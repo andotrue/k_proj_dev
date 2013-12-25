@@ -1,5 +1,0 @@
-db7121,::1,GET,http://localhost:8000/,1387550820,b19294
-b19294,::1,GET,http://localhost:8000/,1387550820,
-5a7ebb,::1,GET,http://localhost:8000/_wdt/b19294,1387550820,d0d3aa
-d0d3aa,::1,GET,http://localhost:8000/_wdt/b19294,1387550821,
-ebe215,::1,GET,http://localhost:8000/,1387551314,
