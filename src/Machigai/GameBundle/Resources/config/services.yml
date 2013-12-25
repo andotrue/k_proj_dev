@@ -1,0 +1,7 @@
+parameters:
+#    machigai_game.example.class: Machigai\GameBundle\Example
+
+services:
+#    machigai_game.example:
+#        class: %machigai_game.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,4 @@
+machigai_game:
+    resource: "@MachigaiGameBundle/Resources/config/routing.yml"
+    prefix:   /
+
