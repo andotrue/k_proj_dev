@@ -61,3 +61,7 @@ error:
 confirm:
     pattern: /shop/confirm
     defaults: { _controller: MachigaiGameBundle:Shop:confirm }
+
+index:
+    pattern: /ranking
+    defaults: { _controller: MachigaiGameBundle:Ranking:index }
