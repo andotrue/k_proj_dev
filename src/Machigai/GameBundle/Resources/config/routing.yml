@@ -1,3 +1,19 @@
 machigai_game_homepage:
     path: /
     defaults: { _controller: MachigaiGameBundle:Default:index }
+
+index:
+    pattern: /help/
+    defaults: { _controller: MachigaiGameBundle:Help:index }
+
+howtoplay:
+    pattern: /help/howtoplay
+    defaults: { _controller: MachigaiGameBundle:Help:howtoplay }
+
+terms:
+    pattern: /help/terms
+    defaults: { _controller: MachigaiGameBundle:Help:terms }
+
+inquiry:
+    pattern: /help/inquiry
+    defaults: { _controller: MachigaiGameBundle:Help:inquiry }
