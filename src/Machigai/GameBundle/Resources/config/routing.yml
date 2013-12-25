@@ -29,3 +29,27 @@ username:
 complete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
+
+index:
+    pattern: /shop/
+    defaults: { _controller: MachigaiGameBundle:Shop:index }
+
+wallpaper:
+    pattern: /shop/wallpaper/
+    defaults: { _controller: MachigaiGameBundle:Shop:wallpaper }
+
+stamp:
+    pattern: /shop/stamp/
+    defaults: { _controller: MachigaiGameBundle:Shop:stamp }
+
+download:
+    pattern: /shop/download/
+    defaults: { _controller: MachigaiGameBundle:Shop:download }
+
+error:
+    pattern: /shop/error
+    defaults: { _controller: MachigaiGameBundle:Shop:error }
+
+confirm:
+    pattern: /shop/confirm
+    defaults: { _controller: MachigaiGameBundle:Shop:confirm }
