@@ -17,3 +17,15 @@ terms:
 inquiry:
     pattern: /help/inquiry
     defaults: { _controller: MachigaiGameBundle:Help:inquiry }
+
+index:
+    pattern: /setting/
+    defaults: { _controller: MachigaiGameBundle:Setting:index }
+
+username:
+    pattern: /setting/username
+    defaults: { _controller: MachigaiGameBundle:Setting:username }
+
+complete:
+    pattern: /setting/complete
+    defaults: { _controller: MachigaiGameBundle:Setting:complete }
