@@ -1,3 +1,67 @@
 machigai_game_homepage:
     path: /
     defaults: { _controller: MachigaiGameBundle:Default:index }
+
+index:
+    pattern: /help/
+    defaults: { _controller: MachigaiGameBundle:Help:index }
+    requirements: 
+        _method: GET
+
+howtoplay:
+    pattern: /help/howtoplay
+    defaults: { _controller: MachigaiGameBundle:Help:howtoplay }
+    requirements: 
+        _method: GET
+
+terms:
+    pattern: /help/terms
+    defaults: { _controller: MachigaiGameBundle:Help:terms }
+    requirements: 
+        _method: GET
+
+inquiry:
+    pattern: /help/inquiry
+    defaults: { _controller: MachigaiGameBundle:Help:inquiry }
+
+index:
+    pattern: /setting/
+    defaults: { _controller: MachigaiGameBundle:Setting:index }
+    requirements: 
+        _method: GET
+
+username:
+    pattern: /setting/username
+    defaults: { _controller: MachigaiGameBundle:Setting:username }
+
+complete:
+    pattern: /setting/complete
+    defaults: { _controller: MachigaiGameBundle:Setting:complete }
+
+index:
+    pattern: /shop/
+    defaults: { _controller: MachigaiGameBundle:Shop:index }
+
+wallpaper:
+    pattern: /shop/wallpaper/
+    defaults: { _controller: MachigaiGameBundle:Shop:wallpaper }
+
+stamp:
+    pattern: /shop/stamp/
+    defaults: { _controller: MachigaiGameBundle:Shop:stamp }
+
+download:
+    pattern: /shop/download/
+    defaults: { _controller: MachigaiGameBundle:Shop:download }
+
+error:
+    pattern: /shop/error
+    defaults: { _controller: MachigaiGameBundle:Shop:error }
+
+confirm:
+    pattern: /shop/confirm
+    defaults: { _controller: MachigaiGameBundle:Shop:confirm }
+
+index:
+    pattern: /ranking
+    defaults: { _controller: MachigaiGameBundle:Ranking:index }
