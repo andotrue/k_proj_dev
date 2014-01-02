@@ -3,5 +3,10 @@
 {% block title %}MachigaiGameBundle:Register:complete{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Register:complete page</h1>
+<header><h1><img src="{{ asset('images/title_logo.png')}}"></h1></header>
+<section>
+ <h2>登録完了</h2>
+ <p>登録が完了しました。<br />まちがいさがし放題をお楽しみください！</p>
+</section>
+<footer><button onclick="location='{{ path('Top')}}'">アプリTOPへ</footer>
 {% endblock %}
