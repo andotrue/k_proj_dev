@@ -85,3 +85,11 @@ GameClear:
 GameFail:
     pattern: /game/fail
     defaults: { _controller: MachigaiGameBundle:Game:fail }
+
+index:
+    pattern: /register
+    defaults: { _controller: MachigaiGameBundle:Register:index }
+
+complete:
+    pattern: /register/complete
+    defaults: { _controller: MachigaiGameBundle:Register:complete }
