@@ -1,8 +1,8 @@
-machigai_game_homepage:
-    path: /
+Top:
+    path: /top
     defaults: { _controller: MachigaiGameBundle:Default:index }
 
-index:
+Help:
     pattern: /help/
     defaults: { _controller: MachigaiGameBundle:Help:index }
     requirements: 
@@ -24,7 +24,7 @@ inquiry:
     pattern: /help/inquiry
     defaults: { _controller: MachigaiGameBundle:Help:inquiry }
 
-index:
+Setting:
     pattern: /setting/
     defaults: { _controller: MachigaiGameBundle:Setting:index }
     requirements: 
@@ -38,7 +38,7 @@ complete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
 
-index:
+Shop:
     pattern: /shop/
     defaults: { _controller: MachigaiGameBundle:Shop:index }
 
@@ -62,6 +62,26 @@ confirm:
     pattern: /shop/confirm
     defaults: { _controller: MachigaiGameBundle:Shop:confirm }
 
-index:
+Ranking:
     pattern: /ranking
     defaults: { _controller: MachigaiGameBundle:Ranking:index }
+
+GameSelect:
+    pattern: /game/select
+    defaults: { _controller: MachigaiGameBundle:Game:select }
+
+GamePlay:
+    pattern: /game/play
+    defaults: { _controller: MachigaiGameBundle:Game:play }
+
+GameFinish:
+    pattern: /game/finish
+    defaults: { _controller: MachigaiGameBundle:Game:finish }
+
+GameClear:
+    pattern: /game/clear
+    defaults: { _controller: MachigaiGameBundle:Game:clear }
+
+GameFail:
+    pattern: /game/fail
+    defaults: { _controller: MachigaiGameBundle:Game:fail }

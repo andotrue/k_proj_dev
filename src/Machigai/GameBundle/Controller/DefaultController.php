@@ -10,8 +10,8 @@ class DefaultController extends Controller
     {
         return $this->render('MachigaiGameBundle:Default:index.html.twig', array('name' => 'taro'));
     }
-    public function help($page)
+    public function error()
     {
-	return $this->render('MachigaiGameBundle:Default:help.html.twig', array('page' => $page));
+	return $this->render('MachigaiGameBundle:Default:error.html.twig');
     }
 }

@@ -1,44 +1,38 @@
 {% extends "::base.html.twig" %}
+{% block title %}The blog title goes here{% endblock %}
 {% block body %}
-<div data-bind="style: { width: '100%', height: '1280px',      backgroundColor: 'gray',
-                                                        backgroundImage: 'url(' + currentPage().backgroundImage + ')' ,
-                                                        backgroundRepeat: 'no-repeat',
-                                                        backgroundSize: 'cover'
-                                                } ">
-<p>     The name is <span data-bind="text: pages[0].name"></span></p>
-<div id="background" class="psedo-button" data-bind="" onclick="pageViewModel.moveTo(1);currentPage(pageViewModel.pages[1]);this.style.visibility ='hidden'" style="border: solid 1px black;display:block;position:absolute;width:500px; height:100px;filter:alfa(style=0,opacity=0);bottom:160px;left:10%;"></div>
-
-        <script>
-        function Page(name, backgroundImage, backgroundMusic){
-                var self = this;
-                self.name = name;
-                self.backgroundImage = backgroundImage;
-                self.backgroundMusic = backgroundMusic;
-                self.initialize = function(){xxxalert("test");return self;};
-        }
-        
-        function PageViewModel(){
-                var self = this;
-                self.pages = [
-                        new Page("top",                 "{{ asset('bundles/machigaigame/images/top.jpg') }}", null),
-                        new Page("select-game", "{{ asset('bundles/machigaigame/images/select.jpg') }}",null),
-                        new Page("game",                "{ asset('bundles/machigaigame/images/game.jpg') }}"),
-                        new Page("ranking",     "{{ asset('bundles/machigaigame/images/ranking.jpg') }}"),
-//                      new Page("stamp", "{{ asset('bundles/machigaigame/images/top.jpg') }}"),
-                        new Page("help",                "{{ asset('bundles/machigaigame/images/help.jpg') }}")
-                ];
-                self.moveTo = function(pageNum){
-                        return currentPage = self.pages[pageNum].initialize();
-                }
-                
-        };
-        window.onload = function(){
-                pageViewModel = new PageViewModel();
-                page = pageViewModel.pages[0];
-                currentPage = ko.observable( page );
-                ko.applyBindings(pageViewModel);                
-        }
-        </script>
-
-</div>
+ <header id="title">
+ <h1>タイトルロゴ</h1>
+ <p id="user_name"> 【ユーザー名】さん</p>
+ <div id="auIDLogin">
+  <button>auIDログイン</button>
+  <p>auIDでログインすると以下の機能が使えるよ！<br />
+（追加料金はかかりません。）</p>
+  <nav>
+   <ul>
+    <li>ポイント</li>
+    <li>問題の保存</li>
+    <li>ランキング</li>
+    <li>ショップ</li>
+   </ul>
+  </nav>
+ </div>
+ </header>
+ <section id="current_point">
+  <h2>現在のポイント</h2>
+  <p>xx  pt</p>
+ </section>
+ <section id="menu">
+  <button onclick="location='{{ path('GameSelect') }}'">まちがいさがし</button>
+  <button onclick="location='{{ path('Shop') }}'">ショップ</button>
+  <button onclick="location='{{ path('Ranking') }}'">ランキング</button>
+  <button onclick="location='{{ path('Help') }}'">ヘルプ</button>
+ </section>
+ <section id="news">
+  <h2>おしらせ</h2>
+  <p>テキストテキストテキストテキス トテキストテキストテキストテキストテキストテキストテキスト</p>
+ </section>
+ <section id="smart_pass">
+  <a href="{{ path('Top')}}">auスマートパスへ戻る</a>
+ </section>
 {% endblock %}
