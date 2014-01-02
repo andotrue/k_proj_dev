@@ -1,7 +1,15 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Setting:index{% endblock %}
+{% block title %}ヘルプ{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Setting:index page</h1>
+<header><h1>ヘルプ</h1></header>
+<section>
+ <h2>設定</h2>
+ <p>ランキングに表示されるニックネームの変更ができます。</p>
+ <button onclick="location='{{ path('nickname') }}'">ニックネーム変更</button>
+</section>
+<footer>
+ <button onclick="location='{{ path('Help') }}'">ヘルプTOPに戻る</button>
+</footer>
 {% endblock %}
