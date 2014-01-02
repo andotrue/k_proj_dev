@@ -8,19 +8,19 @@ Help:
     requirements: 
         _method: GET
 
-howtoplay:
+HelpHowtoplay:
     pattern: /help/howtoplay
     defaults: { _controller: MachigaiGameBundle:Help:howtoplay }
     requirements: 
         _method: GET
 
-terms:
+HelpTerms:
     pattern: /help/terms
     defaults: { _controller: MachigaiGameBundle:Help:terms }
     requirements: 
         _method: GET
 
-inquiry:
+HelpInquiry:
     pattern: /help/inquiry
     defaults: { _controller: MachigaiGameBundle:Help:inquiry }
 

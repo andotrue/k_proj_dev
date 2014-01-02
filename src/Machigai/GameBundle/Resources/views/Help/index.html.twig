@@ -3,5 +3,12 @@
 {% block title %}MachigaiGameBundle:Help:index{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Help:index page</h1>
+<header><h1>ヘルプ</h1></header>
+<nav>
+ <ul>
+  <li><a href="{{ path('Setting') }}">設定</a></li>
+  <li><a href="{{ path('HelpHowtoplay') }}">遊び方</a></li>
+  <li><a href="{{ path('HelpTerms') }}">利用規約</a></li>
+  <li><a href="{{ path('HelpInquiry') }}">お問い合わせ</a></li>
+</nav>
 {% endblock %}
