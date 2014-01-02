@@ -60,9 +60,9 @@ class OAuthController extends Controller
 			return new Response( "<html><body>" .  $error_message . '<br /><br />' . $a_link . "</body></html>");
 		}
 		// サーバ発行したcodeパラメータ設定
-		$code_query = $query->('code');
+		$code_query = $query->get('code');
 		if(!empty($code_query)){ 
-			$code = $query->("code"); //$code = $_GET['code'];
+			$code = $query->get("code"); //$code = $_GET['code'];
 			// 連携パラメータにcode付与
 			$tokenParams .= "&code=" . $code; 
 		}
