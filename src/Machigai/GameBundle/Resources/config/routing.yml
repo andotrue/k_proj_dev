@@ -86,7 +86,7 @@ GameFail:
     pattern: /game/fail
     defaults: { _controller: MachigaiGameBundle:Game:fail }
 
-index:
+Register:
     pattern: /register
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
