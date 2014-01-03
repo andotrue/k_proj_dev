@@ -1,7 +1,36 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Help:howtoplay{% endblock %}
+{% block title %}遊び方{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Help:howtoplay page</h1>
+<header><h1>ヘルプ</h1></header>
+<section id="howtoplay">
+<article>
+<h2>まちがいさがし</h2>
+<img src="" alt="ゲーム画面イメージ"/>
+<p>テキスト</p>
+<table>
+ <tr><th><img src="" alt="問題イラスト" /></th><td><h3>拡大縮小</h3><p>テキスト</p></td></tr>
+ <tr><th><img src="" alt="おてつき" /></th><td><h3>おてつき</h3><p>テキスト</p></td></tr>
+ <tr><th><img src="" alt="ヒントボタン" /></th><td><h3>ヒント</h3><p>テキスト</p></td></tr>
+ <tr><th><img src="" alt="保存して中断" /></th><td><h3>保存して中断</h3><p>テキスト</p></td></tr>
+ <tr><th><img src="" alt="ギブアップ" /></th><td><h3>ギブアップ</h3><p>テキスト</p></td></tr>
+</table>
+</article>
+<article>
+<h2>ランキング</h2>
+<table>
+ <tr><th><img src="" alt="ランキング"/></th><td><p>テキスト</p></td></tr>
+</table>
+</article>
+<article>
+<h2>ショップ</h2>
+<table>
+ <tr><th><img src="" alt="ショップイメージ" /></th><td><p>テキスト</p></td></tr>
+</table>
+</article>
+</section>
+<footer>
+ <button onclick="location='{{ path('Help') }}'">ヘルプTOPに戻る</button>
+</footer>
 {% endblock %}
