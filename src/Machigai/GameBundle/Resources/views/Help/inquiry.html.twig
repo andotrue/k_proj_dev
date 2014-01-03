@@ -1,7 +1,17 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Help:inquiry{% endblock %}
+{% block title %}遊び方{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Help:inquiry page</h1>
+<header><h1>ヘルプ</h1></header>
+<section>
+<article>
+<h2>お問い合わせ</h2>
+<p>テキスト</p>
+</article>
+ <button onclick="location='{{ path('HelpInquiryForm') }}'">お問い合わせ</button>
+</section>
+<footer>
+ <button onclick="location='{{ path('Help') }}'">ヘルプTOPに戻る</button>
+</footer>
 {% endblock %}
