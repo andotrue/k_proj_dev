@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}ニックネーム変更{% endblock %}
+
+{% block body %}
+<header><h1>ヘルプ</h1></header>
+<section>
+ <h2>登録内容確認</h2>
+ <p>下記の内容でよろしければ、登録ボタンを押してください。</p>
+ {{ form(form) }}
+</section>
+{% endblock %}
