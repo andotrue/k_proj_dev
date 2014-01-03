@@ -24,6 +24,14 @@ HelpInquiryForm:
     pattern: /help/inquiry/form
     defaults: { _controller: MachigaiGameBundle:Help:form }
 
+HelpInquiryFormDo:
+    pattern: /help/inquiry/form/do
+    defaults: { _controller: MachigaiGameBundle:Help:inquiryFormDo }
+
+HelpInquiryFormComplete:
+    pattern: /help/inquiry/form/complete
+    defaults: { _controller: MachigaiGameBundle:Help:inquiryFormComplete }
+
 HelpInquiry:
     pattern: /help/inquiry
     defaults: { _controller: MachigaiGameBundle:Help:inquiry }
