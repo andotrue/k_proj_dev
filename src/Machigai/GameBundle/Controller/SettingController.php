@@ -13,7 +13,13 @@ class SettingController extends Controller
 
     public function nicknameAction()
     {
-        return $this->render('MachigaiGameBundle:Setting:nickname.html.twig');
+	$form = $this->createFormBuilder()
+	 ->setMethod('GET')
+ 	 ->add('nickname', 'text', array('label'=>' '))
+	 ->add('confirm', 'submit', array('label'=>'登録内容確認'))
+	 ->add('state','hidden')
+	 ->getForm();
+        return $this->render('MachigaiGameBundle:Setting:nickname.html.twig', array('form' => $form->createView()) );
     }
 
     public function completeAction()
