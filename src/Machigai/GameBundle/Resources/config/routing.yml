@@ -24,16 +24,25 @@ HelpInquiry:
     pattern: /help/inquiry
     defaults: { _controller: MachigaiGameBundle:Help:inquiry }
 
+SettingNicknameregister:
+    pattern: /setting/nickname
+    defaults: { _controller: MachigaiGameBundle:Setting:nicknameRegister }
+    requirements: 
+        _method: POST
+
+SettingNickname:
+    pattern: /setting/nickname
+    defaults: { _controller: MachigaiGameBundle:Setting:nickname }
+    requirements: 
+        _method: GET
+    
 Setting:
     pattern: /setting/
     defaults: { _controller: MachigaiGameBundle:Setting:index }
     requirements: 
         _method: GET
 
-SettingNickname:
-    pattern: /setting/nickname
-    defaults: { _controller: MachigaiGameBundle:Setting:nickname }
-
+   
 SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
