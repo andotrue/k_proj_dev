@@ -1,7 +1,12 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Setting:complete{% endblock %}
+{% block title %}ヘルプ{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Setting:complete page</h1>
+<header><h1>ヘルプ</h1></header>
+<section>
+ <h2>登録完了</h2>
+ <p>登録が完了しました。</p>
+ <button type="button" onclick="location='{{ path('Top') }}'">アプリTOPへ</button>
+</section>
 {% endblock %}
