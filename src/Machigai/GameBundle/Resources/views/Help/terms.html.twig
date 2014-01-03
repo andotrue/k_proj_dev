@@ -1,7 +1,19 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Help:terms{% endblock %}
+{% block title %}遊び方{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Help:terms page</h1>
+<header><h1>ヘルプ</h1></header>
+<section id="terms">
+<article>
+<h2>利用規約</h2>
+<p>テキスト</p>
+<p>テキスト</p>
+<p>テキスト</p>
+<p>テキスト</p>
+</article>
+</section>
+<footer>
+ <button onclick="location='{{ path('Help') }}'">ヘルプTOPに戻る</button>
+</footer>
 {% endblock %}
