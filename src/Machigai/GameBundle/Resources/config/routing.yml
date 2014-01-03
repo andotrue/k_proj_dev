@@ -20,6 +20,10 @@ HelpTerms:
     requirements: 
         _method: GET
 
+HelpInquiryForm:
+    pattern: /help/inquiry/form
+    defaults: { _controller: MachigaiGameBundle:Help:form }
+
 HelpInquiry:
     pattern: /help/inquiry
     defaults: { _controller: MachigaiGameBundle:Help:inquiry }
