@@ -1,7 +1,13 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle:Game:finish.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Game:clear{% endblock %}
+{% block comment %}
+おめでとう！<br />ショップやランキングをチェック！<br />ほかの問題にもチャレンジ！
+{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Game:clear page</h1>
+{% block menu %}
+ <button onclick="location='{{ path('GameSelect')}}'">ほかの問題で遊ぶ</button>
+ <p>auIDログインをすれば楽しみがいっぱい！TOPからログインしてね！</p>
+ <button onclick="location='{{ path('Top')}}'">アプリTOPへ</button>
+ <button style="disabled:disabled;">ショップ</button>
+ <button style="disabled:disabled;">ランキング</button>
 {% endblock %}
