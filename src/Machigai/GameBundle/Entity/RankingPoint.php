@@ -25,6 +25,13 @@ class RankingPoint
     /**
      * @var integer
      *
+     * @ORM\Column(name="level", type="integer")
+     */
+    private $level;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="rank", type="integer")
      */
     private $rank;
@@ -61,11 +68,35 @@ class RankingPoint
         return $this->id;
     }
 
+
+    /**
+     * Set level
+     *
+     * @param integer $level
+     * @return LevelingPoint
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    /**
+     * Get level
+     *
+     * @return integer 
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
     /**
      * Set rank
      *
      * @param integer $rank
-     * @return RankingPoint
+     * @return LevelingPoint
      */
     public function setRank($rank)
     {
