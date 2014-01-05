@@ -12,7 +12,6 @@ class RegisterController extends Controller
 	 ->setMethod('GET')
  	 ->add('nickname', 'text')
 	 ->add('confirm', 'submit', array('label'=>'内容を確認'))
-	 ->add('state','hidden')
 	 ->getForm();
         return $this->render('MachigaiGameBundle:Register:index.html.twig', array('form' => $form->createView()) );
 	
