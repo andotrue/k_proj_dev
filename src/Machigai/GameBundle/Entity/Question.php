@@ -79,6 +79,21 @@ class Question
     private $distributedTo;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetimetz")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetimetz")
+     */
+    private $updatedAt;
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="copyright_file_name", type="string", length=255)
@@ -86,13 +101,13 @@ class Question
     private $copyrightFileName;
 
     /**
-     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="question", nullable=true)
+     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="question")
      */
     protected $playHistories;
 
     public function __construct()
     {
-	$this->playHistories =new ArrayCollection();
+			$this->playHistories =new ArrayCollection();
     }
 
 
@@ -304,10 +319,57 @@ class Question
     }
 
     /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return PurchaseHistory
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return PurchaseHistory
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
      * Get copyrightFileName
      *
      * @return string 
      */
+
     public function getCopyrightFileName()
     {
         return $this->copyrightFileName;

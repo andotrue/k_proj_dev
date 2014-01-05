@@ -32,13 +32,6 @@ class Item
     /**
      * @var integer
      *
-     * @ORM\Column(name="category_code", type="integer")
-     */
-    private $categoryCode;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="consume_point", type="integer")
      */
     private $consumePoint;
@@ -74,7 +67,8 @@ class Item
     /**
      * @var string
      *
-     * @ORM\Column(name="category", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="ItemCategory", inversedBy="items") 
+     * @ORM\JoinColumn(name="category_code", referencedColumnName="category_code")
      */
     private $category;
 
@@ -119,29 +113,6 @@ class Item
     public function getItemCode()
     {
         return $this->itemCode;
-    }
-
-    /**
-     * Set categoryCode
-     *
-     * @param integer $categoryCode
-     * @return Item
-     */
-    public function setCategoryCode($categoryCode)
-    {
-        $this->categoryCode = $categoryCode;
-
-        return $this;
-    }
-
-    /**
-     * Get categoryCode
-     *
-     * @return integer 
-     */
-    public function getCategoryCode()
-    {
-        return $this->categoryCode;
     }
 
     /**
