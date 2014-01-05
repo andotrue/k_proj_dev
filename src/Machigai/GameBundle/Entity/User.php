@@ -3,6 +3,7 @@
 namespace Machigai\GameBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -40,47 +41,47 @@ class User
      *
      * @ORM\Column(name="current_point", type="integer")
      */
-    private $currentPoint;
+    private $currentPoint = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="easy_clear_time_this_month", type="integer")
+     * @ORM\Column(name="easy_clear_time_this_month", type="integer", nullable=true)
      */
     private $easyClearTimeThisMonth;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="normal_clear_time_this_month", type="integer")
+     * @ORM\Column(name="normal_clear_time_this_month", type="integer", nullable=true)
      */
     private $normalClearTimeThisMonth;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="hard_clear_time_this_month", type="integer")
+     * @ORM\Column(name="hard_clear_time_this_month", type="integer", nullable=true)
      */
     private $hardClearTimeThisMonth;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="easy_clear_time_last_month", type="integer")
+     * @ORM\Column(name="easy_clear_time_last_month", type="integer", nullable=true)
      */
     private $easyClearTimeLastMonth;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="normal_clear_time_last_month", type="integer")
+     * @ORM\Column(name="normal_clear_time_last_month", type="integer", nullable=true)
      */
     private $normalClearTimeLastMonth;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="hard_clear_time_last_month", type="integer")
+     * @ORM\Column(name="hard_clear_time_last_month", type="integer", nullable=true)
      */
     private $hardClearTimeLastMonth;
 
@@ -88,7 +89,7 @@ class User
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="suspend_info", type="json_array")
+     * @ORM\Column(name="suspend_info", type="json_array", nullable=true)
      */
     private $suspendInfo;
 

@@ -3,6 +3,7 @@
 namespace Machigai\GameBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * PlayHistory
@@ -24,28 +25,28 @@ class PlayHistory
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="play_started_at", type="datetimetz")
+     * @ORM\Column(name="play_started_at", type="datetimetz", nullable=true)
      */
     private $playStartedAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="play_ended_at", type="datetimetz")
+     * @ORM\Column(name="play_ended_at", type="datetimetz", nullable=true)
      */
     private $playEndedAt;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="clear_time", type="integer")
+     * @ORM\Column(name="clear_time", type="integer", nullable=true)
      */
     private $clearTime;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="suspend_time", type="integer")
+     * @ORM\Column(name="suspend_time", type="integer", nullable=true)
      */
     private $suspendTime;
  

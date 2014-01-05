@@ -3,6 +3,7 @@
 namespace Machigai\GameBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Question
@@ -66,14 +67,14 @@ class Question
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="distributed_from", type="datetimetz")
+     * @ORM\Column(name="distributed_from", type="datetimetz", nullable=true)
      */
     private $distributedFrom;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="distributed_to", type="datetimetz")
+     * @ORM\Column(name="distributed_to", type="datetimetz", nullable=true)
      */
     private $distributedTo;
 
@@ -85,7 +86,7 @@ class Question
     private $copyrightFileName;
 
     /**
-     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="question", nullable=true)
      */
     protected $playHistories;
 

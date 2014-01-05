@@ -3,6 +3,7 @@
 namespace Machigai\GameBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Ranking
@@ -52,14 +53,14 @@ class Ranking
     /**
      * @var integer
      *
-     * @ORM\Column(name="clear_time", type="integer")
+     * @ORM\Column(name="clear_time", type="integer", nullable=true)
      */
     private $clearTime;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="bonus_point", type="integer")
+     * @ORM\Column(name="bonus_point", type="integer", nullable=true)
      */
     private $bonusPoint;
 

@@ -3,6 +3,7 @@
 namespace Machigai\GameBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * RankingPoint
@@ -31,7 +32,7 @@ class RankingPoint
     /**
      * @var integer
      *
-     * @ORM\Column(name="bonus_point", type="integer")
+     * @ORM\Column(name="bonus_point", type="integer", nullable=true)
      */
     private $bonusPoint;
 
