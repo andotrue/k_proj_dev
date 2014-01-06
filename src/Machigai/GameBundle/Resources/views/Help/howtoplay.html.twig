@@ -1,8 +1,8 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle:Help:index.html.twig" %}
 
 {% block title %}遊び方{% endblock %}
 
-{% block body %}
+{% block contents %}
 <header><h1>ヘルプ</h1></header>
 <section id="howtoplay">
 <article>
@@ -31,6 +31,6 @@
 </article>
 </section>
 <footer>
- <button onclick="location='{{ path('Help') }}'">ヘルプTOPに戻る</button>
+ <a href="{{ path('Help') }}" style="margin-right:7%;"alt="ヘルプTOPへ"><img src="{{ asset('/bundles/machigaigame/images/parts/button_tohelp.png') }}" width="30%"></a><a href="{{ path('Top') }}" alt="アプリTOPへ"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png') }}" width="30%"></a>
 </footer>
 {% endblock %}
