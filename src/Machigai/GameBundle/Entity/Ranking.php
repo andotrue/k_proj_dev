@@ -193,6 +193,7 @@ class Ranking
         return $this->rank;
     }
 
+
     /**
      * Set clearTime
      *
@@ -306,5 +307,51 @@ class Ranking
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Machigai\GameBundle\Entity\User $user
+     * @return Ranking
+     */
+    public function setUser(\Machigai\GameBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Machigai\GameBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set playHistory
+     *
+     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistory
+     * @return Ranking
+     */
+    public function setPlayHistory(\Machigai\GameBundle\Entity\PlayHistory $playHistory = null)
+    {
+        $this->playHistory = $playHistory;
+
+        return $this;
+    }
+
+    /**
+     * Get playHistory
+     *
+     * @return \Machigai\GameBundle\Entity\PlayHistory 
+     */
+    public function getPlayHistory()
+    {
+        return $this->playHistory;
     }
 }

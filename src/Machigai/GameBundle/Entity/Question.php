@@ -374,4 +374,37 @@ class Question
     {
         return $this->copyrightFileName;
     }
+
+    /**
+     * Add playHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistories
+     * @return Question
+     */
+    public function addPlayHistory(\Machigai\GameBundle\Entity\PlayHistory $playHistories)
+    {
+        $this->playHistories[] = $playHistories;
+
+        return $this;
+    }
+
+    /**
+     * Remove playHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistories
+     */
+    public function removePlayHistory(\Machigai\GameBundle\Entity\PlayHistory $playHistories)
+    {
+        $this->playHistories->removeElement($playHistories);
+    }
+
+    /**
+     * Get playHistories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlayHistories()
+    {
+        return $this->playHistories;
+    }
 }

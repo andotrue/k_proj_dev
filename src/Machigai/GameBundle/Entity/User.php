@@ -392,4 +392,126 @@ class User
     {
         return $this->updatedAt;
     }
+
+    /**
+     * Set suspendInfo
+     *
+     * @param array $suspendInfo
+     * @return User
+     */
+    public function setSuspendInfo($suspendInfo)
+    {
+        $this->suspendInfo = $suspendInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get suspendInfo
+     *
+     * @return array 
+     */
+    public function getSuspendInfo()
+    {
+        return $this->suspendInfo;
+    }
+
+    /**
+     * Add purchaseHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PurchaseHistory $purchaseHistories
+     * @return User
+     */
+    public function addPurchaseHistory(\Machigai\GameBundle\Entity\PurchaseHistory $purchaseHistories)
+    {
+        $this->purchaseHistories[] = $purchaseHistories;
+
+        return $this;
+    }
+
+    /**
+     * Remove purchaseHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PurchaseHistory $purchaseHistories
+     */
+    public function removePurchaseHistory(\Machigai\GameBundle\Entity\PurchaseHistory $purchaseHistories)
+    {
+        $this->purchaseHistories->removeElement($purchaseHistories);
+    }
+
+    /**
+     * Get purchaseHistories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPurchaseHistories()
+    {
+        return $this->purchaseHistories;
+    }
+
+    /**
+     * Add playHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistories
+     * @return User
+     */
+    public function addPlayHistory(\Machigai\GameBundle\Entity\PlayHistory $playHistories)
+    {
+        $this->playHistories[] = $playHistories;
+
+        return $this;
+    }
+
+    /**
+     * Remove playHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistories
+     */
+    public function removePlayHistory(\Machigai\GameBundle\Entity\PlayHistory $playHistories)
+    {
+        $this->playHistories->removeElement($playHistories);
+    }
+
+    /**
+     * Get playHistories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlayHistories()
+    {
+        return $this->playHistories;
+    }
+
+    /**
+     * Add rankings
+     *
+     * @param \Machigai\GameBundle\Entity\Ranking $rankings
+     * @return User
+     */
+    public function addRanking(\Machigai\GameBundle\Entity\Ranking $rankings)
+    {
+        $this->rankings[] = $rankings;
+
+        return $this;
+    }
+
+    /**
+     * Remove rankings
+     *
+     * @param \Machigai\GameBundle\Entity\Ranking $rankings
+     */
+    public function removeRanking(\Machigai\GameBundle\Entity\Ranking $rankings)
+    {
+        $this->rankings->removeElement($rankings);
+    }
+
+    /**
+     * Get rankings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRankings()
+    {
+        return $this->rankings;
+    }
 }

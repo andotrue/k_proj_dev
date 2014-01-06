@@ -231,12 +231,45 @@ class Item
     }
 
     /**
-     * Set category
+     * Add purchaseHistories
      *
-     * @param string $category
+     * @param \Machigai\GameBundle\Entity\PurchaseHistory $purchaseHistories
      * @return Item
      */
-    public function setCategory($category)
+    public function addPurchaseHistory(\Machigai\GameBundle\Entity\PurchaseHistory $purchaseHistories)
+    {
+        $this->purchaseHistories[] = $purchaseHistories;
+
+        return $this;
+    }
+
+    /**
+     * Remove purchaseHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PurchaseHistory $purchaseHistories
+     */
+    public function removePurchaseHistory(\Machigai\GameBundle\Entity\PurchaseHistory $purchaseHistories)
+    {
+        $this->purchaseHistories->removeElement($purchaseHistories);
+    }
+
+    /**
+     * Get purchaseHistories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPurchaseHistories()
+    {
+        return $this->purchaseHistories;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Machigai\GameBundle\Entity\ItemCategory $category
+     * @return Item
+     */
+    public function setCategory(\Machigai\GameBundle\Entity\ItemCategory $category = null)
     {
         $this->category = $category;
 
@@ -246,7 +279,7 @@ class Item
     /**
      * Get category
      *
-     * @return string 
+     * @return \Machigai\GameBundle\Entity\ItemCategory 
      */
     public function getCategory()
     {

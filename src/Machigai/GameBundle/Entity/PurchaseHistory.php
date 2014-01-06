@@ -81,51 +81,6 @@ class PurchaseHistory
         return $this->id;
     }
 
-    /**
-     * Set userId
-     *
-     * @param string $userId
-     * @return PurchaseHistory
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return string 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set itemId
-     *
-     * @param integer $itemId
-     * @return PurchaseHistory
-     */
-    public function setItemId($itemId)
-    {
-        $this->itemId = $itemId;
-
-        return $this;
-    }
-
-    /**
-     * Get itemId
-     *
-     * @return integer 
-     */
-    public function getItemId()
-    {
-        return $this->itemId;
-    }
 
     /**
      * Set pointBeforePurchase
@@ -240,5 +195,52 @@ class PurchaseHistory
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+
+    /**
+     * Set user
+     *
+     * @param \Machigai\GameBundle\Entity\User $user
+     * @return PurchaseHistory
+     */
+    public function setUser(\Machigai\GameBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Machigai\GameBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set item
+     *
+     * @param \Machigai\GameBundle\Entity\Item $item
+     * @return PurchaseHistory
+     */
+    public function setItem(\Machigai\GameBundle\Entity\Item $item = null)
+    {
+        $this->item = $item;
+
+        return $this;
+    }
+
+    /**
+     * Get item
+     *
+     * @return \Machigai\GameBundle\Entity\Item 
+     */
+    public function getItem()
+    {
+        return $this->item;
     }
 }

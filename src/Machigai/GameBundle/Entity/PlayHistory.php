@@ -77,7 +77,7 @@ class PlayHistory
     protected $question;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ranking", inversedBy="ranking") 
+     * @ORM\OneToOne(targetEntity="Ranking", mappedBy="playHistory") 
      * @ORM\JoinColumn(name="ranking_id", referencedColumnName="id")
      */ 
     protected $ranking;
@@ -161,5 +161,145 @@ class PlayHistory
     public function getClearTime()
     {
         return $this->clearTime;
+    }
+    
+
+    /**
+     * Set suspendTime
+     *
+     * @param string $suspendTime
+     * @return PlayHistory
+     */
+    public function setSuspendTime($suspendTime)
+    {
+        $this->suspendTime = $suspendTime;
+
+        return $this;
+    }
+
+    /**
+     * Get suspendTime
+     *
+     * @return integer
+     */
+    public function getSuspendTime()
+    {
+        return $this->suspendTime;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return PlayHistory
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return PlayHistory
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+
+    /**
+     * Set user
+     *
+     * @param \Machigai\GameBundle\Entity\User $user
+     * @return PlayHistory
+     */
+    public function setUser(\Machigai\GameBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Machigai\GameBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set question
+     *
+     * @param \Machigai\GameBundle\Entity\Question $question
+     * @return PlayHistory
+     */
+    public function setQuestion(\Machigai\GameBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \Machigai\GameBundle\Entity\Question 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set ranking
+     *
+     * @param \Machigai\GameBundle\Entity\Ranking $ranking
+     * @return PlayHistory
+     */
+    public function setRanking(\Machigai\GameBundle\Entity\Ranking $ranking = null)
+    {
+        $this->ranking = $ranking;
+
+        return $this;
+    }
+
+    /**
+     * Get ranking
+     *
+     * @return \Machigai\GameBundle\Entity\Ranking 
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
     }
 }
