@@ -1,35 +1,36 @@
-{% extends "::base.html.twig" %}
-{% block title %}The blog title goes here{% endblock %}
+{% extends "base.html.twig" %}
 {% block body %}
- <header id="title">
- <h1>タイトルロゴ</h1>
+<header id="title" class="top_bg">
+ <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
  <p id="user_name"> 【ユーザー名】さん</p>
  <div id="auIDLogin">
-  <button>auIDログイン</button>
+  <a href="{{ path('Register')  }}" alt="auIDでログイン"><img src="{{ asset('/bundles/machigaigame/images/parts/button_auID.png')  }}" width="50%" /></a>
+ </header>
+ <section>
   <p>auIDでログインすると以下の機能が使えるよ！<br />
 （追加料金はかかりません。）</p>
   <nav>
-   <ul>
-    <li>ポイント</li>
-    <li>問題の保存</li>
-    <li>ランキング</li>
-    <li>ショップ</li>
+   <ul style="list-style-type:disc;">
+    <li style="display:inline-block;width:45%;">ポイント</li>
+    <li style="display:inline-block;width:45%;">問題の保存</li><br />
+    <li style="display:inline-block;width:45%;">ランキング</li>
+    <li style="display:inline-block;width:45%;">ショップ</li>
    </ul>
   </nav>
  </div>
- </header>
- <section id="current_point">
-  <h2>現在のポイント</h2>
+ </section>
+ <section id="current_point" class="top_bg">
+  <img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
   <p>xx  pt</p>
  </section>
- <section id="menu">
-  <button onclick="location='{{ path('GameSelect') }}'">まちがいさがし</button>
-  <button onclick="location='{{ path('Shop') }}'">ショップ</button>
-  <button onclick="location='{{ path('Ranking') }}'">ランキング</button>
-  <button onclick="location='{{ path('Help') }}'">ヘルプ</button>
+ <section id="menu" class="top_bg">
+  <a href='{{ path('GameSelect') }}' style="padding-right:9%;"><img alt="まちがいさがし" src="{{asset('/bundles/machigaigame/images/parts/button_game.png')}}" width="35%" /></a>
+  <a href='{{ path('Shop') }}'><img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" width="35%" /></a><br />
+  <a href='{{ path('Ranking') }}' style="padding-right:9%;"><img alt="ランキング" src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" width="35%" /></a>
+  <a href='{{ path('Help') }}'><img alt="ヘルプ" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" width="35%" /></a>
  </section>
  <section id="news">
-  <h2>おしらせ</h2>
+  <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
   <p>テキストテキストテキストテキス トテキストテキストテキストテキストテキストテキストテキスト</p>
  </section>
  <section id="smart_pass">
