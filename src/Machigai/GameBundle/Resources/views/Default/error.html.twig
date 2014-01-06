@@ -1,0 +1,12 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+
+{% block title %}エラー{% endblock %}
+
+{% block body %}
+<img src="{{ asset('/bundles/machigaigame/images/parts/header.png')  }}" width="100%" />
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_error.png')  }}" width="100%" />
+<p>エラーが発生しました。<br />通信状態を確認し、はじめからやり直してください。</p>
+<a href="{{ path('Top') }}"><img src="{{asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" /></a>
+{% endblock %}
+
+

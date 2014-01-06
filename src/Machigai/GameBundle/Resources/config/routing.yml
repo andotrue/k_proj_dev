@@ -2,6 +2,12 @@ Top:
     path: /top
     defaults: { _controller: MachigaiGameBundle:Default:index }
 
+Error:
+    path: /error
+    defaults: { _controller: MachigaiGameBundle:Default:error }
+    requirements: 
+        _method: GET
+
 Help:
     pattern: /help/
     defaults: { _controller: MachigaiGameBundle:Help:index }
