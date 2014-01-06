@@ -1,13 +1,11 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 
 {% block title %}ニックネーム変更{% endblock %}
 
-{% block body %}
-<header><h1>ヘルプ</h1></header>
+{% block contents %}
 <section>
- <h2>ニックネーム変更</h2>
+ <img src="{{asset('/bundles/machigaigame/images/parts/header_nicknamechange_change.png')}}" width="100%">
  <p>変更後のニックネームを入力し、登録内容確認ボタンを押してください。</p>
  {{ form (form) }}
 </section>
-<footer><button type="button" onclick="location='{{ path('Setting') }}'">戻る</button></footer>
 {% endblock %}
