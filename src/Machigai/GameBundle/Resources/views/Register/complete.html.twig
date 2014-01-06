@@ -1,12 +1,14 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Register:complete{% endblock %}
+{% block title %}登録完了{% endblock %}
 
 {% block body %}
-<header><h1><img src="{{ asset('images/title_logo.png')}}"></h1></header>
+<header>
+ <img src="{{ asset('/bundles/machigaigame/images/parts/header.png')}}" width="100%" style="display:block;" />
+ <img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregistend.png')  }}" width="100%" style="display:block;" />
+</header>
 <section>
- <h2>登録完了</h2>
- <p>登録が完了しました。<br />まちがいさがし放題をお楽しみください！</p>
+<p style="text-align:left;padding-left:10%;padding-top:1em;padding-bottom:2em;">登録が完了しました。<br />まちがいさがし放題をお楽しみください！</p>
 </section>
-<footer><button onclick="location='{{ path('Top')}}'">アプリTOPへ</footer>
+<footer><a href='{{ path('Top')}}' alt="アプリTOPへ"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')  }}"></a></footer>
 {% endblock %}
