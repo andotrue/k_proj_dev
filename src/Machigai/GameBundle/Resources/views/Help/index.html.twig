@@ -1,17 +1,22 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Help:index{% endblock %}
+{% block title %}ヘルプ{% endblock %}
 
 {% block body %}
-<header><h1>ヘルプ</h1></header>
-<nav>
- <ul>
-  <li><a href="{{ path('Setting') }}">設定</a></li>
-  <li><a href="{{ path('HelpHowtoplay') }}">遊び方</a></li>
-  <li><a href="{{ path('HelpTerms') }}">利用規約</a></li>
-  <li><a href="{{ path('HelpInquiry') }}">お問い合わせ</a></li>
-</nav>
-<footer>
- <button onclick="location='{{ path('Top') }}'">TOPに戻る</button>
-</footer>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%"/>
+ {% block contents %}
+  <br /> 
+  <br /> 
+  <br /> 
+  <a href="{{ path('Setting') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_nicknamechange_setting.png')  }}" width="100%"/></a>
+  <a href="{{ path('HelpHowtoplay') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_help_asobikata.png')  }}" width="100%"/></a>
+  <a href="{{ path('HelpTerms') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_help_kiyaku.png')  }}" width="100%"/></a>
+  <a href="{{ path('HelpInquiry') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_otoiawase_top.png')  }}" width="100%"/></a>
+
+  <br /> 
+  <br /> 
+  <br /> 
+  <br /> 
+  <a href="{{path('Shop')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toshop.png')}}" width="35%"></a><a href="{{path('Top')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>  
+ {% endblock %}
 {% endblock %}
