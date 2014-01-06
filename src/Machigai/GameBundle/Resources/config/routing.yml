@@ -84,7 +84,7 @@ confirm:
     defaults: { _controller: MachigaiGameBundle:Shop:confirm }
 
 Ranking:
-    pattern: /ranking
+    pattern: /ranking/
     defaults: { _controller: MachigaiGameBundle:Ranking:index }
 
 GameSelect:
