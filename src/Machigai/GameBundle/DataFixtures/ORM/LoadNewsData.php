@@ -25,8 +25,8 @@ class LoadNewsData extends AbstractFixture implements OrderedFixtureInterface
 
         //ニュース2
         $news2 = new News();
-        $news2->setTitle('お知らせ2です。<br />このようにHTMLも挿入されます。');
-        $news2->setDescription();
+        $news2->setTitle('お知らせ2です。タイトルは255文字までOKです。');
+        $news2->setDescription('お知らせ2です。<br />このようにHTMLも挿入されます。');
         $news2->setStartedAt(new DateTime('2014/01/05 00:00:00'));
         $news2->setEndedAt(new DateTime('2014/01/08 00:00:00'));
         $news2->setCreatedAt(new DateTime('2014/01/10 00:00:00'));
