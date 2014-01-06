@@ -1,7 +1,25 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Ranking:index{% endblock %}
+{% block title %}ランキング{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Ranking:index page</h1>
+<header>
+</header>
+<section id="container">
+ <ul id="tab">
+  <li><a href="#tab1" class="selected"><img src="" alt="Easy"/></a></li>
+  <li><a href="#tab2"><img src="" alt="Normal"/></a></li>
+  <li><a href="#tab3"><img src="" alt="Hard" /></a></li> 
+ </ul>
+ <ul id="panel">
+  <li id="tab1">
+   {% for rank in ranking_this_month %}
+    {{ rank.getUser().getNickname() }}
+   {% endfor %}
+  </li>
+ </ul>
+</section>
+<footer>
+ <button type="button" onclick="location='{{ path('Top') }}'">TOPに戻る</button>
+</footer>
 {% endblock %}
