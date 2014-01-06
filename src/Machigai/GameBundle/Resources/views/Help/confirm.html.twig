@@ -1,14 +1,11 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 
 {% block title %}遊び方{% endblock %}
 
-{% block body %}
-<header><h1>ヘルプ</h1></header>
-<section>
-<article>
-<h2>お問い合わせ</h2>
-<p>以下の内容でよろしければ、送信ボタンを押してください。</p>
-</article>
+{% block contents %}
+<img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_check.png')}}" width="100%" />
+<p style="padding:1em 2em;text-align:left;">以下の内容でよろしければ、送信ボタンを押してください。</p>
 {{ form(form) }}
-</section>
 {% endblock %}
+
+{% block footer %}{% endblock %}
