@@ -1,13 +1,8 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 
 {% block title %}ヘルプ{% endblock %}
 
-{% block body %}
-<header><h1>ヘルプ</h1></header>
-<section>
- <h2>設定</h2>
- <p>ランキングに表示されるニックネームの変更ができます。</p>
- <button type="button" onclick="location='{{ path('SettingNickname') }}'">ニックネーム変更</button>
-</section>
-<footer><button type="button" onclick="location='{{ path('Help') }}'">ヘルプTOPに戻る</button></footer>
+{% block contents %}
+<p style="padding:1em 2em;text-align:left;">ランキングに表示されるニックネームの変更ができます。</p>
+<a href="{{ path('SettingNickname') }}"><img src="{{asset('/bundles/machigaigame/images/parts/button_nicknamechange.png')}}" width="70%"/></a>
 {% endblock %}
