@@ -1,7 +1,46 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Game:select{% endblock %}
+{% block title %}問題メニュー{% endblock %}
+
+{% block stylesheets %}<style>
+ #questions ul li{display:inline-block; width:27%;padding:2%;}
+ #questions ul li a img{width:100%}
+</style>
+{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Game:select page</h1>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_mondaiselect.png')  }}" width="100%"/>
+
+<div id="level_tab" style="padding-top:5%;"><img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy.png') }}" width="30%"/><img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%"><img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" /></div>
+<section id="select_area" style="background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }});">
+<div id="order_header" style="text-align:right;padding-bottom:0.7em;padding-top:0.7em;"><span style="padding-right:0.5em;">並べ替え</span><select><option selected="selected">古い順</option><option>新しい順</option><option>未クリア問題</option><option>中断問題</option></select></div>
+<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%"/></a><span> 1 / xx </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%"/></a></nav>
+<div id="questions">
+<ul>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No1</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No2</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No3</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No4</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No5</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No6</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No7</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No8</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No9</span></li>
+<li><a href="{{ path('GamePlay')  }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" /></a><br /><span>No10</span></li>
+</ul>
+</div>
+<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%"/></a><span> 1 / xx </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%"/></a></nav>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+<!-- 通信中 -->
+<div style="position:fixed;top:0;left:0;width:100%; height:100%;z-index:100;background-color:rgba(0,0,0,0.4);visibility:hidden;">
+ <img src="/bundles/machigaigame/images/parts/popup_questiondownload.png" width="70%" style="position:absolute;top:40%;left:15%;" />
+</div> 
+<! -- 中断データポップアップ -->
+<div style="position:fixed;top:0;left:0;width:100%; height:100%;z-index:100;background-color:rgba(0,0,0,0.4);visibility:hidden;">
+ <span>No.1</span>
+ <h2>問題タイトル</h2>
+</div>
 {% endblock %}
