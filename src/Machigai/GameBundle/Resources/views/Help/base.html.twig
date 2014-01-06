@@ -1,0 +1,15 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+
+{% block title %}ヘルプ{% endblock %}
+
+{% block body %}
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%"/>
+ {% block contents %}
+ {% endblock %}
+ 
+ {% block footer %}
+ <footer style="margin-top:10%;">
+  <a href="{{path('Help')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_tohelp.png')}}" width="35%"></a><a href="{{path('Top')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>  
+ </footer>
+ {% endblock %}
+{% endblock %}

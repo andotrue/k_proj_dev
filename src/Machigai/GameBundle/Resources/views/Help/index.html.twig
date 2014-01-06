@@ -1,9 +1,7 @@
-{% extends "MachigaiGameBundle::base.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 
 {% block title %}ヘルプ{% endblock %}
 
-{% block body %}
-<img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%"/>
  {% block contents %}
   <br /> 
   <br /> 
@@ -12,11 +10,10 @@
   <a href="{{ path('HelpHowtoplay') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_help_asobikata.png')  }}" width="100%"/></a>
   <a href="{{ path('HelpTerms') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_help_kiyaku.png')  }}" width="100%"/></a>
   <a href="{{ path('HelpInquiry') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_otoiawase_top.png')  }}" width="100%"/></a>
-
-  <br /> 
-  <br /> 
-  <br /> 
-  <br /> 
-  <a href="{{path('Shop')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toshop.png')}}" width="35%"></a><a href="{{path('Top')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>  
  {% endblock %}
-{% endblock %}
+ 
+ {% block footer %}
+ <footer style="margin-top:10%;">
+  <a href="{{path('Shop')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toshop.png')}}" width="35%"></a><a href="{{path('Top')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>  
+ </footer>
+ {% endblock %}

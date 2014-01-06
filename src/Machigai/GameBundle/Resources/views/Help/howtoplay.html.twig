@@ -1,4 +1,4 @@
-{% extends "MachigaiGameBundle:Help:index.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 
 {% block title %}遊び方{% endblock %}
 
@@ -30,7 +30,4 @@
 </table>
 </article>
 </section>
-<footer>
- <a href="{{ path('Help') }}" style="margin-right:7%;"alt="ヘルプTOPへ"><img src="{{ asset('/bundles/machigaigame/images/parts/button_tohelp.png') }}" width="30%"></a><a href="{{ path('Top') }}" alt="アプリTOPへ"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png') }}" width="30%"></a>
-</footer>
 {% endblock %}

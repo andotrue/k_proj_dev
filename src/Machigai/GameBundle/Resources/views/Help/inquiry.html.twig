@@ -1,4 +1,4 @@
-{% extends "MachigaiGameBundle:Help:index.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 
 {% block title %}遊び方{% endblock %}
 
@@ -8,7 +8,4 @@
 <br />
 <p style="padding-bottom:10%;">お問い合わせはこちらからご連絡ください。</p>
  <a href="{{ path('HelpInquiryForm') }}" alt="お問い合わせ"><img src="{{ asset('/bundles/machigaigame/images/parts/button_otoiawase.png') }}" width="67%;" /></a>
-<footer style="margin-top:10%;">
- <a href="{{ path('Help') }}" style="margin-right:7%;"alt="ヘルプTOPへ"><img src="{{ asset('/bundles/machigaigame/images/parts/button_tohelp.png') }}" width="30%"></a><a href="{{ path('Top') }}" alt="アプリTOPへ"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png') }}" width="30%"></a>
-</footer>
 {% endblock %}
