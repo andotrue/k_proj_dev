@@ -1,12 +1,8 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 
 {% block title %}ヘルプ{% endblock %}
 
-{% block body %}
-<header><h1>ヘルプ</h1></header>
-<section>
- <h2>登録完了</h2>
- <p>送信が完了しました。</p>
- <button type="button" onclick="location='{{ path('Top') }}'">アプリTOPへ</button>
-</section>
+{% block contents %}
+<img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_sendend.png')}}" width="100%" />
+ <p style="padding:1em 2em;text-align:left;">送信が完了しました。</p>
 {% endblock %}
