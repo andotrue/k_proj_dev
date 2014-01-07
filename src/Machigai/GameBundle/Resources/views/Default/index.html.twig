@@ -3,8 +3,8 @@
 <header id="title" class="top_bg">
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
  <p id="user_name"> 【ユーザー名】さん</p>
- <div id="auIDLogin">
-  <a href="{{ path('Register')  }}" alt="auIDでログイン"><img src="{{ asset('/bundles/machigaigame/images/parts/button_auID.png')  }}" width="50%" /></a>
+ <div id="auIDLogin" style="padding:20px">
+  <a href="{{ path('Register')  }}" alt="auIDでログイン"><img src="{{ asset('/bundles/machigaigame/images/parts/button_auID.png')  }}" width="60%" /></a>
  </header>
  <section>
   <p>auIDでログインすると以下の機能が使えるよ！<br />
@@ -33,7 +33,71 @@
   <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
   <p>テキストテキストテキストテキス トテキストテキストテキストテキストテキストテキストテキスト</p>
  </section>
- <section id="smart_pass">
-  <a href="http://pass.auone.jp/main/">auスマートパスへ戻る</a>
- </section>
+<section style="padding-top:2em;">
+<div class="pre_pass white">
+<p><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
+</div>
+</section>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+ /* =================================================
+ *  	pre_pass
+ * ================================================*/
+ /*common */
+.pre_pass{
+	text-align:center;
+	height:44px;
+	line-height:44px;
+	border:#8f8f8f 1px solid;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	}
+.pre_pass a{
+	display:block;
+	background:url( {{asset('/bundles/machigaigame/images/parts/button_tosmartpass.png')}} ) no-repeat center;
+	height:44px;
+	width:100%;
+	text-indent:-9999px;
+	}
+	
+/*black */	
+.pre_pass.black{
+	background-image: linear-gradient(bottom, rgb(0,0,0) 4%, rgb(0,0,0) 47%, rgb(59,59,59) 52%, rgb(65,65,65) 100%);
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.04, rgb(0,0,0)),
+	color-stop(0.47, rgb(0,0,0)),
+	color-stop(0.52, rgb(59,59,59)),
+	color-stop(1, rgb(65,65,65))
+);
+	border:#000 1px solid;
+	}
+.pre_pass.black a{
+	background:url(../img/txt_02.png) no-repeat center;
+	}	
+	
+/*white */			
+.pre_pass.white{
+	background:#fff;
+	}
+	
+/*gradation */		
+.pre_pass.grada{
+	background-image: linear-gradient(bottom, rgb(172,172,172) 0%, rgb(255,255,255) 59%, rgb(255,255,255) 77%, rgb(255,255,255) 94%);
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, rgb(172,172,172)),
+	color-stop(0.59, rgb(255,255,255)),
+	color-stop(0.77, rgb(255,255,255)),
+	color-stop(0.94, rgb(255,255,255))
+);
+	border:#8f8f8f 1px solid;
+	}
+</style>
 {% endblock %}
