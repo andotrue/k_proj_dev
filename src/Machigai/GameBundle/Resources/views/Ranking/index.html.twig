@@ -1,25 +1,25 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle::base.html.twig" %}
 
 {% block title %}ランキング{% endblock %}
 
 {% block body %}
-<header>
-</header>
-<section id="container">
- <ul id="tab">
-  <li><a href="#tab1" class="selected"><img src="" alt="Easy"/></a></li>
-  <li><a href="#tab2"><img src="" alt="Normal"/></a></li>
-  <li><a href="#tab3"><img src="" alt="Hard" /></a></li> 
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_ranking.png') }}" width="100%"/>
+<section>
+<div id="month_tab" class="bottom_blue_line" style="padding:5% 0 0 0;"><img id="this_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_thismonth.png') }}" width="47%" style="padding-right:2%;" /><img id="last_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_lastmonth.png') }}" width="47%" /></div>
+<div id="level_tab" style="padding-top:0.5%;"><img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy.png') }}" width="30%"/><img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%"><img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" /></div>
+<div id="ranking_area" class="bottom_blue_line" style="width: 100%;height:300px; overflow-y:scroll; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size: 100% auto; " >
+ <ul id="panel" style="padding-top:0.8%; ">
+  {% for rank in ranking_this_month %}
+   <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
+    <span>{{ rank.getRank() }}位 </span><br />
+    <span>タイム　</span>
+   </li>
+  {% endfor %}
  </ul>
- <ul id="panel">
-  <li id="tab1">
-   {% for rank in ranking_this_month %}
-    {{ rank.getUser().getNickname() }}
-   {% endfor %}
-  </li>
- </ul>
+</div>
 </section>
-<footer>
- <button type="button" onclick="location='{{ path('Top') }}'">TOPに戻る</button>
-</footer>
+<p style="padding:1%;text-align:left;">毎月末日 24:00時点での順位に応じてポイントが付与されます。<br />ランキングに挑戦するにはauIDログインが必要です。</p>
+ <footer style="margin:3% auto 5% auto;">
+  <a href="{{path('Top')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>
+ </footer>
 {% endblock %}
