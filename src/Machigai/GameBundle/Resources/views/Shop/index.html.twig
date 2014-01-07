@@ -1,7 +1,24 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle::base.html.twig" %}
 
 {% block title %}MachigaiGameBundle:Shop:index{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Shop:index page</h1>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%"/>
+<section>
+<p style="text-align:right;padding-right:2%;">
+現在のポイント： 999999pt <br />
+<span style="padding-right:0.5em;">並べ替え</span> <select><option value="">50音順</option><option value="">新しい順</option><option value="">古い順</option><option value="">人気順</option></select>
+</p>
+<div id="category_tab" class="bottom_blue_line" style="padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp.png') }}" width="47%" style="padding-right:2%;" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}" width="47%" /></div>
+<div id="item_area" class="bottom_blue_line" style="width: 100%;height:300px; overflow-y:scroll; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size: 100% auto; " >
+<div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
+<div id="wallpaper">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
+</div>
+<nav style="padding-top:3%;"><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%"/></a><span> 1 / xx </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%"/></a></nav>
+</section>
+
+<footer style="margin:3% auto 5% auto;">
+  <a href="{{path('Top')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>
+</footer>
+
 {% endblock %}
