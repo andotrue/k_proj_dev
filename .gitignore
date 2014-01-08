@@ -1,3 +1,4 @@
 app/cache/
 app/logs/
 .*
+web/app_dev.php
