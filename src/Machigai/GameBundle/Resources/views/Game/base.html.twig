@@ -14,7 +14,9 @@
 	<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
 	<style>
 	 body,header,section,footer,div,p,*{padding:0;margin:0;border:0;}
-	.popup{position:fixed;top:28%;}
+	.popup_image{position:fixed;top:28%;text-align:center;}
+	.popup{z-index:100;position:fixed;background-color:rgba(0,0,0,0.5);width:100%;height:100%;text-align:center;color:white;}
+	.hidden{visibility:hidden}
 	ul{list-style-type:none;}
 	</style>
         {% block stylesheets %}{% endblock %}

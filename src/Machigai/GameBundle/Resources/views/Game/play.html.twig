@@ -19,16 +19,16 @@
 
 </div>
 <div style="display:inline-block;width:42%;">
- <div id="machigai_area" style="vertical-align:middle;">
+ <div id="machigai" style="vertical-align:middle;">
    <img src= "{{ asset('bundles/machigaigame/images/parts/game_machigai.png') }}" width="20%" style="vertical-align:middle;"/>
   {% for i in 0..7 %}
-   <img id="machigai-{{i}}" class="machigai_star" src= "{{ asset('bundles/machigaigame/images/parts/game_star_on.png') }}" width="6%"/>
+   <img id="star-{{i}}" class="machigai_star" src= "{{ asset('bundles/machigaigame/images/parts/game_star_off.png') }}" width="6%"/>
   {% endfor %}
  </div>
- <div id="otetsuki_area" >
+ <div id="otetsuki" >
    <img src= "{{ asset('bundles/machigaigame/images/parts/game_otetsuki.png') }}" width="20%" style="vertical-align:middle;"/>
   {% for i in 0..7 %}
-   <img id="otetsuki-{{i}}" class="otetsuki_heart" src= "{{ asset('bundles/machigaigame/images/parts/game_heart_off.png') }}" width="6%"/>
+   <img id="heart-{{i}}" class="otetsuki_heart" src= "{{ asset('bundles/machigaigame/images/parts/game_heart_on.png') }}" width="6%"/>
   {% endfor %}
  </div>
 </div>
@@ -44,27 +44,52 @@
 <img id="slidehandle" src= "{{ asset('bundles/machigaigame/images/parts/game_slideicon.png') }}" width="15%" style="position:fixed;left:20%;bottom:1.9%;" /></a>
 </div>
 <div id="menu_area" style="display:inline-block; width:22%;position:relative;top:5%;">
- <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_hint.png') }}" width="30%" onclick="displayPopupHint();" />
- <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_save.png') }}" width="30%" onclick="displayPopupSave();"/>
- <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_giveup.png') }}" width="30%" onclick="displayPopupGiveup();"/>
+ <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_hint.png') }}" width="30%" onclick="Game.popup($('#game_hint'));" />
+ <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_save.png') }}" width="30%" onclick="Game.popup($('#game_save'));"/>
+ <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_giveup.png') }}" width="30%" onclick="Game.popup($('#game_giveup'));"/>
 </div>
 </footer>
 
 <!-- RotationAlert -->
-<!--<div id="RotationAlert" style="z-index:100;position:fixed;background-color:black;width:100%;height:100%;text-align:center;color:white;visibility='hidden'" visibility="hidden"> 
+<div id="RotationAlert" class="popup hidden" style="z-index:1000;background-color:black;color:white;"> 
  <p style="font-size:300%;">WARNING</p>
  <p style="font-size:130%;">端末を横向きにしてください。</p> -->
 </div>               
-<!-- Start -->
-<div id="Start" style="z-index:100;position:fixed;background-color:rgba(0,0,0,0.5);width:100%;height:100%;text-align:center;color:white;visibility='hidden'" visibility="visible" onclick="gameStart();"> 
-<p class="popup" style="text-align:center">
+<!-- Game Start -->
+<div id="game_start" class="popup" onclick="Game.start();"> 
+<p class="popup_image">
  <img src= "{{ asset('bundles/machigaigame/images/parts/popup_gamestart.png') }}" width="40%" />
 </p>
 </div>
+
+<!-- Game Hint -->
+<div id="game_hint" class="popup" style="visibility:hidden" onclick="Game.showHint();"> 
+<p class="popup_image">
+ <img src= "{{ asset('bundles/machigaigame/images/parts/popup_game_hint.png') }}" width="40%" />
+</p>
+</div>
+
+<!-- Game Save -->
+<div id="game_save" class="popup" style="visibility:hidden" onclick="Game.save();"> 
+<p class="popup_image">
+ <img src= "{{ asset('bundles/machigaigame/images/parts/popup_game_save.png') }}" width="40%" />
+</p>
+</div>
+
+<!-- Game Giveup -->
+<div id="game_giveup" class="popup" style="visibility:hidden" onclick="Game.giveup();"> 
+<p class="popup_image">
+ <img src= "{{ asset('bundles/machigaigame/images/parts/popup_game_giveup.png') }}" width="40%" />
+</p>
+</div>
+
 {% endblock %}
 
 {% block javascripts %}
 <script>
+var DEBUG_MODE = true;
+
+
 //window.onunload= function(){alert("Unload!") };
 document.onundo= function(){alert("Undo!");};
 window.onredo= function(){alert("Redo!");};
@@ -92,27 +117,6 @@ function msecToTimeStr(msec){
 	if(min < 10) min = "0"+ min;
 	return (min + ":" + sec);
 };
-var  gameStart = function(){
-	$("#Start").hide();
-	leftTime.startTimeStamp = new Date();
-	leftTime.timer = $.timer(function(){
-		var is_update;
-		var oldTime = leftTime.leftTime;
-		leftTime.leftTime -= calcurateMSec;
-		if(Math.floor(oldTime / 1000) != Math.floor()){
-			leftTime.updateText();
-		}	
-		if(leftTime.leftTime <= 0){
-			gameFinish();
-		}
-	});
-	leftTime.timer.set({time:calcurateMSec,autostart:true});
-}
-var gameFinish = function(){
-	leftTime.finishTimeStamp = new Date();
-	leftTime.timer.stop();
-	$("#title").text("Finish!");
-}
 
 function displayPopupHint(){
  confirm("displayPopupHint!");
@@ -144,7 +148,6 @@ function ontouchmoveCallback(event){
   }
 */
 	//$(this).css("left", event.touches[0].pageX+"px");
-	//$("#title").text(touchX);
 	this.pageX = event.changedTouches[0].pageX;
 	$("#title").text(event.changedTouches[0].pageX);
 	//$("#title").text(100+"px");
@@ -152,8 +155,111 @@ function ontouchmoveCallback(event){
 function ontouchendCallback(event){
 
 }
-
+/////////////////////////////////
+// Game Object
 //
+//
+
+var Game = new Object;
+Game.leftTime = leftTime;
+
+Game.start = function(){
+	$("#game_start").hide();
+	leftTime.startTimeStamp = new Date();
+	this.timer = $.timer(function(){
+		var is_update;
+		var oldTime = leftTime.leftTime;
+		leftTime.leftTime -= calcurateMSec;
+		if(Math.floor(oldTime / 1000) != Math.floor()){
+			leftTime.updateText();
+		}	
+		if(leftTime.leftTime <= 0){
+			this.finish();
+		}
+	});
+	this.timer.set({time:calcurateMSec,autostart:true});
+}
+Game.finish = function(){
+	leftTime.finishTimeStamp = new Date();
+	this.timer.stop();
+	$("#title").text("Finish!");
+}
+Game.complete = function(){
+	this.timer.stop();
+	this.completeTime = this.finishTime =new Date();
+	this.state = "complete";
+	return this;
+};
+Game.save = function(){
+	this.timer.stop();
+	this.saveTime = new Date();
+	this.state = "save";
+};
+
+Game.giveup = function(){
+	this.timer.stop();
+	this.finishTime = new Date();
+	this.state = "giveup";
+};
+Game.fail = function(){
+	this.timer.stop();
+	this.finishTime = new Date();
+	this.state = "fail";
+};
+
+Game.resume = function(){
+	this.startTime = new Date();
+	this.timer.play();
+	this.state = "resume";
+};
+
+Game.stop = function(){
+	this.timer.stop();
+	this.state = "stop";
+};
+Game.play = function(){
+	this.timer.play();
+	this.state = "play";
+};
+Game.popup = function(jquery_object){
+	jquery_object.css("visibility", "visible");
+};
+Game.showHint = function(){
+	this.timer.play();
+	this.state = "play";
+//	this.status["hint"] = true;
+};
+
+/////////////////////////////////
+// Otetsuki & Machigai
+//
+// 
+
+var Otetsuki = $("#otetsuki"), Machigai= $("#machigai");
+Machigai.stars = $(".machigai_star");
+Otetsuki.hearts = $(".otetsuki_heart");
+Machigai.star_count = 0;
+Otetsuki.heart_count = 8;
+Machigai.getStar = function(){
+	this.star_count +=1;
+	$(this.stars[this.star_count-1]).attr("src","{{ asset('bundles/machigaigame/images/parts/game_star_on.png') }}");
+	if(this.heart_count <=0){
+		Game.complete();
+	}
+	
+	return this;
+};
+Machigai.getStar();
+Otetsuki.loseHeart = function(){
+	this.heart_count -=1;
+	$(this.hearts[this.heart_count]).attr("src","{{ asset('bundles/machigaigame/images/parts/game_heart_off.png') }}");
+	if(this.heart_count <=0){
+		Game.gameover();
+	}
+	return this;
+};
+Otetsuki.loseHeart();
+/////////////////////////////////
 // Initialize Javascript for Game
 //
 //
@@ -168,17 +274,17 @@ $(function(){
 		$(window).bind("load",function(){if(navigator.userAgent.match(/Android/i)){
 		    window.scrollTo(0,1);
 		 }});
-	//	$(window).bind("load",function(){window.scrollTo(0,0);})
-	//	$(window).bind("load orientationchange",function(){
-	//		if(Math.abs(window.orientation) === 90){
+	$(window).bind("load",function(){window.scrollTo(0,0);});
+/*	$(window).bind("load orientationchange",function(){
+		if(Math.abs(window.orientation) == 90){
 			//横向きの場合の命令
-	//			$("#RotationAlert").hide();
-	//		}else{
-			//縦向きの場合の命令
-	//			$("#RotationAlert").show();
-	//		}
-	//	})
-	/* タッチできる環境なら true、そうでないなら false 。
+			unless(DEBUG_MODE == true){ $("#RotationAlert").hide();}
+		}else{
+			//縦向きの場合の命令:
+			unless(DEBUG_MODE == true){ $("#RotationAlert").show();}
+		}
+	})
+*/	/* タッチできる環境なら true、そうでないなら false 。
 	   ここで先に判別しておきます。 */
 	var isTouch = ('ontouchstart' in window);
 	var illust1 = $("#illust1");
@@ -332,7 +438,6 @@ $('#slidehandle').bind({
 	$(".illust").attr({width:illust1.illustWidth});
 	// 位置 X 座標を覚えておく
 	this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
-	$("#title").text(illust1.illustWidth);
     },
     /* タッチの終了、マウスのドラッグの終了 */
     'touchend mouseup': function(e) {
