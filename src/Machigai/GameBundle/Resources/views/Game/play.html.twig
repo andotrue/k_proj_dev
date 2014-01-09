@@ -38,7 +38,7 @@
  <img id="illust2" class="illust" src="{{ asset('bundles/machigaigame/questions/3/MS00003_2.png') }}" width="49.5%" style="left:50%;position:absolute;">
 </section>
 <footer style="position:fixed;height:17%;width:100%;bottom:0; background: url({{ asset('bundles/machigaigame/images/parts/game_header.png') }})">
-<div id="left-time" style="display:inline-block; width:20%;"><p id="time_left" style="text-align:center;">残り時間</p><p style="text-align:center;">5:00</p></div>
+<div id="left_time" style="display:inline-block; width:20%;"><p style="text-align:center;">残り時間</p><p  id="time_left" style="text-align:center;">5:00</p></div>
 <div id="slidebar_area" style="display:inline-block; width:56%;">
 <img  id="slidebar" src= "{{ asset('bundles/machigaigame/images/parts/game_slidebar.png') }}" width="50%" style="position:fixed;left:20%;bottom:4%;"/></a>
 <img id="slidehandle" src= "{{ asset('bundles/machigaigame/images/parts/game_slideicon.png') }}" width="15%" style="position:fixed;left:20%;bottom:1.9%;" /></a>
@@ -55,6 +55,12 @@
  <p style="font-size:300%;">WARNING</p>
  <p style="font-size:130%;">端末を横向きにしてください。</p> -->
 </div>               
+<!-- Start -->
+<div id="Start" style="z-index:100;position:fixed;background-color:rgba(0,0,0,0.5);width:100%;height:100%;text-align:center;color:white;visibility='hidden'" visibility="visible" onclick="gameStart();"> 
+<p class="popup" style="text-align:center">
+ <img src= "{{ asset('bundles/machigaigame/images/parts/popup_gamestart.png') }}" width="40%" />
+</p>
+</div>
 {% endblock %}
 
 {% block javascripts %}
@@ -68,6 +74,45 @@ window.onreadystatechange= function(){alert("OnReadyStateChange!");};
 //window.ondragstart= function(){alert("dragstart!")};
 //window.onpageshow = function(){alert("Come back!")}
 //window.onpagehide = function(){alert("Hiding!")}
+
+// Setup Timer
+var leftTime = $("#time_left");
+var calcurateMSec = 100;
+leftTime.leftTime = 360000;
+leftTime.updateText = function(){
+	remining_txt = msecToTimeStr(this.leftTime);
+	this.text(remining_txt);
+};
+leftTime.updateText();
+function msecToTimeStr(msec){
+	var total_sec = Math.floor(msec/1000);
+	var min = Math.floor(total_sec /60);
+	var sec = total_sec % 60;
+	if(sec < 10) sec = "0"+ sec;
+	if(min < 10) min = "0"+ min;
+	return (min + ":" + sec);
+};
+var  gameStart = function(){
+	$("#Start").hide();
+	leftTime.startTimeStamp = new Date();
+	leftTime.timer = $.timer(function(){
+		var is_update;
+		var oldTime = leftTime.leftTime;
+		leftTime.leftTime -= calcurateMSec;
+		if(Math.floor(oldTime / 1000) != Math.floor()){
+			leftTime.updateText();
+		}	
+		if(leftTime.leftTime <= 0){
+			gameFinish();
+		}
+	});
+	leftTime.timer.set({time:calcurateMSec,autostart:true});
+}
+var gameFinish = function(){
+	leftTime.finishTimeStamp = new Date();
+	leftTime.timer.stop();
+	$("#title").text("Finish!");
+}
 
 function displayPopupHint(){
  confirm("displayPopupHint!");
@@ -107,37 +152,42 @@ function ontouchmoveCallback(event){
 function ontouchendCallback(event){
 
 }
+
+//
+// Initialize Javascript for Game
+//
+//
 $(function(){
-//	$('#slidehandle').bind("touchstart", ontouchstartCallback);
-//	$('#slidehandle').bind("touchmove", ontouchmoveCallback);
-//	$('#slidehandle').bind("touchend", ontouchendCallback);
-//	$('#slidehandle').bind("mousedown", ontouchstartCallback);
-//	$('#slidehandle').bind("mousemove", ontouchmoveCallback);
-//	$('#slidehandle').bind("mouseup", ontouchendCallback);
-	//Andorid WebAppナビゲーションバー非表示対策
-	$(window).bind("load",function(){if(navigator.userAgent.match(/Android/i)){
-	    window.scrollTo(0,1);
-	 }});
-//	$(window).bind("load",function(){window.scrollTo(0,0);})
-//	$(window).bind("load orientationchange",function(){
-//		if(Math.abs(window.orientation) === 90){
-		//横向きの場合の命令
-//			$("#RotationAlert").hide();
-//		}else{
-		//縦向きの場合の命令
-//			$("#RotationAlert").show();
-//		}
-//	})
-/* タッチできる環境なら true、そうでないなら false 。
-   ここで先に判別しておきます。 */
-var isTouch = ('ontouchstart' in window);
-var illust1 = $("#illust1");
-var illust2 = $("#illust2");
-illust1.originalWidth =  illust1.width(); 
-illust1.originalHeight =  $(document) * 70.0/ 100.0;
-illust1.css({clip:"rect(" + "0" +"," + illust1.width() +"px," + illust1.originalHeight + "px," +"0"+")", position:"absolute"});
-illust2.css({clip:"rect(" + "0" +"," + illust2.width() +"px," + "1000" + "px," +"0"+")", position:"absolute"});
-$('.illust').bind({
+	//	$('#slidehandle').bind("touchstart", ontouchstartCallback);
+	//	$('#slidehandle').bind("touchmove", ontouchmoveCallback);
+	//	$('#slidehandle').bind("touchend", ontouchendCallback);
+	//	$('#slidehandle').bind("mousedown", ontouchstartCallback);
+	//	$('#slidehandle').bind("mousemove", ontouchmoveCallback);
+	//	$('#slidehandle').bind("mouseup", ontouchendCallback);
+		//Andorid WebAppナビゲーションバー非表示対策
+		$(window).bind("load",function(){if(navigator.userAgent.match(/Android/i)){
+		    window.scrollTo(0,1);
+		 }});
+	//	$(window).bind("load",function(){window.scrollTo(0,0);})
+	//	$(window).bind("load orientationchange",function(){
+	//		if(Math.abs(window.orientation) === 90){
+			//横向きの場合の命令
+	//			$("#RotationAlert").hide();
+	//		}else{
+			//縦向きの場合の命令
+	//			$("#RotationAlert").show();
+	//		}
+	//	})
+	/* タッチできる環境なら true、そうでないなら false 。
+	   ここで先に判別しておきます。 */
+	var isTouch = ('ontouchstart' in window);
+	var illust1 = $("#illust1");
+	var illust2 = $("#illust2");
+	illust1.originalWidth =  illust1.width(); 
+	illust1.originalHeight =  $(document) * 70.0/ 100.0;
+	illust1.css({clip:"rect(" + "0" +"," + illust1.width() +"px," + illust1.originalHeight + "px," +"0"+")", position:"absolute"});
+	illust2.css({clip:"rect(" + "0" +"," + illust2.width() +"px," + "1000" + "px," +"0"+")", position:"absolute"});
+	$('.illust').bind({
                  
     /* タッチの開始、マウスボタンを押したとき */
     'touchstart mousedown': function(e) {
