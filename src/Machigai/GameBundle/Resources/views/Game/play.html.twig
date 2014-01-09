@@ -1,44 +1,303 @@
-{% extends "::base.html.twig" %}
-{% block body %}
-<div data-bind="style: { width: '100%', height: '1280px',      backgroundColor: 'gray',
-                                                        backgroundImage: 'url(' + currentPage().backgroundImage + ')' ,
-                                                        backgroundRepeat: 'no-repeat',
-                                                        backgroundSize: 'cover'
-                                                } ">
-<p>     The name is <span data-bind="text: pages[0].name"></span></p>
-<div id="background" class="psedo-button" data-bind="" onclick="pageViewModel.moveTo(1);currentPage(pageViewModel.pages[1]);this.style.visibility ='hidden'" style="border: solid 1px black;display:block;position:absolute;width:500px; height:100px;filter:alfa(style=0,opacity=0);bottom:160px;left:10%;"></div>
+{% extends "MachigaiGameBundle:Game:base.html.twig" %}
 
-        <script>
-        function Page(name, backgroundImage, backgroundMusic){
-                var self = this;
-                self.name = name;
-                self.backgroundImage = backgroundImage;
-                self.backgroundMusic = backgroundMusic;
-                self.initialize = function(){xxxalert("test");return self;};
-        }
-        
-        function PageViewModel(){
-                var self = this;
-                self.pages = [
-                        new Page("top",                 "{{ asset('bundles/machigaigame/images/top.jpg') }}", null),
-                        new Page("select-game", "{{ asset('bundles/machigaigame/images/select.jpg') }}",null),
-                        new Page("game",                "{ asset('bundles/machigaigame/images/game.jpg') }}"),
-                        new Page("ranking",     "{{ asset('bundles/machigaigame/images/ranking.jpg') }}"),
-//                      new Page("stamp", "{{ asset('bundles/machigaigame/images/top.jpg') }}"),
-                        new Page("help",                "{{ asset('bundles/machigaigame/images/help.jpg') }}")
-                ];
-                self.moveTo = function(pageNum){
-                        return currentPage = self.pages[pageNum].initialize();
-                }
-                
-        };
-        window.onload = function(){
-                pageViewModel = new PageViewModel();
-                page = pageViewModel.pages[0];
-                currentPage = ko.observable( page );
-                ko.applyBindings(pageViewModel);                
-        }
-        </script>
+{% block stylesheets %}
+<style> 
+ img{line-height:0;}
+ img.machigai_star, img.otetsuki_heart{vertical-align:middle;}
+	
+ section#illust_area{background: url({{asset('bundles/machigaigame/images/parts/game_mondaiarea.png')}}) ;}
+</style>
+{% endblock %}
+
+{% block body %}
+<!-- Game Default Structure -->
+<header style="position:fixed;height:15%; width:100%; background: url({{ asset('bundles/machigaigame/images/parts/game_header.png') }})">
+<h1 id="title" style="font-size:1.5em;display:inline-block;width:24%;padding:0% 1%;"><marquee>タイトル</marquee></h1>
+<div style="height:7%;display:inline-block;width:27%;padding:0% 1%;">
+ <p id="copyright" style="font-size:0.5em;">コピーライトだよ！</p>
+ <p id="url" style="font-size:0.5em;">http://www.copyright.co.jp.com.uk</p>
 
 </div>
+<div style="display:inline-block;width:42%;">
+ <div id="machigai_area" style="vertical-align:middle;">
+   <img src= "{{ asset('bundles/machigaigame/images/parts/game_machigai.png') }}" width="20%" style="vertical-align:middle;"/>
+  {% for i in 0..7 %}
+   <img id="machigai-{{i}}" class="machigai_star" src= "{{ asset('bundles/machigaigame/images/parts/game_star_on.png') }}" width="6%"/>
+  {% endfor %}
+ </div>
+ <div id="otetsuki_area" >
+   <img src= "{{ asset('bundles/machigaigame/images/parts/game_otetsuki.png') }}" width="20%" style="vertical-align:middle;"/>
+  {% for i in 0..7 %}
+   <img id="otetsuki-{{i}}" class="otetsuki_heart" src= "{{ asset('bundles/machigaigame/images/parts/game_heart_off.png') }}" width="6%"/>
+  {% endfor %}
+ </div>
+</div>
+</header>
+<section id="illust_area" style="position:fixed;line-height:0;display:block;top:15%;height:80%;width:100%;">
+ <img id="illust1" class="illust" src="{{ asset('bundles/machigaigame/questions/3/MS00003_1.png') }}" width="49.5%" " style="left:0;position:absolute;">
+ <img id="illust2" class="illust" src="{{ asset('bundles/machigaigame/questions/3/MS00003_2.png') }}" width="49.5%" style="left:50%;position:absolute;">
+</section>
+<footer style="position:fixed;height:17%;width:100%;bottom:0; background: url({{ asset('bundles/machigaigame/images/parts/game_header.png') }})">
+<div id="left-time" style="display:inline-block; width:20%;"><p id="time_left" style="text-align:center;">残り時間</p><p style="text-align:center;">5:00</p></div>
+<div id="slidebar_area" style="display:inline-block; width:56%;">
+<img  id="slidebar" src= "{{ asset('bundles/machigaigame/images/parts/game_slidebar.png') }}" width="50%" style="position:fixed;left:20%;bottom:4%;"/></a>
+<img id="slidehandle" src= "{{ asset('bundles/machigaigame/images/parts/game_slideicon.png') }}" width="15%" style="position:fixed;left:20%;bottom:1.9%;" /></a>
+</div>
+<div id="menu_area" style="display:inline-block; width:22%;position:relative;top:5%;">
+ <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_hint.png') }}" width="30%" onclick="displayPopupHint();" />
+ <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_save.png') }}" width="30%" onclick="displayPopupSave();"/>
+ <img id="" src= "{{ asset('bundles/machigaigame/images/parts/game_icon_giveup.png') }}" width="30%" onclick="displayPopupGiveup();"/>
+</div>
+</footer>
+
+<!-- RotationAlert -->
+<!--<div id="RotationAlert" style="z-index:100;position:fixed;background-color:black;width:100%;height:100%;text-align:center;color:white;visibility='hidden'" visibility="hidden"> 
+ <p style="font-size:300%;">WARNING</p>
+ <p style="font-size:130%;">端末を横向きにしてください。</p> -->
+</div>               
+{% endblock %}
+
+{% block javascripts %}
+<script>
+//window.onunload= function(){alert("Unload!") };
+document.onundo= function(){alert("Undo!");};
+window.onredo= function(){alert("Redo!");};
+window.onmessage= function(){alert("OnMessage!");};
+//window.onerror= function(e){alert();};
+window.onreadystatechange= function(){alert("OnReadyStateChange!");};
+//window.ondragstart= function(){alert("dragstart!")};
+//window.onpageshow = function(){alert("Come back!")}
+//window.onpagehide = function(){alert("Hiding!")}
+
+function displayPopupHint(){
+ confirm("displayPopupHint!");
+}
+function displayPopupSave(){
+ confirm("displayPopupSave!");
+}
+function displayPopupGiveup(){
+ confirm("displayPopupGiveup!");
+}
+function ontouchstartCallback(event){
+ //alert(event.clientY);
+ 
+}
+function ontouchmoveCallback(event){
+  event.preventDefault();
+/*  if(typeof(event) == "undefined"){
+    alert("a");	
+    $("#slidehandle").attr("left", event.clientY);
+    return;
+  a
+}
+*/
+//  var touchX = event.touches[0].pageX;
+/*  if (event.touches.length > 0) {
+    for (var i=0; i<event.touches.length; i++) {
+      var t = event.touches[i];
+    }
+  }
+*/
+	//$(this).css("left", event.touches[0].pageX+"px");
+	//$("#title").text(touchX);
+	this.pageX = event.changedTouches[0].pageX;
+	$("#title").text(event.changedTouches[0].pageX);
+	//$("#title").text(100+"px");
+}
+function ontouchendCallback(event){
+
+}
+$(function(){
+//	$('#slidehandle').bind("touchstart", ontouchstartCallback);
+//	$('#slidehandle').bind("touchmove", ontouchmoveCallback);
+//	$('#slidehandle').bind("touchend", ontouchendCallback);
+//	$('#slidehandle').bind("mousedown", ontouchstartCallback);
+//	$('#slidehandle').bind("mousemove", ontouchmoveCallback);
+//	$('#slidehandle').bind("mouseup", ontouchendCallback);
+	//Andorid WebAppナビゲーションバー非表示対策
+	$(window).bind("load",function(){if(navigator.userAgent.match(/Android/i)){
+	    window.scrollTo(0,1);
+	 }});
+//	$(window).bind("load",function(){window.scrollTo(0,0);})
+//	$(window).bind("load orientationchange",function(){
+//		if(Math.abs(window.orientation) === 90){
+		//横向きの場合の命令
+//			$("#RotationAlert").hide();
+//		}else{
+		//縦向きの場合の命令
+//			$("#RotationAlert").show();
+//		}
+//	})
+/* タッチできる環境なら true、そうでないなら false 。
+   ここで先に判別しておきます。 */
+var isTouch = ('ontouchstart' in window);
+var illust1 = $("#illust1");
+var illust2 = $("#illust2");
+illust1.originalWidth =  illust1.width(); 
+illust1.originalHeight =  $(document) * 70.0/ 100.0;
+illust1.css({clip:"rect(" + "0" +"," + illust1.width() +"px," + illust1.originalHeight + "px," +"0"+")", position:"absolute"});
+illust2.css({clip:"rect(" + "0" +"," + illust2.width() +"px," + "1000" + "px," +"0"+")", position:"absolute"});
+$('.illust').bind({
+                 
+    /* タッチの開始、マウスボタンを押したとき */
+    'touchstart mousedown': function(e) {
+        // ページが動いたり、反応を止める
+        e.preventDefault();
+         
+        // 開始位置 X,Y 座標を覚えておく
+        // （touchmove イベントを通らず終了したときのために必ず覚えておくこと）
+        this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
+        this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
+        // 現在の illust の場所を覚えておく
+        this.left = $(this).position().left;
+	this.haba = $(this).width();
+	this.right = this.left + this.haba; 
+        this.top = $(this).position().left;
+	this.takasa = $(this).height();
+	this.bottom = this.left + this.haba; 
+        // タッチ処理を開始したフラグをたてる
+        this.touched = true;
+    },
+    /* タッチしながら移動、マウスのドラッグ */
+    'touchmove mousemove': function(e) {
+         
+        // 開始していない場合は動かないようにする
+        // 過剰動作の防止
+        if (!this.touched) {
+            return;
+        }
+         
+        // ページが動くのを止める
+        e.preventDefault();
+         
+        // 移動先の hoge の位置を取得する
+        this.left = this.left - (this.pageX - (isTouch ? event.changedTouches[0].pageX : e.pageX) );
+	this.right = this.left + this.haba;
+        this.top = this.top - (this.pageY - (isTouch ? event.changedTouches[0].pageY : e.pageY) );
+/*	if( this.left < this.min){
+		this.left = this.min;
+		this.right = this.left + this.haba;
+	}else if( this.right > this.max){
+		this.right = this.max;
+		this.left = this.right - this.haba;
+	}
+*/	//スライダーの割合を計算
+	this.ratio = 1.0 + (this.left - this.min) / (this.max -this.min - this.haba);
+
+
+	//clip用変数の定義
+	this.illustWidth = this.ratio * this.originalWidth ;
+	this.illustHeight = this.ratio * this.originalHeight ;
+	var dw = this.illustWidth - this.originalWidth;	
+	var dh = this.illustHeight - this.originalHeight;
+	this.cliptop = dh;
+	this.clipbottom = dh + this.originalHeight;
+	this.clipleft = dw;
+	this.cilpright = dw + this.originalWidth;
+//	$(this).css({clip:"rect(" + this.cliptop +"px," + this.clipleft +"px," + this.clipbottom + "px," + this.clipright+")", position:"absolute"});
+	
+	//$(".illust").attr({width:illust1.illustWidth});
+	// 位置 X 座標を覚えておく
+	this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
+	this.pageY = (isTouch ? event.changedTouches[0].pageY : e.pageY);
+	$("#title").text("" + this.originalWidth +" top=>"+ this.cliptop + " right=>" + this.clipright + " bottom=>" + this.clipbottom + " left=>" + this.clipleft );
+
+    },
+    /* タッチの終了、マウスのドラッグの終了 */
+    'touchend mouseup': function(e) {
+        if (!this.touched) {
+            return;
+        }
+         
+        // タッチ処理は終了したため、フラグをたたむ
+        this.touched = false;
+         
+        // 必要なら以下で最終の hoge の位置を取得し何かに使う
+        // this.pageX
+        // this.pageY
+    }
+});
+/* hoge のイベントを jQuery.bind で捕獲します。 */
+$('#slidehandle').bind({
+                 
+    /* タッチの開始、マウスボタンを押したとき */
+    'touchstart mousedown': function(e) {
+        // ページが動いたり、反応を止める
+        e.preventDefault();
+         
+        // 開始位置 X,Y 座標を覚えておく
+        // （touchmove イベントを通らず終了したときのために必ず覚えておくこと）
+        this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
+ 
+        // 現在の hoge の場所を覚えておく
+        this.left = $(this).position().left;
+	this.adjustMax = 1.05;
+        this.max = $("#slidebar").position().left + $("#slidebar").width() * this.adjustMax;
+	this.min = $("#slidebar").position().left; 
+	this.haba = $(this).width();
+	this.right = this.left + this.haba; 
+        // タッチ処理を開始したフラグをたてる
+        this.touched = true;
+    },
+    /* タッチしながら移動、マウスのドラッグ */
+    'touchmove mousemove': function(e) {
+         
+        // 開始していない場合は動かないようにする
+        // 過剰動作の防止
+        if (!this.touched) {
+            return;
+        }
+         
+        // ページが動くのを止める
+        e.preventDefault();
+         
+        // 移動先の hoge の位置を取得する
+        this.left = this.left - (this.pageX - (isTouch ? event.changedTouches[0].pageX : e.pageX) );
+	this.right = this.left + this.haba;
+	if( this.left < this.min){
+		this.left = this.min;
+		this.right = this.left + this.haba;
+	}else if( this.right > this.max){
+		this.right = this.max;
+		this.left = this.right - this.haba;
+	}
+	//スライダーの割合を計算
+	this.ratio = 1.0 + (this.left - this.min) / (this.max -this.min - this.haba);
+
+	// slider を移動させる
+	$(this).css({left:this.left, top:this.top});
+
+	//clip用変数の定義
+	illust1.illustWidth = this.ratio * illust1.originalWidth ;
+	illust1.illustHeight = this.ratio * illust1.originalHeight ;
+	var dw = illust1.illustWidth - illust1.originalWidth;	
+	var dh = illust1.illustHeight - illust1.originalHeight;
+	illust1.cliptop = dh;
+	illust1.clipbottom = dh + illust1.originalHeight;
+	illust1.clipleft = dw;
+	illust1.cilpright = dw + illust1.originalWidth;
+	
+	$(this).css({left:this.left});
+	
+	$(".illust").attr({width:illust1.illustWidth});
+	// 位置 X 座標を覚えておく
+	this.pageX = (isTouch ? event.changedTouches[0].pageX : e.pageX);
+	$("#title").text(illust1.illustWidth);
+    },
+    /* タッチの終了、マウスのドラッグの終了 */
+    'touchend mouseup': function(e) {
+        if (!this.touched) {
+            return;
+        }
+         
+        // タッチ処理は終了したため、フラグをたたむ
+        this.touched = false;
+         
+        // 必要なら以下で最終の hoge の位置を取得し何かに使う
+        // this.pageX
+        // this.pageY
+    }
+});
+});
+</script>
 {% endblock %}
