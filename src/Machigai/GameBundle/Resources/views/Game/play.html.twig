@@ -57,30 +57,34 @@
 </div>               
 <!-- Game Start -->
 <div id="game_start" class="popup" onclick="Game.start();"> 
-<p class="popup_image">
- <img src= "{{ asset('bundles/machigaigame/images/parts/popup_gamestart.png') }}" width="40%" />
+<p class="popup_answer">
+ <img class="popup_image" src= "{{ asset('bundles/machigaigame/images/parts/popup_gamestart.png') }}" width="40%" />
 </p>
 </div>
 
-<!-- Game Hint -->
+<!-- Game Hint Popup -->
 <div id="game_hint" class="popup" style="visibility:hidden" onclick="Game.showHint();"> 
 <p class="popup_image">
  <img src= "{{ asset('bundles/machigaigame/images/parts/popup_game_hint.png') }}" width="40%" />
 </p>
 </div>
 
-<!-- Game Save -->
+<!-- Game Save Popup -->
 <div id="game_save" class="popup" style="visibility:hidden" onclick="Game.save();"> 
 <p class="popup_image">
  <img src= "{{ asset('bundles/machigaigame/images/parts/popup_game_save.png') }}" width="40%" />
 </p>
 </div>
 
-<!-- Game Giveup -->
+<!-- Game Giveup Popup -->
 <div id="game_giveup" class="popup" style="visibility:hidden" onclick="Game.giveup();"> 
-<p class="popup_image">
- <img src= "{{ asset('bundles/machigaigame/images/parts/popup_game_giveup.png') }}" width="40%" />
-</p>
+ <div class="popup_answer">
+  <img class="popup_image" src= "{{ asset('bundles/machigaigame/images/parts/popup_game_giveup.png') }}" width="50%" />
+  <div class="popup_answer2">
+   <img class="game_popup_answer_yes" onclick="Game.giveup();" src="{{ asset('bundles/machigaigame/images/parts/button_yes.png') }}" width="30%" /></a>
+   <img class="game_popup_answer_no" onclick="Game.play()" src="{{ asset('bundles/machigaigame/images/parts/button_no.png') }}" width="30%" />
+  </div>
+ </div>
 </div>
 
 {% endblock %}
@@ -88,7 +92,6 @@
 {% block javascripts %}
 <script>
 var DEBUG_MODE = true;
-
 
 //window.onunload= function(){alert("Unload!") };
 document.onundo= function(){alert("Undo!");};
@@ -213,11 +216,13 @@ Game.resume = function(){
 	this.state = "resume";
 };
 
-Game.stop = function(){
-	this.timer.stop();
+Game.pause = function(){
+	this.timer.pause();
 	this.state = "stop";
 };
 Game.play = function(){
+	$(".popup").hide();
+	$(".popup").css("visibility","hidden");
 	this.timer.play();
 	this.state = "play";
 };
