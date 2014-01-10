@@ -12,7 +12,7 @@
 {% block body %}
 <!-- Game Default Structure -->
 <header style="position:fixed;height:15%; width:100%; background: url({{ asset('bundles/machigaigame/images/parts/game_header.png') }})">
-<h1 id="title" style="font-size:1.5em;display:inline-block;width:24%;padding:0% 1%;"><marquee>タイトル</marquee></h1>
+<h1 style="font-size:1em;display:inline-block;width:24%;padding:0% 1%;"><marquee id="title" >タイトル</marquee></h1>
 <div style="height:7%;display:inline-block;width:27%;padding:0% 1%;">
  <p id="copyright" style="font-size:0.5em;">コピーライトだよ！</p>
  <p id="url" style="font-size:0.5em;">http://www.copyright.co.jp.com.uk</p>
@@ -56,30 +56,40 @@
  <p style="font-size:130%;">端末を横向きにしてください。</p> -->
 </div>               
 <!-- Game Start -->
-<div id="game_start" class="popup" onclick="Game.start();"> 
+<div id="game_start" class="popup" > 
 <p class="popup_answer">
- <img class="popup_image" src= "{{ asset('bundles/machigaigame/images/parts/popup_gamestart.png') }}" width="40%" />
+ <img id="game_start_image" class="popup_image" src= "{{ asset('bundles/machigaigame/images/parts/popup_questiondownload.png') }}" width="60%" />
 </p>
 </div>
 
 <!-- Game Hint Popup -->
-<div id="game_hint" class="popup" style="visibility:hidden" onclick="Game.showHint();"> 
-<p class="popup_image">
- <img src= "{{ asset('bundles/machigaigame/images/parts/popup_game_hint.png') }}" width="40%" />
-</p>
+<div id="game_hint" class="popup" style="visibility:hidden" onclick="Game.play();"> 
+ <div class="popup_answer">
+  <img class="popup_image" src= "{{ asset('bundles/machigaigame/images/parts/popup_game_hint.png') }}" width="60%" />
+  <div class="popup_answer2">
+   <img class="game_popup_answer_yes" onclick="Game.showHint();" src="{{ asset('bundles/machigaigame/images/parts/button_yes.png') }}" width="30%" /></a>
+   <img class="game_popup_answer_no" onclick="Game.play()" src="{{ asset('bundles/machigaigame/images/parts/button_no.png') }}" width="30%" />
+  </div>
+ </div>
 </div>
+
 
 <!-- Game Save Popup -->
-<div id="game_save" class="popup" style="visibility:hidden" onclick="Game.save();"> 
-<p class="popup_image">
- <img src= "{{ asset('bundles/machigaigame/images/parts/popup_game_save.png') }}" width="40%" />
-</p>
+<div id="game_save" class="popup" style="visibility:hidden" > 
+ <div class="popup_answer">
+  <img class="popup_image" src= "{{ asset('bundles/machigaigame/images/parts/popup_game_save.png') }}" width="60%" />
+  <div class="popup_answer2">
+   <img class="game_popup_answer_yes" onclick="Game.save();" src="{{ asset('bundles/machigaigame/images/parts/button_yes.png') }}" width="30%" /></a>
+   <img class="game_popup_answer_no" onclick="Game.play()" src="{{ asset('bundles/machigaigame/images/parts/button_no.png') }}" width="30%" />
+  </div>
+ </div>
 </div>
 
+
 <!-- Game Giveup Popup -->
-<div id="game_giveup" class="popup" style="visibility:hidden" onclick="Game.giveup();"> 
+<div id="game_giveup" class="popup" style="visibility:hidden"> 
  <div class="popup_answer">
-  <img class="popup_image" src= "{{ asset('bundles/machigaigame/images/parts/popup_game_giveup.png') }}" width="50%" />
+  <img class="popup_image" src= "{{ asset('bundles/machigaigame/images/parts/popup_game_giveup.png') }}" width="60%" />
   <div class="popup_answer2">
    <img class="game_popup_answer_yes" onclick="Game.giveup();" src="{{ asset('bundles/machigaigame/images/parts/button_yes.png') }}" width="30%" /></a>
    <img class="game_popup_answer_no" onclick="Game.play()" src="{{ asset('bundles/machigaigame/images/parts/button_no.png') }}" width="30%" />
@@ -152,7 +162,7 @@ function ontouchmoveCallback(event){
 */
 	//$(this).css("left", event.touches[0].pageX+"px");
 	this.pageX = event.changedTouches[0].pageX;
-	$("#title").text(event.changedTouches[0].pageX);
+//	$("#title").text(event.changedTouches[0].pageX);
 	//$("#title").text(100+"px");
 }
 function ontouchendCallback(event){
@@ -165,7 +175,12 @@ function ontouchendCallback(event){
 
 var Game = new Object;
 Game.leftTime = leftTime;
+Game.initialize = function(){
+	Question.getData();
+}
+Game.setIllust = function(){
 
+}
 Game.start = function(){
 	$("#game_start").hide();
 	leftTime.startTimeStamp = new Date();
@@ -181,59 +196,147 @@ Game.start = function(){
 		}
 	});
 	this.timer.set({time:calcurateMSec,autostart:true});
+	console.log("Game.start()");
 }
 Game.finish = function(){
 	leftTime.finishTimeStamp = new Date();
 	this.timer.stop();
 	$("#title").text("Finish!");
+	console.log("Game.finish()");
 }
 Game.complete = function(){
 	this.timer.stop();
 	this.completeTime = this.finishTime =new Date();
 	this.state = "complete";
+	console.log("Game.complete()");
 	return this;
 };
 Game.save = function(){
 	this.timer.stop();
 	this.saveTime = new Date();
 	this.state = "save";
+	console.log("Game.save()");
+	window.location.replace("{{ path('GameSelect') }}");
 };
 
 Game.giveup = function(){
 	this.timer.stop();
 	this.finishTime = new Date();
 	this.state = "giveup";
+	console.log("Game.giveup()");
+	window.location.replace("{{ path('GameSelect') }}");
 };
 Game.fail = function(){
 	this.timer.stop();
 	this.finishTime = new Date();
 	this.state = "fail";
+	console.log("Game.fail()");
 };
 
 Game.resume = function(){
 	this.startTime = new Date();
 	this.timer.play();
 	this.state = "resume";
+	console.log("Game.resume()");
 };
 
 Game.pause = function(){
 	this.timer.pause();
-	this.state = "stop";
+	this.state = "pause";
+	console.log("Game.pause()");
 };
 Game.play = function(){
 	$(".popup").hide();
 	$(".popup").css("visibility","hidden");
 	this.timer.play();
 	this.state = "play";
+	console.log("Game.play()");
+	if(this.timer.isActive == false){
+		console.log("Game.timer is NOT Active.");
+	} else{ console.log("Game.timer is Active.");}
 };
 Game.popup = function(jquery_object){
+	$(".popup").show();
 	jquery_object.css("visibility", "visible");
+	console.log("Game.popup()");
 };
 Game.showHint = function(){
 	this.timer.play();
 	this.state = "play";
 //	this.status["hint"] = true;
+	console.log("Game.showHint()");
 };
+
+
+/////////////////////////////////
+// Question 
+//
+// 
+
+var Question = new Object;
+Question.illusts = $(".illust");
+var illust1 = $(Question.illusts[0]);
+var illust2 = $(Question.illusts[1]);
+Question.number = 3;
+Question.getData = function(){
+	console.log("Question.getData()");
+	//データの準備
+	submitData = {number:Question.number};
+	//リクエスト
+	Question.response = $.ajax({
+		async: true,
+		timeout: 10000,
+		type: "GET",
+		cache: true,
+		ifModified: false,
+		dataType: 'xml',
+		data: submitData,
+//		url: "{{ path('GameGetData')}}",
+		url: "{{ asset('bundles/machigaigame/questions/3/MS00003.xml')}}",
+		beforeSend: function(){
+			console.log("Question.getData:beforeSend()");
+		},
+		
+		complete: function(xml){
+			console.log("Question.getData:complete():");
+			Question.differentNode = xml.responseXML.getElementsByTagName("different")[0];
+			Question.id = xml.responseXML.getElementsByTagName("id")[0].textContent;
+			Question.name = xml.responseXML.getElementsByTagName("name")[0].textContent;
+			Question.difficulty = xml.responseXML.getElementsByTagName("difficulty")[0].textContent;
+			Question.differentNode = xml.responseXML.getElementsByTagName("different")[0];
+			Question.pointNodes = Question.differentNode.getElementsByTagName("point");
+			Question.points = [];
+			jQuery.each(Question.pointNodes,function(){
+				var point = {};
+				point['X'] = this.getElementsByTagName("x")[0].textContent;
+				point['Y'] = this.getElementsByTagName("y")[0].textContent; 
+				Question.points.push(point);
+			});
+			
+			$("#title").text(Question.name);
+			console.log("Question.getData:complete():");
+		},
+		
+		success: function(){
+			console.log("Question.getData:success()");
+			$("#game_start_image").attr("src", "{{ asset('bundles/machigaigame/images/parts/popup_gamestart_first.png') }}");
+			$("#game_start").bind("click", Game.start);
+		},
+		
+		error: function(){
+			console.log("Question.getData:error()");
+
+		}
+		
+	});
+};
+
+
+/////////////////////////////////
+// Illust
+//
+// 
+
 
 /////////////////////////////////
 // Otetsuki & Machigai
@@ -254,7 +357,6 @@ Machigai.getStar = function(){
 	
 	return this;
 };
-Machigai.getStar();
 Otetsuki.loseHeart = function(){
 	this.heart_count -=1;
 	$(this.hearts[this.heart_count]).attr("src","{{ asset('bundles/machigaigame/images/parts/game_heart_off.png') }}");
@@ -263,11 +365,13 @@ Otetsuki.loseHeart = function(){
 	}
 	return this;
 };
-Otetsuki.loseHeart();
+
+
 /////////////////////////////////
 // Initialize Javascript for Game
 //
 //
+Game.initialize();
 $(function(){
 	//	$('#slidehandle').bind("touchstart", ontouchstartCallback);
 	//	$('#slidehandle').bind("touchmove", ontouchmoveCallback);
@@ -292,8 +396,6 @@ $(function(){
 */	/* タッチできる環境なら true、そうでないなら false 。
 	   ここで先に判別しておきます。 */
 	var isTouch = ('ontouchstart' in window);
-	var illust1 = $("#illust1");
-	var illust2 = $("#illust2");
 	illust1.originalWidth =  illust1.width(); 
 	illust1.originalHeight =  $(document) * 70.0/ 100.0;
 	illust1.css({clip:"rect(" + "0" +"," + illust1.width() +"px," + illust1.originalHeight + "px," +"0"+")", position:"absolute"});
