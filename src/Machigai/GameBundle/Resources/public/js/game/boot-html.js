@@ -27,12 +27,15 @@
 // Not needed by cocos2d + JS bindings
 
 var MW = MW || {};
-
+var bd = '/bundles/machigaigame/js/game/';
+var rd = bd + 'res/';
 (function () {
     var d = document;
     var c = {
         COCOS2D_DEBUG:2, //0 to turn debug off, 1 for basic debug, and 2 for full debug
-        showFPS:true,
+        box2d:false,
+        chipmunk:false,
+        showFPS:false,
         loadExtension:false,
         frameRate:60,
         renderMode:1,       //Choose of RenderMode: 0(default), 1(Canvas only), 2(WebGL only)
@@ -40,9 +43,16 @@ var MW = MW || {};
         engineDir: '/bundles/machigaigame/js/game/cocos/cocos2d/',
         /*SingleEngineFile:'MoonWarriors-compress.js',*/
         appFiles:[
-            '/bundles/machigaigame/js/game/src/Resource.js',
-            '/bundles/machigaigame/js/game/src/Background.js'
-        ]
+            bd + 'src/App.js',
+            bd + 'src/GameData.js',
+/*            bd + 'src/Heart.js',
+            bd + 'src/Star.js',
+            bd + 'src/Question.js',
+            bd + 'src/Illust.js',
+            bd + 'src/HintButton.js',
+            bd + 'src/SaveButton.js',
+            bd + 'src/GiveupButton.js'
+*/        ]
     };
 
     if(!d.createElement('canvas').getContext){

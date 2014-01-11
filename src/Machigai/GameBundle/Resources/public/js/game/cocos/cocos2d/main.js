@@ -1,30 +1,4 @@
-/****************************************************************************
- Copyright (c) 2010-2012 cocos2d-x.org
- Copyright (c) 2008-2010 Ricardo Quesada
- Copyright (c) 2011      Zynga Inc.
-
- http://www.cocos2d-x.org
-
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
- ****************************************************************************/
-var cocos2dApp = cc.Application.extend({
+var Application = cc.Application.extend({
     config:document['ccConfig'],
     ctor:function (scene) {
         this._super();
@@ -38,17 +12,18 @@ var cocos2dApp = cc.Application.extend({
         // initialize director
         var director = cc.Director.getInstance();
 
-        cc.EGLView.getInstance()._adjustSizeToBrowser();
-        cc.EGLView.getInstance().adjustViewPort(true);
-       var screenSize = cc.EGLView.getInstance().getFrameSize();
-        var resourceSize = cc.size(1080, 1920);
-        var designSize = cc.size(1080, 1920);
+//        cc.EGLView.getInstance()._adjustSizeToBrowser();
+//        cc.EGLView.getInstance().adjustViewPort(true);
+        var screenSize = cc.EGLView.getInstance().getFrameSize();
+        var screenSize = cc.size(320,568);
+        var resourceSize = cc.size(1280, 1920);
+        var designSize = cc.size(1280, 1920);
 
         var searchPaths = [];
         var resDirOrders = [];
 
-        searchPaths.push("res");
-        cc.FileUtils.getInstance().setSearchPaths(searchPaths);
+//        searchPaths.push("res");
+//        cc.FileUtils.getInstance().setSearchPaths(searchPaths);
 
         var platform = cc.Application.getInstance().getTargetPlatform();
         if (platform == cc.TARGET_PLATFORM.MOBILE_BROWSER) {
@@ -56,19 +31,19 @@ var cocos2dApp = cc.Application.extend({
         }
         else if (platform == cc.TARGET_PLATFORM.PC_BROWSER) {
             if (screenSize.height >= 800) {
-                resDirOrders.push("HD");
+//                resDirOrders.push("HD");
             }
             else {
-                resourceSize = cc.size(320, 480);
-                designSize = cc.size(320, 480);
-                resDirOrders.push("Normal");
+                resourceSize = cc.size(1080, 1920);
+                designSize = cc.size(1080, 1920);
+//                resDirOrders.push("Normal");
             }
         }
 
-        cc.FileUtils.getInstance().setSearchResolutionsOrder(resDirOrders);
-        director.setContentScaleFactor(resourceSize.width / designSize.width);
+//        cc.FileUtils.getInstance().setSearchResolutionsOrder(resDirOrders);
+//        director.setContentScaleFactor(resourceSize.width / designSize.width);
         cc.EGLView.getInstance().setDesignResolutionSize(designSize.width, designSize.height, cc.RESOLUTION_POLICY.SHOW_ALL);
-        cc.EGLView.getInstance().resizeWithBrowserSize(true);
+//        cc.EGLView.getInstance().resizeWithBrowserSize(true);
 
         // turn on display FPS
         director.setDisplayStats(this.config['showFPS']);
@@ -85,4 +60,4 @@ var cocos2dApp = cc.Application.extend({
     }
 });
 
-var myApp = new cocos2dApp(MyScene);
+var myApp = new Application(MyGameScene);
