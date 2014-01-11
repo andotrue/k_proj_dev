@@ -3,8 +3,8 @@ parameters:
     database_host: 127.0.0.1
     database_port: null
     database_name: machigai_dev
-    database_user: machigai 
-    database_password: J+3nkrqkne;fnkfaf
+    database_user: root
+    database_password: pass.test
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
