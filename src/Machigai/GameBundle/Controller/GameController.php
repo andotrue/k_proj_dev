@@ -13,7 +13,7 @@ class GameController extends Controller
 
     public function playAction()
     {
-	return $this->render('MachigaiGameBundle:Game:play.html.twig');	
+	return $this->render('MachigaiGameBundle:Game:index.html.twig');	
     }
 
     public function finishAction()
