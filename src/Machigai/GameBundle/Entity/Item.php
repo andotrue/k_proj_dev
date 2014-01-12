@@ -36,6 +36,13 @@ class Item
      */
     private $consumePoint;
 
+     /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
     /**
      * @var \DateTime
      *
@@ -65,8 +72,6 @@ class Item
     private $updatedAt;
 
     /**
-     * @var string
-     *
      * @ORM\ManyToOne(targetEntity="ItemCategory", inversedBy="items") 
      * @ORM\JoinColumn(name="category_code", referencedColumnName="category_code")
      */
@@ -284,5 +289,28 @@ class Item
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Item
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

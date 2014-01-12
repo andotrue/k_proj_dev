@@ -8,7 +8,10 @@ class ShopController extends Controller
 {
     public function indexAction()
     {
-	return $this->render('MachigaiGameBundle:Shop:index.html.twig');
+    $items = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:Item')
+        ->findAll();
+	return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items));
     }
 
     public function wallpaperAction()
@@ -21,9 +24,12 @@ class ShopController extends Controller
 	return $this->render('MachigaiGameBundle:Shop:stamp.html.twig');
     }
 
-    public function downloadAction()
+    public function downloadAction($id)
     {
-	return $this->render('MachigaiGameBundle:Shop:download.html.twig');
+    $items = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:Item')
+        ->findBy(array('id'=>$id));
+	return $this->render('MachigaiGameBundle:Shop:download.html.twig',array('items'=>$items));
     }
 
     public function errorAction()

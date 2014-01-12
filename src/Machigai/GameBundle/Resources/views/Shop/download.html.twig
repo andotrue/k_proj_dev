@@ -1,7 +1,16 @@
-{% extends "::base.html.twig" %}
-
-{% block title %}MachigaiGameBundle:Shop:download{% endblock %}
-
-{% block body %}
-<h1>Welcome to the Shop:download page</h1>
-{% endblock %}
+<span class="">コンテンツ詳細</span>
+<p>以下の内容でよろしければ購入ボタンを押してください。</p>
+<img src="" width="15%" style="text-align:middle;width:80px;height:80px;"/><br />
+{{items.0.getDescription}}<br />
+<span class="">必要ポイント:{{items.0.getConsumePoint}}</span><br />
+<span class="">現在のポイント</span><br />
+未実装pt<br />
+<span class="">購入後のポイント</span><br />
+未実装pt<br />
+<span class="">
+<a href="{{ path('confirm',{"id":items.0.getId}) }}">購入する未実装</a>
+</span><br />
+※購入後30日間は再ダウンロードできます。<br />
+<span class="">
+<a href="{{path('Shop')}}">ショップに戻る</a>
+</span>

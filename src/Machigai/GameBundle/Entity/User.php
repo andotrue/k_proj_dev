@@ -119,14 +119,15 @@ class User
     protected $playHistories;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ranking", mappedBy="user")
-     */
+    * @ORM\OneToMany(targetEntity="Ranking", mappedBy="user")
+    */
     protected $rankings;
 
     public function __construct()
     {
 	$this->purchaseHistories =new ArrayCollection();
 	$this->playHistories =new ArrayCollection();
+    $this->rankings = new ArrayCollection();
     }
 
 
@@ -513,5 +514,18 @@ class User
     public function getRankings()
     {
         return $this->rankings;
+    }
+
+    /**
+     * Set rankings
+     *
+     * @param \Machigai\GameBundle\Entity\Ranking $rankings
+     * @return User
+     */
+    public function setRankings(\Machigai\GameBundle\Entity\Ranking $rankings = null)
+    {
+        $this->rankings = $rankings;
+
+        return $this;
     }
 }

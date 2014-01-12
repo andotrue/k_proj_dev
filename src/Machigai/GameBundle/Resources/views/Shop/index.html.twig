@@ -26,15 +26,48 @@ function change_tabs(data){
 <div id="category_tab" class="bottom_blue_line" style="padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp.png') }}" width="47%" style="padding-right:2%;" onclick="change_tabs(0)" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}" width="47%" onclick="change_tabs(1)" /></div>
 <div id="item_area" class="bottom_blue_line" style="width: 100%;height:300px; overflow-y:scroll; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size: 100% auto; " >
 
-<div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}stamps</div>
-<div id="wallpaper">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}wallpapers</div>
+<div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
+<div id="wallpaper">{{ include('MachigaiGameBundle:Shop:wallpaper.html.twig',{}) }}</div>
 </div>
 <nav style="padding-top:3%;"><a style="padding-right:20%;">
-	<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%"/></a><span> 1 / xx </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%"/></a></nav>
+	<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" id="prev"/></a><span><span id="page"></span> / <span id="max"></span> </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" id="next" /></a></nav>
 </section>
 
 <footer style="margin:3% auto 5% auto;">
   <a href="{{path('Top')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>
 </footer>
 
+<script>
+$(function() {
+  var page = 0;
+  function draw() {
+    $('#page').html(page + 1);
+    if($('.item1').size() < 21){
+    	$('#max').html(1);
+    }else{
+    	$('#max').html(parseInt($('.item1').size() / 20 + 1));
+    }
+    $('.item1').hide();
+    if(page == 0){
+      $('.item1:first').show();
+      $('.item1:gt(' + page * 1 + '):lt(19)').show();
+    }else{
+      $('.item1:gt(' + page * 19 + '):lt(20)').show();
+    }
+  }
+  $('#prev').click(function() {
+    if (page > 0) {
+      page--;
+      draw();
+    }
+  });
+  $('#next').click(function() {
+    if (page < ($('.item1').size() - 1) / 20 - 1) {
+      page++;
+      draw();
+    }
+  });
+  draw();
+});
+</script>
 {% endblock %}

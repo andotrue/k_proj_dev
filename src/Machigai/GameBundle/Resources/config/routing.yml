@@ -78,7 +78,7 @@ ShopStamp:
     defaults: { _controller: MachigaiGameBundle:Shop:stamp }
 
 ShopDownload:
-    pattern: /shop/download/
+    pattern: /shop/download/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:download }
 
 ShopError:
@@ -86,7 +86,7 @@ ShopError:
     defaults: { _controller: MachigaiGameBundle:Shop:error }
 
 confirm:
-    pattern: /shop/confirm
+    pattern: /shop/confirm/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:confirm }
 
 Ranking:
