@@ -5,16 +5,44 @@
     <meta charset="utf-8">
     <title>まちがいさがしメイトfor auスマートパス</title>
     <link rel="icon" type="image/GIF" href="res/favicon.ico"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-    <meta name="screen-orientation" content="portlait"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1" />
     <meta name="full-screen" content="yes"/>
+    <meta name="screen-orientation" content="portrait"/>
     <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <script type='text/javascript'>
+        function preventScroll(event) {
+          if (event.touches[0].target && (event.touches[0].target.tagName.toLowerCase() == "body" || event.touches[0].target.tagName.toLowerCase() == "body")) {event.preventDefault();}
+        }
+        document.addEventListener("touchstart", preventScroll, false);
+        document.addEventListener("touchmove", preventScroll, false);
+        document.addEventListener("touchend", preventScroll, false);
+        document.addEventListener("gesturestart", preventScroll, false);
+        document.addEventListener("gesturechange", preventScroll, false);
+        document.addEventListener("gestureend", preventScroll, false);
+        window.addEventListener("load", function() {
+            setTimeout(scrollBy, 100, 0, 1);
+        }, false);
+    </script>
+    <style>
+        body, canvas, div {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        div.dummy {
+            height: 1px;
+        }
+    </style>
 </head>
 <body style="background:white;padding:0;margin:0;">
     <canvas id="gameCanvas" ></canvas>
-<!--    <script type="text/javascript" src="cordova.js"></script> -->
     <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/game/boot-html.js') }}"></script>
-</script>
+    <div class="dummy"></div>
 </body>
 </html>
