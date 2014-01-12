@@ -33,6 +33,12 @@ class GameController extends Controller
 
         $response = new BinaryFileResponse($file);
 //        $response->prepare($request);
+        if ($type == 'xml'){
+            $response->headers->set('Content-Type', 'text/xml');
+            $response->headers->set('charset', 'UTF-8');
+        }else{
+            $response->headers->set('Content-Type', 'image/png');
+        }
         return  $response->send();
     }
 
