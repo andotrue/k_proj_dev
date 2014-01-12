@@ -1,16 +1,41 @@
-<span class="">コンテンツ詳細</span>
-<p>以下の内容でよろしければ購入ボタンを押してください。</p>
+{% extends "MachigaiGameBundle::base.html.twig" %}
+
+{% block title %}MachigaiGameBundle:Shop:download{% endblock %}
+
+{% block body %}
+<div style=" font-size:2em;">
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%"/>
+<br />
+
+<div style="border-bottom: 3px solid rgb(25,152,231);"></div>
+<div style="padding:2%">
+コンテンツ詳細<br />
+</div>
+<div style="border-bottom: 3px solid rgb(25,152,231);"></div>
+
+<div style="padding:2%">
+以下の内容でよろしければ購入ボタンを押してください。
+</div>
+<div class="shop_contentdetailarea" style="padding:2%">
 <img src="" width="15%" style="text-align:middle;width:80px;height:80px;"/><br />
-{{items.0.getDescription}}<br />
-<span class="">必要ポイント:{{items.0.getConsumePoint}}</span><br />
-<span class="">現在のポイント</span><br />
-未実装pt<br />
-<span class="">購入後のポイント</span><br />
-未実装pt<br />
-<span class="">
-<a href="{{ path('confirm',{"id":items.0.getId}) }}">購入する未実装</a>
-</span><br />
-※購入後30日間は再ダウンロードできます。<br />
-<span class="">
-<a href="{{path('Shop')}}">ショップに戻る</a>
-</span>
+<div style="font-size:0.8em">{{items.0.getDescription}}</div>
+必要ポイント:{{items.0.getConsumePoint}}pt<br />
+</div>
+<div style="border-bottom: 7px solid rgb(25,152,231);"></div>
+<div style="padding:2%;">
+現在のポイント
+→
+購入後のポイント
+</div>
+<div class="shop_contentdetailarea" style="padding:2%">
+未実装pt → 未実装pt<br />
+
+<a href="{{ path('confirm',{"id":items.0.getId}) }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy.png') }}" width="35%"/></a>
+<br />
+購入後30日間は再ダウンロードできます。<br />
+</div>
+<div style="border-bottom: 7px solid rgb(25,152,231);"></div>
+<a href="{{path('Shop')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toshop.png')}}" width="35%"></a><br />
+<a href="{{path('Top')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>
+</div>
+{% endblock %}

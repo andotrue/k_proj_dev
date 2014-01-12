@@ -1,27 +1,31 @@
+<div style="font-size:1.5em;">
 <ul class="panel" style="padding-top:0.8%; ">
-{% for item in items%}
+{% for item in items %}
 {% if item.category.categoryCode == 1 %}
    <li class="wallpaper1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
     <img src="" width="15%" style="text-align:middle;width:80px;height:80px;"/>
-    <div style="display:inline-block;width:55%;">
+    <div style="display:inline-block;width:55%; ">
 	<p style="text-align:left;">
   <span class="title">
-  {{item.getItemCode}}
-  {% if date(item.getCreatedAt) > date('-7days') %}
-    new!マーク
-  {% endif %}
+  {{item.getItemCode}}  
   </span>
-	   <span class="description"><br />{{item.getDescription}}</br></span>
-           <span class="updated_at">{{item.getCreatedAt|date('Y/m/d')}} up!</span>
+  <div style="font-size:0.8em">
+	   <span class="description">{{item.getDescription}}<br /></span>
+           <span class="updated_at">{{item.getCreatedAt|date('Y/m/d')}} UP!</span>
+  </div>
 	</p>
     </div>
-    <div style="display:inline-block;">
-	<img src="">
-	<span class="point">{{item.getConsumePoint}}pt</span><br />
-  <span class="detail"><a href="{{ path('ShopDownload',{"id":item.getId}) }}">詳細</a></span>
-	<a href="" alt="購入"><img src="" width="13%" style="width:90px: height: 25px;"/></a>
+  <div style="display:inline-block;">
+  <div align="center">
+  {% if date(item.getCreatedAt) > date('-7days') %}
+  <img src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
+  {% endif %}
+	{{item.getConsumePoint}}pt<br />
+  <span class="detail"><a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy.png') }}" width="50%"/></a></span>
+  </div>
     </div>
    </li>
 {% endif %}
 {% endfor %}
 </ul>
+</div>

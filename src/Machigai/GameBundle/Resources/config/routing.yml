@@ -69,6 +69,10 @@ Shop:
     pattern: /shop/
     defaults: { _controller: MachigaiGameBundle:Shop:index }
 
+ShopSort:
+    pattern: /shop/{field}/
+    defaults: { _controller: MachigaiGameBundle:Shop:index }
+
 ShopWallpaper:
     pattern: /shop/wallpaper/
     defaults: { _controller: MachigaiGameBundle:Shop:wallpaper }
@@ -88,6 +92,10 @@ ShopError:
 confirm:
     pattern: /shop/confirm/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:confirm }
+
+downloadExecute:
+    pattern: /shop/downloadExecute/{id}
+    defaults: { _controller: MachigaiGameBundle:Shop:downloadExecute }
 
 Ranking:
     pattern: /ranking/

@@ -3,7 +3,8 @@
 namespace Machigai\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Doctrine\Common\Collections\Criteria;
 class ShopController extends Controller
 {
     public function indexAction()
@@ -12,6 +13,21 @@ class ShopController extends Controller
         ->getRepository('MachigaiGameBundle:Item')
         ->findAll();
 	return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items));
+    }
+    public function indexSortAction($field){
+        if($field == "orderByOld"){
+            $sort = "DESC";
+            $field = "createdAt";
+        }else{
+            $sort = "ASC";
+            $field = $field;
+        }
+//        $field = "itemCode";
+        $items = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:Item')
+//        ->findBy(array(),array('id'=>$sort));
+        ->findBy(array(),array($field=>$sort));
+    return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items));
     }
 
     public function wallpaperAction()
@@ -41,5 +57,10 @@ class ShopController extends Controller
     {
 	return $this->render('MachigaiGameBundle:Shop:confirm.html.twig');
     }
-
+    public function downloadExecuteAction($id){
+        $file = dirname(__FILE__).'/../Resources/questions/1/105/MS00105_1.png';
+        $response = new BinaryFileResponse($file);
+        $response->headers->set('Content-Type', 'image/png');
+        return  $response->send();
+    }
 }

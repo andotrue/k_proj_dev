@@ -1,3 +1,20 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+
+{% block title %}MachigaiGameBundle:Shop:download{% endblock %}
+
+{% block body %}
+<div style="font-size:2em;">
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%"/>
+<div style="border-bottom: 3px solid rgb(25,152,231);"></div>
+<div style="padding:1%">
+<p>ダウンロード</p>
+</div>
+<div style="border-bottom: 3px solid rgb(25,152,231);"></div>
+<div style="padding:5%">
 <p>下のボタンを押すとダウンロードがはじまります。</p>
-<a href="">ダウンロード</a><br />
-<a href="{{path('Shop')}}">ショップへ</a> <a href="{{path('Top')}}">TOPへ</a>
+</div>
+<a href="{{path('downloadExecute',{"id":144})}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_download.png')}}" width="40%" style="padding:5%"></a><br />
+<a href="{{path('Shop')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toshop.png')}}" width="25%" style="padding:3%"></a>
+<a href="{{path('Top')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="25%" style="padding:3%"></a>
+</div>
+{% endblock %}

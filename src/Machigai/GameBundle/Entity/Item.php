@@ -24,14 +24,14 @@ class Item
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="item_code", type="string", length=32)
      */
     private $itemCode;
 
     /**
      * @var integer
-     *
+     * 
      * @ORM\Column(name="consume_point", type="integer")
      */
     private $consumePoint;
