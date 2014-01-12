@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>92</id>
+ <name>今年こそ、早めに･･･？</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>200</x><!--point のx座標 -->
+  <y>117</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>31</x><!--point のx座標 -->
+  <y>222</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>129</x><!--point のx座標 -->
+  <y>466</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>321</x><!--point のx座標 -->
+  <y>247</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>518</x><!--point のx座標 -->
+  <y>190</y><!--point のy座標-->
+ </point>
+</different>

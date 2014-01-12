@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>39</id>
+ <name>今日はお祭り！</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>86</x><!--point のx座標 -->
+  <y>94</y><!--point のy座標-->
+ </point>
+</different>

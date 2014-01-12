@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>183</id>
+ <name>列の先には何がある？</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>44</x><!--point のx座標 -->
+  <y>121</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>280</x><!--point のx座標 -->
+  <y>68</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>32</x><!--point のx座標 -->
+  <y>308</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>197</x><!--point のx座標 -->
+  <y>309</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>302</x><!--point のx座標 -->
+  <y>303</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>276</x><!--point のx座標 -->
+  <y>504</y><!--point のy座標-->
+ </point>
+</different>

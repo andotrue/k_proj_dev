@@ -98,12 +98,20 @@ GameSelect:
     defaults: { _controller: MachigaiGameBundle:Game:select }
 
 GamePlay:
-    pattern: /game/play
+    pattern: /game/play/
     defaults: { _controller: MachigaiGameBundle:Game:index }
-    
+
+GameGetPlayHistory:
+    pattern: /game/history
+    defaults: { _controller: MachigaiGameBundle:Game:getPlayHistory}
+
 GameGetData:
     pattern: /game/data/
-    defaults: { _controller: MachigaiGameBundle:Game:play }
+    defaults: { _controller: MachigaiGameBundle:Game:download }
+
+GameDownload:
+    pattern: /game/download/{level}/{qcode}/{type}
+    defaults: { _controller: MachigaiGameBundle:Game:download }
 GameFinish:
     pattern: /game/finish
     defaults: { _controller: MachigaiGameBundle:Game:finish }

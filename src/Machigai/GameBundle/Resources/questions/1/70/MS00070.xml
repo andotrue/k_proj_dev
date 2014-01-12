@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>70</id>
+ <name>今年の運勢は？</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>226</x><!--point のx座標 -->
+  <y>352</y><!--point のy座標-->
+ </point>
+</different>

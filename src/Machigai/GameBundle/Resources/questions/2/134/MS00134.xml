@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>134</id>
+ <name>シャボン玉とんだ♪</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>193</x><!--point のx座標 -->
+  <y>155</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>122</x><!--point のx座標 -->
+  <y>210</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>236</x><!--point のx座標 -->
+  <y>253</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>183</x><!--point のx座標 -->
+  <y>284</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>146</x><!--point のx座標 -->
+  <y>366</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>243</x><!--point のx座標 -->
+  <y>379</y><!--point のy座標-->
+ </point>
+</different>

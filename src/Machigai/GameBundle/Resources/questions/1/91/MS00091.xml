@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>91</id>
+ <name>ぼくは万能スポーツマン</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>250</x><!--point のx座標 -->
+  <y>130</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>36</x><!--point のx座標 -->
+  <y>143</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>83</x><!--point のx座標 -->
+  <y>309</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>230</x><!--point のx座標 -->
+  <y>587</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>116</x><!--point のx座標 -->
+  <y>484</y><!--point のy座標-->
+ </point>
+</different>
