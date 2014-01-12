@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>25</id>
+ <name>出会いの秋､み～つけたっ!?</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>169</x><!--point のx座標 -->
+  <y>115</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>392</x><!--point のx座標 -->
+  <y>99</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>70</x><!--point のx座標 -->
+  <y>140</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>29</x><!--point のx座標 -->
+  <y>300</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>210</x><!--point のx座標 -->
+  <y>265</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>392</x><!--point のx座標 -->
+  <y>264</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>60</x><!--point のx座標 -->
+  <y>396</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>252</x><!--point のx座標 -->
+  <y>392</y><!--point のy座標-->
+ </point>
+</different>

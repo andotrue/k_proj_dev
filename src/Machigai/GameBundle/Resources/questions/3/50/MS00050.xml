@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>50</id>
+ <name>花ざかりのﾊﾟﾗﾀﾞｲｽ！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>270</x><!--point のx座標 -->
+  <y>26</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>286</x><!--point のx座標 -->
+  <y>218</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>137</x><!--point のx座標 -->
+  <y>104</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>330</x><!--point のx座標 -->
+  <y>459</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>237</x><!--point のx座標 -->
+  <y>662</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>94</x><!--point のx座標 -->
+  <y>497</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>131</x><!--point のx座標 -->
+  <y>640</y><!--point のy座標-->
+ </point>
+</different>

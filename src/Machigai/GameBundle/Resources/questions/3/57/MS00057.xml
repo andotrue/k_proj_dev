@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>57</id>
+ <name>4千年の歴史を体感中！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>54</x><!--point のx座標 -->
+  <y>71</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>330</x><!--point のx座標 -->
+  <y>84</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>210</x><!--point のx座標 -->
+  <y>113</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>65</x><!--point のx座標 -->
+  <y>278</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>341</x><!--point のx座標 -->
+  <y>270</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>190</x><!--point のx座標 -->
+  <y>256</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>67</x><!--point のx座標 -->
+  <y>352</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>192</x><!--point のx座標 -->
+  <y>400</y><!--point のy座標-->
+ </point>
+</different>

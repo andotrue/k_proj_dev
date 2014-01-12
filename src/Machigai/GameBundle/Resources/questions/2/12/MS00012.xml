@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>12</id>
+ <name>MerryChristmas お昼はｳｷｳｷお買いもの☆</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>229</x><!--point のx座標 -->
+  <y>116</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>311</x><!--point のx座標 -->
+  <y>235</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>250</x><!--point のx座標 -->
+  <y>474</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>289</x><!--point のx座標 -->
+  <y>681</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>125</x><!--point のx座標 -->
+  <y>604</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>70</x><!--point のx座標 -->
+  <y>426</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>25</x><!--point のx座標 -->
+  <y>321</y><!--point のy座標-->
+ </point>
+</different>

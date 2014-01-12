@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>45</id>
+ <name>静ひつの森にて</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>447</x><!--point のx座標 -->
+  <y>348</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>467</x><!--point のx座標 -->
+  <y>203</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>410</x><!--point のx座標 -->
+  <y>53</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>158</x><!--point のx座標 -->
+  <y>90</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>162</x><!--point のx座標 -->
+  <y>435</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>343</x><!--point のx座標 -->
+  <y>326</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>140</x><!--point のx座標 -->
+  <y>377</y><!--point のy座標-->
+ </point>
+</different>
