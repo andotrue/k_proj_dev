@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>95</id>
+ <name>飛行機に乗って、どこまでも</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>532</x><!--point のx座標 -->
+  <y>175</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>547</x><!--point のx座標 -->
+  <y>254</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>342</x><!--point のx座標 -->
+  <y>326</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>325</x><!--point のx座標 -->
+  <y>115</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>122</x><!--point のx座標 -->
+  <y>170</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>109</x><!--point のx座標 -->
+  <y>358</y><!--point のy座標-->
+ </point>
+</different>

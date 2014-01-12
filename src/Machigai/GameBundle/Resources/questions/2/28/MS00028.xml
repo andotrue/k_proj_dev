@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>28</id>
+ <name>おもちゃ箱から飛び出して</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>239</x><!--point のx座標 -->
+  <y>10</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>24</x><!--point のx座標 -->
+  <y>93</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>297</x><!--point のx座標 -->
+  <y>235</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>319</x><!--point のx座標 -->
+  <y>454</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>129</x><!--point のx座標 -->
+  <y>494</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>272</x><!--point のx座標 -->
+  <y>700</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>44</x><!--point のx座標 -->
+  <y>698</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>47</id>
+ <name>釣られてなるものか…</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>441</x><!--point のx座標 -->
+  <y>163</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>372</x><!--point のx座標 -->
+  <y>339</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>153</x><!--point のx座標 -->
+  <y>330</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>43</x><!--point のx座標 -->
+  <y>80</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>248</x><!--point のx座標 -->
+  <y>202</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>482</x><!--point のx座標 -->
+  <y>267</y><!--point のy座標-->
+ </point>
+</different>

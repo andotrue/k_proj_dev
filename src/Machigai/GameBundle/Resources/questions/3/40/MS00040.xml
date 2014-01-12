@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>40</id>
+ <name>だいすきお菓子屋さん</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>373</x><!--point のx座標 -->
+  <y>76</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>228</x><!--point のx座標 -->
+  <y>90</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>43</x><!--point のx座標 -->
+  <y>40</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>65</x><!--point のx座標 -->
+  <y>187</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>175</x><!--point のx座標 -->
+  <y>260</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>203</x><!--point のx座標 -->
+  <y>355</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>315</x><!--point のx座標 -->
+  <y>438</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>326</x><!--point のx座標 -->
+  <y>280</y><!--point のy座標-->
+ </point>
+</different>

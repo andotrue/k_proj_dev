@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>36</id>
+ <name>みんな待っててね!ぼくは町のﾎﾟｽﾄﾏﾝ</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>344</x><!--point のx座標 -->
+  <y>18</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>54</x><!--point のx座標 -->
+  <y>212</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>40</x><!--point のx座標 -->
+  <y>312</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>174</x><!--point のx座標 -->
+  <y>404</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>334</x><!--point のx座標 -->
+  <y>323</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>359</x><!--point のx座標 -->
+  <y>424</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>92</x><!--point のx座標 -->
+  <y>77</y><!--point のy座標-->
+ </point>
+</different>
