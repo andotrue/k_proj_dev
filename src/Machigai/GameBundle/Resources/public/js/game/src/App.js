@@ -24,9 +24,23 @@ var PlayLayer = cc.Layer.extend({
             var LabelMiss = cc.Sprite.create( gsDir + "label/miss.png" );
             var LabelOtetsuki = cc.Sprite.create( gsDir + "label/otetsuki.png" );
             var LabelTimelimit = cc.Sprite.create( gsDir + "label/timelimit.png" );
+           
+            var heartsOn = [];
+            var heartsOff = [];
+            for (var i = 0; i < 8; i++) {
+                var on  = cc.Sprite.create( gsDir + "other/heart_off.png" );
+                var off = cc.Sprite.create( gsDir + "other/heart_on.png" );
 
-            var HeartOff = cc.Sprite.create( gsDir + "other/heart_off.png" );
-            var HeartOn = cc.Sprite.create( gsDir + "other/heart_on.png" );
+//                heartsOn.push(on);
+//                heartsOff.push(off);
+                this.addChild(on);
+                this.addChild(off);
+
+                on.setPosition(700 + 30 * i ,1840);
+                off.setPosition(700 + 30 * i, 1840);
+//                off.setOpacity(0);
+            };
+           
             var Ng = cc.Sprite.create( gsDir + "other/ng.png" );
             var Ok = cc.Sprite.create( gsDir + "other/ok.png" );
             var Slidebar = cc.Sprite.create( gsDir + "other/slidebar.png" );
@@ -62,8 +76,6 @@ var PlayLayer = cc.Layer.extend({
             this.addChild(LabelOtetsuki);
             this.addChild(LabelTimelimit);
 
-            this.addChild(HeartOff);
-            this.addChild(HeartOn);
             this.addChild(Ng);
             this.addChild(Ok);
             this.addChild(Slidebar);
@@ -106,8 +118,6 @@ var PlayLayer = cc.Layer.extend({
             StarOff.setPosition(700,1890);
             StarOn.setPosition(700,1890);
             LabelMachigai.setPosition(616,1840);
-            HeartOff.setPosition(700,1840);
-            HeartOn.setPosition(700,1840);
 
             LabelTimelimit.setPosition(100,100);
 

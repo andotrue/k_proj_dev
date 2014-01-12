@@ -16,7 +16,7 @@ var Application = cc.Application.extend({
 //        cc.EGLView.getInstance().adjustViewPort(true);
         var screenSize = cc.EGLView.getInstance().getFrameSize();
         var screenSize = cc.size(320,568);
-        var resourceSize = cc.size(1280, 1920);
+        var resourceSize = cc.size(640, 860);
         var designSize = cc.size(1280, 1920);
 
         var searchPaths = [];
@@ -27,7 +27,7 @@ var Application = cc.Application.extend({
 
         var platform = cc.Application.getInstance().getTargetPlatform();
         if (platform == cc.TARGET_PLATFORM.MOBILE_BROWSER) {
-            resDirOrders.push("HD");
+//            resDirOrders.push("HD");
         }
         else if (platform == cc.TARGET_PLATFORM.PC_BROWSER) {
             if (screenSize.height >= 800) {
