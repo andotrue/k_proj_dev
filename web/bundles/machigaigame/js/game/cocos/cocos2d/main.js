@@ -12,12 +12,12 @@ var Application = cc.Application.extend({
         // initialize director
         var director = cc.Director.getInstance();
 
-//        cc.EGLView.getInstance()._adjustSizeToBrowser();
-//        cc.EGLView.getInstance().adjustViewPort(true);
+        cc.EGLView.getInstance()._adjustSizeToBrowser();
+        cc.EGLView.getInstance().adjustViewPort(true);
         var screenSize = cc.EGLView.getInstance().getFrameSize();
         var screenSize = cc.size(320,568);
         var resourceSize = cc.size(640, 860);
-        var designSize = cc.size(1280, 1920);
+        var designSize = cc.size(720, 1280);
 
         var searchPaths = [];
         var resDirOrders = [];
