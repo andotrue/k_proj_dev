@@ -6,6 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class GameController extends Controller
 {
+    public function indexAction()
+    {
+    return $this->render('MachigaiGameBundle:Game:index.html.twig');    
+    }
+
     public function selectAction()
     {
 	return $this->render('MachigaiGameBundle:Game:select.html.twig');	
