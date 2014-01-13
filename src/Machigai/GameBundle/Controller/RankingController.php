@@ -3,8 +3,9 @@
 namespace Machigai\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Machigai\GameBundle\Controller\BaseController;
 
-class RankingController extends Controller
+class RankingController extends BaseController
 {
     public function indexAction()
     {

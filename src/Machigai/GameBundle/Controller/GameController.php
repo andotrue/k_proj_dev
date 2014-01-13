@@ -3,9 +3,10 @@
 namespace Machigai\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class GameController extends Controller
+class GameController extends BaseController
 {
     public function indexAction()
     {
