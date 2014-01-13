@@ -1,0 +1,18 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+
+{% block title %}ニックネーム名登録{% endblock %}
+
+{% block body %}
+<header><h1><img src="{{ asset('/bundles/machigaigame/images/parts/header.png')}}" style="width:100%"></h1></header>
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="width:100%">
+<div style="font-size:2em">
+<section>
+  <p>
+以下の内容でよろしければ登録ボタンを押してください。</p>
+<div style="2.5em;padding:5%"><p>user name here</p></div>
+<a href="{{path('Register')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_back.png')}}" style="width:35%;align:center;"></a>
+  <a href="{{path('complete')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_nicknamechange.png')}}" style="width:35%;align:center;">
+  </a>
+</section>
+</div>
+{% endblock %}

@@ -136,6 +136,10 @@ Register:
     pattern: /register/
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
+RegisterConfirm:
+    pattern: /register/confirm/
+    defaults: { _controller: MachigaiGameBundle:Register:confirm }
+
 complete:
-    pattern: /register/complete/{auId}/{nickName}
+    pattern: /register/complete/
     defaults: { _controller: MachigaiGameBundle:Register:complete }

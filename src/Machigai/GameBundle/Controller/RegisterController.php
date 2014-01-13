@@ -25,13 +25,16 @@ class RegisterController extends Controller
         return $this->render('MachigaiGameBundle:Register:index.html.twig', array('form' => $form->createView()) );
     }
 
-    public function completeAction($auId,$nickName)
+    public function completeAction()
     { 
-        $em = $this->getDoctrine()->getEntityManager();
+/*        $em = $this->getDoctrine()->getEntityManager();
         $user = $em->getRepository('MachigaiGameBundle:User')->findByAuId($auId)[0];
         $user->setNickName($nickName);
         $em->flush();
-        return $this->render('MachigaiGameBundle:Register:complete.html.twig');
+*/        return $this->render('MachigaiGameBundle:Register:complete.html.twig');
+    }
+    public function confirmAction(){
+        return $this->render('MachigaiGameBundle:Register:confirm.html.twig');
     }
 
 }
