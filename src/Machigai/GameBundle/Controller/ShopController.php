@@ -9,10 +9,11 @@ class ShopController extends BaseController
 {
     public function indexAction()
     {
+    $user = $this->getUser();
     $items = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
         ->findAll();
-	return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items));
+	return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items,'user'=>$user));
     }
     public function indexSortAction($field){
         if($field == "orderByOld"){
@@ -42,10 +43,11 @@ class ShopController extends BaseController
 
     public function downloadAction($id)
     {
+    $user = $this->getUser();
     $items = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
         ->findBy(array('id'=>$id));
-	return $this->render('MachigaiGameBundle:Shop:download.html.twig',array('items'=>$items));
+	return $this->render('MachigaiGameBundle:Shop:download.html.twig',array('items'=>$items,'user'=>$user));
     }
 
     public function errorAction()

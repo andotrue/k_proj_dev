@@ -2,9 +2,13 @@
 {% block body %}
 <header id="title" class="top_bg">
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
- <p id="user_name"> 【ユーザー名】さん</p>
+ <p id="user_name" style="font-size:2em">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
  <div id="auIDLogin" style="padding:20px">
-  <a href="{{ path('Register')  }}" alt="auIDでログイン"><img src="{{ asset('/bundles/machigaigame/images/parts/button_auID.png')  }}" width="60%" /></a>
+  {% if user is not empty %}
+  <a href="{{path('Logout')}}"><img width="450px" height="80px" /></a>
+  {% else %}
+  <a href="{{ path('Login')  }}" alt="auIDでログイン"><img src="{{ asset('/bundles/machigaigame/images/parts/button_auID.png')  }}" width="60%" /></a>
+  {% endif %}
  </header>
  <section>
   <p>auIDでログインすると以下の機能が使えるよ！<br />
@@ -21,11 +25,16 @@
  </section>
  <section id="current_point" class="top_bg">
   <img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
-  <p>xx  pt</p>
+  <p style="font-size:2em">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
  </section>
  <section id="menu" class="top_bg">
   <a href='{{ path('GameSelect') }}' style="padding-right:9%;"><img alt="まちがいさがし" src="{{asset('/bundles/machigaigame/images/parts/button_game.png')}}" width="35%" /></a>
-  <a href='{{ path('Shop') }}'><img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" width="35%" /></a><br />
+  {% if user is empty %}
+  	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" />
+  {% else %}
+  	<a href='{{ path('Shop') }}'> 
+  	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" width="35%" /></a>
+  {% endif %}<br />
   <a href='{{ path('Ranking') }}' style="padding-right:9%;"><img alt="ランキング" src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" width="35%" /></a>
   <a href='{{ path('Help') }}'><img alt="ヘルプ" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" width="35%" /></a>
  </section>

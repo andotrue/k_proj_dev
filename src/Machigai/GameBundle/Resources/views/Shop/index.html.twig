@@ -20,7 +20,7 @@ function change_tabs(data){
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%"/>
 <section>
 <p style="text-align:right;padding-right:2%; font-size:250%;">
-現在のポイント： 999999pt <br />
+現在のポイント：{{user.getCurrentPoint}} pt <br />
 <span style="padding-right:0.5em;">並べ替え</span> <select id="sortSelect" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
 </p>
 <div id="category_tab" class="bottom_blue_line" style="padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp.png') }}" width="47%" style="padding-right:2%;" onclick="change_tabs(0)" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}" width="47%" onclick="change_tabs(1)" /></div>

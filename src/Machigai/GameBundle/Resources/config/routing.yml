@@ -57,14 +57,13 @@ SettingNickname:
     defaults: { _controller: MachigaiGameBundle:Setting:nickname }
     requirements: 
         _method: GET
-    
+
 Setting:
     pattern: /setting/
     defaults: { _controller: MachigaiGameBundle:Setting:index }
     requirements: 
         _method: GET
 
-   
 SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
@@ -90,7 +89,7 @@ ShopDownload:
     defaults: { _controller: MachigaiGameBundle:Shop:download }
 
 ShopError:
-    pattern: /shop/error
+    pattern: /shop/error/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:error }
 
 confirm:
@@ -139,6 +138,10 @@ GameFail:
 Register:
     pattern: /register/
     defaults: { _controller: MachigaiGameBundle:Register:index }
+
+Login:
+    pattern: /register/login
+    defaults: { _controller: MachigaiGameBundle:Register:login }
 
 RegisterConfirm:
     pattern: /register/confirm/
