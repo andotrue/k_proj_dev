@@ -5,7 +5,7 @@ namespace Machigai\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Doctrine\Common\Collections\Criteria;
-class ShopController extends Controller
+class ShopController extends BaseController
 {
     public function indexAction()
     {

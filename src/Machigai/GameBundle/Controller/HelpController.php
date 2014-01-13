@@ -3,8 +3,9 @@
 namespace Machigai\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Machigai\GameBundle\Controller\BaseController;
 
-class HelpController extends Controller
+class HelpController extends BaseController
 {
     public function indexAction()
     {

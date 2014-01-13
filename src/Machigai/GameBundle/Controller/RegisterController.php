@@ -3,9 +3,10 @@
 namespace Machigai\GameBundle\Controller;
 use Machigai\GameBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 
-class RegisterController extends Controller
+class RegisterController extends BaseController
 {
 
     //AuIDログイン
@@ -24,10 +25,16 @@ class RegisterController extends Controller
                 //ログインユーザの場合
                 $session->set('auId', 'auid1');
                 $session->set('id', '1');
-            }else{
+                $session->set('smartPassResult', true );                
+            }elseif($user_type == 'notLoggedIn'){
                 //非ログインユーザの場合
                 $session->set('auId', 'auid1');                
                 $session->set('id', null );
+                $session->set('smartPassResult', true );                
+            }else{
+                $session->set('auId', null );                
+                $session->set('id', null );                
+                $session->set('smartPassResult', null );                
             }
         }
 

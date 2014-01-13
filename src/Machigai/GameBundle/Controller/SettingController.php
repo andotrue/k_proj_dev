@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Machigai\GameBundle\Entity\User;
 use Machigai\GameBundle\Form\UserType;
 
-class SettingController extends Controller
+class SettingController extends BaseController
 {
     public function indexAction()
     {
