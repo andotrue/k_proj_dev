@@ -58,9 +58,22 @@ class ShopController extends Controller
 	return $this->render('MachigaiGameBundle:Shop:confirm.html.twig');
     }
     public function downloadExecuteAction($id){
+        
+        //ダウンロード
+        $image_file = dirname(__FILE__).'/../Resources/questions/1/105/MS00105_1.png';
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $image_file);
+        header('Content-Length:' . filesize($image_file));
+        header('Pragma: no-cache');
+        header('Cache-Control: no-cache');
+        readfile($image_file);
+        exit;
+
+/*      ブラウザ出力
+
         $file = dirname(__FILE__).'/../Resources/questions/1/105/MS00105_1.png';
         $response = new BinaryFileResponse($file);
         $response->headers->set('Content-Type', 'image/png');
         return  $response->send();
-    }
+*/    }
 }
