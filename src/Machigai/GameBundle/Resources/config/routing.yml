@@ -2,6 +2,10 @@ Top:
     path: /top
     defaults: { _controller: MachigaiGameBundle:Default:index }
 
+Logout:
+    path: /logout
+    defaults: { _controller: MachigaiGameBundle:Default:index }
+
 Error:
     path: /error
     defaults: { _controller: MachigaiGameBundle:Default:error }
@@ -135,6 +139,10 @@ GameFail:
 Register:
     pattern: /register/
     defaults: { _controller: MachigaiGameBundle:Register:index }
+
+RegisterLogin:
+    pattern: /register/login
+    defaults: { _controller: MachigaiGameBundle:Register:login }
 
 complete:
     pattern: /register/complete/{auId}/{nickName}
