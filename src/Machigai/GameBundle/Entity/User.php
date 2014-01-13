@@ -24,10 +24,9 @@ class User
 
     /**
      * @var string
-     *
      * @ORM\Column(name="au_id", type="string", length=32)
      */
-    private $auId;
+    public $auId;
 
     /**
      * @var string

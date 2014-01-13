@@ -133,9 +133,9 @@ GameFail:
     defaults: { _controller: MachigaiGameBundle:Game:fail }
 
 Register:
-    pattern: /register
+    pattern: /register/
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
 complete:
-    pattern: /register/complete
+    pattern: /register/complete/{auId}/{nickName}
     defaults: { _controller: MachigaiGameBundle:Register:complete }
