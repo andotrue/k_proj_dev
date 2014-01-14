@@ -21,7 +21,15 @@
   <img src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
   {% endif %}
 	{{item.getConsumePoint}}pt<br />
-  <span class="detail"><a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy.png') }}" width="50%"/></a></span>
+  <span class="detail">
+{% if item.getId in purchasedItems %}
+<a href="{{ path('confirm',{"id":item.getId}) }}">
+  <img src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl.png') }}" width="100%"/>
+</a>
+{% else %}
+  <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_shopbuy.png') }}" width="100%"/></a>
+{% endif %}
+  </span>
   </div>
     </div>
    </li>

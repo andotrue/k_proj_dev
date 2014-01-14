@@ -22,4 +22,19 @@ class BaseController extends Controller
             return $user;
         }
 	}
+    public function getPurchasedItems(){
+        $user = $this->getUser();
+        $user_id = $user->getId();
+        $pre_purchasedItems = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:PurchaseHistory')
+        ->findByUser($user_id);
+        $purchasedItems = array();
+        foreach ($pre_purchasedItems as $purchasedItem) {
+            $purchasedItems[] = $purchasedItem->getItem()->getId();
+        }
+
+        return $purchasedItems;
+//      var_dump($purchasedItems);
+//      exit;
+    }
 }

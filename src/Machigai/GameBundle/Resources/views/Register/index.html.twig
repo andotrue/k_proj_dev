@@ -12,7 +12,9 @@
   <p>auIDログインが完了しました。<br />
 登録を続けるにはニックネームを入力してください。</p>
 <div style="width:auto;height:auto;padding:2%;font-size:1em;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat">
-{{ form_widget (form.nickname)}}
+
+{{ form_widget (form.nickname, { 'attr':{'style':'width:8em;font-size:2em;' }}) }}
+<!--{{ form_widget (form.nickname)}}-->
 </div>
 <br />
   <input type="hidden" name="state" value="confirm"><br />
@@ -21,17 +23,19 @@
   <p>ニックネームはランキングに表示されます。<br />
 本名・住所など個人を特定できる内容は記載しないようご注意ください。<br />
 また、ニックネームはTOP画面の「ヘルプ」→「設定」から変更することができます。</p>
-<input type="submit" id="submit">
+<input type="submit" id="submitButton">
   {{ form_widget (form.confirm) }}
- {{ form_end (form) }}
+ {{ form_end (form, {'attr':{'id':'submitEnd'}}) }}
 </section>
 </div>
 <script>
 $(function(){
-	$('#submit').hide();
+	$('#submitButton').hide();
+	$('#submitEnd').hide();
+	$('#form_confirm').hide();
 })
 function submitNickname(){
-	$('#submit').trigger("click");
+	$('#submitButton').trigger("click");
 }
 </script>
 {% endblock %}

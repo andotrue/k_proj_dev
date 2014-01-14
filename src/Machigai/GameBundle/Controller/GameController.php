@@ -22,7 +22,7 @@ class GameController extends BaseController
         return json_encode($history);
     }
 
-    public function playAction()
+    public function playAction($id)
     {
     	return $this->render('MachigaiGameBundle:Game:play.html.twig');	
     }
