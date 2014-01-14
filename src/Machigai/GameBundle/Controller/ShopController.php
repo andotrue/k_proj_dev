@@ -1,7 +1,7 @@
 <?php
 
 namespace Machigai\GameBundle\Controller;
-
+use Machigai\GameBundle\Entity\PurchaseHistory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Doctrine\Common\Collections\Criteria;
@@ -23,7 +23,6 @@ class ShopController extends BaseController
         $purchaseHistory = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:PurchaseHistory')
         ->findAll();
-
 
         if($field == "orderByOld"){
             $sort = "DESC";
@@ -62,29 +61,42 @@ class ShopController extends BaseController
 	return $this->render('MachigaiGameBundle:Shop:error.html.twig');
     }
 
-    public function confirmAction()
+    public function confirmAction($id)
     {
-	return $this->render('MachigaiGameBundle:Shop:confirm.html.twig');
+	return $this->render('MachigaiGameBundle:Shop:confirm.html.twig',array('id'=>$id));
     }
     public function downloadExecuteAction($id){
         $user = $this->getUser();
-        $itemPoint = $this->getDoctrine()
+        $item = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
-        ->findOneById($id)->getConsumePoint();
+        ->findOneById($id);
         $purchasedItems = $this->getPurchasedItems();
 
-
+        $itemPoint = $item->getConsumePoint();
         if(in_array($id,$purchasedItems)){
             $this->download();
         }else{
             $remainder = $user->getCurrentPoint()-$itemPoint;
-            var_dump($remainder);
-            exit;
+
+            $purchasedInfo = new PurchaseHistory();
+            $purchasedInfo->setUser($user);
+            $purchasedInfo->setItem($item);
+            $purchasedInfo->setPointBeforePurchase($user->getCurrentPoint());
+            $purchasedInfo->setPointAfterPurchase($remainder);
+            $purchasedInfo->setConsumePoint($itemPoint);
+            $purchasedInfo->setCreatedAt(date("Y-m-d H:i:s"));
+            $purchasedInfo->setUpdatedAt(date("Y-m-d H:i:s"));
 
             $em = $this->getDoctrine()->getEntityManager();
-            $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
-            $user->setNickName($nickname);
+            $em->persist($purchasedInfo);      
             $em->flush();
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
+            $user_id->setCurrentPoint($remainder);
+            $em->flush();
+          
+            $this->download();
         }
     }
     public function download(){

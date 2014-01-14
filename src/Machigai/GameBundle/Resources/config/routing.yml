@@ -108,6 +108,10 @@ GameSelect:
     pattern: /game/select
     defaults: { _controller: MachigaiGameBundle:Game:select }
 
+SortQuestion:
+    pattern: /game/select/{sort}
+    defaults: { _controller: MachigaiGameBundle:Game:sortQuestions }
+
 GamePlay:
     pattern: /game/play/{id}
     defaults: { _controller: MachigaiGameBundle:Game:play }

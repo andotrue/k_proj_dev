@@ -29,7 +29,7 @@
 </div>
 <div class="shop_contentdetailarea" style="padding:2%">
 {% set remainder = user.getCurrentPoint - items.0.getConsumePoint %}
-{{user.getCurrentPoint}} pt → {% if remainder < 0 %} 0 {% else %}
+{{user.getCurrentPoint}} pt → {% if remainder < 0 %} 0 pt<br /> {% else %}
 {{user.getCurrentPoint - items.0.getConsumePoint}} pt<br />
 {% endif %}
 {% if remainder > -1 %}

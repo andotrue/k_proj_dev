@@ -82,15 +82,9 @@ class Item
      */
     protected $purchaseHistories;
 
-    /**
-    * @ORM\OneToMany(targetEntity="ItemPopularity", mappedBy="items")
-    */
-    protected $itemPopularities;
-
     public function __construct()
     {
 	$this->purchaseHistories =new ArrayCollection();
-    $this->itemPopularities =new ArrayCollection();
     }
 
     /**
