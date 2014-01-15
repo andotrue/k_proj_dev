@@ -44,9 +44,11 @@ class GameController extends BaseController
                 ->getRepository('MachigaiGameBundle:PlayHistory')
                 ->getNotCleared($userId);
                         $histories = array();
+                        if(!empty($pre_histories)){
                         foreach ($pre_histories as $history) {
                             $histories[] = $history->getQuestion()->getId();
                         }
+                    }
             }
         }else{
             $questions = $this->getDoctrine()

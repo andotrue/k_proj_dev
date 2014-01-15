@@ -71,8 +71,9 @@ class PlayHistory
     protected $user;
     
     /**
-    * @ORM\OneToMany(targetEntity="Question", mappedBy="playHistories")
-    */
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="playHistories") 
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     */ 
     protected $question;
 
     /**
@@ -318,5 +319,74 @@ class PlayHistory
     public function getRanking()
     {
         return $this->ranking;
+    }
+
+    /**
+     * Set gameStatus
+     *
+     * @param integer $gameStatus
+     * @return PlayHistory
+     */
+    public function setGameStatus($gameStatus)
+    {
+        $this->gameStatus = $gameStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get gameStatus
+     *
+     * @return integer 
+     */
+    public function getGameStatus()
+    {
+        return $this->gameStatus;
+    }
+
+    /**
+     * Set playInfo
+     *
+     * @param string $playInfo
+     * @return PlayHistory
+     */
+    public function setPlayInfo($playInfo)
+    {
+        $this->playInfo = $playInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get playInfo
+     *
+     * @return string 
+     */
+    public function getPlayInfo()
+    {
+        return $this->playInfo;
+    }
+
+    /**
+     * Add question
+     *
+     * @param \Machigai\GameBundle\Entity\Question $question
+     * @return PlayHistory
+     */
+    public function addQuestion(\Machigai\GameBundle\Entity\Question $question)
+    {
+        $this->question[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \Machigai\GameBundle\Entity\Question $question
+     */
+    public function removeQuestion(\Machigai\GameBundle\Entity\Question $question)
+    {
+        $this->question->removeElement($question);
     }
 }

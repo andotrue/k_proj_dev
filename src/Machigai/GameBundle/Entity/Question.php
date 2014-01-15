@@ -102,15 +102,10 @@ class Question
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="PlayHistory", inversedBy="question") 
-     * @ORM\JoinColumn(name="id", referencedColumnName="question_id")
-     */ 
+     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="questions")
+     */
     protected $playHistories;
 
-    public function __construct()
-    {
-			$this->playHistories =new ArrayCollection();
-    }
 
 
     /**
@@ -407,5 +402,18 @@ class Question
     public function getPlayHistories()
     {
         return $this->playHistories;
+    }
+
+    /**
+     * Set playHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistories
+     * @return Question
+     */
+    public function setPlayHistories(\Machigai\GameBundle\Entity\PlayHistory $playHistories = null)
+    {
+        $this->playHistories = $playHistories;
+
+        return $this;
     }
 }
