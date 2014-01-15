@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Machigai\GameBundle\Entity\UserRepository")
  */
-class User
+class User 
 {
     /**
      * @var integer
@@ -27,6 +27,12 @@ class User
      * @ORM\Column(name="au_id", type="string", length=32)
      */
     public $auId;
+
+    /**
+     * @var string
+     * @ORM\Column(name="sync_token", type="string", length=255)
+     */
+    public $syncToken;
 
     /**
      * @var string
@@ -526,5 +532,44 @@ class User
         $this->rankings = $rankings;
 
         return $this;
+    }
+
+    /**
+     * Set syncToken
+     *
+     * @param string $syncToken
+     * @return User
+     */
+    public function setSyncToken($syncToken)
+    {
+        $this->syncToken = $syncToken;
+
+        return $this;
+    }
+
+    /**
+     * Get syncToken
+     *
+     * @return string 
+     */
+    public function getSyncToken()
+    {
+        return $this->syncToken;
+    }
+
+    public function toJsonForSync(){
+        return json_encode(array(
+//            'username' => $this->nickname,
+ //           'point' => $this->currentPoint,
+            'username' => $this->nickname,
+            'point' => $this->currentPoint,
+            'status' => array(
+                array('id'=>1, 'status' =>1 ),
+                array('id'=>2, 'status' =>2 ),
+                array('id'=>3, 'status' =>3 ),
+                array('id'=>4, 'status' =>4 ),
+                array('id'=>5, 'status' =>5 )
+                )
+            ));
     }
 }
