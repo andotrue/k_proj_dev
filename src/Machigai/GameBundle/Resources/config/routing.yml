@@ -4,7 +4,7 @@ Top:
 
 Logout:
     path: /logout
-    defaults: { _controller: MachigaiGameBundle:Default:index }
+    defaults: { _controller: MachigaiGameBundle:Default:logout }
 
 Error:
     path: /error
