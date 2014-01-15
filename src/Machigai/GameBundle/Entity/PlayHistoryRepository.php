@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class PlayHistoryRepository extends EntityRepository
 {
+	public function getSuspended($userId)
+	{ 
+	return $this->getEntityManager()  
+            ->createQuery('SELECT h FROM MachigaiGameBundle:PlayHistory h WHERE h.suspendTime is not null and h.user =:id ORDER BY h.id ASC')->setParameter('id', $userId)
+            ->getResult();  
+    }
+    public function getNotCleared($userId)
+	{
+	return $this->getEntityManager()  
+            ->createQuery('SELECT h FROM MachigaiGameBundle:PlayHistory h WHERE h.clearTime is null and h.user =:id ORDER BY h.id ASC')->setParameter('id', $userId)
+            ->getResult();  
+    }
 }

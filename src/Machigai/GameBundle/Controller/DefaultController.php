@@ -10,7 +10,9 @@ class DefaultController extends BaseController
 {
     public function indexAction()
     {
-        return $this->render('MachigaiGameBundle:Default:index.html.twig', array('name' => 'taro'));
+        $user = $this->getUser();
+
+        return $this->render('MachigaiGameBundle:Default:index.html.twig', array('user' => $user));
     }
     public function logoutAction(Request $request){
         $session = $request->getSession();

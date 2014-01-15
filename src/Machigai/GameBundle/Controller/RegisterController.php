@@ -8,12 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RegisterController extends BaseController
 {
-
     //AuIDログイン
     public function loginAction(Request $request)
     {
         $session = $request->getSession();
-
 
         //開発モード時,セッションを生成する。
         $MODE = 'DEV';
@@ -49,33 +47,56 @@ class RegisterController extends BaseController
     }
 
     public function indexAction(Request $request)
-    {	
+    {
+    
 	$form = $this->createFormBuilder()
 	 ->setMethod('GET')
  	 ->add('nickname', 'text')
-     ->add('auId', 'hidden')
 	 ->add('confirm', 'submit', array('label'=>'内容を確認'))
 	 ->getForm();
-     
-     if ($request->getMethod() == 'POST') {
-        $form->bind($request);
-        if ($form->isValid()) {
-            // データベースへの保存など、何らかのアクションを実行する
-        }
-    }
         return $this->render('MachigaiGameBundle:Register:index.html.twig', array('form' => $form->createView()) );
     }
 
-    public function completeAction($auId,$nickName)
+    public function completeAction(Request $request)
     { 
-        $em = $this->getDoctrine()->getEntityManager();
+        $nickname = new User();
+
+        $form = $this->createFormBuilder()
+        ->setMethod('GET')
+        ->add('nickname', 'text')
+        ->add('confirm', 'submit', array('label'=>'内容を確認'))
+        ->getForm();
+        $form->bind($request);
+        $nickname = $form->getData();
+        $nickname = $nickname['nickname'];
+//        $em = $this->getDoctrine()->getEntityManager();
+        $pre_userId = $this->getUser();
+        $userId = $pre_userId->getId();
 //        $user = $em->getRepository('MachigaiGameBundle:User')->findByAuId($auId)[0];
-        $user = $em
+/*        $user = $em
             ->createQuery('SELECT u FROM MachigaiGameBundle:User u ORDER BY u.auId ASC')  
             ->getResult();  
         $user->setNickName($nickName);
         $em->flush();
+*/
+         $em = $this->getDoctrine()->getEntityManager();
+         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+         $user->setNickName($nickname);
+         $em->flush();
         return $this->render('MachigaiGameBundle:Register:complete.html.twig');
+    }
+    public function confirmAction(Request $request){
+       $nickname = new User();
+
+        $form = $this->createFormBuilder()
+        ->setMethod('GET')
+        ->add('nickname', 'hidden')
+        ->add('confirm', 'submit')
+        ->getForm();
+        $form->bind($request);
+        $nickname = $form->getData();
+
+        return $this->render('MachigaiGameBundle:Register:confirm.html.twig',array('nickname'=>$nickname,'form' => $form->createView()));
     }
 
 }

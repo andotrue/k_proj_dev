@@ -65,12 +65,12 @@ class DateTimeTzType extends Type
     /**
      * {@inheritdoc}
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+/*    public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         return ($value !== null)
             ? $value->format($platform->getDateTimeTzFormatString()) : null;
     }
-
+*/
     /**
      * {@inheritdoc}
      */

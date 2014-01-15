@@ -17,7 +17,8 @@
 以下の内容でよろしければ購入ボタンを押してください。
 </div>
 <div class="shop_contentdetailarea" style="padding:2%">
-<img src="" width="15%" style="text-align:middle;width:80px;height:80px;"/><br />
+<img src="{{ asset('/bundles/machigaigame/images/wallpaper/sample.png')  }}"style="text-align:middle;width:20%;height:20%;"/><br />
+{{items.0.getName}}
 <div style="font-size:0.8em">{{items.0.getDescription}}</div>
 必要ポイント:{{items.0.getConsumePoint}}pt<br />
 </div>
@@ -28,9 +29,15 @@
 購入後のポイント
 </div>
 <div class="shop_contentdetailarea" style="padding:2%">
-未実装pt → 未実装pt<br />
-
+{% set remainder = user.getCurrentPoint - items.0.getConsumePoint %}
+{{user.getCurrentPoint}} pt → {% if remainder < 0 %} 0 pt<br /> {% else %}
+{{user.getCurrentPoint - items.0.getConsumePoint}} pt<br />
+{% endif %}
+{% if remainder > -1 %}
 <a href="{{ path('confirm',{"id":items.0.getId}) }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy.png') }}" width="35%"/></a>
+{% else %}
+<a href="{{ path('ShopError',{"id":items.0.getId}) }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy.png') }}" width="35%"/></a>
+{% endif %}
 <br />
 購入後30日間は再ダウンロードできます。<br />
 </div>

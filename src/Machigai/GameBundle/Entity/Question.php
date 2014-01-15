@@ -107,9 +107,11 @@ class Question
      */
     private $copyrightFileName;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="question")
-     */
+     * @ORM\ManyToMany(targetEntity="PlayHistory", inversedBy="question") 
+     * @ORM\JoinColumn(name="id", referencedColumnName="question_id")
+     */ 
     protected $playHistories;
 
     public function __construct()
@@ -150,7 +152,6 @@ class Question
     {
         return $this->questionNumber;
     }
-
     /**
      * Set level
      *
