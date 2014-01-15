@@ -97,7 +97,7 @@ class GameController extends BaseController
 
     public function playAction($id)
     {
-    	return $this->render('MachigaiGameBundle:Game:play.html.twig');	
+    	return $this->render('MachigaiGameBundle:Game:index.html.twig');	
     }
     public function downloadAction($level,$qcode,$type)
     {

@@ -37,10 +37,9 @@ class AndroidController extends Controller
 //		$serializer = $this->get('jms_serializer');
 //		$json = $serializer->serialize($user, 'json');
 		$json = $user->toJsonForSync(); 
-
 		$response = new Response($json);
 		$response->headers->set('Content-Type', 'application/json');
-		return $response->send();
+		return $response;
 	}
 
 	//ゲスト用トークンが必要
@@ -61,7 +60,7 @@ class AndroidController extends Controller
 		$response = new Response($html);
 		$response->headers->set('Content-Type', 'text/html');
 		$response->headers->set('Content-Type', 'utf8');
-		return $response->send();
+		return $response;
 	}
 
 	//ゲスト用トークンが必要
@@ -77,7 +76,7 @@ class AndroidController extends Controller
 		$response = new Response($json);
 		$response->headers->set('Content-Type', 'application/json');
 
-		return $response->send();
+		return $response;
 	}
 
 	//ゲスト用トークンが必要	
@@ -100,12 +99,12 @@ class AndroidController extends Controller
         }else{
             $response->headers->set('Content-Type', 'image/png');
         }
-        return  $response->send();
+        return  $response;
 
 		$json = json_encode(array());
 		$response = new Response($json);
 		$response->headers->set('Content-Type', 'application/json');
-		return $response->send();
+		return $response;
 	}
 
 
