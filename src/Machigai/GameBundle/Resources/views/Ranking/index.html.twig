@@ -65,7 +65,7 @@ function change_show_conditions(data){
   {% for rank in ranking_previous_month %}
   <div class="game_lavel_{{rank.getLevel()}}">
    <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">  	
-    <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}}<br />
+    <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}} さん<br />
     <span>タイム　</span>{{rank.getClearTime()}} 
    </li>
   </div>

@@ -11,6 +11,8 @@
 {% block body %}
 <script>
 var game_id = null;
+var current_level = "easy";
+var max = null;
 $(function(){
 	$('.normalLevel').hide();
 	$('.hardLevel').hide();
@@ -31,6 +33,8 @@ function changeLevel(level){
 	$(other_mode1).hide();
 	$(other_mode2).hide();
 	$(chosen_mode).show();
+	current_level = level;
+	rewritePageNum();
 }
 
 function popup(id){
@@ -57,6 +61,70 @@ function sortSelect(){
 		window.location = "{{path('SortQuestion',{"sort":"suspended"})}}";
 	}
 }
+function rewritePageNum(){
+	var page = 0;
+	var target = "li."+current_level;
+    var max = parseInt($(target).size());
+    $('.page').html(page+1);
+    if((max%24)==0){
+    	if(parseInt(max/24)==0){
+    		$('.maxPage').html(1);
+    	}else{
+	    	$('.maxPage').html(parseInt(max/24));
+    	}
+    }else{
+    	if(parseInt(max/24)==0){
+    		$('.maxPage').html(1);
+    	}else{
+	    	$('.maxPage').html(parseInt(max/24+1));
+    	}
+    }
+}
+</script>
+
+<script>
+$(function() {
+  var page = 0;
+  function draw() {
+  	var target = "li."+current_level;
+  	var str = 'li.'+current_level+':first,li.'+current_level+':gt("'+page * 24 + '"):lt(24)';
+    $(target).hide();
+	$(str).show();
+    var max = parseInt($(target).size());
+    rewritePageNum();
+  $('.prev').click(function() {
+  	var target = "li."+current_level;
+    if (page > 0) {
+      page--;
+      draw();
+    }
+  });
+  $('.next').click(function() {
+  	var target = "li."+current_level;
+    if (page < ($(target).size() - 1) / 24 - 1) {
+      page++;
+      draw();
+    }
+  });
+  function rewritePageNum(){
+  	$('.page').html(page+1);
+    if((max%24)==0){
+    	if(parseInt(max/24)==0){
+    		$('.maxPage').html(1);
+    	}else{
+	    	$('.maxPage').html(parseInt(max/24));
+    	}
+    }else{
+    	if(parseInt(max/24)==0){
+    		$('.maxPage').html(1);
+    	}else{
+	    	$('.maxPage').html(parseInt(max/24+1));
+    	}
+    }
+  }
+}
+  draw();
+});
 </script>
 
 
@@ -85,28 +153,29 @@ function sortSelect(){
 
 
 
-<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%"/></a><span> 1 / xx </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%"/></a></nav>
-
+<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
+<li class="easy"></li>
 {% if histories is  null %}
 <div id="questions">
 	<ul class="easyLevel">
 	{% for question in questions %}
 	{% if question.getLevel() == 1 %}
-	<li><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
+	<li class="easy"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
 	{% endif %}
 	{% endfor %}
+	</span>
 	</ul>
 	<ul class="normalLevel">
 	{% for question in questions %}
 	{% if question.getLevel() == 2 %}
-	<li><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
+	<li class="normal"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
 	{% endif %}
 	{% endfor %}
 	</ul>
 	<ul class="hardLevel">
 	{% for question in questions %}
 	{% if question.getLevel() == 3 %}
-	<li><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
+	<li class="hard"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
 	{% endif %}
 	{% endfor %}
 	</ul>
@@ -118,7 +187,7 @@ function sortSelect(){
 	{% for question in questions %}
 	{% if question.getId in histories %}
 	{% if question.getLevel() == 1 %}
-	<li><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
+	<li class="easy"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
 	{% endif %}
 	{% endif %}
 	{% endfor %}
@@ -127,7 +196,7 @@ function sortSelect(){
 	{% for question in questions %}
 	{% if question.getLevel() == 2 %}
 	{% if question.getId in histories %}
-	<li><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
+	<li class="normal"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
 	{% endif %}
 	{% endif %}
 	{% endfor %}
@@ -136,7 +205,7 @@ function sortSelect(){
 	{% for question in questions %}
 	{% if question.getLevel() == 3 %}
 	{% if question.getId in histories %}
-	<li><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
+	<li class="hard"><img src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_first.png')  }}" onclick="popup({{question.getId}});"/><br /><span>No{{question.getQuestionNumber}}</span></li>
 	</ul>
 	{% endif %}
 	{% endif %}
@@ -146,7 +215,7 @@ function sortSelect(){
 </section>
 
 
-<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%"/></a><span> 1 / xx </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%"/></a></nav>
+<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span> <a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
 <p style="font-size:2em; padding:2%;">
 ランキングへの反映は初回挑戦分のみとなります。<br />
 中断問題、複数回クリアされた問題はランキング対象になりませんのでご注意ください。
@@ -158,35 +227,10 @@ function sortSelect(){
 <div style="position:fixed;top:0;left:0;width:100%; height:100%;z-index:100;background-color:rgba(0,0,0,0.4);visibility:hidden;">
  <img src="/bundles/machigaigame/images/parts/popup_questiondownload.png" width="70%" style="position:absolute;top:40%;left:15%;" />
 </div> 
-<! -- 中断データポップアップ -->
+<!-- 中断データポップアップ -->
 <div style="position:fixed;top:0;left:0;width:100%; height:100%;z-index:100;background-color:rgba(0,0,0,0.4);visibility:hidden;">
  <span>No.1</span>
  <h2>問題タイトル</h2>
 </div>
-<!--
-<script>
-$(function() {
-  var page = 0;
-  function draw() {
-    $('.easyLevel').html(page + 1);
-    $('li').hide();
-    $('li:first,li:gt(' + page * 10 + '):lt(10)').show();
-  }
-  $('#prev').click(function() {
-    if (page > 0) {
-      page--;
-      draw();
-    }
-  });
-  $('#next').click(function() {
-    if (page < ($('li').size() - 1) / 10 - 1) {
-      page++;
-      draw();
-    }
-  });
-  draw();
-});
-</script>
-<span id="prev">＜</span>　<span id="page"></span>　<span id="next">＞</span>
--->
+
 {% endblock %}
