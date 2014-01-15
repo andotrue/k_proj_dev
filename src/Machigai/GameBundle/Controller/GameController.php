@@ -15,51 +15,79 @@ class GameController extends BaseController
     public function selectAction()
     {
         $user = $this->getUser();
-        $questions = $this->getDoctrine()
-        ->getRepository('MachigaiGameBundle:Question')
-        ->findAll();
         $histories = null;
+        $questions = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT q from MachigaiGameBundle:Question q 
+                                    left join  q.playHistories p 
+                                    order by p.gameStatus desc')
+                ->getResult();
+
     	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));
     }
     public function sortQuestionsAction($sort){
         $user = $this->getUser();
         $userId = $user->getId();
         $histories = null;
-        if($sort != "DESC" and $sort != "ASC"){
-            if($sort == "suspended"){
-                $pre_histories = $this->getDoctrine()
-                ->getRepository('MachigaiGameBundle:PlayHistory')
-                ->getSuspended($userId);
-                        $histories = array();
-                            foreach ($pre_histories as $history) {
-                                $histories[] = $history->getQuestion()->getId();
-                            }
-                
-/*$questions = $this->getDoctrine()
-                    ->getEntityManager()
-                    ->createQuery('SELECT q from MachigaiGameBundle.Question q left join  q.playHistories p join p.user u where u.Id = :id and p.suspendedIime is not null order by q.id asc;')->setParameter('id', $user->getId());
-*/
-            }elseif($sort == "notCleared"){
-                $pre_histories = $this->getDoctrine()
-                ->getRepository('MachigaiGameBundle:PlayHistory')
-                ->getNotCleared($userId);
-                        $histories = array();
-                        if(!empty($pre_histories)){
-                        foreach ($pre_histories as $history) {
-                            $histories[] = $history->getQuestion()->getId();
-                        }
-                    }
-            }
-        }else{
-            $questions = $this->getDoctrine()
-            ->getRepository('MachigaiGameBundle:Question')
-            ->findBy(array(),array('createdAt'=>$sort));
-        }
-
+  
         $questions = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Question')
         ->findAll();
+  
+        switch ($sort) {
+            case 'DESC':
+            case 'ASC' :
+                $questions = $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:Question')
+                ->findBy(array(),array('createdAt'=>$sort));
+                break;
+            case 'suspended':
+                $pre_histories = $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:PlayHistory')
+                ->getSuspended($userId);
+
+                $histories = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p 
+                                    left join  p.question q 
+                                    left join p.user u 
+                                    where u.id = :id and p.gameStatus = 3 
+                                    order by q.id asc')
+                ->setParameter('id', $user->getId())
+                ->getResult();
+                break;
+            case 'notCleared':
+                $pre_histories = $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:PlayHistory')
+                ->getNotCleared($userId);
+
+                $histories = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p 
+                                    left join  p.question q 
+                                    left join p.user u 
+                                    where u.id = :id and p.gameStatus = 2 
+                                    order by q.id asc')
+                ->setParameter('id', $user->getId())
+                ->getResult();
+                break;
+            default:
+                break;
+        }
+        $list = $this->makeList($histories);
         return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));
+    }
+    public function makeList($histories){
+        $list = array();
+        for ($i=0; $i < count($histories); $i++) { 
+            $history = $histories[$i];
+            $question = $history->getQuestion();
+            $data = array(  'gameStatus' => $history->getGameStatus(),
+                            'questionId' => $question->getId()
+                        );
+            $list[$i] = $data;
+       }
+        return $list;
     }
     public function getPlayHistory()
     {

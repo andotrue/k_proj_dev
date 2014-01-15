@@ -108,7 +108,7 @@ class Question
     private $copyrightFileName;
 
     /**
-     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="questions")
+     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="question")
      */
     protected $playHistories;
 

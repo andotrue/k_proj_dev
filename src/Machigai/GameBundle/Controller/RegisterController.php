@@ -22,7 +22,7 @@ class RegisterController extends BaseController
             if($user_type == 'loggedIn'){
                 //ログインユーザの場合
                 $session->set('auId', 'auid1');
-                $session->set('id', '1');
+                $session->set('id', '167');
                 $session->set('smartPassResult', true );                
             }elseif($user_type == 'notLoggedIn'){
                 //非ログインユーザの場合
