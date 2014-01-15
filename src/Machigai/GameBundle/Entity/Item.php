@@ -30,6 +30,13 @@ class Item
     private $itemCode;
 
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="name", type="string", length=32)
+     */
+    private $name;
+
+    /**
      * @var integer
      * 
      * @ORM\Column(name="consume_point", type="integer")
@@ -312,5 +319,28 @@ class Item
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Item
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

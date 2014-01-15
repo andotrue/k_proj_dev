@@ -23,17 +23,17 @@ class GameController extends BaseController
     }
     public function sortQuestionsAction($sort){
         $user = $this->getUser();
-  /*      $questions = $this->getDoctrine()
-        ->getRepository('MachigaiGameBundle:Question')
-        ->findAll();
-*/        $userId = $user->getId();
+        $userId = $user->getId();
         $histories = null;
         if($sort != "DESC" and $sort != "ASC"){
             if($sort == "suspended"){
                 $pre_histories = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:PlayHistory')
                 ->getSuspended($userId);
-//                ->findBy(array('suspendTime'=>'5000'));
+                        $histories = array();
+                            foreach ($pre_histories as $history) {
+                                $histories[] = $history->getQuestion()->getId();
+                            }
                 
 /*$questions = $this->getDoctrine()
                     ->getEntityManager()
@@ -43,16 +43,17 @@ class GameController extends BaseController
                 $pre_histories = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:PlayHistory')
                 ->getNotCleared($userId);
+                        $histories = array();
+                        foreach ($pre_histories as $history) {
+                            $histories[] = $history->getQuestion()->getId();
+                        }
             }
         }else{
             $questions = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:Question')
             ->findBy(array(),array('createdAt'=>$sort));
         }
-        $histories = array();
-        foreach ($pre_histories as $history) {
-            $histories[] = $history->getQuestion()->getId();
-        }
+
         $questions = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Question')
         ->findAll();

@@ -124,7 +124,6 @@ function sortSelect(){
 	{% endfor %}
 	</ul>
 	<ul class="normalLevel">
-	normal?
 	{% for question in questions %}
 	{% if question.getLevel() == 2 %}
 	{% if question.getId in histories %}
@@ -134,7 +133,6 @@ function sortSelect(){
 	{% endfor %}
 	</ul>
 	<ul class="hardLevel">
-	hard!!!
 	{% for question in questions %}
 	{% if question.getLevel() == 3 %}
 	{% if question.getId in histories %}
@@ -146,6 +144,7 @@ function sortSelect(){
 </div>
 {% endif %}
 </section>
+
 
 <nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%"/></a><span> 1 / xx </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%"/></a></nav>
 <p style="font-size:2em; padding:2%;">
@@ -165,4 +164,29 @@ function sortSelect(){
  <h2>問題タイトル</h2>
 </div>
 {% endblock %}
-
+<!--
+<script>
+$(function() {
+  var page = 0;
+  function draw() {
+    $('.easyLevel').html(page + 1);
+    $('li').hide();
+    $('li:first,li:gt(' + page * 10 + '):lt(10)').show();
+  }
+  $('#prev').click(function() {
+    if (page > 0) {
+      page--;
+      draw();
+    }
+  });
+  $('#next').click(function() {
+    if (page < ($('li').size() - 1) / 10 - 1) {
+      page++;
+      draw();
+    }
+  });
+  draw();
+});
+</script>
+<span id="prev">＜</span>　<span id="page"></span>　<span id="next">＞</span>
+-->
