@@ -9,6 +9,10 @@ var BaseLayer = cc.Layer.extend({
         if (this._super()) {
             var Header = cc.Sprite.create( gsDir + "background/header.png");
             var Footer = cc.Sprite.create( gsDir + "background/footer.png");
+            this.addChild(Header);
+            this.addChild(Footer);
+            Header.setPosition(426,1242);
+            Footer.setPosition(426,38);
 
             var IconGiveup = cc.Sprite.create( gsDir + "button/icon_giveup.png" );
             var IconHint = cc.Sprite.create( gsDir + "button/icon_hint.png" );
@@ -17,28 +21,26 @@ var BaseLayer = cc.Layer.extend({
             var LabelOtetsuki = cc.Sprite.create( gsDir + "label/otetsuki.png" );
             var LabelMachigai = cc.Sprite.create( gsDir + "label/machigai.png" );
             var LabelTimelimit = cc.Sprite.create( gsDir + "label/timelimit.png" );
-           
-            var heartsOn = [];
-            var heartsOff = [];
-            for (var i = 0; i < 8; i++) {
-                var on  = cc.Sprite.create( gsDir + "other/heart_off.png" );
-                var off = cc.Sprite.create( gsDir + "other/heart_on.png" );
-//                heartsOn.push(on);
-//                heartsOff.push(off);
-                this.addChild(on);
-                this.addChild(off);
 
-                on.setPosition(700 + 30 * i ,1840);
-                off.setPosition(700 + 30 * i, 1840);
+            var stars = [];
+            var hearts = [];
+            for (var i = 0; i < 10; i++) {
+                var star  = cc.Sprite.create( gsDir + "other/star_off.png" );
+                var heart = cc.Sprite.create( gsDir + "other/heart_on.png" );
+                hearts.push(heart);
+                stars.push(star);
+                this.addChild(heart);
+                this.addChild(star);
+
+                star.setPosition(420 + 30 * i ,1256);
+                heart.setPosition(420 + 30 * i, 1216);
 //                off.setOpacity(0);
-            };
+            }
            
             var Slidebar = cc.Sprite.create( gsDir + "other/slidebar.png" );
             var Slideicon = cc.Sprite.create( gsDir + "other/slideicon.png" );
 
             //Layerの子要素に。
-            this.addChild(Header);
-            this.addChild(Footer);
 
             this.addChild(IconGiveup);
             this.addChild(IconHint);
@@ -51,22 +53,23 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(Slidebar);
             this.addChild(Slideicon);
 
-            //Positionの設定
-            Header.setPosition(640,1863);
-            Footer.setPosition(640,57);
 
-            IconGiveup.setPosition(760,66);
-            IconHint.setPosition(880,66);
-            IconSave.setPosition(1000,66);
+            IconGiveup.setPosition(506,44);
+            IconHint.setPosition(586,44);
+            IconSave.setPosition(667,44);
             
-            LabelOtetsuki.setPosition(616,1890);
-            LabelMachigai.setPosition(616,1840);
-            LabelTimelimit.setPosition(100,100);
+            LabelOtetsuki.setPosition(350,1256);
+            LabelMachigai.setPosition(350,1216);
+            LabelTimelimit.setPosition(100,1260);
 
-            Slidebar.setPosition(460,66);
+            Slidebar.setPosition(307,44);
             Slidebar.setScaleX(0.75);
-            Slideicon.setPosition(460,63);
+            Slideicon.setPosition(360,44);
             Slideicon.setScaleX(0.90);
+
+            var clock = new ClockLayer();
+            this.addChild(clock,15);
+
 /*
             var popupGameStart = cc.MenuItemImage.create(
                 bd+"res/game_scene/popup/gamestart.png",

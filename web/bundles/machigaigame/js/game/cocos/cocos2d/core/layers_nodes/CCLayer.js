@@ -232,7 +232,7 @@ cc.Layer = cc.Node.extend(/** @lends cc.Layer# */{
     },
 
     onAccelerometer:function (accelerationValue) {
-        cc.log("onAccelerometer event should be handled.")
+        cc.log("onAccelerometer event should be handled.");
     },
 
     /**

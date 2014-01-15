@@ -1,4 +1,4 @@
-var MyGameScene = cc.Scene.extend({
+var ResultScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
 
@@ -7,15 +7,8 @@ var MyGameScene = cc.Scene.extend({
 //        var spriteFrameCache = cc.SpriteFrameCache.getInstance();
 //        spriteFrameCache.addSpriteFrames("res/baseResource.plist","res/baseResource.png");
 
-        var baseLayer = new BaseLayer();
-        this.addChild(baseLayer,10);
-
-        var illustLayer = new IllustLayer();
-        this.addChild(illustLayer,0);
-
-        var popupLayer = new PopupLayer();
-        this.addChild(popupLayer,20);
-
+        var resultLayer = new ResultLayer();
+        this.addChild(resultLayer,0);
 
 //        gSharedEngine.setMusicVolume(1);
 //        gSharedEngine.setEffectsVolume(1);
