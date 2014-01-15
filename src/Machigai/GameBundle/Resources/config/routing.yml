@@ -147,3 +147,24 @@ RegisterLogin:
 complete:
     pattern: /register/complete/{auId}/{nickName}
     defaults: { _controller: MachigaiGameBundle:Register:complete }
+
+SyncUser:
+    pattern: /sync/user
+    defaults: { _controller: MachigaiGameBundle:Android:user }
+    requirements:
+        _method: GET
+SyncNotice:
+    pattern: /sync/notices
+    defaults: { _controller: MachigaiGameBundle:Android:notices }
+    requirements:
+        _method: GET
+SyncGame:
+    pattern: /sync/game/
+    defaults: { _controller: MachigaiGameBundle:Android:game }
+    requirements: 
+        _method: GET
+SyncGameData:
+    pattern: /sync/game/{id}/{fileName}
+    defaults: { _controller: MachigaiGameBundle:Android:gameData }
+    requirements: 
+        _method: GET
