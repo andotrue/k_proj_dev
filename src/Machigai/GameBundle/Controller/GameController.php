@@ -18,7 +18,8 @@ class GameController extends BaseController
         $questions = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Question')
         ->findAll();
-    	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions));	
+        $histories = null;
+    	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));
     }
     public function sortQuestionsAction($sort){
         $user = $this->getUser();

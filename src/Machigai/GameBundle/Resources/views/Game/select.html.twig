@@ -80,7 +80,7 @@ function sortSelect(){
 </div>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_mondaiselect.png')  }}" width="100%"/>
 <div id="level_tab" style="padding-top:5%;"><img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy.png') }}" width="30%" onclick='changeLevel("easy");'/><img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick='changeLevel("normal")'><img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick='changeLevel("hard");'/></div>
-<section id="select_area" style="background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }}); background-repeat:no-repeat; widtn:auto">
+<section id="select_area" style="background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }}); background-repeat:no-repeat; background-size:cover;">
 <div id="order_header" style="text-align:right;padding-bottom:0.7em;padding-top:0.7em;"><span style="padding-right:0.5em;">並べ替え</span><select id="sortSelect" onchange="sortSelect()"><option selected="selected" value=""></option><option value="1">古い順</option><option value="2">新しい順</option><option value="3">未クリア問題</option><option value="4">中断問題</option></select></div>
 
 
@@ -145,8 +145,8 @@ function sortSelect(){
 	{% endfor %}
 </div>
 {% endif %}
-
 </section>
+
 <nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%"/></a><span> 1 / xx </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%"/></a></nav>
 <p style="font-size:2em; padding:2%;">
 ランキングへの反映は初回挑戦分のみとなります。<br />
