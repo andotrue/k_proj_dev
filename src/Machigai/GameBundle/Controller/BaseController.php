@@ -30,11 +30,18 @@ class BaseController extends Controller
         ->findByUser($user_id);
         $purchasedItems = array();
         foreach ($pre_purchasedItems as $purchasedItem) {
-            $purchasedItems[] = $purchasedItem->getItem()->getId();
+            $times = $purchasedItem->getCreatedAt();
+            foreach ($times as $from) {
+                $to = date( "Y-m-d H:i:s", time());
+                $fromSec = strtotime($from);
+                $toSec   = strtotime($to);
+                $differences = $toSec - $fromSec;
+                //30days
+                if($differences < 2592000){
+                    $purchasedItems[] = $purchasedItem->getItem()->getId();
+                }
+            }       
         }
-
         return $purchasedItems;
-//      var_dump($purchasedItems);
-//      exit;
     }
 }
