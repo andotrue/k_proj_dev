@@ -2,6 +2,10 @@ Top:
     path: /top
     defaults: { _controller: MachigaiGameBundle:Default:index }
 
+Logout:
+    path: /logout
+    defaults: { _controller: MachigaiGameBundle:Default:logout }
+
 Error:
     path: /error
     defaults: { _controller: MachigaiGameBundle:Default:error }
@@ -53,14 +57,13 @@ SettingNickname:
     defaults: { _controller: MachigaiGameBundle:Setting:nickname }
     requirements: 
         _method: GET
-    
+
 Setting:
     pattern: /setting/
     defaults: { _controller: MachigaiGameBundle:Setting:index }
     requirements: 
         _method: GET
 
-   
 SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
@@ -68,6 +71,10 @@ SettingComplete:
 Shop:
     pattern: /shop/
     defaults: { _controller: MachigaiGameBundle:Shop:index }
+
+ShopSort:
+    pattern: /shop/{field}/
+    defaults: { _controller: MachigaiGameBundle:Shop:indexSort }
 
 ShopWallpaper:
     pattern: /shop/wallpaper/
@@ -78,16 +85,20 @@ ShopStamp:
     defaults: { _controller: MachigaiGameBundle:Shop:stamp }
 
 ShopDownload:
-    pattern: /shop/download/
+    pattern: /shop/download/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:download }
 
 ShopError:
-    pattern: /shop/error
+    pattern: /shop/error/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:error }
 
 confirm:
-    pattern: /shop/confirm
+    pattern: /shop/confirm/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:confirm }
+
+downloadExecute:
+    pattern: /shop/downloadExecute/{id}
+    defaults: { _controller: MachigaiGameBundle:Shop:downloadExecute }
 
 Ranking:
     pattern: /ranking/
@@ -97,9 +108,13 @@ GameSelect:
     pattern: /game/select
     defaults: { _controller: MachigaiGameBundle:Game:select }
 
+SortQuestion:
+    pattern: /game/select/{sort}
+    defaults: { _controller: MachigaiGameBundle:Game:sortQuestions }
+
 GamePlay:
-    pattern: /game/play/
-    defaults: { _controller: MachigaiGameBundle:Game:index }
+    pattern: /game/play/{id}
+    defaults: { _controller: MachigaiGameBundle:Game:play }
 
 GameGetPlayHistory:
     pattern: /game/history
@@ -125,9 +140,42 @@ GameFail:
     defaults: { _controller: MachigaiGameBundle:Game:fail }
 
 Register:
-    pattern: /register
+    pattern: /register/
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
+Login:
+    pattern: /register/login
+    defaults: { _controller: MachigaiGameBundle:Register:login }
+
+RegisterConfirm:
+    pattern: /register/confirm/
+    defaults: { _controller: MachigaiGameBundle:Register:confirm }
+
+RegisterLogin:
+    pattern: /register/login
+    defaults: { _controller: MachigaiGameBundle:Register:login }
+
 complete:
-    pattern: /register/complete
+    pattern: /register/complete/
     defaults: { _controller: MachigaiGameBundle:Register:complete }
+
+SyncUser:
+    pattern: /sync/user
+    defaults: { _controller: MachigaiGameBundle:Android:user }
+    requirements:
+        _method: GET
+SyncNotice:
+    pattern: /sync/notices
+    defaults: { _controller: MachigaiGameBundle:Android:notices }
+    requirements:
+        _method: GET
+SyncGame:
+    pattern: /sync/game/
+    defaults: { _controller: MachigaiGameBundle:Android:game }
+    requirements: 
+        _method: GET
+SyncGameData:
+    pattern: /sync/game/{id}/{fileName}
+    defaults: { _controller: MachigaiGameBundle:Android:gameData }
+    requirements: 
+        _method: GET

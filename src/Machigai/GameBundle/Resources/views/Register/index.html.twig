@@ -1,22 +1,38 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle::base.html.twig" %}
 
 {% block title %}ニックネーム名登録{% endblock %}
 
 {% block body %}
-<header><h1><img src="{{ asset('images/title_logo.png')}}"></h1></header>
+<header><h1><img src="{{ asset('/bundles/machigaigame/images/parts/header.png')}}" style="width:100%"></h1></header>
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="width:100%">
+<div style="font-size:2em">
 <section>
- <h2>ニックネーム登録</h2>
- {{ form_start (form) }} 
-  {{ form_widget (form.state, {'attr': { 'value' : 'confirm' } }) }}
-  {{ form_errors (form) }}
+ <form action="{{ path('RegisterConfirm') }}" method="post" {{ form_enctype(form) }}>
+ {{ form_errors (form) }}
   <p>auIDログインが完了しました。<br />
 登録を続けるにはニックネームを入力してください。</p>
-  {{ form_widget (form.nickname)}}
-  <input type="hidden" name="state" value="confirm">
+
+<input type="text" id="form_nickname" name="form[nickname]" required="required" style="margin-top:2%;font-size:2em;background-image:url(/bundles/machigaigame/images/parts/nicknametextarea.png);background-size:100% 100%; background-repeat:no-repeat;">
+<br />
+  <input type="hidden" name="state" value="confirm"><br />
+ <img src="{{ asset('/bundles/machigaigame/images/parts/button_nicknamechange.png')}}" style="width:35%;align:center;" onclick="submitNickname()">
+ 
   <p>ニックネームはランキングに表示されます。<br />
 本名・住所など個人を特定できる内容は記載しないようご注意ください。<br />
 また、ニックネームはTOP画面の「ヘルプ」→「設定」から変更することができます。</p>
+<input type="submit" id="submitButton">
   {{ form_widget (form.confirm) }}
- {{ form_end (form) }}
+ {{ form_end (form, {'attr':{'id':'submitEnd'}}) }}
 </section>
+</div>
+<script>
+$(function(){
+	$('#submitButton').hide();
+	$('#submitEnd').hide();
+	$('#form_confirm').hide();
+})
+function submitNickname(){
+	$('#submitButton').trigger("click");
+}
+</script>
 {% endblock %}

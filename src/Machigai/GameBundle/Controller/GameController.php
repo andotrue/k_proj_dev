@@ -3,9 +3,10 @@
 namespace Machigai\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class GameController extends Controller
+class GameController extends BaseController
 {
     public function indexAction()
     {
@@ -13,7 +14,50 @@ class GameController extends Controller
     }
     public function selectAction()
     {
-    	return $this->render('MachigaiGameBundle:Game:select.html.twig');	
+        $user = $this->getUser();
+        $questions = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:Question')
+        ->findAll();
+        $histories = null;
+    	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));
+    }
+    public function sortQuestionsAction($sort){
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $histories = null;
+        if($sort != "DESC" and $sort != "ASC"){
+            if($sort == "suspended"){
+                $pre_histories = $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:PlayHistory')
+                ->getSuspended($userId);
+                        $histories = array();
+                            foreach ($pre_histories as $history) {
+                                $histories[] = $history->getQuestion()->getId();
+                            }
+                
+/*$questions = $this->getDoctrine()
+                    ->getEntityManager()
+                    ->createQuery('SELECT q from MachigaiGameBundle.Question q left join  q.playHistories p join p.user u where u.Id = :id and p.suspendedIime is not null order by q.id asc;')->setParameter('id', $user->getId());
+*/
+            }elseif($sort == "notCleared"){
+                $pre_histories = $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:PlayHistory')
+                ->getNotCleared($userId);
+                        $histories = array();
+                        foreach ($pre_histories as $history) {
+                            $histories[] = $history->getQuestion()->getId();
+                        }
+            }
+        }else{
+            $questions = $this->getDoctrine()
+            ->getRepository('MachigaiGameBundle:Question')
+            ->findBy(array(),array('createdAt'=>$sort));
+        }
+
+        $questions = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:Question')
+        ->findAll();
+        return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));
     }
     public function getPlayHistory()
     {
@@ -21,7 +65,7 @@ class GameController extends Controller
         return json_encode($history);
     }
 
-    public function playAction()
+    public function playAction($id)
     {
     	return $this->render('MachigaiGameBundle:Game:play.html.twig');	
     }

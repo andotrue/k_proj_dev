@@ -71,9 +71,8 @@ class PlayHistory
     protected $user;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Question", inversedBy="playHistories") 
-     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
-     */ 
+    * @ORM\OneToMany(targetEntity="Question", mappedBy="playHistories")
+    */
     protected $question;
 
     /**
@@ -82,7 +81,25 @@ class PlayHistory
      */ 
     protected $ranking;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="game_status", type="integer", nullable=true)
+     */
+    private $gameStatus;
 
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="play_info", type="text", nullable=true)
+     */
+    private $playInfo;
+
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
 
     /**
      * Get id

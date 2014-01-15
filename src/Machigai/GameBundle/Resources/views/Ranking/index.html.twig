@@ -49,11 +49,12 @@ function change_show_conditions(data){
 <div id="ranking_area" class="bottom_blue_line" style="width: 100%;height:300px; overflow-y:scroll; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size: 100% auto; " >
  <ul id="panel" style="padding-top:0.8%; ">
 
+<div style="font-size:2em">
  <div id="current_month">
   {% for rank in ranking_this_month %}
   <div class="game_lavel_{{rank.getLevel()}}">
    <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
-    <span>{{ rank.getRank() }}位 </span><br />
+    <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}}<br />
     <span>タイム　</span>{{rank.getClearTime()}} 
    </li>
   </div>
@@ -64,13 +65,14 @@ function change_show_conditions(data){
   {% for rank in ranking_previous_month %}
   <div class="game_lavel_{{rank.getLevel()}}">
    <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">  	
-    <span>{{ rank.getRank() }}位 </span><br />
+    <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}} さん<br />
     <span>タイム　</span>{{rank.getClearTime()}} 
    </li>
   </div>
   {% endfor %}
- </div>
- 
+</div>
+</div>
+
  </ul>
 </div>
 </section>

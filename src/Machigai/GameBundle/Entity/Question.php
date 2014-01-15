@@ -79,6 +79,13 @@ class Question
     private $distributedTo;
 
     /**
+     * @var \boolean
+     *
+     * @ORM\Column(name="is_delete", type="boolean", nullable=true)
+     */
+    private $isDelete;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetimetz")
@@ -406,5 +413,28 @@ class Question
     public function getPlayHistories()
     {
         return $this->playHistories;
+    }
+
+    /**
+     * Set isDelete
+     *
+     * @param boolean $isDelete
+     * @return Question
+     */
+    public function setIsDelete($isDelete)
+    {
+        $this->isDelete = $isDelete;
+
+        return $this;
+    }
+
+    /**
+     * Get isDelete
+     *
+     * @return boolean 
+     */
+    public function getIsDelete()
+    {
+        return $this->isDelete;
     }
 }

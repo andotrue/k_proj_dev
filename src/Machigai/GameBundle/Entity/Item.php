@@ -24,17 +24,38 @@ class Item
 
     /**
      * @var string
-     *
+     * 
      * @ORM\Column(name="item_code", type="string", length=32)
      */
     private $itemCode;
 
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="name", type="string", length=32)
+     */
+    private $name;
+
+    /**
      * @var integer
-     *
+     * 
      * @ORM\Column(name="consume_point", type="integer")
      */
     private $consumePoint;
+
+     /**
+     * @var text
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="popularity_rank", type="integer")
+     */
+    private $popularityRank;
 
     /**
      * @var \DateTime
@@ -65,8 +86,6 @@ class Item
     private $updatedAt;
 
     /**
-     * @var string
-     *
      * @ORM\ManyToOne(targetEntity="ItemCategory", inversedBy="items") 
      * @ORM\JoinColumn(name="category_code", referencedColumnName="category_code")
      */
@@ -284,5 +303,74 @@ class Item
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Item
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Item
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set popularityRank
+     *
+     * @param integer $popularityRank
+     * @return Item
+     */
+    public function setPopularityRank($popularityRank)
+    {
+        $this->popularityRank = $popularityRank;
+
+        return $this;
+    }
+
+    /**
+     * Get popularityRank
+     *
+     * @return integer 
+     */
+    public function getPopularityRank()
+    {
+        return $this->popularityRank;
     }
 }
