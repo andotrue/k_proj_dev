@@ -81,7 +81,7 @@ class Question
     /**
      * @var \boolean
      *
-     * @ORM\Column(name="is_delete", type="bool", nullable=true)
+     * @ORM\Column(name="is_delete", type="boolean", nullable=true)
      */
     private $isDelete;
 
@@ -107,11 +107,9 @@ class Question
      */
     private $copyrightFileName;
 
-
     /**
-     * @ORM\ManyToMany(targetEntity="PlayHistory", inversedBy="question") 
-     * @ORM\JoinColumn(name="id", referencedColumnName="question_id")
-     */ 
+     * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="question")
+     */
     protected $playHistories;
 
     public function __construct()
@@ -152,6 +150,7 @@ class Question
     {
         return $this->questionNumber;
     }
+
     /**
      * Set level
      *
@@ -419,10 +418,10 @@ class Question
     /**
      * Set isDelete
      *
-     * @param \bool $isDelete
+     * @param boolean $isDelete
      * @return Question
      */
-    public function setIsDelete(\bool $isDelete)
+    public function setIsDelete($isDelete)
     {
         $this->isDelete = $isDelete;
 
@@ -432,7 +431,7 @@ class Question
     /**
      * Get isDelete
      *
-     * @return \bool 
+     * @return boolean 
      */
     public function getIsDelete()
     {
