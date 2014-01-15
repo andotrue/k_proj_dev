@@ -51,6 +51,13 @@ class Item
     private $description;
 
     /**
+     * @var integer
+     * 
+     * @ORM\Column(name="popularity_rank", type="integer")
+     */
+    private $popularityRank;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="distributed_from", type="datetimetz", nullable=true)
@@ -342,5 +349,28 @@ class Item
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set popularityRank
+     *
+     * @param integer $popularityRank
+     * @return Item
+     */
+    public function setPopularityRank($popularityRank)
+    {
+        $this->popularityRank = $popularityRank;
+
+        return $this;
+    }
+
+    /**
+     * Get popularityRank
+     *
+     * @return integer 
+     */
+    public function getPopularityRank()
+    {
+        return $this->popularityRank;
     }
 }

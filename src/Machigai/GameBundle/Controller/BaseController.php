@@ -15,8 +15,7 @@ class BaseController extends Controller
 	        ->getRepository('MachigaiGameBundle:User')
 	        ->find($id);
 			return $user;
-        }
-        if(empty($id) ) {
+        }else{
         	//GUESTの場合NULLを返す
             $user = NULL;
             return $user;

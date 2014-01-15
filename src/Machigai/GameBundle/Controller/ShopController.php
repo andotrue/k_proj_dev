@@ -27,6 +27,9 @@ class ShopController extends BaseController
         if($field == "orderByOld"){
             $sort = "DESC";
             $field = "createdAt";
+        }elseif($field == "popularity"){
+            $sort = "ASC";
+            $field = "popularityRank";
         }else{
             $sort = "ASC";
             $field = $field;

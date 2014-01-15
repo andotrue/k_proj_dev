@@ -40,7 +40,6 @@ $(function() {
     $('#page').html(page + 1);
     $(target).hide();
     var str = target+':first,'+target+':gt("'+page*20+'"):lt(20)';
-//    $('.item1:first,.item1:gt(' + page * 2 + '):lt(2)').show();
   $(str).show();
     rewritePageNum();
   }
@@ -67,12 +66,14 @@ $(function() {
 function sortSelect(){
 	var optionValue = $('#sortSelect').val();
 	if(optionValue == 1){
-		window.location = "{{path('ShopSort',{"field":"itemCode"})}}";
+		window.location = "{{path('ShopSort',{"field":"name"})}}";
 	}else if(optionValue == 2){
 		window.location = "{{path('ShopSort',{"field":"createdAt"})}}";
 	}else if(optionValue == 3){
 		window.location = "{{path('ShopSort',{"field":"orderByOld"})}}";
-	}	
+	}else if(optionValue == 4){
+    window.location = "{{path('ShopSort',{"field":"popularity"})}}";
+  }
 }
 function rewritePageNum(){
     var max = parseInt($('.item1').size());
