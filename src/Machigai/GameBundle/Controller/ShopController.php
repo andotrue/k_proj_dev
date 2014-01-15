@@ -19,7 +19,7 @@ class ShopController extends BaseController
     }
     public function indexSortAction($field){
         $user = $this->getUser();
-
+        $purchasedItems = $this->getPurchasedItems();
         $purchaseHistory = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:PurchaseHistory')
         ->findAll();
@@ -27,6 +27,9 @@ class ShopController extends BaseController
         if($field == "orderByOld"){
             $sort = "DESC";
             $field = "createdAt";
+        }elseif($field == "popularity"){
+            $sort = "ASC";
+            $field = "popularityRank";
         }else{
             $sort = "ASC";
             $field = $field;
@@ -34,7 +37,7 @@ class ShopController extends BaseController
         $items = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
         ->findBy(array(),array($field=>$sort));
-    return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items,'user'=>$user));
+    return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items,'user'=>$user,'purchasedItems'=>$purchasedItems));
     }
 
     public function wallpaperAction()
