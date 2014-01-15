@@ -4,7 +4,7 @@ Top:
 
 Logout:
     path: /logout
-    defaults: { _controller: MachigaiGameBundle:Default:index }
+    defaults: { _controller: MachigaiGameBundle:Default:logout }
 
 Error:
     path: /error
@@ -158,3 +158,24 @@ RegisterLogin:
 complete:
     pattern: /register/complete/
     defaults: { _controller: MachigaiGameBundle:Register:complete }
+
+SyncUser:
+    pattern: /sync/user
+    defaults: { _controller: MachigaiGameBundle:Android:user }
+    requirements:
+        _method: GET
+SyncNotice:
+    pattern: /sync/notices
+    defaults: { _controller: MachigaiGameBundle:Android:notices }
+    requirements:
+        _method: GET
+SyncGame:
+    pattern: /sync/game/
+    defaults: { _controller: MachigaiGameBundle:Android:game }
+    requirements: 
+        _method: GET
+SyncGameData:
+    pattern: /sync/game/{id}/{fileName}
+    defaults: { _controller: MachigaiGameBundle:Android:gameData }
+    requirements: 
+        _method: GET

@@ -79,6 +79,13 @@ class Question
     private $distributedTo;
 
     /**
+     * @var \boolean
+     *
+     * @ORM\Column(name="is_delete", type="boolean", nullable=true)
+     */
+    private $isDelete;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetimetz")
@@ -99,7 +106,6 @@ class Question
      * @ORM\Column(name="copyright_file_name", type="string", length=255)
      */
     private $copyrightFileName;
-
 
     /**
      * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="questions")
@@ -140,6 +146,7 @@ class Question
     {
         return $this->questionNumber;
     }
+
     /**
      * Set level
      *
@@ -415,5 +422,27 @@ class Question
         $this->playHistories = $playHistories;
 
         return $this;
+    }
+    /*
+     * Set isDelete
+     *
+     * @param boolean $isDelete
+     * @return Question
+     */
+    public function setIsDelete($isDelete)
+    {
+        $this->isDelete = $isDelete;
+
+        return $this;
+    }
+
+    /**
+     * Get isDelete
+     *
+     * @return boolean 
+     */
+    public function getIsDelete()
+    {
+        return $this->isDelete;
     }
 }

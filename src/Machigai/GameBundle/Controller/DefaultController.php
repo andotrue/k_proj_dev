@@ -19,7 +19,7 @@ class DefaultController extends BaseController
 
         $id = $session->get('id');
         if(!empty($id)){
-	        $session->set('id', null );
+	        $session->remove('id');
 
 	        //表示していないが、とりあえず
 	        $this->get('session')->getFlashBag()->add(
