@@ -1,5 +1,22 @@
 {% extends "MachigaiGameBundle::base.html.twig" %}
 {% block body %}
+<script>
+var image_path = null;
+var image_id = null;
+function changeImage(imageId){
+	var pre_src = $('#'+imageId).attr('src');
+	var src = pre_src.replace(/_off/g,'');
+	image_path = src;
+	image_id = imageId;
+	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
+}
+function originalImage(){
+	var pre_src = $('#'+image_id).attr('src');
+	var src = image_path.replace(/.png/g,'_off.png');
+	$('#'+image_id).attr("src",src);
+}
+</script>
 <header id="title" class="top_bg">
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
  <p id="user_name" style="font-size:2em">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
@@ -28,15 +45,15 @@
   <p style="font-size:2em">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
  </section>
  <section id="menu" class="top_bg">
-  <a href='{{ path('GameSelect') }}' style="padding-right:9%;"><img alt="まちがいさがし" src="{{asset('/bundles/machigaigame/images/parts/button_game.png')}}" width="35%" /></a>
+  <a href='{{ path('GameSelect') }}' style="padding-right:9%;"><img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
   {% if user is empty %}
-  	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" />
+  	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_gray.png')}}" width="35%" />
   {% else %}
   	<a href='{{ path('Shop') }}'> 
-  	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" width="35%" /></a>
+  	<img alt="ショップ" id="shop_button" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
   {% endif %}<br />
-  <a href='{{ path('Ranking') }}' style="padding-right:9%;"><img alt="ランキング" src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" width="35%" /></a>
-  <a href='{{ path('Help') }}'><img alt="ヘルプ" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" width="35%" /></a>
+  <a href='{{ path('Ranking') }}' style="padding-right:9%;"><img alt="ランキング" id="ranking_button" src="{{asset('/bundles/machigaigame/images/parts/button_ranking_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
+  <a href='{{ path('Help') }}'><img alt="ヘルプ" id="help_button" src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
  </section>
  <section id="news">
   <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />

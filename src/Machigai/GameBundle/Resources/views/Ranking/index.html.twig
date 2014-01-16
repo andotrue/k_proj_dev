@@ -6,6 +6,8 @@
 <script>
 var month = 0;
 var mode = 2;
+var image_path = null;
+var image_id = null;
 $(function(){
 	$('.game_lavel_2').hide();
 	$('.game_lavel_3').hide();
@@ -34,17 +36,30 @@ function change_show_conditions(data){
 		$(chosen_mode).show();	
 	};
 }
+function changeImage(imageId){
+  var pre_src = $('#'+imageId).attr('src');
+  var src = pre_src.replace(/_off/g,'');
+  image_path = src;
+  image_id = imageId;
+  $('#'+imageId).attr("src",src);
+  setTimeout("originalImage();", 200);
+}
+function originalImage(){
+  var pre_src = $('#'+image_id).attr('src');
+  var src = image_path.replace(/.png/g,'_off.png');
+  $('#'+image_id).attr("src",src);
+}
 </script>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_ranking.png') }}" width="100%"/>
 <section>
 <div id="month_tab" class="bottom_blue_line" style="padding:5% 0 0 0;">
-	<img id="this_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_thismonth.png') }}" width="47%" style="padding-right:2%;" onclick="change_show_conditions(0)"/>
-	<img id="last_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_lastmonth.png') }}" width="47%" onclick="change_show_conditions(1)"/>
+	<img id="this_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_thismonth_off.png') }}" width="47%" style="padding-right:2%;" onclick="changeImage(this.id);change_show_conditions(0)"/>
+	<img id="last_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_lastmonth_off.png') }}" width="47%" onclick="changeImage(this.id);change_show_conditions(1)"/>
 </div>
 <div id="level_tab" style="padding-top:0.5%;">
-	<img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy.png') }}" width="30%" onclick="change_show_conditions(2)"/>
-	<img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick="change_show_conditions(3)"/>
-	<img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick="change_show_conditions(4)"/>
+	<img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}" width="30%" onclick="changeImage(this.id);change_show_conditions(2)"/>
+	<img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick="changeImage(this.id);change_show_conditions(3)"/>
+	<img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick="changeImage(this.id);change_show_conditions(4)"/>
 </div>
 <div id="ranking_area" class="bottom_blue_line" style="width: 100%;height:300px; overflow-y:scroll; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size: 100% auto; " >
  <ul id="panel" style="padding-top:0.8%; ">
@@ -78,6 +93,6 @@ function change_show_conditions(data){
 </section>
 <p style="padding:1%;text-align:left;">毎月末日 24:00時点での順位に応じてポイントが付与されます。<br />ランキングに挑戦するにはauIDログインが必要です。</p>
  <footer style="margin:3% auto 5% auto;">
-  <a href="{{path('Top')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>
+  <a href="{{path('Top')}}" style="margin-right:7%;"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
  </footer>
 {% endblock %}
