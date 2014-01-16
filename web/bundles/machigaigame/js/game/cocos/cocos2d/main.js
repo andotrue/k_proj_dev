@@ -15,7 +15,7 @@ var Application = cc.Application.extend({
         cc.EGLView.getInstance()._adjustSizeToBrowser();
         cc.EGLView.getInstance().adjustViewPort(true);
 //        director.setContentScaleFactor(resourceSize.width / designSize.width);
-        cc.EGLView.getInstance().setDesignResolutionSize(720, 1280, cc.RESOLUTION_POLICY.SHOW_ALL);
+        cc.EGLView.getInstance().setDesignResolutionSize(1080, 1920, cc.RESOLUTION_POLICY.SHOW_ALL);
         cc.EGLView.getInstance().resizeWithBrowserSize(true);
 
         // turn on display FPS
@@ -29,15 +29,8 @@ var Application = cc.Application.extend({
             director.replaceScene(new this.startScene());
         }, this);
 
-        var qcode = 2;
-
         return true;
-    },
-
-    startGame:function(){
-
     }
-
 });
 
 var myApp = new Application(MyGameScene);

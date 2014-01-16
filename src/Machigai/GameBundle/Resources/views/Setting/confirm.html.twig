@@ -6,8 +6,43 @@
 <img src="{{asset('/bundles/machigaigame/images/parts/header_nicknamechange_check.png')}}" width="100%" />
 <section>
  <p style="padding:1em 2em;text-align:left;">下記の内容でよろしければ、登録ボタンを押してください。</p>
+ <p style="padding:2%">ニックネーム</p>
+ <br />
+ <font color="blue">{{ form.vars['value']['nickname']}}</font>
+ <br />	
+ <div style="padding:3%">
  {{ form(form) }}
+</div>
+<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" style="width:35%;align:center;" onclick="changeImage(this.id);modifyNickname()">
+<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_regist_off.png')}}" style="width:35%;align:center;" onclick="changeImage(this.id);submitNickname()">
 </section>
+<script>
+var image_path = null;
+var image_id = null;
+$(function(){
+	$('#form_register').hide();
+	$('#form_ammend').hide();
+})
+function changeImage(imageId){
+	var pre_src = $('#'+imageId).attr('src');
+	var src = pre_src.replace(/_off/g,'');
+	image_path = src;
+	image_id = imageId;
+	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
+}
+function originalImage(){
+	var pre_src = $('#'+image_id).attr('src');
+	var src = image_path.replace(/.png/g,'_off.png');
+	$('#'+image_id).attr("src",src);
+}
+function submitNickname(){
+	$('#form_register').trigger('click');
+}
+function modifyNickname(){
+	$('#form_ammend').trigger('click');
+}
+</script>
 {% endblock %}
 
 {% block footer %}{% endblock %}
