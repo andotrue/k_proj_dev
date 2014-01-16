@@ -61,7 +61,11 @@ function originalImage(){
  </section>
  <section id="news" class="top_bg">
   <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
-  <p style="color:rgb(255,254,255);padding:1%">テキストテキストテキストテキス トテキストテキストテキストテキストテキストテキストテキスト</p>
+  <div class="news" style="color:rgb(255,254,255);margin-left:25%;margin-right:25%">
+  {% for i in 0..2 %}
+   <p style="text-align:left">{{news[i].getTitle}}<br />{{news[i].getDescription|raw}}</p><br />
+  {% endfor %} 
+  </div>
 <div class="pre_pass white">
 <p style="font-size:2em"><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
 </div>
