@@ -1,5 +1,6 @@
 var BaseLayer = cc.Layer.extend({
-
+    illusts: null,
+    slider: null,
     _parent: null,
     ctor:function () {
         this._super();
@@ -11,12 +12,18 @@ var BaseLayer = cc.Layer.extend({
     init:function () {
         var bRet = false;
         if (this._super()) {
+            this.illusts = new IllustLayer();
+            this.addChild(this.illusts,0);
+
+
             var Header = cc.Sprite.create( gsDir + "background/header.png");
             var Footer = cc.Sprite.create( gsDir + "background/footer.png");
             this.addChild(Header);
             this.addChild(Footer);
-            Header.setPosition(426,1242);
-            Footer.setPosition(426,38);
+            Header.setAnchorPoint(1, 1);
+            Header.setPosition(720,1280);
+            Footer.setAnchorPoint(0.0,0.0);
+            Footer.setPosition(0,0);
 
             var LabelOtetsuki = cc.Sprite.create( gsDir + "label/otetsuki.png" );
             var LabelMachigai = cc.Sprite.create( gsDir + "label/machigai.png" );
@@ -47,40 +54,46 @@ var BaseLayer = cc.Layer.extend({
             LabelTimelimit.setPosition(100,1260);
 
 
-            var clock = new ClockLayer();
-            this.addChild(clock,15);
+            this.clock = new Clock();
+            this.addChild(this.clock,15);
 
+            this.slider = new Slider();
+            this.addChild(this.slider,18);
 
-            var popupHint = cc.MenuItemImage.create(
-                bd+"res/game_scene/button/icon_hint.png",
-                bd+"res/game_scene/button/icon_hint.png",
-                this.menuCallBack.bind(this)
-            );
-            popupHint.setPosition(506, 50);
-            popupHint.name = "HINT";
+            this.initMenu();
 
-            var popupSave = cc.MenuItemImage.create(
-                bd+"res/game_scene/button/icon_save.png",
-                bd+"res/game_scene/button/icon_save.png",
-                this.menuCallBack.bind(this)
-            );
-            popupSave.setPosition(667, 50);
-            popupSave.name = "SAVE";
-
-            var popupGiveup = cc.MenuItemImage.create(
-                bd+"res/game_scene/button/icon_giveup.png",
-                bd+"res/game_scene/button/icon_giveup.png",
-                this.menuCallBack.bind(this)
-            );
-            popupGiveup.setPosition(586, 50);
-            popupGiveup.name = "GIVEUP";
-
-            var menu = cc.Menu.create([popupHint,popupSave,popupGiveup]);
-            menu.setPosition(0,0);
-            this.addChild(menu);
             bRet = true;
         }
         return bRet;
+    },
+    initMenu:function(){
+        var popupHint = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/icon_hint.png",
+            bd+"res/game_scene/button/icon_hint.png",
+            this.menuCallBack.bind(this)
+        );
+        popupHint.setPosition(506, 50);
+        popupHint.name = "HINT";
+
+        var popupSave = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/icon_save.png",
+            bd+"res/game_scene/button/icon_save.png",
+            this.menuCallBack.bind(this)
+        );
+        popupSave.setPosition(667, 50);
+        popupSave.name = "SAVE";
+
+        var popupGiveup = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/icon_giveup.png",
+            bd+"res/game_scene/button/icon_giveup.png",
+            this.menuCallBack.bind(this)
+        );
+        popupGiveup.setPosition(586, 50);
+        popupGiveup.name = "GIVEUP";
+
+        var menu = cc.Menu.create([popupHint,popupSave,popupGiveup]);
+        menu.setPosition(0,0);
+        this.addChild(menu);
     },
     menuCallBack:function(sender){
         var popup = new PopupLayer();
@@ -89,9 +102,22 @@ var BaseLayer = cc.Layer.extend({
 
 //        cc.Director.getInstance().replaceScene(cc.TransitionSlideInT.create(0.4, nextScene));
     },
+    onTouchesBegan: function(touches, event){
+        cc.log('onTouchesBegan:' + touches.length);
+        this.onTouchBegan(touches[0], event);
+    },
+    onTouchesMoved: function(touches, event){
+        cc.log('onTouchesMoved' + touches.length);
+        this.onTouchMoved(touches[0], event);
+    },
+    onTouchesEnded: function(touches, event){
+        cc.log('onTouchesMoved' + touches.length);
+        this.onTouchEnded(touches[0], event);
+    },
     onTouchBegan:function (touch, event) {
-        cc.log("Base.onTouchBegan event should be handled.");
-        return false;
+        cc.log("Base.onTouchBegan: ( " + touch.getLocation().x + ", " + touch.getLocation().y + " )");
+        this.touchedFrom = touch.getLocation();
+        return true;
     },
 
     /**
@@ -100,8 +126,13 @@ var BaseLayer = cc.Layer.extend({
      * @param {event} event
      */
     onTouchMoved:function (touch, event) {
-        cc.log("Base.onTouchMoved event should be handled.");
-        return false;
+        cc.log("Base.onTouchMoved ( " + touch.getLocation().x + ", " + touch.getLocation().y + " )");
+        this.touchedTo = touch.getLocation();
+        var dx = this.touchedTo.x - this.touchedFrom.x;
+        var dy = this.touchedTo.y - this.touchedFrom.y;
+        this.illusts.move(dx, dy);
+        this.touchedFrom = this.touchedTo;
+        return true;
     },
 
     /**
@@ -110,10 +141,10 @@ var BaseLayer = cc.Layer.extend({
      * @param {event} event
      */
     onTouchEnded:function (touch, event) {
-        cc.log("Base.onTouchEnded event should be handled.");
+        cc.log("Base.onTouchEnded ( " + touch.getLocation().x + ", " + touch.getLocation().y + " )");
         cc.log("Delegate Event to objects.");
 
-        return false;
+        return true;
     },
 
     onEnter:function () {
@@ -129,5 +160,8 @@ var BaseLayer = cc.Layer.extend({
         cc.unregisterTouchDelegate(this);
         this._parent = null;
         this._super();
+    },
+    checkInside:function(position){
+
     }
 });

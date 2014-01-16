@@ -1,4 +1,4 @@
-var ClockLayer = cc.LayerGradient.extend({
+var Clock = cc.LayerGradient.extend({
     ctor:function () {
         this._super();
         this.init();

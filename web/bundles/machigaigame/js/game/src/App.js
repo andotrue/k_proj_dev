@@ -8,17 +8,12 @@ var MyGameScene = cc.Scene.extend({
 //        spriteFrameCache.addSpriteFrames("res/baseResource.plist","res/baseResource.png");
 
         var baseLayer = new BaseLayer();
-//        baseLayer.setParent(this);
         this.addChild(baseLayer,10);
 
-        var illustLayer = new IllustLayer();
-        this.addChild(illustLayer,0);
 
         var popupLayer = new PopupLayer();
-        this.addChild(popupLayer,30);
-
-        var slider = new Slider();
-        this.addChild(popupLayer,25);
+        popupLayer.init("PLAY");
+        this.addChild(popupLayer,20);
 
 
 //        gSharedEngine.setMusicVolume(1);

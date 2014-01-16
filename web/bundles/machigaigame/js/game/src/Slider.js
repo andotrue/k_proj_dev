@@ -1,4 +1,4 @@
-var Slider = cc.LayerGradient.extend({
+var Slider = cc.Layer.extend({
     ctor:function () {
         cc.log("Slider.ctor");
         this._super();
@@ -10,38 +10,27 @@ var Slider = cc.LayerGradient.extend({
         if (this._super()) {
             this.initSelf();
 
+            this.setAnchorPoint(0,0);
             var slidebar = cc.Sprite.create( gsDir + "other/slidebar.png" );
             var slideicon = cc.Sprite.create( gsDir + "other/slideicon.png" );
             this.addChild(slidebar);
             this.addChild(slideicon);
-            slidebar.setPosition(50,50);
-            slideicon.setPosition(50,50);
-/*            Slidebar.setPosition(307,44);
-            Slidebar.setScaleX(0.75);
-            Slideicon.setPosition(360,44);
-            Slideicon.setScaleX(0.90);
-*/        }
+            slidebar.setPosition(250,125);
+            slidebar.setScaleX(0.75);
+            slideicon.setPosition(250,125);
+            slideicon.setScaleX(0.75);
+        }
         return bRet;
     },
     initSelf:function(){
-
-		this.setContentSize(cc.size(240,50));
-        this.setStartColor(cc.c3b(255,0,0));
-        this.setEndColor(cc.c3b(255,0,255));
-        this.setStartOpacity(255);
-        this.setEndOpacity(255);
-        var blend =  new cc.BlendFunc();
-        blend.src = cc.GL_SRC_ALPHA;
-        blend.dst = cc.GL_ONE_MINUS_SRC_ALPHA;
-        this.setBlendFunc(blend);
-
-        this.setPosition(360,160);
+        this.setPosition(0,0);
         cc.log("slider.initSelf");
     },
   
     onTouchBegan:function (touch, event) {
-        cc.log("Slider.onTouchBegan event should be handled.");
-        return true;
+        cc.log("Slider.onTouchBegan: ( " + touch.getLocation().x + ", " + touch.getLocation().y + " )");
+        this.touchedFrom = touch.getLocation();
+        return false;
     },
 
     /**
@@ -50,8 +39,13 @@ var Slider = cc.LayerGradient.extend({
      * @param {event} event
      */
     onTouchMoved:function (touch, event) {
-        cc.log("Slider.onTouchMoved event should be handled.");
-        return true;
+        cc.log("Slider.onTouchMoved ( " + touch.getLocation().x + ", " + touch.getLocation().y + " )");
+        this.touchedTo = touch.getLocation();
+        var dx = this.touchedTo.x - this.touchedFrom.x;
+        var dy = this.touchedTo.y - this.touchedFrom.y;
+        this.illusts.move(dx, dy);
+        this.touchedFrom = this.touchedTo;
+        return false;
     },
 
     /**
@@ -60,8 +54,8 @@ var Slider = cc.LayerGradient.extend({
      * @param {event} event
      */
     onTouchEnded:function (touch, event) {
-        cc.log("Slider.onTouchEnded event should be handled.");
-        return true;
+        cc.log("Slider.onTouchEnded ( " + touch.getLocation().x + ", " + touch.getLocation().y + " )");
+        return false;
     },
 
     onEnter:function () {

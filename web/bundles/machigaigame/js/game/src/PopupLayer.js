@@ -62,7 +62,7 @@ var PopupLayer = cc.Layer.extend({
      * @return {Boolean}
      */
     onTouchBegan:function (touch, event) {
-        cc.log("onTouchBegan event should be handled.");
+        cc.log("Popup.onTouchBegan");
         return true;
     },
 
@@ -72,7 +72,7 @@ var PopupLayer = cc.Layer.extend({
      * @param {event} event
      */
     onTouchMoved:function (touch, event) {
-        cc.log("onTouchMoved event should be handled.");
+        cc.log("Popup.onTouchMoved");
         return true;
     },
 
@@ -82,8 +82,8 @@ var PopupLayer = cc.Layer.extend({
      * @param {event} event
      */
     onTouchEnded:function (touch, event) {
-        cc.log("onTouchEnded event should be handled.");
-        if (this.state =="LOADING")
+        cc.log("Popup.onTouchEnded");
+        if (this.state =="PLAY")
             this.removeFromParent();
         return true;
     },
