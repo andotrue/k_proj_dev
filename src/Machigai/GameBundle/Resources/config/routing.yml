@@ -64,6 +64,12 @@ Setting:
     requirements: 
         _method: GET
 
+JsonUpload:
+    pattern:  /game/uploadData
+    defaults: { _controller: MachigaiGameBundle:Game:uploadData }
+    requirements:
+        _method: POST
+
 SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }

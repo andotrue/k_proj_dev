@@ -5,6 +5,7 @@ namespace Machigai\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class GameController extends BaseController
 {
@@ -140,8 +141,41 @@ class GameController extends BaseController
     {
 	return $this->render('MachigaiGameBundle:Game:fail.html.twig');	
     }
-    public function uploadData(){
+    public function uploadDataAction(){
+        $request = $this->get('request');
+        $data=$request->request->get('playInfo');
+
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $questionId = "???";// enter the question_id the user just played
+        $playHistory = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT p from MachigaiGameBundle:Playhistory p
+                                    where userId = :user and questionId = :id')
+                ->setParameter('user', $userId)
+                ->setParameter('id', $questionId())
+                ->getResult();
+        if(empty($playHistory)){
+            $em = $this->getDoctrine()->getEntityManager();
+            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->findBy('userId'=>$userId);
+            $playHistory->setPlayInfo($data);
+            $em->flush();
+        }else{
+            $playHistoryId = $playHistory->getId();
+            $em = $this->getDoctrine()->getEntityManager();
+            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($playHistoryId);
+            $playHistory->setPlayInfo($data);
+            $em->flush();
+        }
+    /* 参考
+    http://symfony2forum.org/threads/5-Using-Symfony2-jQuery-and-Ajax
+    */
     }
     public function downloadData(){
+        // create a simple Response with a 200 status code (the default)
+        $response = new Response('Hello '.$name, Response::HTTP_OK);
+        // create a JSON-response with a 200 status code
+        $response = new Response(json_encode(array('name' => $name)));
+        $response->headers->set('Content-Type', 'application/json');
     }
 }

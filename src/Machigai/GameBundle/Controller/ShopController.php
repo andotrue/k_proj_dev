@@ -118,5 +118,5 @@ class ShopController extends BaseController
         $response = new BinaryFileResponse($file);
         $response->headers->set('Content-Type', 'image/png');
         return  $response->send();
-*/      }  
+*/      }
 }
