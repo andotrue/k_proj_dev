@@ -3,15 +3,15 @@
 {% for item in items %}
 {% if item.category.categoryCode == 1 %}
    <li class="wallpaper1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
-    <img src="{{ asset('/bundles/machigaigame/images/wallpaper/sample.png')  }}" width="15%" style="text-align:middle;width:80px;height:80px;"/>
+    <img src="{{ asset('/bundles/machigaigame/images/wallpaper/sample.png')  }}" width="15%" style="text-align:middle;width:10%;height:10%;"/>
     <div style="display:inline-block;width:55%; ">
 	<p style="text-align:left;">
-  <span class="title">
-  {{item.getName}}  
-  </span>
+  <p style="font-size:1.2em">
+    {{item.getName}}
+  </p>
   <div style="font-size:0.8em">
-	   <span class="description">{{item.getDescription}}<br /></span>
-           <span class="updated_at">{{item.getCreatedAt|date('Y/m/d')}} UP!</span>
+	  <span class="description">{{item.getDescription}}<br /></span>
+    <span class="updated_at">{{item.getCreatedAt|date('Y/m/d')}} UP!</span>
   </div>
 	</p>
     </div>
@@ -20,14 +20,14 @@
   {% if date(item.getCreatedAt) > date('-7days') %}
   <img src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
   {% endif %}
-	{{item.getConsumePoint}}pt<br />
+  <p style="font-size:1.1em">{{item.getConsumePoint}}pt</p><br />
   <span class="detail">
 {% if item.getId in purchasedItems %}
 <a href="{{ path('confirm',{"id":item.getId}) }}">
-  <img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
+  <img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="80%" onclick="changeImage(this.id);"/>
 </a>
 {% else %}
-  <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopbuy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+  <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopbuy_off.png') }}" width="80%" onclick="changeImage(this.id);"/></a>
 {% endif %}
   </span>
   </div>

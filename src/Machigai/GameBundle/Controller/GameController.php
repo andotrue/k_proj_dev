@@ -27,7 +27,7 @@ class GameController extends BaseController
     }
     public function sortQuestionsAction($sort){
         $user = $this->getUser();
-        $userId = $user->getId();
+        if($user!=null){$userId = $user->getId();};
         $histories = null;
   
         $questions = $this->getDoctrine()
@@ -42,37 +42,47 @@ class GameController extends BaseController
                 ->findBy(array(),array('createdAt'=>$sort));
                 break;
             case 'suspended':
-                $pre_histories = $this->getDoctrine()
-                ->getRepository('MachigaiGameBundle:PlayHistory')
-                ->getSuspended($userId);
+                if($user==null){
+                    $histories = array();
+                    break;
+                }else{
+                    $pre_histories = $this->getDoctrine()
+                    ->getRepository('MachigaiGameBundle:PlayHistory')
+                    ->getSuspended($userId);
 
-                $histories = $this->getDoctrine()
-                ->getEntityManager()
-                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p 
-                                    left join  p.question q 
-                                    left join p.user u 
-                                    where u.id = :id and p.gameStatus = 3 
-                                    order by q.id asc')
-                ->setParameter('id', $user->getId())
-                ->getResult();
-                break;
+                    $histories = $this->getDoctrine()
+                    ->getEntityManager()
+                    ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p 
+                                        left join  p.question q 
+                                        left join p.user u 
+                                        where u.id = :id and p.gameStatus = 3 
+                                        order by q.id asc')
+                    ->setParameter('id', $user->getId())
+                    ->getResult();
+                    break;
+                }
             case 'notCleared':
-                $pre_histories = $this->getDoctrine()
-                ->getRepository('MachigaiGameBundle:PlayHistory')
-                ->getNotCleared($userId);
+                if($user==null){
+                    $histories = array();
+                    break;
+                }else{
+                    $pre_histories = $this->getDoctrine()
+                    ->getRepository('MachigaiGameBundle:PlayHistory')
+                    ->getNotCleared($userId);
 
-                $histories = $this->getDoctrine()
-                ->getEntityManager()
-                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p 
-                                    left join  p.question q 
-                                    left join p.user u 
-                                    where u.id = :id and p.gameStatus = 2 
-                                    order by q.id asc')
-                ->setParameter('id', $user->getId())
-                ->getResult();
-                break;
-            default:
-                break;
+                    $histories = $this->getDoctrine()
+                    ->getEntityManager()
+                    ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p 
+                                        left join  p.question q 
+                                        left join p.user u 
+                                        where u.id = :id and p.gameStatus = 2 
+                                        order by q.id asc')
+                    ->setParameter('id', $user->getId())
+                    ->getResult();
+                    break;
+                }
+                default:
+                    break;
         }
         $list = $this->makeList($histories);
         return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));
@@ -130,5 +140,8 @@ class GameController extends BaseController
     {
 	return $this->render('MachigaiGameBundle:Game:fail.html.twig');	
     }
-
+    public function uploadData(){
+    }
+    public function downloadData(){
+    }
 }

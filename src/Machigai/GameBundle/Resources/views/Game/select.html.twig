@@ -169,11 +169,18 @@ $(function() {
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_mondaiselect.png')  }}" width="100%"/>
 <div id="level_tab" style="padding-top:5%;"><img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("easy");'/><img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("normal")'><img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("hard");'/></div>
 <section id="select_area" style="background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }}); background-repeat:no-repeat; background-size:cover;">
-<div id="order_header" style="text-align:right;padding-bottom:0.7em;padding-top:0.7em;"><span style="padding-right:0.5em;">並べ替え</span><select id="sortSelect" onchange="sortSelect()"><option selected="selected" value=""></option><option value="1">古い順</option><option value="2">新しい順</option><option value="3">未クリア問題</option><option value="4">中断問題</option></select></div>
+
+
+<div id="order_header" style="text-align:right;padding-bottom:0.7em;padding-top:0.7em;">
+<div id="selectBox" style="position:relative;top:23%;left:30%;width:50%;height:2em;">
+<img style="position:absolute;left:75%;top:0;width:50%;height:40%" src="{{ asset('/bundles/machigaigame/images/parts/game_sort.png')}}">
+<span style="position:relative;left:-40%;">並べ替え</span><select style="position:absolute;left:75%;top:0%;opacity:0;width:50%;height:40%" id="sortSelect" onchange="sortSelect()"><option selected="selected" value=""></option><option value="1">古い順</option><option value="2">新しい順</option><option value="3">未クリア問題</option><option value="4">中断問題</option></select>
+</div>
+</div>
 
 
 
-<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
+<nav style="padding-top:10%"><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
 <li class="easy"></li><li class="normal"></li><li class="hard"></li>
 {% if histories is  null %}
 <div id="questions">
@@ -303,7 +310,7 @@ $(function() {
 </section>
 
 <nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span> <a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
-<p style="font-size:2em; padding:2%;">
+<p style="font-size:1em; padding:2%;">
 ランキングへの反映は初回挑戦分のみとなります。<br />
 中断問題、複数回クリアされた問題はランキング対象になりませんのでご注意ください。
 </p>

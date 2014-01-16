@@ -1,14 +1,14 @@
-<div style="font-size:1.5em;">
+<div style="font-size:0.8em;">
 <ul class="panel" style="padding-top:0.8%; ">
 {% for item in items %}
 {% if item.category.categoryCode == 2 %}
    <li class="item1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
-    <img src="{{ asset('/bundles/machigaigame/images/stamp/sample.png')  }}" width="15%" style="text-align:middle;width:80px;height:80px;"/>
+    <img src="{{ asset('/bundles/machigaigame/images/stamp/sample.png')  }}" width="15%" style="text-align:middle;width:10%;height:10%;"/>
     <div style="display:inline-block;width:55%;">
 	<p style="text-align:left;"><span class="title">
-    <font size="5">
+    <p style="font-size:1.2em">
     {{item.getName}}
-  </font>
+  </p>
   </span>
   <div style="font-size:0.8em">
 	 <span class="description">{{item.getDescription}}</br></span>
@@ -21,14 +21,14 @@
   {% if date(item.getCreatedAt) > date('-7days') %}
     <img src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
     {% endif %}
-	<font size="5">{{item.getConsumePoint}}pt</font><br />
+	<p style="font-size:1.1em">{{item.getConsumePoint}}pt</p><br />
   <span class="detail">
 {% if item.getId in purchasedItems %}
 <a href="{{ path('confirm',{"id":item.getId}) }}">
-  <img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
+  <img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="80%" onclick="changeImage(this.id);"/>
 </a>
 {% else %}
-  <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopbuy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+  <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopbuy_off.png') }}" width="80%" onclick="changeImage(this.id);"/></a>
 {% endif %}
   </span>
     </div>
