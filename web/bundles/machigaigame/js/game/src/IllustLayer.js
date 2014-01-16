@@ -17,8 +17,8 @@ var IllustLayer = cc.Layer.extend({
             this.addChild(Ok);
 
             //Positionの設定
-            MondaiArea.setPosition(640,960);
-            MondaiArea.setScaleY(3.8);
+            MondaiArea.setPosition(360,680);
+            MondaiArea.setScaleY(1);
             Ng.setPosition(640,960);
             Ok.setPosition(640,960);
 

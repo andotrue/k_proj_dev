@@ -1,8 +1,12 @@
 var BaseLayer = cc.Layer.extend({
 
+    _parent: null,
     ctor:function () {
         this._super();
         this.init();
+    },
+    setParent:function(parent){
+        this._parent = parent;
     },
     init:function () {
         var bRet = false;
@@ -13,10 +17,6 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(Footer);
             Header.setPosition(426,1242);
             Footer.setPosition(426,38);
-
-            var IconGiveup = cc.Sprite.create( gsDir + "button/icon_giveup.png" );
-            var IconHint = cc.Sprite.create( gsDir + "button/icon_hint.png" );
-            var IconSave = cc.Sprite.create( gsDir + "button/icon_save.png" );
 
             var LabelOtetsuki = cc.Sprite.create( gsDir + "label/otetsuki.png" );
             var LabelMachigai = cc.Sprite.create( gsDir + "label/machigai.png" );
@@ -37,61 +37,97 @@ var BaseLayer = cc.Layer.extend({
 //                off.setOpacity(0);
             }
            
-            var Slidebar = cc.Sprite.create( gsDir + "other/slidebar.png" );
-            var Slideicon = cc.Sprite.create( gsDir + "other/slideicon.png" );
-
             //Layerの子要素に。
-
-            this.addChild(IconGiveup);
-            this.addChild(IconHint);
-            this.addChild(IconSave);
-
             this.addChild(LabelOtetsuki);
             this.addChild(LabelMachigai);
             this.addChild(LabelTimelimit);
 
-            this.addChild(Slidebar);
-            this.addChild(Slideicon);
-
-
-            IconGiveup.setPosition(506,44);
-            IconHint.setPosition(586,44);
-            IconSave.setPosition(667,44);
-            
             LabelOtetsuki.setPosition(350,1256);
             LabelMachigai.setPosition(350,1216);
             LabelTimelimit.setPosition(100,1260);
 
-            Slidebar.setPosition(307,44);
-            Slidebar.setScaleX(0.75);
-            Slideicon.setPosition(360,44);
-            Slideicon.setScaleX(0.90);
 
             var clock = new ClockLayer();
             this.addChild(clock,15);
 
-/*
-            var popupGameStart = cc.MenuItemImage.create(
-                bd+"res/game_scene/popup/gamestart.png",
-                this.menuCallBack,
-                this
-            );
-            popupGameStart.setPosition(640, 960);
 
-            var menu = cc.Menu.create(popupGameStart);
+            var popupHint = cc.MenuItemImage.create(
+                bd+"res/game_scene/button/icon_hint.png",
+                bd+"res/game_scene/button/icon_hint.png",
+                this.menuCallBack.bind(this)
+            );
+            popupHint.setPosition(506, 50);
+            popupHint.name = "HINT";
+
+            var popupSave = cc.MenuItemImage.create(
+                bd+"res/game_scene/button/icon_save.png",
+                bd+"res/game_scene/button/icon_save.png",
+                this.menuCallBack.bind(this)
+            );
+            popupSave.setPosition(667, 50);
+            popupSave.name = "SAVE";
+
+            var popupGiveup = cc.MenuItemImage.create(
+                bd+"res/game_scene/button/icon_giveup.png",
+                bd+"res/game_scene/button/icon_giveup.png",
+                this.menuCallBack.bind(this)
+            );
+            popupGiveup.setPosition(586, 50);
+            popupGiveup.name = "GIVEUP";
+
+            var menu = cc.Menu.create([popupHint,popupSave,popupGiveup]);
             menu.setPosition(0,0);
             this.addChild(menu);
             bRet = true;
-  */      }
+        }
         return bRet;
     },
     menuCallBack:function(sender){
-//        gSharedEngine.playEffect(EFFECT_BUTTON_CHICK);
-        //gGameMode = eGameMode.Challenge;
-  //      gGameMode = eGameMode.Timer;
-//        var nextScene = cc.Scene.create();
-//        var nextLayer = new PatternMatrix;
-//        nextScene.addChild(nextLayer);
+        var popup = new PopupLayer();
+        popup.init(sender.name);
+        this.addChild(popup);
+
 //        cc.Director.getInstance().replaceScene(cc.TransitionSlideInT.create(0.4, nextScene));
+    },
+    onTouchBegan:function (touch, event) {
+        cc.log("Base.onTouchBegan event should be handled.");
+        return true;
+    },
+
+    /**
+     * callback when a touch event moved
+     * @param {cc.Touch} touch
+     * @param {event} event
+     */
+    onTouchMoved:function (touch, event) {
+        cc.log("Base.onTouchMoved event should be handled.");
+        return true;
+    },
+
+    /**
+     * callback when a touch event finished
+     * @param {cc.Touch} touch
+     * @param {event} event
+     */
+    onTouchEnded:function (touch, event) {
+        cc.log("Base.onTouchEnded event should be handled.");
+        cc.log("Delegate Event to objects.");
+
+        return true;
+    },
+
+    onEnter:function () {
+        cc.log("Base.onEnter");
+       if(sys.platform == "browser")
+            cc.registerTargetedDelegate(2, true, this);
+        else
+            cc.registerTargettedDelegate(2,true,this);
+        this._super();
+    },
+    onExit:function () {
+        cc.log("Base.onExit");
+        cc.unregisterTouchDelegate(this);
+        this._parent = null;
+        this._super();
     }
 });

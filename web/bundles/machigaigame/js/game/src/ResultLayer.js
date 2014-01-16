@@ -12,8 +12,6 @@ var ResultLayer = cc.Layer.extend({
             //Layerの子要素に。
             this.addChild(Header);
 
-
-
             this.addChild(LabelOtetsuki);
 
             this.addChild(Slideicon);

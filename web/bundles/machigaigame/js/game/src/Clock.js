@@ -59,5 +59,6 @@ var ClockLayer = cc.LayerGradient.extend({
 			this.reservedDigits[i] = target;
 			target.setPosition( left, this.digitHeight *0.6);
 		}
-    }
+    },
+
 });
