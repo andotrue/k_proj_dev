@@ -91,7 +91,7 @@ var BaseLayer = cc.Layer.extend({
     },
     onTouchBegan:function (touch, event) {
         cc.log("Base.onTouchBegan event should be handled.");
-        return true;
+        return false;
     },
 
     /**
@@ -101,7 +101,7 @@ var BaseLayer = cc.Layer.extend({
      */
     onTouchMoved:function (touch, event) {
         cc.log("Base.onTouchMoved event should be handled.");
-        return true;
+        return false;
     },
 
     /**
@@ -113,7 +113,7 @@ var BaseLayer = cc.Layer.extend({
         cc.log("Base.onTouchEnded event should be handled.");
         cc.log("Delegate Event to objects.");
 
-        return true;
+        return false;
     },
 
     onEnter:function () {
