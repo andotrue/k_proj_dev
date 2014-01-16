@@ -48,7 +48,6 @@ function gameStart(){
 	window.location = "/machigai/app_dev.php/game/play/"+game_id;
 }
 function cancel(){
-	originalImage();
 	$('#popup').hide();
 	$('#popup_continue').hide();
 }
@@ -89,6 +88,7 @@ function changeImage(imageId){
 	image_path = src;
 	image_id = imageId;
 	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
 }
 function originalImage(){
 	var pre_src = $('#'+image_id).attr('src');
@@ -162,7 +162,7 @@ $(function() {
 <p style="position:absolute;top:50%;left:20%;margin-top:36%;padding:5%;width:50%;font-size:2em">※「はじめから遊ぶ」を選択すると中断データは削除されます。</p>
 </div>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_mondaiselect.png')  }}" width="100%"/>
-<div id="level_tab" style="padding-top:5%;"><img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy.png') }}" width="30%" onclick='changeLevel("easy");'/><img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick='changeLevel("normal")'><img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick='changeLevel("hard");'/></div>
+<div id="level_tab" style="padding-top:5%;"><img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("easy");'/><img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("normal")'><img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("hard");'/></div>
 <section id="select_area" style="background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }}); background-repeat:no-repeat; background-size:cover;">
 <div id="order_header" style="text-align:right;padding-bottom:0.7em;padding-top:0.7em;"><span style="padding-right:0.5em;">並べ替え</span><select id="sortSelect" onchange="sortSelect()"><option selected="selected" value=""></option><option value="1">古い順</option><option value="2">新しい順</option><option value="3">未クリア問題</option><option value="4">中断問題</option></select></div>
 
