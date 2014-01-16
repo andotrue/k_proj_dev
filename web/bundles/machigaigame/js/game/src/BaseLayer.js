@@ -25,15 +25,15 @@ var BaseLayer = cc.Layer.extend({
             Footer.setAnchorPoint(0.0,0.0);
             Footer.setPosition(0,0);
 
-            var LabelOtetsuki = cc.Sprite.create( gsDir + "label/otetsuki.png" );
-            var LabelMachigai = cc.Sprite.create( gsDir + "label/machigai.png" );
-            var LabelTimelimit = cc.Sprite.create( gsDir + "label/timelimit.png" );
+            var LabelOtetsuki = cc.Sprite.create( gsDir + "label/game_otetsuki.png" );
+            var LabelMachigai = cc.Sprite.create( gsDir + "label/game_machigai.png" );
+            var LabelTimelimit = cc.Sprite.create( gsDir + "label/game_timelimit.png" );
 
             var stars = [];
             var hearts = [];
             for (var i = 0; i < 10; i++) {
-                var star  = cc.Sprite.create( gsDir + "other/star_off.png" );
-                var heart = cc.Sprite.create( gsDir + "other/heart_on.png" );
+                var star  = cc.Sprite.create( gsDir + "other/game_star_off.png" );
+                var heart = cc.Sprite.create( gsDir + "other/game_heart_on.png" );
                 hearts.push(heart);
                 stars.push(star);
                 this.addChild(heart);
@@ -68,24 +68,24 @@ var BaseLayer = cc.Layer.extend({
     },
     initMenu:function(){
         var popupHint = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/icon_hint.png",
-            bd+"res/game_scene/button/icon_hint.png",
+            bd+"res/game_scene/button/game_icon_hint.png",
+            bd+"res/game_scene/button/game_icon_hint.png",
             this.menuCallBack.bind(this)
         );
         popupHint.setPosition(506, 50);
         popupHint.name = "HINT";
 
         var popupSave = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/icon_save.png",
-            bd+"res/game_scene/button/icon_save.png",
+            bd+"res/game_scene/button/game_icon_save.png",
+            bd+"res/game_scene/button/game_icon_save.png",
             this.menuCallBack.bind(this)
         );
         popupSave.setPosition(667, 50);
         popupSave.name = "SAVE";
 
         var popupGiveup = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/icon_giveup.png",
-            bd+"res/game_scene/button/icon_giveup.png",
+            bd+"res/game_scene/button/game_icon_giveup.png",
+            bd+"res/game_scene/button/game_icon_giveup.png",
             this.menuCallBack.bind(this)
         );
         popupGiveup.setPosition(586, 50);
