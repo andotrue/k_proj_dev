@@ -112,10 +112,6 @@ class Question
      */
     protected $playHistories;
 
-    public function __construct()
-    {
-			$this->playHistories =new ArrayCollection();
-    }
 
 
     /**
@@ -416,6 +412,18 @@ class Question
     }
 
     /**
+     * Set playHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistories
+     * @return Question
+     */
+    public function setPlayHistories(\Machigai\GameBundle\Entity\PlayHistory $playHistories = null)
+    {
+        $this->playHistories = $playHistories;
+
+        return $this;
+    }
+    /*
      * Set isDelete
      *
      * @param boolean $isDelete

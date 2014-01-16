@@ -26,13 +26,13 @@ class User
      * @var string
      * @ORM\Column(name="au_id", type="string", length=32)
      */
-    public $auId;
+    private $auId;
 
     /**
      * @var string
      * @ORM\Column(name="sync_token", type="string", length=255)
      */
-    public $syncToken;
+    private $syncToken;
 
     /**
      * @var string

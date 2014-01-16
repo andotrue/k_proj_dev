@@ -22,7 +22,7 @@
 また、ニックネームはTOP画面の「ヘルプ」→「設定」から変更することができます。</p>
 <input type="submit" id="submitButton">
   {{ form_widget (form.confirm) }}
- {{ form_end (form, {'attr':{'id':'submitEnd'}}) }}
+<div id="submitEnd">{{ form_end (form) }}</div>
 </section>
 </div>
 <script>
