@@ -41,12 +41,20 @@ class SettingController extends BaseController
     }
    
     public function nicknameRegisterAction(){
+    $nickname = new User();
 	$request = $this->getRequest();
         $form = $this->createFormBuilder()
-		 ->add('nickname')
+         ->setMethod('GET')
+		 ->add('nickname','text')
 		 ->add('register', 'submit')
 		 ->getForm();
-	$form->handleRequest($request);		
+	$form->handleRequest($request);
+	$nickname = $form->getData();
+    $nickname = $nickname['nickname'];
+    var_dump($nickname);
+    exit;
+//    var_dump($nickname);
+//    exit;
 	 #TODO: Deal with nickname registration.
 	if ( $form->get('register')->isClicked() && $form->isValid()){
 		return $this->redirect($this->generateUrl('SettingComplete'));

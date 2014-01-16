@@ -49,7 +49,7 @@ function popup(id,gameTitle){
 }
 
 function gameStart(){
-	window.location = "/machigai/app_dev.php/game/play/"+game_id;
+	window.location = '{{ path("GamePlay",{"id":'+game_id+'}) }}';
 }
 function cancel(){
 	$('#popup').hide();
