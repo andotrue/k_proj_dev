@@ -11,8 +11,11 @@ class DefaultController extends BaseController
     public function indexAction()
     {
         $user = $this->getUser();
+        $news = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:News')
+        ->findBy(array(),array('startedAt'=>'DESC'));
 
-        return $this->render('MachigaiGameBundle:Default:index.html.twig', array('user' => $user));
+        return $this->render('MachigaiGameBundle:Default:index.html.twig', array('user' => $user,'news'=>$news));
     }
     public function logoutAction(Request $request){
         $session = $request->getSession();

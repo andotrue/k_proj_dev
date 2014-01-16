@@ -29,15 +29,8 @@ var Application = cc.Application.extend({
             director.replaceScene(new this.startScene());
         }, this);
 
-        var qcode = 2;
-
         return true;
-    },
-
-    startGame:function(){
-
     }
-
 });
 
 var myApp = new Application(MyGameScene);

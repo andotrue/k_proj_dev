@@ -19,7 +19,7 @@ class SettingController extends BaseController
 	$request = $this->getRequest();
         $form = $this->createFormBuilder()
 		 ->setMethod('GET')
-		 ->add('nickname', 'text',array('label'=>' '))
+		 ->add('nickname', 'text',array('label'=>' ', 'attr'=>array('style'=>"margin-top:2%;font-size:2em;background-image:url(/bundles/machigaigame/images/parts/nicknametextarea.png);background-size:100% 100%; background-repeat:no-repeat;")))
 		 ->add('confirm', 'submit', array('label'=>'確認'))
 		 ->getForm();
 	$form->handleRequest($request);		
@@ -28,7 +28,8 @@ class SettingController extends BaseController
 	 $form = $this->createFormBuilder()
 		 ->setAction($this->generateUrl('SettingNicknameregister'))
 		 ->setMethod('POST')
-		 ->add('nickname','text',array('label'=>' ', 'attr'=>array('disabled'=>'disabled')))
+//		 ->add('nickname','text',array('label'=>' ', 'attr'=>array('disabled'=>'disabled')))
+		 ->add('nickname','hidden',array('label'=>' '))
 		 ->add('register', 'submit', array('label'=>'登録'))
 		 ->add('ammend','button',array('label'=>'修正', 'attr'=>array('onclick'=>'history.back()')))
 		 ->getForm();
@@ -40,17 +41,24 @@ class SettingController extends BaseController
 	}
     }
    
-    public function nicknameRegisterAction(){
+    public function nicknameRegisterAction(Request $request){
+    $nickname = new User();
 	$request = $this->getRequest();
-        $form = $this->createFormBuilder()
-		 ->add('nickname')
+    $form = $this->createFormBuilder()
+	     ->setMethod('GET')
+		 ->add('nickname','text')
 		 ->add('register', 'submit')
 		 ->getForm();
-	$form->handleRequest($request);		
-	 #TODO: Deal with nickname registration.
-	if ( $form->get('register')->isClicked() && $form->isValid()){
+	$form->bind($request);
+	$nickname = $form->getData();
+    $nickname = $nickname['nickname'];
+    $pre_userId = $this->getUser();
+    $userId = $pre_userId->getId();
+    $em = $this->getDoctrine()->getEntityManager();
+ 	$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+ 	$user->setNickName($nickname);
+ 	$em->flush();
 		return $this->redirect($this->generateUrl('SettingComplete'));
-	}
     }
    
     public function completeAction()

@@ -112,6 +112,13 @@ class Question
      */
     protected $playHistories;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="question_title", type="string", length=32)
+     */
+    private $questionTitle;
+
 
 
     /**
@@ -444,5 +451,35 @@ class Question
     public function getIsDelete()
     {
         return $this->isDelete;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->playHistories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set questionTitle
+     *
+     * @param string $questionTitle
+     * @return Question
+     */
+    public function setQuestionTitle($questionTitle)
+    {
+        $this->questionTitle = $questionTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get questionTitle
+     *
+     * @return string 
+     */
+    public function getQuestionTitle()
+    {
+        return $this->questionTitle;
     }
 }

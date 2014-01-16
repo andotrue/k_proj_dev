@@ -43,7 +43,6 @@ var IllustLayer = cc.Layer.extend({
     },
     init:function () {
         var bRet = false;
-
         if (this._super()) {
             this.qcode = "105";
             this.level = 1;
@@ -59,7 +58,6 @@ var IllustLayer = cc.Layer.extend({
             var Ng = cc.Sprite.create( gsDir + "other/ng.png" );
             var Ok = cc.Sprite.create( gsDir + "other/ok.png" );
 
-            //Layerの子要素に。
             this.addChild(Ng);
             this.addChild(Ok);
 

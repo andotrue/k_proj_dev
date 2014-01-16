@@ -34,9 +34,9 @@ var Clock = cc.LayerGradient.extend({
 		this.reservedDigits = [];
 		this.digits = {};
 		for (var i = 0; i <= 9; i++) {
-			this.digits[i] = cc.Sprite.create( gsDir + "number/number_" + i + ".png" );
+			this.digits[i] = cc.Sprite.create( gsDir + "number/game_number_" + i + ".png" );
 		}
-		var coron = cc.Sprite.create( gsDir + "number/number_coron.png" );
+		var coron = cc.Sprite.create( gsDir + "number/game_number_coron.png" );
 		this.digits[':'] = coron;
     },
     setDigits:function(timeStr){
@@ -54,7 +54,7 @@ var Clock = cc.LayerGradient.extend({
 				width = this.digitWidth;
 			}
 			left += width;
-			target = cc.Sprite.create( gsDir + "number/number_" + target_num + ".png" );
+			target = cc.Sprite.create( gsDir + "number/game_number_" + target_num + ".png" );
 			this.addChild(target);
 			this.reservedDigits[i] = target;
 			target.setPosition( left, this.digitHeight *0.6);

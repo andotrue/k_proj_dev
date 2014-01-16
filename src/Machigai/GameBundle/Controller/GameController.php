@@ -20,7 +20,7 @@ class GameController extends BaseController
                 ->getEntityManager()
                 ->createQuery('SELECT q from MachigaiGameBundle:Question q 
                                     left join  q.playHistories p 
-                                    order by p.gameStatus desc')
+                                    order by p.gameStatus desc, q.questionNumber asc')
                 ->getResult();
 
     	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));

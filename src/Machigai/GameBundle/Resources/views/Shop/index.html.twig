@@ -9,7 +9,7 @@
 現在のポイント：{{user.getCurrentPoint}} pt <br />
 <span style="padding-right:0.5em;">並べ替え</span> <select id="sortSelect" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
 </p>
-<div id="category_tab" class="bottom_blue_line" style="padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp.png') }}" width="47%" style="padding-right:2%;" onclick="change_tabs(0)" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}" width="47%" onclick="change_tabs(1)" /></div>
+<div id="category_tab" class="bottom_blue_line" style="padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp_off.png') }}" width="47%" style="padding-right:2%;" onclick="changeImage(this.id);change_tabs(0)" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami_off.png') }}" width="47%" onclick="changeImage(this.id);change_tabs(1)" /></div>
 <div id="item_area" class="bottom_blue_line" style="width: 100%;height:300px; overflow-y:scroll; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size: 100% auto; " >
 <div class="item1"></div><div class="wallpaper1"></div>
 <div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
@@ -19,12 +19,14 @@
 	<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" id="prev"/></a><span><span id="page"></span> / <span id="maxPage"></span> </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" id="next" /></a></nav>
 </section>
 <footer style="margin:3% auto 5% auto;">
-  <a href="{{path('Top')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>
+  <a href="{{path('Top')}}" style="margin-right:7%;"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
 </footer>
 
 <script>
 var page = 0;
 var current_mode = 0;
+var image_path = null;
+var image_id = null;
 $(function(){
   $('#wallpaper').hide();
 })
@@ -103,6 +105,19 @@ function change_tabs(data){
     $('#stamp').hide();
     $('#wallpaper').show();
   }
+}
+function changeImage(imageId){
+  var pre_src = $('#'+imageId).attr('src');
+  var src = pre_src.replace(/_off/g,'');
+  image_path = src;
+  image_id = imageId;
+  $('#'+imageId).attr("src",src);
+  setTimeout("originalImage();", 200);
+}
+function originalImage(){
+  var pre_src = $('#'+image_id).attr('src');
+  var src = image_path.replace(/.png/g,'_off.png');
+  $('#'+image_id).attr("src",src);
 }
 </script>
 {% endblock %}

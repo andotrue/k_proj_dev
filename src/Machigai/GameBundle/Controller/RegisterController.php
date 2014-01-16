@@ -69,16 +69,9 @@ class RegisterController extends BaseController
         $form->bind($request);
         $nickname = $form->getData();
         $nickname = $nickname['nickname'];
-//        $em = $this->getDoctrine()->getEntityManager();
         $pre_userId = $this->getUser();
         $userId = $pre_userId->getId();
-//        $user = $em->getRepository('MachigaiGameBundle:User')->findByAuId($auId)[0];
-/*        $user = $em
-            ->createQuery('SELECT u FROM MachigaiGameBundle:User u ORDER BY u.auId ASC')  
-            ->getResult();  
-        $user->setNickName($nickName);
-        $em->flush();
-*/
+
          $em = $this->getDoctrine()->getEntityManager();
          $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
          $user->setNickName($nickname);
