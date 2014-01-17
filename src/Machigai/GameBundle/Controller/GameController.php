@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class GameController extends BaseController
 {
@@ -143,21 +144,27 @@ class GameController extends BaseController
     }
     public function uploadDataAction(){
         $request = $this->get('request');
-        $data=$request->request->get('playInfo');
+        /* get data like below from view
 
+        {
+            'playInfo':playInfo text,
+            'questionId':question_id
+        }
+
+        */
+        $data=$request->request->get('playInfo');
+        $questionId = $request->request->get('questionId');
         $user = $this->getUser();
         $userId = $user->getId();
-        $questionId = "???";// enter the question_id the user just played
         $playHistory = $this->getDoctrine()
                 ->getEntityManager()
-                ->createQuery('SELECT p from MachigaiGameBundle:Playhistory p
-                                    where userId = :user and questionId = :id')
-                ->setParameter('user', $userId)
-                ->setParameter('id', $questionId())
+                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
+                                    where p.user = :user and p.question = :question')
+                ->setParameters(array('user'=>$userId,'question'=>$questionId))
                 ->getResult();
         if(empty($playHistory)){
             $em = $this->getDoctrine()->getEntityManager();
-            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->findBy('userId'=>$userId);
+            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('userId'=>$userId));
             $playHistory->setPlayInfo($data);
             $em->flush();
         }else{
@@ -171,11 +178,22 @@ class GameController extends BaseController
     http://symfony2forum.org/threads/5-Using-Symfony2-jQuery-and-Ajax
     */
     }
-    public function downloadData(){
-        // create a simple Response with a 200 status code (the default)
-        $response = new Response('Hello '.$name, Response::HTTP_OK);
-        // create a JSON-response with a 200 status code
-        $response = new Response(json_encode(array('name' => $name)));
-        $response->headers->set('Content-Type', 'application/json');
+    public function downloadDataAction(){
+        $request = $this->get('request');
+        $questionId=$request->query->get('questionId');
+
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+        $playHistory = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
+                                    where p.user = :user and p.question = :question')
+                ->setParameters(array('user'=>$userId,'question'=>$questionId))
+                ->getResult();
+
+        $playInfo = $playHistory[0]->getPlayInfo();
+        $playInfo=json_encode($playInfo);//jscon encode the array
+        return new Response($playInfo,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
     }
 }
