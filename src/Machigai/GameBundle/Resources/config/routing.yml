@@ -179,6 +179,10 @@ Login:
     pattern: /register/login
     defaults: { _controller: MachigaiGameBundle:Register:login }
 
+LoginCheck:
+    pattern: /register/loginCheck
+    defaults: { _controller: MachigaiGameBundle:Register:loginCheck }
+
 RegisterConfirm:
     pattern: /register/confirm/
     defaults: { _controller: MachigaiGameBundle:Register:confirm }
