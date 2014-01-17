@@ -1,6 +1,5 @@
 var Stars = cc.Class.extend({
-    _MAX: 10,
-    _INITIAL_VALUE: 0,
+    _MAX: null,
     _count: 0,
     _objWidth: 30,
     _objHeight: 40,
@@ -10,13 +9,13 @@ var Stars = cc.Class.extend({
     parent: null,
     _file_path_off: gsDir + "other/game_star_off.png",
     _file_path_on: gsDir + "other/game_star_on.png",
-    ctor:function(parent){
+    ctor:function(parent, machigai_limit){
         if(parent === undefined) throw("Star.ctor: parent must not be undefined!");
         this.init(parent);
     },
-    init:function(parent){
+    init:function(parent, machigai_limit){
         this.parent = parent;
-        this._count = this._INITIAL_VALUE;
+        this._MAX = machigai_limit;
         cc.log("parent._id = " + this.parent.__instance_id);
         for (var i = 0; i < this._MAX; i++) {
             this._changeSprite(i, this._file_path_off);

@@ -1,12 +1,12 @@
 //
-//	playData['']
-//  playData['limitTime']
+//
 //
 
 var Clock = cc.Layer.extend({
+	TIME_LIMIT_RATIO: 1000,
 	_initial_time_ms: 0,
 	_PLAY_INFO_TIME_DATA_NAME: "interrupts",
-	_PLAY_INFO_LIMIT_TIME_NAME: "LIMIT_TIME",
+	_PLAY_INFO_LIMIT_TIME_NAME: "TIME_LIMIT",
 	_currentDuration: 0, // milliseconds (duration, Date - Dateの形式)
 	_digitWidth: 30,
 	_digitHeight: 43,
@@ -57,21 +57,22 @@ var Clock = cc.Layer.extend({
 		this._currentDuration = this._initial_time_ms - this.getPassedDuration();
 		return this._currentDuration;
 	},
-    ctor:function (playData) {
-		if(playData === undefined) throw("Clock.ctor: playData is undefined!! ");
+    ctor:function (playInfo) {
+		if(playInfo === undefined) throw("Clock.ctor: playInfo is undefined!! ");
         this._super();
-        this.init(playData);
+        this._playInfo = playInfo;
+        this.init();
     },
-    init:function (playData) {
+    init:function () {
         var bRet = false;
         if (this._super()) {
-            this.initSelf();
-            this.initDigits();
-            this.initTimes(playData);
+            this._initSelf();
+            this._initDigits();
+            this._initTimes();
         }
         return bRet;
     },
-    initSelf:function(){
+    _initSelf:function(){
 /*		
 		this.setContentSize(cc.size(240,50));
         this.setStartColor(cc.c3b(255,0,0));
@@ -85,18 +86,21 @@ var Clock = cc.Layer.extend({
 */
         this.setPosition(30,1187);
     },
-    initTimes:function(playData){
+    _initTimes:function(){
+		cc.log("Clock._initTimes");
+		var playInfo = this._playInfo;
 		this._status = this._LOADING;
-		this._initial_time_ms = playData[this._PLAY_INFO_LIMIT_TIME_NAME];
-		if(playData[this._PLAY_INFO_TIME_DATA_NAME]!== undefined){
-			this._clockData = playData[this._PLAY_INFO_TIME_DATA_NAME];
+		cc.log("Clock._initTime: _initial_time_ms = " + playInfo.TIME_LIMIT * this.TIME_LIMIT_RATIO);
+		this._initial_time_ms = playInfo.TIME_LIMIT * this.TIME_LIMIT_RATIO ;
+		if(playInfo.playData !== undefined){
+			this._clockData = playInfo.playData;
 		}else{
 			this._clockData = [];
 		}
         this.updateDigits();
     },
 
-    initDigits:function(){
+    _initDigits:function(){
 		this.reservedDigits = [];
 		this.digits = {};
 		for (var i = 0; i <= 9; i++) {

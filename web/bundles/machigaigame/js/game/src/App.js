@@ -1,4 +1,5 @@
 var MyGameScene = cc.Scene.extend({
+    playInfo: null,
     onEnter:function () {
         this._super();
         var self = this;
@@ -6,9 +7,13 @@ var MyGameScene = cc.Scene.extend({
 
 //        var spriteFrameCache = cc.SpriteFrameCache.getInstance();
 //        spriteFrameCache.addSpriteFrames("res/baseResource.plist","res/baseResource.png");
-        var playInfo = new PlayInfo();
+        var paths = window.location.pathname.split("/");
+        var questionId = paths[paths.length -1];
+        cc.log("MyGameScene: questionId = " + questionId);
 
-        var baseLayer = new BaseLayer(self);
+        this.playInfo = new PlayInfo(questionId);
+
+        var baseLayer = new BaseLayer(self, this.playInfo);
         this.addChild(baseLayer,10);
 
 

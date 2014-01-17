@@ -11,13 +11,14 @@ var Hearts = cc.Class.extend({
     parent: null,
     _file_path_off: gsDir + "other/game_heart_off.png",
     _file_path_on: gsDir + "other/game_heart_on.png",
-    ctor:function(parent){
+    ctor:function(parent, failLimit){
         if(parent === undefined) throw("Heart.ctor: parent must not be undefined!");
-        this.init(parent);
+        this.init(parent, failLimit);
     },
-    init:function(parent){
+    init:function(parent,failLimit){
         this.parent = parent;
-        this._count = this._INITIAL_VALUE;
+        this._count = failLimit;
+        this._MAX = failLimit;
         for (var i = 0; i < this._MAX; i++) {
             this._changeSprite(i, this._file_path_off);
         }

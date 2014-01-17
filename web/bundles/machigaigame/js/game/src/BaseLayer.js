@@ -1,10 +1,13 @@
 var BaseLayer = cc.Layer.extend({
+
     illusts: null,
     slider: null,
     parent: null,
-    ctor:function (parent) {
+    playInfo: null,
+    ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
+        this.playInfo = playInfo;
         this.init(parent);
     },
     init:function (parent) {
@@ -21,7 +24,7 @@ var BaseLayer = cc.Layer.extend({
             var width = 640;
             var height = 1280 - (Header._rect.height + Footer._rect.height);
 //            cc.log("IllustLayer.setIllustFullTargetRect(" + 0 + ", " + Footer._rect.height + ", " + width + ", " + height + ")");
-            this.illusts = new IllustLayer(cc.rect(0,Footer._rect.height, width, height));
+            this.illusts = new IllustLayer(cc.rect(0,Footer._rect.height, width, height), this.playInfo.LEVEL, this.playInfo.QCODE);
             this.addChild(this.illusts,0);
             this.addChild(Header);
             this.addChild(Footer);
@@ -52,10 +55,7 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(this.ng);
             this.addChild(this.ok);
 
-
-
-
-            this.clock = new Clock();
+            this.clock = new Clock(this.playInfo);
             this.addChild(this.clock,15);
 
             this.slider = new Slider(0.5, 3.0);
@@ -69,12 +69,13 @@ var BaseLayer = cc.Layer.extend({
     },
     _initSelf:function(){
         cc.log("BaseLayer._initSelf()");
+        this.setAnchorPoint(0,0);
         this.setPosition(0,0);
     },
     initStarsAndHearts:function(){
         self = this;
-        this.stars = new Stars(self);
-        this.hearts = new Hearts(self);
+        this.stars = new Stars(self,this.playInfo.MACHIGAI_POINT);
+        this.hearts = new Hearts(self, this.playInfo.FAIL_LIMIT);
     },
     initMenu:function(){
         var popupHint = cc.MenuItemImage.create(

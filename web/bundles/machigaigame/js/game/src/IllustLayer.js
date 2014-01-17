@@ -1,5 +1,5 @@
 var IllustLayer = cc.Layer.extend({
-    q_def_path: "../download/",
+    _q_def_path: "../download/",
     q_code: null,
     level: null,
     illusts:{},
@@ -9,13 +9,10 @@ var IllustLayer = cc.Layer.extend({
     originalSize: null,
     fullContentsRect: null,
     currentScale: null,
+    illustFrames: null,
 
     currentIllustSize:function(){
       return cc.size(this.originalSize.widh * this.currentScale, this.originalSize * this.currentScale);
-    },
-    ctor:function (rect) {
-        this._super();
-        this.init(rect);
     },
     move:function(dx,dy){
       this.offset = cc.p( this.offset.x + dx, this.offset.y + dy);
@@ -51,7 +48,7 @@ var IllustLayer = cc.Layer.extend({
           postfix = "/second";
           break;
       }
-      return this.q_def_path + this.level + '/' + this.qcode + "/first";
+      return this._q_def_path + this.level + '/' + this.qcode + "/first";
     },
     setIllustFullTargetRect:function(rect){
       this.fullContentsRect = rect;
@@ -108,14 +105,19 @@ var IllustLayer = cc.Layer.extend({
 //      return [bool, cx, cy];
     },
 
-    init:function (rect) {
+    ctor:function (rect, level, qcode) {
+        this._super();
+        this.init(rect, level, qcode);
+    },
+
+    init:function (rect, level, qcode) {
         var bRet = false;
         if (this._super()) {
             //イラストの表示範囲を設定
             this.setIllustFullTargetRect(rect);
 
-            this.qcode = "105";
-            this.level = 1;
+            this.qcode = qcode;
+            this.level = level;
 
 //            this.rect = new cc.Rect(0,0, 300,300);
             this.offset = new cc.Point(100,50);
@@ -134,28 +136,6 @@ var IllustLayer = cc.Layer.extend({
         return bRet;
     },
 /*
-    onTouchesBegan: function(touches, event){
-      //cc.log('onTouchesBegan:' + touches.length);
-      for (var i=0; i < touches.length; i++) {
-        this.processEvent(touches[i]);
-      }
-    },
-    onTouchesMoved: function(touches, event){
-      //cc.log('onTouchesMoved' + touches.length);
-      for (var i=0; i < touches.length; i++) {
-        this.processEvent(touches[i]);
-      }
-    },
-    onTouchBegan:function (touch, event) {
-      processEvent(touch);
-    },
-    onTouchMoved:function (touch, event) {
-      processEvent(touch);
-    },
-    processEvent: function(touch){
-/*       if(this.eating || !touch){
-        return;
-      }
    
       this.eating = true;
 
@@ -179,11 +159,7 @@ var IllustLayer = cc.Layer.extend({
           break;
         }
       }
-      if(!hae){
-        this.eating = false;
-        this.kaeru.kerokero();
-        return;
-      }
+
       this.kaeru.beron(local, function() {
         if (hae) {
           hae.runAction(cc.Sequence.create([
