@@ -1,11 +1,11 @@
 <div style="font-size:0.8em;">
-<ul class="panel" style="padding-top:0.8%; ">
+<ul class="panel" style="padding-top:0.8%;clear:right">
 {% for item in items %}
 {% if item.category.categoryCode == 1 %}
-   <li class="item1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
+  <li class="item1" style="display:block; text-align:left;padding:1%; border: 1px solid rgb(253,138,55)">
     <img src="{{ asset('/bundles/machigaigame/images/stamp/sample.png')  }}" style="width:15%;height:15%;"/>
 
-<div style="display:inline-block;width:55%;">
+<div style="display:inline-block;width:35%;">
 
    <p style="text-align:left;"><span class="title">
    <p style="font-size:1.2em;white-space:nowrap; ">
@@ -18,7 +18,7 @@
    </p>
 </div>
 
-<div style="display:inline-block;height">
+<div style="display:inline-block;float:right;height:35%">
     <div align="center">
     {% if date(item.getCreatedAt) > date('-7days') %}
      <img src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
