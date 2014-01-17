@@ -19,7 +19,7 @@ function originalImage(){
 </script>
 <header id="title" class="top_bg">
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
- <p id="user_name" style="font-size:3em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
+ <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:2em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
  <div id="auIDLogin" style="padding:20px"> 
   <div>
   <a href="{{path('RegisterUser')}}">
@@ -33,21 +33,21 @@ function originalImage(){
 </div>
  </header>
  <section style="background-image:url(/bundles/machigaigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;">
-  <p>auIDでログインすると以下の機能が使えるよ！<br />
-（追加料金はかかりません。）</p>
+  <p style="width:80%;margin: 0 auto;white-space:nowrap;">会員登録すると以下の機能が使えるよ！</p>
+  <p style="width:50%;margin: 0 auto;white-space:nowrap;">（追加料金はかかりません。）</p>
   <nav>
-   <ul style="list-style-type:disc;">
-    <li style="display:inline-block;width:20%;">ポイント</li>
-    <li style="display:inline-block;width:20%;">問題の保存</li>
-    <li style="display:inline-block;width:20%;">ランキング</li>
-    <li style="display:inline-block;width:20%;">ショップ</li>
+   <ul style="list-style-type:disc;width:100%;white-space:nowrap;">
+    <li style="display:inline-block;width:22%;">・ポイント</li>
+    <li style="display:inline-block;width:22%;">・問題の保存</li>
+    <li style="display:inline-block;width:22%;">・ランキング</li>
+    <li style="display:inline-block;width:22%;">・ショップ</li>
    </ul>
   </nav>
  </div>
  </section>
  <section id="current_point" class="top_bg">
   <img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
-  <p style="font-size:3em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
+  <p style="font-size:2em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
  </section>
  <section id="menu" class="top_bg">
   <a href='{{ path('GameSelect') }}' style="padding-right:9%;"><img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
@@ -62,9 +62,9 @@ function originalImage(){
  </section>
  <section id="news" class="top_bg">
   <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
-  <div class="news" style="color:rgb(255,254,255);margin-left:25%;margin-right:25%">
+  <div class="news" style="color:rgb(255,254,255);">
   {% for i in 0..2 %}
-   <p style="text-align:left">{{news[i].getTitle}}<br />{{news[i].getDescription|raw}}</p><br />
+   <p style="text-align:left;width:80%;margin: 0 auto;">{{news[i].getTitle}}<br />{{news[i].getDescription|raw}}</p><br />
   {% endfor %} 
   </div>
 <div class="pre_pass white">
