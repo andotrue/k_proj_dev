@@ -43,6 +43,8 @@ var rd = bd + 'res/';
         engineDir: '/bundles/machigaigame/js/game/cocos/cocos2d/',
         /*SingleEngineFile:'MoonWarriors-compress.js',*/
         appFiles:[
+            bd + 'src/PlayData.js',        
+            bd + 'src/PlayInfo.js',
             bd + 'src/GameData.js',
             bd + 'src/Stars.js',
             bd + 'src/Hearts.js',

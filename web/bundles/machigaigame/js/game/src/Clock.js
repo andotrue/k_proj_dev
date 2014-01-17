@@ -1,25 +1,78 @@
+//
+//	playData['']
+//  playData['limitTime']
+//
+
 var Clock = cc.Layer.extend({
-	_INITIAL_TIME_MS: 5000000,
-	_currentTime: 0,
+	_initial_time_ms: 0,
+	_PLAY_INFO_TIME_DATA_NAME: "interrupts",
+	_PLAY_INFO_LIMIT_TIME_NAME: "LIMIT_TIME",
+	_currentDuration: 0, // milliseconds (duration, Date - Dateの形式)
 	_digitWidth: 30,
 	_digitHeight: 43,
 	_coronWidth: 20,
-    ctor:function () {
+	_startTime: null,
+	_clockData: [], //時刻データ
+	_clearTime: null, // milliseconds (duration, Date - Dateの形式)
+	_finishTime: null,
+	_status: null,	//タイマー（ゲームのステータスコード）
+	_LOADING: 0,
+	_PLAYING: 1,
+	_INTERRUPTED: 2,
+	_FINISHED: 3,
+	_playInfo: null,
+
+	updateClock:function(){
+
+	},
+	startTimer:function(){
+		this.resumeTimer();
+		this._startTime = this._clockData[this._clockData.length - 1 ]['resumed'];
+	},
+	resumeTimer:function(){
+		this._clockData.push({ 'resumed': new Date() });
+		this._status = this._PLAYING;
+	},
+	interruptTimer:function(){
+		this._clockData[ this._clockData.length -1 ]['interrupted'] = new Date();
+		this._status = this._INTERRUPTED;
+	},
+	stopTimer:function(){
+		this.interruptTimer();
+		this._status = this._FINISHED;
+		this._finishTime = this._clockData[this._clockData.length - 1 ]['interrupted'];
+	},
+	getPassedDuration:function(){
+		var duration = 0;
+		for (var i = this._clockData.length - 1; i >= 0; i--) {
+			if( ( i == this._clockData.length - 1 ) && this._clockData[i]['interrupted'] === undefined ){
+				duration += new Date() - this._clockData[i]['resumed'];
+			}else{
+				duration += this._clockData[i]['interrupted'] - this._clockData[i]['resumed'];
+			}
+		}
+		return duration;
+	},
+	getCurrentDuration:function(){
+		this._currentDuration = this._initial_time_ms - this.getPassedDuration();
+		return this._currentDuration;
+	},
+    ctor:function (playData) {
+		if(playData === undefined) throw("Clock.ctor: playData is undefined!! ");
         this._super();
-        this.init();
+        this.init(playData);
     },
-    init:function () {
+    init:function (playData) {
         var bRet = false;
         if (this._super()) {
             this.initSelf();
             this.initDigits();
-
-            this.setDigits(this._INITIAL_TIME_MS);
+            this.initTimes(playData);
         }
         return bRet;
     },
     initSelf:function(){
-/*
+/*		
 		this.setContentSize(cc.size(240,50));
         this.setStartColor(cc.c3b(255,0,0));
         this.setEndColor(cc.c3b(255,0,255));
@@ -32,6 +85,16 @@ var Clock = cc.Layer.extend({
 */
         this.setPosition(30,1187);
     },
+    initTimes:function(playData){
+		this._status = this._LOADING;
+		this._initial_time_ms = playData[this._PLAY_INFO_LIMIT_TIME_NAME];
+		if(playData[this._PLAY_INFO_TIME_DATA_NAME]!== undefined){
+			this._clockData = playData[this._PLAY_INFO_TIME_DATA_NAME];
+		}else{
+			this._clockData = [];
+		}
+        this.updateDigits();
+    },
 
     initDigits:function(){
 		this.reservedDigits = [];
@@ -42,49 +105,45 @@ var Clock = cc.Layer.extend({
 		var coron = cc.Sprite.create( gsDir + "number/game_number_coron.png" );
 		this.digits[':'] = coron;
     },
-    getCurrentTime:function(){
-		return this._currentTime;
-	},
-
-	_padding:function (vale,char,n){
-		var val = toString(vale);
+	_padding:function (num,char,n){
+		var val = String(num);
 		for(; val.length < n; val+=char);
 		return val;
 	},
     _getMinuteString:function(){
-		var time = this.getCurrentTime();
+		var time = this.getCurrentDuration();
 		var target = Math.floor( (time / 1000) / 60 );
 		cc.log("Clock._getMinuteString: str = " + this._padding( target, "0", 2 ));
 		return this._padding( target, "0", 2 );
 	},
     _getSecondString:function(){
-		var time = this.getCurrentTime();
-		var target = (time / 1000) % 60;
+		var time = this.getCurrentDuration();
+		var target = Math.floor((time / 1000) % 60);
 		cc.log("Clock._getSecondString: str = " + this._padding( target, "0", 2 ));
 		return this._padding( target, "0", 2 );
 	},
     _getMillisecondString:function(){
-		var time = this.getCurrentTime();
-		var target = time % 1000;
+		var time = this.getCurrentDuration();
+		var target = Math.floor(time % 1000);
 		cc.log("Clock._getMillisecondString: str = " + this._padding( target, "0", 4 ));
 		return this._padding( target, "0", 4 );
     },
     _concatenateDigitStringsToTime:function(){
 		var mm = this._getMinuteString();
 		var ss = this._getSecondString();
-		var ms = this._getMillisecondString();
+		var ms = this._getMillisecondString().slice(-2);
 		var colon = ":";
-		cc.log("Clock._getMinuteString: str = " + mm + colon + ss + colon + ms);
-		return mm + colon + ss + colon + ms;
+		cc.log("Clock._concatenateDigitStringsToTime: str = " + mm + colon + ss + colon + ms);
+		return (mm + colon + ss + colon + ms);
     },
-    setDigits:function(ms){
-		this.setDigitsByMilliSeconds(ms);
+    updateDigits:function(){
+		this.updateDigitsByMilliSeconds();
     },
-    setDigitsByMilliSeconds:function(ms){
+    updateDigitsByMilliSeconds:function(){
 		var timeString = this._concatenateDigitStringsToTime();
-		this.setDigitsByStr(timeString);
+		this.updateDigitsByStr(timeString);
     },
-    setDigitsByStr:function(timeStr){
+    updateDigitsByStr:function(timeStr){
 		for (var i = this.reservedDigits.length - 1; i >= 0; i--) {
 			this.reservedDigits[i].removeFromParent();
 		}
@@ -99,12 +158,16 @@ var Clock = cc.Layer.extend({
 				width = this._digitWidth;
 			}
 			left += width;
+			cc.log("Clock.updateDigitsByStr: width = " + width);
 			target = cc.Sprite.create( gsDir + "number/game_number_" + target_num + ".png" );
 			this.addChild(target);
 			this.reservedDigits[i] = target;
-			cc.log("Clock.setDigitsByStr: str = " + timeStr, + ", left = " + left);
-			target.setPosition( left, this._digiHeight *0.6);
+			cc.log("Clock.updateDigitsByStr: str = " + timeStr + ", left = " + left);
+			target.setPosition( left, this._digitHeight *0.6);
 		}
     },
 
 });
+
+Clock.RESUMED_KEY = 'resumed';
+Clock.INTERRUPTED_KEY = 'interrupted';

@@ -6,6 +6,7 @@ var MyGameScene = cc.Scene.extend({
 
 //        var spriteFrameCache = cc.SpriteFrameCache.getInstance();
 //        spriteFrameCache.addSpriteFrames("res/baseResource.plist","res/baseResource.png");
+        var playInfo = new PlayInfo();
 
         var baseLayer = new BaseLayer(self);
         this.addChild(baseLayer,10);
