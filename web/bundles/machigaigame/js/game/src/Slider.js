@@ -1,16 +1,22 @@
 var Slider = cc.Layer.extend({
-    ctor:function () {
+    slidebar: null,
+    slideicon: null,
+    ctor:function (start,end) {
         cc.log("Slider.ctor");
         this._super();
-        this.init();
+
+        if (start === undefined )
+            throw ("Silder: Not created with start,end Range.");
+        this.init(start,end);
     },
-    init:function () {
+    init:function (start,end) {
         cc.log("Slider.init");
         var bRet = false;
         if (this._super()) {
             this.initSelf();
 
-            this.setAnchorPoint(0,0);
+            this.setRatioRange(start,end);
+
             var slidebar = cc.Sprite.create( gsDir + "other/game_slidebar.png" );
             var slideicon = cc.Sprite.create( gsDir + "other/game_slideicon.png" );
             this.addChild(slidebar);
@@ -19,14 +25,36 @@ var Slider = cc.Layer.extend({
             slidebar.setScaleX(0.75);
             slideicon.setPosition(250,125);
             slideicon.setScaleX(0.75);
+            this.slidebar = slidebar;
+            this.slideicon = slideicon;
         }
         return bRet;
     },
     initSelf:function(){
+        this.setAnchorPoint(0,0);
         this.setPosition(0,0);
         cc.log("slider.initSelf");
     },
-  
+    setRatioRange:function(start,end){
+        this.startRatio = start;
+        this.endRatio = end;
+    },
+    getRatio:function(){
+        var ratio = 0;
+        var box = this.slidebar.getBoundingBoxToWorld();
+        var width  = box.width;
+        var iconpos = this.slideicon.getPosition();
+        ratio = this.startRatio + (iconpos.x - box.x) /width * (this.endRatio - this.startRatio);
+        cc.log("slideicon.ratio");
+
+        return ratio;
+    },
+    move:function(touch) {
+        var touched = touch.getLocation();
+        var bounding = this.slidebar.getBoundingBoxToWorld();
+        if( touched.x > bounding.x && touched.x  < bounding.x + bounding.width )
+            this.slideicon.setPosition(touched.x, this.slideicon.getPosition().y);
+    },
     onTouchBegan:function (touch, event) {
         cc.log("Slider.onTouchBegan: ( " + touch.getLocation().x + ", " + touch.getLocation().y + " )");
         this.touchedFrom = touch.getLocation();

@@ -1,9 +1,9 @@
 var PopupLayer = cc.Layer.extend({
     state: null,
-    ctor:function () {
+    ctor:function (type) {
         cc.log("PopupLayer.ctor");
         this._super();
-        this.init();
+        this.init(type);
     },
     init:function (type) {
         cc.log("PopupLayer.init");
@@ -27,6 +27,13 @@ var PopupLayer = cc.Layer.extend({
                 case 'PLAY':
                     this.popupPlay();
                     break;
+                case 'GAMEOVER_SUCCESS':
+                    this.popupGameoverSuccess();
+                    break;
+                case 'GAMEOVER_FAIL':
+                    this.popupGameoverFail();
+                    break;
+
                 default:
             }
 
@@ -83,8 +90,18 @@ var PopupLayer = cc.Layer.extend({
      */
     onTouchEnded:function (touch, event) {
         cc.log("Popup.onTouchEnded");
-        if (this.state =="PLAY")
-            this.removeFromParent();
+        switch (this.state){
+            case "PLAY":
+                cc.log("Popup.onTouchEnded: PLAY. now removing self.");
+                this.removeFromParent();
+                break;
+            case "GAMEOVER_SUCCESS":
+                this.gameoverSuccess();
+                break;
+            case "GAMEOVER_FAIL":
+                this.gameoverFail();
+                break;
+        }
         return true;
     },
 
@@ -174,6 +191,27 @@ var PopupLayer = cc.Layer.extend({
         cc.log(document.location);
 
         window.location="../select";
+    },
+    popupGameoverSuccess:function(){
+        this.state = "GAMEOVER_SUCCESS";
+        var popup = cc.Sprite.create( gsDir + "label/clear.png" );
+        this.addChild(popup);
+        popup.setPosition(360,640);
+    },
+    gameoverSuccess:function(){
+
+    },
+    popupGameoverFail:function(){
+        this.state = "GAMEOVER_FAIL";
+        var popup = cc.Sprite.create( gsDir + "label/miss.png" );
+        this.addChild(popup);
+        popup.setPosition(360,640);
+    },
+    gameoverFail:function(){
+        var nextScene = new MyGameScene();
+        cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
+        this.removeFromParent();
+        this._parent.removeFromParent();
     },
     menuCallBack:function (sender) {
         cc.log('PopupLayer.menuCallBack');

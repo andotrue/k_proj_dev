@@ -26,7 +26,8 @@ var Application = cc.Application.extend({
 
         //load resources
         cc.LoaderScene.preload(g_resources, function () {
-            director.replaceScene(new this.startScene());
+            var nextScene = new this.startScene();
+            director.replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         }, this);
 
         return true;
