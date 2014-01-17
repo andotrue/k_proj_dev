@@ -91,5 +91,61 @@ class RegisterController extends BaseController
 
         return $this->render('MachigaiGameBundle:Register:confirm.html.twig',array('nickname'=>$nickname,'form' => $form->createView()));
     }
+    public function userRegisterAction(Request $request){
+        $userData = new User();
+
+        $form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->setAction($this->generateUrl('RegisterUserConfirm'))
+         ->add('mailAddress', 'text',array('label'=>false))
+         ->add('password', 'text',array('label'=>false))
+         ->add('confirm', 'submit', array('label'=>'内容を確認'))
+         ->getForm();
+        return $this->render('MachigaiGameBundle:Register:userRegister.html.twig', array('userData'=>$userData,'form' => $form->createView()) );
+    }
+    public function userConfirmAction(Request $request){
+        $userData = new User();
+
+        $form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->setAction($this->generateUrl('RegisterUserComplete'))
+         ->add('mailAddress', 'hidden',array('label'=>false))
+         ->add('password', 'hidden',array('label'=>false))
+         ->add('confirm', 'submit', array('label'=>'内容を確認'))
+         ->getForm();
+         $form->bind($request);
+         $userData = $form->getData();
+
+        return $this->render('MachigaiGameBundle:Register:userConfirm.html.twig',array('userData'=>$userData,'form' => $form->createView()));
+    }
+    public function userCompleteAction(Request $request){
+        
+        $form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->add('mailAddress', 'hidden',array('label'=>false))
+         ->add('password', 'hidden',array('label'=>false))
+         ->getForm();
+         $form->bind($request);
+         $userData = $form->getData();
+
+         $data = new User();
+         $data->setMailAddress($userData['mailAddress']);
+         $data->setPassword($userData['password']);
+         $data->setNickname('ゲスト');
+         $data->setCreatedAt(date("Y-m-d H:i:s"));
+         $data->setUpdatedAt(date("Y-m-d H:i:s"));
+
+         $em = $this->getDoctrine()->getEntityManager();
+         $em->persist($data);
+         $em->flush();
+
+        return $this->render('MachigaiGameBundle:Register:userComplete.html.twig');
+    }
+    public function sentEmailAction(){
+        return $this->render('MachigaiGameBundle:Register:sentEmail.html.twig');
+    }
+    public function beforeRegisterNicknameAction(){
+        return $this->render('MachigaiGameBundle:Register:beforeRegisterNickname.html.twig');
+    }
 
 }

@@ -155,6 +155,26 @@ Register:
     pattern: /register/
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
+RegisterUser:
+    pattern: /register/userRegister
+    defaults: { _controller: MachigaiGameBundle:Register:userRegister }
+
+RegisterUserConfirm:
+    pattern: /register/userConfirm
+    defaults: { _controller: MachigaiGameBundle:Register:userConfirm }
+
+RegisterUserComplete:
+    pattern: /register/userComplete
+    defaults: { _controller: MachigaiGameBundle:Register:userComplete }
+
+SentEmail:
+    pattern: /register/sentEmail
+    defaults: { _controller: MachigaiGameBundle:Register:sentEmail }
+
+BeforeNickname:
+    pattern: /register/beforeRegisterNickname
+    defaults: { _controller: MachigaiGameBundle:Register:beforeRegisterNickname }
+
 Login:
     pattern: /register/login
     defaults: { _controller: MachigaiGameBundle:Register:login }

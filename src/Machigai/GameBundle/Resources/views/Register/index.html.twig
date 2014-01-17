@@ -1,39 +1,35 @@
 {% extends "MachigaiGameBundle::base.html.twig" %}
-
 {% block title %}ニックネーム名登録{% endblock %}
-
 {% block body %}
-<header><h1><img src="{{ asset('/bundles/machigaigame/images/parts/header.png')}}" style="width:100%"></h1></header>
-<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="width:100%">
-<div style="font-size:2em">
-<section>
+
+<img src="{{ asset('/bundles/machigaigame/images/parts/1-01_4_bg
+.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
+
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="position:relative;top:10%;width:100%;margin-top:31%">
+
+<section id="nicknameForm" style="position:relative;margin-top:11%">
  <form action="{{ path('RegisterConfirm') }}" method="post" {{ form_enctype(form) }}>
  {{ form_errors (form) }}
-  <p>auIDログインが完了しました。<br />
-登録を続けるにはニックネームを入力してください。</p>
-
-<input type="text" id="form_nickname" name="form[nickname]" required="required" style="margin-top:2%;font-size:2em;background-image:url(/bundles/machigaigame/images/parts/nicknametextarea.png);background-size:100% 100%; background-repeat:no-repeat;">
+<input type="text" id="form_nickname" name="form[nickname]" required="required" style="margin-top:2%;background-image:url(/bundles/machigaigame/images/parts/nicknametextarea.png);background-size:100% 100%; background-repeat:no-repeat;width:84%;height:2.3em;">
 <br />
   <input type="hidden" name="state" value="confirm"><br />
- <img id="nichnamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_nicknamechange_off.png')}}" style="width:35%;align:center;" onclick="changeImage(this.id);submitNickname()">
- 
-  <p style="text-align:left; padding:3%" >ニックネームはランキングに表示されます。<br />
-本名・住所など個人を特定できる内容は記載しないようご注意ください。<br />
-また、ニックネームはTOP画面の「ヘルプ」→「設定」から変更することができます。</p>
+
 <input type="submit" id="submitButton">
   {{ form_widget (form.confirm) }}
 </section>
-</div>
+
+<img id="nickname" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck2_off.png')}}" onclick="changeImage(this.id);submitNickname();" style="position:relative;margin-top:48%">
+
 <script>
 var image_path = null;
 var image_id = null;
 $(function(){
-	$('#submitButton').hide();
-	$('#submitEnd').hide();
-	$('#form_confirm').hide();
+  $('#submitButton').hide();
+  $('#submitEnd').hide();
+  $('#form_confirm').hide();
 })
 function submitNickname(){
-	$('#submitButton').trigger("click");
+  $('#submitButton').trigger("click");
 }
 function changeImage(imageId){
   var pre_src = $('#'+imageId).attr('src');

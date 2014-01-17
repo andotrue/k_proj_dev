@@ -22,7 +22,8 @@ function originalImage(){
  <p id="user_name" style="font-size:3em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
  <div id="auIDLogin" style="padding:20px"> 
   <div>
-  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_touroku.png')}}" width="35%" onclick="changeImage(this.id);"/>
+  <a href="{{path('RegisterUser')}}">
+  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_touroku.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
   {% if user is not empty %}
   <a href="{{path('Logout')}}"><img width="300px" height="80px" /></a>
   {% else %}
