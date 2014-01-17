@@ -1,0 +1,55 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+{% block title %}{% endblock %}
+{% block body %}
+<style>
+ .mailaddress {width:100%;padding:1%;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+ .invisible {opacity:0;}
+ #form_password {width:100%;padding:1%;margin-top:19%;position:relative;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+ .registerForm {width:80%;margin:0 auto;position:absolute;left:8%;top:35%;}
+ .linkButtons {position:relative;margin-top:23%;}
+ #mailAddress{position:relative;margin-top:37%}
+</style>
+<img src="{{ asset('/bundles/machigaigame/images/parts/1-01_2_bg
+.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_touroku_check.png')}}" style="position:relative;top:10%;width:100%;margin-top:29%">
+
+<section>
+ <form action="{{ path('RegisterUserComplete') }}" method="post" >
+ <p id="mailAddress">{{userData.mailAddress}}</p>
+ {{form(form)}}
+
+   <div class="linkButtons">
+   <a href="{{path('RegisterUser')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" onclick="changeImage(this.id);"></a>
+   <img id="registerConfirm" src="{{ asset('/bundles/machigaigame/images/parts/button_send_mail_off.png')}}" onclick="changeImage(this.id);submitRegister()" style="margin-left:14%">
+  </div>
+</div>
+
+
+</section>
+<script>
+var image_path = null;
+var image_id = null;
+
+$(function(){
+	$('#form').hide();
+	$('#form_confirm').hide();
+})
+function submitRegister(){
+	$('#form_confirm').trigger("click");
+}
+function changeImage(imageId){
+  var pre_src = $('#'+imageId).attr('src');
+  var src = pre_src.replace(/_off/g,'');
+  image_path = src;
+  image_id = imageId;
+  $('#'+imageId).attr("src",src);
+  setTimeout("originalImage();", 200);
+}
+function originalImage(){
+  var pre_src = $('#'+image_id).attr('src');
+  var src = image_path.replace(/.png/g,'_off.png');
+  $('#'+image_id).attr("src",src);
+}
+</script>
+</div>
+{% endblock %}
