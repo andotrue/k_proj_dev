@@ -20,31 +20,33 @@ function originalImage(){
 <header id="title" class="top_bg">
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:2em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
- <div id="auIDLogin" style="padding:20px"> 
+ <div id="auIDLogin" style=""> 
   <div>
   <a href="{{path('RegisterUser')}}">
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_touroku.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
   {% if user is not empty %}
-  <a href="{{path('Logout')}}"><img width="300px" height="80px" /></a>
+  <a href="{{path('Logout')}}"><img width="35%" height="60px" /></a>
   {% else %}
   <a href="{{ path('Login')  }}" alt="login">
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_login.png')}}" style="margin-left:10%" width="35%" onclick="changeImage(this.id);"/></a>
   {% endif %}
 </div>
  </header>
+ {% if user is empty %}
  <section style="background-image:url(/bundles/machigaigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;">
   <p style="width:80%;margin: 0 auto;white-space:nowrap;">会員登録すると以下の機能が使えるよ！</p>
   <p style="width:50%;margin: 0 auto;white-space:nowrap;">（追加料金はかかりません。）</p>
   <nav>
    <ul style="list-style-type:disc;width:100%;white-space:nowrap;">
-    <li style="display:inline-block;width:22%;">・ポイント</li>
-    <li style="display:inline-block;width:22%;">・問題の保存</li>
-    <li style="display:inline-block;width:22%;">・ランキング</li>
-    <li style="display:inline-block;width:22%;">・ショップ</li>
+    <li style="display:inline-block;width:17%;padding:1%">・ポイント</li>
+    <li style="display:inline-block;width:20%;padding:1%">・問題の保存</li>
+    <li style="display:inline-block;width:20%;padding:1%">・ランキング</li>
+    <li style="display:inline-block;width:17%;padding:1%">・ショップ</li>
    </ul>
   </nav>
  </div>
  </section>
+ {% endif %}
  <section id="current_point" class="top_bg">
   <img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
   <p style="font-size:2em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
