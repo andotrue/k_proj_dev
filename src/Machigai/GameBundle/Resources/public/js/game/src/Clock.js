@@ -1,9 +1,7 @@
-//
-//
-//
-
 var Clock = cc.Layer.extend({
 	TIME_LIMIT_RATIO: 1000,
+	Y: 1300,
+	X: 10,
 	_initial_time_ms: 0,
 	_PLAY_INFO_TIME_DATA_NAME: "interrupts",
 	_PLAY_INFO_LIMIT_TIME_NAME: "TIME_LIMIT",
@@ -23,100 +21,100 @@ var Clock = cc.Layer.extend({
 	_playInfo: null,
 	_timer: null,
 	updateClock:function(){
-		if (self.getCurrentDuration() <=0){
-			self._status = self._FINISHED;
-			self.parent.gameoverFail();
-			clearInterval(self._timer);
+		if (that.getCurrentDuration() <=0){
+			that._status = that._FINISHED;
+			that.parent.gameoverFail();
+			clearInterval(that._timer);
 		}else{
-			self.updateDigits();
+			that.updateDigits();
 		}
 	},
 	startTimer:function(){
-		self.resumeTimer();
-		self._startTime = self._clockData[self._clockData.length - 1 ]['resumed'];
-		self._timer = setInterval(self.updateClock, 233);
+		that.resumeTimer();
+		that._startTime = that._clockData[that._clockData.length - 1 ]['resumed'];
+		that._timer = setInterval(that.updateClock, 233);
 	},
 	resumeTimer:function(){
-		self._clockData.push({ 'resumed': new Date() });
-		self._status = self._PLAYING;
+		that._clockData.push({ 'resumed': new Date() });
+		that._status = that._PLAYING;
 	},
 	interruptTimer:function(){
-		self._clockData[ self._clockData.length -1 ]['interrupted'] = new Date();
-		self._status = self._INTERRUPTED;
+		that._clockData[ that._clockData.length -1 ]['interrupted'] = new Date();
+		that._status = that._INTERRUPTED;
 	},
 	stopTimer:function(){
-		self.interruptTimer();
-		self._status = self._FINISHED;
-		self._finishTime = self._clockData[self._clockData.length - 1 ]['interrupted'];
+		that.interruptTimer();
+		that._status = that._FINISHED;
+		that._finishTime = that._clockData[that._clockData.length - 1 ]['interrupted'];
 	},
 	getPassedDuration:function(){
 		var duration = 0;
-		for (var i = self._clockData.length - 1; i >= 0; i--) {
-			if( ( i == self._clockData.length - 1 ) && self._clockData[i]['interrupted'] === undefined ){
-				duration += new Date() - self._clockData[i]['resumed'];
+		for (var i = that._clockData.length - 1; i >= 0; i--) {
+			if( ( i == that._clockData.length - 1 ) && that._clockData[i]['interrupted'] === undefined ){
+				duration += new Date() - that._clockData[i]['resumed'];
 			}else{
-				duration += self._clockData[i]['interrupted'] - self._clockData[i]['resumed'];
+				duration += that._clockData[i]['interrupted'] - that._clockData[i]['resumed'];
 			}
 		}
 		return duration;
 	},
 	getCurrentDuration:function(){
-		self._currentDuration = self._initial_time_ms - self.getPassedDuration();
-		return self._currentDuration;
+		that._currentDuration = that._initial_time_ms - that.getPassedDuration();
+		return that._currentDuration;
 	},
     ctor:function (parent) {
 //		if(playInfo === undefined) throw("Clock.ctor: playInfo is undefined!! ");
-		self = this;
-        self._super();
-        self.parent = parent;
-        self._playInfo = parent.playInfo;
-        self.init();
+		that = this;
+        that._super();
+        that.parent = parent;
+        that._playInfo = parent.playInfo;
+        that.init();
     },
     init:function () {
         var bRet = false;
-        if (self._super()) {
-            self._initSelf();
-            self._initDigits();
-            self._initTimes();
+        if (that._super()) {
+            that._initSelf();
+            that._initDigits();
+            that._initTimes();
         }
         return bRet;
     },
     _initSelf:function(){
 /*		
-		self.setContentSize(cc.size(240,50));
-        self.setStartColor(cc.c3b(255,0,0));
-        self.setEndColor(cc.c3b(255,0,255));
-        self.setStartOpacity(255);
-        self.setEndOpacity(255);
+		that.setContentSize(cc.size(240,50));
+        that.setStartColor(cc.c3b(255,0,0));
+        that.setEndColor(cc.c3b(255,0,255));
+        that.setStartOpacity(255);
+        that.setEndOpacity(255);
         var blend =  new cc.BlendFunc();
         blend.src = cc.GL_SRC_ALPHA;
         blend.dst = cc.GL_ONE_MINUS_SRC_ALPHA;
-        self.setBlendFunc(blend);
+        that.setBlendFunc(blend);
 */
-        self.setPosition(30,1187);
+        that.setPosition(that.X,that.Y);
     },
     _initTimes:function(){
 //		cc.log("Clock._initTimes");
-		var playInfo = self._playInfo;
-		self._status = self._LOADING;
-//		cc.log("Clock._initTime: _initial_time_ms = " + playInfo.TIME_LIMIT * self.TIME_LIMIT_RATIO);
-		self._initial_time_ms = playInfo.TIME_LIMIT * self.TIME_LIMIT_RATIO ;
+		var playInfo = that._playInfo;
+		that._status = that._LOADING;
+//		cc.log("Clock._initTime: _initial_time_ms = " + playInfo.TIME_LIMIT * that.TIME_LIMIT_RATIO);
+		that._initial_time_ms = playInfo.TIME_LIMIT * that.TIME_LIMIT_RATIO ;
 		if(playInfo.playData !== undefined){
-			self._clockData = playInfo.playData;
+			that._clockData = playInfo.playData;
 		}else{
-			self._clockData = [];
+			that._clockData = [];
 		}
-        self.updateDigits();
+        that.updateDigits();
     },
 
     _initDigits:function(){
-		self.reservedDigits = [];
-		self.digits = {};
+		that.reservedDigits = [];
+		that.digits = {};
 		for (var i = 0; i <= 9; i++) {
-			self.digits[i] = cc.Sprite.create( gsDir + "number/game_number_" + i + ".png" );
+			that.digits[i] = cc.Sprite.create( gsDir + "number/game_number_" + i + ".png" );
 		}
 		var coron = cc.Sprite.create( gsDir + "number/game_number_coron.png" );
-		self.digits[':'] = coron;
+		that.digits[':'] = coron;
     },
 	_padding:function (num,char,n){
 		var val = String(num);
@@ -124,42 +122,42 @@ var Clock = cc.Layer.extend({
 		return val;
 	},
     _getMinuteString:function(){
-		var time = self.getCurrentDuration();
+		var time = that.getCurrentDuration();
 		var target = Math.floor( (time / 1000) / 60 );
-//		cc.log("Clock._getMinuteString: str = " + self._padding( target, "0", 2 ));
-		return self._padding( target, "0", 2 );
+//		cc.log("Clock._getMinuteString: str = " + that._padding( target, "0", 2 ));
+		return that._padding( target, "0", 2 );
 	},
     _getSecondString:function(){
-		var time = self.getCurrentDuration();
+		var time = that.getCurrentDuration();
 		var target = Math.floor((time / 1000) % 60);
-//		cc.log("Clock._getSecondString: str = " + self._padding( target, "0", 2 ));
-		return self._padding( target, "0", 2 );
+//		cc.log("Clock._getSecondString: str = " + that._padding( target, "0", 2 ));
+		return that._padding( target, "0", 2 );
 	},
     _getMillisecondString:function(){
-		var time = self.getCurrentDuration();
+		var time = that.getCurrentDuration();
 		var target = Math.floor(time % 1000);
-//		cc.log("Clock._getMillisecondString: str = " + self._padding( target, "0", 4 ));
-		return self._padding( target, "0", 4 );
+//		cc.log("Clock._getMillisecondString: str = " + that._padding( target, "0", 4 ));
+		return that._padding( target, "0", 4 );
     },
     _concatenateDigitStringsToTime:function(){
-		var mm = self._getMinuteString();
-		var ss = self._getSecondString();
-		var ms = self._getMillisecondString().slice(2);
+		var mm = that._getMinuteString();
+		var ss = that._getSecondString();
+		var ms = that._getMillisecondString().slice(2);
 		var colon = ":";
 //		cc.log("Clock._concatenateDigitStringsToTime: str = " + mm + colon + ss + colon + ms);
 		return (mm + colon + ss + colon + ms);
     },
     updateDigits:function(){
-		self.updateDigitsByMilliSeconds();
+		that.updateDigitsByMilliSeconds();
     },
     updateDigitsByMilliSeconds:function(){
-		var timeString = self._concatenateDigitStringsToTime();
-		self.updateDigitsByStr(timeString);
+		var timeString = that._concatenateDigitStringsToTime();
+		that.updateDigitsByStr(timeString);
     },
     updateDigitsByStr:function(timeStr){
 //		cc.log("Clock.updateDigitsByStr: str = " + timeStr );
-		for (var i = self.reservedDigits.length - 1; i >= 0; i--) {
-			self.reservedDigits[i].removeFromParent();
+		for (var i = that.reservedDigits.length - 1; i >= 0; i--) {
+			that.reservedDigits[i].removeFromParent();
 		}
 		var left = 0;
 		for (var i = 0; i < timeStr.length ; i++) {
@@ -167,15 +165,15 @@ var Clock = cc.Layer.extend({
 
 			if (target_num == ":"){
 				target_num = "coron";
-				width = self._coronWidth;
+				width = that._coronWidth;
 			}else{
-				width = self._digitWidth;
+				width = that._digitWidth;
 			}
 			left += width;
 			target = cc.Sprite.create( gsDir + "number/game_number_" + target_num + ".png" );
-			self.addChild(target);
-			self.reservedDigits[i] = target;
-			target.setPosition( left, self._digitHeight *0.6);
+			that.addChild(target);
+			that.reservedDigits[i] = target;
+			target.setPosition( left, that._digitHeight *0.6);
 		}
     },
 

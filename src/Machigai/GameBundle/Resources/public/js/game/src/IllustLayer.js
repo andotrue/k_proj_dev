@@ -1,7 +1,5 @@
-var IllustLayer = cc.LayerGradient.extend({
-    _q_def_path: "../download/",
-    FRAME_WIDTH: 400,
-    FRAME_HEIGHT: 300,
+var IllustLayer = cc.Layer.extend({
+    _q_def_path: "/app_dev.php/game/download/",
     q_code: null,
     level: null,
     illusts:{},
@@ -12,19 +10,11 @@ var IllustLayer = cc.LayerGradient.extend({
     fullContentsRect: null, //このレイヤーのサイズ
     illustFrameRects: [], //イラストの表示される範囲
     currentScale: null,
-    illustFrames: [],
-    qpoints: [], //間違いポイント
+    frames: [],
 
     initIllustFrameRects:function(){
       cc.log("IllustLayer.initIllustFrameRects:");
       illustFrameRects =[];
-      var x1 = 360;
-      var x2 = 360;
-      var y1 = 540 + this.FRAME_HEIGHT;
-      var y2 = 540 - this.FRAME_HEIGHT;
-
-      var rect1 = cc.rect(x1,y1,this.FRAME_WIDTH,this.FRAME_HEIGHT);
-      var rect2 = cc.rect(cc.rect(x2,y2,this.FRAME_WIDTH,this.FRAME_HEIGHT));
 
       this.illustFrameRects.push(rect1);
       this.illustFrameRects.push(rect2);
@@ -34,9 +24,9 @@ var IllustLayer = cc.LayerGradient.extend({
     currentIllustSize:function(){
       return cc.size(this.originalSize.widh * this.currentScale, this.originalSize * this.currentScale);
     },
-    move:function(dx,dy){
-      this.offset = cc.p( this.offset.x + dx, this.offset.y + dy);
-      this.updateIllusts();
+    move:function(dx,dy,touch){
+//      this.offset = cc.p( this.offset.x + dx, this.offset.y + dy);
+      this.updateIllusts(dx, dy,touch);
     },
     getIllustAreaSize:function(){
       return ( cc.p(this.getIllustAreaWidth, this.getIllustAreaHeight));
@@ -68,6 +58,7 @@ var IllustLayer = cc.LayerGradient.extend({
           postfix = "/second";
           break;
       }
+      cc.log("IllustLayer.imgPath(index) =" + this._q_def_path + this.level + '/' + this.qcode + "/first");
       return this._q_def_path + this.level + '/' + this.qcode + "/first";
     },
     setIllustFullTargetRect:function(rect){
@@ -81,40 +72,29 @@ var IllustLayer = cc.LayerGradient.extend({
         return this.illustFrameRects[1];
       }
     },
-    showMachigaiPoint:function(){
 
-    },
-    updateIllusts:function(){
-      //イラスト入れ替え用に元画像を削除。
-      for (var index = this.FIRST; index <= this.SECOND; index++) {
-        if( this.illusts[index] !== undefined){
-          this.illusts[index].removeFromParent();
-        }
-
+    updateIllusts:function(dx, dy,touch){
+      cc.log("IllustLayer.updateIllusts(): dx, dy, touch, offset = " + dx  + ", " + dy);
+      //イラスト入れ替え用に
+      cc.log("IllustFrame.update");
+        this.frames[0].update(dx,dy,touch);
+        this.frames[1].update(dx,dy,touch);
 //        this.illusts[index] = cc.Sprite.createWithSpriteFrame(this.getFrame(index));
-
-        var rect = this.calculateRectArea();
-        this.illusts[index] = cc.Sprite.create(this.imgPath(index) /*, this.makeRect(index) */ );
-        this.illusts[index].setAnchorPoint(0.5,0.5);
-        this.addChild( this.illusts[index]);
 //        cc.log("(x, y) = (" + this.getCenterPoint(index).x +  ", " + this.getCenterPoint(index).y + ")");
         //はみ出しを確認
-
-        var posX = this.getCenterPoint(index).x + this.offset.x;
-        var posY = this.getCenterPoint(index).y + this.offset.y;
-        cc.log("this.currentScale, posX, posY = " + this.currentScale + ", " + posX + ", " + posY);
-        this.illusts[index].setPosition(posX , posY);
-        this.scaleIllust(index);
-      }
-    },
+     },
     scaleIllust:function(index,scale){
         if(scale >= 0) this.currentScale = scale;
         cc.log("this.currentScale = " + this.currentScale);
-        this.illusts[index].setScale(this.currentScale);
+        //this.frames[index].updateScale(this.currentScale);
+		var target = this.frames[index];
+		target.scale = this.currentScale;
+		target.setImage();
+		//target.updateScale(this.currentScale);
     },
     scaleIllusts:function(scale){
-      this.scaleIllust(this.FIRST,scale);
-      this.scaleIllust(this.SECOND,scale);
+      this.scaleIllust(0,scale);
+      this.scaleIllust(1,scale);
     },
     calculateRectArea:function(){
       var pos = this.offset;
@@ -132,20 +112,35 @@ var IllustLayer = cc.LayerGradient.extend({
 //      return [bool, cx, cy];
     },
 
-    ctor:function (rect, level, qcode, qpoints) {
+    ctor:function (rect, level, qcode) {
+      cc.log("IllustLayer.ctor: rect, level, qcode = " + rect + ", " + level + ", " + qcode );
+        self = this;
         this._super();
-        this.init(rect, level, qcode, qpoints);
+
+        this.qcode = qcode;
+        this.level = level;
+
+        this.init(rect, level, qcode);
     },
 
-    init:function (rect, level, qcode, qpoints) {
+    init:function (rect, level, qcode) {
         var bRet = false;
         if (this._super()) {
-            //イラストの表示範囲を設定
-            this.initIllustFrameRects();
-            this.setIllustFullTargetRect(rect);
-            this.qcode = qcode;
-            this.level = level;
+            this.setAnchorPoint(cc.p(0, 0));
+            this.setPosition(0,0);
+            var frame1 = new IllustFrame(this.imgPath(0), rect, 1);
+            var frame2 = new IllustFrame(this.imgPath(1), rect, 2);
+            frame1.setFriend(frame2);
+            frame2.setFriend(frame1);
+            self.addChild(frame1);
+            self.addChild(frame2);
+            this.frames.push(frame1);
+            this.frames.push(frame2);
 
+            //イラストの表示範囲を設定
+//            this.initIllustFrameRects();
+            this.setIllustFullTargetRect(rect);
+/*
 //            this.rect = new cc.Rect(0,0, 300,300);
             this.offset = new cc.Point(0,0);
             
@@ -155,11 +150,10 @@ var IllustLayer = cc.LayerGradient.extend({
 
             cc.log("this.currentScale = " + this.currentScale);
 
-            this.setAnchorPoint(cc.p(0, 0));
             this.setPosition(360, 640);
 
             this.updateIllusts();
-    
+    */
             bRet = true;
         }
         return bRet;
