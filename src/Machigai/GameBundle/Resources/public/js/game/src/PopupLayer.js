@@ -1,97 +1,283 @@
 var PopupLayer = cc.Layer.extend({
-
-    ctor:function () {
+    state: null,
+    clock: null,
+    baseLayer: null,
+    ctor:function (type,baseLayer) {
+        cc.log("PopupLayer.ctor");
         this._super();
-        this.init();
+        this.baseLayer = baseLayer;
+        this.clock = baseLayer.clock;
+        this.init(type);
     },
-    init:function () {
+    init:function (type) {
+        cc.log("PopupLayer.init");
         var bRet = false;
         if (this._super()) {
+            cc.log("loging");
+//            this.setTouchEnabled(true);
+//            this.setTouchPriority(100);
+            cc.log("setTouch");
 
-            var ResultMenu = cc.Sprite.create( gsDir + "background/result_menu.png" );
-            var ResultMenuGuest = cc.Sprite.create( gsDir + "background/result_menu_guest.png" ); 
+            switch(type){
+                case 'GIVEUP':
+                    this.popupGiveup();
+                    break;
+                case 'SAVE':
+                    this.popupSave();
+                    break;
+                case 'HINT':
+                    this.popupHint();
+                    break;
+                case 'PLAY':
+                    this.popupPlay();
+                    break;
+                case 'GAMEOVER_SUCCESS':
+                    this.popupGameoverSuccess();
+                    break;
+                case 'GAMEOVER_FAIL':
+                    this.popupGameoverFail();
+                    break;
 
-            var ButtonSave = cc.Sprite.create( gsDir + "button/save.png" );
-            var ButtonSaveOff = cc.Sprite.create( gsDir + "button/save_off.png" );
+                default:
+            }
 
-            var LabelMiss = cc.Sprite.create( gsDir + "label/clear.png" );
-            var LabelClear = cc.Sprite.create( gsDir + "label/clear.png" );
-                      
-            var PopupCommon = cc.Sprite.create( gsDir + "popup/common.png" );
-            var PopupGamestart = cc.Sprite.create( gsDir + "popup/gamestart.png" );
-            var PopupGamestartFirst = cc.Sprite.create( gsDir + "popup/gamestart_first.png" );
-            var PopupGamestartGuest = cc.Sprite.create( gsDir + "popup/gamestart_guest.png" );
-            var PopupGamestartNotfirst = cc.Sprite.create( gsDir + "popup/gamestart_notfirst.png" );
-            var PopupGiveup = cc.Sprite.create( gsDir + "popup/giveup.png" );
-            var PopupHint = cc.Sprite.create( gsDir + "popup/hint.png" );
-            var PopupQuestiondownload = cc.Sprite.create( gsDir + "popup/questiondownload.png" );
-            var PopupSave = cc.Sprite.create( gsDir + "popup/save.png" );
-            var PopupSaveGuest = cc.Sprite.create( gsDir + "popup/save_guest.png" );
-
-            //Layerの子要素に。
-            this.addChild(ResultMenu);
-            this.addChild(ResultMenuGuest);
-            this.addChild(ButtonSave);
-            this.addChild(ButtonSaveOff);
-            this.addChild(LabelMiss);
-            this.addChild(LabelClear);
-
-            this.addChild(PopupCommon);
-            this.addChild(PopupGamestart);
-            this.addChild(PopupGamestartFirst);
-            this.addChild(PopupGamestartGuest);
-            this.addChild(PopupGamestartNotfirst);
-            this.addChild(PopupGiveup);
-            this.addChild(PopupHint);
-            this.addChild(PopupQuestiondownload);
-            this.addChild(PopupSave);
-            this.addChild(PopupSaveGuest);
-
-            //Positionの設定
-            ResultMenu.setPosition(640,960);
-            ResultMenuGuest.setPosition(640,960);
-
-            ButtonSave.setPosition(640,960);
-            ButtonSaveOff.setPosition(640,960);
-
-            LabelMiss.setPosition(640,960);
-            LabelMiss.setOpacity(0);
-            LabelClear.setPosition(640,960);
-            LabelClear.setOpacity(0);
-
-            PopupCommon.setPosition(640,960);
-            PopupGamestart.setPosition(640,960);
-            PopupGamestartFirst.setPosition(640,960);
-            PopupGamestartGuest.setPosition(640,960);
-            PopupGamestartNotfirst.setPosition(640,960);
-            PopupGiveup.setPosition(640,960);
-            PopupHint.setPosition(640,960);
-            PopupQuestiondownload.setPosition(640,960);
-            PopupSave.setPosition(640,960);
-            PopupSaveGuest.setPosition(640,960);
-/*
-            var popupGameStart = cc.MenuItemImage.create(
-                bd+"res/game_scene/popup/gamestart.png",
-                this.menuCallBack,
-                this
-            );
-            popupGameStart.setPosition(640, 960);
-
-            var menu = cc.Menu.create(popupGameStart);
-            menu.setPosition(0,0);
-            this.addChild(menu);
-*/
             bRet = true;
         }
         return bRet;
     },
-    menuCallBack:function(sender){
-//        gSharedEngine.playEffect(EFFECT_BUTTON_CHICK);
-        //gGameMode = eGameMode.Challenge;
-  //      gGameMode = eGameMode.Timer;
-        var nextScene = cc.Scene.create();
-//        var nextLayer = new PatternMatrix;
-//        nextScene.addChild(nextLayer);
-//        cc.Director.getInstance().replaceScene(cc.TransitionSlideInT.create(0.4, nextScene));
+
+    initSelf:function(){
+
+/*        this.setContentSize(cc.size(720,1280));
+        this.setStartColor(cc.c3b(0,128,0));
+        this.setEndColor(cc.c3b(0,0,128));
+        this.setStartOpacity(64);
+        this.setEndOpacity(64);
+        var blend =  new cc.BlendFunc();
+        blend.src = cc.GL_SRC_ALPHA;
+        blend.dst = cc.GL_ONE_MINUS_SRC_ALPHA;
+        this.setBlendFunc(blend);
+*/
+        this.setPosition(360,640);
+    },
+
+
+    onUpdate:function (delta){
+        cc.log("PopupLayer.onUpdate");
+    },
+   /**
+     * default implements are used to call script callback if exist<br/>
+     * you must override these touch functions if you wish to utilize them
+     * @param {cc.Touch} touch
+     * @param {event} event
+     * @return {Boolean}
+     */
+    onTouchBegan:function (touch, event) {
+        cc.log("Popup.onTouchBegan");
+        return true;
+    },
+
+    /**
+     * callback when a touch event moved
+     * @param {cc.Touch} touch
+     * @param {event} event
+     */
+    onTouchMoved:function (touch, event) {
+        cc.log("Popup.onTouchMoved");
+        return true;
+    },
+
+    /**
+     * callback when a touch event finished
+     * @param {cc.Touch} touch
+     * @param {event} event
+     */
+    onTouchEnded:function (touch, event) {
+        cc.log("Popup.onTouchEnded");
+        switch (this.state){
+            case "PLAY":
+                cc.log("Popup.onTouchEnded: PLAY. now removing self. start the timer.");
+
+                var baseLayer = this.baseLayer;
+                baseLayer.clock.startTimer();
+                this.removeFromParent();
+                break;
+            case "GAMEOVER_SUCCESS":
+                this.gameoverSuccess();
+                break;
+            case "GAMEOVER_FAIL":
+                this.gameoverFail();
+                break;
+        }
+        return true;
+    },
+
+    popupLoading:function () {
+        this.state = "LOADING";
+        var PopupQuestiondownload = cc.Sprite.create( gsDir + "popup/questiondownload.png" );
+        PopupQuestiondownload.setPosition(360,640);
+        this.addChild(PopupQuestiondownload);
+    },
+
+    popupMiss:function () {
+        this.state = "MISS";
+        var label = cc.Sprite.create( gsDir + "label/miss.png" );
+        this.addChild(label);
+        popup.setPosition(360,640);
+    },
+
+    popupClear:function () {
+        this.state = "CLEAR";
+        var label = cc.Sprite.create( gsDir + "label/clear.png" );
+        this.addChild(label);
+        popup.setPosition(360,640);
+    },
+
+    popupPlay:function () {
+        this.state = "PLAY";
+        var ss = ["popup/gamestart.png", "popup/gamestart_first.png", "popup/gamestart_guest.png","popup/gamestart_notfirst.png"];
+        var i =this.game_status = 1;
+        var popup = cc.Sprite.create( gsDir + ss[i] );
+        this.addChild(popup);
+        popup.setPosition(360,540);
+    },
+    popupHint:function () {
+//        cc.unregisterTouchDelegate(this);
+        this.state = "HINT";
+
+        var popup = cc.Sprite.create( gsDir + "popup/hint.png" );
+        this.addChild(popup);
+        popup.setPosition(360,640);
+
+        var yes = this.createYesButton(360,555);
+        var no = this.createNoButton(360,470);
+        var menu = cc.Menu.create([yes,no]);
+        menu.setPosition(0,0);
+        this.addChild(menu);
+    },
+    hint:function () {
+        cc.log("PopupLayer.hint");
+
+    },
+    popupSave:function () {
+        this.state = "SAVE";
+        path = gsDir + "popup/save.png";
+//        path = gsDir + this.is_guest ? "popup/save.png" : "popup/save_guest.png";
+        var popup = cc.Sprite.create(path);
+        this.addChild(popup);
+        popup.setPosition(360,640);
+
+        var yes = this.createYesButton(360,677);
+        var no = this.createNoButton(360,619);
+        var menu = cc.Menu.create([yes,no]);
+        menu.setPosition(0,0);
+        this.addChild(menu);
+
+    },
+    save:function () {
+        cc.log("PopupLayer.save");
+        cc.log(document.location);
+        window.location="../select";
+
+    },
+    popupGiveup:function () {
+        this.state = "GIVEUP";
+        var popup = cc.Sprite.create( gsDir + "popup/giveup.png" );
+        this.addChild(popup);
+        popup.setPosition(360,640);
+
+        var yes = this.createYesButton(360,630);
+        var no = this.createNoButton(360,520);
+        var menu = cc.Menu.create([yes,no]);
+        menu.setPosition(0,0);
+        this.addChild(menu);
+
+    },
+    giveup:function () {
+        cc.log("PopupLayer.giveup");
+        cc.log(document.location);
+
+        window.location="../select";
+    },
+    popupGameoverSuccess:function(){
+        this.state = "GAMEOVER_SUCCESS";
+        var popup = cc.Sprite.create( gsDir + "label/clear.png" );
+        this.addChild(popup);
+        popup.setPosition(360,640);
+    },
+    gameoverSuccess:function(){
+
+    },
+    popupGameoverFail:function(){
+        this.state = "GAMEOVER_FAIL";
+        var popup = cc.Sprite.create( gsDir + "label/miss.png" );
+        this.addChild(popup);
+        popup.setPosition(360,640);
+    },
+    gameoverFail:function(){
+        var nextScene = new MyGameScene();
+        cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
+        this.removeFromParent();
+        this._parent.removeFromParent();
+    },
+    menuCallBack:function (sender) {
+        cc.log('PopupLayer.menuCallBack');
+        switch(sender.name){
+            case 'YES':
+                cc.log('YES');
+                this.removeFromParent();
+                switch(this.state){
+                    case 'HINT':
+                        this.hint();
+                        break;
+                    case 'SAVE':
+                        this.save();
+                        break;
+                    case 'GIVEUP':
+                        this.giveup();
+                        break;
+                }
+                break;
+            case 'NO':
+                cc.log('NO');
+                this.removeFromParent();
+                break;
+            default:
+                cc.log('default');
+        }
+    },
+    createYesButton:function (x,y) {
+        var yes = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/button_yes.png",
+            bd+"res/game_scene/button/button_yes_off.png",
+            this.menuCallBack.bind(this)
+        );
+        yes.setPosition(x, y);
+        yes.name = "YES";
+        return yes;
+    },
+    createNoButton:function (x,y) {
+        var no = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/button_no.png",
+            bd+"res/game_scene/button/button_no_off.png",
+            this.menuCallBack.bind(this)
+        );
+        no.setPosition(x, y);
+        no.name = "NO";
+        return no;
+    },
+    onEnter:function () {
+        cc.log("PopupLayer.onEnter");
+       if(sys.platform == "browser")
+            cc.registerTargetedDelegate(1, true, this);
+        else
+            cc.registerTargettedDelegate(1,true,this);
+        this._super();
+    },
+    onExit:function () {
+        cc.log("PopupLayer.onExit");
+        cc.unregisterTouchDelegate(this);
+        this.clock = null;
+        this._super();
     }
 });
