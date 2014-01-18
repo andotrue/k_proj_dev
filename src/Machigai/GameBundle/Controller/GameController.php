@@ -186,7 +186,7 @@ class GameController extends BaseController
                 'playInfo' => $playHistoryDB[0]->getPlayInfo(), // Javascriptでは playData
                 );
         }else{
-            $playHistory = null;       
+            $playHistory = null;
         }
 
         $playInfo = array('error'=> false, 'question' => $question, 'playHistory' => $playHistory);
