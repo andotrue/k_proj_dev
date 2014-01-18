@@ -71,9 +71,11 @@ function originalImage(){
    <p style="text-align:left;width:80%;margin: 0 auto;">{{news[i].getTitle}}<br />{{news[i].getDescription|raw}}</p><br />
   {% endfor %} 
   </div>
-<div class="pre_pass white">
-<p style="font-size:2em"><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
-</div>
+
+<a href="http://pass.auone.jp/">
+<img src="{{asset('/bundles/machigaigame/images/parts/buttom_returnto_au_off.png')}}" width="55%" />
+</a>
+
 </section>
 {% endblock %}
 
@@ -93,7 +95,7 @@ function originalImage(){
 	}
 .pre_pass a{
 	display:block;
-	background:url( {{asset('/bundles/machigaigame/images/parts/button_tosmartpass.png')}} ) no-repeat center;
+	background:url( {{asset('/bundles/machigaigame/images/parts/buttom_returnto_au_off.png')}} ) no-repeat center;
 	height:44px;
 	width:100%;
 	text-indent:-9999px;

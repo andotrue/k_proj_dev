@@ -185,6 +185,10 @@ BeforeNickname:
     pattern: /register/beforeRegisterNickname
     defaults: { _controller: MachigaiGameBundle:Register:beforeRegisterNickname }
 
+ReissuePassword:
+    pattern: /register/reissuePassword
+    defaults: { _controller: MachigaiGameBundle:Register:reissuePassword }
+
 Login:
     pattern: /register/login
     defaults: { _controller: MachigaiGameBundle:Register:login }

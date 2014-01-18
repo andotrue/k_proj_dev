@@ -147,7 +147,7 @@ $(function() {
 });
 </script>
 
-
+<div id="allContents" style="background: url({{ asset('/bundles/machigaigame/images/parts/2-01_bg.png')  }}); background-size:width:5%;background-repeat:no-repeat;">
 <div id="popup">
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }}" style="position:absolute;left:5%;top:50%;width:90%"/>
@@ -166,22 +166,30 @@ $(function() {
 <img id="play_reset" src="{{ asset('/bundles/machigaigame/images/parts/button_game_start1_off.png')  }}" style="position:absolute;top:50%;left:20%;margin-top:24%;padding:5%;width:50%" onclick="changeImage(this.id);gameStart();"/>
 <p style="position:absolute;top:50%;left:20%;margin-top:36%;padding:5%;width:50%;font-size:1em">※「はじめから遊ぶ」を選択すると中断データは削除されます。</p>
 </div>
-<img src="{{ asset('/bundles/machigaigame/images/parts/header_mondaiselect.png')  }}" width="100%"/>
-<div id="level_tab" style="padding-top:5%;"><img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("easy");'/><img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("normal")'><img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("hard");'/></div>
-<section id="select_area" style="background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }}); background-repeat:no-repeat; background-size:cover;">
+
+
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_mondaiselect.png')  }}" width="100%" style="position:absolute;top:0;left:0;"/>
+<div id="allquestions">
+<div id="level_tab" style="position:absolute;top:22%">
+	<img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("easy");'/>
+	<img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("normal")' >
+	<img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("hard");' />
+</div>
+<section id="select_area" >
 
 
 <div id="order_header" style="text-align:right;padding-bottom:0.7em;padding-top:0.7em;">
-<div id="selectBox" style="position:relative;top:28%;left:30%;width:50%;height:2em;">
+<div id="selectBox" style="position:absolute;top:10%;left:30%;width:50%;height:2em;">
 <img style="position:absolute;left:75%;top:14%;width:50%;height:40%" src="{{ asset('/bundles/machigaigame/images/parts/game_sort.png')}}">
 <span style="position:relative;left:-28%;">並べ替え</span><select style="position:absolute;left:75%;top:14%;opacity:0;width:50%;height:40%" id="sortSelect" onchange="sortSelect()"><option selected="selected" value=""></option><option value="1">古い順</option><option value="2">新しい順</option><option value="3">未クリア問題</option><option value="4">中断問題</option></select>
 </div>
 </div>
 
-<nav style="padding-top:5%"><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
+<nav style="padding-top:17%"><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
 <li class="easy"></li><li class="normal"></li><li class="hard"></li>
 {% if histories is  null %}
-<div id="questions">
+<div style="margin-bottom:0%;height:30%;display:block">
+<div id="questions" style="margin-top:11%" >
 	<ul class="easyLevel">
 	{% for question in questions %}
 	{% if question.getLevel() == 1 %}
@@ -302,17 +310,15 @@ $(function() {
 	{% endif %}
 	{% endfor %}
 	</ul>
-
 </div>
 {% endif %}
-</section>
 
 <nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span> <a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
-<p style="font-size:0.8em; padding:2%;">
-ランキングへの反映は初回挑戦分のみとなります。
-中断問題、複数回クリアされた問題はランキング対象になりませんのでご注意ください。
-</p>
-<a href="{{path('Top')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" style="padding:2%" onclick="changeImage(this.id);"></a>
+</div>
+<a href="{{path('Top')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" style="padding:2%;margin-bottom:20%" onclick="changeImage(this.id);"></a>
+</div>
+</section>
+</div>
 {% endblock %}
 {% block javascripts %}
 <!-- 通信中 -->
