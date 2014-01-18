@@ -86,11 +86,10 @@ var IllustLayer = cc.Layer.extend({
     scaleIllust:function(index,scale){
         if(scale >= 0) this.currentScale = scale;
         cc.log("this.currentScale = " + this.currentScale);
-        //this.frames[index].updateScale(this.currentScale);
+
 		var target = this.frames[index];
 		target.scale = this.currentScale;
 		target.setImage();
-		//target.updateScale(this.currentScale);
     },
     scaleIllusts:function(scale){
       this.scaleIllust(0,scale);

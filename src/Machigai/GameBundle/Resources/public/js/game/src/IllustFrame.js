@@ -114,6 +114,7 @@ var IllustFrame = cc.Layer.extend({
 			this.originalHeight = sender.height;
 		} else {
 			
+			// 既にある場合は削除
 			this.removeChild(this.illust);
 		}
 
@@ -145,8 +146,18 @@ var IllustFrame = cc.Layer.extend({
         var cy = this.FRAME_HEIGHT / 2;
 //            illust.setTextureRect(rect3);
         illust.setPosition(cx,cy);
-        illust.setScale(scale);
-
+		
+		// 拡大率の微調整
+		var new_scale;
+		
+		if( rect3.width > rect3.height ){
+			
+	        new_scale = this.FRAME_WIDTH / rect3.width;
+		} else {
+	        new_scale = this.FRAME_HEIGHT / rect3.height;
+		}
+		illust.setScale(new_scale);
+		
         this.illust = illust;
     },
 
@@ -156,6 +167,9 @@ var IllustFrame = cc.Layer.extend({
 		
 		scale = scale + 0.5;
 		
+		// 縦横比
+		var h_rate = this.FRAME_HEIGHT / this.FRAME_WIDTH;
+		
 		var cw = this.FRAME_WIDTH / scale;
 		var ch = this.FRAME_HEIGHT / scale;
 		
@@ -163,14 +177,26 @@ var IllustFrame = cc.Layer.extend({
 		var och = orgHeight / scale;
 
 		cc.log("cw, ch, ocw, och = ( " + cw + ", " + ch + ", " + ocw + ", " + och + ")");
-		
-        if ( this.FRAME_WIDTH < ocw ){
+
+		// 読み取りエラーを無くす処理（イレギュラーなデータ）
+		if ( cw > orgWidth || ch > orgHeight ){
 			cw = ocw;
-		}
-		
-		if( this.FRAME_HEIGHT < och){
 			ch = och;
 		}
+		
+		
+
+		
+		
+		/*
+        if ( this.FRAME_WIDTH < cw ){
+        	cw = this.FRAME_WIDTH;
+		}
+		
+		if( this.FRAME_HEIGHT < ch ){
+			ch = this.FRAME_HEIGHT;
+		}
+		*/
 //		var cw = this.FRAME_WIDTH * scale;
 //		var ch = this.FRAME_HEIGHT * scale;
 
