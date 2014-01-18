@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>162</id>
+ <name>春らんまん♪お花畑</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>68</x><!--point のx座標 -->
+  <y>114</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>247</x><!--point のx座標 -->
+  <y>69</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>102</x><!--point のx座標 -->
+  <y>268</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>180</x><!--point のx座標 -->
+  <y>288</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>266</x><!--point のx座標 -->
+  <y>245</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>94</x><!--point のx座標 -->
+  <y>465</y><!--point のy座標-->
+ </point>
+</different>

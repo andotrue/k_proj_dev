@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>219</id>
+ <name>江戸の華！町火消し</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>56</x><!--point のx座標 -->
+  <y>153</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>114</x><!--point のx座標 -->
+  <y>443</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>428</x><!--point のx座標 -->
+  <y>100</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>557</x><!--point のx座標 -->
+  <y>39</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>418</x><!--point のx座標 -->
+  <y>412</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>656</x><!--point のx座標 -->
+  <y>346</y><!--point のy座標-->
+ </point>
+</different>

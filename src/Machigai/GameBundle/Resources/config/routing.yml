@@ -146,9 +146,14 @@ GameGetData:
     pattern: /game/data/
     defaults: { _controller: MachigaiGameBundle:Game:download }
 
+GameDownloadByJSON:
+    pattern: /game/donwloadbyJSON/{id}
+    defaults: { _controller: MachigaiGameBundle:Game:downloadByJSON }
+
 GameDownload:
     pattern: /game/download/{level}/{qcode}/{type}
     defaults: { _controller: MachigaiGameBundle:Game:download }
+
 GameFinish:
     pattern: /game/finish
     defaults: { _controller: MachigaiGameBundle:Game:finish }
@@ -220,7 +225,7 @@ SyncNotice:
     requirements:
         _method: GET
 SyncGame:
-    pattern: /sync/game/
+    pattern: /sync/game/{id}
     defaults: { _controller: MachigaiGameBundle:Android:game }
     requirements: 
         _method: GET

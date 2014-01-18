@@ -119,7 +119,12 @@ class Question
      */
     private $questionTitle;
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qcode", type="integer")
+     */
+    private $qcode;
 
     /**
      * Get id
@@ -481,5 +486,28 @@ class Question
     public function getQuestionTitle()
     {
         return $this->questionTitle;
+    }
+
+    /**
+     * Set qcode
+     *
+     * @param integer $qcode
+     * @return Question
+     */
+    public function setQcode($qcode)
+    {
+        $this->qcode = $qcode;
+
+        return $this;
+    }
+
+    /**
+     * Get qcode
+     *
+     * @return integer 
+     */
+    public function getQcode()
+    {
+        return $this->qcode;
     }
 }

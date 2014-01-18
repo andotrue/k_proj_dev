@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>196</id>
+ <name>備えは万全に</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>82</x><!--point のx座標 -->
+  <y>18</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>47</x><!--point のx座標 -->
+  <y>180</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>121</x><!--point のx座標 -->
+  <y>319</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>259</x><!--point のx座標 -->
+  <y>391</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>459</x><!--point のx座標 -->
+  <y>126</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>501</x><!--point のx座標 -->
+  <y>271</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>575</x><!--point のx座標 -->
+  <y>456</y><!--point のy座標-->
+ </point>
+</different>

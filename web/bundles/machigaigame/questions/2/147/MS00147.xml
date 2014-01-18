@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>147</id>
+ <name>花いっぱいの庭が完成！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>114</x><!--point のx座標 -->
+  <y>161</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>274</x><!--point のx座標 -->
+  <y>151</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>64</x><!--point のx座標 -->
+  <y>251</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>333</x><!--point のx座標 -->
+  <y>310</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>297</x><!--point のx座標 -->
+  <y>464</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>305</x><!--point のx座標 -->
+  <y>642</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>87</x><!--point のx座標 -->
+  <y>716</y><!--point のy座標-->
+ </point>
+</different>

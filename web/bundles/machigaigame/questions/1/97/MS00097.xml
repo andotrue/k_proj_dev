@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>97</id>
+ <name>大当たりおめでとう！</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>566</x><!--point のx座標 -->
+  <y>303</y><!--point のy座標-->
+ </point>
+</different>

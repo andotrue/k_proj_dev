@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>2</id>
+ <name>私をｹﾞﾚﾝﾃﾞに連れてって!</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>93</x><!--point のx座標 -->
+  <y>142</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>242</id>
+ <name>金銀財宝ざっくざく</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>310</x><!--point のx座標 -->
+  <y>35</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>71</x><!--point のx座標 -->
+  <y>114</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>58</x><!--point のx座標 -->
+  <y>274</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>195</x><!--point のx座標 -->
+  <y>354</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>216</x><!--point のx座標 -->
+  <y>540</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>62</x><!--point のx座標 -->
+  <y>478</y><!--point のy座標-->
+ </point>
+</different>
