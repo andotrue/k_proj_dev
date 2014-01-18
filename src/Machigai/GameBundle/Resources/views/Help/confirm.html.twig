@@ -3,9 +3,45 @@
 {% block title %}遊び方{% endblock %}
 
 {% block contents %}
-<img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_check.png')}}" width="100%" />
-<p style="padding:1em 2em;text-align:left;">以下の内容でよろしければ、送信ボタンを押してください。</p>
+<style>
+#allcontents{position:relative;margin-top:35%;}
+.formData{position:relative;margin-top:15%;}
+</style>
+<script>
+var image_path = null;
+var image_id = null;
+function changeImage(imageId){
+	var pre_src = $('#'+imageId).attr('src');
+	var src = pre_src.replace(/_off/g,'');
+	image_path = src;
+	image_id = imageId;
+	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
+}
+function originalImage(){
+	var pre_src = $('#'+image_id).attr('src');
+	var src = image_path.replace(/.png/g,'_off.png');
+	$('#'+image_id).attr("src",src);
+}
+function submitForm(){
+	$('#form_do').trigger('click');
+}
+</script>
+<img src="{{asset('/bundles/machigaigame/images/parts/2-04-4-2_bg.png')}}" style="position:absolute;left:0%;top:0%;width:100%;height:auto;" />
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_check.png')}}" style="position:absolute;left:0%;top:11%;width:100%;" />
 {{ form(form) }}
+{{ form_rest(form) }}
+<div id="allcontents">
+<div class="formData">{{inquiryData['title']}}</div>
+<div class="formData">{{inquiryData['email']}}</div>
+<div class="formData">{{inquiryData['content']}}</div>
+</div>
+
+<div style="position:relative;margin-top:15%">
+<img id="modifyButton" src="{{asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" style="width:25%;margin-right:5%" onclick="changeImage(this.id);history.back();"/>
+<img id="submitButton" src="{{asset('/bundles/machigaigame/images/parts/button_send_off.png')}}" style="width:25%;" onclick="changeImage(this.id);submitForm()"/>
+</div>
 {% endblock %}
 
 {% block footer %}{% endblock %}
