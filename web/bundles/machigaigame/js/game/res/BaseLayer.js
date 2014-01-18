@@ -1,9 +1,15 @@
 var BaseLayer = cc.Layer.extend({
+    HEIGHT: 1408,
+    MIDDLE_Y: 704,
+    MACHIGAI_Y: 1370,
+    OTETSUKI_Y: 1316,
     illusts: null,
     slider: null,
     parent: null,
     playInfo: null,
     clock: null,
+
+
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
@@ -17,26 +23,25 @@ var BaseLayer = cc.Layer.extend({
             this.parent = parent;
             this._initSelf();
 
-            var Header = cc.Sprite.create( gsDir + "background/header.png");
-            var Footer = cc.Sprite.create( gsDir + "background/footer.png");
+            var bg  = cc.Sprite.create( gsDir + "background/game_bg_web.png");
 
+            cc.log("");
             //イラスト描画エリア設定
-            var width = 640;
-            var height = 1280 - (Header._rect.height + Footer._rect.height);
 //            cc.log("IllustLayer.setIllustFullTargetRect(" + 0 + ", " + Footer._rect.height + ", " + width + ", " + height + ")");
-            this.illusts = new IllustLayer(cc.rect(0,Footer._rect.height, width, height), this.playInfo.LEVEL, this.playInfo.QCODE, this.playInfo.MACHIGAI_POINT_DATA );
+            this.illusts = new IllustLayer(cc.rect(0,0,0,0), this.playInfo.LEVEL, this.playInfo.QCODE, this.playInfo.MACHIGAI_POINT_DATA );
             this.addChild(this.illusts,0);
-            this.addChild(Header);
-            this.addChild(Footer);
-            Header.setAnchorPoint(1, 1);
-            Header.setPosition(720,1280);
-            Footer.setAnchorPoint(0,0);
-            Footer.setPosition(0,0);
+            this.addChild(bg, -100 );
+            bg.setAnchorPoint(0, 0);
+            bg.setPosition(0, 0 );
 
 
             var LabelOtetsuki = cc.Sprite.create( gsDir + "label/game_otetsuki.png" );
             var LabelMachigai = cc.Sprite.create( gsDir + "label/game_machigai.png" );
             var LabelTimelimit = cc.Sprite.create( gsDir + "label/game_timelimit.png" );
+
+//            var title = cc.LabelTTF("test", "Marker Felt",10);
+//            var title = new cc.LabelBMFont();
+ //           title.setAnchorPoint(1,1);
 
             this.initStarsAndHearts();
            
@@ -45,13 +50,12 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(LabelMachigai);
             this.addChild(LabelTimelimit);
 
-            LabelOtetsuki.setPosition(350,1216);
-            LabelMachigai.setPosition(350,1256);
-            LabelTimelimit.setPosition(100,1260);
+            LabelMachigai.setPosition(350, this.MACHIGAI_Y);
+            LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
+            LabelTimelimit.setPosition(100,1385);
 
             this.ng = cc.Sprite.create( gsDir + "other/ng.png" );
             this.ok = cc.Sprite.create( gsDir + "other/ok.png" );
-
             this.addChild(this.ng);
             this.addChild(this.ok);
 
@@ -119,7 +123,7 @@ var BaseLayer = cc.Layer.extend({
         this.onTouchEnded(touches[0], event);
     },
     onTouchBegan:function (touch, event) {
-        cc.log("Base.onTouchBegan: ( " + touch.getLocation().x + ", " + touch.getLocation().y + " )");
+        cc.log("Base.onTouchBegan: ( " + touch.getLocation().tox + ", " + touch.getLocation().y + " )");
 
         var touched = this.touchedFrom = touch.getLocation();
         var slidebar = this.slider.slidebar;
@@ -159,7 +163,7 @@ var BaseLayer = cc.Layer.extend({
             this.touchedTo = touch.getLocation();
             var dx = this.touchedTo.x - this.touchedFrom.x;
             var dy = this.touchedTo.y - this.touchedFrom.y;
-            this.illusts.move(dx, dy);
+            this.illusts.move(dx, dy,touch);
             this.touchedFrom = this.touchedTo;
         }
         if (this.isIllustTouched === true){
