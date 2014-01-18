@@ -1,14 +1,16 @@
-{% extends "MachigaiGameBundle:Help:base.html.twig" %}
-
 {% block title %}ヘルプ{% endblock %}
 
 {% block contents %}
 <img src="{{ asset('/bundles/machigaigame/images/parts/2-04-1_bg.png') }}" width="100%" style="position:absolute;top:0%;left:0%;"/>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
-<div style="position:relative;margin-top:45%">
-<a href="{{ path('SettingNickname') }}"><img id="nicknamechange" src="{{asset('/bundles/machigaigame/images/parts/button_nicknamechange_off.png')}}" width="40%" onclick="changeImage(this.id)"/></a>
-<div>
-
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_nicknamechange_setting.png')  }}" width="100%" style="position:absolute;left:0%;top:9%"/>
+<div style="width:100%;margin-left:20%;">
+<div style="position:relative;padding-top:35%;">
+<a href="{{ path('SettingNickname') }}"><img id="nicknamechange" src="{{asset('/bundles/machigaigame/images/parts/button_nickname_off.png')}}" width="65%" onclick="changeImage(this.id)"/></a>
+</div>
+<div style="position:relative;padding-top:10%;">
+<a href="{{ path('Help') }}"><img id="tohelptop" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop_off.png')}}" width="65%" onclick="changeImage(this.id)"/></a>
+</div>
 </div>
 <script>
 var image_path = null;

@@ -1,12 +1,18 @@
-{% extends "MachigaiGameBundle:Help:base.html.twig" %}
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
 
 {% block title %}遊び方{% endblock %}
 
 {% block contents %}
 <style>
-#form_title{position:relative;margin-top:48%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
-#form_email{position:relative;margin-top:14%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
-#form_content{position:relative;margin-top:14%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea2.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+#form_title{position:relative;margin-top:50%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+#form_email{position:relative;margin-top:16%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+#form_content{position:relative;margin-top:16%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea2.png')}});background-repeat:no-repeat;background-size:100% 100%;height:5em;}
+body,*{padding:0;border:none;margin:0;}
+         
+	 body{ text-align: center;}
 </style>
 <script>
 var image_path = null;
@@ -31,12 +37,11 @@ function submitForm(){
 <img src="{{asset('/bundles/machigaigame/images/parts/2-04-4-1_bg.png')}}" style="position:absolute;left:0%;top:0%;opacity:1.4;width:100%;height:auto"/>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_top.png')}}" width="100%" style="position:absolute;left:0%;top:10%"/>
-
-<p>以下の内容をご記入の上、入力内容確認ボタンを押してください。</p>
 {{ form(form) }}
 <div style="position:relative;margin-top:8%">
-<img id="otoiawasecheck" src="{{asset('/bundles/machigaigame/images/parts/button_otoiawasecheck_off.png')}}" width="60%" onclick="changeImage(this.id);submitForm()"/></div>
-<div style="position:relative;margin-top:5%">
- <a href="{{path('Help')}}" style="margin-right:7%;"><img id="button_tohelp" src="{{ asset('/bundles/machigaigame/images/parts/button_tohelp_off.png')}}" width="35%" onclick="changeImage(this.id)"></a><a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id)" /></a>
+<img id="otoiawasecheck" src="{{asset('/bundles/machigaigame/images/parts/button_otoiawasecheck_off.png')}}" width="64%" onclick="changeImage(this.id);submitForm()"/></div>
+<div style="position:relative;margin-top:4%">
+ <a href="{{path('HelpInquiry')}}""><img id="button_tohelp" src="{{ asset('/bundles/machigaigame/images/parts/buttom_return_off.png')}}" width="64%" onclick="changeImage(this.id)">
+ </a>
 </div>
 {% endblock %}
