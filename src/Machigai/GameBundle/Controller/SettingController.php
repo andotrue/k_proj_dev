@@ -19,7 +19,7 @@ class SettingController extends BaseController
 	$request = $this->getRequest();
         $form = $this->createFormBuilder()
 		 ->setMethod('GET')
-		 ->add('nickname', 'text',array('label'=>' ', 'attr'=>array('style'=>"margin-top:2%;font-size:2em;background-image:url(/bundles/machigaigame/images/parts/nicknametextarea.png);background-size:100% 100%; background-repeat:no-repeat;")))
+		 ->add('nickname', 'text',array('label'=>' ', 'attr'=>array('style'=>"margin-top:2%;font-size:1.5em;background-image:url(/bundles/machigaigame/images/parts/nicknametextarea.png);background-size:100% 100%; background-repeat:no-repeat;")))
 		 ->add('confirm', 'submit', array('label'=>'確認'))
 		 ->getForm();
 	$form->handleRequest($request);		

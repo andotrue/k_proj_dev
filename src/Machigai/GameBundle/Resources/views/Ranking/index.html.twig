@@ -49,6 +49,24 @@ function originalImage(){
   var src = image_path.replace(/.png/g,'_off.png');
   $('#'+image_id).attr("src",src);
 }
+window.onload = function(){		
+	var j = 1;
+	while(j <= 3){
+		var i = 1;
+		while(i <= 10){
+			var previousTime = $('.lavel_'+j+'previousMonthTime'+i).html();
+			previousTime = Time.milliSecondsToArray(previousTime)[0]+":"+Time.milliSecondsToArray(previousTime)[1]+":"+Time.milliSecondsToArray(previousTime)[2];
+			$('.lavel_'+j+'previousMonthTime'+i).html(previousTime);
+
+			var currentTime = $('.lavel_'+j+'currentMonthTime'+i).html();
+			currentTime = Time.milliSecondsToArray(currentTime)[0]+":"+Time.milliSecondsToArray(currentTime)[1]+":"+Time.milliSecondsToArray(currentTime)[2];
+			$('.lavel_'+j+'currentMonthTime'+i).html(currentTime);
+			i++
+		};
+		j++
+	}
+}
+
 </script>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_ranking.png') }}" width="100%"/>
 <section>
@@ -64,13 +82,13 @@ function originalImage(){
 <div id="ranking_area" class="bottom_blue_line" style="width: 100%;height:300px; overflow-y:scroll; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size: 100% auto; " >
  <ul id="panel" style="padding-top:0.8%; ">
 
-<div style="font-size:2em">
+<div style="font-size:1.2em">
  <div id="current_month">
   {% for rank in ranking_this_month %}
   <div class="game_lavel_{{rank.getLevel()}}">
    <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
     <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}}<br />
-    <span>タイム　</span>{{rank.getClearTime()}} 
+    <span>タイム　</span><div class="lavel_{{rank.getLevel()}}currentMonthTime{{ rank.getRank() }}">{{rank.getClearTime()}}</div>
    </li>
   </div>
   {% endfor %}
@@ -81,7 +99,7 @@ function originalImage(){
   <div class="game_lavel_{{rank.getLevel()}}">
    <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">  	
     <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}} さん<br />
-    <span>タイム　</span>{{rank.getClearTime()}} 
+    <span>タイム　</span><div class="lavel_{{rank.getLevel()}}previousMonthTime{{ rank.getRank() }}">{{rank.getClearTime()}}</div>
    </li>
   </div>
   {% endfor %}
@@ -93,6 +111,6 @@ function originalImage(){
 </section>
 <p style="padding:1%;text-align:left;">毎月末日 24:00時点での順位に応じてポイントが付与されます。<br />ランキングに挑戦するにはauIDログインが必要です。</p>
  <footer style="margin:3% auto 5% auto;">
-  <a href="{{path('Top')}}" style="margin-right:7%;"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
+  <a href="{{path('Top')}}" style="margin-right:7%;"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" onclick="changeImage(this.id);"></a>
  </footer>
 {% endblock %}

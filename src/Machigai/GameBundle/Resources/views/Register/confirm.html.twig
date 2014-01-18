@@ -1,33 +1,32 @@
 {% extends "MachigaiGameBundle::base.html.twig" %}
-
 {% block title %}ニックネーム名登録{% endblock %}
-
 {% block body %}
-<header><h1><img src="{{ asset('/bundles/machigaigame/images/parts/header.png')}}" style="width:100%"></h1></header>
-<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="width:100%">
-<div style="font-size:2em">
+
+<img src="{{ asset('/bundles/machigaigame/images/parts/1-01_5_bg
+.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
+
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="position:relative;top:10%;width:100%;margin-top:31%">
+
+<section id="nicknameConfirm" style="position:relative;margin-top:19%">
 <form action="{{ path('complete') }}" method="post" {{ form_enctype(form) }}>
-<section>
-<p>以下の内容でよろしければ登録ボタンを押してください。</p>
-<div style="2.5em;padding:5%"><p>{{nickname['nickname']}}</p></div>
+<div style=""><p>{{nickname['nickname']}}</p></div>
 <input type="submit" id="submitButton">
 <div id="submitEnd">
 {{form_row(form,{ 'attr': {'id': "submitEnd" } } )  }}
 {{ form_end (form) }}
 </div>
-<a href="{{path('Register')}}"><img id="button_back" src="{{ asset('/bundles/machigaigame/images/parts/button_back_off.png')}}" style="width:35%;align:center;" onclick="changeImage(this.id)"></a>
-<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_nicknamechange_off.png')}}" style="width:35%;align:center;" onclick="changeImage(this.id);submitNickname()">
 </section>
-</div>
+<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_regist_off.png')}}" onclick="changeImage(this.id);submitNickname()" style="position:relative;margin-top:15%%">
 <script>
 var image_path = null;
 var image_id = null;
 $(function(){
-	$('#submitButton').hide();
-	$('#submitEnd').hide();
+  $('#submitButton').hide();
+  $('#submitEnd').hide();
+  $('#form_confirm').hide();
 })
 function submitNickname(){
-	$('#submitButton').trigger("click");
+  $('#submitButton').trigger("click");
 }
 function changeImage(imageId){
   var pre_src = $('#'+imageId).attr('src');

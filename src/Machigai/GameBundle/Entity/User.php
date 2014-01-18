@@ -24,13 +24,13 @@ class User
 
     /**
      * @var string
-     * @ORM\Column(name="au_id", type="string", length=32)
+     * @ORM\Column(name="au_id", type="string", length=32, nullable=true)
      */
     private $auId;
 
     /**
      * @var string
-     * @ORM\Column(name="sync_token", type="string", length=255)
+     * @ORM\Column(name="sync_token", type="string", length=255, nullable=true)
      */
     private $syncToken;
 
@@ -40,6 +40,20 @@ class User
      * @ORM\Column(name="nickname", type="string", length=255)
      */
     private $nickname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mailAddress", type="string", length=255, nullable=true)
+     */
+    private $mailAddress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    private $password;
 
     /**
      * @var integer
@@ -571,5 +585,51 @@ class User
                 array('id'=>5, 'status' =>5 )
                 )
             ));
+    }
+
+    /**
+     * Set mailAddress
+     *
+     * @param string $mailAddress
+     * @return User
+     */
+    public function setMailAddress($mailAddress)
+    {
+        $this->mailAddress = $mailAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get mailAddress
+     *
+     * @return string 
+     */
+    public function getMailAddress()
+    {
+        return $this->mailAddress;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 }

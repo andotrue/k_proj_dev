@@ -64,6 +64,18 @@ Setting:
     requirements: 
         _method: GET
 
+JsonUpload:
+    pattern:  /game/uploadData
+    defaults: { _controller: MachigaiGameBundle:Game:uploadData }
+    requirements:
+        _method: POST
+
+JsonDownload:
+    pattern:  /game/downloadData
+    defaults: { _controller: MachigaiGameBundle:Game:downloadData }
+    requirements:
+        _method: GET
+
 SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
@@ -148,9 +160,33 @@ Register:
     pattern: /register/
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
+RegisterUser:
+    pattern: /register/userRegister
+    defaults: { _controller: MachigaiGameBundle:Register:userRegister }
+
+RegisterUserConfirm:
+    pattern: /register/userConfirm
+    defaults: { _controller: MachigaiGameBundle:Register:userConfirm }
+
+RegisterUserComplete:
+    pattern: /register/userComplete
+    defaults: { _controller: MachigaiGameBundle:Register:userComplete }
+
+SentEmail:
+    pattern: /register/sentEmail
+    defaults: { _controller: MachigaiGameBundle:Register:sentEmail }
+
+BeforeNickname:
+    pattern: /register/beforeRegisterNickname
+    defaults: { _controller: MachigaiGameBundle:Register:beforeRegisterNickname }
+
 Login:
     pattern: /register/login
     defaults: { _controller: MachigaiGameBundle:Register:login }
+
+LoginCheck:
+    pattern: /register/loginCheck
+    defaults: { _controller: MachigaiGameBundle:Register:loginCheck }
 
 RegisterConfirm:
     pattern: /register/confirm/
