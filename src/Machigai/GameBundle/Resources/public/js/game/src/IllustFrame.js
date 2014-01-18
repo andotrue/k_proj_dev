@@ -32,17 +32,31 @@ var IllustFrame = cc.Layer.extend({
         this.scaleIllust(index);
 
 	},
-    update:function(dx,dy, touched ){
-		cc.log("IllustFrame.update()");
+	update:function(dx,dy, touched ){
+		this.offsetX += dx;
+		this.offsetY += dy;
+		
+		this.setImage();
+		//cc.log("IllustFrame.update()");
+		
+		//this.offsetX = dx / this.scale;
+		//this.offsetY = dy / this.scale;
+		
+		//this.setImage();
+		
+		/*
+		
+		
         if( this.illust !== undefined){
           this.illust.removeFromParent();
         }
         var rect;
         this.offsetX += dx,
         this.offsetY += dy,
+	    */
 
-
-        this.illust = cc.Sprite.create(this.image_file_path /*, this.makeRect(index) */ );
+        //this.illust = cc.Sprite.create(this.image_file_path /*, this.makeRect(index) */ );
+		/*
         this.illust.setAnchorPoint(0.5,0.5);
         this.addChild( this.illust);
 
@@ -50,6 +64,7 @@ var IllustFrame = cc.Layer.extend({
         this.illust.setPosition(dx , dy);
         this.scaleIllust(index);
 //        this.friend.calledUpdate(dx,dy,touched);
+		*/
     },
     updateScale:function(scale){
         this.illust.setScale(scale);
@@ -120,14 +135,16 @@ var IllustFrame = cc.Layer.extend({
 
         var scale = this.scale;
 
-//        var rect3 = this.getRectForClipArea(0, 0, sender.width, sender.height, scale);
-        //var rect3 =  cc.rect( 0 , 0, sender.width, sender.height);
-        var rect3 = this.getRectForClipArea(0,0, this.originalWidth, this.originalHeight, scale);
+        var rect3 = this.getRectForClipArea(
+					this.offsetX,
+					this.offsetY,
+					this.originalWidth,
+					this.originalHeight,
+					scale);
 
         var illust = cc.Sprite.create(this.image_file_path, rect3);
-//            cc.log("illust.size = ( " + illust.getContentSize().getWidth );
-//            cc.log("illust.size = ( " + illust.getTextureRect().width );
-        var rect1 = cc.rect(this.FRAME_X,this.FRAME_Y1,this.FRAME_WIDTH,this.FRAME_HEIGHT);
+
+		var rect1 = cc.rect(this.FRAME_X,this.FRAME_Y1,this.FRAME_WIDTH,this.FRAME_HEIGHT);
         var rect2 = cc.rect(this.FRAME_X,this.FRAME_Y2,this.FRAME_WIDTH,this.FRAME_HEIGHT);
 
         this.addChild(illust);
@@ -165,6 +182,8 @@ var IllustFrame = cc.Layer.extend({
     //スプライトをカットするための領域を取得
     getRectForClipArea:function(offsetX, offsetY,  orgWidth, orgHeight, scale){
 		
+		cc.log("offsetX : " + offsetX + " offsetY : " + offsetY);
+
 		scale = scale + 0.5;
 		
 		// 縦横比
@@ -176,7 +195,6 @@ var IllustFrame = cc.Layer.extend({
 		var ocw = orgWidth / scale;
 		var och = orgHeight / scale;
 
-		cc.log("cw, ch, ocw, och = ( " + cw + ", " + ch + ", " + ocw + ", " + och + ")");
 
 		// 読み取りエラーを無くす処理（イレギュラーなデータ）
 		if ( cw > orgWidth || ch > orgHeight ){
@@ -184,30 +202,10 @@ var IllustFrame = cc.Layer.extend({
 			ch = och;
 		}
 		
-		
-
-		
-		
-		/*
-        if ( this.FRAME_WIDTH < cw ){
-        	cw = this.FRAME_WIDTH;
-		}
-		
-		if( this.FRAME_HEIGHT < ch ){
-			ch = this.FRAME_HEIGHT;
-		}
-		*/
-//		var cw = this.FRAME_WIDTH * scale;
-//		var ch = this.FRAME_HEIGHT * scale;
-
 		var cx = offsetX / scale;
 		var cy = offsetY / scale;
-            cc.log("cw, ch, cx, cy, scale = ( " + cw + ", " + ch + ", " + cx + ", " + cy + "," + scale + ")");
-        //}else{
-        //}
-		//return cc.rect( cx , cy , cw, ch);
-		return cc.rect( 0 , 0 , cw, ch);
-		//return cc.rect( 0 , 0 , 720, 720);
+
+		return cc.rect( cx , cy , cw, ch);
 
     },
     getScale:function(){
