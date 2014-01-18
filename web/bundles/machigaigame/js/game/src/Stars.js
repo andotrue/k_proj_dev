@@ -1,10 +1,10 @@
 var Stars = cc.Class.extend({
     _MAX: null,
     _count: 0,
-    _objWidth: 31,
+    _objWidth: 30,
     _objHeight: 40,
-    _objX: 435,
-    _objY: 1370,
+    _objX: 420,
+    _objY: 1256,
     _sprites: [],
     parent: null,
     _file_path_off: gsDir + "other/game_star_off.png",

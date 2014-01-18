@@ -1,11 +1,8 @@
 var Slider = cc.Layer.extend({
     slidebar: null,
     slideicon: null,
-    MIDDLE_X: 360,
-    MIDDLE_Y: 390,
     ctor:function (start,end) {
         cc.log("Slider.ctor");
-        self = this;
         this._super();
 
         if (start === undefined )
@@ -24,10 +21,10 @@ var Slider = cc.Layer.extend({
             var slideicon = cc.Sprite.create( gsDir + "other/game_slideicon.png" );
             this.addChild(slidebar);
             this.addChild(slideicon);
-            slidebar.setPosition( self.MIDDLE_X, self.MIDDLE_Y);
-            slidebar.setScale(1);
-            slideicon.setPosition(self.MIDDLE_X, self.MIDDLE_Y);
-            slideicon.setScale(1);
+            slidebar.setPosition(250,125);
+            slidebar.setScaleX(0.75);
+            slideicon.setPosition(250,125);
+            slideicon.setScaleX(0.75);
             this.slidebar = slidebar;
             this.slideicon = slideicon;
         }

@@ -65,5 +65,128 @@ class SettingController extends BaseController
     {
         return $this->render('MachigaiGameBundle:Setting:complete.html.twig');
     }
+    public function userSettingAction(){
+    	return $this->render('MachigaiGameBundle:Setting:userSetting.html.twig');
+    }
+    public function changeEmailAction(){
+    	$pre_userId = $this->getUser();
+	    $userId = $pre_userId->getId();
 
+    	$form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->setAction($this->generateUrl('ChangeEmailConfirm'))
+         ->add('mailAddress', 'text',array('label'=>false))
+         ->add('confirm', 'submit', array('label'=>'内容を確認'))
+         ->getForm();
+ /*       $form->handleRequest($request);
+      if( $form->get('confirm')->isClicked() ){
+        $data = $form->getData();
+	 	$form = $this->createFormBuilder()
+		 ->setAction($this->generateUrl('changeEmailConfirm'))
+		 ->setMethod('POST')
+		 ->add('mailAddress','hidden',array('label'=>false))
+		 ->add('register', 'submit', array('label'=>'登録'))
+		 ->getForm();
+	    $form->setData($data);
+	    $form->bind($request);
+        $newEmail = $form->getData();
+         	return $this->render('MachigaiGameBundle:Setting:changeEmailConfirm.html.twig', array('form' => $form->createView()));
+         }else{
+*/         	return $this->render('MachigaiGameBundle:Setting:changeEmail.html.twig',array('form' => $form->createView()));
+             	
+    }
+    public function changeEmailConfirmAction(Request $request){
+         $form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->setAction($this->generateUrl('ChangeEmailSent'))
+         ->add('mailAddress', 'hidden',array('label'=>false))
+         ->add('confirm', 'submit', array('label'=>'内容を確認'))
+         ->getForm();
+         $form->bind($request);
+         $newEmail = $form->getData();
+         return $this->render('MachigaiGameBundle:Setting:changeEmailConfirm.html.twig',array('newEmail'=>$newEmail,'form' => $form->createView()));
+    }
+    public function changeEmailSentAction(Request $request){
+    	$form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->add('mailAddress', 'hidden',array('label'=>false))
+         ->getForm();
+         $form->bind($request);
+         $newEmail = $form->getData();
+    	/*
+    	sending an email function
+    	*/
+    	return $this->render('MachigaiGameBundle:Setting:changeEmailSent.html.twig',array('form' => $form->createView()));
+    }
+    public function changeEmailCompleteAction(){
+		$pre_userId = $this->getDoctrine()
+         ->getRepository('MachigaiGameBundle:User')
+         ->findAll();
+    	$userId = $pre_userId[0]->getId();
+
+    	$em = $this->getDoctrine()->getEntityManager();
+        $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+        $user->setMailAddress($email);
+        $em->flush();
+    	return $this->render('MachigaiGameBundle:Setting:changeEmailComplete.html.twig');
+    }
+    public function changePasswordAction(){
+        $form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->setAction($this->generateUrl('ChangePasswordConfirm'))
+         ->add('password', 'text',array('label'=>false))
+         ->add('confirm', 'submit', array('label'=>'内容を確認'))
+         ->getForm();
+    	return $this->render('MachigaiGameBundle:Setting:changePassword.html.twig',array('form' => $form->createView()));
+    }
+    public function changePasswordConfirmAction(Request $request){
+        $form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->setAction($this->generateUrl('ChangePasswordComplete'))
+         ->add('password', 'hidden',array('label'=>false))
+         ->add('confirm', 'submit', array('label'=>'内容を確認'))
+         ->getForm();
+         $form->bind($request);
+         $password = $form->getData();
+
+        return $this->render('MachigaiGameBundle:Setting:changePasswordConfirm.html.twig',array('form' => $form->createView()));
+    }
+    public function changePasswordCompleteAction(Request $request){
+        $pre_userId = $this->getUser();
+        $userId = $pre_userId->getId();
+        $form = $this->createFormBuilder()
+         ->setMethod('GET')
+         ->add('password', 'hidden',array('label'=>false))
+         ->add('confirm', 'submit', array('label'=>'内容を確認'))
+         ->getForm();
+         $form->bind($request);
+         $password = $form->getData();
+
+         $em = $this->getDoctrine()->getEntityManager();
+         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+         $user->setPassword($password['password']);
+         $em->flush();
+        return $this->render('MachigaiGameBundle:Setting:changePasswordComplete.html.twig');
+    }
+    public function deleteUserAction(){
+    	return $this->render('MachigaiGameBundle:Setting:deleteUser.html.twig');
+    }
+    public function deleteUserConfirmAction(){
+    	return $this->render('MachigaiGameBundle:Setting:deleteUserConfirm.html.twig');
+    }
+    public function deleteUserCompleteAction(Request $request){
+    	$pre_userId = $this->getUser();
+        $userId = $pre_userId->getId();
+    	$session = $request->getSession();
+        $id = $session->get('id');
+        if(!empty($id)){
+	        $session->remove('id');
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+         $em->remove($user);
+         $em->flush();
+
+    	return $this->render('MachigaiGameBundle:Setting:deleteUserComplete.html.twig');
+    }
 }

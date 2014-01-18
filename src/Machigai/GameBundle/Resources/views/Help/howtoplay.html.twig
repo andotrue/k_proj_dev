@@ -1,8 +1,11 @@
-{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 
 {% block title %}遊び方{% endblock %}
 
 {% block contents %}
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
 <script>
 var image_path = null;
 var image_id = null;
@@ -20,31 +23,41 @@ function originalImage(){
 	$('#'+image_id).attr("src",src);
 }
 </script>
-<header><h1>ヘルプ</h1></header>
-<section id="howtoplay">
+<style>
+body{text-align: center}
+th{padding:7%;}
+h3{font-size:0.6em;}
+p{font-size:0.5em;}
+</style>
+<img src="{{ asset('/bundles/machigaigame/images/parts/2-04-2_bg.png')  }}" style="position:absolute;left:0%;top:0%;width:100%;height:auto"/>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_help_asobikata.png')  }}" width="100%" style="position:absolute;left:0%;top:10%"/>
+
+<section id="howtoplay" style="position:relative;margin-top:22%;font-size:0.8em;">
 <article>
-<h2>まちがいさがし</h2>
-<img src="" alt="ゲーム画面イメージ"/>
-<p>テキスト</p>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_asobikata_game.png')  }}" width="100%" style=""/>
+<img src="" alt="ゲーム画面イメージ" width="300px" height="200px"/>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
 <table>
- <tr><th><img src="" alt="問題イラスト" /></th><td><h3>拡大縮小</h3><p>テキスト</p></td></tr>
- <tr><th><img src="" alt="おてつき" /></th><td><h3>おてつき</h3><p>テキスト</p></td></tr>
- <tr><th><img src="" alt="ヒントボタン" /></th><td><h3>ヒント</h3><p>テキスト</p></td></tr>
- <tr><th><img src="" alt="保存して中断" /></th><td><h3>保存して中断</h3><p>テキスト</p></td></tr>
- <tr><th><img src="" alt="ギブアップ" /></th><td><h3>ギブアップ</h3><p>テキスト</p></td></tr>
+ <tr><th><img width="150px" height="150px" src="" alt="問題イラスト" /></th><td><h3>拡大縮小</h3><p>テキスト</p></td></tr>
+ <tr><th><img width="150px" height="150px" src="" alt="おてつき" /></th><td><h3>おてつき</h3><p>テキスト</p></td></tr>
+ <tr><th><img width="150px" height="150px" src="" alt="ヒントボタン" /></th><td><h3>ヒント</h3><p>テキスト</p></td></tr>
+ <tr><th><img width="150px" height="150px" src="" alt="保存して中断" /></th><td><h3>保存して中断</h3><p>テキスト</p></td></tr>
+ <tr><th><img width="150px" height="150px" src="" alt="ギブアップ" /></th><td><h3>ギブアップ</h3><p>テキスト</p></td></tr>
 </table>
 </article>
 <article>
-<h2>ランキング</h2>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_asobikata_ranking.png')  }}" width="100%" style=""/>
 <table>
- <tr><th><img src="" alt="ランキング"/></th><td><p>テキスト</p></td></tr>
+ <tr><th><img width="150px" height="150px" src="" alt="ランキング"/></th><td><p>テキスト</p></td></tr>
 </table>
 </article>
 <article>
-<h2>ショップ</h2>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_asobikata_shop.png')  }}" width="100%" style=""/>
 <table>
- <tr><th><img src="" alt="ショップイメージ" /></th><td><p>テキスト</p></td></tr>
+ <tr><th><img width="150px" height="150px" src="" alt="ショップイメージ" /></th><td><p>テキスト</p></td></tr>
 </table>
 </article>
 </section>
+<a href="{{ path('Help') }}"><img id="tohelptop" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop_off.png')}}" width="65%" onclick="changeImage(this.id)"/></a>
 {% endblock %}

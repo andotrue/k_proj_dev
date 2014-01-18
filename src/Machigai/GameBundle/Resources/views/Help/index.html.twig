@@ -27,10 +27,14 @@ function originalImage(){
   <a href="{{ path('HelpHowtoplay') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_asobikata.png')  }}" width="100%"/></a>
   <a href="{{ path('HelpTerms') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_kiyaku.png')  }}" width="100%"/></a>
   <a href="{{ path('HelpInquiry') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_otoiawase.png')  }}" width="100%"/></a>
+<a href="{{path('UserSetting')}}">ユーザー登録について</a>
+  <!--
+   <a href="{{ path('UserSetting') }}"><img alt="userSetting" src="{{ asset('/bundles/machigaigame/images/parts/button_help_setting.png')  }}" width="100%"/></a>
+  -->
  {% endblock %}
  
  {% block footer %}
  <footer style="margin-top:10%;">
-  <a href="{{path('Shop')}}" style="margin-right:7%;"><img id="button_toshop" src="{{ asset('/bundles/machigaigame/images/parts/button_toshop_off.png')}}" width="35%" onclick="changeImage(this.id)"></a><a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id)" /></a>
+ <a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id)" /></a>
  </footer>
  {% endblock %}
