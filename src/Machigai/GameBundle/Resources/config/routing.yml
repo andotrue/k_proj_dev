@@ -46,6 +46,50 @@ HelpInquiry:
     pattern: /help/inquiry
     defaults: { _controller: MachigaiGameBundle:Help:inquiry }
 
+UserSetting:
+    pattern: /setting/userSetting
+    defaults: { _controller: MachigaiGameBundle:Setting:userSetting }
+
+ChangeEmail:
+    pattern: /setting/changeEmail
+    defaults: { _controller: MachigaiGameBundle:Setting:changeEmail }
+
+ChangeEmailConfirm:
+    pattern: /setting/changeEmailConfirm
+    defaults: { _controller: MachigaiGameBundle:Setting:changeEmailConfirm }
+
+ChangeEmailSent:
+    pattern: /setting/changeEmailSent
+    defaults: { _controller: MachigaiGameBundle:Setting:changeEmailSent }
+
+ChangeEmailComplete:
+    pattern: /setting/changeEmailComplete/
+    defaults: { _controller: MachigaiGameBundle:Setting:changeEmailComplete }
+
+ChangePassword:
+    pattern: /setting/changePassword
+    defaults: { _controller: MachigaiGameBundle:Setting:changePassword }
+
+ChangePasswordConfirm:
+    pattern: /setting/changePasswordConfirm
+    defaults: { _controller: MachigaiGameBundle:Setting:changePasswordConfirm }
+
+ChangePasswordComplete:
+    pattern: /setting/changePasswordComplete
+    defaults: { _controller: MachigaiGameBundle:Setting:changePasswordComplete }
+
+DeleteUser:
+    pattern: /setting/deleteUser
+    defaults: { _controller: MachigaiGameBundle:Setting:deleteUser }
+
+DeleteUserConfirm:
+    pattern: /setting/deleteUserConfirm
+    defaults: { _controller: MachigaiGameBundle:Setting:deleteUserConfirm }
+
+DeleteUserComplete:
+    pattern: /setting/deleteUserComplete
+    defaults: { _controller: MachigaiGameBundle:Setting:deleteUserComplete }
+
 SettingNicknameregister:
     pattern: /setting/nickname
     defaults: { _controller: MachigaiGameBundle:Setting:nicknameRegister }
