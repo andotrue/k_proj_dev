@@ -27,9 +27,9 @@ class HelpController extends BaseController
 	$request = $this->getRequest();
         $form = $this->createFormBuilder()
 		 ->setMethod('GET')
-		 ->add('title', 'text',array('label'=>'件名'))
-		 ->add('email', 'email',array('label'=>'メールアドレス'))
-		 ->add('content', 'textarea',array('label'=>'お問い合わせ内容'))
+		 ->add('title', 'text',array('label'=>false))
+		 ->add('email', 'email',array('label'=>false))
+		 ->add('content', 'textarea',array('label'=>false))
 		 ->add('confirm', 'submit', array('label'=>'入力内容確認'))
 		 ->getForm();
 	$form->handleRequest($request);		
@@ -38,14 +38,16 @@ class HelpController extends BaseController
 	 $form = $this->createFormBuilder()
 		 ->setAction($this->generateUrl('HelpInquiryFormDo'))
 		 ->setMethod('POST')
-		 ->add('title', 'text',array('label'=>'件名', 'attr'=>array('disabled'=>'disabled')))
-		 ->add('email', 'email',array('label'=>'メールアドレス', 'attr'=>array('disabled'=>'disabled')))
-		 ->add('content', 'textarea',array('label'=>'お問い合わせ内容', 'attr'=>array('disabled'=>'disabled')))
+		 ->add('title', 'hidden',array('label'=>false))
+		 ->add('email', 'hidden',array('label'=>false))
+		 ->add('content', 'hidden',array('label'=>false))
 		 ->add('do', 'submit', array('label'=>'登録'))
 		 ->add('ammend','button',array('label'=>'修正', 'attr'=>array('onclick'=>'history.back()')))
 		 ->getForm();
 	 $form->setData($data);
-         return $this->render('MachigaiGameBundle:Help:confirm.html.twig', array('form' => $form->createView()) );
+	 $form->bind($request);
+     $inquiryData = $form->getData();
+         return $this->render('MachigaiGameBundle:Help:confirm.html.twig', array('form' => $form->createView(),'inquiryData'=>$inquiryData) );
 	}else{
 	// 通常のGETリクエスト
          return $this->render('MachigaiGameBundle:Help:form.html.twig', array('form' => $form->createView()) );
@@ -60,9 +62,10 @@ class HelpController extends BaseController
 		 ->add('content', 'textarea',array('label'=>'お問い合わせ内容'))
 		 ->add('do', 'submit', array('label'=>'登録'))
 		 ->getForm();
-	$form->handleRequest($request);		
-	 #TODO: Deal with nickname registration.
+	$form->bind($request);
+	$inquiryData = $form->getData();
 	if ( $form->get('do')->isClicked() && $form->isValid()){
+		#TODO:sending emails function
 		return $this->redirect($this->generateUrl('HelpInquiryFormComplete'));
 	}
     }

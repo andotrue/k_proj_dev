@@ -18,7 +18,7 @@
    </p>
 </div>
 
-<div style="display:inline-block;float:right;height:35%">
+<div style="display:inline-block;width:25%;margin-top7%">
     <div align="center">
     {% if date(item.getCreatedAt) > date('-7days') %}
      <img src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
@@ -30,7 +30,7 @@
   <img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
   </a>
   {% else %}
-    <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopbuy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+    <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
   {% endif %}
   </span>
   </div>

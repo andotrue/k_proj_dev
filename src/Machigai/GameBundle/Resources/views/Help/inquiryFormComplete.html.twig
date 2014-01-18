@@ -3,6 +3,11 @@
 {% block title %}ヘルプ{% endblock %}
 
 {% block contents %}
-<img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_sendend.png')}}" width="100%" />
- <p style="padding:1em 2em;text-align:left;">送信が完了しました。</p>
+<img src="{{asset('/bundles/machigaigame/images/parts/2-04-4-3_bg.png')}}" style="position:absolute;top:0%;left:0%;width:100%;height:auto"/>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_sendend.png')}}" width="100%" style="position:absolute;top:10%;left:0%"/>
+
+<div style="position:relative;margin-top:60%">
+	 <a href="{{path('Help')}}" style="margin-right:7%;"><img id="button_tohelp" src="{{ asset('/bundles/machigaigame/images/parts/button_tohelp_off.png')}}" width="35%" onclick="changeImage(this.id)"></a><a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id)" /></a>
+</div>
 {% endblock %}

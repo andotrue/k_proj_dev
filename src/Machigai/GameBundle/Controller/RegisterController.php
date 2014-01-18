@@ -215,5 +215,7 @@ class RegisterController extends BaseController
     public function beforeRegisterNicknameAction(){
         return $this->render('MachigaiGameBundle:Register:beforeRegisterNickname.html.twig');
     }
-
+    public function reissuePassword(){
+        return $this->render('MachigaiGameBundle:Register:reissuePassword.html.twig');
+    }
 }

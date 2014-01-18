@@ -20,18 +20,13 @@ function originalImage(){
   $('#'+image_id).attr("src",src);
 }
 </script>
-<div style="font-size:2em;">
-<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%"/>
-<div style="border-bottom: 3px solid rgb(25,152,231);"></div>
-<div style="padding:1%">
-<p>ダウンロード</p>
-</div>
-<div style="border-bottom: 3px solid rgb(25,152,231);"></div>
-<div style="padding:5%">
-<p>下のボタンを押すとダウンロードがはじまります。</p>
-</div>
-<a href="{{path('downloadExecute',{"id":id})}}"><img id="downloadExecute" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_download_off.png')}}" width="40%" style="padding:5%" onclick="changeImage(this.id);"></a><br />
+<div style="">
+<img src="{{ asset('/bundles/machigaigame/images/parts/2-03-2_bg.png') }}" width="100%" style="position:absolute;left:0%top:0%;"/>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%" style="position:absolute;top:0%;left:0%"/>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop_download.png') }}" width="100%" style="position:relative;margin-top:15%"/>
+<div style="position:relative;margin-top:16%">
+<a href="{{path('downloadExecute',{"id":id})}}"><img id="downloadExecute" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_download_off.png')}}" width="60%" style="padding:5%" onclick="changeImage(this.id);"></a><br />
 <a href="{{path('Shop')}}"><img id="toshop" src="{{ asset('/bundles/machigaigame/images/parts/button_toshop_off.png')}}" width="25%" style="padding:3%" onclick="changeImage(this.id);"></a>
-<a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="25%" style="padding:3%" onclick="changeImage(this.id);"></a>
+<a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_totop_off.png')}}" width="25%" style="padding:3%" onclick="changeImage(this.id);"></a>
 </div>
 {% endblock %}
