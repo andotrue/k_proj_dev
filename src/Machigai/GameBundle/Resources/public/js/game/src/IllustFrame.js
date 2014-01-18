@@ -176,6 +176,10 @@ var IllustFrame = cc.Layer.extend({
 		illust.setScale(new_scale);
 		
         this.illust = illust;
+		
+		// ちょっと強引だけどスプライトにイベント追加
+		this.illust.onEnter
+		
     },
 
 

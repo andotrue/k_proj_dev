@@ -137,7 +137,13 @@ var BaseLayer = cc.Layer.extend({
             cc.log("Inside the slideicon area!");
             this.canMoveSlider = true;
         }
-        if(cc.rectContainsRect(this.illusts.fullContentsRect,touched)) {
+		
+		// ２つのイラスト上にポイントがあるかをチェック
+		var point0 = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation());
+		var point1 = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation());
+		
+		if(point0.x > 0 || point1.x > 0 ){
+			
             this.canMoveIllust = true;
             this.isIllustTouched = true;
             cc.log("Inside the slideicon area!");
@@ -192,11 +198,34 @@ var BaseLayer = cc.Layer.extend({
         this.isIllustTouched = null;
 
         this.checkGameOver();
-        
+
         return true;
     },
     checkAnswer:function (touch){
-        cc.log("Illust Touched!");
+		
+		var margin = 20;
+		
+		// ポイントを取得
+		var point = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation);
+		if( point.x <= 0){
+			point = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation);
+		}
+		
+		// 解答群の取得
+		var objs = this.playInfo.getClickPointsData();
+		for( var i in objs ){
+			var ap = objs[i];
+			
+			cc.log("anser_point " + ap.x + " " + ap.y);
+			
+			if( (ap.x - margin < point.x && ap.x + margin > point.x) &&
+				(ap.y - margin < point.y && ap.y + margin > point.y )){
+			
+				this.isOK = true;
+			}
+		}
+		
+        cc.log("Illust Touched! ");
         if(this.isOK) return this.runOK();
         return this.runNG();
     },
