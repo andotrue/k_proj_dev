@@ -33,7 +33,11 @@ var IllustFrame = cc.Layer.extend({
 
 	},
 	update:function(dx,dy, touched ){
-		this.offsetX += dx;
+		
+		this.dx = dx;
+		this.dy = dy;
+		
+		this.offsetX -= dx;
 		this.offsetY += dy;
 		
 		this.setImage();
@@ -176,10 +180,6 @@ var IllustFrame = cc.Layer.extend({
 		illust.setScale(new_scale);
 		
         this.illust = illust;
-		
-		// ちょっと強引だけどスプライトにイベント追加
-		this.illust.onEnter
-		
     },
 
 
@@ -190,24 +190,38 @@ var IllustFrame = cc.Layer.extend({
 
 		scale = scale + 0.5;
 		
-		// 縦横比
-		var h_rate = this.FRAME_HEIGHT / this.FRAME_WIDTH;
-		
 		var cw = this.FRAME_WIDTH / scale;
 		var ch = this.FRAME_HEIGHT / scale;
 		
 		var ocw = orgWidth / scale;
 		var och = orgHeight / scale;
 
+		var cx = offsetX / scale;
+		var cy = offsetY / scale;
 
-		// 読み取りエラーを無くす処理（イレギュラーなデータ）
+		// 読み取りエラーを無くす処理
 		if ( cw > orgWidth || ch > orgHeight ){
 			cw = ocw;
 			ch = och;
 		}
 		
-		var cx = offsetX / scale;
-		var cy = offsetY / scale;
+		// 左右の上限、下限の設定
+		if(cw + cx > orgWidth){
+			cx = orgWidth - cw;
+			this.offsetX += this.dx;
+		} else if(cx < 0){
+			cx = 0;
+			this.offsetX = 0;
+		}
+
+		// 上下の上限、下限の設定
+		if(ch + cy > orgHeight){
+			cy = orgHeight - ch;
+			this.offsetY -= this.dy;
+		} else if( cy < 0){
+			cy = 0;
+			this.offsetY = 0;
+		}
 
 		return cc.rect( cx , cy , cw, ch);
 
