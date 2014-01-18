@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>217</id>
+ <name>水辺でバードウォッチング</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>161</x><!--point のx座標 -->
+  <y>144</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>281</x><!--point のx座標 -->
+  <y>104</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>364</x><!--point のx座標 -->
+  <y>216</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>225</x><!--point のx座標 -->
+  <y>267</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>76</x><!--point のx座標 -->
+  <y>383</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>335</x><!--point のx座標 -->
+  <y>384</y><!--point のy座標-->
+ </point>
+</different>

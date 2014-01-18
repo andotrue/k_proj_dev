@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>131</id>
+ <name>本番10分前で～す！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>60</x><!--point のx座標 -->
+  <y>11</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>248</x><!--point のx座標 -->
+  <y>47</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>332</x><!--point のx座標 -->
+  <y>272</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>100</x><!--point のx座標 -->
+  <y>274</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>290</x><!--point のx座標 -->
+  <y>503</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>71</x><!--point のx座標 -->
+  <y>571</y><!--point のy座標-->
+ </point>
+</different>

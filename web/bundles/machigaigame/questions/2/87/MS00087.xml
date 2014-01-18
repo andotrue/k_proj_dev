@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>87</id>
+ <name>もうすぐ巣立ちの時・・・</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>310</x><!--point のx座標 -->
+  <y>128</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>31</x><!--point のx座標 -->
+  <y>122</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>130</x><!--point のx座標 -->
+  <y>293</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>224</x><!--point のx座標 -->
+  <y>452</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>90</x><!--point のx座標 -->
+  <y>484</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>105</x><!--point のx座標 -->
+  <y>660</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>335</x><!--point のx座標 -->
+  <y>636</y><!--point のy座標-->
+ </point>
+</different>

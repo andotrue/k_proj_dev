@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>266</id>
+ <name>満開の4月！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>121</x><!--point のx座標 -->
+  <y>113</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>151</x><!--point のx座標 -->
+  <y>261</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>327</x><!--point のx座標 -->
+  <y>296</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>30</x><!--point のx座標 -->
+  <y>524</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>251</x><!--point のx座標 -->
+  <y>517</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>94</x><!--point のx座標 -->
+  <y>684</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>301</x><!--point のx座標 -->
+  <y>654</y><!--point のy座標-->
+ </point>
+</different>

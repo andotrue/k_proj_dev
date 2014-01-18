@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>9</id>
+ <name>新しい朝がきた!</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>384</x><!--point のx座標 -->
+  <y>20</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>229</x><!--point のx座標 -->
+  <y>146</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>102</x><!--point のx座標 -->
+  <y>138</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>147</x><!--point のx座標 -->
+  <y>236</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>338</x><!--point のx座標 -->
+  <y>309</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>307</x><!--point のx座標 -->
+  <y>464</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>250</x><!--point のx座標 -->
+  <y>452</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>51</x><!--point のx座標 -->
+  <y>444</y><!--point のy座標-->
+ </point>
+</different>

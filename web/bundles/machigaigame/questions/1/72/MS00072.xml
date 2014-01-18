@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>72</id>
+ <name>それいけ！ﾐｨちゃん6</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>158</x><!--point のx座標 -->
+  <y>107</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>156</x><!--point のx座標 -->
+  <y>619</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>36</x><!--point のx座標 -->
+  <y>777</y><!--point のy座標-->
+ </point>
+</different>

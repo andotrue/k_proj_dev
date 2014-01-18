@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>245</id>
+ <name>新型サファリパーク!?</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>108</x><!--point のx座標 -->
+  <y>45</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>26</x><!--point のx座標 -->
+  <y>318</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>29</x><!--point のx座標 -->
+  <y>477</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>223</x><!--point のx座標 -->
+  <y>313</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>334</x><!--point のx座標 -->
+  <y>251</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>335</x><!--point のx座標 -->
+  <y>560</y><!--point のy座標-->
+ </point>
+</different>

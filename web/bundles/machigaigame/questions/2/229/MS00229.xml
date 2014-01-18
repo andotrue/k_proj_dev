@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>229</id>
+ <name>ネコに長靴をはかせると？</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>91</x><!--point のx座標 -->
+  <y>82</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>266</x><!--point のx座標 -->
+  <y>26</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>593</x><!--point のx座標 -->
+  <y>39</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>95</x><!--point のx座標 -->
+  <y>259</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>37</x><!--point のx座標 -->
+  <y>333</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>360</x><!--point のx座標 -->
+  <y>401</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>598</x><!--point のx座標 -->
+  <y>382</y><!--point のy座標-->
+ </point>
+</different>

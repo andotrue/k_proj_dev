@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>119</id>
+ <name>ホラーハウス 不気味な２階</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>117</x><!--point のx座標 -->
+  <y>24</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>277</x><!--point のx座標 -->
+  <y>148</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>222</x><!--point のx座標 -->
+  <y>330</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>32</x><!--point のx座標 -->
+  <y>376</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>23</x><!--point のx座標 -->
+  <y>487</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>221</x><!--point のx座標 -->
+  <y>526</y><!--point のy座標-->
+ </point>
+</different>

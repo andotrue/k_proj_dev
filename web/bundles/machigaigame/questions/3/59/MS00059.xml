@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>59</id>
+ <name>動物たちの楽園</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>116</x><!--point のx座標 -->
+  <y>73</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>202</x><!--point のx座標 -->
+  <y>75</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>361</x><!--point のx座標 -->
+  <y>79</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>305</x><!--point のx座標 -->
+  <y>181</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>208</x><!--point のx座標 -->
+  <y>199</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>137</x><!--point のx座標 -->
+  <y>181</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>59</x><!--point のx座標 -->
+  <y>281</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>131</x><!--point のx座標 -->
+  <y>409</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>215</x><!--point のx座標 -->
+  <y>400</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>285</x><!--point のx座標 -->
+  <y>368</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>323</x><!--point のx座標 -->
+  <y>310</y><!--point のy座標-->
+ </point>
+</different>

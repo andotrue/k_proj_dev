@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>63</id>
+ <name>ホラーハウスからの帰還</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>226</x><!--point のx座標 -->
+  <y>23</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>103</x><!--point のx座標 -->
+  <y>75</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>156</x><!--point のx座標 -->
+  <y>332</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>254</x><!--point のx座標 -->
+  <y>440</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>71</x><!--point のx座標 -->
+  <y>492</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>245</x><!--point のx座標 -->
+  <y>601</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>29</x><!--point のx座標 -->
+  <y>744</y><!--point のy座標-->
+ </point>
+</different>

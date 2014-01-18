@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>31</id>
+ <name>自然とふれあう休日</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>127</x><!--point のx座標 -->
+  <y>99</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>363</x><!--point のx座標 -->
+  <y>150</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>58</x><!--point のx座標 -->
+  <y>206</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>257</x><!--point のx座標 -->
+  <y>194</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>340</x><!--point のx座標 -->
+  <y>303</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>277</x><!--point のx座標 -->
+  <y>398</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>114</x><!--point のx座標 -->
+  <y>402</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>110</x><!--point のx座標 -->
+  <y>269</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>116</id>
+ <name>パレードが始まるよ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>39</x><!--point のx座標 -->
+  <y>80</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>327</x><!--point のx座標 -->
+  <y>38</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>101</x><!--point のx座標 -->
+  <y>275</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>173</x><!--point のx座標 -->
+  <y>376</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>281</x><!--point のx座標 -->
+  <y>337</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>400</x><!--point のx座標 -->
+  <y>276</y><!--point のy座標-->
+ </point>
+</different>

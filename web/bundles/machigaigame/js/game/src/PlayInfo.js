@@ -57,7 +57,7 @@ var PlayInfo = cc.Class.extend({
 		xhttp.send("");
 		var xmlDoc=xhttp.responseText;
 		cc.log(xmlDoc);
-		var data = JSON.parse(xmlDo
+		var data = JSON.parse(xmlDoc);
 		if( data['error'] === true ){
 			this._error_redirect_to("../select");
 		}

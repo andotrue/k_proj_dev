@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>132</id>
+ <name>本番よ～い、アクション！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>92</x><!--point のx座標 -->
+  <y>17</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>293</x><!--point のx座標 -->
+  <y>78</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>175</x><!--point のx座標 -->
+  <y>250</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>340</x><!--point のx座標 -->
+  <y>324</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>271</x><!--point のx座標 -->
+  <y>564</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>32</x><!--point のx座標 -->
+  <y>581</y><!--point のy座標-->
+ </point>
+</different>

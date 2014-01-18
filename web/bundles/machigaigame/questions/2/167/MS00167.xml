@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>167</id>
+ <name>妖精たちのパラダイス</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>75</x><!--point のx座標 -->
+  <y>94</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>261</x><!--point のx座標 -->
+  <y>107</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>164</x><!--point のx座標 -->
+  <y>246</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>52</x><!--point のx座標 -->
+  <y>267</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>46</x><!--point のx座標 -->
+  <y>489</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>246</x><!--point のx座標 -->
+  <y>471</y><!--point のy座標-->
+ </point>
+</different>

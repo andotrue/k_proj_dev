@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>249</id>
+ <name>眠り姫は夢の中</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>63</x><!--point のx座標 -->
+  <y>122</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>54</x><!--point のx座標 -->
+  <y>276</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>406</x><!--point のx座標 -->
+  <y>66</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>276</x><!--point のx座標 -->
+  <y>217</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>107</x><!--point のx座標 -->
+  <y>360</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>310</x><!--point のx座標 -->
+  <y>390</y><!--point のy座標-->
+ </point>
+</different>

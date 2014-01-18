@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>213</id>
+ <name>平安時代にタイムスリップ？</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>79</x><!--point のx座標 -->
+  <y>255</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>216</x><!--point のx座標 -->
+  <y>64</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>341</x><!--point のx座標 -->
+  <y>24</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>312</x><!--point のx座標 -->
+  <y>334</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>602</x><!--point のx座標 -->
+  <y>27</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>556</x><!--point のx座標 -->
+  <y>398</y><!--point のy座標-->
+ </point>
+</different>
