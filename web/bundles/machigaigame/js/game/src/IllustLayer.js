@@ -1,5 +1,7 @@
-var IllustLayer = cc.Layer.extend({
+var IllustLayer = cc.LayerGradient.extend({
     _q_def_path: "../download/",
+    FRAME_WIDTH: 400,
+    FRAME_HEIGHT: 300,
     q_code: null,
     level: null,
     illusts:{},
@@ -7,10 +9,27 @@ var IllustLayer = cc.Layer.extend({
     SECOND: 2,
     offset: null,
     originalSize: null,
-    fullContentsRect: null,
+    fullContentsRect: null, //このレイヤーのサイズ
+    illustFrameRects: [], //イラストの表示される範囲
     currentScale: null,
-    illustFrames: null,
+    illustFrames: [],
 
+    initIllustFrameRects:function(){
+      cc.log("IllustLayer.initIllustFrameRects:");
+      illustFrameRects =[];
+      var x1 = 360;
+      var x2 = 360;
+      var y1 = 540 + this.FRAME_HEIGHT;
+      var y2 = 540 - this.FRAME_HEIGHT;
+
+      var rect1 = cc.rect(x1,y1,this.FRAME_WIDTH,this.FRAME_HEIGHT);
+      var rect2 = cc.rect(cc.rect(x2,y2,this.FRAME_WIDTH,this.FRAME_HEIGHT));
+
+      this.illustFrameRects.push(rect1);
+      this.illustFrameRects.push(rect2);
+      cc.log("FRAME_RECTS:global: ( " + x1 + ", " + y1 + ", " + this.FRAME_WIDTH + ", " + this.FRAME_HEIGHT +" )");
+      cc.log("FRAME_RECTS:global: ( " + x2 + ", " + y2 + ", " + this.FRAME_WIDTH + ", " + this.FRAME_HEIGHT +" )");
+    },
     currentIllustSize:function(){
       return cc.size(this.originalSize.widh * this.currentScale, this.originalSize * this.currentScale);
     },
@@ -54,29 +73,34 @@ var IllustLayer = cc.Layer.extend({
       this.fullContentsRect = rect;
 //      cc.log("setIllustFullTargetRect =" + rect.x + "," + rect.y + ", " + rect.width + ", " + rect.height);
     },
-/*    getFrame:function(index){
-      var rotated = false;
-      return cc.SpriteFrame.create( this.imgPath(index), this.rect, rotated, this.offset, this.originalSize);
+    makeRect:function(index){
+      if(index == 1){
+        return this.illustFrameRects[0];
+      }else{
+        return this.illustFrameRects[1];
+      }
     },
-*/
+
     updateIllusts:function(){
-//      cc.log("IllustLayer.updateIllusts()");
+      //イラスト入れ替え用に元画像を削除。
       for (var index = this.FIRST; index <= this.SECOND; index++) {
         if( this.illusts[index] !== undefined){
           this.illusts[index].removeFromParent();
         }
 
 //        this.illusts[index] = cc.Sprite.createWithSpriteFrame(this.getFrame(index));
+
         var rect = this.calculateRectArea();
-        this.illusts[index] = cc.Sprite.create(this.imgPath(index));
+        this.illusts[index] = cc.Sprite.create(this.imgPath(index) /*, this.makeRect(index) */ );
         this.illusts[index].setAnchorPoint(0.5,0.5);
         this.addChild( this.illusts[index]);
 //        cc.log("(x, y) = (" + this.getCenterPoint(index).x +  ", " + this.getCenterPoint(index).y + ")");
         //はみ出しを確認
 
-
-        cc.log("this.currentScale = " + this.currentScale);
-        this.illusts[index].setPosition(this.getCenterPoint(index).x + this.offset.x, this.getCenterPoint(index).y + this.offset.y);
+        var posX = this.getCenterPoint(index).x + this.offset.x;
+        var posY = this.getCenterPoint(index).y + this.offset.y;
+        cc.log("this.currentScale, posX, posY = " + this.currentScale + ", " + posX + ", " + posY);
+        this.illusts[index].setPosition(posX , posY);
         this.scaleIllust(index);
       }
     },
@@ -114,20 +138,22 @@ var IllustLayer = cc.Layer.extend({
         var bRet = false;
         if (this._super()) {
             //イラストの表示範囲を設定
+            this.initIllustFrameRects();
             this.setIllustFullTargetRect(rect);
-
             this.qcode = qcode;
             this.level = level;
 
 //            this.rect = new cc.Rect(0,0, 300,300);
-            this.offset = new cc.Point(100,50);
-            this.originalSize = new cc.Size(1000,1000);
-            this.currentScale = 2.0;
+            this.offset = new cc.Point(0,0);
+            
+            var sprite = cc.Sprite.create(this.imgPath(1));
+            this.originalSize = sprite._contentSize;
+            this.currentScale = 1.0;
 
             cc.log("this.currentScale = " + this.currentScale);
 
-            this.setAnchorPoint(cc.p(0.0, 0.5));
-            this.setPosition(0, 640);
+            this.setAnchorPoint(cc.p(0.5, 0.5));
+            this.setPosition(360, 640);
 
             this.updateIllusts();
     

@@ -17,7 +17,7 @@ var MyGameScene = cc.Scene.extend({
         this.addChild(baseLayer,10);
 
 
-        var popupLayer = new PopupLayer("PLAY");
+        var popupLayer = new PopupLayer("PLAY",baseLayer);
         this.addChild(popupLayer,20);
 
 

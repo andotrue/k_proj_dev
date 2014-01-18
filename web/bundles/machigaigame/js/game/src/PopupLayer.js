@@ -1,8 +1,12 @@
 var PopupLayer = cc.Layer.extend({
     state: null,
-    ctor:function (type) {
+    clock: null,
+    baseLayer: null,
+    ctor:function (type,baseLayer) {
         cc.log("PopupLayer.ctor");
         this._super();
+        this.baseLayer = baseLayer;
+        this.clock = baseLayer.clock;
         this.init(type);
     },
     init:function (type) {
@@ -92,7 +96,10 @@ var PopupLayer = cc.Layer.extend({
         cc.log("Popup.onTouchEnded");
         switch (this.state){
             case "PLAY":
-                cc.log("Popup.onTouchEnded: PLAY. now removing self.");
+                cc.log("Popup.onTouchEnded: PLAY. now removing self. start the timer.");
+
+                var baseLayer = this.baseLayer;
+                baseLayer.clock.startTimer();
                 this.removeFromParent();
                 break;
             case "GAMEOVER_SUCCESS":
@@ -270,6 +277,7 @@ var PopupLayer = cc.Layer.extend({
     onExit:function () {
         cc.log("PopupLayer.onExit");
         cc.unregisterTouchDelegate(this);
+        this.clock = null;
         this._super();
     }
 });

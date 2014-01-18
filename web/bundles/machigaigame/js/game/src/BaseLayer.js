@@ -1,9 +1,9 @@
 var BaseLayer = cc.Layer.extend({
-
     illusts: null,
     slider: null,
     parent: null,
     playInfo: null,
+    clock: null,
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
@@ -55,7 +55,7 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(this.ng);
             this.addChild(this.ok);
 
-            this.clock = new Clock(this.playInfo);
+            this.clock = new Clock(this);
             this.addChild(this.clock,15);
 
             this.slider = new Slider(0.5, 3.0);
@@ -209,6 +209,7 @@ var BaseLayer = cc.Layer.extend({
         this.ng.setPosition(touched.x, touched.y);
     },
     checkGameOver:function (){
+        cc.log("checkGameOver : " + this.stars.count() + ", " + this.hearts.count());
         if(this.stars.count() == this.stars._MAX){
             this.gameoverSuccess();
         }else if(this.hearts.count() == this.hearts._MIN){
@@ -219,17 +220,17 @@ var BaseLayer = cc.Layer.extend({
 
     },
     gameoverSuccess:function(){
-        var popup = new PopupLayer(this.parent);
+        var popup = new PopupLayer("GAMEOVER_SUCCESS",this);
         popup.init("GAMEOVER_SUCCESS");
         this.addChild(popup);
     },
     gameoverFail:function(){
-        var popup = new PopupLayer(this.parent);
+        var popup = new PopupLayer("GAMEOVER_FAIL",this);
         popup.init("GAMEOVER_FAIL");
         this.addChild(popup);
     },
     menuCallBack:function(sender){
-        var popup = new PopupLayer();
+        var popup = new PopupLayer(this.parent,this);
         popup.init(sender.name);
         this.addChild(popup);
     },
