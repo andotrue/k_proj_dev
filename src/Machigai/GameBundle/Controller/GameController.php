@@ -4,6 +4,8 @@ namespace Machigai\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Machigai\GameBundle\Controller\BaseController;
+use Machigai\GameBundle\Entity\Ranking;
+use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -195,5 +197,60 @@ class GameController extends BaseController
         $playInfo = $playHistory[0]->getPlayInfo();
         $playInfo=json_encode($playInfo);//jscon encode the array
         return new Response($playInfo,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
+    }
+    public function rankingRegister(){
+        $request = $this->get('request');
+        /* get data like below from view
+
+        {
+            'clearTime':clearTime,
+            'questionId':question_id,
+            'gameLevel':gameLevel,
+            'bonusPoint':bonusPoint
+        }
+
+        */
+        $clearTime = $request->request->get('clearTime');
+        $questionId = $request->request->get('questionId');
+        $gameLevel = $request->request->get('gameLevel');
+        $bonusPoint = $request->request->get('bonusPoint');
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $month = date('n');
+        $year = date('Y');
+        $ranking = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT r from MachigaiGameBundle:Ranking r
+                                    where r.level = :gameLevel and r.year = :year and r.month = :month order by r.rank asc')
+                ->setParameters(array('gameLevel'=>$gameLevel,'year'=>$year,'month'=>$month))
+                ->getResult();
+        if($clearTime >= $ranking[9]->getClearTime()){
+            return $this->render('MachigaiGameBundle:Game:');//
+        }else{
+            $playHistory = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
+                                    where p.user = :user and p.question = :question')
+                ->setParameters(array('user'=>$userId,'question'=>$questionId))
+                ->getResult();
+
+            foreach ($ranking as $rank) {
+                if($clearTime < $rank->getClearTime()){
+                    $rankId = $rank->getId();
+                    $em = $this->getDoctrine()->getEntityManager();
+                    $newRank = $em->getRepository('MachigaiGameBundle:Ranking')->findBy(array('id'=>$rankId));
+                    $newRank->setUser($userId);
+                    $newRank->setPlayHistoryId($playHistory[0]->getId());
+                    $newRank->setYear($year);
+                    $newRank->setMonth($month);
+                    $newRank->setLevel($gameLevel);
+                    $newRank->setRank($rank->getRank());
+                    $newRank->setBonusPoint($bonusPoint);
+                    $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
+                    $em->flush();                    
+                    break;
+                }
+            }
+        }
     }
 }

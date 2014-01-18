@@ -76,6 +76,12 @@ JsonDownload:
     requirements:
         _method: GET
 
+RankingRegister:
+    pattern:  /game/rankingRegister
+    defaults: { _controller: MachigaiGameBundle:Game:rankingRegister }
+    requirements:
+        _method: POST
+
 SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
@@ -126,6 +132,10 @@ SortQuestion:
 
 GamePlay:
     pattern: /game/play/{id}
+    defaults: { _controller: MachigaiGameBundle:Game:play }
+
+GameIndex:
+    pattern: /game/play/
     defaults: { _controller: MachigaiGameBundle:Game:play }
 
 GameGetPlayHistory:
