@@ -487,27 +487,4 @@ class Question
     {
         return $this->questionTitle;
     }
-
-    /**
-     * Set qcode
-     *
-     * @param integer $qcode
-     * @return Question
-     */
-    public function setQcode($qcode)
-    {
-        $this->qcode = $qcode;
-
-        return $this;
-    }
-
-    /**
-     * Get qcode
-     *
-     * @return integer 
-     */
-    public function getQcode()
-    {
-        return $this->qcode;
-    }
 }

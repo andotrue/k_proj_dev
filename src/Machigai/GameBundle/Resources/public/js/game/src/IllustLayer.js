@@ -13,6 +13,7 @@ var IllustLayer = cc.LayerGradient.extend({
     illustFrameRects: [], //イラストの表示される範囲
     currentScale: null,
     illustFrames: [],
+    qpoints: [], //間違いポイント
 
     initIllustFrameRects:function(){
       cc.log("IllustLayer.initIllustFrameRects:");
@@ -80,7 +81,9 @@ var IllustLayer = cc.LayerGradient.extend({
         return this.illustFrameRects[1];
       }
     },
+    showMachigaiPoint:function(){
 
+    },
     updateIllusts:function(){
       //イラスト入れ替え用に元画像を削除。
       for (var index = this.FIRST; index <= this.SECOND; index++) {
@@ -129,12 +132,12 @@ var IllustLayer = cc.LayerGradient.extend({
 //      return [bool, cx, cy];
     },
 
-    ctor:function (rect, level, qcode) {
+    ctor:function (rect, level, qcode, qpoints) {
         this._super();
-        this.init(rect, level, qcode);
+        this.init(rect, level, qcode, qpoints);
     },
 
-    init:function (rect, level, qcode) {
+    init:function (rect, level, qcode, qpoints) {
         var bRet = false;
         if (this._super()) {
             //イラストの表示範囲を設定
@@ -152,7 +155,7 @@ var IllustLayer = cc.LayerGradient.extend({
 
             cc.log("this.currentScale = " + this.currentScale);
 
-            this.setAnchorPoint(cc.p(0.5, 0.5));
+            this.setAnchorPoint(cc.p(0, 0));
             this.setPosition(360, 640);
 
             this.updateIllusts();

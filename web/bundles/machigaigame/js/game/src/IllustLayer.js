@@ -13,6 +13,7 @@ var IllustLayer = cc.LayerGradient.extend({
     illustFrameRects: [], //イラストの表示される範囲
     currentScale: null,
     illustFrames: [],
+    qpoints: [], //間違いポイント
 
     initIllustFrameRects:function(){
       cc.log("IllustLayer.initIllustFrameRects:");
@@ -131,12 +132,12 @@ var IllustLayer = cc.LayerGradient.extend({
 //      return [bool, cx, cy];
     },
 
-    ctor:function (rect, level, qcode) {
+    ctor:function (rect, level, qcode, qpoints) {
         this._super();
-        this.init(rect, level, qcode,qpoints);
+        this.init(rect, level, qcode, qpoints);
     },
 
-    init:function (rect, level, qcode) {
+    init:function (rect, level, qcode, qpoints) {
         var bRet = false;
         if (this._super()) {
             //イラストの表示範囲を設定

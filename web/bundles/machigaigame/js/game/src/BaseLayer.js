@@ -24,7 +24,7 @@ var BaseLayer = cc.Layer.extend({
             var width = 640;
             var height = 1280 - (Header._rect.height + Footer._rect.height);
 //            cc.log("IllustLayer.setIllustFullTargetRect(" + 0 + ", " + Footer._rect.height + ", " + width + ", " + height + ")");
-            this.illusts = new IllustLayer(cc.rect(0,Footer._rect.height, width, height), this.playInfo.LEVEL, this.playInfo.QCODE);
+            this.illusts = new IllustLayer(cc.rect(0,Footer._rect.height, width, height), this.playInfo.LEVEL, this.playInfo.QCODE, this.playInfo.MACHIGAI_POINT_DATA );
             this.addChild(this.illusts,0);
             this.addChild(Header);
             this.addChild(Footer);
