@@ -8,13 +8,21 @@ var BaseLayer = cc.Layer.extend({
     parent: null,
     playInfo: null,
     clock: null,
-
+    objs: null, // これまで押した点 {'x', 'y'}
 
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
         this.playInfo = playInfo;
         this.init(parent);
+
+        var objs = this.playInfo.getClickPointsData();
+        if (objs === null){
+            this.objs = {};
+        }else{
+            this.objs = objs;
+        }
+
     },
     init:function (parent) {
         cc.log("BaseLayer.init");
@@ -138,7 +146,6 @@ var BaseLayer = cc.Layer.extend({
             cc.log("Inside the slideicon area!");
             this.canMoveSlider = true;
         }
-		
 		// ２つのイラスト上にポイントがあるかをチェック
 		var ill0 = this.illusts.frames[0].illust;
 		var point0 = ill0.convertToNodeSpace(touch.getLocation());
@@ -215,17 +222,19 @@ var BaseLayer = cc.Layer.extend({
 		var margin = 20;
 		
 		// ポイントを取得
-		var point = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation);
+        var deviceLocation = touch.getLocation();
+        cc.log(" touched point in device location: ( " + deviceLocation.x +  "," + deviceLocation.y + ")" );
+		var point = this.illusts.frames[0].illust.convertToNodeSpace(deviceLocation);
 		if( point.x <= 0){
-			point = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation);
+			point = this.illusts.frames[1].illust.convertToNodeSpace(deviceLocation);
 		}
-		
+		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
+
 		// 解答群の取得
-		var objs = this.playInfo.getClickPointsData();
-		for( var i in objs ){
-			var ap = objs[i];
+		for( var i in this.objs ){
+			var ap = this.objs[i];
 			
-			cc.log("anser_point " + ap.x + " " + ap.y);
+			cc.log(" answered_point is" + ap.x + " " + ap.y);
 			
 			if( (ap.x - margin < point.x && ap.x + margin > point.x) &&
 				(ap.y - margin < point.y && ap.y + margin > point.y )){
@@ -233,6 +242,12 @@ var BaseLayer = cc.Layer.extend({
 				this.isOK = true;
 			}
 		}
+//        this.illusts.
+
+        //タッチポイントを追加
+        var bool = false;
+
+        var result = { x: point.x, y: point.y, isOK: bool, touchedAt: new Date() };
 		
         cc.log("Illust Touched! ");
         if(this.isOK) return this.runOK();
