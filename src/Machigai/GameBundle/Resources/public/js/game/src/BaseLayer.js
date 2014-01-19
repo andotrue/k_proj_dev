@@ -243,32 +243,34 @@ var BaseLayer = cc.Layer.extend({
 			point = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation);
 		 }
 */	
-		// 解答群の取得
+		// 画像の四角の取得
+		var rect = this.illusts.frames[0].illust.getTextureRect();
 		
-		// TODO 正解ポイントの取得
+		// 正解ポイントの取得
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
 		
 		cc.log( objs );
 		
 		for( var i in objs ){
 			var ap = objs[i];
+
+			var apx = parseInt(ap.x);
+			var apy = parseInt(ap.y);
+			var px  = point.x;
+			var py  = rect.height - point.y;	// 座標系の変換
+
+			cc.log(apx + " " + apy + " " + px + " " + py);
 			
-//			cc.log(" answered_point is" + ap.x + " " + ap.y);
-			
-			if( (ap.x - margin < point.x && ap.x + margin > point.x) &&
-				(ap.y - margin < point.y && ap.y + margin > point.y )){
-			
-//				this.isOK = true;
+			if( apx - margin < px && apx + margin > px &&
+				apy - margin < py && apy + margin > py ){
+
                return this.runOK();
                 cc.log(" touch OK ! ");
-			}else{
-    //            this.isOK = false;
-               return this.runNG();
-                cc.log(" touch  ! ");
-            }
+			}
 		}
-		
-        cc.log(" touch OK ! ");
+
+		return this.runNG();
+		cc.log(" touch  ! ");
     },
     runOK:function () {
 //        cc.runAction();
