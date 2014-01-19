@@ -52,7 +52,7 @@ function originalImage(){
 
  <section id="current_point" class="top_bg">
   <img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
-  <p style="font-size:1.5em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
+  <p style="font-size:1em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
  </section>
  <section id="menu" class="top_bg">
 <a href='{{ path('GameSelect') }}' style="padding-right:9%;"><img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
