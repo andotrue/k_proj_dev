@@ -1,6 +1,7 @@
 var ResultLayer = cc.Layer.extend({
-    isCleared: true,
-    isGuest: true,
+    questionId: 152,
+    isCleared: false,
+    isGuest: false,
     //以下は固定値
     SHOP_LINK_PATH: null,
     RANKING_PATH: null,
@@ -69,17 +70,17 @@ var ResultLayer = cc.Layer.extend({
     initMenuForUserSuccess:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
-        path = gsDir + "popup/save.png";
+        path = gsDir + "popup/result_menu.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createShopButton(360,677);
-        var no = this.createRankingButton(360,619);
-        //仕様書通りにボタンを追加
+        var tryAnother = this.createTryAnotherButton(360,700);
+        var toTop = this.createToTopButton(360,600);
+        var toShop = this.createShopButton(360,500);
+        var toRanking = this.createRankingButton(360,400);
 
-
-        var menu = cc.Menu.create([yes,no]);
+        var menu = cc.Menu.create([tryAnother,toShop,toRanking,toTop]);
         menu.setPosition(0,0);
         this.addChild(menu);
 
@@ -87,16 +88,14 @@ var ResultLayer = cc.Layer.extend({
     initMenuForGuestSuccess:function () {
         cc.log("ResultLayer.initMenuForGuest");
         this.state = "SAVE";
-        path = gsDir + "popup/save.png";
+        path = gsDir + "popup/result_menu_guest.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createShopButton(360,677);
-        var no = this.createRankingButton(360,619);
-        //仕様書通りにボタンを追加
-
-        var menu = cc.Menu.create([yes,no]);
+        var tryAnother = this.createTryAnotherButton(360,750)
+        var toTop = this.createToTopButton(360,600);
+        var menu = cc.Menu.create([tryAnother,toTop]);
         menu.setPosition(0,0);
         this.addChild(menu);
 
@@ -105,17 +104,17 @@ var ResultLayer = cc.Layer.extend({
     initMenuForUserFail:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
-        path = gsDir + "popup/save.png";
+        path = gsDir + "popup/result_miss_menu.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createShopButton(360,677);
-        var no = this.createRankingButton(360,619);
-        //仕様書通りにボタンを追加
+        var retry = this.createRetryButton(360,800);
+        var tryAnother = this.createTryAnotherButton(360,700);
+        var toShop = this.createShopButton(360,600);
+        var toRanking = this.createRankingButton(360,500);
 
-
-        var menu = cc.Menu.create([yes,no]);
+        var menu = cc.Menu.create([retry,tryAnother,toShop,toRanking]);
         menu.setPosition(0,0);
         this.addChild(menu);
 
@@ -123,16 +122,16 @@ var ResultLayer = cc.Layer.extend({
     initMenuForGuestFail:function () {
         cc.log("ResultLayer.initMenuForGuest");
         this.state = "SAVE";
-        path = gsDir + "popup/save.png";
+        path = gsDir + "popup/result_miss_menu_guest.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createShopButton(360,677);
-        var no = this.createRankingButton(360,619);
-        //仕様書通りにボタンを追加
+        var retry = this.createRetryButton(360,800);
+        var tryAnother = this.createTryAnotherButton(360,700);
+        var toTop = this.createToTopButton(360,500);
 
-        var menu = cc.Menu.create([yes,no]);
+        var menu = cc.Menu.create([retry,tryAnother,toTop]);
         menu.setPosition(0,0);
         this.addChild(menu);
 
@@ -150,15 +149,14 @@ var ResultLayer = cc.Layer.extend({
 
     },
 
-
     playOtherGames:function () {
         cc.log("ResultLayer.playOtherGames");
         window.location="../select";
     },
-    retry:function (){
-        cc.log("ResultLayer.playOtherGames");
-        window.location="";
 
+    retry:function (){
+        cc.log("ResultLayer.retry");
+        window.location="../../game/play/"+this.questionId;
     },
     toShop:function () {
         cc.log("ResultLayer.toShop");
@@ -178,26 +176,19 @@ var ResultLayer = cc.Layer.extend({
 
         window.location="../../top";
     },
-/* 
+ 
     tryAnother:function(){
         cc.log("PopupLayer.result");
 
         window.location="../../game/select";
     },
-
-    retry:function(){
-        cc.log("PopupLayer.result");
-
-        window.location="../../game/play/156";
-        //question_id指定
-    },
-    
+ 
     toTop:function(){
         cc.log("PopupLayer.result");
 
         window.location="../../top";
     },
-*/
+
 
     menuCallBack:function (sender) {
         cc.log('ResultLayer.menuCallBack');
@@ -224,7 +215,7 @@ var ResultLayer = cc.Layer.extend({
                 break;
             case 'Retry':
                 cc.log('Retry');
-                this.playOtherGames();
+                this.retry();
                 this.removeFromParent();
                 break;
             default:
@@ -233,8 +224,8 @@ var ResultLayer = cc.Layer.extend({
     },
     createShopButton:function (x,y) {
         var shop = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/button_yes.png",
-            bd+"res/game_scene/button/button_yes_off.png",
+            bd+"res/game_scene/button/button_resultshop.png",
+            bd+"res/game_scene/button/button_resultshop_off.png",
             this.menuCallBack.bind(this)
         );
         shop.setPosition(x, y);
@@ -243,8 +234,8 @@ var ResultLayer = cc.Layer.extend({
     },
     createRankingButton:function (x,y) {
         var ranking = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/button_no.png",
-            bd+"res/game_scene/button/button_no_off.png",
+            bd+"res/game_scene/button/button_resultranking.png",
+            bd+"res/game_scene/button/button_resultranking_off.png",
             this.menuCallBack.bind(this)
         );
         ranking.setPosition(x, y);
@@ -253,8 +244,8 @@ var ResultLayer = cc.Layer.extend({
     },
     createTryAnotherButton:function (x,y) {
         var tryAnother = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/button_other_select.png",
-            bd+"res/game_scene/button/button_other_select_off.png",
+            bd+"res/game_scene/button/button_otherselect.png",
+            bd+"res/game_scene/button/button_otherselect_off.png",
             this.menuCallBack.bind(this)
         );
         tryAnother.setPosition(x, y);
