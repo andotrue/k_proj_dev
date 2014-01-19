@@ -138,7 +138,7 @@ var PopupLayer = cc.Layer.extend({
 
     popupPlay:function () {
         this.state = "PLAY";
-        var ss = ["popup/gamestart.png", "popup/gamestart_first.png", "popup/gamestart_guest.png","popup/gamestart_notfirst.png"];
+        var ss = ["popup/popup_gamestart.png", "popup/popup_gamestart_first.png", "popup/popup_gamestart_guest.png","popup/popup_gamestart_notfirst.png"];
         var i =this.game_status = 1;
         var popup = cc.Sprite.create( gsDir + ss[i] );
         this.addChild(popup);
@@ -148,7 +148,7 @@ var PopupLayer = cc.Layer.extend({
 //        cc.unregisterTouchDelegate(this);
         this.state = "HINT";
 
-        var popup = cc.Sprite.create( gsDir + "popup/hint.png" );
+        var popup = cc.Sprite.create( gsDir + "popup/popup_game_hint.png" );
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
@@ -163,7 +163,7 @@ var PopupLayer = cc.Layer.extend({
     },
     popupSave:function () {
         this.state = "SAVE";
-        path = gsDir + "popup/save.png";
+        path = gsDir + "popup/popup_game_save.png";
 //        path = gsDir + this.is_guest ? "popup/save.png" : "popup/save_guest.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
@@ -184,7 +184,7 @@ var PopupLayer = cc.Layer.extend({
     },
     popupGiveup:function () {
         this.state = "GIVEUP";
-        var popup = cc.Sprite.create( gsDir + "popup/giveup.png" );
+        var popup = cc.Sprite.create( gsDir + "popup/popup_game_giveup.png" );
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
@@ -203,7 +203,7 @@ var PopupLayer = cc.Layer.extend({
     },
     popupGameoverSuccess:function(){
         this.state = "GAMEOVER_SUCCESS";
-        var popup = cc.Sprite.create( gsDir + "label/clear.png" );
+        var popup = cc.Sprite.create( gsDir + "label/popup_game_clear.png" );
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
     },
@@ -216,7 +216,7 @@ var PopupLayer = cc.Layer.extend({
     popupGameoverFail:function(){
         cc.log("gameoverfailPopup()");
         this.state = "GAMEOVER_FAIL";
-        var popup = cc.Sprite.create( gsDir + "label/miss.png" );
+        var popup = cc.Sprite.create( gsDir + "label/popup_game_miss.png" );
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
     },
@@ -225,7 +225,6 @@ var PopupLayer = cc.Layer.extend({
         var nextScene = new ResultScene(this.playInfo);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         this.removeFromParent();
-//        this._parent.removeFromParent();
     },
     menuCallBack:function (sender) {
         cc.log('PopupLayer.menuCallBack');

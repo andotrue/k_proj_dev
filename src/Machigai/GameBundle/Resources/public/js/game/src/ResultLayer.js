@@ -13,7 +13,7 @@ var ResultLayer = cc.Layer.extend({
 
 
     ctor:function (isGuest, clearTime, acquiredPoint, currentPoint ) {
-      cc.log("ResultLayer.init()");
+      cc.log("ResultLayer.ctor");
         self = this;
         this._super();
 
@@ -26,7 +26,7 @@ var ResultLayer = cc.Layer.extend({
     },
 
     init:function () {
-      cc.log("ResultLayer.init()");
+      cc.log("ResultLayer.init");
         var bRet = false;
         if (this._super()) {
             this.setAnchorPoint(cc.p(0, 0));
@@ -39,13 +39,13 @@ var ResultLayer = cc.Layer.extend({
 
           cc.log("ResultLayer.init()");
             this.initClearTime();
-//            this.initCurrentPoint();
-//            this.initAcquiredPoint();
+            this.initCurrentPoint();
+            this.initAcquiredPoint();
 
             if(this.isGuest === true){
-//                this.initMenuForGuest();
+                this.initMenuForGuest();
             }else{
-//                this.initMenuForUser();
+                this.initMenuForUser();
             }
 
             bRet = true;
@@ -75,7 +75,7 @@ var ResultLayer = cc.Layer.extend({
 
     },
     initMenuForGuest:function () {
-        cc.log("initMenu");
+        cc.log("ResultLayer.initMenuForGuest");
         this.state = "SAVE";
         path = gsDir + "popup/save.png";
         var popup = cc.Sprite.create(path);
@@ -93,39 +93,39 @@ var ResultLayer = cc.Layer.extend({
     },
 
     initClearTime:function(){
-        cc.log("PopupLayer.hint");
+        cc.log("ResultLayer.initClearTime");
 
     },
     initCurrentPoint:function(){
-        cc.log("PopupLayer.hint");
+        cc.log("ResultLayer.initCurrentPoint");
 
     },
     initAcquiredPoint:function(){
-        cc.log("PopupLayer.hint");
+        cc.log("ResultLayer.initAcquiredPoint");
 
     },
 
 
     playOtherGames:function () {
-        cc.log("PopupLayer.hint");
+        cc.log("ResultLayer.playOtherGames");
         window.location="../select";
     },
 
     toShop:function () {
-        cc.log("PopupLayer.save");
+        cc.log("ResultLayer.toShop");
         cc.log(document.location);
         window.location="../../shop";
 
     },
 
     toRanking:function () {
-        cc.log("PopupLayer.giveup");
+        cc.log("ResultLayer.toRanking");
 
         window.location="../../ranking";
     },
 
     toTop:function(){
-        cc.log("PopupLayer.giveup");
+        cc.log("ResultLayer.toTop");
 
         window.location="../../top";
     },
@@ -151,7 +151,7 @@ var ResultLayer = cc.Layer.extend({
 */
 
     menuCallBack:function (sender) {
-        cc.log('PopupLayer.menuCallBack');
+        cc.log('ResultLayer.menuCallBack');
         switch(sender.name){
             case 'Shop':
                 cc.log('Shop');
