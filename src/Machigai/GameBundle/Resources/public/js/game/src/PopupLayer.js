@@ -225,7 +225,6 @@ var PopupLayer = cc.Layer.extend({
         var nextScene = new ResultScene(this.playInfo);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         this.removeFromParent();
-//        this._parent.removeFromParent();
     },
     menuCallBack:function (sender) {
         cc.log('PopupLayer.menuCallBack');
