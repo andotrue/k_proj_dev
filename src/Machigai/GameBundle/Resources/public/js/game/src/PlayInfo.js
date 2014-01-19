@@ -3,6 +3,8 @@ var PlayInfo = cc.Class.extend({
 	QCODE: null,
 	TITLE: null,
 	LEVEL: null,
+	CLEAR_POINT: null,
+	BONUS_POINT: null,
 	TIME_LIMIT: null,
 	FAIL_LIMIT: null,
 	MACHIGAI_POINT_DATA: null,

@@ -3,11 +3,13 @@ var PopupLayer = cc.Layer.extend({
     clock: null,
     baseLayer: null,
     MIDDLE_Y: 704,
+    playInfo: null,
     ctor:function (type,baseLayer) {
         cc.log("PopupLayer.ctor");
         this._super();
         this.baseLayer = baseLayer;
         this.clock = baseLayer.clock;
+        this.playInfo = baseLayer.playInfo;
         this.init(type);
     },
     init:function (type) {
@@ -150,8 +152,8 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,555);
-        var no = this.createNoButton(360,470);
+        var yes = this.createYesButton(360,620);
+        var no = this.createNoButton(360,535);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -167,8 +169,8 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,677);
-        var no = this.createNoButton(360,619);
+        var yes = this.createYesButton(360,749);
+        var no = this.createNoButton(360,679);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -186,8 +188,8 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,630);
-        var no = this.createNoButton(360,520);
+        var yes = this.createYesButton(360,710);
+        var no = this.createNoButton(360,605);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -206,19 +208,24 @@ var PopupLayer = cc.Layer.extend({
         popup.setPosition(360,this.MIDDLE_Y );
     },
     gameoverSuccess:function(){
-
+        var nextScene = new ResultScene(this.playInfo);
+        cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
+        this.removeFromParent();
+//        this._parent.removeFromParent();
     },
     popupGameoverFail:function(){
+        cc.log("gameoverfailPopup()");
         this.state = "GAMEOVER_FAIL";
         var popup = cc.Sprite.create( gsDir + "label/miss.png" );
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
     },
     gameoverFail:function(){
-        var nextScene = new MyGameScene();
+        cc.log("gameoverfail()");
+        var nextScene = new ResultScene(this.playInfo);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         this.removeFromParent();
-        this._parent.removeFromParent();
+//        this._parent.removeFromParent();
     },
     menuCallBack:function (sender) {
         cc.log('PopupLayer.menuCallBack');

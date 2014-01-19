@@ -1,17 +1,27 @@
 var ResultScene = cc.Scene.extend({
-    onEnter:function () {
-        this._super();
+    ctor:function (playInfo) {
+        cc.log("ResultScene.ctor");
+        this.playData = playInfo.getPlayData();
+//        this.userId = this.playData.getUserId(); TODO:getUserId が変。
+        this.userId = null;
+        if (this.userId === null){
+			this.isGuest = true;
+		}else{
+			this.isGuest = false;
+		}
 
-//        gScoreData.initData();
+        this.acquiredPoint = playInfo.CLEAR_POINT; //とりあえず対処、ボーナスポイント分の修正必要。
+        var clockData = this.playData.getClockData();
+        // this.clearTime = ;
+        this.clearTime = 500000; //とりあえず対処、修正必要。	
+        this.currentPoint = 11110; //とりあえず対処、修正必要。	
 
-//        var spriteFrameCache = cc.SpriteFrameCache.getInstance();
-//        spriteFrameCache.addSpriteFrames("res/baseResource.plist","res/baseResource.png");
-
-        var resultLayer = new ResultLayer();
+        var resultLayer = new ResultLayer(this.isGuest, this.clearTime, this.acquiredPoint, this.currentPoint);
         this.addChild(resultLayer,0);
 
-//        gSharedEngine.setMusicVolume(1);
-//        gSharedEngine.setEffectsVolume(1);
-//        gSharedEngine.playMusic(MUSIC_BACKGROUND,true);
+    },
+    onEnter:function () {
+        this._super();
     }
 });
+
