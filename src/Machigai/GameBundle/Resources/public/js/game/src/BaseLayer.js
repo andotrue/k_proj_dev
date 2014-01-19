@@ -139,10 +139,16 @@ var BaseLayer = cc.Layer.extend({
         }
 		
 		// ２つのイラスト上にポイントがあるかをチェック
-		var point0 = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation());
-		var point1 = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation());
+		var ill0 = this.illusts.frames[0].illust;
+		var point0 = ill0.convertToNodeSpace(touch.getLocation());
+		var ill0R  = ill0.getTextureRect();
+		var ill1 = this.illusts.frames[1].illust;
+		var ill1R  = ill1.getTextureRect();
+		var point1 = ill1.convertToNodeSpace(touch.getLocation());
 		
-		if(point0.x > 0 || point1.x > 0 ){
+		if((point0.x >= 0 && point0.x <= ill0R.width && point0.y >= 0 && point0.y <= ill0R.height) ||
+			(point1.x >= 0 && point1.x <= ill1R.width && point1.y >= 0 && point1.y <= ill1R.height)
+		 ){
 			
             this.canMoveIllust = true;
             this.isIllustTouched = true;
@@ -202,6 +208,8 @@ var BaseLayer = cc.Layer.extend({
         return true;
     },
     checkAnswer:function (touch){
+		
+		cc.log("in check anser");
 		
 		var margin = 20;
 		
