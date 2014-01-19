@@ -33,18 +33,19 @@ var ResultLayer = cc.Layer.extend({
             this.setPosition(360,704);
 
             //バックグランド
-            var bg = cc.Sprite.create( gsDir + "background/bg.png" );
+            var bg = cc.Sprite.create( gsDir + "background/top_bg.png" );
             bg.setPosition(360, 720 );
             this.addChild(bg);
 
-            initClearTime();
-            initCurrentPoint();
-            initAcquiredPoint();
+          cc.log("ResultLayer.init()");
+            this.initClearTime();
+//            this.initCurrentPoint();
+//            this.initAcquiredPoint();
 
             if(this.isGuest === true){
-                this.initMenuForGuest();
+//                this.initMenuForGuest();
             }else{
-                this.initMenuForUser();
+//                this.initMenuForUser();
             }
 
             bRet = true;
