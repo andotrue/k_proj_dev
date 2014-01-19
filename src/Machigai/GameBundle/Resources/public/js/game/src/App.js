@@ -1,6 +1,7 @@
 var MyGameScene = cc.Scene.extend({
     playInfo: null,
     baseLayer: null,
+    clock: null,
     onEnter:function () {
         this._super();
         var self = this;
@@ -11,8 +12,9 @@ var MyGameScene = cc.Scene.extend({
         var paths = window.location.pathname.split("/");
         var questionId = paths[paths.length -1];
         cc.log("MyGameScene: questionId = " + questionId);
-
         this.playInfo = new PlayInfo(questionId);
+        this.clock = new Clock(this);
+        this.playInfo.setClock(this.clock);
 
         var baseLayer = new BaseLayer(self, this.playInfo);
         this.addChild(baseLayer,10);

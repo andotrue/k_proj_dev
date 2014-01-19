@@ -9,7 +9,7 @@ var BaseLayer = cc.Layer.extend({
     playInfo: null,
     clock: null,
     objs: null, // これまで押した点 {'x', 'y'}の記録
-    isOK: null,  
+    isOK: null, 
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
@@ -67,7 +67,7 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(this.ng);
             this.addChild(this.ok);
 
-            this.clock = new Clock(this);
+            this.clock = this.parent.clock;
             this.addChild(this.clock,15);
 
             this.slider = new Slider(1.0, 3.0);

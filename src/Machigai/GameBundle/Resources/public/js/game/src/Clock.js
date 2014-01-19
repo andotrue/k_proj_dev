@@ -20,10 +20,14 @@ var Clock = cc.Layer.extend({
 	_FINISHED: 3,
 	_playInfo: null,
 	_timer: null,
+
+	setPlayInfo:function(playInfo){
+		this._playInfo = playInfo;
+	},
 	updateClock:function(){
 		if (that.getCurrentDuration() <=0){
 			that._status = that._FINISHED;
-			that.parent.gameoverFail();
+			that.parent.baseLayer.gameoverFail();
 			clearInterval(that._timer);
 		}else{
 			that.updateDigits();
