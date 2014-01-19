@@ -30,7 +30,7 @@ var ResultLayer = cc.Layer.extend({
         var bRet = false;
         if (this._super()) {
             this.setAnchorPoint(cc.p(0, 0));
-            this.setPosition(360,704);
+            this.setPosition(0,0)
 
             //バックグランド
             var bg = cc.Sprite.create( gsDir + "background/top_bg.png" );
