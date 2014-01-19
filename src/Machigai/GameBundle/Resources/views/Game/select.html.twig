@@ -5,7 +5,7 @@
 {% block stylesheets %}<style>
  #questions ul li{display:inline-block; width:27%;padding:2%;}
  #questions ul li a img{width:100%}
- .imageSize {width:90%;}
+ .imageSize {width:85%;}
 </style>
 {% endblock %}
 
@@ -146,9 +146,11 @@ $(function() {
   draw();
 });
 </script>
-
-<div id="allContents" style="background: url({{ asset('/bundles/machigaigame/images/parts/2-01_bg.png')  }}); background-size:width:5%;background-repeat:no-repeat;">
+<img src="{{ asset('/bundles/machigaigame/images/parts/2-01_bg.png')  }}" style="position:absolute;left:0%;top:0%;width:100%;height:auto; opacity:1.5"/>
+<!--
+<div id="allContents" style="background: url({{ asset('/bundles/machigaigame/images/parts/2-01_bg.png')  }}); background-size:width:1%;background-repeat:no-repeat;">-->
 <div id="popup">
+
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }}" style="position:absolute;left:5%;top:50%;width:90%"/>
 <button type="button" onclick="cancel()" style="position:absolute;top:50%;left:82%;margin-top:6%;padding:5%;width:10%;filter:alpha(opacity=0);-moz-opacity: 0;opacity: 0;
@@ -170,23 +172,29 @@ $(function() {
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_mondaiselect.png')  }}" width="100%" style="position:absolute;top:0;left:0;"/>
 <div id="allquestions">
-<div id="level_tab" style="position:absolute;top:22%">
+<div id="level_tab" style="position:absolute;top:15%">
 	<img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("easy");'/>
 	<img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("normal")' >
 	<img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("hard");' />
 </div>
+<div id="white_background" style="position:relative;margin-top:32%;background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }}); background-size:cover;background-repeat:no-repeat;">
+<div style="height:5px" ></div>
 <section id="select_area" >
-
-
-<div id="order_header" style="text-align:right;padding-bottom:0.7em;padding-top:0.7em;">
+<div id="order_header" style="position:relative;text-align:right;padding-bottom:0.7em;margin-top:5%;">
 <div id="selectBox" style="position:absolute;top:10%;left:30%;width:50%;height:2em;">
 <img style="position:absolute;left:75%;top:14%;width:50%;height:40%" src="{{ asset('/bundles/machigaigame/images/parts/game_sort.png')}}">
-<span style="position:relative;left:-28%;">並べ替え</span><select style="position:absolute;left:75%;top:14%;opacity:0;width:50%;height:40%" id="sortSelect" onchange="sortSelect()"><option selected="selected" value=""></option><option value="1">古い順</option><option value="2">新しい順</option><option value="3">未クリア問題</option><option value="4">中断問題</option></select>
+<span style="position:relative;left:-28%;color:rgb(94,109,114)">並べ替え</span><select style="position:absolute;left:75%;top:14%;opacity:0;width:50%;height:40%" id="sortSelect" onchange="sortSelect()"><option selected="selected" value=""></option><option value="1">古い順</option><option value="2">新しい順</option><option value="3">未クリア問題</option><option value="4">中断問題</option></select>
 </div>
 </div>
 
-<nav style="padding-top:17%"><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
+<div id="arrow_top" style="position:relative;margin-top:-9%;">
+<nav style="padding-top:17%"><a style="padding-right:10%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a>
+<span class="page"></span>/ <span class="maxPage"></span><a style="padding-left:10%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
 <li class="easy"></li><li class="normal"></li><li class="hard"></li>
+</div>
+
+<!--<div id="games" style="position:relative;margin-top:2%;height:480px;overflow-y:scroll;">-->
+<div id="games" style="position:relative;margin-top:-3%;color:rgb(94,109,114)">
 {% if histories is  null %}
 <div style="margin-bottom:0%;height:30%;display:block">
 <div id="questions" style="margin-top:11%" >
@@ -311,11 +319,15 @@ $(function() {
 	{% endfor %}
 	</ul>
 </div>
-{% endif %}
-
-<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span> <a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
 </div>
-<a href="{{path('Top')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" style="padding:2%;margin-bottom:20%" onclick="changeImage(this.id);"></a>
+{% endif %}
+</div>
+</div>
+<!--
+<nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span> <a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
+-->
+</div>
+<a href="{{path('Top')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" style="position:relative;padding:2%;margin-top:25%" onclick="changeImage(this.id);"></a>
 </div>
 </section>
 </div>
