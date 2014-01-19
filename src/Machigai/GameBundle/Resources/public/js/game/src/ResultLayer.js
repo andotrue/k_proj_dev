@@ -1,23 +1,25 @@
 var ResultLayer = cc.Layer.extend({
+    isCleared: true,
+    isGuest: true,
     //以下は固定値
     SHOP_LINK_PATH: null,
     RANKING_PATH: null,
-    MESSAGE_FOR_USER: "おめでとう！ショップやランキングをチェック",
-    MESSAGE_FOR_GUEST_1: "おめでとう！他の問題にもチャレンジ！",
+    MESSAGE_FOR_USER_SUCCESS: "おめでとう！ショップやランキングをチェック",
+    MESSAGE_FOR_GUEST_1_SUCCESS: "おめでとう！他の問題にもチャレンジ！",
     MESSAGE_FOR_GUEST_2: "XXXXXX",
     //以下は変数から当てはめる
-    isGuest: null,
     acquiredPoint: null,
     clearTime: null,
     currentPoint: null,
 
 
-    ctor:function (isGuest, clearTime, acquiredPoint, currentPoint ) {
+    ctor:function (isGuest,  clearTime, acquiredPoint, currentPoint ) {
       cc.log("ResultLayer.ctor");
         self = this;
         this._super();
 
-        this.isGuest = isGuest;
+//        this.isGuest = isGuest;
+//        this.isCleared = isCleared;
         this.acquiredPoint = clearTime;
         this.clearTime = clearTime;
         this.currentPoint = currentPoint;
@@ -30,22 +32,30 @@ var ResultLayer = cc.Layer.extend({
         var bRet = false;
         if (this._super()) {
             this.setAnchorPoint(cc.p(0, 0));
-            this.setPosition(0,0)
+            this.setPosition(0,0);
 
             //バックグランド
             var bg = cc.Sprite.create( gsDir + "background/top_bg.png" );
             bg.setPosition(360, 720 );
             this.addChild(bg);
 
-          cc.log("ResultLayer.init()");
-            this.initClearTime();
-            this.initCurrentPoint();
-            this.initAcquiredPoint();
+           cc.log("ResultLayer.init()");
+//            this.initClearTime();
+//            this.initCurrentPoint();
+//            this.initAcquiredPoint();
 
             if(this.isGuest === true){
-                this.initMenuForGuest();
+                if( this.isCleared === true ){
+                    this.initMenuForGuestSuccess();
+                }else{
+                    this.initMenuForGuestFail();
+                }
             }else{
-                this.initMenuForUser();
+                if( this.isCleared === true ) {
+                    this.initMenuForUserSuccess();
+                }else{
+                    this.initMenuForUserFail();
+                }
             }
 
             bRet = true;
@@ -56,7 +66,7 @@ var ResultLayer = cc.Layer.extend({
     initClearTime:function(){
 
     },
-    initMenuForUser:function () {
+    initMenuForUserSuccess:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
         path = gsDir + "popup/save.png";
@@ -74,7 +84,7 @@ var ResultLayer = cc.Layer.extend({
         this.addChild(menu);
 
     },
-    initMenuForGuest:function () {
+    initMenuForGuestSuccess:function () {
         cc.log("ResultLayer.initMenuForGuest");
         this.state = "SAVE";
         path = gsDir + "popup/save.png";
@@ -92,6 +102,41 @@ var ResultLayer = cc.Layer.extend({
 
     },
 
+    initMenuForUserFail:function () {
+        cc.log("initMenuForUser");
+        this.state = "SAVE";
+        path = gsDir + "popup/save.png";
+        var popup = cc.Sprite.create(path);
+        this.addChild(popup);
+        popup.setPosition(360,this.MIDDLE_Y );
+
+        var yes = this.createShopButton(360,677);
+        var no = this.createRankingButton(360,619);
+        //仕様書通りにボタンを追加
+
+
+        var menu = cc.Menu.create([yes,no]);
+        menu.setPosition(0,0);
+        this.addChild(menu);
+
+    },
+    initMenuForGuestFail:function () {
+        cc.log("ResultLayer.initMenuForGuest");
+        this.state = "SAVE";
+        path = gsDir + "popup/save.png";
+        var popup = cc.Sprite.create(path);
+        this.addChild(popup);
+        popup.setPosition(360,this.MIDDLE_Y );
+
+        var yes = this.createShopButton(360,677);
+        var no = this.createRankingButton(360,619);
+        //仕様書通りにボタンを追加
+
+        var menu = cc.Menu.create([yes,no]);
+        menu.setPosition(0,0);
+        this.addChild(menu);
+
+    },
     initClearTime:function(){
         cc.log("ResultLayer.initClearTime");
 
@@ -110,7 +155,11 @@ var ResultLayer = cc.Layer.extend({
         cc.log("ResultLayer.playOtherGames");
         window.location="../select";
     },
+    retry:function (){
+        cc.log("ResultLayer.playOtherGames");
+        window.location="";
 
+    },
     toShop:function () {
         cc.log("ResultLayer.toShop");
         cc.log(document.location);

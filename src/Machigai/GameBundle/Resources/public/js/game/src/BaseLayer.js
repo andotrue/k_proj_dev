@@ -8,8 +8,8 @@ var BaseLayer = cc.Layer.extend({
     parent: null,
     playInfo: null,
     clock: null,
-    objs: null, // これまで押した点 {'x', 'y'}
-
+    objs: null, // これまで押した点 {'x', 'y'}の記録
+    isOK: null,  
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
@@ -263,15 +263,12 @@ var BaseLayer = cc.Layer.extend({
                 cc.log(" touch OK ! ");
 			}else{
     //            this.isOK = false;
-               return  this.runNG();
+               return this.runNG();
                 cc.log(" touch  ! ");
             }
 		}
 		
         cc.log(" touch OK ! ");
-    },
-    isOK:function () {
-        return true;
     },
     runOK:function () {
 //        cc.runAction();
