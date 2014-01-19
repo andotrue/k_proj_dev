@@ -170,14 +170,16 @@ var IllustFrame = cc.Layer.extend({
 		
 		// 拡大率の微調整
 		var new_scale;
-		
-		if( rect3.width > rect3.height ){
-			
-	        new_scale = this.FRAME_WIDTH / rect3.width;
+	   
+		if( Math.round(this.FRAME_WIDTH / this.FRAME_HEIGHT)
+				!=  Math.round(rect3.width / rect3.height) ){
+			new_scale = scale;
+		} else if (rect3.width / rect3.height){
+	        new_scale = this.FRAME_WIDTH  / rect3.width;
 		} else {
 	        new_scale = this.FRAME_HEIGHT / rect3.height;
 		}
-		illust.setScale(new_scale);
+		illust.setScale( new_scale );
 		
         this.illust = illust;
     },
@@ -186,8 +188,6 @@ var IllustFrame = cc.Layer.extend({
     //スプライトをカットするための領域を取得
     getRectForClipArea:function(offsetX, offsetY,  orgWidth, orgHeight, scale){
 		
-		cc.log("offsetX : " + offsetX + " offsetY : " + offsetY);
-
 		scale = scale + 0.5;
 		
 		var cw = this.FRAME_WIDTH / scale;
@@ -201,6 +201,7 @@ var IllustFrame = cc.Layer.extend({
 
 		// 読み取りエラーを無くす処理
 		if ( cw > orgWidth || ch > orgHeight ){
+			
 			cw = ocw;
 			ch = och;
 		}
