@@ -9,12 +9,18 @@ var BaseLayer = cc.Layer.extend({
     playInfo: null,
     clock: null,
     objs: null, // これまで押した点 {'x', 'y'}の記録
-    isOK: null, 
+    isOK: null,
+    answeredPoints: [],
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
         this.playInfo = playInfo;
         this.init(parent);
+
+        //正答を初期化
+        for(var i=0; i< this.playInfo.MACHIGAI_LIMIT; i++){
+            this.answeredPoints.push(null);
+        }
 
         var objs = this.playInfo.getClickPointsData();
         if (objs === null){
@@ -67,7 +73,7 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(this.ng);
             this.addChild(this.ok);
 
-            this.clock = this.parent.clock;
+            this.clock = this.playInfo.clock;
             this.addChild(this.clock,15);
 
             this.slider = new Slider(1.0, 3.0);
@@ -86,7 +92,7 @@ var BaseLayer = cc.Layer.extend({
     },
     initStarsAndHearts:function(){
         self = this;
-        this.stars = new Stars(self,this.playInfo.MACHIGAI_POINT);
+        this.stars = new Stars(self,this.playInfo.MACHIGAI_LIMIT);
         this.hearts = new Hearts(self, this.playInfo.FAIL_LIMIT);
     },
     initMenu:function(){
@@ -251,36 +257,44 @@ var BaseLayer = cc.Layer.extend({
 		
 		cc.log( objs );
 		
+        var trueFlag = false;
 		for( var i in objs ){
-			var ap = objs[i];
+            var ap = objs[i];
 
-			var apx = parseInt(ap.x);
-			var apy = parseInt(ap.y);
-			var px  = point.x;
-			var py  = rect.height - point.y;	// 座標系の変換
+            var apx = parseInt(ap.x);
+            var apy = parseInt(ap.y);
+            var px  = point.x;
+            var py  = rect.height - point.y;    // 座標系の変換
 
-			cc.log(apx + " " + apy + " " + px + " " + py);
-			
-			if( apx - margin < px && apx + margin > px &&
-				apy - margin < py && apy + margin > py ){
+            cc.log(apx + " " + apy + " " + px + " " + py);
+            
+            if( apx - margin < px && apx + margin > px &&
+                apy - margin < py && apy + margin > py ){
+                if( this.answeredPoints[i] !== true ){
 
-               return this.runOK();
-                cc.log(" touch OK ! ");
-			}
-		}
+                       cc.log(" touch OK ! ");
+                        this.answeredPoints[i] =true;
+                       return this.runOK();
+                }else{
+                    trueFlag = true;
+                }
+            }
+        }
 
-		return this.runNG();
-		cc.log(" touch  ! ");
+        if( trueFlag === false ){
+            return this.runNG();
+            cc.log(" touch  ! ");            
+        }
     },
     runOK:function () {
 //        cc.runAction();
         this.ok.setPosition(touched.x, touched.y);
 //        this.stars.increment();
-        this.hearts.decrement();
+        this.stars.increment();
     },
     runNG:function () {
         this.ng.setPosition(touched.x, touched.y);
-        this.stars.increment();
+        this.hearts.decrement();
     },
     checkGameOver:function (){
         cc.log("checkGameOver : " + this.stars.count() + ", " + this.hearts.count());
@@ -294,11 +308,13 @@ var BaseLayer = cc.Layer.extend({
 
     },
     gameoverSuccess:function(){
+        this.playInfo.setSucceed();
         var popup = new PopupLayer("GAMEOVER_SUCCESS",this.parent);
         popup.init("GAMEOVER_SUCCESS");
         this.addChild(popup);
     },
     gameoverFail:function(){
+        this.playInfo.setFail();
         var popup = new PopupLayer("GAMEOVER_FAIL",this.parent);
         popup.init("GAMEOVER_FAIL");
         this.addChild(popup);

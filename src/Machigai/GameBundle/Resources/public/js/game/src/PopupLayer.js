@@ -9,7 +9,7 @@ var PopupLayer = cc.Layer.extend({
         this._super();
         this.scene = scene;
         this.baseLayer = scene.baseLayer;
-        this.clock = this.baseLayer.clock;
+        this.clock = scene.clock;
         this.playInfo = this.baseLayer.playInfo;
         this.init(type);
     },
@@ -226,7 +226,7 @@ var PopupLayer = cc.Layer.extend({
     },
     gameoverFail:function(){
         cc.log("gameoverfail()");
-        var nextScene = new ResultScene(this.playInfo);
+        var nextScene = new ResultScene(this.scene.playInfo);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         this.removeFromParent();
     },

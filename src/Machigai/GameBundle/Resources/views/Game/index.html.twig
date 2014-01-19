@@ -13,6 +13,7 @@
     <meta name="x5-fullscreen" content="true"/>
     <meta name="360-fullscreen" content="true"/>
     <meta name="mobile-web-app-capable" content="yes">
+    <script type="text/javascript">var csrf_token = '{{ csrf_token }}';var uid= '{{uid}}'</script>
     <script type='text/javascript'>
         function preventScroll(event) {
           if (event.touches[0].target && (event.touches[0].target.tagName.toLowerCase() == "body" || event.touches[0].target.tagName.toLowerCase() == "body")) {event.preventDefault();}

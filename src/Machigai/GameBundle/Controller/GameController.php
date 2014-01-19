@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class GameController extends BaseController
 {
     public function indexAction()
-    {
+    {   
         return $this->render('MachigaiGameBundle:Game:index.html.twig');   
     }
     public function selectAction()
@@ -126,7 +126,13 @@ class GameController extends BaseController
 
     public function playAction($id)
     {
-    	return $this->render('MachigaiGameBundle:Game:index.html.twig');	
+        $user = $this->getUser();
+        $uid = 0;
+        if(!empty($user)){
+            $uid = $user->getId();
+        }
+        $token = $this->get('form.csrf_provider')->generateCsrfToken('csrf_token');
+    	return $this->render('MachigaiGameBundle:Game:index.html.twig', array('csrf_token' => $token, 'uid' => $uid));	
     }
     public function downloadByJSONAction($id)
     {

@@ -1,29 +1,34 @@
 var ResultLayer = cc.Layer.extend({
-    questionId: 152,
-    isCleared: false,
-    isGuest: false,
     //以下は固定値
+    DEFAULT_FONT_SIZE: 24,
     SHOP_LINK_PATH: null,
     RANKING_PATH: null,
     MESSAGE_FOR_USER_SUCCESS: "おめでとう！ショップやランキングをチェック",
     MESSAGE_FOR_GUEST_1_SUCCESS: "おめでとう！他の問題にもチャレンジ！",
-    MESSAGE_FOR_GUEST_2: "XXXXXX",
+    MESSAGE_FOR_GUEST_2_SUCCESS: "XXXXXX",
+    MESSAGE_FOR_USER_FAIL: "ユーザ失敗",
+    MESSAGE_FOR_GUEST_FAIL: "ゲスト失敗",
     //以下は変数から当てはめる
     acquiredPoint: null,
     clearTime: null,
     currentPoint: null,
+    playInfo: null,
 
 
-    ctor:function (isGuest,  clearTime, acquiredPoint, currentPoint ) {
+    ctor:function (playInfo, isGuest,  clearTime, acquiredPoint, currentPoint ) {
       cc.log("ResultLayer.ctor");
-        self = this;
+        this.playInfo = playInfo;
         this._super();
 
 //        this.isGuest = isGuest;
 //        this.isCleared = isCleared;
-        this.acquiredPoint = clearTime;
+        this.acquiredPoint = acquiredPoint;
         this.clearTime = clearTime;
         this.currentPoint = currentPoint;
+        this.questionId = 152;
+        this.isGuest = isGuest;
+        this.questionId= this.playInfo.QUESTION_ID;
+        this.isCleared = this.playInfo.isSucceed();
 
         this.init();
     },
@@ -40,10 +45,13 @@ var ResultLayer = cc.Layer.extend({
             bg.setPosition(360, 720 );
             this.addChild(bg);
 
-           cc.log("ResultLayer.init()");
-//            this.initClearTime();
-//            this.initCurrentPoint();
-//            this.initAcquiredPoint();
+            if(this.playInfo.isUser()){
+                var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,250,50,0,0,0);
+                var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,100,60,0,0,0);
+            }
+            if (this.playInfo.isSucceed === true){
+                var clearTimeSprite = this.clearTime( Math.Floor(this.clearTime / 1000 )+ "秒",360,350,60,0,0,0);           
+            }
 
             if(this.isGuest === true){
                 if( this.isCleared === true ){
@@ -64,22 +72,19 @@ var ResultLayer = cc.Layer.extend({
         return bRet;
     },
  
-    initClearTime:function(){
-
-    },
     initMenuForUserSuccess:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
-        path = gsDir + "popup/result_menu.png";
+        var path = gsDir + "popup/result_menu.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,this.MIDDLE_Y );
+        popup.setPosition(720,this.MIDDLE_Y );
 
         var tryAnother = this.createTryAnotherButton(360,700);
         var toTop = this.createToTopButton(360,600);
         var toShop = this.createShopButton(360,500);
         var toRanking = this.createRankingButton(360,400);
-
+        var MSG1 = this.createStringSprite(this.MESSAGE_FOR_USER_SUCCESS,360,1000,30,255,255,255);
         var menu = cc.Menu.create([tryAnother,toShop,toRanking,toTop]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -88,10 +93,13 @@ var ResultLayer = cc.Layer.extend({
     initMenuForGuestSuccess:function () {
         cc.log("ResultLayer.initMenuForGuest");
         this.state = "SAVE";
-        path = gsDir + "popup/result_menu_guest.png";
+        var path = gsDir + "popup/result_menu_guest.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,this.MIDDLE_Y );
+        popup.setPosition(720,this.MIDDLE_Y );
+
+        var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_1_SUCCESS,360,1000,30,255,255,255);
+        var MSG2 = this.createStringSprite(this.MESSAGE_FOR_GUEST_2_SUCCESS,360,800,30,255,255,255);
 
         var tryAnother = this.createTryAnotherButton(360,750)
         var toTop = this.createToTopButton(360,600);
@@ -104,10 +112,13 @@ var ResultLayer = cc.Layer.extend({
     initMenuForUserFail:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
-        path = gsDir + "popup/result_miss_menu.png";
+        var path = gsDir + "popup/result_miss_menu.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,this.MIDDLE_Y );
+        popup.setPosition(720,this.MIDDLE_Y );
+
+        var MSG1 = this.createStringSprite(this.MESSAGE_FOR_USER_FAIL,360,1000,30,255,255,255);
+
 
         var retry = this.createRetryButton(360,800);
         var tryAnother = this.createTryAnotherButton(360,700);
@@ -122,10 +133,12 @@ var ResultLayer = cc.Layer.extend({
     initMenuForGuestFail:function () {
         cc.log("ResultLayer.initMenuForGuest");
         this.state = "SAVE";
-        path = gsDir + "popup/result_miss_menu_guest.png";
+        var path = gsDir + "popup/result_miss_menu_guest.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,this.MIDDLE_Y );
+        popup.setPosition(720,this.MIDDLE_Y );
+
+        var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_FAIL,360,1000,30,255,255,255);
 
         var retry = this.createRetryButton(360,800);
         var tryAnother = this.createTryAnotherButton(360,700);
@@ -221,6 +234,19 @@ var ResultLayer = cc.Layer.extend({
             default:
                 cc.log('default');
         }
+    },
+    createPointSprite:function(string,x,y,size,r,g,b){
+        return this.createStringSprite(string,x,y,size);
+    },
+    createStringSprite:function(string,x,y,size,r,g,b){
+        if (size === undefined || size === null){
+            size = this.DEFAULT_FONT_SIZE;
+        }
+        var label = cc.LabelTTF.create(string, "Arial", size);
+        this.addChild(label, 100);
+        label.setPosition(cc.p(x, y));
+        label.setColor(cc.c3b(r, g, b));                     //テキストに色をセット（白）
+        return label;
     },
     createShopButton:function (x,y) {
         var shop = cc.MenuItemImage.create(

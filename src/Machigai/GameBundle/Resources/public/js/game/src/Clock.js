@@ -27,6 +27,7 @@ var Clock = cc.Layer.extend({
 	updateClock:function(){
 		if (that.getCurrentDuration() <=0){
 			that._status = that._FINISHED;
+			that.stopTimer();
 			that.parent.baseLayer.gameoverFail();
 			clearInterval(that._timer);
 		}else{
@@ -50,6 +51,9 @@ var Clock = cc.Layer.extend({
 		that.interruptTimer();
 		that._status = that._FINISHED;
 		that._finishTime = that._clockData[that._clockData.length - 1 ]['interrupted'];
+	},
+	getClearTime:function(){
+		return that.getPassedDuration();
 	},
 	getPassedDuration:function(){
 		var duration = 0;
