@@ -15,7 +15,7 @@ var Stars = cc.Class.extend({
     },
     init:function(parent, machigai_limit){
         this.parent = parent;
-        this._MAX = machigai_limit;
+        this._MAX = 5 // machigai_limit;
         cc.log("parent._id = " + this.parent.__instance_id);
         for (var i = 0; i < this._MAX; i++) {
             this._changeSprite(i, this._file_path_off);
