@@ -55,7 +55,7 @@ var PlayInfo = cc.Class.extend({
 	},
 	_downloadData:function(){
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("GET","/app_dev.php/sync/game/" + this.QUESTION_ID,false);
+		xhttp.open("GET","/machigai/app_dev.php/sync/game/" + this.QUESTION_ID,false);
 		xhttp.send("");
 		var xmlDoc=xhttp.responseText;
 		cc.log(xmlDoc);
@@ -75,7 +75,7 @@ var PlayInfo = cc.Class.extend({
 		array = [userId,startedAt, clickPointsData,clockData];
 
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("POST","/app_dev.php/sync/playHistory/" + this.QUESTION_ID,false);
+		xhttp.open("POST","/machigai/app_dev.php/sync/playHistory/" + this.QUESTION_ID,false);
 		xhttp.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 
 		xhttp.send("");
@@ -98,7 +98,7 @@ var PlayInfo = cc.Class.extend({
 	_downloadQuestionXMLFromserver:function(){
 		cc.log("PlayInfo._downloadQuestionXMLFromserver()");
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("GET","/app_dev.php/game/download/" + this.LEVEL +"/" + this.QCODE + "/xml",false);
+		xhttp.open("GET","/machigai/app_dev.php/game/download/" + this.LEVEL +"/" + this.QCODE + "/xml",false);
 		xhttp.send("");
 		return xhttp.responseXML;
 	},
