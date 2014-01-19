@@ -226,7 +226,7 @@ var BaseLayer = cc.Layer.extend({
 		var margin = 20;
 		
 		// ポイントを取得
-/*        var deviceLocation = touch.getLocation();
+        var deviceLocation = touch.getLocation();
         cc.log(" touched point in device location: ( " + deviceLocation.x +  "," + deviceLocation.y + ")" );
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(deviceLocation);
 		if( point.x <= 0){
@@ -235,14 +235,14 @@ var BaseLayer = cc.Layer.extend({
 		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
 
 		// 解答群の取得
-		for( var i in this.objs ){
+/*		for( var i in this.objs ){
 			var ap = this.objs[i];
-*/
+
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation);
 		if(this.onIllust1){
 			point = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation);
 		 }
-		
+*/	
 		// 解答群の取得
 		
 		// TODO 正解ポイントの取得
@@ -253,29 +253,22 @@ var BaseLayer = cc.Layer.extend({
 		for( var i in objs ){
 			var ap = objs[i];
 			
-			cc.log(" answered_point is" + ap.x + " " + ap.y);
+//			cc.log(" answered_point is" + ap.x + " " + ap.y);
 			
 			if( (ap.x - margin < point.x && ap.x + margin > point.x) &&
 				(ap.y - margin < point.y && ap.y + margin > point.y )){
 			
-				this.isOK = true;
-			}
+//				this.isOK = true;
+               return this.runOK();
+                cc.log(" touch OK ! ");
+			}else{
+    //            this.isOK = false;
+               return  this.runNG();
+                cc.log(" touch  ! ");
+            }
 		}
-/*
-//        this.illusts.
-
-        //タッチポイントを追加
-        var bool = false;
-
-        var result = { x: point.x, y: point.y, isOK: bool, touchedAt: new Date() };
-*/
-
-		// TODO セキュリティを考慮したデータ送信
-		//this.playInfo.setClickPointsData({x: point.x, y: point.y});
 		
-        cc.log("Illust Touched! ");
-        if(this.isOK) return this.runOK();
-        return this.runNG();
+        cc.log(" touch OK ! ");
     },
     isOK:function () {
         return true;
@@ -288,6 +281,7 @@ var BaseLayer = cc.Layer.extend({
     },
     runNG:function () {
         this.ng.setPosition(touched.x, touched.y);
+        this.stars.increment();
     },
     checkGameOver:function (){
         cc.log("checkGameOver : " + this.stars.count() + ", " + this.hearts.count());
