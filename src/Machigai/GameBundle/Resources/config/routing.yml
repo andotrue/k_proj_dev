@@ -269,7 +269,7 @@ SyncNotice:
     requirements:
         _method: GET
 SyncGame:
-    pattern: /sync/game/{id}
+    pattern: /sync/game/{id}/{uid}
     defaults: { _controller: MachigaiGameBundle:Android:game }
     requirements: 
         _method: GET

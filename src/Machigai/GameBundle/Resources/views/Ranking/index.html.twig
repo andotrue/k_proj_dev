@@ -8,6 +8,8 @@ var month = 0;
 var mode = 2;
 var image_path = null;
 var image_id = null;
+var current_level = "easy";
+
 $(function(){
 	$('.game_lavel_2').hide();
 	$('.game_lavel_3').hide();
@@ -49,6 +51,41 @@ function originalImage(){
   var src = image_path.replace(/.png/g,'_off.png');
   $('#'+image_id).attr("src",src);
 }
+function changeTab(level){
+	var other_mode = new Array('easy','normal','hard');
+		var mode = new Array()
+		mode['easy'] = 0;
+		mode['normal'] = 1;
+		mode['hard'] = 2;
+		other_mode.splice(mode[level],1);
+		other_mode1 = '#'+other_mode[0];
+		other_mode2 = '#'+other_mode[1];
+		chosen_mode = "#"+level;
+
+		var pre_src = $(chosen_mode).attr('src');
+		var src = pre_src.replace(/.png/g,'_off.png');
+		var pre_not1 = $(other_mode1).attr('src');
+		var not1 = pre_not1.replace(/_off.png/g,'.png');
+		var pre_not2 = $(other_mode2).attr('src');
+		var not2 = pre_not2.replace(/_off.png/g,'.png');
+		$(chosen_mode).attr("src",src);
+		$(other_mode1).attr("src",not1);
+		$(other_mode2).attr("src",not2);
+		current_level = level;
+}
+function changeMonth(month){
+	if(month=="this_month"){
+		other = "last_month";
+	}else{
+		other = "this_month";
+	}
+		var pre_src = $('#'+month).attr('src');
+		var src = pre_src.replace(/.png/g,'_off.png');
+		var pre_not = $('#'+other).attr('src');
+		var not = pre_not.replace(/_off.png/g,'.png');
+		$('#'+month).attr("src",src);
+		$('#'+other).attr("src",not);
+}
 window.onload = function(){		
 	var j = 1;
 	while(j <= 3){
@@ -73,13 +110,13 @@ window.onload = function(){
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_ranking.png') }}" style="position:absolute;left:0;top:0;width:100%;height:auto;"/>
 <section style="position:relative;margin-top:10%">
 <div id="month_tab" class="bottom_blue_line" style="padding:5% 0 0 0;">
-	<img id="this_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_thismonth_off.png') }}" width="47%" style="padding-right:2%;" onclick="changeImage(this.id);change_show_conditions(0)"/>
-	<img id="last_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_lastmonth_off.png') }}" width="47%" onclick="changeImage(this.id);change_show_conditions(1)"/>
+	<img id="this_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_thismonth_off.png') }}" width="47%" style="padding-right:2%;" onclick="changeMonth(this.id);change_show_conditions(0)"/>
+	<img id="last_month" src="{{ asset('/bundles/machigaigame/images/parts/tab_ranking_lastmonth.png') }}" width="47%" onclick="changeMonth(this.id);change_show_conditions(1)"/>
 </div>
 <div id="level_tab" style="padding-top:0.5%;">
-	<img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}" width="30%" onclick="changeImage(this.id);change_show_conditions(2)"/>
-	<img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick="changeImage(this.id);change_show_conditions(3)"/>
-	<img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick="changeImage(this.id);change_show_conditions(4)"/>
+	<img id="easy" src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}" width="30%" onclick="changeTab(this.id);change_show_conditions(2)"/>
+	<img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal.png') }}" width="30%" onclick="changeTab(this.id);change_show_conditions(3)"/>
+	<img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard.png') }}" width="30%" onclick="changeTab(this.id);change_show_conditions(4)"/>
 </div>
 <div id="ranking_area" class="bottom_blue_line" style="width: 100%;background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size:cover;background-repeat:no-repeat; " >
  <ul id="panel" style="padding-top:0.8%; ">

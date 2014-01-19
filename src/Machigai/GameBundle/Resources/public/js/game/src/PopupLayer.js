@@ -9,7 +9,7 @@ var PopupLayer = cc.Layer.extend({
         this._super();
         this.scene = scene;
         this.baseLayer = scene.baseLayer;
-        this.clock = this.baseLayer.clock;
+        this.clock = scene.clock;
         this.playInfo = this.baseLayer.playInfo;
         this.init(type);
     },
@@ -47,6 +47,7 @@ var PopupLayer = cc.Layer.extend({
 
             bRet = true;
         }
+        cc.log("PopupLayer.init Finished");
         return bRet;
     },
 
@@ -209,13 +210,15 @@ var PopupLayer = cc.Layer.extend({
         popup.setPosition(360,this.MIDDLE_Y );
     },
     gameoverSuccess:function(){
+        cc.log("gameoverSuccess");
+        this.state = "GAMEOVER_SUCCESS";
         var nextScene = new ResultScene(this.playInfo);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         this.removeFromParent();
 //        this._parent.removeFromParent();
     },
     popupGameoverFail:function(){
-        cc.log("gameoverfailPopup()");
+        cc.log("gameoverFail");
         this.state = "GAMEOVER_FAIL";
         var popup = cc.Sprite.create( gsDir + "label/popup_game_miss.png" );
         this.addChild(popup);
@@ -223,7 +226,7 @@ var PopupLayer = cc.Layer.extend({
     },
     gameoverFail:function(){
         cc.log("gameoverfail()");
-        var nextScene = new ResultScene(this.playInfo);
+        var nextScene = new ResultScene(this.scene.playInfo);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         this.removeFromParent();
     },

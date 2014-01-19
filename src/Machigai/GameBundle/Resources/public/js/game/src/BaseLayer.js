@@ -8,13 +8,19 @@ var BaseLayer = cc.Layer.extend({
     parent: null,
     playInfo: null,
     clock: null,
-    objs: null, // これまで押した点 {'x', 'y'}
-
+    objs: null, // これまで押した点 {'x', 'y'}の記録
+    isOK: null,
+    answeredPoints: [],
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
         this.playInfo = playInfo;
         this.init(parent);
+
+        //正答を初期化
+        for(var i=0; i< this.playInfo.MACHIGAI_LIMIT; i++){
+            this.answeredPoints.push(null);
+        }
 
         var objs = this.playInfo.getClickPointsData();
         if (objs === null){
@@ -67,7 +73,7 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(this.ng);
             this.addChild(this.ok);
 
-            this.clock = new Clock(this);
+            this.clock = this.playInfo.clock;
             this.addChild(this.clock,15);
 
             this.slider = new Slider(1.0, 3.0);
@@ -86,7 +92,7 @@ var BaseLayer = cc.Layer.extend({
     },
     initStarsAndHearts:function(){
         self = this;
-        this.stars = new Stars(self,this.playInfo.MACHIGAI_POINT);
+        this.stars = new Stars(self,this.playInfo.MACHIGAI_LIMIT);
         this.hearts = new Hearts(self, this.playInfo.FAIL_LIMIT);
     },
     initMenu:function(){
@@ -226,7 +232,7 @@ var BaseLayer = cc.Layer.extend({
 		var margin = 20;
 		
 		// ポイントを取得
-/*        var deviceLocation = touch.getLocation();
+        var deviceLocation = touch.getLocation();
         cc.log(" touched point in device location: ( " + deviceLocation.x +  "," + deviceLocation.y + ")" );
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(deviceLocation);
 		if( point.x <= 0){
@@ -235,59 +241,60 @@ var BaseLayer = cc.Layer.extend({
 		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
 
 		// 解答群の取得
-		for( var i in this.objs ){
+/*		for( var i in this.objs ){
 			var ap = this.objs[i];
-*/
+
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation);
 		if(this.onIllust1){
 			point = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation);
 		 }
+*/	
+		// 画像の四角の取得
+		var rect = this.illusts.frames[0].illust.getTextureRect();
 		
-		// 解答群の取得
-		
-		// TODO 正解ポイントの取得
+		// 正解ポイントの取得
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
 		
 		cc.log( objs );
 		
+        var trueFlag = false;
 		for( var i in objs ){
-			var ap = objs[i];
-			
-			cc.log(" answered_point is" + ap.x + " " + ap.y);
-			
-			if( (ap.x - margin < point.x && ap.x + margin > point.x) &&
-				(ap.y - margin < point.y && ap.y + margin > point.y )){
-			
-				this.isOK = true;
-			}
-		}
-/*
-//        this.illusts.
+            var ap = objs[i];
 
-        //タッチポイントを追加
-        var bool = false;
+            var apx = parseInt(ap.x);
+            var apy = parseInt(ap.y);
+            var px  = point.x;
+            var py  = rect.height - point.y;    // 座標系の変換
 
-        var result = { x: point.x, y: point.y, isOK: bool, touchedAt: new Date() };
-*/
+            cc.log(apx + " " + apy + " " + px + " " + py);
+            
+            if( apx - margin < px && apx + margin > px &&
+                apy - margin < py && apy + margin > py ){
+                if( this.answeredPoints[i] !== true ){
 
-		// TODO セキュリティを考慮したデータ送信
-		//this.playInfo.setClickPointsData({x: point.x, y: point.y});
-		
-        cc.log("Illust Touched! ");
-        if(this.isOK) return this.runOK();
-        return this.runNG();
-    },
-    isOK:function () {
-        return true;
+                       cc.log(" touch OK ! ");
+                        this.answeredPoints[i] =true;
+                       return this.runOK();
+                }else{
+                    trueFlag = true;
+                }
+            }
+        }
+
+        if( trueFlag === false ){
+            return this.runNG();
+            cc.log(" touch  ! ");            
+        }
     },
     runOK:function () {
 //        cc.runAction();
         this.ok.setPosition(touched.x, touched.y);
 //        this.stars.increment();
-        this.hearts.decrement();
+        this.stars.increment();
     },
     runNG:function () {
         this.ng.setPosition(touched.x, touched.y);
+        this.hearts.decrement();
     },
     checkGameOver:function (){
         cc.log("checkGameOver : " + this.stars.count() + ", " + this.hearts.count());
@@ -301,11 +308,13 @@ var BaseLayer = cc.Layer.extend({
 
     },
     gameoverSuccess:function(){
+        this.playInfo.setSucceed();
         var popup = new PopupLayer("GAMEOVER_SUCCESS",this.parent);
         popup.init("GAMEOVER_SUCCESS");
         this.addChild(popup);
     },
     gameoverFail:function(){
+        this.playInfo.setFail();
         var popup = new PopupLayer("GAMEOVER_FAIL",this.parent);
         popup.init("GAMEOVER_FAIL");
         this.addChild(popup);

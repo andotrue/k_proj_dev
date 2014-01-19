@@ -36,9 +36,9 @@ var IllustFrame = cc.Layer.extend({
 		
 		this.dx = dx;
 		this.dy = dy;
-		
-		this.offsetX -= dx;
+
 		this.offsetY += dy;
+		this.offsetX -= dx;
 		
 		this.setImage();
 		//cc.log("IllustFrame.update()");
@@ -134,8 +134,13 @@ var IllustFrame = cc.Layer.extend({
 			
 			// ベーススケールの計算
 			this.base_scale = this.FRAME_HEIGHT / this.originalHeight;
-			
 			cc.log("base_scale " + this.base_scale);
+
+			this.baseCenterX = this.originalWidth / 2;
+			this.baseCenterY = this.originalHeight / 2;
+			
+			this.dx = 0;
+			this.dy = 0;
 			
 		} else {
 			
@@ -143,7 +148,7 @@ var IllustFrame = cc.Layer.extend({
 			this.removeChild(this.illust);
 		}
 
-        var scale = this.scale;
+        var scale = this.scale * this.base_scale;
 
         var rect3 = this.getRectForClipArea(
 					this.offsetX,
@@ -177,15 +182,7 @@ var IllustFrame = cc.Layer.extend({
 		// 拡大率の微調整
 		var new_scale;
 	   
-		if( Math.round(this.FRAME_WIDTH / this.FRAME_HEIGHT)
-				!=  Math.round(rect3.width / rect3.height) ){
-			new_scale = this.base_scale * scale;
-		
-		} else if (rect3.width < rect3.height){
-	        new_scale = this.FRAME_WIDTH  / rect3.width;
-		} else {
-	        new_scale = this.FRAME_HEIGHT / rect3.height;
-		}
+	    new_scale = this.FRAME_HEIGHT / rect3.height;
 		
 		illust.setScale( new_scale );
 		
@@ -198,42 +195,53 @@ var IllustFrame = cc.Layer.extend({
 		
 		cc.log("初期スケール : " + scale);
 		
-		var cw = this.FRAME_WIDTH / scale;
-		var ch = this.FRAME_HEIGHT / scale;
+		// リクエストされた画像の拡大率
+		var cw = orgWidth / scale;
+		var ch = orgHeight / scale;
 		
-		var ocw = orgWidth / scale;
-		var och = orgHeight / scale;
-
-		var cx = offsetX / scale;
-		var cy = offsetY / scale;
-
-		// 読み取りエラーを無くす処理
-		if ( cw > orgWidth || ch > orgHeight ){
-			
-			cw = ocw;
-			ch = och;
+		// スケールが1を超えたら
+		if( scale > 1 ){
+			cw = orgWidth * scale;
+			ch = orgHeight * scale;
 		}
 		
-		// 左右の上限、下限の設定
-		if(cw + cx > orgWidth){
-			cx = orgWidth - cw;
-			this.offsetX += this.dx;
-		} else if(cx < 0){
+		// 拡大した画像領域がフレームより大きくなる場合
+		if( orgWidth * scale > this.FRAME_WIDTH ){
+			cw = this.FRAME_WIDTH / scale;
+		}
+		if( orgHeight * scale > this.FRAME_HEIGHT ){
+			ch = this.FRAME_HEIGHT / scale;
+		}
+		
+		// 拡大を中心から拡大するようにする為の処理
+		var cx = (this.baseCenterX - cw / 2) + offsetX / scale;
+		var cy = (this.baseCenterY - ch / 2) + offsetY / scale;
+
+		// 座標が0より小さい場合はゼロにする
+		if(cx < 0){
 			cx = 0;
-			this.offsetX = 0;
+			this.offsetX += this.dx;
+		} else if (cx > orgWidth){
+			cx = orgWidth;
 		}
-
-		// 上下の上限、下限の設定
-		if(ch + cy > orgHeight){
-			cy = orgHeight - ch;
-			this.offsetY -= this.dy;
-		} else if( cy < 0){
+		if(cy < 0){
 			cy = 0;
-			this.offsetY = 0;
+			this.offsetY -= this.dy;
+		} else if (cy >= orgHeight){
+			cy = orgHeight;
 		}
 
+		// 座標位置より画像の縦横の上限を制御
+		if(cw + cx > orgWidth){
+			cw = orgWidth;
+			this.offsetX += this.dx;
+		}
+		if(ch + cy > orgHeight){
+			ch = orgHeight;
+			this.offsetY -= this.dy;
+		}
+		
 		return cc.rect( cx , cy , cw, ch);
-
     },
     getScale:function(){
         return this.illust.getScale();

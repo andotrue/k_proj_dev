@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class GameController extends BaseController
 {
     public function indexAction()
-    {
+    {   
         return $this->render('MachigaiGameBundle:Game:index.html.twig');   
     }
     public function selectAction()
@@ -29,7 +29,19 @@ class GameController extends BaseController
                                     order by p.gameStatus desc, q.questionNumber asc')
                 ->getResult();
 
-    	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));
+        if(!empty($user)){
+            $pre_playedQuestions = $this->getDoctrine()
+            ->getRepository('MachigaiGameBundle:PlayHistory')
+            ->findBy(array('user'=>$user->getId()));
+            $playedQuestions = array();
+         
+            foreach ($pre_playedQuestions as $pre_questions) {
+                $playedQuestions[] = $pre_questions->getQuestion()->getId();
+            };
+        }else{
+            $playedQuestions = null;
+        }
+    	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions,'histories'=>$histories));
     }
     public function sortQuestionsAction($sort){
         $user = $this->getUser();
@@ -91,7 +103,8 @@ class GameController extends BaseController
                     break;
         }
         $list = $this->makeList($histories);
-        return $this->render('MachigaiGameBundle:Game:select.html.twig',array('user'=>$user,'questions'=>$questions,'histories'=>$histories));
+        $playedQuestions = null;
+        return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions,'histories'=>$histories));
     }
     public function makeList($histories){
         $list = array();
@@ -113,7 +126,13 @@ class GameController extends BaseController
 
     public function playAction($id)
     {
-    	return $this->render('MachigaiGameBundle:Game:index.html.twig');	
+        $user = $this->getUser();
+        $uid = 0;
+        if(!empty($user)){
+            $uid = $user->getId();
+        }
+        $token = $this->get('form.csrf_provider')->generateCsrfToken('csrf_token');
+    	return $this->render('MachigaiGameBundle:Game:index.html.twig', array('csrf_token' => $token, 'uid' => $uid));	
     }
     public function downloadByJSONAction($id)
     {

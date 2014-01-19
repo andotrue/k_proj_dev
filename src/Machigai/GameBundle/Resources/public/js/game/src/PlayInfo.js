@@ -13,7 +13,64 @@ var PlayInfo = cc.Class.extend({
 	_definition: null,
 	_playData: null,
 	_playDataJSON: null,
+	_clock: null,
+	_user: null,
+	_isSucceed: false,
+	_isPlayed: false,
 
+	getUserID:function(){
+		if(this._user !== null){
+			return this._user['id'];
+		}else{
+			return null;
+		}
+	},
+	isGuest:function(){
+		if(this._user === null){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	isUser:function(){
+		if(this._user !== null){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	isFirstTime:function(){
+		if(this._user === null){
+			return null;
+		}
+		return (this._user['firstTime'] === true);
+	},
+	isSucceed:function(){
+		return this._isSucceed;
+	},
+	setSucceed:function(){
+		this._isSucceed = true;
+		return this._isSucceed;
+	},
+	setFail:function(){
+		this._isSucceed = false;
+		return this._isSucceed;
+	},
+	getCurrentPoint:function(){
+		if(this._user !== null){
+			return this._user['currentPoint'];
+		}else{
+			return null;
+		}
+	},
+	getNewCurrentPoint:function(){
+		if (this.isUser === true && this.isFirstTime() && this.isSucceed){
+			cc.log("PlayInfo.currentPoint = " + this._user['currentPoint'] + this.CLEAR_POINT);
+			return this._user['currentPoint'] + this.CLEAR_POINT;
+		}else{
+			return 0;
+		}
+	},
 	setClickPointsData:function(cilckPoints){
 		cc.log("PlayInfo.setClickPointsData(): reusult = " + this._playData.setClickPointsData(clickPoints) );
 		this._playData.setClickPointsData(clickPoints);
@@ -29,6 +86,14 @@ var PlayInfo = cc.Class.extend({
 	getClockData:function(){
 		cc.log("PlayInfo.getClockData(): reusult = " + this._playData.getClockData() );
 		return this._playData.getClockData();
+	},
+	setClock:function(clock){
+		this.clock = clock;
+		clock.setPlayInfo(this);
+	},
+	getClearTime:function(){
+		if(this.clock === null) throw "PlayInfo: No Clock set!";
+		return this.clock.getClearTime();
 	},
 	getDefinition:function(){
 		cc.log("PlayInfo.getDefinition(): reusult = " + this._definition);
@@ -55,7 +120,8 @@ var PlayInfo = cc.Class.extend({
 	},
 	_downloadData:function(){
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("GET","/app_dev.php/sync/game/" + this.QUESTION_ID,false);
+		xhttp.open("GET","/app_dev.php/sync/game/" + this.QUESTION_ID + "/" +uid,false);
+//		xhttp.setRequestHeader('X-CSRF-Token', csrf_token);
 		xhttp.send("");
 		var xmlDoc=xhttp.responseText;
 		cc.log(xmlDoc);
@@ -64,8 +130,10 @@ var PlayInfo = cc.Class.extend({
 			this._error_redirect_to("../select");
 		}
 		this._data = data;
+		this._user = this._data["user"];
 		this._definition = this._data["question"];
-		this._playDataJSON = this._data["playHistory"];
+//		this._playDataJSON = this._data["playHistory"];
+		csrf_token = this._data["csrf_token"];
 
 	},
 	_sendPlayHistory:function(){
@@ -76,6 +144,7 @@ var PlayInfo = cc.Class.extend({
 
 		var xhttp=new XMLHttpRequest();
 		xhttp.open("POST","/app_dev.php/sync/playHistory/" + this.QUESTION_ID,false);
+		xhttp.setRequestHeader('X-CSRF-Token', csrf_token);
 		xhttp.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 
 		xhttp.send("");
@@ -148,14 +217,5 @@ var PlayInfo = cc.Class.extend({
 		}else{
 			this._playData = PlayData.loadFromJSON();
 		}
-	},
-
-	onEnter:function(){
-		cc.log("PlayInfo.onEnter");
-	},
-
-	onExit:function(){
-		cc.log("PlayInfo.onExit");
-		this._playData = null;
 	}
 });

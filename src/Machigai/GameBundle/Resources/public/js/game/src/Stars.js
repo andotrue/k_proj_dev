@@ -3,19 +3,21 @@ var Stars = cc.Class.extend({
     _count: 0,
     _objWidth: 30,
     _objHeight: 40,
-    _objX: 420,
-    _objY: 1256,
+    _objX: 430,
+    _objY: 1366,
     _sprites: [],
     parent: null,
+
+
     _file_path_off: gsDir + "other/game_star_off.png",
     _file_path_on: gsDir + "other/game_star_on.png",
-    ctor:function(parent, machigai_limit){
+    ctor:function(parent, MACHIGAI_LIMIT){
         if(parent === undefined) throw("Star.ctor: parent must not be undefined!");
+        this.parent = parent;
+        this._MAX = MACHIGAI_LIMIT;// machigai_limit;
         this.init(parent);
     },
-    init:function(parent, machigai_limit){
-        this.parent = parent;
-        this._MAX = machigai_limit;
+    init:function(parent){
         cc.log("parent._id = " + this.parent.__instance_id);
         for (var i = 0; i < this._MAX; i++) {
             this._changeSprite(i, this._file_path_off);

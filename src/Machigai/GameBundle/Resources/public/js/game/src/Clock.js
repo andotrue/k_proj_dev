@@ -20,10 +20,15 @@ var Clock = cc.Layer.extend({
 	_FINISHED: 3,
 	_playInfo: null,
 	_timer: null,
+
+	setPlayInfo:function(playInfo){
+		this._playInfo = playInfo;
+	},
 	updateClock:function(){
 		if (that.getCurrentDuration() <=0){
 			that._status = that._FINISHED;
-			that.parent.gameoverFail();
+			that.stopTimer();
+			that.parent.baseLayer.gameoverFail();
 			clearInterval(that._timer);
 		}else{
 			that.updateDigits();
@@ -46,6 +51,9 @@ var Clock = cc.Layer.extend({
 		that.interruptTimer();
 		that._status = that._FINISHED;
 		that._finishTime = that._clockData[that._clockData.length - 1 ]['interrupted'];
+	},
+	getClearTime:function(){
+		return that.getPassedDuration();
 	},
 	getPassedDuration:function(){
 		var duration = 0;
