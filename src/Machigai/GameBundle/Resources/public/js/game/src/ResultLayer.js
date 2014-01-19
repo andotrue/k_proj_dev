@@ -39,13 +39,13 @@ var ResultLayer = cc.Layer.extend({
 
           cc.log("ResultLayer.init()");
             this.initClearTime();
-//            this.initCurrentPoint();
-//            this.initAcquiredPoint();
+            this.initCurrentPoint();
+            this.initAcquiredPoint();
 
             if(this.isGuest === true){
-//                this.initMenuForGuest();
+                this.initMenuForGuest();
             }else{
-//                this.initMenuForUser();
+                this.initMenuForUser();
             }
 
             bRet = true;

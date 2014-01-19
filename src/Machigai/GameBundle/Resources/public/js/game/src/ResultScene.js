@@ -1,6 +1,8 @@
 var ResultScene = cc.Scene.extend({
-    ctor:function (playInfo) {
+    onEnter:function (playInfo) {
         cc.log("ResultScene.ctor");
+        this._super();
+
         this.playData = playInfo.getPlayData();
 //        this.userId = this.playData.getUserId(); TODO:getUserId が変。
         this.userId = null;
@@ -20,8 +22,5 @@ var ResultScene = cc.Scene.extend({
         this.addChild(resultLayer,0);
 
     },
-    onEnter:function () {
-        this._super();
-    }
 });
 

@@ -306,7 +306,7 @@ var BaseLayer = cc.Layer.extend({
         this.addChild(popup);
     },
     gameoverFail:function(){
-        var popup = new PopupLayer("GAMEOVER_FAIL",this);
+        var popup = new PopupLayer("GAMEOVER_FAIL",this.parent);
         popup.init("GAMEOVER_FAIL");
         this.addChild(popup);
     },
