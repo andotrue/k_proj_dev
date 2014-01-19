@@ -3,11 +3,13 @@ var PopupLayer = cc.Layer.extend({
     clock: null,
     baseLayer: null,
     MIDDLE_Y: 704,
+    playInfo: null,
     ctor:function (type,baseLayer) {
         cc.log("PopupLayer.ctor");
         this._super();
         this.baseLayer = baseLayer;
         this.clock = baseLayer.clock;
+        this.playInfo = baseLayer.playInfo;
         this.init(type);
     },
     init:function (type) {
@@ -206,7 +208,10 @@ var PopupLayer = cc.Layer.extend({
         popup.setPosition(360,this.MIDDLE_Y );
     },
     gameoverSuccess:function(){
-
+        var nextScene = new ResultScene(this.playInfo);
+        cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
+        this.removeFromParent();
+        this._parent.removeFromParent();
     },
     popupGameoverFail:function(){
         this.state = "GAMEOVER_FAIL";
@@ -215,7 +220,7 @@ var PopupLayer = cc.Layer.extend({
         popup.setPosition(360,this.MIDDLE_Y );
     },
     gameoverFail:function(){
-        var nextScene = new MyGameScene();
+        var nextScene = new ResultScene(this.playInfo);
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         this.removeFromParent();
         this._parent.removeFromParent();

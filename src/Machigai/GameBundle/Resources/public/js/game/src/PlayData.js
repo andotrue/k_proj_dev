@@ -17,7 +17,7 @@ var PlayData = cc.Class.extend({
 		return this.isSaved;
 	},
 	getUserId:function(){
-		cc.log("PlayData.getUserId : " + this.getUserId());
+		cc.log("PlayData.getUserId : " + this._userId());
 		return this._userId;
 	},
 	getPlayHistoryId:function(){
