@@ -62,7 +62,7 @@ var BaseLayer = cc.Layer.extend({
             this.clock = new Clock(this);
             this.addChild(this.clock,15);
 
-            this.slider = new Slider(0.5, 3.0);
+            this.slider = new Slider(1.0, 3.0);
             this.addChild(this.slider,18);
 
             this.initMenu();
