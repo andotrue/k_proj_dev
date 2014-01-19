@@ -3,10 +3,12 @@ var Stars = cc.Class.extend({
     _count: 0,
     _objWidth: 30,
     _objHeight: 40,
-    _objX: 420,
-    _objY: 1256,
+    _objX: 430,
+    _objY: 1366,
     _sprites: [],
     parent: null,
+
+
     _file_path_off: gsDir + "other/game_star_off.png",
     _file_path_on: gsDir + "other/game_star_on.png",
     ctor:function(parent, machigai_limit){

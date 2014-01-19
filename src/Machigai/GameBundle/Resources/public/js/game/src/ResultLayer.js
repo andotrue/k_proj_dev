@@ -155,22 +155,27 @@ var ResultLayer = cc.Layer.extend({
         switch(sender.name){
             case 'Shop':
                 cc.log('Shop');
+                this.toShop();
                 this.removeFromParent();
                 break;
             case 'Ranking':
                 cc.log('Ranking');
+                this.toRanking();
                 this.removeFromParent();
                 break;
             case 'TryAnother':
                 cc.log('TryAnother');
+                this.tryAnother();
                 this.removeFromParent();
                 break;
             case 'ToTop':
                 cc.log('ToTop');
+                this.toTop();
                 this.removeFromParent();
                 break;
             case 'Retry':
                 cc.log('Retry');
+                this.playOtherGames();
                 this.removeFromParent();
                 break;
             default:
