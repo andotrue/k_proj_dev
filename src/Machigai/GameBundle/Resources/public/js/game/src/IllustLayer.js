@@ -59,7 +59,7 @@ var IllustLayer = cc.Layer.extend({
           break;
       }
       cc.log("IllustLayer.imgPath(index) =" + this._q_def_path + this.level + '/' + this.qcode + "/first");
-      return this._q_def_path + this.level + '/' + this.qcode + "/first";
+      return this._q_def_path + this.level + '/' + this.qcode + postfix;
     },
     setIllustFullTargetRect:function(rect){
       this.fullContentsRect = rect;
@@ -127,8 +127,8 @@ var IllustLayer = cc.Layer.extend({
         if (this._super()) {
             this.setAnchorPoint(cc.p(0, 0));
             this.setPosition(0,0);
-            var frame1 = new IllustFrame(this.imgPath(0), rect, 1);
-            var frame2 = new IllustFrame(this.imgPath(1), rect, 2);
+            var frame1 = new IllustFrame(this.imgPath(1), rect, 1);
+            var frame2 = new IllustFrame(this.imgPath(2), rect, 2);
             frame1.setFriend(frame2);
             frame2.setFriend(frame1);
             self.addChild(frame1);

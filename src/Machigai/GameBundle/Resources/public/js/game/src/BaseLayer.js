@@ -87,7 +87,8 @@ var BaseLayer = cc.Layer.extend({
             bd+"res/game_scene/button/game_icon_hint.png",
             this.menuCallBack.bind(this)
         );
-        popupHint.setPosition(506, 50);
+//        popupHint.setPosition(506, 50);
+        popupHint.setPosition(185, 259);
         popupHint.name = "HINT";
 
         var popupSave = cc.MenuItemImage.create(
@@ -95,7 +96,7 @@ var BaseLayer = cc.Layer.extend({
             bd+"res/game_scene/button/game_icon_save.png",
             this.menuCallBack.bind(this)
         );
-        popupSave.setPosition(667, 50);
+        popupSave.setPosition(360, 259);
         popupSave.name = "SAVE";
 
         var popupGiveup = cc.MenuItemImage.create(
@@ -103,7 +104,7 @@ var BaseLayer = cc.Layer.extend({
             bd+"res/game_scene/button/game_icon_giveup.png",
             this.menuCallBack.bind(this)
         );
-        popupGiveup.setPosition(586, 50);
+        popupGiveup.setPosition(535, 259);
         popupGiveup.name = "GIVEUP";
 
         var menu = cc.Menu.create([popupHint,popupSave,popupGiveup]);

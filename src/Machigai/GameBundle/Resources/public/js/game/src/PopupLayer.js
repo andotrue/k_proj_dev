@@ -158,7 +158,6 @@ var PopupLayer = cc.Layer.extend({
     },
     hint:function () {
         cc.log("PopupLayer.hint");
-
     },
     popupSave:function () {
         this.state = "SAVE";
