@@ -104,7 +104,7 @@ var IllustFrame = cc.Layer.extend({
             this.offsetY = 0;
             this.image_file_path = image_file_path;
             this.index = index;
-			this.scale = 0.5;
+			this.scale = 1;
 			
             var dis = this;
 
@@ -131,6 +131,18 @@ var IllustFrame = cc.Layer.extend({
 		{
 	        this.originalWidth = sender.width;
 			this.originalHeight = sender.height;
+			
+			// ベーススケールの計算
+			if( this.originalWidth < this.originalHeight ){
+				this.base_scale = this.FRAME_WIDTH / this.originalWidth;
+//				this.base_scale = this.originalWidth / this.FRAME_WIDTH;
+			} else {
+				this.base_scale = this.FRAME_HEIGHT / this.originalHeight;
+//				this.base_scale = this.originalHeight / this.FRAME_HEIGHT;
+			}
+			
+			cc.log("base_scale " + this.base_scale);
+			
 		} else {
 			
 			// 既にある場合は削除
@@ -173,12 +185,14 @@ var IllustFrame = cc.Layer.extend({
 	   
 		if( Math.round(this.FRAME_WIDTH / this.FRAME_HEIGHT)
 				!=  Math.round(rect3.width / rect3.height) ){
-			new_scale = scale;
-		} else if (rect3.width / rect3.height){
+			new_scale = this.base_scale * scale;
+		
+		} else if (rect3.width < rect3.height){
 	        new_scale = this.FRAME_WIDTH  / rect3.width;
 		} else {
 	        new_scale = this.FRAME_HEIGHT / rect3.height;
 		}
+		
 		illust.setScale( new_scale );
 		
         this.illust = illust;
@@ -188,7 +202,7 @@ var IllustFrame = cc.Layer.extend({
     //スプライトをカットするための領域を取得
     getRectForClipArea:function(offsetX, offsetY,  orgWidth, orgHeight, scale){
 		
-		scale = scale + 0.5;
+		cc.log("初期スケール : " + scale);
 		
 		var cw = this.FRAME_WIDTH / scale;
 		var ch = this.FRAME_HEIGHT / scale;
