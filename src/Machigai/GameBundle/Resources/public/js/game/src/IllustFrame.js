@@ -36,9 +36,9 @@ var IllustFrame = cc.Layer.extend({
 		
 		this.dx = dx;
 		this.dy = dy;
-		
-		this.offsetX -= dx;
+
 		this.offsetY += dy;
+		this.offsetX -= dx;
 		
 		this.setImage();
 		//cc.log("IllustFrame.update()");
@@ -139,6 +139,9 @@ var IllustFrame = cc.Layer.extend({
 			this.baseCenterX = this.originalWidth / 2;
 			this.baseCenterY = this.originalHeight / 2;
 			
+			this.dx = 0;
+			this.dy = 0;
+			
 		} else {
 			
 			// 既にある場合は削除
@@ -179,7 +182,7 @@ var IllustFrame = cc.Layer.extend({
 		// 拡大率の微調整
 		var new_scale;
 	   
-		new_scale = this.FRAME_HEIGHT / rect3.height;
+	    new_scale = this.FRAME_HEIGHT / rect3.height;
 		
 		illust.setScale( new_scale );
 		
@@ -216,24 +219,28 @@ var IllustFrame = cc.Layer.extend({
 
 		// 座標が0より小さい場合はゼロにする
 		if(cx < 0){
-			cx = this.offsetX = 0;
+			cx = 0;
+			this.offsetX += this.dx;
 		} else if (cx > orgWidth){
-			cx = this.offsetX = orgWidth;
+			cx = orgWidth;
 		}
 		if(cy < 0){
-			cy = this.offsetY = 0;
-		} else if (cy > orgHeight){
-			cy = this.offsetY = orgHeight;
+			cy = 0;
+			this.offsetY -= this.dy;
+		} else if (cy >= orgHeight){
+			cy = orgHeight;
 		}
 
 		// 座標位置より画像の縦横の上限を制御
 		if(cw + cx > orgWidth){
 			cw = orgWidth;
+			this.offsetX += this.dx;
 		}
 		if(ch + cy > orgHeight){
 			ch = orgHeight;
+			this.offsetY -= this.dy;
 		}
-
+		
 		return cc.rect( cx , cy , cw, ch);
     },
     getScale:function(){
