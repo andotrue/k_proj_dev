@@ -66,6 +66,29 @@ var PlayInfo = cc.Class.extend({
 		this._playDataJSON = this._data["playHistory"];
 
 	},
+	_sendPlayHistory:function(){
+		//token, user_id, QUESTION_ID,  _playData,(	_clickPointsData: [], _clockData: [],)
+		if(userId === undefined || this._playData.length < 1 ) throw "data not sufficient.";
+
+		array = [userId,startedAt, clickPointsData,clockData];
+
+		var xhttp=new XMLHttpRequest();
+		xhttp.open("POST","/app_dev.php/sync/playHistory/" + this.QUESTION_ID,false);
+		xhttp.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+
+		xhttp.send("");
+
+		return true;
+	},
+
+	//LocalStorage保存用
+	_serializePlayHistory:function(){
+		//TODO: implement here.
+	},
+	_savePlayHistoryToLocalStrorage:function(){
+		//TODO: implement here.
+
+	},
 	_error_redirect_to:function(url){
 		window.location = url;
 		throw "CAN'T GET QUESTION!";
