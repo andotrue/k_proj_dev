@@ -70,7 +70,7 @@ var BaseLayer = cc.Layer.extend({
             this.clock = new Clock(this);
             this.addChild(this.clock,15);
 
-            this.slider = new Slider(0.5, 3.0);
+            this.slider = new Slider(1.0, 3.0);
             this.addChild(this.slider,18);
 
             this.initMenu();
@@ -154,11 +154,17 @@ var BaseLayer = cc.Layer.extend({
 		var ill1R  = ill1.getTextureRect();
 		var point1 = ill1.convertToNodeSpace(touch.getLocation());
 		
-		if((point0.x >= 0 && point0.x <= ill0R.width && point0.y >= 0 && point0.y <= ill0R.height) ||
-			(point1.x >= 0 && point1.x <= ill1R.width && point1.y >= 0 && point1.y <= ill1R.height)
-		 ){
+		if(point0.x >= 0 && point0.x <= ill0R.width && point0.y >= 0 && point0.y <= ill0R.height) {
 			
-            this.canMoveIllust = true;
+			this.onIllust0 = true;
+			
+		} else if (point1.x >= 0 && point1.x <= ill1R.width && point1.y >= 0 && point1.y <= ill1R.height) {
+
+			this.onIllust1 = true;
+		}
+		
+		if( this.onIllust0 || this.onIllust ){
+			this.canMoveIllust = true;
             this.isIllustTouched = true;
             cc.log("Inside the slideicon area!");
         }
@@ -217,12 +223,10 @@ var BaseLayer = cc.Layer.extend({
     },
     checkAnswer:function (touch){
 		
-		cc.log("in check anser");
-		
 		var margin = 20;
 		
 		// ポイントを取得
-        var deviceLocation = touch.getLocation();
+/*        var deviceLocation = touch.getLocation();
         cc.log(" touched point in device location: ( " + deviceLocation.x +  "," + deviceLocation.y + ")" );
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(deviceLocation);
 		if( point.x <= 0){
@@ -233,6 +237,21 @@ var BaseLayer = cc.Layer.extend({
 		// 解答群の取得
 		for( var i in this.objs ){
 			var ap = this.objs[i];
+*/
+		var point = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation);
+		if(this.onIllust1){
+			point = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation);
+		 }
+		
+		// 解答群の取得
+		
+		// TODO 正解ポイントの取得
+		var objs = this.playInfo.MACHIGAI_POINT_DATA;
+		
+		cc.log( objs );
+		
+		for( var i in objs ){
+			var ap = objs[i];
 			
 			cc.log(" answered_point is" + ap.x + " " + ap.y);
 			
@@ -242,12 +261,17 @@ var BaseLayer = cc.Layer.extend({
 				this.isOK = true;
 			}
 		}
+/*
 //        this.illusts.
 
         //タッチポイントを追加
         var bool = false;
 
         var result = { x: point.x, y: point.y, isOK: bool, touchedAt: new Date() };
+*/
+
+		// TODO セキュリティを考慮したデータ送信
+		//this.playInfo.setClickPointsData({x: point.x, y: point.y});
 		
         cc.log("Illust Touched! ");
         if(this.isOK) return this.runOK();
