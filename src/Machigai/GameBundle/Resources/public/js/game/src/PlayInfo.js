@@ -13,6 +13,7 @@ var PlayInfo = cc.Class.extend({
 	_definition: null,
 	_playData: null,
 	_playDataJSON: null,
+	_clock: null,
 
 	setClickPointsData:function(cilckPoints){
 		cc.log("PlayInfo.setClickPointsData(): reusult = " + this._playData.setClickPointsData(clickPoints) );
@@ -29,6 +30,10 @@ var PlayInfo = cc.Class.extend({
 	getClockData:function(){
 		cc.log("PlayInfo.getClockData(): reusult = " + this._playData.getClockData() );
 		return this._playData.getClockData();
+	},
+	setClock:function(clock){
+		this.clock = clock;
+		clock.setPlayInfo(this);
 	},
 	getDefinition:function(){
 		cc.log("PlayInfo.getDefinition(): reusult = " + this._definition);
