@@ -133,13 +133,7 @@ var IllustFrame = cc.Layer.extend({
 			this.originalHeight = sender.height;
 			
 			// ベーススケールの計算
-			if( this.originalWidth < this.originalHeight ){
-				this.base_scale = this.FRAME_WIDTH / this.originalWidth;
-//				this.base_scale = this.originalWidth / this.FRAME_WIDTH;
-			} else {
-				this.base_scale = this.FRAME_HEIGHT / this.originalHeight;
-//				this.base_scale = this.originalHeight / this.FRAME_HEIGHT;
-			}
+			this.base_scale = this.FRAME_HEIGHT / this.originalHeight;
 			
 			cc.log("base_scale " + this.base_scale);
 			
