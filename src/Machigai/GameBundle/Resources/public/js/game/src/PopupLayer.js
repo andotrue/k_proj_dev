@@ -152,8 +152,8 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,555);
-        var no = this.createNoButton(360,470);
+        var yes = this.createYesButton(360,620);
+        var no = this.createNoButton(360,535);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -169,8 +169,8 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,677);
-        var no = this.createNoButton(360,619);
+        var yes = this.createYesButton(360,749);
+        var no = this.createNoButton(360,679);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -188,8 +188,8 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,630);
-        var no = this.createNoButton(360,520);
+        var yes = this.createYesButton(360,710);
+        var no = this.createNoButton(360,605);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
         this.addChild(menu);

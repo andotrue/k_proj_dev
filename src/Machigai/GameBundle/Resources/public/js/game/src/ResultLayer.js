@@ -52,7 +52,9 @@ var ResultLayer = cc.Layer.extend({
         return bRet;
     },
  
+    initClearTime:function(){
 
+    },
     initMenuForUser:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
@@ -82,7 +84,6 @@ var ResultLayer = cc.Layer.extend({
         var yes = this.createShopButton(360,677);
         var no = this.createRankingButton(360,619);
         //仕様書通りにボタンを追加
-
 
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
@@ -127,6 +128,26 @@ var ResultLayer = cc.Layer.extend({
 
         window.location="../../top";
     },
+/* 
+    tryAnother:function(){
+        cc.log("PopupLayer.result");
+
+        window.location="../../game/select";
+    },
+
+    retry:function(){
+        cc.log("PopupLayer.result");
+
+        window.location="../../game/play/156";
+        //question_id指定
+    },
+    
+    toTop:function(){
+        cc.log("PopupLayer.result");
+
+        window.location="../../top";
+    },
+*/
 
     menuCallBack:function (sender) {
         cc.log('PopupLayer.menuCallBack');
@@ -137,6 +158,18 @@ var ResultLayer = cc.Layer.extend({
                 break;
             case 'Ranking':
                 cc.log('Ranking');
+                this.removeFromParent();
+                break;
+            case 'TryAnother':
+                cc.log('TryAnother');
+                this.removeFromParent();
+                break;
+            case 'ToTop':
+                cc.log('ToTop');
+                this.removeFromParent();
+                break;
+            case 'Retry':
+                cc.log('Retry');
                 this.removeFromParent();
                 break;
             default:
@@ -151,7 +184,7 @@ var ResultLayer = cc.Layer.extend({
         );
         shop.setPosition(x, y);
         shop.name = "Shop";
-        return ranking;
+        return shop;
     },
     createRankingButton:function (x,y) {
         var ranking = cc.MenuItemImage.create(
@@ -162,5 +195,35 @@ var ResultLayer = cc.Layer.extend({
         ranking.setPosition(x, y);
         ranking.name = "Ranking";
         return ranking;
+    },
+    createTryAnotherButton:function (x,y) {
+        var tryAnother = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/button_other_select.png",
+            bd+"res/game_scene/button/button_other_select_off.png",
+            this.menuCallBack.bind(this)
+        );
+        tryAnother.setPosition(x, y);
+        tryAnother.name = "TryAnother";
+        return tryAnother;
+    },
+    createToTopButton:function (x,y) {
+        var toTop = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/button_returnto_top.png",
+            bd+"res/game_scene/button/button_returnto_top_off.png",
+            this.menuCallBack.bind(this)
+        );
+        toTop.setPosition(x, y);
+        toTop.name = "ToTop";
+        return toTop;
+    },
+    createRetryButton:function (x,y) {
+        var retry = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/button_retry.png",
+            bd+"res/game_scene/button/button_retry_off.png",
+            this.menuCallBack.bind(this)
+        );
+        retry.setPosition(x, y);
+        retry.name = "Retry";
+        return retry;
     },
 });
