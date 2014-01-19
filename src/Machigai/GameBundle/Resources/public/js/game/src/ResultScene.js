@@ -3,7 +3,8 @@ var ResultScene = cc.Scene.extend({
         cc.log("ResultScene.ctor");
         this._super();
 
-        this.playData = playInfo.getPlayData();
+//        this.playData = playInfo.getPlayData();
+        this.playData = null;
 //        this.userId = this.playData.getUserId(); TODO:getUserId が変。
         this.userId = null;
         if (this.userId === null){
@@ -12,8 +13,8 @@ var ResultScene = cc.Scene.extend({
 			this.isGuest = false;
 		}
 
-        this.acquiredPoint = playInfo.CLEAR_POINT; //とりあえず対処、ボーナスポイント分の修正必要。
-        var clockData = this.playData.getClockData();
+        this.acquiredPoint =300; // playInfo.CLEAR_POINT; //とりあえず対処、ボーナスポイント分の修正必要。
+        var clockData =  null; //this.playData.getClockData();
         // this.clearTime = ;
         this.clearTime = 500000; //とりあえず対処、修正必要。	
         this.currentPoint = 11110; //とりあえず対処、修正必要。	

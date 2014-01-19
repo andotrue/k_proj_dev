@@ -4,12 +4,13 @@ var PopupLayer = cc.Layer.extend({
     baseLayer: null,
     MIDDLE_Y: 704,
     playInfo: null,
-    ctor:function (type,baseLayer) {
+    ctor:function (type,scene) {
         cc.log("PopupLayer.ctor");
         this._super();
-        this.baseLayer = baseLayer;
-        this.clock = baseLayer.clock;
-        this.playInfo = baseLayer.playInfo;
+        this.scene = scene;
+        this.baseLayer = scene.baseLayer;
+        this.clock = this.baseLayer.clock;
+        this.playInfo = this.baseLayer.playInfo;
         this.init(type);
     },
     init:function (type) {
@@ -102,7 +103,7 @@ var PopupLayer = cc.Layer.extend({
                 cc.log("Popup.onTouchEnded: PLAY. now removing self. start the timer.");
 
                 var baseLayer = this.baseLayer;
-                baseLayer.clock.startTimer();
+                this.baseLayer.clock.startTimer();
                 this.removeFromParent();
                 break;
             case "GAMEOVER_SUCCESS":

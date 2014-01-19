@@ -301,7 +301,7 @@ var BaseLayer = cc.Layer.extend({
 
     },
     gameoverSuccess:function(){
-        var popup = new PopupLayer("GAMEOVER_SUCCESS",this);
+        var popup = new PopupLayer("GAMEOVER_SUCCESS",this.parent);
         popup.init("GAMEOVER_SUCCESS");
         this.addChild(popup);
     },
@@ -311,7 +311,7 @@ var BaseLayer = cc.Layer.extend({
         this.addChild(popup);
     },
     menuCallBack:function(sender){
-        var popup = new PopupLayer(this.parent,this);
+        var popup = new PopupLayer(this.parent,this.parent);
         popup.init(sender.name);
         this.addChild(popup);
     },
