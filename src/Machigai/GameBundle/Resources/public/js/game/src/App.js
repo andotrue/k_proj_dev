@@ -1,5 +1,6 @@
 var MyGameScene = cc.Scene.extend({
     playInfo: null,
+    baseLayer: null,
     onEnter:function () {
         this._super();
         var self = this;
@@ -15,9 +16,9 @@ var MyGameScene = cc.Scene.extend({
 
         var baseLayer = new BaseLayer(self, this.playInfo);
         this.addChild(baseLayer,10);
+        this.baseLayer = baseLayer;
 
-
-        var popupLayer = new PopupLayer("PLAY",baseLayer);
+        var popupLayer = new PopupLayer("PLAY",this);
         this.addChild(popupLayer,20);
         this.addChild(baseLayer,10);
 
