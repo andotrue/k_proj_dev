@@ -149,24 +149,24 @@ $(function() {
 <img src="{{ asset('/bundles/machigaigame/images/parts/2-01_bg.png')  }}" style="position:absolute;left:0%;top:0%;width:100%;height:auto; opacity:1.5"/>
 <!--
 <div id="allContents" style="background: url({{ asset('/bundles/machigaigame/images/parts/2-01_bg.png')  }}); background-size:width:1%;background-repeat:no-repeat;">-->
-<div id="popup">
 
-
-<img src="{{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }}" style="position:absolute;left:5%;top:50%;width:90%"/>
-<button type="button" onclick="cancel()" style="position:absolute;top:50%;left:82%;margin-top:6%;padding:5%;width:10%;filter:alpha(opacity=0);-moz-opacity: 0;opacity: 0;
+<div id="popup" style="z-index:4;position:absolute;margin-top:50%;width:90%;left:10%">
+<img src="{{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }}" style="position:absolute;left:0%;top:50%;width:90%"/>
+<button type="button" onclick="cancel()" style="position:absolute;top:52%;left:77%;margin-top:6%;padding:5%;width:10%;height:6%;filter:alpha(opacity=0);-moz-opacity: 0;opacity: 0;
 "></button>
-<p class="gameTitle" style="position:absolute;top:50%;left:20%;margin-top:5%;padding:5%;width:50%;font-size:1.5em"></p>
-<img id="play_game" src="{{ asset('/bundles/machigaigame/images/parts/button_game_start3_off.png')  }}" style="position:absolute;top:50%;left:15%;margin-top:24%;padding:5%;width:60%" onclick="changeImage(this.id);gameStart(1);"/>
+<p class="gameTitle" style="position:absolute;top:50%;left:13%;margin-top:5%;padding:5%;width:50%;font-size:1.5em"></p>
+<img id="play_game" src="{{ asset('/bundles/machigaigame/images/parts/button_game_start3_off.png')  }}" style="position:relative;top:50%;left:-5%;margin-top:74%;padding:5%;width:60%" onclick="changeImage(this.id);gameStart(1);"/>
 </div>
 
-<div id="popup_continue">
+
+<div id="popup_continue" style="z-index:4;position:absolute;margin-top:50%;width:90%;left:10%">
 <img src="{{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }}" style="position:absolute;left:5%;top:50%;width:90%"/>
-<button type="button" onclick="cancel()" style="position:absolute;top:50%;left:82%;margin-top:6%;padding:5%;width:10%;filter:alpha(opacity=0);-moz-opacity: 0;opacity: 0;
+<button type="button" onclick="cancel()" style="position:absolute;top:52%;left:82%;margin-top:7%;padding:5%;width:10%;height:6%;filter:alpha(opacity=0);-moz-opacity: 0;opacity:0;
 "></button>
-<p class="gameTitle" style="position:absolute;top:50%;left:20%;margin-top:5%;padding:5%;width:50%;font-size:1.5em"></p>
-<img id="play_continue" src="{{ asset('/bundles/machigaigame/images/parts/button_game_start2_off.png')  }}" style="position:absolute;top:40%;left:20%;margin-top:22%;padding:5%;width:50%" onclick="changeImage(this.id);gameStart();"/>
-<img id="play_reset" src="{{ asset('/bundles/machigaigame/images/parts/button_game_start1_off.png')  }}" style="position:absolute;top:50%;left:20%;margin-top:24%;padding:5%;width:50%" onclick="changeImage(this.id);gameStart();"/>
-<p style="position:absolute;top:50%;left:20%;margin-top:36%;padding:5%;width:50%;font-size:1em">※「はじめから遊ぶ」を選択すると中断データは削除されます。</p>
+<p class="gameTitle" style="position:absolute;top:50%;left:13%;margin-top:5%;padding:5%;width:50%;font-size:1.5em"></p>
+<img id="play_continue" src="{{ asset('/bundles/machigaigame/images/parts/button_game_start2_off.png')  }}" style="position:absolute;top:40%;left:20%;margin-top:17%;padding:5%;width:50%" onclick="changeImage(this.id);gameStart();"/>
+<img id="play_reset" src="{{ asset('/bundles/machigaigame/images/parts/button_game_start1_off.png')  }}" style="position:absolute;top:50%;left:20%;margin-top:28%;padding:5%;width:50%" onclick="changeImage(this.id);gameStart();"/>
+<p style="position:absolute;top:50%;left:20%;margin-top:38%;padding:5%;width:50%;font-size:0.6em">※「はじめから遊ぶ」を選択すると中断データは削除されます。</p>
 </div>
 
 
@@ -177,12 +177,12 @@ $(function() {
 	<img id="normal" src="{{ asset('/bundles/machigaigame/images/parts/tab_normal_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("normal")' >
 	<img id="hard" src="{{ asset('/bundles/machigaigame/images/parts/tab_hard_off.png') }}" width="30%" onclick='changeImage(this.id);changeLevel("hard");' />
 </div>
-<div id="white_background" style="position:relative;margin-top:32%;background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }}); background-size:cover;background-repeat:no-repeat;">
+<div id="white_background" style="position:relative;margin-top:30%;background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }}); background-size:cover;background-repeat:no-repeat;">
 <div style="height:5px" ></div>
 <section id="select_area" >
-<div id="order_header" style="position:relative;text-align:right;padding-bottom:0.7em;margin-top:5%;">
+<div id="order_header" style="position:relative;text-align:right;padding-bottom:0.7em;margin-top:5%;z-index:3">
 <div id="selectBox" style="position:absolute;top:10%;left:30%;width:50%;height:2em;">
-<img style="position:absolute;left:75%;top:14%;width:50%;height:40%" src="{{ asset('/bundles/machigaigame/images/parts/game_sort.png')}}">
+<img style="position:absolute;left:75%;top:14%;width:50%;height:40%;" src="{{ asset('/bundles/machigaigame/images/parts/game_sort.png')}}">
 <span style="position:relative;left:-28%;color:rgb(94,109,114)">並べ替え</span><select style="position:absolute;left:75%;top:14%;opacity:0;width:50%;height:40%" id="sortSelect" onchange="sortSelect()"><option selected="selected" value=""></option><option value="1">古い順</option><option value="2">新しい順</option><option value="3">未クリア問題</option><option value="4">中断問題</option></select>
 </div>
 </div>
@@ -194,11 +194,11 @@ $(function() {
 </div>
 
 <!--<div id="games" style="position:relative;margin-top:2%;height:480px;overflow-y:scroll;">-->
-<div id="games" style="position:relative;margin-top:-3%;color:rgb(94,109,114)">
+<div id="games" style="position:relative;margin-top:-3%;color:rgb(94,109,114);">
 {% if histories is  null %}
 <div style="margin-bottom:0%;height:30%;display:block">
 <div id="questions" style="margin-top:11%" >
-	<ul class="easyLevel">
+	<ul class="easyLevel" >
 	{% for question in questions %}
 	{% if question.getLevel() == 1 %}
 	<li class="easy">
