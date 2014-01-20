@@ -23,9 +23,9 @@ class Question
     private $id;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="question_number", type="string", length=32)
+     * @ORM\Column(name="question_number", type="integer")
      */
     private $questionNumber;
 

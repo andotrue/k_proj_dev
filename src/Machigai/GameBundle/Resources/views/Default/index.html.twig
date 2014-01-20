@@ -25,6 +25,7 @@ function originalImage(){
   <a href="{{path('RegisterUser')}}">
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_touroku.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
   {% if user is not empty %}
+
   {% else %}
   <a href="{{ path('Login')  }}" alt="login">
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_login.png')}}" style="margin-left:10%" width="35%" onclick="changeImage(this.id);"/></a>
@@ -72,7 +73,10 @@ function originalImage(){
    <p style="text-align:left;width:80%;margin: 0 auto;">{{news[i].getTitle}}<br />{{news[i].getDescription|raw}}</p><br />
   {% endfor %} 
   </div>
-
+{% if user is not empty %}
+   <a href="{{ path('Logout')  }}" alt="ログアウト">
+  <img id="userLogout" src="" style="margin-left:10%" width="35%" height="50px" onclick="changeImage(this.id);"/></a>
+ {% endif %}
 <section style="padding-top:2em;">
 <div class="pre_pass white">
 <p><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
