@@ -167,15 +167,16 @@ var BaseLayer = cc.Layer.extend({
 		var ill1R  = ill1.getTextureRect();
 		var point1 = ill1.convertToNodeSpace(touch.getLocation());
 		
+		this.onIllust0 = false;
+		this.onIllust1 = false;
+		
 		if(point0.x >= 0 && point0.x <= ill0R.width && point0.y >= 0 && point0.y <= ill0R.height) {
 			
 			this.onIllust0 = true;
-			this.onIllust1 = false;
 			
 		} else if (point1.x >= 0 && point1.x <= ill1R.width && point1.y >= 0 && point1.y <= ill1R.height) {
 
 			this.onIllust1 = true;
-			this.onIllust0 = false;
 		}
 		
 		if( this.onIllust0 || this.onIllust1 ){
@@ -243,23 +244,17 @@ var BaseLayer = cc.Layer.extend({
 		// ポイントを取得
         var deviceLocation = touch.getLocation();
         cc.log(" touched point in device location: ( " + deviceLocation.x +  "," + deviceLocation.y + ")" );
+		var illustF = this.illusts.frames[0];
+		
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(deviceLocation);
 		if( this.onIllust1 ){
 			point = this.illusts.frames[1].illust.convertToNodeSpace(deviceLocation);
 		}
 		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
 
-		// 解答群の取得
-/*		for( var i in this.objs ){
-			var ap = this.objs[i];
-
-		var point = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation);
-		if(this.onIllust1){
-			point = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation);
-		 }
-*/	
-		// 画像の四角の取得
-		var rect = this.illusts.frames[0].illust.getTextureRect();
+		var makeX = point.x + illustF.imageX;
+		var makeY = point.y + illustF.imageY;
+		cc.log(" imageX imageY : ( " + makeX + ", " + makeY + ")");
 
 		// 正解ポイントの取得
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
@@ -270,8 +265,8 @@ var BaseLayer = cc.Layer.extend({
 
             var apx = parseInt(ap.x);
             var apy = parseInt(ap.y);
-            var px  = point.x;
-            var py  = rect.height - point.y;    // 座標系の変換
+            var px  = makeX;
+            var py  = illustF.originalHeight - makeY;    // 座標系の変換
 
             cc.log(apx + " " + apy + " " + px + " " + py);
             
