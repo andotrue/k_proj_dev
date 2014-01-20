@@ -11,13 +11,13 @@ var Stars = cc.Class.extend({
 
     _file_path_off: gsDir + "other/game_star_off.png",
     _file_path_on: gsDir + "other/game_star_on.png",
-    ctor:function(parent, machigai_limit){
+    ctor:function(parent, MACHIGAI_LIMIT){
         if(parent === undefined) throw("Star.ctor: parent must not be undefined!");
+        this.parent = parent;
+        this._MAX = MACHIGAI_LIMIT;// machigai_limit;
         this.init(parent);
     },
-    init:function(parent, machigai_limit){
-        this.parent = parent;
-        this._MAX = 5 // machigai_limit;
+    init:function(parent){
         cc.log("parent._id = " + this.parent.__instance_id);
         for (var i = 0; i < this._MAX; i++) {
             this._changeSprite(i, this._file_path_off);

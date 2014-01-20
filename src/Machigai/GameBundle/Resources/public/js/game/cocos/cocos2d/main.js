@@ -12,8 +12,8 @@ var Application = cc.Application.extend({
         // initialize director
         var director = cc.Director.getInstance();
 
-        cc.EGLView.getInstance()._adjustSizeToBrowser();
-        cc.EGLView.getInstance().adjustViewPort(true);
+        cc.EGLView.getInstance()._adjustSizeToBrowser(false);
+        cc.EGLView.getInstance().adjustViewPort(false);
 //        director.setContentScaleFactor(resourceSize.width / designSize.width);
         cc.EGLView.getInstance().setDesignResolutionSize(720, 1408, cc.RESOLUTION_POLICY.SHOW_ALL);
         cc.EGLView.getInstance().resizeWithBrowserSize(true);

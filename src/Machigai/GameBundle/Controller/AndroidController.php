@@ -5,9 +5,10 @@ namespace Machigai\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Machigai\GameBundle\Entity\User;
 use \DateTime;
 
-class AndroidController extends Controller
+class AndroidController extends BaseController
 {
 	public function getCommonAccessToken(){
 		return 'h6C43S5SS7wMu7JNuy3LM8E4';
@@ -65,7 +66,7 @@ class AndroidController extends Controller
 	}
 
 	//ゲスト用トークンが必要
-	public function gameAction($id){
+	public function gameAction($id, $uid){
 /*		//ゲスト用トークンチェック
 		if (!$this->hasValidCommonToken())
 			return $response = $this->getErrorJsonResponse('Invalid User')->send();			
@@ -109,9 +110,15 @@ class AndroidController extends Controller
 
         $copyrightFileName = "";
 
-        $user = $this->getUser();
-        
-        $question = array(
+//        $user = $this->getUser();
+       $user = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:User')
+        ->find($uid);
+//        var_dump($user);
+//        $token = $request->headers->get('X-CSRF-Token');
+ //       var_dump($token);
+
+        $questionArray = array(
                 'questionId' => $question->getId(),
                 'questionNumber' => $questionNumber,
                 'failLimit' => $failLimit,
@@ -122,12 +129,19 @@ class AndroidController extends Controller
                 'qcode' => $qcode,
                 'questionTitle' => $questionTitle,
             );
-
+        
+        $userData = null;        
         //登録ユーザの場合
         if (!empty($user)){
+            $userData = array(
+                'userId' => $uid,
+                'currentPoint' => $user->getCurrentPoint()
+            );
+
+
             $playHistoryDB = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:PlayHistory')
-            ->findBy(array('userId'=> $userId, 'questionId'=> $question->getId() ));
+            ->findBy(array('user' => $user , 'question'=> $question ));
         }
         //playHistoryデータがあった場合
 
@@ -145,8 +159,13 @@ class AndroidController extends Controller
         }else{
             $playHistory = null;       
         }
+        if (!empty($user) && empty($playHistory)){
+            $userData['isFirstTime'] = true;
+        }else{
+            $userData['isFirstTime'] = false;            
+        }
 
-        $playInfo = array('error'=> false, 'question' => $question, 'playHistory' => $playHistory);
+        $playInfo = array('error'=> false, 'user' => $userData, 'question' => $questionArray, 'playHistory' => $playHistory);
         $json = json_encode($playInfo);
         $json = $json;
         $logger = $this->get('logger');
