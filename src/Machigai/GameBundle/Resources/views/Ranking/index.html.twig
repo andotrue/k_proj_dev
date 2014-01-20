@@ -9,7 +9,7 @@ var mode = 2;
 var image_path = null;
 var image_id = null;
 var current_level = "easy";
-
+var monthTab = "this_month";
 $(function(){
 	$('.game_lavel_2').hide();
 	$('.game_lavel_3').hide();
@@ -52,6 +52,7 @@ function originalImage(){
   $('#'+image_id).attr("src",src);
 }
 function changeTab(level){
+	if(current_level!=level){
 	var other_mode = new Array('easy','normal','hard');
 		var mode = new Array()
 		mode['easy'] = 0;
@@ -72,8 +73,10 @@ function changeTab(level){
 		$(other_mode1).attr("src",not1);
 		$(other_mode2).attr("src",not2);
 		current_level = level;
+	}
 }
 function changeMonth(month){
+	if(monthTab!=month){
 	if(month=="this_month"){
 		other = "last_month";
 	}else{
@@ -85,6 +88,8 @@ function changeMonth(month){
 		var not = pre_not.replace(/_off.png/g,'.png');
 		$('#'+month).attr("src",src);
 		$('#'+other).attr("src",not);
+		monthTab = month;
+	}
 }
 window.onload = function(){		
 	var j = 1;

@@ -101,6 +101,7 @@ function originalImage(){
 	$('#'+image_id).attr("src",src);
 }
 function changeTab(level){
+	if(current_level!=level){
 	var other_mode = new Array('easy','normal','hard');
 		var mode = new Array()
 		mode['easy'] = 0;
@@ -121,19 +122,13 @@ function changeTab(level){
 		$(other_mode1).attr("src",not1);
 		$(other_mode2).attr("src",not2);
 		current_level = level;
+	}
 }
 </script>
 
 <script>
+var page = 0;
 $(function() {
-  var page = 0;
-  function draw() {
-  	var target = "li."+current_level;
-  	var str = 'li.'+current_level+':first,li.'+current_level+':gt("'+page * 24 + '"):lt(24)';
-    $(target).hide();
-	$(str).show();
-    var max = parseInt($(target).size());
-    rewritePageNum();
   $('.prev').click(function() {
   	var target = "li."+current_level;
     if (page > 0) {
@@ -148,6 +143,13 @@ $(function() {
       draw();
     }
   });
+  function draw() {
+  	var target = "li."+current_level;
+  	var str = 'li.'+current_level+':first,li.'+current_level+':gt("'+page * 24 + '"):lt(24)';
+    $(target).hide();
+	$(str).show();
+    var max = parseInt($(target).size());
+    rewritePageNum();
   function rewritePageNum(){
   	$('.page').html(page+1);
     if((max%24)==0){
