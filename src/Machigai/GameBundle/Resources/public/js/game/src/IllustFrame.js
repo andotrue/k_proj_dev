@@ -241,6 +241,9 @@ var IllustFrame = cc.Layer.extend({
 			this.offsetY -= this.dy;
 		}
 		
+		this.imageX = cx;
+		this.imageY = cy;
+		
 		return cc.rect( cx , cy , cw, ch);
     },
     getScale:function(){
