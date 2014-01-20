@@ -33,6 +33,10 @@ var BaseLayer = cc.Layer.extend({
 
     },
     init:function (parent) {
+		
+		this.onIllust0 = false;
+		this.onIllust1 = false;
+		
         cc.log("BaseLayer.init");
         var bRet = false;
         if (this._super()) {
@@ -69,12 +73,6 @@ var BaseLayer = cc.Layer.extend({
             LabelMachigai.setPosition(350, this.MACHIGAI_Y);
             LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
             LabelTimelimit.setPosition(100,1385);
-
-			// OK画像 NG画像
-            this.ng = cc.Sprite.create( gsDir + "other/ng.png" );
-            this.ok = cc.Sprite.create( gsDir + "other/ok.png" );
-            this.addChild(this.ng);
-            this.addChild(this.ok);
 
 			this.upperHint = cc.Sprite.create( gsDir + "other/ok.png" );
 			this.lowerHint = cc.Sprite.create( gsDir + "other/ok.png" );
@@ -172,13 +170,15 @@ var BaseLayer = cc.Layer.extend({
 		if(point0.x >= 0 && point0.x <= ill0R.width && point0.y >= 0 && point0.y <= ill0R.height) {
 			
 			this.onIllust0 = true;
+			this.onIllust1 = false;
 			
 		} else if (point1.x >= 0 && point1.x <= ill1R.width && point1.y >= 0 && point1.y <= ill1R.height) {
 
 			this.onIllust1 = true;
+			this.onIllust0 = false;
 		}
 		
-		if( this.onIllust0 || this.onIllust ){
+		if( this.onIllust0 || this.onIllust1 ){
 			this.canMoveIllust = true;
             this.isIllustTouched = true;
             cc.log("Inside the slideicon area!");
@@ -296,15 +296,51 @@ var BaseLayer = cc.Layer.extend({
         }
     },
     runOK:function () {
-//        cc.runAction();
-        this.ok.setPosition(touched.x, touched.y);
+
+		var uldiff	 = this.illusts.frames[1].FRAME_HEIGHT;
+		var upperPos = this.getUpperPos();
+		
+		//        cc.runAction();
+		
+		var upperOk = cc.Sprite.create( gsDir + "other/ok.png" );
+		var lowerOk = cc.Sprite.create( gsDir + "other/ok.png" );
+		this.addChild(upperOk);
+		this.addChild(lowerOk);
+		
+		upperOk.setPosition(upperPos.x, upperPos.y);
+		lowerOk.setPosition(upperPos.x, upperPos.y + uldiff);
 //        this.stars.increment();
         this.stars.increment();
     },
     runNG:function () {
-        this.ng.setPosition(touched.x, touched.y);
+		cc.log(" tx " + touched.y);
+		var uldiff	 = this.illusts.frames[1].FRAME_HEIGHT;
+		var upperPos = this.getUpperPos();
+		
+		//        cc.runAction();
+		
+		var upperNg = cc.Sprite.create( gsDir + "other/ng.png" );
+		var lowerNg = cc.Sprite.create( gsDir + "other/ng.png" );
+		this.addChild(upperNg);
+		this.addChild(lowerNg);
+		
+		upperNg.setPosition(upperPos.x, upperPos.y);
+		lowerNg.setPosition(upperPos.x, upperPos.y + uldiff);
+
+		setTimeout(function(){
+			upperNg.removeFromParent();
+			lowerNg.removeFromParent();
+		}, 3000);
+		
         this.hearts.decrement();
     },
+	getUpperPos: function() {
+		var upperPos = touched.y;
+		if(this.onIllust0){
+			upperPos = touched.y - this.illusts.frames[1].FRAME_HEIGHT;
+		}
+		return {x: touched.x, y: upperPos};
+	},
     checkGameOver:function (){
         cc.log("checkGameOver : " + this.stars.count() + ", " + this.hearts.count());
         if(this.stars.count() == this.stars._MAX){
