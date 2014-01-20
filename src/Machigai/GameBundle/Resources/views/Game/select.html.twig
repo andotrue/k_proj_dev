@@ -127,17 +127,8 @@ function changeTab(level){
 </script>
 
 <script>
-
+var page = 0;
 $(function() {
-  var page = 0;
-  function draw() {
-  	var target = "li."+current_level;
-  	var str = 'li.'+current_level+':first,li.'+current_level+':gt("'+page * 24 + '"):lt(24)';
-    $(target).hide();
-	$(str).show();
-    var max = parseInt($(target).size());
-    alert(page);
-    rewritePageNum();
   $('.prev').click(function() {
   	var target = "li."+current_level;
     if (page > 0) {
@@ -152,6 +143,13 @@ $(function() {
       draw();
     }
   });
+  function draw() {
+  	var target = "li."+current_level;
+  	var str = 'li.'+current_level+':first,li.'+current_level+':gt("'+page * 24 + '"):lt(24)';
+    $(target).hide();
+	$(str).show();
+    var max = parseInt($(target).size());
+    rewritePageNum();
   function rewritePageNum(){
   	$('.page').html(page+1);
     if((max%24)==0){
