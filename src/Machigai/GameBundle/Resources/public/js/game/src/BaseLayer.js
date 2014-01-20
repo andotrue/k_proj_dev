@@ -70,10 +70,16 @@ var BaseLayer = cc.Layer.extend({
             LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
             LabelTimelimit.setPosition(100,1385);
 
+			// OK画像 NG画像
             this.ng = cc.Sprite.create( gsDir + "other/ng.png" );
             this.ok = cc.Sprite.create( gsDir + "other/ok.png" );
             this.addChild(this.ng);
             this.addChild(this.ok);
+
+			this.upperHint = cc.Sprite.create( gsDir + "other/ok.png" );
+			this.lowerHint = cc.Sprite.create( gsDir + "other/ok.png" );
+			this.addChild(this.upperHint);
+			this.addChild(this.lowerHint);
 
             this.clock = this.playInfo.clock;
             this.addChild(this.clock,15);
@@ -106,6 +112,7 @@ var BaseLayer = cc.Layer.extend({
 //        popupHint.setPosition(506, 50);
         popupHint.setPosition(185, 259);
         popupHint.name = "HINT";
+		this.popupHint = popupHint;
 
         var popupSave = cc.MenuItemImage.create(
             bd+"res/game_scene/button/game_icon_save.png",
@@ -348,6 +355,11 @@ var BaseLayer = cc.Layer.extend({
 	dispHint:function(){
 		this.getHint = true;
 
+		// ヒントボタンを無効に TODO グレーアウト
+//		this.popupHint.setEnabled(false);
+		this.popupHint.setVisible(false);
+
+
 		// 既に正解した答えの番号を取得
 		var alreadyAnsweredIndex = new Array();
 		var j = 0;
@@ -371,7 +383,6 @@ var BaseLayer = cc.Layer.extend({
 		var upperPictIllust = this.illusts.frames[0].illust;
 
 		var lowerPict = this.illusts.frames[1];
-		var lowerPictIllust = this.illusts.frames[1].illust;
 
 		var getUpperPos = upperPict.getPosition();
 		var getLowerPos = lowerPict.getPosition();
@@ -383,13 +394,22 @@ var BaseLayer = cc.Layer.extend({
 		//TODO: 暫定処理を修正
 		var upperY = lowerY + lowerPict.FRAME_HEIGHT;
 
-		this.upperHint = cc.Sprite.create( gsDir + "other/ok.png" );
-		this.lowerHint = cc.Sprite.create( gsDir + "other/ok.png" );
-		this.addChild(this.upperHint);
-		this.addChild(this.lowerHint);
 		this.upperHint.setPosition(px, upperY);
 		this.lowerHint.setPosition(px, lowerY);
+		
+		this.upperHint.runAction(cc.Blink.create(2.5, 10));
+		this.lowerHint.runAction(cc.Blink.create(2.5, 10));
+		
+		this.upperHint.setVisible(true);
+		this.upperHint.setVisible(true);
 
+		var dis = this;
+
+		setTimeout( function(){
+			dis.upperHint.setVisible(false);
+			dis.lowerHint.setVisible(false);
+		}, 3000);
+		
 		return true;
 	}
 });
