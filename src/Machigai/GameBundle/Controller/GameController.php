@@ -22,12 +22,20 @@ class GameController extends BaseController
     {
         $user = $this->getUser();
         $histories = null;
-        $questions = $this->getDoctrine()
+/*        $questions = $this->getDoctrine()
                 ->getEntityManager()
                 ->createQuery('SELECT q from MachigaiGameBundle:Question q 
                                     left join  q.playHistories p 
                                     order by p.gameStatus desc, q.questionNumber asc')
                 ->getResult();
+*/
+         $questions = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT q from MachigaiGameBundle:Question q 
+                                    left join  q.playHistories p 
+                                    order by q.questionNumber asc')
+                ->getResult();
+
 
         if(!empty($user)){
             $pre_playedQuestions = $this->getDoctrine()
