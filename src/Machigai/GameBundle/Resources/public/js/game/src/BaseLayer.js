@@ -11,6 +11,8 @@ var BaseLayer = cc.Layer.extend({
     objs: null, // これまで押した点 {'x', 'y'}の記録
     isOK: null,
     answeredPoints: [],
+	getHint: false,
+	//コンストラクタ
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
@@ -251,7 +253,7 @@ var BaseLayer = cc.Layer.extend({
 */	
 		// 画像の四角の取得
 		var rect = this.illusts.frames[0].illust.getTextureRect();
-		
+
 		// 正解ポイントの取得
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
 		
@@ -273,7 +275,7 @@ var BaseLayer = cc.Layer.extend({
                 if( this.answeredPoints[i] !== true ){
 
                        cc.log(" touch OK ! ");
-                        this.answeredPoints[i] =true;
+                       this.answeredPoints[i] =true;
                        return this.runOK();
                 }else{
                     trueFlag = true;
@@ -342,5 +344,52 @@ var BaseLayer = cc.Layer.extend({
         var bounding = node.getBoundingBoxToWorld();
         return ( (position.x > bounding.x ) && (position.x < bounding.x + bounding.width)
             && (position.y > bounding.y ) && (position.y < bounding.y + bounding.height));
-    }
+    },
+	dispHint:function(){
+		this.getHint = true;
+
+		// 既に正解した答えの番号を取得
+		var alreadyAnsweredIndex = new Array();
+		var j = 0;
+		for( var i in this.answeredPoints){
+			if(this.answeredPoints[i] !== true){
+				alreadyAnsweredIndex[j] = i;
+				cc.log("未正解ポイントのインデックス: ( " + i + ")");
+				cc.log("未正解ポイントの数: ( " + j + ")");
+				j++;
+			}
+		}
+		// 正解ポイントの取得
+		var apObj = this.playInfo.MACHIGAI_POINT_DATA;
+		// ヒントになる座標を取得
+		var pointHint = apObj[alreadyAnsweredIndex[parseInt(Math.random()*j)]];
+		var apx = parseInt(pointHint.x);
+		var apy = parseInt(pointHint.y);
+		cc.log("x:"+apx+" y:"+apy+" にヒント表示");
+
+		var upperPict = this.illusts.frames[0];
+		var upperPictIllust = this.illusts.frames[0].illust;
+
+		var lowerPict = this.illusts.frames[1];
+		var lowerPictIllust = this.illusts.frames[1].illust;
+
+		var getUpperPos = upperPict.getPosition();
+		var getLowerPos = lowerPict.getPosition();
+
+		var startUpperX = upperPict.getContentSize().width / 2 - upperPictIllust.getContentSize().width / 2;
+
+		var px  = getUpperPos.x + startUpperX + (apx * (upperPict.scale * upperPict.base_scale));
+        var lowerY = getUpperPos.y - (apy * (upperPict.scale * upperPict.base_scale));
+		//TODO: 暫定処理を修正
+		var upperY = lowerY + lowerPict.FRAME_HEIGHT;
+
+		this.upperHint = cc.Sprite.create( gsDir + "other/ok.png" );
+		this.lowerHint = cc.Sprite.create( gsDir + "other/ok.png" );
+		this.addChild(this.upperHint);
+		this.addChild(this.lowerHint);
+		this.upperHint.setPosition(px, upperY);
+		this.lowerHint.setPosition(px, lowerY);
+
+		return true;
+	}
 });
