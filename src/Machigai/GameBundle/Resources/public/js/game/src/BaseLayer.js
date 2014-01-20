@@ -244,7 +244,7 @@ var BaseLayer = cc.Layer.extend({
         var deviceLocation = touch.getLocation();
         cc.log(" touched point in device location: ( " + deviceLocation.x +  "," + deviceLocation.y + ")" );
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(deviceLocation);
-		if( point.x <= 0){
+		if( this.onIllust1 ){
 			point = this.illusts.frames[1].illust.convertToNodeSpace(deviceLocation);
 		}
 		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
@@ -263,8 +263,6 @@ var BaseLayer = cc.Layer.extend({
 
 		// 正解ポイントの取得
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
-		
-		cc.log( objs );
 		
         var trueFlag = false;
 		for( var i in objs ){
@@ -310,7 +308,13 @@ var BaseLayer = cc.Layer.extend({
 		upperOk.setPosition(upperPos.x, upperPos.y);
 		lowerOk.setPosition(upperPos.x, upperPos.y + uldiff);
 //        this.stars.increment();
-        this.stars.increment();
+
+		setTimeout(function(){
+			upperOk.removeFromParent();
+			lowerOk.removeFromParent();
+		}, 3000);
+		
+		this.stars.increment();
     },
     runNG:function () {
 		cc.log(" tx " + touched.y);
