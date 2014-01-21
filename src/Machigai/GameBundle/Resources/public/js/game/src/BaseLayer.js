@@ -272,8 +272,8 @@ var BaseLayer = cc.Layer.extend({
 		}
 		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
 
-		var makeX = point.x + illustF.imageX;
-		var makeY = point.y + illustF.imageY;
+		var makeX = point.x + illustF.currentX;
+		var makeY = point.y + illustF.currentY;
 		cc.log(" imageX imageY : ( " + makeX + ", " + makeY + ")");
 
 		// 正解ポイントの取得
