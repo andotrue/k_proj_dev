@@ -32,7 +32,7 @@ class OAuthController extends Controller {
 		$query = $request->query;
 
 		// パラメータ定義
-		$method = empty($query->get("method")) ? "get" : $query->get("method");
+		$method = empty($GET["method"]) ? "get" : $query->get("method");
 		$state = $session->get("state", null);  // return null if state doesn't exist.
 		$code = null;
 		$accessToken = null;
