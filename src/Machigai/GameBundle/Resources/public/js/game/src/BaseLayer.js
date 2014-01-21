@@ -273,7 +273,7 @@ var BaseLayer = cc.Layer.extend({
 		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
 
 		var makeX = point.x + illustF.currentX;
-		var makeY = point.y + illustF.currentY;
+		var makeY = (illustF.illust.getContentSize().height - point.y) + illustF.currentY;
 		cc.log(" imageX imageY : ( " + makeX + ", " + makeY + ")");
 
 		// 正解ポイントの取得
@@ -286,7 +286,7 @@ var BaseLayer = cc.Layer.extend({
             var apx = parseInt(ap.x);
             var apy = parseInt(ap.y);
             var px  = makeX;
-            var py  = illustF.originalHeight - makeY;    // 座標系の変換
+            var py  = makeY;    // 座標系の変換
 
             cc.log(apx + " " + apy + " " + px + " " + py);
             
