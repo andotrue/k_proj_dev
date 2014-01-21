@@ -154,14 +154,20 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,620);
-        var no = this.createNoButton(360,535);
-        var menu = cc.Menu.create([yes,no]);
-        menu.setPosition(0,0);
-        this.addChild(menu);
+		var yes = this.createYesButton(360,620);
+		var no = this.createNoButton(360,535);
+		var menu = cc.Menu.create([yes,no]);
+		menu.setPosition(0,0);
+		this.addChild(menu);
     },
     hint:function () {
         cc.log("PopupLayer.hint");
+		if(this.baseLayer.getHint == false){
+			this.baseLayer.dispHint();
+			cc.log("PopupLayer.hint:give hint");
+		}else{
+			cc.log("PopupLayer.hint:already given hint");
+		}
     },
     popupSave:function () {
         this.state = "SAVE";

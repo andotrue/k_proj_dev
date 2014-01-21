@@ -11,6 +11,8 @@ var BaseLayer = cc.Layer.extend({
     objs: null, // これまで押した点 {'x', 'y'}の記録
     isOK: null,
     answeredPoints: [],
+	getHint: false,
+	//コンストラクタ
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
         this._super();
@@ -31,6 +33,10 @@ var BaseLayer = cc.Layer.extend({
 
     },
     init:function (parent) {
+		
+		this.onIllust0 = false;
+		this.onIllust1 = false;
+		
         cc.log("BaseLayer.init");
         var bRet = false;
         if (this._super()) {
@@ -68,10 +74,10 @@ var BaseLayer = cc.Layer.extend({
             LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
             LabelTimelimit.setPosition(100,1385);
 
-            this.ng = cc.Sprite.create( gsDir + "other/ng.png" );
-            this.ok = cc.Sprite.create( gsDir + "other/ok.png" );
-            this.addChild(this.ng);
-            this.addChild(this.ok);
+			this.upperHint = cc.Sprite.create( gsDir + "other/ok.png" );
+			this.lowerHint = cc.Sprite.create( gsDir + "other/ok.png" );
+			this.addChild(this.upperHint);
+			this.addChild(this.lowerHint);
 
             this.clock = this.playInfo.clock;
             this.addChild(this.clock,15);
@@ -104,6 +110,7 @@ var BaseLayer = cc.Layer.extend({
 //        popupHint.setPosition(506, 50);
         popupHint.setPosition(185, 259);
         popupHint.name = "HINT";
+		this.popupHint = popupHint;
 
         var popupSave = cc.MenuItemImage.create(
             bd+"res/game_scene/button/game_icon_save.png",
@@ -160,6 +167,9 @@ var BaseLayer = cc.Layer.extend({
 		var ill1R  = ill1.getTextureRect();
 		var point1 = ill1.convertToNodeSpace(touch.getLocation());
 		
+		this.onIllust0 = false;
+		this.onIllust1 = false;
+		
 		if(point0.x >= 0 && point0.x <= ill0R.width && point0.y >= 0 && point0.y <= ill0R.height) {
 			
 			this.onIllust0 = true;
@@ -169,7 +179,7 @@ var BaseLayer = cc.Layer.extend({
 			this.onIllust1 = true;
 		}
 		
-		if( this.onIllust0 || this.onIllust ){
+		if( this.onIllust0 || this.onIllust1 ){
 			this.canMoveIllust = true;
             this.isIllustTouched = true;
             cc.log("Inside the slideicon area!");
@@ -234,28 +244,20 @@ var BaseLayer = cc.Layer.extend({
 		// ポイントを取得
         var deviceLocation = touch.getLocation();
         cc.log(" touched point in device location: ( " + deviceLocation.x +  "," + deviceLocation.y + ")" );
+		var illustF = this.illusts.frames[0];
+		
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(deviceLocation);
-		if( point.x <= 0){
+		if( this.onIllust1 ){
 			point = this.illusts.frames[1].illust.convertToNodeSpace(deviceLocation);
 		}
 		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
 
-		// 解答群の取得
-/*		for( var i in this.objs ){
-			var ap = this.objs[i];
+		var makeX = point.x + illustF.imageX;
+		var makeY = point.y + illustF.imageY;
+		cc.log(" imageX imageY : ( " + makeX + ", " + makeY + ")");
 
-		var point = this.illusts.frames[0].illust.convertToNodeSpace(touch.getLocation);
-		if(this.onIllust1){
-			point = this.illusts.frames[1].illust.convertToNodeSpace(touch.getLocation);
-		 }
-*/	
-		// 画像の四角の取得
-		var rect = this.illusts.frames[0].illust.getTextureRect();
-		
 		// 正解ポイントの取得
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
-		
-		cc.log( objs );
 		
         var trueFlag = false;
 		for( var i in objs ){
@@ -263,8 +265,8 @@ var BaseLayer = cc.Layer.extend({
 
             var apx = parseInt(ap.x);
             var apy = parseInt(ap.y);
-            var px  = point.x;
-            var py  = rect.height - point.y;    // 座標系の変換
+            var px  = makeX;
+            var py  = illustF.originalHeight - makeY;    // 座標系の変換
 
             cc.log(apx + " " + apy + " " + px + " " + py);
             
@@ -273,7 +275,7 @@ var BaseLayer = cc.Layer.extend({
                 if( this.answeredPoints[i] !== true ){
 
                        cc.log(" touch OK ! ");
-                        this.answeredPoints[i] =true;
+                       this.answeredPoints[i] =true;
                        return this.runOK();
                 }else{
                     trueFlag = true;
@@ -287,15 +289,57 @@ var BaseLayer = cc.Layer.extend({
         }
     },
     runOK:function () {
-//        cc.runAction();
-        this.ok.setPosition(touched.x, touched.y);
+
+		var uldiff	 = this.illusts.frames[1].FRAME_HEIGHT;
+		var upperPos = this.getUpperPos();
+		
+		//        cc.runAction();
+		
+		var upperOk = cc.Sprite.create( gsDir + "other/ok.png" );
+		var lowerOk = cc.Sprite.create( gsDir + "other/ok.png" );
+		this.addChild(upperOk);
+		this.addChild(lowerOk);
+		
+		upperOk.setPosition(upperPos.x, upperPos.y);
+		lowerOk.setPosition(upperPos.x, upperPos.y + uldiff);
 //        this.stars.increment();
-        this.stars.increment();
+
+		setTimeout(function(){
+			upperOk.removeFromParent();
+			lowerOk.removeFromParent();
+		}, 3000);
+		
+		this.stars.increment();
     },
     runNG:function () {
-        this.ng.setPosition(touched.x, touched.y);
+		cc.log(" tx " + touched.y);
+		var uldiff	 = this.illusts.frames[1].FRAME_HEIGHT;
+		var upperPos = this.getUpperPos();
+		
+		//        cc.runAction();
+		
+		var upperNg = cc.Sprite.create( gsDir + "other/ng.png" );
+		var lowerNg = cc.Sprite.create( gsDir + "other/ng.png" );
+		this.addChild(upperNg);
+		this.addChild(lowerNg);
+		
+		upperNg.setPosition(upperPos.x, upperPos.y);
+		lowerNg.setPosition(upperPos.x, upperPos.y + uldiff);
+
+		setTimeout(function(){
+			upperNg.removeFromParent();
+			lowerNg.removeFromParent();
+		}, 3000);
+		
         this.hearts.decrement();
     },
+	getUpperPos: function() {
+		var upperPos = touched.y;
+		if(this.onIllust0){
+			upperPos = touched.y - this.illusts.frames[1].FRAME_HEIGHT;
+		}
+		return {x: touched.x, y: upperPos};
+	},
     checkGameOver:function (){
         cc.log("checkGameOver : " + this.stars.count() + ", " + this.hearts.count());
         if(this.stars.count() == this.stars._MAX){
@@ -342,5 +386,65 @@ var BaseLayer = cc.Layer.extend({
         var bounding = node.getBoundingBoxToWorld();
         return ( (position.x > bounding.x ) && (position.x < bounding.x + bounding.width)
             && (position.y > bounding.y ) && (position.y < bounding.y + bounding.height));
-    }
+    },
+	dispHint:function(){
+		this.getHint = true;
+
+		// ヒントボタンを無効に TODO グレーアウト
+//		this.popupHint.setEnabled(false);
+		this.popupHint.setVisible(false);
+
+
+		// 既に正解した答えの番号を取得
+		var alreadyAnsweredIndex = new Array();
+		var j = 0;
+		for( var i in this.answeredPoints){
+			if(this.answeredPoints[i] !== true){
+				alreadyAnsweredIndex[j] = i;
+				cc.log("未正解ポイントのインデックス: ( " + i + ")");
+				cc.log("未正解ポイントの数: ( " + j + ")");
+				j++;
+			}
+		}
+		// 正解ポイントの取得
+		var apObj = this.playInfo.MACHIGAI_POINT_DATA;
+		// ヒントになる座標を取得
+		var pointHint = apObj[alreadyAnsweredIndex[parseInt(Math.random()*j)]];
+		var apx = parseInt(pointHint.x);
+		var apy = parseInt(pointHint.y);
+		cc.log("x:"+apx+" y:"+apy+" にヒント表示");
+
+		var upperPict = this.illusts.frames[0];
+		var upperPictIllust = this.illusts.frames[0].illust;
+
+		var lowerPict = this.illusts.frames[1];
+
+		var getUpperPos = upperPict.getPosition();
+		var getLowerPos = lowerPict.getPosition();
+
+		var startUpperX = upperPict.getContentSize().width / 2 - upperPictIllust.getContentSize().width / 2;
+
+		var px  = getUpperPos.x + startUpperX + (apx * (upperPict.scale * upperPict.base_scale));
+        var lowerY = getUpperPos.y - (apy * (upperPict.scale * upperPict.base_scale));
+		//TODO: 暫定処理を修正
+		var upperY = lowerY + lowerPict.FRAME_HEIGHT;
+
+		this.upperHint.setPosition(px, upperY);
+		this.lowerHint.setPosition(px, lowerY);
+		
+		this.upperHint.runAction(cc.Blink.create(2.5, 10));
+		this.lowerHint.runAction(cc.Blink.create(2.5, 10));
+		
+		this.upperHint.setVisible(true);
+		this.upperHint.setVisible(true);
+
+		var dis = this;
+
+		setTimeout( function(){
+			dis.upperHint.setVisible(false);
+			dis.lowerHint.setVisible(false);
+		}, 3000);
+		
+		return true;
+	}
 });
