@@ -87,6 +87,9 @@ var BaseLayer = cc.Layer.extend({
 
             this.initMenu();
 
+			var thr = this.HEIGHT - this.getContentSize().height;
+			this.setPositionY(-thr);
+
             bRet = true;
         }
         return bRet;
@@ -201,13 +204,30 @@ var BaseLayer = cc.Layer.extend({
             this.illusts.scaleIllusts(ratio);
             return true;
         }
-        if (this.canMoveIllust === true){
-            this.touchedTo = touch.getLocation();
-            var dx = this.touchedTo.x - this.touchedFrom.x;
-            var dy = this.touchedTo.y - this.touchedFrom.y;
+		this.touchedTo = touch.getLocation();
+		var dx = this.touchedTo.x - this.touchedFrom.x;
+		var dy = this.touchedTo.y - this.touchedFrom.y;
+		
+		if (this.canMoveIllust === true &&
+				(this.onIllust0 || this.onIllust1) ){
             this.illusts.move(dx, dy,touch);
             this.touchedFrom = this.touchedTo;
-        }
+        } else {
+			
+			//cc.log("rect " + this.getRect().height);
+			
+			
+			var thr = this.HEIGHT - this.getContentSize().height;
+			var posy = this.getPositionY() + dy;
+
+			if( -thr < posy && posy < 0 ){
+				this.setPositionY(posy);
+			} else if (-thr >= posy ) {
+				this.setPositionY(-thr);
+			} else {
+				this.setPositionY(0);
+			}
+		}
         if (this.isIllustTouched === true){
             this.isIllustTouched = false;
         }
