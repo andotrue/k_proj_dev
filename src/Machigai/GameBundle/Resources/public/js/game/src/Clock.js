@@ -29,6 +29,7 @@ var Clock = cc.Layer.extend({
 			that._status = that._FINISHED;
 			that.stopTimer();
 			that.parent.baseLayer.gameoverFail();
+			that.updateDigitsByStr("00:00:00");
 			clearInterval(that._timer);
 		}else{
 			that.updateDigits();

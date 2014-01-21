@@ -74,8 +74,8 @@ var BaseLayer = cc.Layer.extend({
             LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
             LabelTimelimit.setPosition(100,1385);
 
-			this.upperHint = cc.Sprite.create( gsDir + "other/ok.png" );
-			this.lowerHint = cc.Sprite.create( gsDir + "other/ok.png" );
+			this.upperHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
+			this.lowerHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
 			this.addChild(this.upperHint);
 			this.addChild(this.lowerHint);
 
@@ -112,6 +112,8 @@ var BaseLayer = cc.Layer.extend({
         );
 //        popupHint.setPosition(506, 50);
         popupHint.setPosition(185, 259);
+		popupHint.setDisabledImage(
+				cc.Sprite.create(bd+"res/game_scene/button/game_icon_hint_gray.png"));
         popupHint.name = "HINT";
 		this.popupHint = popupHint;
 
@@ -411,10 +413,8 @@ var BaseLayer = cc.Layer.extend({
 	dispHint:function(){
 		this.getHint = true;
 
-		// ヒントボタンを無効に TODO グレーアウト
-//		this.popupHint.setEnabled(false);
-		this.popupHint.setVisible(false);
-
+		// ヒントボタンを無効に
+		this.popupHint.setEnabled(false);
 
 		// 既に正解した答えの番号を取得
 		var alreadyAnsweredIndex = new Array();
