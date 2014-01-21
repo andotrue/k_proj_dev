@@ -66,6 +66,10 @@ ChangeEmailComplete:
     pattern: /setting/changeEmailComplete/
     defaults: { _controller: MachigaiGameBundle:Setting:changeEmailComplete }
 
+SendEmail:
+    pattern: /register/sendEmail/
+    defaults: { _controller: MachigaiGameBundle:Register:sendEmail }
+
 ChangePassword:
     pattern: /setting/changePassword
     defaults: { _controller: MachigaiGameBundle:Setting:changePassword }
@@ -276,5 +280,11 @@ SyncGame:
 SyncGameData:
     pattern: /sync/game/{id}/{fileName}
     defaults: { _controller: MachigaiGameBundle:Android:gameData }
+    requirements: 
+        _method: GET
+
+SyncQuestionData:
+    pattern: /sync/game/getQuestionData
+    defaults: { _controller: MachigaiGameBundle:Android:getQuestionData }
     requirements: 
         _method: GET
