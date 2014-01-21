@@ -15,8 +15,11 @@ var Application = cc.Application.extend({
         cc.EGLView.getInstance()._adjustSizeToBrowser(false);
         cc.EGLView.getInstance().adjustViewPort(false);
 //        director.setContentScaleFactor(resourceSize.width / designSize.width);
-        cc.EGLView.getInstance().setDesignResolutionSize(720, 1408, cc.RESOLUTION_POLICY.SHOW_ALL);
-        cc.EGLView.getInstance().resizeWithBrowserSize(true);
+
+        //cc.EGLView.getInstance().setDesignResolutionSize(720, 1408, cc.RESOLUTION_POLICY.FIXED_WIDTH);
+        cc.EGLView.getInstance().setDesignResolutionSize(
+				720, 1408, cc.RESOLUTION_POLICY.FIXED_WIDTH);
+		cc.EGLView.getInstance().resizeWithBrowserSize(true);
 
         // turn on display FPS
         director.setDisplayStats(this.config['showFPS']);
