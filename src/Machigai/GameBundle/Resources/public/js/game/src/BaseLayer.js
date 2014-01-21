@@ -74,8 +74,8 @@ var BaseLayer = cc.Layer.extend({
             LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
             LabelTimelimit.setPosition(100,1385);
 
-			this.upperHint = cc.Sprite.create( gsDir + "other/ok.png" );
-			this.lowerHint = cc.Sprite.create( gsDir + "other/ok.png" );
+			this.upperHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
+			this.lowerHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
 			this.addChild(this.upperHint);
 			this.addChild(this.lowerHint);
 
@@ -112,6 +112,8 @@ var BaseLayer = cc.Layer.extend({
         );
 //        popupHint.setPosition(506, 50);
         popupHint.setPosition(185, 259);
+		popupHint.setDisabledImage(
+				cc.Sprite.create(bd+"res/game_scene/button/game_icon_hint_gray.png"));
         popupHint.name = "HINT";
 		this.popupHint = popupHint;
 
@@ -272,8 +274,8 @@ var BaseLayer = cc.Layer.extend({
 		}
 		cc.log(" touched point in  iilust frame: ( " + point.x + ", " + point.y + ")");
 
-		var makeX = point.x + illustF.imageX;
-		var makeY = point.y + illustF.imageY;
+		var makeX = point.x + illustF.currentX;
+		var makeY = (illustF.illust.getContentSize().height - point.y) + illustF.currentY;
 		cc.log(" imageX imageY : ( " + makeX + ", " + makeY + ")");
 
 		// 正解ポイントの取得
@@ -286,7 +288,7 @@ var BaseLayer = cc.Layer.extend({
             var apx = parseInt(ap.x);
             var apy = parseInt(ap.y);
             var px  = makeX;
-            var py  = illustF.originalHeight - makeY;    // 座標系の変換
+            var py  = makeY;    // 座標系の変換
 
             cc.log(apx + " " + apy + " " + px + " " + py);
             
@@ -317,11 +319,11 @@ var BaseLayer = cc.Layer.extend({
 		
 		var upperOk = cc.Sprite.create( gsDir + "other/ok.png" );
 		var lowerOk = cc.Sprite.create( gsDir + "other/ok.png" );
-		this.addChild(upperOk);
-		this.addChild(lowerOk);
+		this.illusts.frames[0].illust.addChild(upperOk);
+		this.illusts.frames[1].illust.addChild(lowerOk);
 		
 		upperOk.setPosition(upperPos.x, upperPos.y);
-		lowerOk.setPosition(upperPos.x, upperPos.y + uldiff);
+		lowerOk.setPosition(upperPos.x, upperPos.y);
 //        this.stars.increment();
 
 		setTimeout(function(){
@@ -332,19 +334,17 @@ var BaseLayer = cc.Layer.extend({
 		this.stars.increment();
     },
     runNG:function () {
-		cc.log(" tx " + touched.y);
-		var uldiff	 = this.illusts.frames[1].FRAME_HEIGHT;
 		var upperPos = this.getUpperPos();
 		
 		//        cc.runAction();
 		
 		var upperNg = cc.Sprite.create( gsDir + "other/ng.png" );
 		var lowerNg = cc.Sprite.create( gsDir + "other/ng.png" );
-		this.addChild(upperNg);
-		this.addChild(lowerNg);
+		this.illusts.frames[0].illust.addChild(upperNg);
+		this.illusts.frames[1].illust.addChild(lowerNg);
 		
 		upperNg.setPosition(upperPos.x, upperPos.y);
-		lowerNg.setPosition(upperPos.x, upperPos.y + uldiff);
+		lowerNg.setPosition(upperPos.x, upperPos.y);
 
 		setTimeout(function(){
 			upperNg.removeFromParent();
@@ -354,11 +354,14 @@ var BaseLayer = cc.Layer.extend({
         this.hearts.decrement();
     },
 	getUpperPos: function() {
-		var upperPos = touched.y;
-		if(this.onIllust0){
-			upperPos = touched.y - this.illusts.frames[1].FRAME_HEIGHT;
+		
+		var illust = this.illusts.frames[0].illust;
+		if( this.onIllust1 ){
+			illust = this.illusts.frames[1].illust;
 		}
-		return {x: touched.x, y: upperPos};
+		var point = illust.convertToNodeSpace(touched);
+
+	   return point;
 	},
     checkGameOver:function (){
         cc.log("checkGameOver : " + this.stars.count() + ", " + this.hearts.count());
@@ -410,10 +413,8 @@ var BaseLayer = cc.Layer.extend({
 	dispHint:function(){
 		this.getHint = true;
 
-		// ヒントボタンを無効に TODO グレーアウト
-//		this.popupHint.setEnabled(false);
-		this.popupHint.setVisible(false);
-
+		// ヒントボタンを無効に
+		this.popupHint.setEnabled(false);
 
 		// 既に正解した答えの番号を取得
 		var alreadyAnsweredIndex = new Array();

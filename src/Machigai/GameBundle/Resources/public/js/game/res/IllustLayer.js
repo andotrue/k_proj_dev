@@ -1,5 +1,5 @@
 var IllustLayer = cc.Layer.extend({
-    _q_def_path: "/machigai/app_dev.php/game/download/",
+    _q_def_path: "/machigai/game/download/",
     q_code: null,
     level: null,
     illusts:{},

@@ -1,5 +1,5 @@
 var IllustLayer = cc.Layer.extend({
-    _q_def_path: "/app_dev.php/game/download/",
+    _q_def_path: "/game/download/",
     q_code: null,
     level: null,
     illusts:{},
@@ -89,7 +89,7 @@ var IllustLayer = cc.Layer.extend({
 
 		var target = this.frames[index];
 		target.scale = this.currentScale;
-		target.setImage();
+		target.setImage(target.MODE_SCALE);
     },
     scaleIllusts:function(scale){
       this.scaleIllust(0,scale);

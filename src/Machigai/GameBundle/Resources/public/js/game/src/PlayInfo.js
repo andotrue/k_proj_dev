@@ -120,7 +120,7 @@ var PlayInfo = cc.Class.extend({
 	},
 	_downloadData:function(){
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("GET","/app_dev.php/sync/game/" + this.QUESTION_ID + "/" +uid,false);
+		xhttp.open("GET","/sync/game/" + this.QUESTION_ID + "/" +uid,false);
 //		xhttp.setRequestHeader('X-CSRF-Token', csrf_token);
 		xhttp.send("");
 		var xmlDoc=xhttp.responseText;
@@ -143,7 +143,7 @@ var PlayInfo = cc.Class.extend({
 		array = [userId,startedAt, clickPointsData,clockData];
 
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("POST","/app_dev.php/sync/playHistory/" + this.QUESTION_ID,false);
+		xhttp.open("POST","/sync/playHistory/" + this.QUESTION_ID,false);
 		xhttp.setRequestHeader('X-CSRF-Token', csrf_token);
 		xhttp.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 
@@ -167,7 +167,7 @@ var PlayInfo = cc.Class.extend({
 	_downloadQuestionXMLFromserver:function(){
 		cc.log("PlayInfo._downloadQuestionXMLFromserver()");
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("GET","/app_dev.php/game/download/" + this.LEVEL +"/" + this.QCODE + "/xml",false);
+		xhttp.open("GET","/game/download/" + this.LEVEL +"/" + this.QCODE + "/xml",false);
 		xhttp.send("");
 		return xhttp.responseXML;
 	},
