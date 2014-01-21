@@ -10,6 +10,9 @@ var image_path = null;
 var image_id = null;
 var current_level = "easy";
 var monthTab = "this_month";
+
+var droid = function(){}
+droid.getBack = function(){window.location = '{{path('Top')}}';};
 $(function(){
 	$('.game_lavel_2').hide();
 	$('.game_lavel_3').hide();
@@ -154,6 +157,6 @@ window.onload = function(){
 </div>
 </section>
  <footer style="position:relative;margin:25% auto 5% auto;">
-  <a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
+  <img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: droid.getBack();">
  </footer>
 {% endblock %}
