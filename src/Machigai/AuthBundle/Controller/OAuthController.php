@@ -12,7 +12,7 @@ class OAuthController extends Controller {
 		// au ID OAuth連携用パラメータ
 		$clientId = "AJlZDAAAAUK3x8nX";
 		$clientSecret = "8A6a-TTacq1Hk7yACeR6w3YZCv_w-ykW";
-		$scope = "apass4web";
+		$scope = "";//"apass4web";
 		
 		//$redirectUrl = "https://" . $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?method=redirect";
 		$redirectUrl = $this->get('router')->generate('response_token', array('method' => 'redirect'), true);
@@ -32,12 +32,14 @@ class OAuthController extends Controller {
 		$query = $request->query;
 
 		// パラメータ定義
-		$method = empty($_GET["method"]) ? "get" : $query->get("method");
+		$method = empty($query->get("method")) ? "get" : $query->get("method");
 		$state = $session->get("state", null);  // return null if state doesn't exist.
 		$code = null;
 		$accessToken = null;
 		$refreshToken = null;
 		$refreshLimit = null;
+		
+		$SERVER["SCRIPT_NAME"] = $this->get('router')->generate('response_token');
 		
 		// methodパラメータ別に処理実施
 		switch ($method) {
@@ -50,7 +52,7 @@ class OAuthController extends Controller {
 					$session->set("state", $state);
 					$authzReqUrl .= "&state=" . $state;
 					// metaリフレッシュで認可要求
-					$response_html = '<html><head><meta http-equiv="refresh" content="1; url="' . $authzReqUrl . '"></head><body>[AUTHZ_REQ] Please wait...</body></html>';
+					$response_html = '<html><head><meta http-equiv="refresh" content="1" url="' . $authzReqUrl . '"></head><body>[AUTHZ_REQ] Please wait...</body></html>';
 					return new Response($response_html);
 					
 				}
@@ -61,6 +63,7 @@ class OAuthController extends Controller {
 				
 				// セッション状態が一致しない場合
 				$state_query = $query->get("state");
+
 				if (!empty($state_query) && $state_query != $state) {
 					$response_html = '<html><body>Unmatch[' . $query('state') .
 							' <=> ' . $state . ']<br /><br /><a href="' .
