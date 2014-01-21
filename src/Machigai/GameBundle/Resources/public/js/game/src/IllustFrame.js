@@ -33,52 +33,42 @@ var IllustFrame = cc.Layer.extend({
 
 	},
 	update:function(dx,dy, touched ){
-		
+
+		/*
+		 * dx,dy は画像中の移動量
+		 * offsetX,Y は今の画像の左上のX,Yを表す
+		 */
 		this.dx = dx;
 		this.dy = dy;
 
-		this.offsetY += dy;
-		this.offsetX -= dx;
+		this.offsetY += Math.round(dy / this.scale);
+		this.offsetX -= Math.round(dx / this.scale);
+		
+		// 移動量の上限を制御
+		if( this.offsetX > this.originalWidth){
+			this.offsetX = this.originalWidth;
+		} else if( this.offsetX < 0 ){
+			this.offsetX = 0;
+		}
+		
+		if(this.offsetY > this.originalHeight){
+			this.offsetY = this.originalHeight;
+		} else if( this.offsetY < 0 ){
+			this.offsetY = 0;
+		}
+		
+		cc.log("offsetX,offsetY = " + this.offsetX + "," + this.offsetY);
 		
 		this.setImage();
-		//cc.log("IllustFrame.update()");
-		
-		//this.offsetX = dx / this.scale;
-		//this.offsetY = dy / this.scale;
-		
-		//this.setImage();
-		
-		/*
-		
-		
-        if( this.illust !== undefined){
-          this.illust.removeFromParent();
-        }
-        var rect;
-        this.offsetX += dx,
-        this.offsetY += dy,
-	    */
 
-        //this.illust = cc.Sprite.create(this.image_file_path /*, this.makeRect(index) */ );
-		/*
-        this.illust.setAnchorPoint(0.5,0.5);
-        this.addChild( this.illust);
-
-//        cc.log("this.currentScale, posX, posY = " + this.currentScale + ", " + posX + ", " + posY);
-        this.illust.setPosition(dx , dy);
-        this.scaleIllust(index);
-//        this.friend.calledUpdate(dx,dy,touched);
-		*/
-    },
+	},
     updateScale:function(scale){
         this.illust.setScale(scale);
     },
     getCenterPoint:function(index){
       var direction =  (1.5 - index) * 2.0;
-      var dx = FRAME_WIDTH/ 2.0;
-      var dy = FRAME_HEIGHT / 2.0;
-//      cc.log("getCenterPoint: direction = " + direction);
-//      cc.log("getCenterPoint: dx, dy = " + dx + ", " + dy);
+      var dx = this.FRAME_WIDTH / 2.0;
+      var dy = this.FRAME_HEIGHT / 2.0;
       return cc.p(dx, direction * dy);
     },
 
@@ -108,17 +98,13 @@ var IllustFrame = cc.Layer.extend({
 			
             var dis = this;
 
-
-
             var image = new Image();
             image.src = image_file_path;
             image.onload = function(){
-                var _this = dis;   
-                _this.setImage(this);
+                dis.setImage(this);
             };
 
-
-          bRet = true;
+	        bRet = true;
         }
         return bRet;
     },
@@ -132,7 +118,12 @@ var IllustFrame = cc.Layer.extend({
 	        this.originalWidth = sender.width;
 			this.originalHeight = sender.height;
 			
-			// ベーススケールの計算
+			/*
+				ベーススケールの計算
+				ベーススケールとは、画像を読みこんだ際、スケールが1に対して
+				読み込んだ値をあらかじめ一定数で縮小/拡大するための数値
+				これがある事によりスライダーからの割合を素直に受け取れる
+			*/
 			this.base_scale = this.FRAME_HEIGHT / this.originalHeight;
 			cc.log("base_scale " + this.base_scale);
 
@@ -148,21 +139,14 @@ var IllustFrame = cc.Layer.extend({
 			this.removeChild(this.illust);
 		}
 
-        var scale = this.scale * this.base_scale;
+        var rect3 = this.getRectForClipArea();
 
-        var rect3 = this.getRectForClipArea(
-					this.offsetX,
-					this.offsetY,
-					this.originalWidth,
-					this.originalHeight,
-					scale);
-
-        var illust = cc.Sprite.create(this.image_file_path, rect3);
+        this.illust = cc.Sprite.create(this.image_file_path, rect3);
 
 		var rect1 = cc.rect(this.FRAME_X,this.FRAME_Y1,this.FRAME_WIDTH,this.FRAME_HEIGHT);
         var rect2 = cc.rect(this.FRAME_X,this.FRAME_Y2,this.FRAME_WIDTH,this.FRAME_HEIGHT);
 
-        this.addChild(illust);
+        this.addChild(this.illust);
 
         switch(this.index){
             case 1:
@@ -176,68 +160,65 @@ var IllustFrame = cc.Layer.extend({
 
         var cx = this.FRAME_WIDTH  / 2;
         var cy = this.FRAME_HEIGHT / 2;
-//            illust.setTextureRect(rect3);
-        illust.setPosition(cx,cy);
+        this.illust.setPosition(cx,cy);
 		
-		// 拡大率の微調整
-		var new_scale;
-	   
-	    new_scale = this.FRAME_HEIGHT / rect3.height;
+		// 拡大率の調整（高さに合わせる）
+		var new_scale = this.FRAME_HEIGHT / rect3.height;
 		
-		illust.setScale( new_scale );
-		
-        this.illust = illust;
+		this.illust.setScale( new_scale );
     },
 
 
     //スプライトをカットするための領域を取得
-    getRectForClipArea:function(offsetX, offsetY,  orgWidth, orgHeight, scale){
+    getRectForClipArea:function(){
 		
+		var scale = this.scale * this.base_scale;
+
 		cc.log("初期スケール : " + scale);
 		
 		// リクエストされた画像の拡大率
-		var cw = orgWidth / scale;
-		var ch = orgHeight / scale;
+		var cw = this.originalWidth / scale;
+		var ch = this.originalHeight / scale;
 		
 		// スケールが1を超えたら
 		if( scale > 1 ){
-			cw = orgWidth * scale;
-			ch = orgHeight * scale;
+			cw = this.originalWidth * scale;
+			ch = this.originalHeight * scale;
 		}
 		
 		// 拡大した画像領域がフレームより大きくなる場合
-		if( orgWidth * scale > this.FRAME_WIDTH ){
+		if( this.originalWidth * scale > this.FRAME_WIDTH ){
 			cw = this.FRAME_WIDTH / scale;
 		}
-		if( orgHeight * scale > this.FRAME_HEIGHT ){
+		if( this.originalHeight * scale > this.FRAME_HEIGHT ){
 			ch = this.FRAME_HEIGHT / scale;
 		}
 		
 		// 拡大を中心から拡大するようにする為の処理
-		var cx = (this.baseCenterX - cw / 2) + offsetX / scale;
-		var cy = (this.baseCenterY - ch / 2) + offsetY / scale;
+		var cx = (this.baseCenterX - cw / 2) + this.offsetX;
+		var cy = (this.baseCenterY - ch / 2) + this.offsetY;
 
 		// 座標が0より小さい場合はゼロにする
 		if(cx < 0){
 			cx = 0;
 			this.offsetX += this.dx;
-		} else if (cx > orgWidth){
-			cx = orgWidth;
+		} else if (cx > this.originalWidth){
+			cx = this.originalWidth;
 		}
 		if(cy < 0){
 			cy = 0;
 			this.offsetY -= this.dy;
-		} else if (cy >= orgHeight){
-			cy = orgHeight;
+		} else if (cy >= this.originalHeight){
+			cy = this.originalHeight;
 		}
 
 		// 座標位置より画像の縦横の上限を制御
-		if(cw + cx > orgWidth){
-			cw = orgWidth;
+		if(cw + cx > this.originalWidth){
+			cw = this.originalWidth;
 			this.offsetX += this.dx;
 		}
-		if(ch + cy > orgHeight){
-			ch = orgHeight;
+		if(ch + cy > this.originalHeight){
+			ch = this.originalHeight;
 			this.offsetY -= this.dy;
 		}
 		
