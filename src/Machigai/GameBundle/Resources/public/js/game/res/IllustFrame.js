@@ -71,7 +71,7 @@ var IllustFrame = cc.Layer.extend({
     ctor:function (image_file_path, rect, index ) {
 		cc.log("IllustFrame.ctor");
         this._super();
-//        var _image_file_path = "/app_dev.php/game/download/1/105/xml";
+//        var _image_file_path = "/game/download/1/105/xml";
         this.init(image_file_path, rect, index );
     },
 

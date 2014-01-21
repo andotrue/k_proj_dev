@@ -53,7 +53,7 @@ var PlayInfo = cc.Class.extend({
 	},
 	_downloadData:function(){
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("GET","/app_dev.php/sync/game/" + this.QUESTION_ID,false);
+		xhttp.open("GET","/sync/game/" + this.QUESTION_ID,false);
 		xhttp.send("");
 		var xmlDoc=xhttp.responseText;
 		cc.log(xmlDoc);
@@ -73,7 +73,7 @@ var PlayInfo = cc.Class.extend({
 	_downloadQuestionXMLFromserver:function(){
 		cc.log("PlayInfo._downloadQuestionXMLFromserver()");
 		var xhttp=new XMLHttpRequest();
-		xhttp.open("GET","/app_dev.php/game/download/" + this.LEVEL +"/" + this.QCODE + "/xml",false);
+		xhttp.open("GET","/game/download/" + this.LEVEL +"/" + this.QCODE + "/xml",false);
 		xhttp.send("");
 		return xhttp.responseXML;
 	},
