@@ -182,9 +182,9 @@ class AndroidController extends BaseController
 		if(!$this->hasValidCommonToken()) 
 			return $this->getErrorJsonResponse('Invalid User')->send();
 
-		$request = $this->getRequest();
+		$request = $this->get('request');
 
-       $types = array('xml' => '.xml', 'first' => '_1.png', 'second' => '_2.png');
+        $types = array('xml' => '.xml', 'first' => '_1.png', 'second' => '_2.png');
         $format = $types[$type];
         $file = dirname(__FILE__).'/../Resources/questions/'.$level.'/'. $qcode . '/MS'. sprintf('%05d',$qcode). $format;
 
@@ -204,9 +204,8 @@ class AndroidController extends BaseController
 		return $response;
 	}
 
-
-	public function getUser(){
-		$request = $this->getRequest();
+	public function getUserAction(){
+		$request = $this->get('request');
 		$sync_token = $request->query->get('token');
 
         if(!empty($sync_token)){
@@ -223,18 +222,30 @@ class AndroidController extends BaseController
         }
 	}
 
-	public function hasValidCommonToken(){
-		$request = $this->getRequest();
+	public function hasValidCommonTokenAction(){
+		$request = $this->get('request');
 		$request_token = $request->query->get('token');
 		$common_token = $this->getCommonAccessToken();
 		return ($common_token == $request_token);
 	}
 
-	public function getErrorJsonResponse($text){
+	public function getErrorJsonResponseAction($text){
 		$json = json_encode(array('error'=> $text));
 		$response = new Response($json);
 		$response->headers->set('Content-Type', 'application/json');
 		return $response;
 	}
 
+    public function getQuestionDataAction(){
+        $questions = $this->getDoctrine()
+            ->getRepository('MachigaiGameBundle:Question')
+            ->findAll();
+        $questionData = array();
+        for ($i = 0; $i < count($questions); $i++) {
+            $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
+            $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
+        }
+        $questionData=json_encode($questionData);//jscon encode the array
+        return new Response($questionData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
+    }
 }

@@ -12,7 +12,7 @@ class RegisterController extends BaseController
     public function loginAction(Request $request)
     {
 
-        if(!empty($hensu)){
+        if(!empty($login)){
             $session = $request->getSession();
 
             //開発モード時,セッションを生成する。
@@ -77,7 +77,10 @@ class RegisterController extends BaseController
         if(empty($checkData)){
             $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
-        }elseif($password != $checkData[0]->getPassword()){
+//        }elseif($checkData[0]->getNickname()==NULL){
+//            $caution = "登録が完了していません。";
+//            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
+        }elseif(hash('sha512',$password) != $checkData[0]->getPassword()){
             $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));            
         }else{
@@ -195,11 +198,11 @@ class RegisterController extends BaseController
          ->getForm();
          $form->bind($request);
          $userData = $form->getData();
+         $userData['password'] = hash('sha512',$userData['password']);
 
          $data = new User();
          $data->setMailAddress($userData['mailAddress']);
          $data->setPassword($userData['password']);
-         $data->setNickname('ゲスト');
          $data->setCreatedAt(date("Y-m-d H:i:s"));
          $data->setUpdatedAt(date("Y-m-d H:i:s"));
 
@@ -215,7 +218,17 @@ class RegisterController extends BaseController
     public function beforeRegisterNicknameAction(){
         return $this->render('MachigaiGameBundle:Register:beforeRegisterNickname.html.twig');
     }
-    public function reissuePassword(){
+    public function reissuePasswordAction(){
         return $this->render('MachigaiGameBundle:Register:reissuePassword.html.twig');
+    }
+    public function sendEmailAction(){
+/*    $message = \Swift_Message::newInstance()
+        ->setSubject('Hello Email')
+        ->setFrom('send@example.com')
+        ->setTo('shirai.kenta@vareal.co.jp')
+        ->setBody('mail test');
+    $this->get('mailer')->send($message);
+*/
+    return $this->render('MachigaiGameBundle:Register:reissuePassword.html.twig');
     }
 }
