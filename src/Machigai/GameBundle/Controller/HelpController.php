@@ -85,7 +85,10 @@ class HelpController extends BaseController
     }
     public function inquiryAction()
     {
-	return $this->render('MachigaiGameBundle:Help:inquiry.html.twig');
+		return $this->render('MachigaiGameBundle:Help:inquiry.html.twig');
+    }
+    public function privacyPolicyAction(){
+		return $this->render('MachigaiGameBundle:Help:privacyPolicy.html.twig');
     }
 
 }
