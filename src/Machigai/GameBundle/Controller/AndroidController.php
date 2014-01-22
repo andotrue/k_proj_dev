@@ -244,6 +244,7 @@ class AndroidController extends BaseController
         for ($i = 0; $i < count($questions); $i++) {
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
+            $questionData['question'][$i]['is_delete'] = false;
         }
         $questionData=json_encode($questionData);//jscon encode the array
         return new Response($questionData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
