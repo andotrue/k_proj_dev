@@ -28,12 +28,12 @@
 </div>
 
 <nav style="padding-top:3%;position:relative"><a style="padding-right:20%;">
-<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" id="prev"/></a><span><span id="page"></span> / <span id="maxPage"></span> </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" id="next" /></a>
+<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}" width="7.5%" id="prev"/></a><span><span class="page"></span> / <span id="maxPage"></span> </span><a style="padding-left:20%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" width="7.5%" id="next" /></a>
 </nav>
 
 </section>
 <footer style="margin:3% auto 5% auto;position:relative">
-  <a href="{{path('Top')}}" style="margin-right:0 auto;"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" onclick="changeImage(this.id);"></a>
+<img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" onclick="changeImage(this.id);javascript: droid.getBack();">
 </footer>
 
 <script>
@@ -41,23 +41,47 @@ var page = 0;
 var current_mode = 0;
 var image_path = null;
 var image_id = null;
+var target = ".item1";
+var droid = function(){}
+droid.getBack = function(){window.location = '{{path('Top')}}';};
 $(function(){
   $('#wallpaper').hide();
 })
 
 $(function() {
+var page = 0;
 
   function draw() {
     if(current_mode==0){
-      var target = '.item1';
+      target = '.item1';
     }else{
-      var target = '.wallpaper1';
+      target = '.wallpaper1';
     }
-    $('#page').html(page + 1);
     $(target).hide();
     var str = target+':first,'+target+':gt("'+page*20+'"):lt(20)';
   $(str).show();
-    rewritePageNum();
+    rewritePageNum(target);
+  }
+  function rewritePageNum(){
+    if(target == '.item1'){
+      var max = parseInt($('.item1').size());
+    }else{
+      var max = parseInt($('.wallpaper1').size());
+    }
+    $('.page').html(page+1);
+    if((max%20)==0){
+      if(parseInt(max/20)==0){
+        $('#maxPage').html(1);
+      }else{
+        $('#maxPage').html(parseInt(max/20));
+      }
+    }else{
+      if(parseInt(max/20)==0){
+        $('#maxPage').html(1);
+      }else{
+        $('#maxPage').html(parseInt(max/20+1));
+      }
+    }
   }
   $('#prev').click(function() {
     if (page > 0) {
@@ -91,9 +115,29 @@ function sortSelect(){
     window.location = "{{path('ShopSort',{"field":"popularity"})}}";
   }
 }
+function change_tabs(data){
+  page = 0;
+  if(data == 0){
+    current_mode = 0;
+    target = ".item1";
+    $('#wallpaper').hide();
+    $('#stamp').show();
+    rewritePageNum();
+  }else{
+    current_mode = 1;
+    target = "wallpaper1";
+    $('#stamp').hide();
+    $('#wallpaper').show();
+    rewritePageNum();
+  }
+}
 function rewritePageNum(){
-    var max = parseInt($('.item1').size());
-    $('#page').html(page+1);
+    if(target == '.item1'){
+      var max = parseInt($('.item1').size());
+    }else{
+      var max = parseInt($('.wallpaper1').size());
+    }
+    $('.page').html(page+1);
     if((max%20)==0){
       if(parseInt(max/20)==0){
         $('#maxPage').html(1);
@@ -108,18 +152,6 @@ function rewritePageNum(){
       }
     }
   }
-function change_tabs(data){
-  page = 0;
-  if(data == 0){
-    current_mode = 0;
-    $('#wallpaper').hide();
-    $('#stamp').show();
-  }else{
-    current_mode = 1;
-    $('#stamp').hide();
-    $('#wallpaper').show();
-  }
-}
 function changeImage(imageId){
   var pre_src = $('#'+imageId).attr('src');
   var src = pre_src.replace(/_off/g,'');
