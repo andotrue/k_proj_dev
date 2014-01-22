@@ -234,7 +234,7 @@ https://machigai.puzzle-m.net\n
                     )
 */                )
             ;
-            $this->get('mailer')->send($message);
+         $this->get('mailer')->send($message);
 
          $em = $this->getDoctrine()->getEntityManager();
          $em->persist($data);

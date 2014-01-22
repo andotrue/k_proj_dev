@@ -19,6 +19,8 @@ function originalImage(){
 	var src = image_path.replace(/.png/g,'_off.png');
 	$('#'+image_id).attr("src",src);
 }
+var droid = function(){}
+droid.getBack = function(){window.location = '{{path('Top')}}';};
 </script>
   <br /> 
   <br /> 
@@ -27,7 +29,9 @@ function originalImage(){
   <a href="{{ path('HelpHowtoplay') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_asobikata.png')  }}" width="100%"/></a>
   <a href="{{ path('HelpTerms') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_kiyaku.png')  }}" width="100%"/></a>
   <a href="{{ path('HelpInquiry') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_otoiawase.png')  }}" width="100%"/></a>
+{% if user is not empty %}
 <a href="{{path('UserSetting')}}">ユーザー登録について</a>
+{% endif %}
   <!--
    <a href="{{ path('UserSetting') }}"><img alt="userSetting" src="{{ asset('/bundles/machigaigame/images/parts/button_help_setting.png')  }}" width="100%"/></a>
   -->
@@ -35,6 +39,6 @@ function originalImage(){
  
  {% block footer %}
  <footer style="margin-top:10%;">
- <a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id)" /></a>
+<img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: droid.getBack();" />
  </footer>
  {% endblock %}
