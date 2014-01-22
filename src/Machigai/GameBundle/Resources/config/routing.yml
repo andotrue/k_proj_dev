@@ -116,7 +116,7 @@ JsonUpload:
     pattern:  /game/uploadData
     defaults: { _controller: MachigaiGameBundle:Game:uploadData }
     requirements:
-        _method: POST
+        _method: GET
 
 JsonDownload:
     pattern:  /game/downloadData
@@ -214,9 +214,13 @@ GameFail:
     pattern: /game/fail
     defaults: { _controller: MachigaiGameBundle:Game:fail }
 
-Register:
-    pattern: /register/
-    defaults: { _controller: MachigaiGameBundle:Register:index }
+Login:
+    pattern: /register/login
+    defaults: { _controller: MachigaiGameBundle:Register:login }
+
+LoginCheck:
+    pattern: /register/loginCheck
+    defaults: { _controller: MachigaiGameBundle:Register:loginCheck }
 
 RegisterUser:
     pattern: /register/userRegister
@@ -235,20 +239,12 @@ SentEmail:
     defaults: { _controller: MachigaiGameBundle:Register:sentEmail }
 
 BeforeNickname:
-    pattern: /register/beforeRegisterNickname
+    pattern: /register/beforeRegisterNickname/{pass}
     defaults: { _controller: MachigaiGameBundle:Register:beforeRegisterNickname }
 
 ReissuePassword:
     pattern: /register/reissuePassword
     defaults: { _controller: MachigaiGameBundle:Register:reissuePassword }
-
-Login:
-    pattern: /register/login
-    defaults: { _controller: MachigaiGameBundle:Register:login }
-
-LoginCheck:
-    pattern: /register/loginCheck
-    defaults: { _controller: MachigaiGameBundle:Register:loginCheck }
 
 RegisterConfirm:
     pattern: /register/confirm/
@@ -261,6 +257,14 @@ RegisterLogin:
 complete:
     pattern: /register/complete/
     defaults: { _controller: MachigaiGameBundle:Register:complete }
+
+TimeOver:
+    pattern: /register/emailTimeover
+    defaults: { _controller: MachigaiGameBundle:Register:emailTimeover }
+
+Register:
+    pattern: /register/{temp}
+    defaults: { _controller: MachigaiGameBundle:Register:index }
 
 SyncUser:
     pattern: /sync/user

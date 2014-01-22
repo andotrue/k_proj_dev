@@ -56,6 +56,13 @@ class User
     private $password;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="temp_pass", type="string", length=255)
+     */
+    private $tempPass;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="current_point", type="integer")
@@ -631,5 +638,28 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set tempPass
+     *
+     * @param string $tempPass
+     * @return User
+     */
+    public function setTempPass($tempPass)
+    {
+        $this->tempPass = $tempPass;
+
+        return $this;
+    }
+
+    /**
+     * Get tempPass
+     *
+     * @return string 
+     */
+    public function getTempPass()
+    {
+        return $this->tempPass;
     }
 }
