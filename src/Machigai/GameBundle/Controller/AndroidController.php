@@ -221,6 +221,22 @@ class AndroidController extends BaseController
             return NULL;
         }
 	}
+    public function gameFileAction($level,$qcode, $type){
+
+        $types = array('xml' => '.xml', 'first' => '_1.png', 'second' => '_2.png');
+        $format = $types[$type];
+        $file = dirname(__FILE__).'/../Resources/questions/'.$level.'/'. $qcode . '/MS'. sprintf('%05d',$qcode). $format;
+
+        $response = new BinaryFileResponse($file);
+//        $response->prepare($request);
+        if ($type == 'xml'){
+            $response->headers->set('Content-Type', 'text/xml');
+            $response->headers->set('charset', 'UTF-8');
+        }else{
+            $response->headers->set('Content-Type', 'image/png');
+        }
+        return  $response->send();
+    }
 
 	public function hasValidCommonTokenAction(){
 		$request = $this->get('request');
