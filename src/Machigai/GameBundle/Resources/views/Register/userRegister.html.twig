@@ -1,6 +1,17 @@
 {% extends "MachigaiGameBundle::base.html.twig" %}
 {% block title %}{% endblock %}
 {% block body %}
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+  <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+  <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
+  <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
+  <link rel="apple-touch-icon" href="" />
+  <link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css')  }}" />
+  <link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
+
+  <link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css>Error')  }}" />
 <style>
  #form_mailAddress {width:100%;padding:1%;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
  .invisible {opacity:0;}
@@ -36,8 +47,8 @@ $(function(){
 function submitRegister(){
 	$('#form_confirm').trigger("click");
 }
-var droid = function(){}
-droid.getBack = function(){window.location = '{{path('Top')}}';};
+//var droid = function(){}
+//droid.getBack = function(){window.location = '{{path('Top')}}';};
 </script>
 </div>
 {% endblock %}
