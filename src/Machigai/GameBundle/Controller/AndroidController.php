@@ -259,6 +259,7 @@ class AndroidController extends BaseController
             ->findAll();
         $questionData = array();
         for ($i = 0; $i < count($questions); $i++) {
+            $questionData['question'][$i]['id'] = $questions[$i]->getId();
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
             $questionData['question'][$i]['is_delete'] = false;
