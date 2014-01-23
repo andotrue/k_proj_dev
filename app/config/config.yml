@@ -62,8 +62,12 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: smtp
-    host:      mail.machigai.puzzle-m.net
-    username:  mail.machigai.puzzle-m.net
-    password:  
-    spool:     { type: memory }
+    transport:  smtp
+    encryption: ssl
+#   auth_mode:  login
+    host:       smtp.gmail.com
+    username:   shirai99999@gmail.com
+    password:   999999999q
+#    host:       machigai.puzzle-m.net
+#    username:   mail.machigai.puzzle-m.net
+#    port:   25
