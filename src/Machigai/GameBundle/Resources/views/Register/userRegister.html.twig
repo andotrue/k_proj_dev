@@ -17,6 +17,11 @@
   {{ form_errors (form) }}
 
   {{ form (form) }} 
+  <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
+  {% if error is not empty %}
+  {{error}}
+  {% endif %}
+  </div>
    <div class="linkButtons">
 
    <img id="topImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"><a href="{{path('Top')}}" id="htopImage"></a>

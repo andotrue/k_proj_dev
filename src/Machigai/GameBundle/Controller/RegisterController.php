@@ -177,7 +177,9 @@ class RegisterController extends BaseController
          ->add('password', 'text',array('label'=>false))
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
-        return $this->render('MachigaiGameBundle:Register:userRegister.html.twig', array('userData'=>$userData,'form' => $form->createView()) );
+
+         $error = null;
+        return $this->render('MachigaiGameBundle:Register:userRegister.html.twig', array('error'=>$error,'userData'=>$userData,'form' => $form->createView()) );
     }
     public function userConfirmAction(Request $request){
         $userData = new User();
@@ -191,6 +193,22 @@ class RegisterController extends BaseController
          ->getForm();
          $form->bind($request);
          $userData = $form->getData();
+
+         $emailCheck = $this->getDoctrine()
+         ->getRepository('MachigaiGameBundle:User')
+         ->findBy(array('mailAddress'=>$userData['mailAddress']));
+
+         if(!empty($emailCheck)){
+             $form = $this->createFormBuilder()
+             ->setMethod('GET')
+             ->setAction($this->generateUrl('RegisterUserConfirm'))
+             ->add('mailAddress', 'text',array('label'=>false))
+             ->add('password', 'text',array('label'=>false))
+             ->add('confirm', 'submit', array('label'=>'内容を確認'))
+             ->getForm();
+            $error = "入力されたメールアドレスはすでに使用されています";
+;            return $this->render('MachigaiGameBundle:Register:userRegister.html.twig',array('error'=>$error,'form' => $form->createView()));
+         }
 
         return $this->render('MachigaiGameBundle:Register:userConfirm.html.twig',array('userData'=>$userData,'form' => $form->createView()));
     }
