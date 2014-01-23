@@ -6,7 +6,6 @@
  .invisible {opacity:0;}
  #form_password {width:100%;padding:1%;margin-top:19%;position:relative;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
  .registerForm {width:80%;margin-top:53%;position:relative;left:8%;}
- .linkButtons {position:relative;left:8%;margin-top:33%;float:left;}
 </style>
 <img src="{{ asset('/bundles/machigaigame/images/parts/1-01_7_bg.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
 
@@ -22,7 +21,7 @@
   {{error}}
   {% endif %}
   </div>
-   <div class="linkButtons">
+   <div class="linkButtons" style="position:relative;left:8%;margin-top:33%;float:left;">
 
    <img id="topImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"><a href="{{path('Top')}}" id="htopImage"></a>
    <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
