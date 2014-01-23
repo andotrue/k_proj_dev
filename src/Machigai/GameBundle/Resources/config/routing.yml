@@ -272,6 +272,12 @@ SyncNotice:
     defaults: { _controller: MachigaiGameBundle:Android:notices }
     requirements:
         _method: GET
+SyncGameFile:
+    pattern: /sync/game/file/{level}/{qcode}/{type}
+    defaults: { _controller: MachigaiGameBundle:Android:gameFile }
+    requirements: 
+        _method: GET
+
 SyncGame:
     pattern: /sync/game/{id}/{uid}
     defaults: { _controller: MachigaiGameBundle:Android:game }
