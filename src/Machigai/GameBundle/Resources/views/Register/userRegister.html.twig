@@ -21,7 +21,6 @@
 
    <img id="topImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"><a href="{{path('Top')}}" id="htopImage"></a>
    <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
-
    </div>
   </div>
 </section>
@@ -33,6 +32,8 @@ $(function(){
 function submitRegister(){
 	$('#form_confirm').trigger("click");
 }
+var droid = function(){}
+droid.getBack = function(){window.location = '{{path('Top')}}';};
 </script>
 </div>
 {% endblock %}

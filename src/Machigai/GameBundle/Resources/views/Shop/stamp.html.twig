@@ -3,7 +3,7 @@
 {% for item in items %}
 {% if item.category.categoryCode == 2 %}
   <li class="item1" style="display:block; text-align:left;padding:1%; border: 1px solid rgb(253,138,55)">
-    <img src="{{ asset('/bundles/machigaigame/images/stamp/sample.png')  }}" style="width:15%;height:15%;"/>
+    <img src="{{ asset('/bundles/machigaigame/images/stamp/')}}{{item.getItemPath}}_thum.png" style="width:15%;height:15%;"/>
 
 <div style="display:inline-block;width:35%;">
 

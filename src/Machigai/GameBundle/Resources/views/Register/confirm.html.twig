@@ -10,6 +10,7 @@
 <section id="nicknameConfirm" style="position:relative;margin-top:19%">
 <form action="{{ path('complete') }}" method="post" {{ form_enctype(form) }}>
 <div style=""><p>{{nickname['nickname']}}</p></div>
+<input type="hidden" id="form_tempPass" name="form[tempPass]" value="{{nickname['tempPass']}}">
 <input type="submit" id="submitButton">
 <div id="submitEnd">
 {{form_row(form,{ 'attr': {'id': "submitEnd" } } )  }}

@@ -113,20 +113,55 @@ class SettingController extends BaseController
          ->getForm();
          $form->bind($request);
          $newEmail = $form->getData();
-    	/*
-    	sending an email function
-    	*/
+
+         $salt = "adsofaief048u49wtuhlkmfgosaihfguaeaisdufgha8yw";
+         $tempData = hash('sha512',$salt.$newEmail['mailAddress']);
+         $message = \Swift_Message::newInstance()
+        ->setSubject('【まちがいさがし放題】メールアドレス変更のご案内')
+        ->setFrom('exsample@vareal.co.jp')
+        ->setTo($newEmail['mailAddress'])
+        ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」でメールアドレスを変更されるお客様へお送りしています。このメールを受信された時点では変更は完了しておりませんので、ご注意下さい。\n
+尚、このメールに心当たりのない方は破棄していただきますようお願い申し上げます。\n
+下記URLをクリックするとメールアドレス変更が完了します。\n
+その後、TOPページより新しいメールアドレスで再度ログインをお願い致します。\n\n".
+"http://st.machigai.puzzle-m.net/app_dev.php/setting/changeEmailComplete/".$tempData.
+"\n※URL有効期限：メール配信後24時間※有効期限を過ぎると登録が行えません。\n
+お手数ですがはじめからやり直してください。今後とも「まちがいさがし放題」をどうぞよろしくお願いいたします。\n
+https://machigai.puzzle-m.net\n
+\n
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿\n
+※このメールアドレスは配信専用です。返信されないようお願いいたします。"
+                )
+            ;
+            $this->get('mailer')->send($message);
+
+         $pre_userId = $this->getUser();
+         $userId = $pre_userId->getId();
+
+         $em = $this->getDoctrine()->getEntityManager();
+         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);         
+         $user->setTempPass($newEmail['mailAddress']);
+         $em->flush();
+
     	return $this->render('MachigaiGameBundle:Setting:changeEmailSent.html.twig',array('form' => $form->createView()));
     }
-    public function changeEmailCompleteAction(){
-		$pre_userId = $this->getDoctrine()
+    public function changeEmailCompleteAction($pass){
+        $salt = "adsofaief048u49wtuhlkmfgosaihfguaeaisdufgha8yw";
+        $check = array();
+        $userData = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
          ->findAll();
-    	$userId = $pre_userId[0]->getId();
+
+        for ($i=0; $i < count($userData);$i++) {
+            if($pass == hash('sha512',$salt.$userData[$i]->getTempPass())){
+                $userId = $userData[$i]->getId();
+                $newEmail = $userData[$i]->getMailAddress();
+            }
+        }
 
     	$em = $this->getDoctrine()->getEntityManager();
         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
-        $user->setMailAddress($email);
+        $user->setMailAddress($newEmail);
         $em->flush();
     	return $this->render('MachigaiGameBundle:Setting:changeEmailComplete.html.twig');
     }
@@ -164,7 +199,7 @@ class SettingController extends BaseController
 
          $em = $this->getDoctrine()->getEntityManager();
          $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
-         $user->setPassword($password['password']);
+         $user->setPassword(hash('sha512',$password['password']));
          $em->flush();
         return $this->render('MachigaiGameBundle:Setting:changePasswordComplete.html.twig');
     }

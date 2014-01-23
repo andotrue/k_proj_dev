@@ -117,15 +117,15 @@ class RegisterController extends BaseController
         }
     }
 
-    public function indexAction(Request $request)
+    public function indexAction($temp)
     {
-    
 	$form = $this->createFormBuilder()
 	 ->setMethod('GET')
  	 ->add('nickname', 'text')
+     ->add('tempPass','hidden')
 	 ->add('confirm', 'submit', array('label'=>'内容を確認'))
 	 ->getForm();
-        return $this->render('MachigaiGameBundle:Register:index.html.twig', array('form' => $form->createView()) );
+        return $this->render('MachigaiGameBundle:Register:index.html.twig', array('tempPass'=>$temp,'form' => $form->createView()) );
     }
 
     public function completeAction(Request $request)
@@ -135,17 +135,21 @@ class RegisterController extends BaseController
         $form = $this->createFormBuilder()
         ->setMethod('GET')
         ->add('nickname', 'text')
+        ->add('tempPass','hidden')
         ->add('confirm', 'submit', array('label'=>'内容を確認'))
         ->getForm();
         $form->bind($request);
         $nickname = $form->getData();
         $nickname = $nickname['nickname'];
-        $pre_userId = $this->getUser();
-        $userId = $pre_userId->getId();
+        $tempPass = $form->getData()['tempPass'];
+
+//        $pre_userId = $this->getUser();
+//        $userId = $pre_userId->getId();
 
          $em = $this->getDoctrine()->getEntityManager();
-         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
-         $user->setNickName($nickname);
+         $user = $em->getRepository('MachigaiGameBundle:User')->findBy(array('tempPass'=>$tempPass));
+
+         $user[0]->setNickname($nickname);
          $em->flush();
         return $this->render('MachigaiGameBundle:Register:complete.html.twig');
     }
@@ -155,6 +159,7 @@ class RegisterController extends BaseController
         $form = $this->createFormBuilder()
         ->setMethod('GET')
         ->add('nickname', 'hidden')
+        ->add('tempPass','hidden')
         ->add('confirm', 'submit')
         ->getForm();
         $form->bind($request);
@@ -199,12 +204,37 @@ class RegisterController extends BaseController
          $form->bind($request);
          $userData = $form->getData();
          $userData['password'] = hash('sha512',$userData['password']);
+         $salt = "akjsfoaeouawoa892ah4lkja78aklalkajgarglskr";
+         $tempData = hash('sha512',date("Y-m-d H:i:s").$salt);
 
          $data = new User();
          $data->setMailAddress($userData['mailAddress']);
          $data->setPassword($userData['password']);
          $data->setCreatedAt(date("Y-m-d H:i:s"));
          $data->setUpdatedAt(date("Y-m-d H:i:s"));
+         $data->setTempPass($tempData);
+
+         $message = \Swift_Message::newInstance()
+        ->setSubject('【まちがいさがし放題】会員登録のご案内')
+        ->setFrom('exsample@vareal.co.jp')
+        ->setTo($userData['mailAddress'])
+        ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」で会員登録をされるお客様へお送りしています。\nこのメールを受信された時点では登録は完了しておりませんので、ご注意下さい。\n
+尚、このメールに心当たりのない方は破棄していただきますようお願い申し上げます。\n
+下記URLをクリックすると登録が完了します。その後、ニックネームの登録画面に進みますので画面の案内に従って登録をお願い致します。\n\n".
+"http://st.machigai.puzzle-m.net/app_dev.php/register/beforeRegisterNickname/".$tempData.
+"\n※URL有効期限：メール配信後24時間※有効期限を過ぎると登録が行えません。\n
+お手数ですがはじめからやり直してください。今後とも「まちがいさがし放題」をどうぞよろしくお願いいたします。\n
+https://machigai.puzzle-m.net\n
+\n
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿\n
+※このメールアドレスは配信専用です。返信されないようお願いいたします。"
+/*            $this->renderView(
+                'HelloBundle:Hello:email.txt.twig',
+                array('name' => $name)
+                    )
+*/                )
+            ;
+         $this->get('mailer')->send($message);
 
          $em = $this->getDoctrine()->getEntityManager();
          $em->persist($data);
@@ -215,20 +245,44 @@ class RegisterController extends BaseController
     public function sentEmailAction(){
         return $this->render('MachigaiGameBundle:Register:sentEmail.html.twig');
     }
-    public function beforeRegisterNicknameAction(){
-        return $this->render('MachigaiGameBundle:Register:beforeRegisterNickname.html.twig');
+    public function beforeRegisterNicknameAction($pass){
+        $tempPasswords = $this->getDoctrine()
+         ->getRepository('MachigaiGameBundle:User')
+         ->findAll();
+         $check = array();
+        foreach ($tempPasswords as $pw) {
+            $check[] = $pw->getTempPass();
+        }
+        if(in_array($pass,$check)){
+            $checkPass = $this->getDoctrine()
+             ->getRepository('MachigaiGameBundle:User')
+             ->findBy(array('tempPass'=>$pass));
+
+            $from = $checkPass[0]->getCreatedAt();
+            $from = ($from->format('Y-m-d H:i:s'));
+            $to = date("Y-m-d H:i:s", time());
+            $fromSec = strtotime($from);
+            $toSec   = strtotime($to);
+            $differences = $toSec - $fromSec;
+               
+            if($differences > 86400){
+                $em = $this->getDoctrine()->getEntityManager();
+                $user = $em->getRepository('MachigaiGameBundle:User')->find($checkPass[0]->getId());         
+                $em->remove($user);
+                $em->flush();
+                return $this->render('MachigaiGameBundle:Register:emailTimeover.html.twig');
+            }
+            return $this->render('MachigaiGameBundle:Register:beforeRegisterNickname.html.twig',array('tempPass'=>$pass));
+        }
+        return $this->render('MachigaiGameBundle:Register:authError.html.twig');
     }
     public function reissuePasswordAction(){
         return $this->render('MachigaiGameBundle:Register:reissuePassword.html.twig');
     }
-    public function sendEmailAction(){
-/*    $message = \Swift_Message::newInstance()
-        ->setSubject('Hello Email')
-        ->setFrom('send@example.com')
-        ->setTo('shirai.kenta@vareal.co.jp')
-        ->setBody('mail test');
-    $this->get('mailer')->send($message);
-*/
-    return $this->render('MachigaiGameBundle:Register:reissuePassword.html.twig');
+    public function sendEmailAction(){        
+        return $this->render('MachigaiGameBundle:Register:reissuePassword.html.twig');
+    }
+    public function emailTimeoverAction(){        
+        return $this->render('MachigaiGameBundle:Register:emailTimeover.html.twig');
     }
 }
