@@ -37,6 +37,13 @@ class Item
     private $name;
 
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="item_path", type="string", length=50)
+     */
+    private $itemPath;
+
+    /**
      * @var integer
      * 
      * @ORM\Column(name="consume_point", type="integer")
@@ -372,5 +379,28 @@ class Item
     public function getPopularityRank()
     {
         return $this->popularityRank;
+    }
+
+    /**
+     * Set itemPath
+     *
+     * @param string $itemPath
+     * @return Item
+     */
+    public function setItemPath($itemPath)
+    {
+        $this->itemPath = $itemPath;
+
+        return $this;
+    }
+
+    /**
+     * Get itemPath
+     *
+     * @return string 
+     */
+    public function getItemPath()
+    {
+        return $this->itemPath;
     }
 }

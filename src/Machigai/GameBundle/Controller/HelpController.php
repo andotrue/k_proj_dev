@@ -9,7 +9,9 @@ class HelpController extends BaseController
 {
     public function indexAction()
     {
-	return $this->render('MachigaiGameBundle:Help:index.html.twig');
+    	$user = $this->getUser();
+
+		return $this->render('MachigaiGameBundle:Help:index.html.twig',array('user'=>$user));
     }
 
     public function howtoplayAction()
@@ -64,17 +66,29 @@ class HelpController extends BaseController
 		 ->getForm();
 	$form->bind($request);
 	$inquiryData = $form->getData();
-	if ( $form->get('do')->isClicked() && $form->isValid()){
-		#TODO:sending emails function
-		return $this->redirect($this->generateUrl('HelpInquiryFormComplete'));
-	}
+
+		if ( $form->get('do')->isClicked() && $form->isValid()){
+			
+			$message = \Swift_Message::newInstance()
+	        ->setSubject('【まちがいさがし放題】お客様からのお問い合わせ')
+	        ->setFrom($inquiryData['email'])
+	        ->setTo('shirai.kenta@vareal.co.jp')
+	        ->setBody("件名:".$inquiryData['title']."\n"."メールアドレス:".$inquiryData['email']."\n"."本文:".$inquiryData['content']);
+	        
+	        $this->get('mailer')->send($message);
+
+			return $this->redirect($this->generateUrl('HelpInquiryFormComplete'));
+		}
     }
     public function inquiryFormCompleteAction(){
-	return $this->render('MachigaiGameBundle:Help:inquiryFormComplete.html.twig');
+		return $this->render('MachigaiGameBundle:Help:inquiryFormComplete.html.twig');
     }
     public function inquiryAction()
     {
-	return $this->render('MachigaiGameBundle:Help:inquiry.html.twig');
+		return $this->render('MachigaiGameBundle:Help:inquiry.html.twig');
+    }
+    public function privacyPolicyAction(){
+		return $this->render('MachigaiGameBundle:Help:privacyPolicy.html.twig');
     }
 
 }
