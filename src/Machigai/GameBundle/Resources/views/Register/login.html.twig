@@ -39,7 +39,7 @@
    <div class="linkButtons">
    <img id="topImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"><a href="{{path('Top')}}" id="htopImage"></a>
     
-   <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
+   <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login_off.png')}}" onclick="changeImage(this.id);s{{ form_rest(form) }}ubmitRegister()" >
    </div>
   </div>
 </section>

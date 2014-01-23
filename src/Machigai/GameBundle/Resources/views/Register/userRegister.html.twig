@@ -25,14 +25,14 @@
   <div class="registerForm">
   <form action="{{ path('RegisterUserConfirm') }}" method="post" {{ form_enctype(form) }}>
   {{ form_errors (form) }}
-
+  {{ form_rest(form) }}
   {{ form (form) }} 
   <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
   {% if error is not empty %}
   {{error}}
   {% endif %}
   </div>
-   <div class="linkButtons" style="position:relative;left:8%;margin-top:33%;float:left;">
+   <div class="linkButtons" style="position:relative;left:8%;margin-top:33%;z-index:2;">
 
    <img id="topImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"><a href="{{path('Top')}}" id="htopImage"></a>
    <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
