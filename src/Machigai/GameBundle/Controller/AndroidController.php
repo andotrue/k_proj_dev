@@ -236,7 +236,7 @@ class AndroidController extends BaseController
         }else{
             $response->headers->set('Content-Type', 'image/png');
         }
-        return  $response->send();
+        return  $response;
     }
 
 	public function hasValidCommonTokenAction(){
