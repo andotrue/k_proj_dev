@@ -5,6 +5,7 @@ namespace Machigai\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Machigai\GameBundle\Entity\User;
 use \DateTime;
 
@@ -221,6 +222,22 @@ class AndroidController extends BaseController
             return NULL;
         }
 	}
+    public function gameFileAction($level,$qcode, $type){
+
+        $types = array('xml' => '.xml', 'first' => '_1.png', 'second' => '_2.png');
+        $format = $types[$type];
+        $file = dirname(__FILE__).'/../Resources/questions/'.$level.'/'. $qcode . '/MS'. sprintf('%05d',$qcode). $format;
+
+        $response = new BinaryFileResponse($file);
+//        $response->prepare($request);
+        if ($type == 'xml'){
+            $response->headers->set('Content-Type', 'text/xml');
+            $response->headers->set('charset', 'UTF-8');
+        }else{
+            $response->headers->set('Content-Type', 'image/png');
+        }
+        return  $response;
+    }
 
 	public function hasValidCommonTokenAction(){
 		$request = $this->get('request');
@@ -244,6 +261,7 @@ class AndroidController extends BaseController
         for ($i = 0; $i < count($questions); $i++) {
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
+            $questionData['question'][$i]['is_delete'] = false;
         }
         $questionData=json_encode($questionData);//jscon encode the array
         return new Response($questionData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
