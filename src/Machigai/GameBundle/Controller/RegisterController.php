@@ -48,8 +48,8 @@ class RegisterController extends BaseController
         }else{
             $form = $this->createFormBuilder()
              ->setMethod('GET')
-             ->add('mailAddress', 'text',array('label'=>false))
-             ->add('password', 'text',array('label'=>false))
+             ->add('mailAddress', 'email',array('label'=>false))
+             ->add('password', 'password',array('label'=>false))
              ->add('confirm', 'submit', array('label'=>'内容を確認'))
              ->getForm();
             $userData = $form->getData();
@@ -173,11 +173,13 @@ class RegisterController extends BaseController
         $form = $this->createFormBuilder()
          ->setMethod('GET')
          ->setAction($this->generateUrl('RegisterUserConfirm'))
-         ->add('mailAddress', 'text',array('label'=>false))
-         ->add('password', 'text',array('label'=>false))
+         ->add('mailAddress', 'email',array('label'=>false))
+         ->add('password', 'password',array('label'=>false))
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
-        return $this->render('MachigaiGameBundle:Register:userRegister.html.twig', array('userData'=>$userData,'form' => $form->createView()) );
+
+         $error = null;
+        return $this->render('MachigaiGameBundle:Register:userRegister.html.twig', array('error'=>$error,'userData'=>$userData,'form' => $form->createView()) );
     }
     public function userConfirmAction(Request $request){
         $userData = new User();
@@ -191,6 +193,22 @@ class RegisterController extends BaseController
          ->getForm();
          $form->bind($request);
          $userData = $form->getData();
+
+         $emailCheck = $this->getDoctrine()
+         ->getRepository('MachigaiGameBundle:User')
+         ->findBy(array('mailAddress'=>$userData['mailAddress']));
+
+         if(!empty($emailCheck)){
+             $form = $this->createFormBuilder()
+             ->setMethod('GET')
+             ->setAction($this->generateUrl('RegisterUserConfirm'))
+             ->add('mailAddress', 'text',array('label'=>false))
+             ->add('password', 'text',array('label'=>false))
+             ->add('confirm', 'submit', array('label'=>'内容を確認'))
+             ->getForm();
+            $error = "入力されたメールアドレスはすでに使用されています";
+;            return $this->render('MachigaiGameBundle:Register:userRegister.html.twig',array('error'=>$error,'form' => $form->createView()));
+         }
 
         return $this->render('MachigaiGameBundle:Register:userConfirm.html.twig',array('userData'=>$userData,'form' => $form->createView()));
     }
@@ -216,7 +234,7 @@ class RegisterController extends BaseController
 
          $message = \Swift_Message::newInstance()
         ->setSubject('【まちがいさがし放題】会員登録のご案内')
-        ->setFrom('exsample@vareal.co.jp')
+        ->setFrom('machigai.puzzle-m.net')
         ->setTo($userData['mailAddress'])
         ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」で会員登録をされるお客様へお送りしています。\nこのメールを受信された時点では登録は完了しておりませんので、ご注意下さい。\n
 尚、このメールに心当たりのない方は破棄していただきますようお願い申し上げます。\n
