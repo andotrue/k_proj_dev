@@ -2,6 +2,8 @@
 <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
 <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
 <style>
 body{text-align:center;}
 body{background-image: url({{ asset('/bundles/machigaigame/images/parts/2-04-3-4_bg.png') }}); background-size:cover; background-repeat:no-repeat;"}
@@ -9,27 +11,10 @@ body{background-image: url({{ asset('/bundles/machigaigame/images/parts/2-04-3-4
 {% block title %}利用規約{% endblock %}
 
 {% block contents %}
-<script>
-var image_path = null;
-var image_id = null;
-function changeImage(imageId){
-	var pre_src = $('#'+imageId).attr('src');
-	var src = pre_src.replace(/_off/g,'');
-	image_path = src;
-	image_id = imageId;
-	$('#'+imageId).attr("src",src);
-	setTimeout("originalImage();", 200);
-}
-function originalImage(){
-	var pre_src = $('#'+image_id).attr('src');
-	var src = image_path.replace(/.png/g,'_off.png');
-	$('#'+image_id).attr("src",src);
-}
-</script>
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help_kiyaku.png') }}" width="100%" style="position:absolute;top:10%;left:0%;"/>
-<div style="position:absolute;left:0%;top:16%;padding:3%">
+<div style="position:absolute;left:0%;top:16%;padding:5%">
 <section id="terms" padding="5%" style="font-size:0.8em;text-align:left">
 <div id="content">
 <p>
@@ -58,7 +43,7 @@ function originalImage(){
 <p>(10)本サービス又は本利用契約に関してお客さまとの間で疑義又は争いが生じた場合には、誠意をもって協議することとしますが、それでもなお解決しない場合には「東京地方裁判所」又は「東京簡易裁判所」を専属の管轄裁判所とします。</p>
 </div>
 <div style="position:relative;margin-left:24%">
-<a href="{{ path('Help') }}"><img id="tohelptop" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop_off.png')}}" width="60%" onclick="changeImage(this.id)"/></a>
+<img id="tohelptop" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop_off.png')}}" width="60%" onclick="changeImage(this.id)"/><a href="{{ path('Help') }}" id="htohelptop"></a>
 </div>
 </section>
 </div>
