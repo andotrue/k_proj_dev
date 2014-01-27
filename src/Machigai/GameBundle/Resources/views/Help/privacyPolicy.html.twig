@@ -4,7 +4,13 @@
 <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
 <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
-<img src="{{asset('/bundles/machigaigame/images/parts/2-04-3-4_bg.png')}}" width="100%" style="position:absolute;left:0%;top:0%"/>
+{% block title %}プライバシーポリシー{% endblock %}
+<style>
+body{text-align:center;}
+body{background-image: url({{ asset('/bundles/machigaigame/images/parts/2-04-3-4_bg.png') }}); background-size:cover; background-repeat:no-repeat;"}
+</style>
+{% block contents %}
+
 <img alt="privacy policy" src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <img src="{{asset('/bundles/machigaigame/images/parts/header_help_privacypolicy.png')}}" width="100%" style="position:absolute;left:0%;top:10%"/>
 
@@ -43,6 +49,8 @@
 Email：support@machigai.puzzle-m.net<br />
 TEL：03-5725-5024
 </p>
-<img id="tohelptop" style="margin-left:20%;" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop_off.png')}}" width="60%" onclick="changeImage(this.id)"/><a href="{{ path('Help') }}" id="htohelptop"></a>
+<img id="tohelptop" style="margin-top:5%" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop_off.png')}}" width="60%" onclick="changeImage(this.id)"/><a href="{{ path('Help') }}" id="htohelptop"></a>
 </div>
 </div>
+
+{% endblock %}
