@@ -312,25 +312,7 @@ var BaseLayer = cc.Layer.extend({
     },
     runOK:function () {
 
-		var uldiff	 = this.illusts.frames[1].FRAME_HEIGHT;
-		var upperPos = this.getUpperPos();
-		
-		//        cc.runAction();
-		
-		var upperOk = cc.Sprite.create( gsDir + "other/ok.png" );
-		var lowerOk = cc.Sprite.create( gsDir + "other/ok.png" );
-		this.illusts.frames[0].illust.addChild(upperOk);
-		this.illusts.frames[1].illust.addChild(lowerOk);
-		
-		upperOk.setPosition(upperPos.x, upperPos.y);
-		lowerOk.setPosition(upperPos.x, upperPos.y);
-//        this.stars.increment();
-
-		setTimeout(function(){
-			upperOk.removeFromParent();
-			lowerOk.removeFromParent();
-		}, 3000);
-		
+		this.updateAnswerMark();
 		this.stars.increment();
     },
     runNG:function () {
@@ -467,5 +449,48 @@ var BaseLayer = cc.Layer.extend({
 		}, 3000);
 		
 		return true;
+	},
+	updateAnswerMark: function(){
+
+		var objs = this.playInfo.MACHIGAI_POINT_DATA;
+		
+		for( var i in objs ){
+            var ap = objs[i];
+            var apx = parseInt(ap.x);
+            var apy = parseInt(ap.y);
+
+			if( this.answeredPoints[i] == true ){
+				
+				var upperPict = this.illusts.frames[0];
+				var upperPictIllust = this.illusts.frames[0].illust;
+				var lowerPictIllust = this.illusts.frames[1].illust;
+
+				if(upperPict.currentX <= apx &&
+				   upperPict.currentX + upperPict.currentWidth >= apx &&
+				   upperPict.currentY <= apy &&
+				   upperPict.currentY + upperPict.currentHeight >= apy){
+				   
+					// 座標系の変換
+					apy = upperPictIllust.getContentSize().height - apy;
+
+					var rate = upperPict.scale * upperPict.base_scale;
+
+					apx = apx - upperPict.currentX;
+					apy = apy + upperPict.currentY;
+
+					var upperOk = cc.Sprite.create( gsDir + "other/ok.png" );
+					var lowerOk = cc.Sprite.create( gsDir + "other/ok.png" );
+
+					upperOk.setPosition(apx, apy);
+					lowerOk.setPosition(apx, apy);
+
+					upperOk.setScale(rate);
+					lowerOk.setScale(rate);
+
+					upperPictIllust.addChild(upperOk);
+					lowerPictIllust.addChild(lowerOk);				
+				}
+			}
+		}				
 	}
 });

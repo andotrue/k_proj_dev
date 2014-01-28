@@ -156,6 +156,8 @@ var IllustFrame = cc.Layer.extend({
 		var new_scale = this.FRAME_HEIGHT / rect3.height;
 		
 		this.illust.setScale( new_scale );
+		
+		this.getParent().getParent().updateAnswerMark();
     },
 
 
