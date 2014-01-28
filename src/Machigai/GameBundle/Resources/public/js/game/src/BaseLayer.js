@@ -74,11 +74,6 @@ var BaseLayer = cc.Layer.extend({
             LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
             LabelTimelimit.setPosition(100,1385);
 
-			this.upperHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
-			this.lowerHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
-			this.addChild(this.upperHint);
-			this.addChild(this.lowerHint);
-
             this.clock = this.playInfo.clock;
             this.addChild(this.clock,15);
 
@@ -413,40 +408,57 @@ var BaseLayer = cc.Layer.extend({
 		var apObj = this.playInfo.MACHIGAI_POINT_DATA;
 		// ヒントになる座標を取得
 		var pointHint = apObj[alreadyAnsweredIndex[parseInt(Math.random()*j)]];
-		var apx = parseInt(pointHint.x);
-		var apy = parseInt(pointHint.y);
-		cc.log("x:"+apx+" y:"+apy+" にヒント表示");
 
 		var upperPict = this.illusts.frames[0];
-		var upperPictIllust = this.illusts.frames[0].illust;
-
 		var lowerPict = this.illusts.frames[1];
+		upperPict.scale = 1.0;
+		lowerPict.scale = 1.0;
+		upperPict.setImage(upperPict.MODE_SCALE);
+		lowerPict.setImage(lowerPict.MODE_SCALE);
 
-		var getUpperPos = upperPict.getPosition();
-		var getLowerPos = lowerPict.getPosition();
-
-		var startUpperX = upperPict.getContentSize().width / 2 - upperPictIllust.getContentSize().width / 2;
-
-		var px  = getUpperPos.x + startUpperX + (apx * (upperPict.scale * upperPict.base_scale));
-        var lowerY = getUpperPos.y - (apy * (upperPict.scale * upperPict.base_scale));
-		//TODO: 暫定処理を修正
-		var upperY = lowerY + lowerPict.FRAME_HEIGHT;
-
-		this.upperHint.setPosition(px, upperY);
-		this.lowerHint.setPosition(px, lowerY);
+		var upperPictIllust = upperPict.illust;
+		var lowerPictIllust = lowerPict.illust;
 		
-		this.upperHint.runAction(cc.Blink.create(2.5, 10));
-		this.lowerHint.runAction(cc.Blink.create(2.5, 10));
+		var apx = parseInt(pointHint.x);
+		var apy = parseInt(pointHint.y);
+
+		// 座標系の変換
+		apy = upperPictIllust.getContentSize().height - apy;
+
+		apx = apx - upperPict.currentX;
+		apy = apy + upperPict.currentY;
+
+		var upperHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
+		var lowerHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
+
+		upperPictIllust.addChild(upperHint);
+		lowerPictIllust.addChild(lowerHint);
+
+		upperHint.setPosition(apx, apy);
+		lowerHint.setPosition(apx, apy);
 		
-		this.upperHint.setVisible(true);
-		this.upperHint.setVisible(true);
-
-		var dis = this;
-
-		setTimeout( function(){
-			dis.upperHint.setVisible(false);
-			dis.lowerHint.setVisible(false);
-		}, 3000);
+		var opa = 255;
+		var minus = 20;
+		
+		var eventId = setInterval(
+			function(){
+				if(opa - minus <= 0){
+					upperPictIllust.removeChild(upperHint);
+					lowerPictIllust.removeChild(lowerHint);
+					clearInterval(eventId);
+					opa = 0;
+				} else {
+					opa -= minus;
+					upperHint.setOpacity(opa);
+					lowerHint.setOpacity(opa);
+				}
+			}, 100
+		);
+		
+//		setTimeout( function(){
+//			dis.upperHint.setVisible(false);
+//			dis.lowerHint.setVisible(false);
+//		}, 3000);
 		
 		return true;
 	},
