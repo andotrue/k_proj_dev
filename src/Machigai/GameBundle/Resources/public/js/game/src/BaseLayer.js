@@ -307,7 +307,8 @@ var BaseLayer = cc.Layer.extend({
     },
     runOK:function () {
 
-		this.updateAnswerMark();
+		var illust = this.illusts.frames[0];
+		illust.setImage(illust.MODE_SCALE);
 		this.stars.increment();
     },
     runNG:function () {
@@ -462,8 +463,8 @@ var BaseLayer = cc.Layer.extend({
 		
 		return true;
 	},
-	updateAnswerMark: function(){
-
+	updateAnswerMark: function(new_scale){
+		
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
 		
 		for( var i in objs ){
@@ -481,23 +482,77 @@ var BaseLayer = cc.Layer.extend({
 				   upperPict.currentX + upperPict.currentWidth >= apx &&
 				   upperPict.currentY <= apy &&
 				   upperPict.currentY + upperPict.currentHeight >= apy){
-				   
-					// 座標系の変換
-					apy = upperPictIllust.getContentSize().height - apy;
-
-					var rate = upperPict.scale * upperPict.base_scale;
-
-					apx = apx - upperPict.currentX;
-					apy = apy + upperPict.currentY;
 
 					var upperOk = cc.Sprite.create( gsDir + "other/ok.png" );
 					var lowerOk = cc.Sprite.create( gsDir + "other/ok.png" );
 
+					var okSize		= upperOk.getContentSize();
+					var okWidth		= okSize.width;
+					var okHeight	= okSize.height;
+					var okLeft		= 0;
+					var okTop		= 0;
+					
+					var leftAp		= apx - (okWidth / 2);
+					var topAp		= apy - (okHeight / 2);
+
+					var curRight	= upperPict.currentX + upperPict.currentWidth;
+					var right		= leftAp + okWidth;
+					var curBottom	= upperPict.currentY + upperPict.currentHeight;
+					var bottom		= topAp + okHeight;
+					
+					if( upperPict.currentX > leftAp ){
+						//左を切る
+						okLeft	= upperPict.currentX - leftAp;
+						okWidth = okWidth - okLeft;
+						apx		= apx + (okLeft / 2);
+					} else if( curRight < right ){
+						//右を切る
+						okWidth	= okWidth - (right - curRight);
+						okLeft	= curRight - right;
+						apx		= apx + (okLeft / 2);
+					}
+					if( upperPict.currentY > topAp ){
+						//上を切る
+						okTop	= upperPict.currentY - topAp;
+						okHeight = okHeight - okTop;
+						apy		= apy + (okTop / 2);
+					} else if( curBottom < bottom ){
+						//下を切る
+						okHeight= okHeight - (bottom - curBottom);
+						okTop	= curBottom - bottom;
+						apy		= apy + (okTop / 2);
+					}
+					
+					//上を切る
+//					if( upperPict.currentY > top ){
+//						top		= upperPict.currentY - top;
+//						apy		= apy + top;
+//					} else {
+//						top = 0;
+//					}
+					
+//					apy = apy * new_scale;
+					
+					console.log(okLeft + " " + okTop + " " + okWidth + " " + okHeight);
+					
+					// 座標系の変換
+					apy = upperPictIllust.getContentSize().height - apy;
+
+					apx = apx - upperPict.currentX;
+					apy = apy + upperPict.currentY;
+
+					var rect = cc.rect(okLeft,okTop,okWidth,okHeight);
+					upperOk.setTextureRect(rect);
+					lowerOk.setTextureRect(rect);
+					
+					console.log(upperOk.getContentSize().width);
+					console.log(new_scale);
 					upperOk.setPosition(apx, apy);
 					lowerOk.setPosition(apx, apy);
 
-					upperOk.setScale(rate);
-					lowerOk.setScale(rate);
+//					var rate = 1;//upperPict.scale * upperPict.base_scale * new_scale;
+//					upperOk.setScale(rate);
+//					lowerOk.setScale(rate);
 
 					upperPictIllust.addChild(upperOk);
 					lowerPictIllust.addChild(lowerOk);				

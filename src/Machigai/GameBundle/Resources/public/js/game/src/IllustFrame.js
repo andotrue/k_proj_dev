@@ -157,7 +157,7 @@ var IllustFrame = cc.Layer.extend({
 		
 		this.illust.setScale( new_scale );
 		
-		this.getParent().getParent().updateAnswerMark();
+		this.getParent().getParent().updateAnswerMark(new_scale);
     },
 
 
