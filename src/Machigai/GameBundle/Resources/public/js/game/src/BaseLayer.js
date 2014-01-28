@@ -523,17 +523,6 @@ var BaseLayer = cc.Layer.extend({
 						apy		= apy + (okTop / 2);
 					}
 					
-					//上を切る
-//					if( upperPict.currentY > top ){
-//						top		= upperPict.currentY - top;
-//						apy		= apy + top;
-//					} else {
-//						top = 0;
-//					}
-					
-//					apy = apy * new_scale;
-					
-					console.log(okLeft + " " + okTop + " " + okWidth + " " + okHeight);
 					
 					// 座標系の変換
 					apy = upperPictIllust.getContentSize().height - apy;
@@ -545,8 +534,6 @@ var BaseLayer = cc.Layer.extend({
 					upperOk.setTextureRect(rect);
 					lowerOk.setTextureRect(rect);
 					
-					console.log(upperOk.getContentSize().width);
-					console.log(new_scale);
 					upperOk.setPosition(apx, apy);
 					lowerOk.setPosition(apx, apy);
 
