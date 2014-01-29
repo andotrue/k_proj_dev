@@ -30,7 +30,6 @@ var BaseLayer = cc.Layer.extend({
         }else{
             this.objs = objs;
         }
-
     },
     init:function (parent) {
 		
@@ -86,6 +85,9 @@ var BaseLayer = cc.Layer.extend({
 			this.setPositionY(-thr);
 
             bRet = true;
+
+			// マーキーの表示
+			this.dispTitle();
         }
         return bRet;
     },
@@ -537,14 +539,55 @@ var BaseLayer = cc.Layer.extend({
 					upperOk.setPosition(apx, apy);
 					lowerOk.setPosition(apx, apy);
 
-//					var rate = 1;//upperPict.scale * upperPict.base_scale * new_scale;
-//					upperOk.setScale(rate);
-//					lowerOk.setScale(rate);
-
 					upperPictIllust.addChild(upperOk);
 					lowerPictIllust.addChild(lowerOk);				
 				}
 			}
 		}				
+	},
+	dispTitle: function(){
+		
+		// タイトルのマーキー表示
+		
+		var labelWidth = 140;
+		var labelHeight = 40;
+		var labelX = 195;
+		var labelY = 141;
+		var title  = "てすとてすとてすとてすとてすと";
+		var length = title.length * 40;
+
+		var tencil = cc.DrawNodeCanvas.create();
+		tencil.drawPoly(
+			[
+			cc.p(-labelWidth,labelHeight),
+			cc.p(-labelWidth,-labelHeight), 
+			cc.p(labelWidth, -labelHeight),
+			cc.p(labelWidth,labelHeight)
+			],
+			new cc.Color4F(0,0,0,0),
+			0,
+			new cc.Color4F(0,0,0,0));
+		
+		tencil.setPosition(cc.p(labelX,labelY));
+
+		var titleLabel = cc.LabelTTF.create(title, "Arial", 38);
+		titleLabel.setPosition(cc.p(labelX + labelWidth,labelY));
+		titleLabel.setColor(new cc.Color4F(0,0,0,0));
+		titleLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
+		
+		var clipNode = cc.ClippingNode.create(tencil);
+		
+		clipNode.addChild(titleLabel);
+		this.addChild(clipNode);
+
+		var moveQ = length + (labelWidth * 2);
+
+        titleLabel.runAction(cc.MoveBy.create(0, cc.p(labelWidth * 2, 0)));
+
+       	var go = cc.MoveBy.create(10, cc.p(-moveQ, 0));       	
+        var goBack = cc.MoveBy.create(0, cc.p(moveQ, 0));        
+        var seq = cc.Sequence.create(go, goBack, null);
+        titleLabel.runAction((cc.RepeatForever.create(seq) ));
+		
 	}
 });
