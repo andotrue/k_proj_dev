@@ -12,6 +12,7 @@ var BaseLayer = cc.Layer.extend({
     isOK: null,
     answeredPoints: [],
 	getHint: false,
+	title: null,
 	//コンストラクタ
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
@@ -57,17 +58,15 @@ var BaseLayer = cc.Layer.extend({
             var LabelOtetsuki = cc.Sprite.create( gsDir + "label/game_otetsuki.png" );
             var LabelMachigai = cc.Sprite.create( gsDir + "label/game_machigai.png" );
             var LabelTimelimit = cc.Sprite.create( gsDir + "label/game_timelimit.png" );
-
-//            var title = cc.LabelTTF("test", "Marker Felt",10);
-//            var title = new cc.LabelBMFont();
- //           title.setAnchorPoint(1,1);
-
+			
             this.initStarsAndHearts();
            
             //Layerの子要素に。
             this.addChild(LabelOtetsuki);
             this.addChild(LabelMachigai);
             this.addChild(LabelTimelimit);
+
+			//TODO: Copyright
 
             LabelMachigai.setPosition(350, this.MACHIGAI_Y);
             LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
@@ -553,8 +552,13 @@ var BaseLayer = cc.Layer.extend({
 		var labelHeight = 40;
 		var labelX = 195;
 		var labelY = 141;
-		var title  = "てすとてすとてすとてすとてすと";
+		var title  = this.playInfo.TITLE;
+		var MIN_LENGTH = 500;
 		var length = title.length * 40;
+		
+		if( length < MIN_LENGTH){
+			length = MIN_LENGTH;
+		}
 
 		var tencil = cc.DrawNodeCanvas.create();
 		tencil.drawPoly(
