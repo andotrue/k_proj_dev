@@ -11,7 +11,7 @@
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/bar_touroku_end.png')}}" style="position:relative;top:10%;width:100%;margin-top:31%">
 
-<a id="loginAndTop" href="{{ path('LoginAfterSettingName',{'email':email},{'pass':pass})}}"></a>
+<a id="loginAndTop" href="{{ path('LoginAfterSettingName',{'email':email, 'pass':pass})}}"></a>
 <img id="toTop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" onclick="changeImage(this.id);submitButton();" style="position:relative;margin-top:37%;width:64%">
 <script>
 var image_path = null;
