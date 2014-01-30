@@ -3,11 +3,11 @@ var ResultLayer = cc.Layer.extend({
     DEFAULT_FONT_SIZE: 24,
     SHOP_LINK_PATH: null,
     RANKING_PATH: null,
-    MESSAGE_FOR_USER_SUCCESS: "おめでとう！ショップやランキングをチェック",
-    MESSAGE_FOR_GUEST_1_SUCCESS: "おめでとう！他の問題にもチャレンジ！",
-    MESSAGE_FOR_GUEST_2_SUCCESS: "XXXXXX",
-    MESSAGE_FOR_USER_FAIL: "ユーザ失敗",
-    MESSAGE_FOR_GUEST_FAIL: "ゲスト失敗",
+//    MESSAGE_FOR_USER_SUCCESS: "おめでとう！ショップやランキングをチェック",
+//    MESSAGE_FOR_GUEST_1_SUCCESS: "おめでとう！他の問題にもチャレンジ！",
+//    MESSAGE_FOR_GUEST_2_SUCCESS: "XXXXXX",
+//    MESSAGE_FOR_USER_FAIL: "ユーザ失敗",
+//    MESSAGE_FOR_GUEST_FAIL: "ゲスト失敗",
     //以下は変数から当てはめる
     acquiredPoint: null,
     clearTime: null,
@@ -46,11 +46,11 @@ var ResultLayer = cc.Layer.extend({
             this.addChild(bg);
 
             if(this.playInfo.isUser()){
-                var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,250,50,0,0,0);
-                var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,100,60,0,0,0);
+//                var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,250,50,0,0,0);
+//                var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,100,60,0,0,0);
             }
             if (this.playInfo.isSucceed === true){
-                var clearTimeSprite = this.clearTime( Math.Floor(this.clearTime / 1000 )+ "秒",360,350,60,0,0,0);           
+//               var clearTimeSprite = this.clearTime( Math.Floor(this.clearTime / 1000 )+ "秒",360,350,60,0,0,0);           
             }
 
             if(this.isGuest === true){
@@ -63,7 +63,8 @@ var ResultLayer = cc.Layer.extend({
                 if( this.isCleared === true ) {
                     this.initMenuForUserSuccess();
                 }else{
-                    this.initMenuForUserFail();
+//                    this.initMenuForUserFail();
+                    this.initMenuForUserSuccess();
                 }
             }
 
@@ -79,6 +80,9 @@ var ResultLayer = cc.Layer.extend({
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
         popup.setPosition(360,470 );
+
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
 
         var tryAnother = this.createTryAnotherButton(360,280);
 //        var toTop = this.createToTopButton(360,600);
@@ -106,6 +110,9 @@ var ResultLayer = cc.Layer.extend({
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_1_SUCCESS,360,1000,30,255,255,255);
         var MSG2 = this.createStringSprite(this.MESSAGE_FOR_GUEST_2_SUCCESS,360,800,30,255,255,255);
 
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
+
         var tryAnother = this.createTryAnotherButton(360,270)
         var toTop = this.createToTopButton(360,90);
         tryAnother.setScale(0.7);
@@ -126,6 +133,9 @@ var ResultLayer = cc.Layer.extend({
         popup.setPosition(360,470 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_USER_FAIL,360,1000,30,255,255,255);
+
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
 
         var retry = this.createRetryButton(360,300);
         var tryAnother = this.createTryAnotherButton(360,230);
@@ -151,6 +161,9 @@ var ResultLayer = cc.Layer.extend({
         popup.setPosition(360,470 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_FAIL,360,1000,30,255,255,255);
+
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
 
         var retry = this.createRetryButton(360,290);
         var tryAnother = this.createTryAnotherButton(360,220);
