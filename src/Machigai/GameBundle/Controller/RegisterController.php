@@ -62,8 +62,8 @@ class RegisterController extends BaseController
         $form = $this->createFormBuilder()
          ->setMethod('GET')
          ->setAction($this->generateUrl('RegisterUserComplete'))
-         ->add('mailAddress', 'text',array('label'=>false))
-         ->add('password', 'text',array('label'=>false))
+         ->add('mailAddress', 'email',array('label'=>false))
+         ->add('password', 'password',array('label'=>false))
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
         $form->bind($request);
