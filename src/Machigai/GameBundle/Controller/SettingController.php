@@ -155,7 +155,7 @@ https://machigai.puzzle-m.net\n
         for ($i=0; $i < count($userData);$i++) {
             if($pass == hash('sha512',$salt.$userData[$i]->getTempPass())){
                 $userId = $userData[$i]->getId();
-                $newEmail = $userData[$i]->getMailAddress();
+                $newEmail = $userData[$i]->getTempPass();
             }
         }
 
