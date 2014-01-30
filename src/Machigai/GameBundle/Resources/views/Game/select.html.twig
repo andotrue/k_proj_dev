@@ -8,7 +8,6 @@
  .imageSize {width:85%;}
 </style>
 {% endblock %}
-
 {% block body %}
 <script>
 var game_id = null;
@@ -46,6 +45,7 @@ function popup(id,gameTitle){
 	game_title = gameTitle;
 	$('.gameTitle').empty();
 	$('<p>'+game_title+'</p>').appendTo('.gameTitle');
+	$('#popup').center();
 	$('#popup').show();
 }
 
