@@ -126,9 +126,10 @@ var Clock = cc.Layer.extend({
 		that.digits[':'] = coron;
     },
 	_padding:function (num,char,n){
-		var val = String(num);
-		for(; val.length < n; val+=char);
-		return val;
+//		var val = String(num);
+//		for(; val.length < n; val+=char);
+		return (char+(num)).slice(-n); 
+		//return val;
 	},
     _getMinuteString:function(){
 		var time = that.getCurrentDuration();
@@ -146,12 +147,12 @@ var Clock = cc.Layer.extend({
 		var time = that.getCurrentDuration();
 		var target = Math.floor(time % 1000);
 //		cc.log("Clock._getMillisecondString: str = " + that._padding( target, "0", 4 ));
-		return that._padding( target, "0", 4 );
+		return that._padding( target, "0", 2 );
     },
     _concatenateDigitStringsToTime:function(){
 		var mm = that._getMinuteString();
 		var ss = that._getSecondString();
-		var ms = that._getMillisecondString().slice(2);
+		var ms = that._getMillisecondString();//.slice(2);
 		var colon = ":";
 //		cc.log("Clock._concatenateDigitStringsToTime: str = " + mm + colon + ss + colon + ms);
 		return (mm + colon + ss + colon + ms);

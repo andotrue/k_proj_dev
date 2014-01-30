@@ -72,7 +72,7 @@ class HelpController extends BaseController
 			$message = \Swift_Message::newInstance()
 	        ->setSubject('【まちがいさがし放題】お客様からのお問い合わせ')
 	        ->setFrom($inquiryData['email'])
-	        ->setTo('shirai.kenta@vareal.co.jp')
+	        ->setTo('support@machigai.puzzle-m.net')
 	        ->setBody("件名:".$inquiryData['title']."\n"."メールアドレス:".$inquiryData['email']."\n"."本文:".$inquiryData['content']);
 	        
 	        $this->get('mailer')->send($message);
