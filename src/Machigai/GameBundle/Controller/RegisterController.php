@@ -151,7 +151,15 @@ class RegisterController extends BaseController
 
          $user[0]->setNickname($nickname);
          $em->flush();
-        return $this->render('MachigaiGameBundle:Register:complete.html.twig');
+
+         $userData = $this->getDoctrine()
+         ->getRepository('MachigaiGameBundle:User')
+         ->findBy(array('tempPass'=>$tempPass));
+
+         $email = $userData[0]->getMailAddress();
+         $pass = $userData[0]->getPassword();
+
+        return $this->render('MachigaiGameBundle:Register:complete.html.twig',array('email'=>$email,'pass'=>$pass));
     }
     public function confirmAction(Request $request){
        $nickname = new User();
@@ -302,5 +310,54 @@ https://machigai.puzzle-m.net\n
     }
     public function emailTimeoverAction(){        
         return $this->render('MachigaiGameBundle:Register:emailTimeover.html.twig');
+    }
+    public function loginAfterSettingName($email,$pass){
+        $mailAddress = $email;
+        $password = $pass;
+
+        $checkData = $this->getDoctrine()
+         ->getRepository('MachigaiGameBundle:User')
+         ->findBy(array('mailAddress'=>$mailAddress));
+        if(empty($checkData)){
+            $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
+            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
+//        }elseif($checkData[0]->getNickname()==NULL){
+//            $caution = "登録が完了していません。";
+//            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
+        }elseif(hash('sha512',$password) != $checkData[0]->getPassword()){
+            $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
+            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));            
+        }else{
+                $userId = $checkData[0]->getId();
+                $session = $request->getSession();
+                //開発モード時,セッションを生成する。
+                $MODE = 'DEV';
+                $user_type = 'loggedIn';
+
+                if( $MODE == 'DEV'){
+                    if($user_type == 'loggedIn'){
+                        //ログインユーザの場合
+                        $session->set('auId', 'auid1');
+                        $session->set('id', $userId);
+                        $session->set('smartPassResult', true );                
+                    }elseif($user_type == 'notLoggedIn'){
+                        //非ログインユーザの場合
+                        $session->set('auId', 'auid1');                
+                        $session->set('id', null );
+                        $session->set('smartPassResult', true );                
+                    }else{
+                        $session->set('auId', null );                
+                        $session->set('id', null );                
+                        $session->set('smartPassResult', null );                
+                    }
+                }
+                $id = $session->get('id');
+                if( empty($id) ) {
+                    //auIDログインページへリダイレクト
+                    return $this->redirect('https://auone.jp');
+                }else{
+                    return $this->redirect($this->generateUrl('Top'));
+                }
+        }
     }
 }

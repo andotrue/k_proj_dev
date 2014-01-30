@@ -75,17 +75,22 @@ var ResultLayer = cc.Layer.extend({
     initMenuForUserSuccess:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
-        var path = gsDir + "popup/result_menu.png";
+        var path = gsDir + "popup/2-01_3_web_bg_.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(720,this.MIDDLE_Y );
+        popup.setPosition(360,470 );
 
-        var tryAnother = this.createTryAnotherButton(360,700);
-        var toTop = this.createToTopButton(360,600);
-        var toShop = this.createShopButton(360,500);
-        var toRanking = this.createRankingButton(360,400);
+        var tryAnother = this.createTryAnotherButton(360,280);
+//        var toTop = this.createToTopButton(360,600);
+        var toShop = this.createShopButton(360,210);
+        var toRanking = this.createRankingButton(360,140);
+
+        tryAnother.setScale(0.7);
+        toShop.setScale(0.7);
+        toRanking.setScale(0.7);
+
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_USER_SUCCESS,360,1000,30,255,255,255);
-        var menu = cc.Menu.create([tryAnother,toShop,toRanking,toTop]);
+        var menu = cc.Menu.create([tryAnother,toShop,toRanking]);
         menu.setPosition(0,0);
         this.addChild(menu);
 
@@ -93,16 +98,19 @@ var ResultLayer = cc.Layer.extend({
     initMenuForGuestSuccess:function () {
         cc.log("ResultLayer.initMenuForGuest");
         this.state = "SAVE";
-        var path = gsDir + "popup/result_menu_guest.png";
+        var path = gsDir + "popup/2-01_3_web_bg.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(720,this.MIDDLE_Y );
+        popup.setPosition(360,470 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_1_SUCCESS,360,1000,30,255,255,255);
         var MSG2 = this.createStringSprite(this.MESSAGE_FOR_GUEST_2_SUCCESS,360,800,30,255,255,255);
 
-        var tryAnother = this.createTryAnotherButton(360,750)
-        var toTop = this.createToTopButton(360,600);
+        var tryAnother = this.createTryAnotherButton(360,270)
+        var toTop = this.createToTopButton(360,90);
+        tryAnother.setScale(0.7);
+        toTop.setScale(0.7);
+
         var menu = cc.Menu.create([tryAnother,toTop]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -112,18 +120,22 @@ var ResultLayer = cc.Layer.extend({
     initMenuForUserFail:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
-        var path = gsDir + "popup/result_miss_menu.png";
+        var path = gsDir + "popup/2-01_4_web_bg.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(720,this.MIDDLE_Y );
+        popup.setPosition(360,470 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_USER_FAIL,360,1000,30,255,255,255);
 
+        var retry = this.createRetryButton(360,300);
+        var tryAnother = this.createTryAnotherButton(360,230);
+        var toShop = this.createShopButton(360,160);
+        var toRanking = this.createRankingButton(360,90);
 
-        var retry = this.createRetryButton(360,800);
-        var tryAnother = this.createTryAnotherButton(360,700);
-        var toShop = this.createShopButton(360,600);
-        var toRanking = this.createRankingButton(360,500);
+        retry.setScale(0.7);
+        tryAnother.setScale(0.7);
+        toShop.setScale(0.7);
+        toRanking.setScale(0.7);
 
         var menu = cc.Menu.create([retry,tryAnother,toShop,toRanking]);
         menu.setPosition(0,0);
@@ -133,16 +145,19 @@ var ResultLayer = cc.Layer.extend({
     initMenuForGuestFail:function () {
         cc.log("ResultLayer.initMenuForGuest");
         this.state = "SAVE";
-        var path = gsDir + "popup/result_miss_menu_guest.png";
+        var path = gsDir + "popup/2-01_4_web_bg_.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(720,this.MIDDLE_Y );
+        popup.setPosition(360,470 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_FAIL,360,1000,30,255,255,255);
 
-        var retry = this.createRetryButton(360,800);
-        var tryAnother = this.createTryAnotherButton(360,700);
-        var toTop = this.createToTopButton(360,500);
+        var retry = this.createRetryButton(360,290);
+        var tryAnother = this.createTryAnotherButton(360,220);
+        var toTop = this.createToTopButton(360,150);
+        retry.setScale(0.7);
+        tryAnother.setScale(0.7);
+        toTop.setScale(0.7);
 
         var menu = cc.Menu.create([retry,tryAnother,toTop]);
         menu.setPosition(0,0);

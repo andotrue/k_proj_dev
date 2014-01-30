@@ -266,6 +266,10 @@ TimeOver:
     pattern: /register/emailTimeover
     defaults: { _controller: MachigaiGameBundle:Register:emailTimeover }
 
+LoginAfterSettingName:
+    pattern: /register/loginAfterSettingName/{email}/{pass}
+    defaults: { _controller: MachigaiGameBundle:Register:loginAfterSettingName }
+
 Register:
     pattern: /register/{temp}
     defaults: { _controller: MachigaiGameBundle:Register:index }
