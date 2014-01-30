@@ -148,7 +148,6 @@ class RegisterController extends BaseController
 
          $em = $this->getDoctrine()->getEntityManager();
          $user = $em->getRepository('MachigaiGameBundle:User')->findBy(array('tempPass'=>$tempPass));
-
          $user[0]->setNickname($nickname);
          $em->flush();
 
@@ -311,23 +310,14 @@ https://machigai.puzzle-m.net\n
     public function emailTimeoverAction(){        
         return $this->render('MachigaiGameBundle:Register:emailTimeover.html.twig');
     }
-    public function loginAfterSettingName($email,$pass){
+    public function loginAfterSettingNameAction($email,$pass, Request $request){
         $mailAddress = $email;
         $password = $pass;
 
         $checkData = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
          ->findBy(array('mailAddress'=>$mailAddress));
-        if(empty($checkData)){
-            $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
-            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
-//        }elseif($checkData[0]->getNickname()==NULL){
-//            $caution = "登録が完了していません。";
-//            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
-        }elseif(hash('sha512',$password) != $checkData[0]->getPassword()){
-            $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
-            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));            
-        }else{
+ 
                 $userId = $checkData[0]->getId();
                 $session = $request->getSession();
                 //開発モード時,セッションを生成する。
@@ -358,6 +348,5 @@ https://machigai.puzzle-m.net\n
                 }else{
                     return $this->redirect($this->generateUrl('Top'));
                 }
-        }
     }
 }
