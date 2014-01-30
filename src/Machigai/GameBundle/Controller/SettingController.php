@@ -118,7 +118,7 @@ class SettingController extends BaseController
          $tempData = hash('sha512',$salt.$newEmail['mailAddress']);
          $message = \Swift_Message::newInstance()
         ->setSubject('【まちがいさがし放題】メールアドレス変更のご案内')
-        ->setFrom('exsample@vareal.co.jp')
+        ->setFrom('machigai.puzzle-m.net')
         ->setTo($newEmail['mailAddress'])
         ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」でメールアドレスを変更されるお客様へお送りしています。このメールを受信された時点では変更は完了しておりませんので、ご注意下さい。\n
 尚、このメールに心当たりのない方は破棄していただきますようお願い申し上げます。\n
