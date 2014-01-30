@@ -12,6 +12,7 @@ var BaseLayer = cc.Layer.extend({
     isOK: null,
     answeredPoints: [],
 	getHint: false,
+	title: null,
 	//コンストラクタ
     ctor:function (parent, playInfo) {
         cc.log("BaseLayer.ctor");
@@ -30,7 +31,6 @@ var BaseLayer = cc.Layer.extend({
         }else{
             this.objs = objs;
         }
-
     },
     init:function (parent) {
 		
@@ -58,11 +58,7 @@ var BaseLayer = cc.Layer.extend({
             var LabelOtetsuki = cc.Sprite.create( gsDir + "label/game_otetsuki.png" );
             var LabelMachigai = cc.Sprite.create( gsDir + "label/game_machigai.png" );
             var LabelTimelimit = cc.Sprite.create( gsDir + "label/game_timelimit.png" );
-
-//            var title = cc.LabelTTF("test", "Marker Felt",10);
-//            var title = new cc.LabelBMFont();
- //           title.setAnchorPoint(1,1);
-
+			
             this.initStarsAndHearts();
            
             //Layerの子要素に。
@@ -70,14 +66,11 @@ var BaseLayer = cc.Layer.extend({
             this.addChild(LabelMachigai);
             this.addChild(LabelTimelimit);
 
+			//TODO: Copyright
+
             LabelMachigai.setPosition(350, this.MACHIGAI_Y);
             LabelOtetsuki.setPosition(350, this.OTETSUKI_Y);
             LabelTimelimit.setPosition(100,1385);
-
-			this.upperHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
-			this.lowerHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
-			this.addChild(this.upperHint);
-			this.addChild(this.lowerHint);
 
             this.clock = this.playInfo.clock;
             this.addChild(this.clock,15);
@@ -91,6 +84,9 @@ var BaseLayer = cc.Layer.extend({
 			this.setPositionY(-thr);
 
             bRet = true;
+
+			// マーキーの表示
+			this.dispTitle();
         }
         return bRet;
     },
@@ -312,25 +308,8 @@ var BaseLayer = cc.Layer.extend({
     },
     runOK:function () {
 
-		var uldiff	 = this.illusts.frames[1].FRAME_HEIGHT;
-		var upperPos = this.getUpperPos();
-		
-		//        cc.runAction();
-		
-		var upperOk = cc.Sprite.create( gsDir + "other/ok.png" );
-		var lowerOk = cc.Sprite.create( gsDir + "other/ok.png" );
-		this.illusts.frames[0].illust.addChild(upperOk);
-		this.illusts.frames[1].illust.addChild(lowerOk);
-		
-		upperOk.setPosition(upperPos.x, upperPos.y);
-		lowerOk.setPosition(upperPos.x, upperPos.y);
-//        this.stars.increment();
-
-		setTimeout(function(){
-			upperOk.removeFromParent();
-			lowerOk.removeFromParent();
-		}, 3000);
-		
+		var illust = this.illusts.frames[0];
+		illust.setImage(illust.MODE_SCALE);
 		this.stars.increment();
     },
     runNG:function () {
@@ -431,41 +410,188 @@ var BaseLayer = cc.Layer.extend({
 		var apObj = this.playInfo.MACHIGAI_POINT_DATA;
 		// ヒントになる座標を取得
 		var pointHint = apObj[alreadyAnsweredIndex[parseInt(Math.random()*j)]];
-		var apx = parseInt(pointHint.x);
-		var apy = parseInt(pointHint.y);
-		cc.log("x:"+apx+" y:"+apy+" にヒント表示");
 
 		var upperPict = this.illusts.frames[0];
-		var upperPictIllust = this.illusts.frames[0].illust;
-
 		var lowerPict = this.illusts.frames[1];
+		upperPict.scale = 1.0;
+		lowerPict.scale = 1.0;
+		upperPict.setImage(upperPict.MODE_SCALE);
+		lowerPict.setImage(lowerPict.MODE_SCALE);
 
-		var getUpperPos = upperPict.getPosition();
-		var getLowerPos = lowerPict.getPosition();
-
-		var startUpperX = upperPict.getContentSize().width / 2 - upperPictIllust.getContentSize().width / 2;
-
-		var px  = getUpperPos.x + startUpperX + (apx * (upperPict.scale * upperPict.base_scale));
-        var lowerY = getUpperPos.y - (apy * (upperPict.scale * upperPict.base_scale));
-		//TODO: 暫定処理を修正
-		var upperY = lowerY + lowerPict.FRAME_HEIGHT;
-
-		this.upperHint.setPosition(px, upperY);
-		this.lowerHint.setPosition(px, lowerY);
+		var upperPictIllust = upperPict.illust;
+		var lowerPictIllust = lowerPict.illust;
 		
-		this.upperHint.runAction(cc.Blink.create(2.5, 10));
-		this.lowerHint.runAction(cc.Blink.create(2.5, 10));
+		var apx = parseInt(pointHint.x);
+		var apy = parseInt(pointHint.y);
+
+		// 座標系の変換
+		apy = upperPictIllust.getContentSize().height - apy;
+
+		apx = apx - upperPict.currentX;
+		apy = apy + upperPict.currentY;
+
+		var upperHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
+		var lowerHint = cc.Sprite.create( gsDir + "other/game_hint.png" );
+
+		upperPictIllust.addChild(upperHint);
+		lowerPictIllust.addChild(lowerHint);
+
+		upperHint.setPosition(apx, apy);
+		lowerHint.setPosition(apx, apy);
 		
-		this.upperHint.setVisible(true);
-		this.upperHint.setVisible(true);
-
-		var dis = this;
-
-		setTimeout( function(){
-			dis.upperHint.setVisible(false);
-			dis.lowerHint.setVisible(false);
-		}, 3000);
+		var opa = 255;
+		var minus = 20;
+		
+		var eventId = setInterval(
+			function(){
+				if(opa - minus <= 0){
+					upperPictIllust.removeChild(upperHint);
+					lowerPictIllust.removeChild(lowerHint);
+					clearInterval(eventId);
+					opa = 0;
+				} else {
+					opa -= minus;
+					upperHint.setOpacity(opa);
+					lowerHint.setOpacity(opa);
+				}
+			}, 100
+		);
+		
+//		setTimeout( function(){
+//			dis.upperHint.setVisible(false);
+//			dis.lowerHint.setVisible(false);
+//		}, 3000);
 		
 		return true;
+	},
+	updateAnswerMark: function(new_scale){
+		
+		var objs = this.playInfo.MACHIGAI_POINT_DATA;
+		
+		for( var i in objs ){
+            var ap = objs[i];
+            var apx = parseInt(ap.x);
+            var apy = parseInt(ap.y);
+
+			if( this.answeredPoints[i] == true ){
+				
+				var upperPict = this.illusts.frames[0];
+				var upperPictIllust = this.illusts.frames[0].illust;
+				var lowerPictIllust = this.illusts.frames[1].illust;
+
+				if(upperPict.currentX <= apx &&
+				   upperPict.currentX + upperPict.currentWidth >= apx &&
+				   upperPict.currentY <= apy &&
+				   upperPict.currentY + upperPict.currentHeight >= apy){
+
+					var upperOk = cc.Sprite.create( gsDir + "other/ok.png" );
+					var lowerOk = cc.Sprite.create( gsDir + "other/ok.png" );
+
+					var okSize		= upperOk.getContentSize();
+					var okWidth		= okSize.width;
+					var okHeight	= okSize.height;
+					var okLeft		= 0;
+					var okTop		= 0;
+					
+					var leftAp		= apx - (okWidth / 2);
+					var topAp		= apy - (okHeight / 2);
+
+					var curRight	= upperPict.currentX + upperPict.currentWidth;
+					var right		= leftAp + okWidth;
+					var curBottom	= upperPict.currentY + upperPict.currentHeight;
+					var bottom		= topAp + okHeight;
+					
+					if( upperPict.currentX > leftAp ){
+						//左を切る
+						okLeft	= upperPict.currentX - leftAp;
+						okWidth = okWidth - okLeft;
+						apx		= apx + (okLeft / 2);
+					} else if( curRight < right ){
+						//右を切る
+						okWidth	= okWidth - (right - curRight);
+						okLeft	= curRight - right;
+						apx		= apx + (okLeft / 2);
+					}
+					if( upperPict.currentY > topAp ){
+						//上を切る
+						okTop	= upperPict.currentY - topAp;
+						okHeight = okHeight - okTop;
+						apy		= apy + (okTop / 2);
+					} else if( curBottom < bottom ){
+						//下を切る
+						okHeight= okHeight - (bottom - curBottom);
+						okTop	= curBottom - bottom;
+						apy		= apy + (okTop / 2);
+					}
+					
+					
+					// 座標系の変換
+					apy = upperPictIllust.getContentSize().height - apy;
+
+					apx = apx - upperPict.currentX;
+					apy = apy + upperPict.currentY;
+
+					var rect = cc.rect(okLeft,okTop,okWidth,okHeight);
+					upperOk.setTextureRect(rect);
+					lowerOk.setTextureRect(rect);
+					
+					upperOk.setPosition(apx, apy);
+					lowerOk.setPosition(apx, apy);
+
+					upperPictIllust.addChild(upperOk);
+					lowerPictIllust.addChild(lowerOk);				
+				}
+			}
+		}				
+	},
+	dispTitle: function(){
+		
+		// タイトルのマーキー表示
+		
+		var labelWidth = 140;
+		var labelHeight = 40;
+		var labelX = 195;
+		var labelY = 141;
+		var title  = this.playInfo.TITLE;
+		var MIN_LENGTH = 500;
+		var length = title.length * 40;
+		
+		if( length < MIN_LENGTH){
+			length = MIN_LENGTH;
+		}
+
+		var tencil = cc.DrawNodeCanvas.create();
+		tencil.drawPoly(
+			[
+			cc.p(-labelWidth,labelHeight),
+			cc.p(-labelWidth,-labelHeight), 
+			cc.p(labelWidth, -labelHeight),
+			cc.p(labelWidth,labelHeight)
+			],
+			new cc.Color4F(0,0,0,0),
+			0,
+			new cc.Color4F(0,0,0,0));
+		
+		tencil.setPosition(cc.p(labelX,labelY));
+
+		var titleLabel = cc.LabelTTF.create(title, "Arial", 38);
+		titleLabel.setPosition(cc.p(labelX + labelWidth,labelY));
+		titleLabel.setColor(new cc.Color4F(0,0,0,0));
+		titleLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
+		
+		var clipNode = cc.ClippingNode.create(tencil);
+		
+		clipNode.addChild(titleLabel);
+		this.addChild(clipNode);
+
+		var moveQ = length + (labelWidth * 2);
+
+        titleLabel.runAction(cc.MoveBy.create(0, cc.p(labelWidth * 2, 0)));
+
+       	var go = cc.MoveBy.create(10, cc.p(-moveQ, 0));       	
+        var goBack = cc.MoveBy.create(0, cc.p(moveQ, 0));        
+        var seq = cc.Sequence.create(go, goBack, null);
+        titleLabel.runAction((cc.RepeatForever.create(seq) ));
+		
 	}
 });
