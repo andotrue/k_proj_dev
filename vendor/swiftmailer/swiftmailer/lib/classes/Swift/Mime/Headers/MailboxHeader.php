@@ -354,5 +354,6 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
                 '] does not comply with RFC 2822, 3.6.2.'
                 );
         }
-*/    }
+*/
+    }
 }
