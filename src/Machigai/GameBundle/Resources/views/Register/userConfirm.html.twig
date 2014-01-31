@@ -19,8 +19,12 @@
  {{form(form)}}
 
    <div class="linkButtons">
-   <img id="topImage" style="width:30%" src="{{ asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" onclick="changeImage(this.id);"><a href="{{path('RegisterUser')}}" id="htopImage"></a>
+   <a href="{{path('RegisterUser')}}" id="htopImage">
+   <img id="topImage" style="width:30%" src="{{ asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" onclick="changeImage(this.id);"></a>
+   <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_modify.png')}}" >
+
    <img id="registerConfirm" src="{{ asset('/bundles/machigaigame/images/parts/button_send_mail_off.png')}}" onclick="changeImage(this.id);submitRegister()" style="margin-left:14%;width:30%">
+   <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_send_mail.png')}}" >
   </div>
 </div>
 

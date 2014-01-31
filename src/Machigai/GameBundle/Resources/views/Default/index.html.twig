@@ -42,14 +42,20 @@
  </section>
  <section id="menu" class="top_bg">
 <img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/><a href='{{ path('GameSelect') }}' id="hgame_button" style="padding-right:9%;"></a>
+<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_game.png')}}" />
   {% if user is empty %}
   	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_gray.png')}}" width="35%" />
   {% else %}
-  	
-  	<img alt="ショップ" id="shop_button" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/><a href='{{ path('Shop') }}' id="hshop_button"> </a>
+  	<a href='{{ path('Shop') }}' id="hshop_button">
+  	<img alt="ショップ" id="shop_button" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/><img src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" class="preload"/></a>
   {% endif %}<br />
-  <img alt="ランキング" id="ranking_button" src="{{asset('/bundles/machigaigame/images/parts/button_ranking_off.png')}}" width="35%" onclick="changeImage(this.id);"/><a href='{{ path('Ranking') }}' id="hranking_button" style="padding-right:9%;"></a>
-  <img alt="ヘルプ" id="help_button" src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/><a href='{{ path('Help') }}' id="hhelp_button"></a>
+  <a href='{{ path('Ranking') }}' id="hranking_button">
+  <img alt="ランキング" id="ranking_button" style="padding-right:9%" src="{{asset('/bundles/machigaigame/images/parts/button_ranking_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
+  <img src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" class="preload"/>
+  <a href='{{ path('Help') }}' id="hhelp_button">
+  <img alt="ヘルプ" id="help_button" src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
+  <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" />
+
  </section>
  <section id="news" class="top_bg">
   <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />

@@ -1,7 +1,15 @@
 <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
-<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
-<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.min.js') }}"></script>
+	<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css')  }}" />
+	<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
+
+	<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css>Error')  }}" />
 
 {% block title %}遊び方{% endblock %}
 
@@ -44,4 +52,7 @@ function submitForm(){
  <a href="{{path('HelpInquiry')}}""><img id="button_tohelp" src="{{ asset('/bundles/machigaigame/images/parts/buttom_return_off.png')}}" width="64%" onclick="changeImage(this.id)">
  </a>
 </div>
+
+<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_otoiawasecheck.png')}}" />
+<img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/buttom_return.png')}}" >
 {% endblock %}
