@@ -63,7 +63,7 @@ ChangeEmailSent:
     defaults: { _controller: MachigaiGameBundle:Setting:changeEmailSent }
 
 ChangeEmailComplete:
-    pattern: /setting/changeEmailComplete/{pass}
+    pattern: /setting/changeEmailComplete/
     defaults: { _controller: MachigaiGameBundle:Setting:changeEmailComplete }
 
 SendEmail:
@@ -116,7 +116,7 @@ JsonUpload:
     pattern:  /game/uploadData
     defaults: { _controller: MachigaiGameBundle:Game:uploadData }
     requirements:
-        _method: GET
+        _method: POST
 
 JsonDownload:
     pattern:  /game/downloadData
@@ -133,10 +133,6 @@ RankingRegister:
 SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
-
-PrivacyPolicy:
-    pattern: /help/privacyPolicy
-    defaults: { _controller: MachigaiGameBundle:Help:privacyPolicy }
 
 Shop:
     pattern: /shop/
@@ -218,13 +214,9 @@ GameFail:
     pattern: /game/fail
     defaults: { _controller: MachigaiGameBundle:Game:fail }
 
-Login:
-    pattern: /register/login
-    defaults: { _controller: MachigaiGameBundle:Register:login }
-
-LoginCheck:
-    pattern: /register/loginCheck
-    defaults: { _controller: MachigaiGameBundle:Register:loginCheck }
+Register:
+    pattern: /register/
+    defaults: { _controller: MachigaiGameBundle:Register:index }
 
 RegisterUser:
     pattern: /register/userRegister
@@ -243,12 +235,20 @@ SentEmail:
     defaults: { _controller: MachigaiGameBundle:Register:sentEmail }
 
 BeforeNickname:
-    pattern: /register/beforeRegisterNickname/{pass}
+    pattern: /register/beforeRegisterNickname
     defaults: { _controller: MachigaiGameBundle:Register:beforeRegisterNickname }
 
 ReissuePassword:
     pattern: /register/reissuePassword
     defaults: { _controller: MachigaiGameBundle:Register:reissuePassword }
+
+Login:
+    pattern: /register/login
+    defaults: { _controller: MachigaiGameBundle:Register:login }
+
+LoginCheck:
+    pattern: /register/loginCheck
+    defaults: { _controller: MachigaiGameBundle:Register:loginCheck }
 
 RegisterConfirm:
     pattern: /register/confirm/
@@ -322,3 +322,9 @@ SyncQuestionData:
     defaults: { _controller: MachigaiGameBundle:Android:getQuestionData }
     requirements: 
         _method: GET
+
+AndroidGameDataUpload:
+    pattern:  /sync/game/uploadData
+    defaults: { _controller: MachigaiGameBundle:Android:uploadData }
+    requirements:
+        _method: POST
