@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Machigai\GameBundle\Entity\User;
+use Machigai\GameBundle\Entity\Question;
+use Machigai\GameBundle\Entity\PlayHistory;
 use \DateTime;
 
 class AndroidController extends BaseController
@@ -316,7 +318,7 @@ class AndroidController extends BaseController
                 ->setParameters(array('user'=>$user,'question'=>$questionId))
                 ->getResult();
         if(empty($playHistory)){
-            $logger->info("downloadAction: playHistory is null.");
+            $logger->info("uploadDataAction: playHistory is null.");
             $playHistory = new PlayHistory();
             $playHistory->setCreatedAt(new DateTime());
             $playHistory->setUpdatedAt(new DateTime());
@@ -326,9 +328,9 @@ class AndroidController extends BaseController
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($product);
             $em->flush();
-            $logger->info("downloadAction: playHistory is saved.");
+            $logger->info("uploadDataAction: playHistory is saved.");
         }else{
-            $logger->info("downloadAction: playHistory exists.");
+            $logger->info("uploadDataAction: playHistory exists.");
             $playHistory->setUpdatedAt(new DateTime());
             $playHistory->setGameStatus(2); //TODO: ゲームステータス状態をきちんと取得
             $playHistory->setPlayInfo($data);
@@ -338,7 +340,7 @@ class AndroidController extends BaseController
             $playHistory->setPlayInfo($data);
             $em->persist($playHistory);
             $em->flush();
-            $logger->info("downloadAction: playHistory is saved.");
+            $logger->info("uploadDataAction: playHistory is saved.");
         }
 
         $responseData=json_encode(array("status" => "OK"));//jscon encode the array
