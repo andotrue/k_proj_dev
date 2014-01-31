@@ -290,6 +290,8 @@ class AndroidController extends BaseController
         return new Response($questionData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
     }
     public function uploadDataAction(){
+        $logger = $this->get('logger');
+
         $request = $this->get('request');
 
         $data=$request->request->get('playInfo');
@@ -303,6 +305,9 @@ class AndroidController extends BaseController
         $user = $this->getDoctrine()
                 ->getEntityManager()
                 ->getRepository('MachigaiGameBundle:User')->findBy(array('id'=>$userId));
+        $question = $this->getDoctrine()
+                ->getEntityManager()
+                ->getRepository('MachigaiGameBundle:Question')->find($questionId);
 
         $playHistory = $this->getDoctrine()
                 ->getEntityManager()
@@ -311,19 +316,33 @@ class AndroidController extends BaseController
                 ->setParameters(array('user'=>$user,'question'=>$questionId))
                 ->getResult();
         if(empty($playHistory)){
-            $em = $this->getDoctrine()->getEntityManager();
-            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user));
+            $logger->info("downloadAction: playHistory is null.");
+            $playHistory = new PlayHistory();
+            $playHistory->setCreatedAt(new DateTime());
+            $playHistory->setUpdatedAt(new DateTime());
+            $playHistory->setGameStatus(2); //TODO: ゲームステータス状態をきちんと取得
+            $playHistory->addQuestion($question);
             $playHistory->setPlayInfo($data);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($product);
             $em->flush();
+            $logger->info("downloadAction: playHistory is saved.");
         }else{
-            $playHistoryId = $playHistory->getId();
+            $logger->info("downloadAction: playHistory exists.");
+            $playHistory->setUpdatedAt(new DateTime());
+            $playHistory->setGameStatus(2); //TODO: ゲームステータス状態をきちんと取得
+            $playHistory->setPlayInfo($data);
+
             $em = $this->getDoctrine()->getEntityManager();
             $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($playHistoryId);
             $playHistory->setPlayInfo($data);
+            $em->persist($playHistory);
             $em->flush();
+            $logger->info("downloadAction: playHistory is saved.");
         }
 
         $responseData=json_encode(array("status" => "OK"));//jscon encode the array
+        $logger->info("downloadAction: all done.");
         return new Response($$responseData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
 
     /* 参考
