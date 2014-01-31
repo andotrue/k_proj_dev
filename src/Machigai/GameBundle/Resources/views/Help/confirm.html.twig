@@ -42,6 +42,9 @@ function submitForm(){
 <img id="modifyButton" src="{{asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" style="width:30%;margin-right:5%" onclick="changeImage(this.id);history.back();"/>
 <img id="submitButton" src="{{asset('/bundles/machigaigame/images/parts/buttom_send_off.png')}}" style="width:30%;" onclick="changeImage(this.id);submitForm()"/>
 </div>
+
+<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_modify.png')}}" />
+<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/buttom_send.png')}}" />
 {% endblock %}
 
 {% block footer %}{% endblock %}

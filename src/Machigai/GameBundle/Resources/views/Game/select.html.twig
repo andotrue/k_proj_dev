@@ -183,7 +183,7 @@ $(function() {
 </div>
 
 
-<div id="popup_continue" style="z-index:4;position:absolute;margin-top:50%;width:90%;left:10%">
+<div id="popup_continue" style="z-index:4;position:absolute;margin-top:50%;width:100%;left:10%">
 <img src="{{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }}" style="position:absolute;left:5%;top:50%;width:90%"/>
 <button type="button" onclick="cancel()" style="position:absolute;top:52%;left:82%;margin-top:7%;padding:5%;width:10%;height:6%;filter:alpha(opacity=0);-moz-opacity: 0;opacity:0;
 "></button>
@@ -357,6 +357,7 @@ $(function() {
 なりませんのでご注意ください。
 </p></div>
 <a href="{{path('Top')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" style="position:relative;padding:2%;margin-top:5%" onclick="changeImage(this.id);"></a>
+<img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
 </div>
 </section>
 </div>

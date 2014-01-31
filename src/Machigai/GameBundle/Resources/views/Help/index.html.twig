@@ -41,5 +41,6 @@ droid.getBack = function(){window.location = '{{path('Top')}}';};
  {% block footer %}
  <footer style="margin-top:10%;">
 <img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: droid.getBack();" />
+<img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}"  />
  </footer>
  {% endblock %}
