@@ -55,19 +55,19 @@ var ResultLayer = cc.Layer.extend({
 
             if(this.isGuest === true){
                 if( this.isCleared === true ){
-                    window.location = "/game/resultGuestClear";
+                    window.location = "/sync/game/resultGuestClear";
 //                    this.initMenuForGuestSuccess();
                 }else{
 //                    this.initMenuForGuestFail();
-                    window.location = "/game/resultGuestFalse";
+                    window.location = "/sync/game/resultGuestFalse";
                 }
             }else{
                 if( this.isCleared === true ) {
 //                    this.initMenuForUserSuccess();
-                    window.location = "/game/resultUserClear";
+                    window.location = "/sync/game/resultUserClear";
                 }else{
 //                    this.initMenuForUserFail();
-                    window.location = "/game/resultUserFalse";
+                    window.location = "/sync/game/resultUserFalse";
                 }
             }
 
