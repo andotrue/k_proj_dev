@@ -326,7 +326,7 @@ class AndroidController extends BaseController
             $playHistory->addQuestion($question);
             $playHistory->setPlayInfo($data);
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($product);
+            $em->persist($playHistory);
             $em->flush();
             $logger->info("uploadDataAction: playHistory is saved.");
         }else{
