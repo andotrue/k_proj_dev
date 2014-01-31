@@ -306,7 +306,8 @@ class AndroidController extends BaseController
 
         $users = $this->getDoctrine()
                 ->getManager()
-                ->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$userToken));
+                ->getRepository('MachigaiGameBundle:User')->findBy(array('id' =>$userId));
+//                ->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$userToken));
         $user = $users[0];
         $question = $this->getDoctrine()
                 ->getManager()
