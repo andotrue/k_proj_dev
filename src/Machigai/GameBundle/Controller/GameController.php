@@ -370,4 +370,18 @@ class GameController extends BaseController
             }
         }
     }
+    public function resultUserClearAction(){
+        return $this->render('MachigaiGameBundle:Game:resultUserClear.html.twig');
+    }
+    public function resultGuestClearAction(){
+        return $this->render('MachigaiGameBundle:Game:resultGuestClear.html.twig');
+    }
+    public function resultUserFalseAction(){
+        //To Do : リトライ用のquestionIdを定義
+        return $this->render('MachigaiGameBundle:Game:resultUserFalse.html.twig',array('questionId'=>152));
+    }
+    public function resultGuestFalseAction(){
+        //To Do : リトライ用のquestionIdを定義
+        return $this->render('MachigaiGameBundle:Game:resultGuestFalse.html.twig',array('questionId'=>152));
+    }
 }

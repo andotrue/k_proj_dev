@@ -55,16 +55,19 @@ var ResultLayer = cc.Layer.extend({
 
             if(this.isGuest === true){
                 if( this.isCleared === true ){
-                    this.initMenuForGuestSuccess();
+                    window.location = "/game/resultGuestClear";
+//                    this.initMenuForGuestSuccess();
                 }else{
-                    this.initMenuForGuestFail();
+//                    this.initMenuForGuestFail();
+                    window.location = "/game/resultGuestFalse";
                 }
             }else{
                 if( this.isCleared === true ) {
-                    this.initMenuForUserSuccess();
+//                    this.initMenuForUserSuccess();
+                    window.location = "/game/resultUserClear";
                 }else{
 //                    this.initMenuForUserFail();
-                    this.initMenuForUserSuccess();
+                    window.location = "/game/resultUserFalse";
                 }
             }
 
@@ -79,15 +82,15 @@ var ResultLayer = cc.Layer.extend({
         var path = gsDir + "popup/2-01_3_web_bg_.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,470 );
+        popup.setPosition(360,380 );
 
-        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
-        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,610,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,430,60,0,0,0);
 
-        var tryAnother = this.createTryAnotherButton(360,280);
+        var tryAnother = this.createTryAnotherButton(360,190);
 //        var toTop = this.createToTopButton(360,600);
-        var toShop = this.createShopButton(360,210);
-        var toRanking = this.createRankingButton(360,140);
+        var toShop = this.createShopButton(360,120);
+        var toRanking = this.createRankingButton(360,50);
 
         tryAnother.setScale(0.7);
         toShop.setScale(0.7);
@@ -105,16 +108,16 @@ var ResultLayer = cc.Layer.extend({
         var path = gsDir + "popup/2-01_3_web_bg.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,470 );
+        popup.setPosition(360,380 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_1_SUCCESS,360,1000,30,255,255,255);
         var MSG2 = this.createStringSprite(this.MESSAGE_FOR_GUEST_2_SUCCESS,360,800,30,255,255,255);
 
-        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
-        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,610,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,430,60,0,0,0);
 
-        var tryAnother = this.createTryAnotherButton(360,270)
-        var toTop = this.createToTopButton(360,90);
+        var tryAnother = this.createTryAnotherButton(360,180)
+        var toTop = this.createToTopButton(360,0);
         tryAnother.setScale(0.7);
         toTop.setScale(0.7);
 
