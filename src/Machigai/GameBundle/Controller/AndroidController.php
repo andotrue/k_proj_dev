@@ -299,7 +299,7 @@ class AndroidController extends BaseController
         $data=$request->request->get('playInfo');
         $userToken = $request->request->get('userToken');
         $userId = 167; 
-        $questionId = $request->request->get('questionId');
+        $questionId = (int)($request->request->get('questionId'));
         //TODO: userTokenからuserを取得する実装が必要。
 //        $user = $this->getUser();
 //        $userId = $user->getId();
