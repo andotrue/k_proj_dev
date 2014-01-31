@@ -79,7 +79,7 @@ var ResultLayer = cc.Layer.extend({
         var path = gsDir + "popup/2-01_3_web_bg_.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,470 );
+        popup.setPosition(360,this.MIDDLE_Y );
 
         var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
         var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
@@ -105,7 +105,7 @@ var ResultLayer = cc.Layer.extend({
         var path = gsDir + "popup/2-01_3_web_bg.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,470 );
+        popup.setPosition(360,this.MIDDLE_Y );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_1_SUCCESS,360,1000,30,255,255,255);
         var MSG2 = this.createStringSprite(this.MESSAGE_FOR_GUEST_2_SUCCESS,360,800,30,255,255,255);
@@ -130,7 +130,7 @@ var ResultLayer = cc.Layer.extend({
         var path = gsDir + "popup/2-01_4_web_bg.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,470 );
+        popup.setPosition(360,this.MIDDLE_Y );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_USER_FAIL,360,1000,30,255,255,255);
 
@@ -158,7 +158,7 @@ var ResultLayer = cc.Layer.extend({
         var path = gsDir + "popup/2-01_4_web_bg_.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,470 );
+        popup.setPosition(360,this.MIDDLE_Y );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_FAIL,360,1000,30,255,255,255);
 

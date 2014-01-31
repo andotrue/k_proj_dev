@@ -18,7 +18,7 @@
 </div>
 
 </p>
-<div id="category_tab" class="bottom_blue_line" style="position:relative;padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp_off.png') }}" width="47%" style="padding-right:2%;" onclick="changeImage(this.id);change_tabs(0)" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami_off.png') }}" width="47%" onclick="changeImage(this.id);change_tabs(1)" />
+<div id="category_tab" class="bottom_blue_line" style="position:relative;padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp_off.png') }}" width="47%" style="padding-right:2%;" onclick="changeImageTab(this.id);change_tabs(0)" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}" width="47%" onclick="changeImageTab(this.id);change_tabs(1)" />
 </div>
 
 <div id="item_area" class="bottom_blue_line" style="position:relative;width:100%; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }}); background-size:cover; background-repeat:no-repeat;" >
@@ -42,7 +42,7 @@
 
 
 <script>
-var page = 0;
+//var page = 0;
 var current_mode = 0;
 var image_path = null;
 var image_id = null;
@@ -136,6 +136,7 @@ function change_tabs(data){
     rewritePageNum();
   }
 }
+
 function rewritePageNum(){
     if(target == '.item1'){
       var max = parseInt($('.item1').size());
@@ -157,18 +158,28 @@ function rewritePageNum(){
       }
     }
   }
-function changeImage(imageId){
-  var pre_src = $('#'+imageId).attr('src');
-  var src = pre_src.replace(/_off/g,'');
-  image_path = src;
-  image_id = imageId;
-  $('#'+imageId).attr("src",src);
-  setTimeout("originalImage();", 200);
-}
-function originalImage(){
-  var pre_src = $('#'+image_id).attr('src');
-  var src = image_path.replace(/.png/g,'_off.png');
-  $('#'+image_id).attr("src",src);
+
+var current_tab = "stamp_tab";
+function changeImageTab(imageId){
+  if(current_tab != imageId){
+    if(imageId == "stamp_tab"){
+      var imageId1 = "wallpaper_tab";
+    }else{
+      var imageId1 = "stamp_tab";
+    }
+
+    var image_id = imageId;
+    var pre_src = $('#'+image_id).attr('src');
+    var src = pre_src.replace(/.png/g,'_off.png');
+    $('#'+image_id).attr("src",src);
+
+    var pre_src1 = $('#'+imageId1).attr('src');
+    var src1 = pre_src1.replace(/_off/g,'');
+    image_path1 = src1;
+    image_id1 = imageId1;
+    $('#'+imageId1).attr("src",src1);
+    current_tab = imageId;
+  }
 }
 </script>
 {% endblock %}
