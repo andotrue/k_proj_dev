@@ -42,7 +42,7 @@
 
 
 <script>
-var page = 0;
+//var page = 0;
 var current_mode = 0;
 var image_path = null;
 var image_id = null;
@@ -136,6 +136,7 @@ function change_tabs(data){
     rewritePageNum();
   }
 }
+
 function rewritePageNum(){
     if(target == '.item1'){
       var max = parseInt($('.item1').size());
@@ -157,6 +158,7 @@ function rewritePageNum(){
       }
     }
   }
+
 var current_tab = "stamp_tab";
 function changeImageTab(imageId){
   if(current_tab != imageId){
