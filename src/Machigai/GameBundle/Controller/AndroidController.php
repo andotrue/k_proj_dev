@@ -259,12 +259,73 @@ class AndroidController extends BaseController
             ->findAll();
         $questionData = array();
         for ($i = 0; $i < count($questions); $i++) {
+            $playHistory = $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:PlayHistory')
+                ->findBy(array('user' => $user , 'question'=> $questions[$i] ));
+
             $questionData['question'][$i]['id'] = $questions[$i]->getId();
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
+            $questionData['question'][$i]['machigaiLimit'] = $questions[$i]->getFailLimit();
+            $questionData['question'][$i]['clearPoint'] = $questions[$i]->getClearPoint();
+            $questionData['question'][$i]['timeLimit'] = $questions[$i]->getTimeLimit();
+            $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo();
+            $questionData['question'][$i]['status'] = $playHistory->getGameStatus();
             $questionData['question'][$i]['is_delete'] = false;
         }
+/*
+        if (!empty($playHistoryDB)){
+            $playHistory = array(
+                'playHistoryId' => $playHistoryDB[0]->getId(), 
+                'playStartedAt' => $playHistoryDB[0]->getPlayStartedAt(), 
+                'playEndedAt' => $playHistoryDB[0]->getPlayEndedAt(),
+                'clearTime' => $playHistoryDB[0]->getClearTime(),
+                'suspendedTime' => $playHistoryDB[0]->getSuspendedTime(),
+                'gameStatus' => $playHistoryDB[0]->getGameStatus(),
+                'playInfo' => $playHistoryDB[0]->getPlayInfo(), // Javascriptでは playData
+                );
+*/
         $questionData=json_encode($questionData);//jscon encode the array
         return new Response($questionData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
     }
+    public function uploadDataAction(){
+        $request = $this->get('request');
+
+        $data=$request->request->get('playInfo');
+        $userToken = $request->request->get('userToken');
+        $questionId = $request->request->get('questionId');
+        //TODO: userTokenからuserを取得する実装が必要。
+//        $user = $this->getUser();
+//        $userId = $user->getId();
+
+        $user = $this->getDoctrine()
+                ->getEntityManager()
+                ->getRepository('MachigaiGameBundle:User')->findBy(array('id'=>1));
+
+        $playHistory = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
+                                    where p.user = :user and p.question = :question')
+                ->setParameters(array('user'=>$userId,'question'=>$questionId))
+                ->getResult();
+        if(empty($playHistory)){
+            $em = $this->getDoctrine()->getEntityManager();
+            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('userId'=>$userId));
+            $playHistory->setPlayInfo($data);
+            $em->flush();
+        }else{
+            $playHistoryId = $playHistory->getId();
+            $em = $this->getDoctrine()->getEntityManager();
+            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($playHistoryId);
+            $playHistory->setPlayInfo($data);
+            $em->flush();
+        }
+
+        $responseData=json_encode(array("status" => "OK"));//jscon encode the array
+        return new Response($$responseData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
+
+    /* 参考
+    http://symfony2forum.org/threads/5-Using-Symfony2-jQuery-and-Ajax
+    */
+    }    
 }
