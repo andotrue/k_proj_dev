@@ -256,24 +256,37 @@ class AndroidController extends BaseController
 	}
 
     public function getQuestionDataAction(){
+        $request = $this->get('request');
+        $syncToken = $request->query->get('syncToken');
+
         $questions = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:Question')
             ->findAll();
         $questionData = array();
+
+        $users = $this->getDoctrine()
+            ->getRepository('MachigaiGameBundle:User')
+            ->findBy(array('syncToken' => $syncToken));
+        $user = $users[0];
+
         for ($i = 0; $i < count($questions); $i++) {
-/*            $playHistory = $this->getDoctrine()
+            $playHistories = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:PlayHistory')
                 ->findBy(array('user' => $user , 'question'=> $questions[$i] ));
-*/
+
             $questionData['question'][$i]['id'] = $questions[$i]->getId();
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
             $questionData['question'][$i]['machigaiLimit'] = $questions[$i]->getFailLimit();
             $questionData['question'][$i]['clearPoint'] = $questions[$i]->getClearPoint();
             $questionData['question'][$i]['timeLimit'] = $questions[$i]->getTimeLimit();
-//            $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo(); //TODO: ユーザトークンに対応
-//            $questionData['question'][$i]['status'] = $playHistory->getGameStatus(); //TOOD:　ユーザトークンに対応
-            $questionData['question'][$i]['status'] = "1";
+            if(!empty($playHistories)){
+                $playHistory = $playHistories[0];
+                $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo(); //TODO: ユーザトークンに対応
+                $questionData['question'][$i]['status'] = $playHistory->getGameStatus(); //TOOD:　ユーザトークンに対応
+            }else{
+                $questionData['question'][$i]['status'] = "1";
+            }
             $questionData['question'][$i]['is_delete'] = false;
         }
 /*
