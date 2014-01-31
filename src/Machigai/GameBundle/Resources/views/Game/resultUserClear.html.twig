@@ -5,16 +5,47 @@
 <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
 <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.min.js') }}"></script>
+
 <script>
+
+	function getCurrentDuration(){
+		return {{clearTime}};
+	}
+	function padding(num,char,n){
+		return (char+(num)).slice(-n); 
+	}
+    function getMinuteString(){
+		var time =getCurrentDuration();
+		var target = Math.floor( (time / 1000) / 60 );
+		return padding( target, "0", 2 );
+	}
+    function getSecondString(){
+		var time = getCurrentDuration();
+		var target = Math.floor((time / 1000) % 60);
+		return padding( target, "0", 2 );
+	}
+    function getMillisecondString(){
+		var time = getCurrentDuration();
+		var target = Math.floor(time % 1000);
+		return padding( target, "0", 2 );
+    }
+    function clearTimeString(){
+		var mm = getMinuteString();
+		var ss = getSecondString();
+		var ms = getMillisecondString();//.slice(2);
+		var colon = ":";
+		return (mm + colon + ss + colon + ms);
+    }
+
 window.onload = function(){		
-	var previousTime = $('#clearTime').html();
-	previousTime = Time.milliSecondsToArray(previousTime)[0]+":"+Time.milliSecondsToArray(previousTime)[1]+":"+Time.milliSecondsToArray(previousTime)[2];
-	$('#clearTime').html(previousTime);
+	$('#clearTime').html(clearTimeString());
 }
+
 </script>
+
 <img src="{{asset('/bundles/machigaigame/images/parts/2-01_3_web_bg_.png')}}" style="position:absolute;margin-left:-1%;width:100%"/>
 
-<p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;color:white;">{{clearTime}}</p>
+<p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;color:white;"></p>
 <p id="getPoint" style="position:absolute;top:33%;width:100%;text-align:center;font-size:5em;color:white;">{{clearPoint}}pt</p>
 <p id="currentPoint" style="position:absolute;top:49%;width:100%;text-align:center;font-size:5em;color:white;">{{currentPoint}}pt</p>
 
