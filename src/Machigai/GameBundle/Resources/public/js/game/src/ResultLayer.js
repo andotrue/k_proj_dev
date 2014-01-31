@@ -55,20 +55,20 @@ var ResultLayer = cc.Layer.extend({
 
             if(this.isGuest === true){
                 if( this.isCleared === true ){
-                    window.location = "/game/resultGuestClear";
-//                    this.initMenuForGuestSuccess();
+                    clearTime = this.playInfo.getClearTime();
+                    window.location = "/game/resultGuestClear?clearTime="+clearTime;
                 }else{
-//                    this.initMenuForGuestFail();
-                    window.location = "/game/resultUserClear";
+                    qId = this.playInfo.QUESTION_ID;
+                    window.location = "/game/resultGuestFalse?questionId="+qId;
                 }
             }else{
                 if( this.isCleared === true ) {
-//                    this.initMenuForUserSuccess();
-                    window.location = "/game/resultUserClear";
+                    clearTime = this.playInfo.getClearTime();
+                    qId = this.playInfo.QUESTION_ID;
+                    window.location = "/game/resultUserClear?questionId="+qId+"&clearTime="+clearTime;
                 }else{
-//                    this.initMenuForUserFail();
-                    //window.location = "/machigai/app_dev.php/game/resultUserFalse";
-                    window.location = "/game/resultUserClear";
+                    qId = this.playInfo.QUESTION_ID;
+                    window.location = "/game/resultUserFalse?questionId="+qId;
                 }
             }
 

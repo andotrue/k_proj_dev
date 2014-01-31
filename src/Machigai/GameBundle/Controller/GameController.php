@@ -371,17 +371,53 @@ class GameController extends BaseController
         }
     }
     public function resultUserClearAction(){
-        return $this->render('MachigaiGameBundle:Game:resultUserClear.html.twig');
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $pre_currentPoint = $user->getCurrentPoint();
+
+        $request = $this->get('request');
+        $clearTime = $request->query->get('clearTime');
+        $questionId = $request->query->get('questionId');
+    
+        $question = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT q from MachigaiGameBundle:Question q
+                                    where q.id = :id')
+                ->setParameters(array('id'=>$questionId))
+                ->getResult();
+
+        $clearPoint = $question[0]->getClearPoint();
+        $currentPoint = $pre_currentPoint+$clearPoint;
+
+        return $this->render('MachigaiGameBundle:Game:resultUserClear.html.twig',array('clearTime'=>$clearTime,'clearPoint'=>$clearPoint,'currentPoint'=>$currentPoint));
     }
-    public function resultGuestClearAction(){
-        return $this->render('MachigaiGameBundle:Game:resultGuestClear.html.twig');
+    public function resultGuestClearAction(){       
+        $request = $this->get('request');
+        $clearTime = $request->query->get('clearTime');
+
+        return $this->render('MachigaiGameBundle:Game:resultGuestClear.html.twig',array('clearTime'=>$clearTime));
     }
     public function resultUserFalseAction(){
-        //To Do : リトライ用のquestionIdを定義
-        return $this->render('MachigaiGameBundle:Game:resultUserFalse.html.twig',array('questionId'=>152));
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $currentPoint = $user->getCurrentPoint();
+
+        $request = $this->get('request');
+        $questionId = $request->query->get('questionId');
+    
+        $question = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT q from MachigaiGameBundle:Question q
+                                    where q.id = :id')
+                ->setParameters(array('id'=>$questionId))
+                ->getResult();
+
+        return $this->render('MachigaiGameBundle:Game:resultUserFalse.html.twig',array('questionId'=>$questionId,'currentPoint'=>$currentPoint));
     }
     public function resultGuestFalseAction(){
-        //To Do : リトライ用のquestionIdを定義
-        return $this->render('MachigaiGameBundle:Game:resultGuestFalse.html.twig',array('questionId'=>152));
+        $request = $this->get('request');
+        $questionId = $request->query->get('questionId');
+
+        return $this->render('MachigaiGameBundle:Game:resultGuestFalse.html.twig',array('questionId'=>$questionId));
     }
 }
