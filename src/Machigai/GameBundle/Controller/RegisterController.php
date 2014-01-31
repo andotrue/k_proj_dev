@@ -141,7 +141,8 @@ class RegisterController extends BaseController
         $form->bind($request);
         $nickname = $form->getData();
         $nickname = $nickname['nickname'];
-        $tempPass = $form->getData()['tempPass'];
+        $tempPass = $form->getData();
+		$tempPass = $tempPass['tempPass'];
 
 //        $pre_userId = $this->getUser();
 //        $userId = $pre_userId->getId();

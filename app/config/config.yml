@@ -61,16 +61,9 @@ doctrine:
         auto_mapping: true
 
 # Swiftmailer Configuration
-#swiftmailer:
-#    transport:  smtp
-#    encryption: ssl
-#    host:       smtp.gmail.com
-#    username:   shirai99999@gmail.com
-#    password:   999999999q
-
 swiftmailer:
     transport: smtp
     host:      mail.machigai.puzzle-m.net
     username:  mail.machigai.puzzle-m.net
-    password:
+    password:  
     spool:     { type: memory }
