@@ -3,11 +3,11 @@ var ResultLayer = cc.Layer.extend({
     DEFAULT_FONT_SIZE: 24,
     SHOP_LINK_PATH: null,
     RANKING_PATH: null,
-    MESSAGE_FOR_USER_SUCCESS: "おめでとう！ショップやランキングをチェック",
-    MESSAGE_FOR_GUEST_1_SUCCESS: "おめでとう！他の問題にもチャレンジ！",
-    MESSAGE_FOR_GUEST_2_SUCCESS: "XXXXXX",
-    MESSAGE_FOR_USER_FAIL: "ユーザ失敗",
-    MESSAGE_FOR_GUEST_FAIL: "ゲスト失敗",
+//    MESSAGE_FOR_USER_SUCCESS: "おめでとう！ショップやランキングをチェック",
+//    MESSAGE_FOR_GUEST_1_SUCCESS: "おめでとう！他の問題にもチャレンジ！",
+//    MESSAGE_FOR_GUEST_2_SUCCESS: "XXXXXX",
+//    MESSAGE_FOR_USER_FAIL: "ユーザ失敗",
+//    MESSAGE_FOR_GUEST_FAIL: "ゲスト失敗",
     //以下は変数から当てはめる
     acquiredPoint: null,
     clearTime: null,
@@ -46,24 +46,29 @@ var ResultLayer = cc.Layer.extend({
             this.addChild(bg);
 
             if(this.playInfo.isUser()){
-                var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,250,50,0,0,0);
-                var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,100,60,0,0,0);
+//                var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,250,50,0,0,0);
+//                var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,100,60,0,0,0);
             }
             if (this.playInfo.isSucceed === true){
-                var clearTimeSprite = this.clearTime( Math.Floor(this.clearTime / 1000 )+ "秒",360,350,60,0,0,0);           
+//               var clearTimeSprite = this.clearTime( Math.Floor(this.clearTime / 1000 )+ "秒",360,350,60,0,0,0);           
             }
 
             if(this.isGuest === true){
                 if( this.isCleared === true ){
-                    this.initMenuForGuestSuccess();
+                    window.location = "/game/resultGuestClear";
+//                    this.initMenuForGuestSuccess();
                 }else{
-                    this.initMenuForGuestFail();
+//                    this.initMenuForGuestFail();
+                    window.location = "/game/resultUserClear";
                 }
             }else{
                 if( this.isCleared === true ) {
-                    this.initMenuForUserSuccess();
+//                    this.initMenuForUserSuccess();
+                    window.location = "/game/resultUserClear";
                 }else{
-                    this.initMenuForUserFail();
+//                    this.initMenuForUserFail();
+                    //window.location = "/machigai/app_dev.php/game/resultUserFalse";
+                    window.location = "/game/resultUserClear";
                 }
             }
 
@@ -78,12 +83,15 @@ var ResultLayer = cc.Layer.extend({
         var path = gsDir + "popup/2-01_3_web_bg_.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,470 );
+        popup.setPosition(360,380 );
 
-        var tryAnother = this.createTryAnotherButton(360,280);
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,610,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,430,60,0,0,0);
+
+        var tryAnother = this.createTryAnotherButton(360,190);
 //        var toTop = this.createToTopButton(360,600);
-        var toShop = this.createShopButton(360,210);
-        var toRanking = this.createRankingButton(360,140);
+        var toShop = this.createShopButton(360,120);
+        var toRanking = this.createRankingButton(360,50);
 
         tryAnother.setScale(0.7);
         toShop.setScale(0.7);
@@ -101,13 +109,16 @@ var ResultLayer = cc.Layer.extend({
         var path = gsDir + "popup/2-01_3_web_bg.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,470 );
+        popup.setPosition(360,380 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_1_SUCCESS,360,1000,30,255,255,255);
         var MSG2 = this.createStringSprite(this.MESSAGE_FOR_GUEST_2_SUCCESS,360,800,30,255,255,255);
 
-        var tryAnother = this.createTryAnotherButton(360,270)
-        var toTop = this.createToTopButton(360,90);
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,610,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,430,60,0,0,0);
+
+        var tryAnother = this.createTryAnotherButton(360,180)
+        var toTop = this.createToTopButton(360,0);
         tryAnother.setScale(0.7);
         toTop.setScale(0.7);
 
@@ -126,6 +137,9 @@ var ResultLayer = cc.Layer.extend({
         popup.setPosition(360,470 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_USER_FAIL,360,1000,30,255,255,255);
+
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
 
         var retry = this.createRetryButton(360,300);
         var tryAnother = this.createTryAnotherButton(360,230);
@@ -151,6 +165,9 @@ var ResultLayer = cc.Layer.extend({
         popup.setPosition(360,470 );
 
         var MSG1 = this.createStringSprite(this.MESSAGE_FOR_GUEST_FAIL,360,1000,30,255,255,255);
+
+        var acquiredPointSprite = this.createPointSprite(this.acquiredPoint + "pt",360,700,60,0,0,0);
+        var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,520,60,0,0,0);
 
         var retry = this.createRetryButton(360,290);
         var tryAnother = this.createTryAnotherButton(360,220);

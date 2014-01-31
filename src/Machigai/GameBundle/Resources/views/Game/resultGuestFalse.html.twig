@@ -1,0 +1,31 @@
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.min.js') }}"></script>
+
+<img src="{{asset('/bundles/machigaigame/images/parts/2-01_4_web_bg_.png')}}" style="position:absolute;margin-left:-1%;width:100%"/>
+
+<p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;color:white;">00:00:00</p>
+<p id="getPoint" style="position:absolute;top:37%;width:100%;text-align:center;font-size:2.3em;color:white;">ポイントの獲得には会員登録が必要です。</p>
+<p id="currentPoint" style="position:absolute;top:53%;width:100%;text-align:center;font-size:2.3em;color:white;">ポイントの獲得には会員登録が必要です。</p>
+
+<div id="buttons" style="position:absolute; top:80%; width:100%; text-align:center">
+<a href="{{ path('GamePlay',{'id':questionId}) }}">
+<img id="tryOthers" src="{{asset('/bundles/machigaigame/images/parts/button_retry_off.png')}}" style="width:65%" onclick="changeImage(this.id);"/>
+</a>
+<a href="{{ path('GameSelect') }}">
+<img id="toTop" src="{{asset('/bundles/machigaigame/images/parts/button_otherselect_off.png')}}" style="width:65%;margin-top:4%" onclick="changeImage(this.id);"/>
+</a>
+<a href="{{ path('Top') }}">
+<img id="toShop" src="{{asset('/bundles/machigaigame/images/parts/button_returnto_top_off.png')}}" style="width:65%;margin-top:19%" onclick="changeImage(this.id);"/>
+</a>
+</div>
+
+<div style="position:relative;" class="preload">
+<img src="{{asset('/bundles/machigaigame/images/parts/button_retry.png')}}" />
+<img src="{{asset('/bundles/machigaigame/images/parts/button_otherselect.png')}}" />
+<img src="{{asset('/bundles/machigaigame/images/parts/button_returnto_top.png')}}" />
+</div>

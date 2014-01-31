@@ -32,23 +32,24 @@
   {{error}}
   {% endif %}
   </div>
-   <div class="linkButtons" style="position:relative;left:8%;margin-top:33%;z-index:2;">
+   <div class="linkButtons" style="position:relative;margin-top:33%;z-index:2; text-align:center">
 
-   <img id="topImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"><a href="{{path('Top')}}" id="htopImage"></a>
+   <a href="{{path('Top')}}" id="htopImage">
+   <img id="topImage" width="35%" style="margin-right:9%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
+   <img src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" class="preload">
+
    <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
+   <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck.png')}}"  >
    </div>
   </div>
 </section>
 <script>
 $(function(){
-//	$('#form').hide();
 	$('#form_confirm').hide();
 })
 function submitRegister(){
 	$('#form_confirm').trigger("click");
 }
-//var droid = function(){}
-//droid.getBack = function(){window.location = '{{path('Top')}}';};
 </script>
 </div>
 {% endblock %}

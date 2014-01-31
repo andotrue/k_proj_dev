@@ -37,9 +37,12 @@
   {% endif %}
   </div>
    <div class="linkButtons">
-   <img id="topImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"><a href="{{path('Top')}}" id="htopImage"></a>
+    <a href="{{path('Top')}}" id="htopImage">
+   <img id="topImage" width="35%" style="margin-right:9%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
+   <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
     
-   <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login_off.png')}}" onclick="changeImage(this.id);s{{ form_rest(form) }}ubmitRegister()" >
+   <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login_off.png')}}" onclick="changeImage(this.id);{{ form_rest(form) }}submitRegister()" >
+   <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login.png')}}" >
    </div>
   </div>
 </section>

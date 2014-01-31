@@ -1,5 +1,8 @@
 var image_path = null;
 var image_id = null;
+$(function(){
+	$('.preload').hide();
+})
 function changeImage(imageId){
 	var pre_src = $('#'+imageId).attr('src');
 	var src = pre_src.replace(/_off/g,'');

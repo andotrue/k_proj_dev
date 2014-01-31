@@ -1,7 +1,3 @@
-
-
-
-
 {% extends "MachigaiGameBundle::base.html.twig" %}
 {% block title %}ニックネーム名登録{% endblock %}
 {% block body %}
@@ -11,16 +7,15 @@
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/bar_touroku_end.png')}}" style="position:relative;top:10%;width:100%;margin-top:31%">
 
-<a href='{{ path('Top')}}' alt="アプリTOPへ">
-<img id="toTop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" onclick="changeImage(this.id);" style="position:relative;margin-top:37%;width:64%">
-</a>
-
+<a id="loginAndTop" href="{{ path('LoginAfterSettingName',{'email':email, 'pass':pass})}}">
+<img id="toTop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" onclick="changeImage(this.id);submitButton();" style="position:relative;margin-top:37%;width:64%"></a>
+<img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" class="preload">
 <script>
 var image_path = null;
 var image_id = null;
 $(function(){
   $('#submitButton').hide();
-  $('#submitEnd').hide();
+//  $('#loginAndTop').hide();
   $('#form_confirm').hide();
 })
 function changeImage(imageId){
@@ -35,6 +30,9 @@ function originalImage(){
   var pre_src = $('#'+image_id).attr('src');
   var src = image_path.replace(/.png/g,'_off.png');
   $('#'+image_id).attr("src",src);
+}
+function submitButton(){
+  $('#loginAndTop').trigger('click');
 }
 </script>
 {% endblock %}
