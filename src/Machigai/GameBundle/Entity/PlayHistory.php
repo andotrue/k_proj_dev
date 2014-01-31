@@ -53,14 +53,14 @@ class PlayHistory
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetimetz")
+     * @ORM\Column(name="created_at", type="datetimetz", nullable=true)
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetimetz")
+     * @ORM\Column(name="updated_at", type="datetimetz", nullable=true)
      */
     private $updatedAt;
     
@@ -234,9 +234,9 @@ class PlayHistory
      * @param \DateTime $updatedAt
      * @return PlayHistory
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+//        $this->updatedAt = new \DateTime(); //TODO: setUpdateAtを実現化
 
         return $this;
     }
@@ -375,7 +375,7 @@ class PlayHistory
      */
     public function addQuestion(\Machigai\GameBundle\Entity\Question $question)
     {
-        $this->question[] = $question;
+        $this->question = $question;
 
         return $this;
     }
