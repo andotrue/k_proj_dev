@@ -259,18 +259,19 @@ class AndroidController extends BaseController
             ->findAll();
         $questionData = array();
         for ($i = 0; $i < count($questions); $i++) {
-            $playHistory = $this->getDoctrine()
+/*            $playHistory = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:PlayHistory')
                 ->findBy(array('user' => $user , 'question'=> $questions[$i] ));
-
+*/
             $questionData['question'][$i]['id'] = $questions[$i]->getId();
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
             $questionData['question'][$i]['machigaiLimit'] = $questions[$i]->getFailLimit();
             $questionData['question'][$i]['clearPoint'] = $questions[$i]->getClearPoint();
             $questionData['question'][$i]['timeLimit'] = $questions[$i]->getTimeLimit();
-            $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo();
-            $questionData['question'][$i]['status'] = $playHistory->getGameStatus();
+//            $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo(); //TODO: ユーザトークンに対応
+//            $questionData['question'][$i]['status'] = $playHistory->getGameStatus(); //TOOD:　ユーザトークンに対応
+            $questionData['question'][$i]['status'] = "1";
             $questionData['question'][$i]['is_delete'] = false;
         }
 /*
