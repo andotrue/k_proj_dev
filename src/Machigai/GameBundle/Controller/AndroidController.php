@@ -299,17 +299,20 @@ class AndroidController extends BaseController
         $data=$request->request->get('playInfo');
         $userToken = $request->request->get('userToken');
         $userId = 167; 
-        $questionId = $request->request->get('questionId');
+        $questionId = (int)($request->request->get('questionId'));
         //TODO: userTokenからuserを取得する実装が必要。
 //        $user = $this->getUser();
 //        $userId = $user->getId();
 
         $user = $this->getDoctrine()
                 ->getEntityManager()
-                ->getRepository('MachigaiGameBundle:User')->findBy(array('id'=>$userId));
+                ->getRepository('MachigaiGameBundle:User')->find($userId);
+        $logger->info("uploadDataAction: $user.getId() =". $user->getId());
+
         $question = $this->getDoctrine()
                 ->getEntityManager()
                 ->getRepository('MachigaiGameBundle:Question')->find($questionId);
+        $logger->info("uploadDataAction: $question.getId() =". $question->getId());
 
         $playHistory = $this->getDoctrine()
                 ->getEntityManager()
