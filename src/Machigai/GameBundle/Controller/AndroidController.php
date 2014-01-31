@@ -305,55 +305,63 @@ class AndroidController extends BaseController
 //        $userId = $user->getId();
 
         $user = $this->getDoctrine()
-                ->getEntityManager()
+                ->getManager()
                 ->getRepository('MachigaiGameBundle:User')->find($userId);
-        $userId = $user->getId();
-//        $logger->info("uploadDataAction: $user.getId() =". $userId);
 
         $question = $this->getDoctrine()
-                ->getEntityManager()
+                ->getManager()
                 ->getRepository('MachigaiGameBundle:Question')->find($questionId);
         $questionId = $question->getId();
-//        $logger->info("uploadDataAction: $question.getId() =". $questionId);
 
-        $playHistory = $this->getDoctrine()
-                ->getEntityManager()
+        $playHistories = $this->getDoctrine()
+                ->getManager()
                 ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
                                     where p.user = :user and p.question = :question')
-                ->setParameters(array('user'=>$user,'question'=>$questionId))
+                ->setParameters(array('user'=>$user,'question'=>$question))
                 ->getResult();
-        if(empty($playHistory)){
+       
+
+        if(empty($playHistories)){
             $logger->info("uploadDataAction: playHistory is null.");
             $playHistory = new PlayHistory();
-            $playHistory->setCreatedAt(new DateTime());
-            $playHistory->setUpdatedAt(new DateTime());
+//            $playHistory->setCreatedAt(new DateTime());
+//            $playHistory->setUpdatedAt();
             $playHistory->setGameStatus(2); //TODO: ゲームステータス状態をきちんと取得
             $playHistory->addQuestion($question);
             $playHistory->setPlayInfo($data);
-            $em = $this->getDoctrine()->getEntityManager();
+            $playHistory->setUser($user);
+            $em = $this->getDoctrine()->getManager();
             $em->persist($playHistory);
+            applyRanking($playHistory);
             $em->flush();
             $logger->info("uploadDataAction: playHistory is saved.");
         }else{
+            $playHistory = $playHistories[0];
             $logger->info("uploadDataAction: playHistory exists.");
-            $playHistory->setUpdatedAt(new DateTime());
+            $playHistory->setUpdatedAt();
             $playHistory->setGameStatus(2); //TODO: ゲームステータス状態をきちんと取得
             $playHistory->setPlayInfo($data);
 
-            $em = $this->getDoctrine()->getEntityManager();
-            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($playHistoryId);
+            $em = $this->getDoctrine()->getManager();
             $playHistory->setPlayInfo($data);
             $em->persist($playHistory);
             $em->flush();
             $logger->info("uploadDataAction: playHistory is saved.");
         }
 
-        $responseData=json_encode(array("status" => "OK"));//jscon encode the array
+        $responseData=json_encode(array("status" => "OK"));//json encode the array
         $logger->info("downloadAction: all done.");
-        return new Response($$responseData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
+        return new Response($responseData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
 
     /* 参考
     http://symfony2forum.org/threads/5-Using-Symfony2-jQuery-and-Ajax
     */
-    }    
+    }
+/*
+*
+*   Rankingに登録処理を行う
+*/
+ public function applyRanking($playHistory){
+    //TODO: Ranking登録処理。
+ }
 }
