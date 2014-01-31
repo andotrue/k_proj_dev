@@ -306,10 +306,13 @@ class AndroidController extends BaseController
 
         $user = $this->getDoctrine()
                 ->getEntityManager()
-                ->getRepository('MachigaiGameBundle:User')->findBy(array('id'=>$userId));
+                ->getRepository('MachigaiGameBundle:User')->find($userId);
+        $logger->info("uploadDataAction: $user.getId() =". $user->getId());
+
         $question = $this->getDoctrine()
                 ->getEntityManager()
                 ->getRepository('MachigaiGameBundle:Question')->find($questionId);
+        $logger->info("uploadDataAction: $question.getId() =". $question->getId());
 
         $playHistory = $this->getDoctrine()
                 ->getEntityManager()
