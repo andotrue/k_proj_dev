@@ -304,10 +304,10 @@ class AndroidController extends BaseController
 //        $user = $this->getUser();
 //        $userId = $user->getId();
 
-        $user = $this->getDoctrine()
+        $users = $this->getDoctrine()
                 ->getManager()
-                ->getRepository('MachigaiGameBundle:User')->find($userId);
-
+                ->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$userToken));
+        $user = $users[0];
         $question = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('MachigaiGameBundle:Question')->find($questionId);
@@ -332,7 +332,7 @@ class AndroidController extends BaseController
             $playHistory->setUser($user);
             $em = $this->getDoctrine()->getManager();
             $em->persist($playHistory);
-            applyRanking($playHistory);
+            $this->applyRanking($playHistory);
             $em->flush();
             $logger->info("uploadDataAction: playHistory is saved.");
         }else{
@@ -345,6 +345,7 @@ class AndroidController extends BaseController
             $em = $this->getDoctrine()->getManager();
             $playHistory->setPlayInfo($data);
             $em->persist($playHistory);
+            $this->applyRanking($playHistory);
             $em->flush();
             $logger->info("uploadDataAction: playHistory is saved.");
         }
@@ -357,11 +358,11 @@ class AndroidController extends BaseController
     http://symfony2forum.org/threads/5-Using-Symfony2-jQuery-and-Ajax
     */
     }
-/*
-*
-*   Rankingに登録処理を行う
-*/
- public function applyRanking($playHistory){
-    //TODO: Ranking登録処理。
- }
+    /*
+    *
+    *   Rankingに登録処理を行う
+    */
+     public function applyRanking($playHistory){
+        //TODO: Ranking登録処理。
+     }
 }
