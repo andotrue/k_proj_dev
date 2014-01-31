@@ -1,0 +1,38 @@
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.min.js') }}"></script>
+<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css')  }}" />
+<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
+<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css>Error')  }}" />
+
+
+<img src="{{asset('/bundles/machigaigame/images/parts/2-01_4_web_bg.png')}}" style="position:absolute;margin-left:-1%;width:100%"/>
+
+<p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;color:white;">00:00:00</p>
+<p id="getPoint" style="position:absolute;top:33%;width:100%;text-align:center;font-size:5em;color:white;">0pt</p>
+<p id="currentPoint" style="position:absolute;top:49%;width:100%;text-align:center;font-size:5em;color:white;">99999pt</p>
+<div id="buttons" style="position:absolute; top:80%; width:100%; text-align:center">
+<a href="{{ path('GamePlay',{'id':questionId}) }}">
+<img id="tryOthers" src="{{asset('/bundles/machigaigame/images/parts/button_retry_off.png')}}" style="width:65%" onclick="changeImage(this.id);"/>
+</a>
+<a href="{{ path('GameSelect') }}">
+<img id="toTop" src="{{asset('/bundles/machigaigame/images/parts/button_otherselect_off.png')}}" style="width:65%;margin-top:2%" onclick="changeImage(this.id);"/>
+</a>
+<a href="{{ path('Shop') }}">
+<img id="toShop" src="{{asset('/bundles/machigaigame/images/parts/button_resultshop_off.png')}}" style="width:65%;margin-top:2%" onclick="changeImage(this.id);"/>
+</a>
+<a href="{{ path('Ranking') }}">
+<img id="toRanking" src="{{asset('/bundles/machigaigame/images/parts/button_resultranking_off.png')}}" style="width:65%;margin-top:2%" onclick="changeImage(this.id);"/>
+</a>
+</div>
+
+<div class="preload">
+<img src="{{asset('/bundles/machigaigame/images/parts/button_retry.png')}}" />
+<img src="{{asset('/bundles/machigaigame/images/parts/button_otherselect.png')}}" />
+<img src="{{asset('/bundles/machigaigame/images/parts/button_resultranking.png')}}" />
+<img src="{{asset('/bundles/machigaigame/images/parts/button_resultshop.png')}}" />
+</div>

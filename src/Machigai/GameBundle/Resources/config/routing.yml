@@ -274,6 +274,22 @@ Register:
     pattern: /register/{temp}
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
+ResultUserClear:
+    pattern: /game/resultUserClear
+    defaults: { _controller: MachigaiGameBundle:Game:resultUserClear }
+
+ResultGuestClear:
+    pattern: /game/resultGuestClear
+    defaults: { _controller: MachigaiGameBundle:Game:resultGuestClear }
+
+ResultUserFalse:
+    pattern: /game/resultUserFalse
+    defaults: { _controller: MachigaiGameBundle:Game:resultUserFalse }
+
+ResultGuestFalse:
+    pattern: /game/resultGuestFalse
+    defaults: { _controller: MachigaiGameBundle:Game:resultGuestFalse }
+
 SyncUser:
     pattern: /sync/user
     defaults: { _controller: MachigaiGameBundle:Android:user }
