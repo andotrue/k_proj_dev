@@ -306,3 +306,9 @@ SyncQuestionData:
     defaults: { _controller: MachigaiGameBundle:Android:getQuestionData }
     requirements: 
         _method: GET
+
+AndroidGameDataUpload:
+    pattern:  /sync/game/uploadData
+    defaults: { _controller: MachigaiGameBundle:Android:uploadData }
+    requirements:
+        _method: POST
