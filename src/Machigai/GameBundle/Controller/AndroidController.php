@@ -308,13 +308,13 @@ class AndroidController extends BaseController
                 ->getEntityManager()
                 ->getRepository('MachigaiGameBundle:User')->find($userId);
         $userId = $user->getId();
-        $logger->info("uploadDataAction: $user.getId() =". $userId);
+//        $logger->info("uploadDataAction: $user.getId() =". $userId);
 
         $question = $this->getDoctrine()
                 ->getEntityManager()
                 ->getRepository('MachigaiGameBundle:Question')->find($questionId);
         $questionId = $question->getId();
-        $logger->info("uploadDataAction: $question.getId() =". $questionId);
+//        $logger->info("uploadDataAction: $question.getId() =". $questionId);
 
         $playHistory = $this->getDoctrine()
                 ->getEntityManager()
