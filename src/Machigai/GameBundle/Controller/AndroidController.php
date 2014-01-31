@@ -294,6 +294,7 @@ class AndroidController extends BaseController
 
         $data=$request->request->get('playInfo');
         $userToken = $request->request->get('userToken');
+        $userId = 167; 
         $questionId = $request->request->get('questionId');
         //TODO: userTokenからuserを取得する実装が必要。
 //        $user = $this->getUser();
@@ -301,17 +302,17 @@ class AndroidController extends BaseController
 
         $user = $this->getDoctrine()
                 ->getEntityManager()
-                ->getRepository('MachigaiGameBundle:User')->findBy(array('id'=>1));
+                ->getRepository('MachigaiGameBundle:User')->findBy(array('id'=>$userId));
 
         $playHistory = $this->getDoctrine()
                 ->getEntityManager()
                 ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
                                     where p.user = :user and p.question = :question')
-                ->setParameters(array('user'=>$userId,'question'=>$questionId))
+                ->setParameters(array('user'=>$user,'question'=>$questionId))
                 ->getResult();
         if(empty($playHistory)){
             $em = $this->getDoctrine()->getEntityManager();
-            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('userId'=>$userId));
+            $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user));
             $playHistory->setPlayInfo($data);
             $em->flush();
         }else{
