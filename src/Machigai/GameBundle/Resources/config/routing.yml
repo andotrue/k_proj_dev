@@ -323,6 +323,30 @@ SyncQuestionData:
     requirements: 
         _method: GET
 
+AndroidAuIdLogin:
+    pattern: /sync/register/auIdLogin
+    defaults: { _controller: MachigaiGameBundle:Android:auIdLogin }
+    requirements:
+        _method: GET
+
+AndroidRegisterEntry:
+    pattern: /sync/register/entry
+    defaults: { _controller: MachigaiGameBundle:Android:registerEntry }
+    requirements:
+        _method: GET
+
+AndroidRegisterConfirm:
+    pattern: /sync/register/confirm
+    defaults: { _controller: MachigaiGameBundle:Android:registerConfirm }
+    requirements:
+        _method: POST
+
+AndroidRegisterComplete:
+    pattern: /sync/register/complete
+    defaults: { _controller: MachigaiGameBundle:Android:registerComplete }
+    requirements:
+        _method: POST
+
 AndroidGameDataUpload:
     pattern:  /sync/game/uploadData
     defaults: { _controller: MachigaiGameBundle:Android:uploadData }
