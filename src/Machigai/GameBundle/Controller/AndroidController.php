@@ -385,4 +385,76 @@ class AndroidController extends BaseController
      public function applyRanking($playHistory){
         //TODO: Ranking登録処理。
      }
+
+     public function auIdLoginAction(){
+        //TODO: auIdLoginを実装。
+        //TODO: OpenIDを渡す。
+        $openId = uniqid();
+        return $this->redirect($this->generateUrl('AndroidRegisterEntry'));
+//        return $this->redirect($this->generateUrl('AndroidRegisterEntry'), array('openId' => $openId));
+     }
+     public function registerEntryAction(){
+        //TODO: 初回アクセス時はフォーム表示、次回アクセス時は確認画面を表示。
+        $openId = uniqid();
+//        $openId = $this->get('request')->query("openId");
+//        var_dump($openId);
+//        exit();
+        $form = $this->createFormBuilder()
+         ->setMethod('POST')
+         ->add('nickname', 'text')
+         ->add('openId', 'hidden')
+         ->add('confirm', 'submit', array('label'=>'内容を確認'))
+         ->getForm();
+        
+        return $this->render('MachigaiGameBundle:Android:registerEntry.html.twig', array('openId' => $openId, 'form' => $form->createView()) );
+
+     }
+     public function registerConfirmAction(){
+        $request = $this->get("request");
+        $nickname = new User();
+
+        $form = $this->createFormBuilder()
+        ->setMethod('POST')
+        ->add('nickname', 'hidden')
+        ->add('openId', 'hidden')
+        ->add('confirm', 'submit')
+        ->getForm();
+        $form->bind($request);
+        $nickname = $form->getData();
+
+        return $this->render('MachigaiGameBundle:Android:registerConfirm.html.twig',array('nickname'=>$nickname, 'form' => $form->createView()));
+     }
+     public function registerCompleteAction(){
+        $request = $this->get("request");
+        $userData = new User();
+
+        $form = $this->createFormBuilder()
+        ->setMethod('GET')
+        ->add('nickname', 'hidden')
+        ->add('openId', 'hidden')
+        ->add('confirm', 'submit')
+        ->getForm();
+        $form->bind($request);
+        //ユーザ登録処理, OpenID, syncToken, nicknameを登録する。
+        $userData = $form->getData();
+        $nickname = $userData["nickname"];
+        $openId = $userData["openId"];
+        $syncToken = uniqid();
+        $createdAt = new DateTime();
+        $updatedAt = new DateTime();
+
+        $user = new User();
+        $user->setNickname($nickname);
+        $user->setAuId($openId);
+        $user->setSyncToken($syncToken);
+        $user->setPassword("no_need");
+        $user->setTempPass("no_need");
+        $user->setCreatedAt($createdAt->format("U"));
+        $user->setUpdatedAt($updatedAt->format("U"));
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
+
+     }
 }
