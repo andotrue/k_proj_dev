@@ -113,11 +113,11 @@ class AndroidController extends BaseController
 
         $copyrightFileName = "";
 
-//        $user = $this->getUser();
-       $user = $this->getDoctrine()
+        $user = $this->getUser();
+/*       $user = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:User')
         ->find($uid);
-//        var_dump($user);
+*///        var_dump($user);
 //        $token = $request->headers->get('X-CSRF-Token');
  //       var_dump($token);
 
@@ -256,9 +256,11 @@ class AndroidController extends BaseController
 	}
 
     public function getQuestionDataAction(){
+        $logger = $this->get('logger');
+        $logger->info("getQuestionDataAction:");
         $request = $this->get('request');
         $syncToken = $request->query->get('syncToken');
-
+        $syncToken = "aaaaa"; //TODO: 解除必要
         $questions = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:Question')
             ->findAll();
@@ -277,14 +279,17 @@ class AndroidController extends BaseController
             $questionData['question'][$i]['id'] = $questions[$i]->getId();
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
-            $questionData['question'][$i]['machigaiLimit'] = $questions[$i]->getFailLimit();
+            $questionData['question'][$i]['otetsukiLimit'] = $questions[$i]->getFailLimit();
             $questionData['question'][$i]['clearPoint'] = $questions[$i]->getClearPoint();
             $questionData['question'][$i]['timeLimit'] = $questions[$i]->getTimeLimit();
             if(!empty($playHistories)){
+                $logger->info("getQuestionDataAction: playHistory is null.");
                 $playHistory = $playHistories[0];
                 $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo(); //TODO: ユーザトークンに対応
                 $questionData['question'][$i]['status'] = $playHistory->getGameStatus(); //TOOD:　ユーザトークンに対応
             }else{
+            $logger->info("getQuestionDataAction: playHistory exists.");
+                $questionData['question'][$i]['playInfoData'] = null;
                 $questionData['question'][$i]['status'] = "1";
             }
             $questionData['question'][$i]['is_delete'] = false;
@@ -311,6 +316,7 @@ class AndroidController extends BaseController
 
         $data=$request->request->get('playInfo');
         $userToken = $request->request->get('userToken');
+        $status = $request->request->get("status");
         $userId = 167; 
         $questionId = (int)($request->request->get('questionId'));
         //TODO: userTokenからuserを取得する実装が必要。
@@ -340,10 +346,10 @@ class AndroidController extends BaseController
             $playHistory = new PlayHistory();
 //            $playHistory->setCreatedAt(new DateTime());
 //            $playHistory->setUpdatedAt();
-            $playHistory->setGameStatus(2); //TODO: ゲームステータス状態をきちんと取得
             $playHistory->addQuestion($question);
             $playHistory->setPlayInfo($data);
             $playHistory->setUser($user);
+            $playHistory->setGameStatus($status);
             $em = $this->getDoctrine()->getManager();
             $em->persist($playHistory);
             $this->applyRanking($playHistory);
@@ -353,7 +359,7 @@ class AndroidController extends BaseController
             $playHistory = $playHistories[0];
             $logger->info("uploadDataAction: playHistory exists.");
             $playHistory->setUpdatedAt();
-            $playHistory->setGameStatus(2); //TODO: ゲームステータス状態をきちんと取得
+            $playHistory->setGameStatus($status);
             $playHistory->setPlayInfo($data);
 
             $em = $this->getDoctrine()->getManager();
