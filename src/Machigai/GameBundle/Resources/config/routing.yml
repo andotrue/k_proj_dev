@@ -356,3 +356,8 @@ AndroidGameDataUpload:
     defaults: { _controller: MachigaiGameBundle:Android:uploadData }
     requirements:
         _method: POST
+AndroidCopyright:
+    pattern: /sync/copyright
+    defaults: { _controller: MachigaiGameBundle:Android:copyright }
+    requirements:
+        _method: GET
