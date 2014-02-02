@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Machigai\GameBundle\Entity\User;
 use Machigai\GameBundle\Entity\Question;
 use Machigai\GameBundle\Entity\PlayHistory;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
 class AndroidController extends BaseController
@@ -231,11 +232,23 @@ class AndroidController extends BaseController
 	}
     public function gameFileAction($level,$qcode, $type){
 
-        $types = array('xml' => '.xml', 'first' => '_1.png', 'second' => '_2.png');
+        $types = array('xml' => '.xml', 'first' => '_1.png', 'second' => '_2.png', 'copyright' => 'copyright.png');
         $format = $types[$type];
-        $file = dirname(__FILE__).'/../Resources/questions/'.$level.'/'. $qcode . '/MS'. sprintf('%05d',$qcode). $format;
 
-        $response = new BinaryFileResponse($file);
+        if ($type == 'copyright'){
+            $file = dirname(__FILE__).'/../Resources/questions/'.$level.'/'. $qcode . '/'. $format;
+        }else{
+            $file = dirname(__FILE__).'/../Resources/questions/'.$level.'/'. $qcode . '/MS'. sprintf('%05d',$qcode). $format;            
+        }
+
+        try{
+            $response = new BinaryFileResponse($file);
+        }catch(FileNotFoundException $e){
+            $logger = $this->get('logger');
+            $logger->info("FileNotFound AndroidController.gameFileAcition:". $file);
+            $file = dirname(__FILE__).'/../Resources/questions/defaultCopyright.png';
+            $response = new BinaryFileResponse($file);
+        }
 //        $response->prepare($request);
         if ($type == 'xml'){
             $response->headers->set('Content-Type', 'text/xml');
