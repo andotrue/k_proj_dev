@@ -462,4 +462,20 @@ class AndroidController extends BaseController
         return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
 
      }
+     public function copyrightAction(){
+        $request = $this->get("request");
+
+        $questionId = $request->query->get("id");
+        $pages = array(
+            1 =>"default",
+            2 =>"sample1"
+            );
+        if(array_key_exists($questionId, $pages)){
+            $pageName  = $pages[$questionId]; 
+        }else{
+            $pageName = "default"; 
+        }
+
+        return $this->render('MachigaiGameBundle:Copyright:'. $pageName .'.html.twig');
+     }
 }
