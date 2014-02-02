@@ -452,8 +452,8 @@ class AndroidController extends BaseController
         $user->setNickname($nickname);
         $user->setAuId($openId);
         $user->setSyncToken($syncToken);
-        $user->setCreatedAt($createdAt->format("r"));
-        $user->setUpdatedAt($updatedAt->format("r"));
+        $user->setCreatedAt($createdAt->format("Y-m-d H:i:s"));
+        $user->setUpdatedAt($updatedAt->format("Y-m-d H:i:s"));
         $user->setPassword("no_need");
         $user->setTempPass("no_need");
         $em = $this->getDoctrine()->getManager();
