@@ -34,10 +34,15 @@ class AndroidController extends BaseController
 
 	//ユーザ識別用トークンが必要
 	public function userAction(){
-		$user = $this->getUser();
+        $request = $this->get("request");
+        $syncToken = $request->query->get("token");
+        $users = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:User')
+        ->findBy(array("syncToken"=>$syncToken));
 
-		if(empty($user))
+        if(empty($users))
 			return $this->getErrorJsonResponse('Invalid User')->send();
+        $user = $users[0];
 
 //		$serializer = $this->get('jms_serializer');
 //		$json = $serializer->serialize($user, 'json');
@@ -447,10 +452,10 @@ class AndroidController extends BaseController
         $user->setNickname($nickname);
         $user->setAuId($openId);
         $user->setSyncToken($syncToken);
+        $user->setCreatedAt($createdAt->format("r"));
+        $user->setUpdatedAt($updatedAt->format("r"));
         $user->setPassword("no_need");
         $user->setTempPass("no_need");
-        $user->setCreatedAt($createdAt->format("U"));
-        $user->setUpdatedAt($updatedAt->format("U"));
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
