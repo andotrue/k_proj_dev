@@ -584,14 +584,14 @@ class User
  //           'point' => $this->currentPoint,
             'username' => $this->nickname,
             'point' => $this->currentPoint,
-            'status' => array(
+/*            'status' => array(
                 array('id'=>1, 'status' =>1 ),
                 array('id'=>2, 'status' =>2 ),
                 array('id'=>3, 'status' =>3 ),
                 array('id'=>4, 'status' =>4 ),
                 array('id'=>5, 'status' =>5 )
                 )
-            ));
+*/            ));
     }
 
     /**
