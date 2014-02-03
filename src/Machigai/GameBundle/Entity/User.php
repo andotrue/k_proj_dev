@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Machigai\GameBundle\Entity\UserRepository")
  */
-class User
+class User 
 {
     /**
      * @var integer
@@ -24,17 +24,43 @@ class User
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="au_id", type="string", length=32)
+     * @ORM\Column(name="au_id", type="string", length=32, nullable=true)
      */
     private $auId;
 
     /**
      * @var string
+     * @ORM\Column(name="sync_token", type="string", length=255, nullable=true)
+     */
+    private $syncToken;
+
+    /**
+     * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=255)
+     * @ORM\Column(name="nickname", type="string", length=255, nullable=true)
      */
     private $nickname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mailAddress", type="string", length=255, nullable=true)
+     */
+    private $mailAddress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    private $password;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="temp_pass", type="string", length=255)
+     */
+    private $tempPass;
 
     /**
      * @var integer
@@ -119,14 +145,15 @@ class User
     protected $playHistories;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ranking", mappedBy="user")
-     */
+    * @ORM\OneToMany(targetEntity="Ranking", mappedBy="user")
+    */
     protected $rankings;
 
     public function __construct()
     {
 	$this->purchaseHistories =new ArrayCollection();
 	$this->playHistories =new ArrayCollection();
+    $this->rankings = new ArrayCollection();
     }
 
 
@@ -513,5 +540,126 @@ class User
     public function getRankings()
     {
         return $this->rankings;
+    }
+
+    /**
+     * Set rankings
+     *
+     * @param \Machigai\GameBundle\Entity\Ranking $rankings
+     * @return User
+     */
+    public function setRankings(\Machigai\GameBundle\Entity\Ranking $rankings = null)
+    {
+        $this->rankings = $rankings;
+
+        return $this;
+    }
+
+    /**
+     * Set syncToken
+     *
+     * @param string $syncToken
+     * @return User
+     */
+    public function setSyncToken($syncToken)
+    {
+        $this->syncToken = $syncToken;
+
+        return $this;
+    }
+
+    /**
+     * Get syncToken
+     *
+     * @return string 
+     */
+    public function getSyncToken()
+    {
+        return $this->syncToken;
+    }
+
+    public function toJsonForSync(){
+        return json_encode(array(
+//            'username' => $this->nickname,
+ //           'point' => $this->currentPoint,
+            'username' => $this->nickname,
+            'point' => $this->currentPoint,
+/*            'status' => array(
+                array('id'=>1, 'status' =>1 ),
+                array('id'=>2, 'status' =>2 ),
+                array('id'=>3, 'status' =>3 ),
+                array('id'=>4, 'status' =>4 ),
+                array('id'=>5, 'status' =>5 )
+                )
+*/            ));
+    }
+
+    /**
+     * Set mailAddress
+     *
+     * @param string $mailAddress
+     * @return User
+     */
+    public function setMailAddress($mailAddress)
+    {
+        $this->mailAddress = $mailAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get mailAddress
+     *
+     * @return string 
+     */
+    public function getMailAddress()
+    {
+        return $this->mailAddress;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set tempPass
+     *
+     * @param string $tempPass
+     * @return User
+     */
+    public function setTempPass($tempPass)
+    {
+        $this->tempPass = $tempPass;
+
+        return $this;
+    }
+
+    /**
+     * Get tempPass
+     *
+     * @return string 
+     */
+    public function getTempPass()
+    {
+        return $this->tempPass;
     }
 }

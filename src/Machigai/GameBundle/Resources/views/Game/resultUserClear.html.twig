@@ -1,0 +1,68 @@
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.min.js') }}"></script>
+
+<script>
+
+	function getCurrentDuration(){
+		return {{clearTime}};
+	}
+	function padding(num,char,n){
+		return (char+(num)).slice(-n); 
+	}
+    function getMinuteString(){
+		var time =getCurrentDuration();
+		var target = Math.floor( (time / 1000) / 60 );
+		return padding( target, "0", 2 );
+	}
+    function getSecondString(){
+		var time = getCurrentDuration();
+		var target = Math.floor((time / 1000) % 60);
+		return padding( target, "0", 2 );
+	}
+    function getMillisecondString(){
+		var time = getCurrentDuration();
+		var target = Math.floor(time % 1000);
+		return padding( target, "0", 2 );
+    }
+    function clearTimeString(){
+		var mm = getMinuteString();
+		var ss = getSecondString();
+		var ms = getMillisecondString();//.slice(2);
+		var colon = ":";
+		return (mm + colon + ss + colon + ms);
+    }
+
+window.onload = function(){		
+	$('#clearTime').html(clearTimeString());
+}
+
+</script>
+
+<img src="{{asset('/bundles/machigaigame/images/parts/2-01_3_web_bg_.png')}}" style="position:absolute;margin-left:-1%;width:100%"/>
+
+<p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;color:white;"></p>
+<p id="getPoint" style="position:absolute;top:33%;width:100%;text-align:center;font-size:5em;color:white;">{{clearPoint}}pt</p>
+<p id="currentPoint" style="position:absolute;top:49%;width:100%;text-align:center;font-size:5em;color:white;">{{currentPoint}}pt</p>
+
+<div id="buttons" style="position:absolute; top:80%; width:100%; text-align:center">
+<a href="{{ path('GameSelect') }}">
+<img id="tryOthers" src="{{asset('/bundles/machigaigame/images/parts/button_otherselect_off.png')}}" style="width:65%" onclick="changeImage(this.id);"/>
+</a>
+<a href="{{ path('Shop') }}">
+<img id="toShop" src="{{asset('/bundles/machigaigame/images/parts/button_resultshop_off.png')}}" style="width:65%;margin-top:5%" onclick="changeImage(this.id);"/>
+</a>
+<a href="{{ path('Ranking') }}">
+<img id="toRanking" src="{{asset('/bundles/machigaigame/images/parts/button_resultranking_off.png')}}" style="width:65%;margin-top:5%" onclick="changeImage(this.id);"/>
+</a>
+</div>
+
+<div style="position:relative;" class="preload">
+<img src="{{asset('/bundles/machigaigame/images/parts/button_otherselect.png')}}" />
+<img src="{{asset('/bundles/machigaigame/images/parts/button_resultshop.png')}}" />
+<img src="{{asset('/bundles/machigaigame/images/parts/button_resultranking.png')}}" />
+</div>

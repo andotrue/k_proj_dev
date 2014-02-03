@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+	public function findByAuId($auId)  
+    {  
+        return $this->getEntityManager()  
+            ->createQuery('SELECT u FROM MachigaiGameBundle:User u ORDER BY u.auId ASC')  
+            ->getResult();  
+    }  
 }

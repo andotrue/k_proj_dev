@@ -3,17 +3,44 @@
 {% block title %}ヘルプ{% endblock %}
 
  {% block contents %}
+<script>
+var image_path = null;
+var image_id = null;
+function changeImage(imageId){
+	var pre_src = $('#'+imageId).attr('src');
+	var src = pre_src.replace(/_off/g,'');
+	image_path = src;
+	image_id = imageId;
+	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
+}
+function originalImage(){
+	var pre_src = $('#'+image_id).attr('src');
+	var src = image_path.replace(/.png/g,'_off.png');
+	$('#'+image_id).attr("src",src);
+}
+var droid = function(){}
+droid.getBack = function(){window.location = '{{path('Top')}}';};
+</script>
   <br /> 
   <br /> 
   <br /> 
-  <a href="{{ path('Setting') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_nicknamechange_setting.png')  }}" width="100%"/></a>
-  <a href="{{ path('HelpHowtoplay') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_help_asobikata.png')  }}" width="100%"/></a>
-  <a href="{{ path('HelpTerms') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_help_kiyaku.png')  }}" width="100%"/></a>
-  <a href="{{ path('HelpInquiry') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/header_otoiawase_top.png')  }}" width="100%"/></a>
+  <a href="{{ path('Setting') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_setting.png')  }}" width="100%"/></a>
+  <a href="{{ path('HelpHowtoplay') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_asobikata.png')  }}" width="100%"/></a>
+  <a href="{{path('PrivacyPolicy')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_privacypolicy.png')  }}" width="100%"/ ></a>
+  <a href="{{ path('HelpTerms') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_kiyaku.png')  }}" width="100%"/></a>
+  <a href="{{ path('HelpInquiry') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_otoiawase.png')  }}" width="100%"/></a>
+{% if user is not empty %}
+<a href="{{path('UserSetting')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_userregist.png')  }}" width="100%"/></a>
+{% endif %}
+  <!--
+   <a href="{{ path('UserSetting') }}"><img alt="userSetting" src="{{ asset('/bundles/machigaigame/images/parts/button_help_setting.png')  }}" width="100%"/></a>
+  -->
  {% endblock %}
  
  {% block footer %}
  <footer style="margin-top:10%;">
-  <a href="{{path('Shop')}}" style="margin-right:7%;"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toshop.png')}}" width="35%"></a><a href="{{path('Top')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" width="35%"></a>  
+<img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: droid.getBack();" />
+<img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}"  />
  </footer>
  {% endblock %}

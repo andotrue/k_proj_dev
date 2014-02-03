@@ -2,6 +2,10 @@ Top:
     path: /top
     defaults: { _controller: MachigaiGameBundle:Default:index }
 
+Logout:
+    path: /logout
+    defaults: { _controller: MachigaiGameBundle:Default:logout }
+
 Error:
     path: /error
     defaults: { _controller: MachigaiGameBundle:Default:error }
@@ -42,6 +46,54 @@ HelpInquiry:
     pattern: /help/inquiry
     defaults: { _controller: MachigaiGameBundle:Help:inquiry }
 
+UserSetting:
+    pattern: /setting/userSetting
+    defaults: { _controller: MachigaiGameBundle:Setting:userSetting }
+
+ChangeEmail:
+    pattern: /setting/changeEmail
+    defaults: { _controller: MachigaiGameBundle:Setting:changeEmail }
+
+ChangeEmailConfirm:
+    pattern: /setting/changeEmailConfirm
+    defaults: { _controller: MachigaiGameBundle:Setting:changeEmailConfirm }
+
+ChangeEmailSent:
+    pattern: /setting/changeEmailSent
+    defaults: { _controller: MachigaiGameBundle:Setting:changeEmailSent }
+
+ChangeEmailComplete:
+    pattern: /setting/changeEmailComplete/
+    defaults: { _controller: MachigaiGameBundle:Setting:changeEmailComplete }
+
+SendEmail:
+    pattern: /register/sendEmail/
+    defaults: { _controller: MachigaiGameBundle:Register:sendEmail }
+
+ChangePassword:
+    pattern: /setting/changePassword
+    defaults: { _controller: MachigaiGameBundle:Setting:changePassword }
+
+ChangePasswordConfirm:
+    pattern: /setting/changePasswordConfirm
+    defaults: { _controller: MachigaiGameBundle:Setting:changePasswordConfirm }
+
+ChangePasswordComplete:
+    pattern: /setting/changePasswordComplete
+    defaults: { _controller: MachigaiGameBundle:Setting:changePasswordComplete }
+
+DeleteUser:
+    pattern: /setting/deleteUser
+    defaults: { _controller: MachigaiGameBundle:Setting:deleteUser }
+
+DeleteUserConfirm:
+    pattern: /setting/deleteUserConfirm
+    defaults: { _controller: MachigaiGameBundle:Setting:deleteUserConfirm }
+
+DeleteUserComplete:
+    pattern: /setting/deleteUserComplete
+    defaults: { _controller: MachigaiGameBundle:Setting:deleteUserComplete }
+
 SettingNicknameregister:
     pattern: /setting/nickname
     defaults: { _controller: MachigaiGameBundle:Setting:nicknameRegister }
@@ -53,14 +105,31 @@ SettingNickname:
     defaults: { _controller: MachigaiGameBundle:Setting:nickname }
     requirements: 
         _method: GET
-    
+
 Setting:
     pattern: /setting/
     defaults: { _controller: MachigaiGameBundle:Setting:index }
     requirements: 
         _method: GET
 
-   
+JsonUpload:
+    pattern:  /game/uploadData
+    defaults: { _controller: MachigaiGameBundle:Game:uploadData }
+    requirements:
+        _method: POST
+
+JsonDownload:
+    pattern:  /game/downloadData
+    defaults: { _controller: MachigaiGameBundle:Game:downloadData }
+    requirements:
+        _method: GET
+
+RankingRegister:
+    pattern:  /game/rankingRegister
+    defaults: { _controller: MachigaiGameBundle:Game:rankingRegister }
+    requirements:
+        _method: POST
+
 SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
@@ -68,6 +137,10 @@ SettingComplete:
 Shop:
     pattern: /shop/
     defaults: { _controller: MachigaiGameBundle:Shop:index }
+
+ShopSort:
+    pattern: /shop/{field}/
+    defaults: { _controller: MachigaiGameBundle:Shop:indexSort }
 
 ShopWallpaper:
     pattern: /shop/wallpaper/
@@ -78,16 +151,20 @@ ShopStamp:
     defaults: { _controller: MachigaiGameBundle:Shop:stamp }
 
 ShopDownload:
-    pattern: /shop/download/
+    pattern: /shop/download/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:download }
 
 ShopError:
-    pattern: /shop/error
+    pattern: /shop/error/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:error }
 
 confirm:
-    pattern: /shop/confirm
+    pattern: /shop/confirm/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:confirm }
+
+downloadExecute:
+    pattern: /shop/downloadExecute/{id}
+    defaults: { _controller: MachigaiGameBundle:Shop:downloadExecute }
 
 Ranking:
     pattern: /ranking/
@@ -97,12 +174,34 @@ GameSelect:
     pattern: /game/select
     defaults: { _controller: MachigaiGameBundle:Game:select }
 
+SortQuestion:
+    pattern: /game/select/{sort}
+    defaults: { _controller: MachigaiGameBundle:Game:sortQuestions }
+
 GamePlay:
-    pattern: /game/play
+    pattern: /game/play/{id}
     defaults: { _controller: MachigaiGameBundle:Game:play }
+
+GameIndex:
+    pattern: /game/play/
+    defaults: { _controller: MachigaiGameBundle:Game:play }
+
+GameGetPlayHistory:
+    pattern: /game/history
+    defaults: { _controller: MachigaiGameBundle:Game:getPlayHistory}
+
 GameGetData:
     pattern: /game/data/
-    defaults: { _controller: MachigaiGameBundle:Game:play }
+    defaults: { _controller: MachigaiGameBundle:Game:download }
+
+GameDownloadByJSON:
+    pattern: /game/donwloadbyJSON/{id}
+    defaults: { _controller: MachigaiGameBundle:Game:downloadByJSON }
+
+GameDownload:
+    pattern: /game/download/{level}/{qcode}/{type}
+    defaults: { _controller: MachigaiGameBundle:Game:download }
+
 GameFinish:
     pattern: /game/finish
     defaults: { _controller: MachigaiGameBundle:Game:finish }
@@ -116,9 +215,145 @@ GameFail:
     defaults: { _controller: MachigaiGameBundle:Game:fail }
 
 Register:
-    pattern: /register
+    pattern: /register/
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
+RegisterUser:
+    pattern: /register/userRegister
+    defaults: { _controller: MachigaiGameBundle:Register:userRegister }
+
+RegisterUserConfirm:
+    pattern: /register/userConfirm
+    defaults: { _controller: MachigaiGameBundle:Register:userConfirm }
+
+RegisterUserComplete:
+    pattern: /register/userComplete
+    defaults: { _controller: MachigaiGameBundle:Register:userComplete }
+
+SentEmail:
+    pattern: /register/sentEmail
+    defaults: { _controller: MachigaiGameBundle:Register:sentEmail }
+
+BeforeNickname:
+    pattern: /register/beforeRegisterNickname
+    defaults: { _controller: MachigaiGameBundle:Register:beforeRegisterNickname }
+
+ReissuePassword:
+    pattern: /register/reissuePassword
+    defaults: { _controller: MachigaiGameBundle:Register:reissuePassword }
+
+Login:
+    pattern: /register/login
+    defaults: { _controller: MachigaiGameBundle:Register:login }
+
+LoginCheck:
+    pattern: /register/loginCheck
+    defaults: { _controller: MachigaiGameBundle:Register:loginCheck }
+
+RegisterConfirm:
+    pattern: /register/confirm/
+    defaults: { _controller: MachigaiGameBundle:Register:confirm }
+
+RegisterLogin:
+    pattern: /register/login
+    defaults: { _controller: MachigaiGameBundle:Register:login }
+
 complete:
-    pattern: /register/complete
+    pattern: /register/complete/
     defaults: { _controller: MachigaiGameBundle:Register:complete }
+
+TimeOver:
+    pattern: /register/emailTimeover
+    defaults: { _controller: MachigaiGameBundle:Register:emailTimeover }
+
+LoginAfterSettingName:
+    pattern: /register/loginAfterSettingName/{email}/{pass}
+    defaults: { _controller: MachigaiGameBundle:Register:loginAfterSettingName }
+
+Register:
+    pattern: /register/{temp}
+    defaults: { _controller: MachigaiGameBundle:Register:index }
+
+ResultUserClear:
+    pattern: /game/resultUserClear
+    defaults: { _controller: MachigaiGameBundle:Game:resultUserClear }
+
+ResultGuestClear:
+    pattern: /game/resultGuestClear
+    defaults: { _controller: MachigaiGameBundle:Game:resultGuestClear }
+
+ResultUserFalse:
+    pattern: /game/resultUserFalse
+    defaults: { _controller: MachigaiGameBundle:Game:resultUserFalse }
+
+ResultGuestFalse:
+    pattern: /game/resultGuestFalse
+    defaults: { _controller: MachigaiGameBundle:Game:resultGuestFalse }
+
+SyncUser:
+    pattern: /sync/user
+    defaults: { _controller: MachigaiGameBundle:Android:user }
+    requirements:
+        _method: GET
+SyncNotice:
+    pattern: /sync/notices
+    defaults: { _controller: MachigaiGameBundle:Android:notices }
+    requirements:
+        _method: GET
+SyncGameFile:
+    pattern: /sync/game/file/{level}/{qcode}/{type}
+    defaults: { _controller: MachigaiGameBundle:Android:gameFile }
+    requirements: 
+        _method: GET
+
+SyncGame:
+    pattern: /sync/game/{id}/{uid}
+    defaults: { _controller: MachigaiGameBundle:Android:game }
+    requirements: 
+        _method: GET
+SyncGameData:
+    pattern: /sync/game/{id}/{fileName}
+    defaults: { _controller: MachigaiGameBundle:Android:gameData }
+    requirements: 
+        _method: GET
+
+SyncQuestionData:
+    pattern: /sync/game/getQuestionData
+    defaults: { _controller: MachigaiGameBundle:Android:getQuestionData }
+    requirements: 
+        _method: GET
+
+AndroidAuIdLogin:
+    pattern: /sync/register/auIdLogin
+    defaults: { _controller: MachigaiGameBundle:Android:auIdLogin }
+    requirements:
+        _method: GET
+
+AndroidRegisterEntry:
+    pattern: /sync/register/entry
+    defaults: { _controller: MachigaiGameBundle:Android:registerEntry }
+    requirements:
+        _method: GET
+
+AndroidRegisterConfirm:
+    pattern: /sync/register/confirm
+    defaults: { _controller: MachigaiGameBundle:Android:registerConfirm }
+    requirements:
+        _method: POST
+
+AndroidRegisterComplete:
+    pattern: /sync/register/complete
+    defaults: { _controller: MachigaiGameBundle:Android:registerComplete }
+    requirements:
+        _method: POST
+
+AndroidGameDataUpload:
+    pattern:  /sync/game/uploadData
+    defaults: { _controller: MachigaiGameBundle:Android:uploadData }
+    requirements:
+        _method: POST
+AndroidCopyright:
+    pattern: /sync/copyright
+    defaults: { _controller: MachigaiGameBundle:Android:copyright }
+    requirements:
+        _method: GET

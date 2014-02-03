@@ -53,14 +53,14 @@ class PlayHistory
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetimetz")
+     * @ORM\Column(name="created_at", type="datetimetz", nullable=true)
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetimetz")
+     * @ORM\Column(name="updated_at", type="datetimetz", nullable=true)
      */
     private $updatedAt;
     
@@ -82,7 +82,25 @@ class PlayHistory
      */ 
     protected $ranking;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="game_status", type="integer", nullable=true)
+     */
+    private $gameStatus;
 
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="play_info", type="text", nullable=true)
+     */
+    private $playInfo;
+
+
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -216,9 +234,9 @@ class PlayHistory
      * @param \DateTime $updatedAt
      * @return PlayHistory
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+//        $this->updatedAt = new \DateTime(); //TODO: setUpdateAtを実現化
 
         return $this;
     }
@@ -301,5 +319,74 @@ class PlayHistory
     public function getRanking()
     {
         return $this->ranking;
+    }
+
+    /**
+     * Set gameStatus
+     *
+     * @param integer $gameStatus
+     * @return PlayHistory
+     */
+    public function setGameStatus($gameStatus)
+    {
+        $this->gameStatus = $gameStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get gameStatus
+     *
+     * @return integer 
+     */
+    public function getGameStatus()
+    {
+        return $this->gameStatus;
+    }
+
+    /**
+     * Set playInfo
+     *
+     * @param string $playInfo
+     * @return PlayHistory
+     */
+    public function setPlayInfo($playInfo)
+    {
+        $this->playInfo = $playInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get playInfo
+     *
+     * @return string 
+     */
+    public function getPlayInfo()
+    {
+        return $this->playInfo;
+    }
+
+    /**
+     * Add question
+     *
+     * @param \Machigai\GameBundle\Entity\Question $question
+     * @return PlayHistory
+     */
+    public function addQuestion(\Machigai\GameBundle\Entity\Question $question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \Machigai\GameBundle\Entity\Question $question
+     */
+    public function removeQuestion(\Machigai\GameBundle\Entity\Question $question)
+    {
+        $this->question->removeElement($question);
     }
 }

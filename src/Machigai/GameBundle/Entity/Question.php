@@ -23,9 +23,9 @@ class Question
     private $id;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="question_number", type="string", length=32)
+     * @ORM\Column(name="question_number", type="integer")
      */
     private $questionNumber;
 
@@ -79,6 +79,13 @@ class Question
     private $distributedTo;
 
     /**
+     * @var \boolean
+     *
+     * @ORM\Column(name="is_delete", type="boolean", nullable=true)
+     */
+    private $isDelete;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetimetz")
@@ -105,11 +112,19 @@ class Question
      */
     protected $playHistories;
 
-    public function __construct()
-    {
-			$this->playHistories =new ArrayCollection();
-    }
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="question_title", type="string", length=32)
+     */
+    private $questionTitle;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="qcode", type="integer")
+     */
+    private $qcode;
 
     /**
      * Get id
@@ -406,5 +421,93 @@ class Question
     public function getPlayHistories()
     {
         return $this->playHistories;
+    }
+
+    /**
+     * Set playHistories
+     *
+     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistories
+     * @return Question
+     */
+    public function setPlayHistories(\Machigai\GameBundle\Entity\PlayHistory $playHistories = null)
+    {
+        $this->playHistories = $playHistories;
+
+        return $this;
+    }
+    /*
+     * Set isDelete
+     *
+     * @param boolean $isDelete
+     * @return Question
+     */
+    public function setIsDelete($isDelete)
+    {
+        $this->isDelete = $isDelete;
+
+        return $this;
+    }
+
+    /**
+     * Get isDelete
+     *
+     * @return boolean 
+     */
+    public function getIsDelete()
+    {
+        return $this->isDelete;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->playHistories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set questionTitle
+     *
+     * @param string $questionTitle
+     * @return Question
+     */
+    public function setQuestionTitle($questionTitle)
+    {
+        $this->questionTitle = $questionTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get questionTitle
+     *
+     * @return string 
+     */
+    public function getQuestionTitle()
+    {
+        return $this->questionTitle;
+    }
+
+    /**
+     * Set qcode
+     *
+     * @param integer $qcode
+     * @return Question
+     */
+    public function setQcode($qcode)
+    {
+        $this->qcode = $qcode;
+
+        return $this;
+    }
+
+    /**
+     * Get qcode
+     *
+     * @return integer 
+     */
+    public function getQcode()
+    {
+        return $this->qcode;
     }
 }

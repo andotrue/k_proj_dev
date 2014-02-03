@@ -1,0 +1,58 @@
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
+{% block title %}プライバシーポリシー{% endblock %}
+<style>
+body{text-align:center;}
+body{background-image: url({{ asset('/bundles/machigaigame/images/parts/2-04-3-4_bg.png') }}); background-size:cover; background-repeat:no-repeat;"}
+</style>
+{% block contents %}
+
+<img alt="privacy policy" src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/machigaigame/images/parts/header_help_privacypolicy.png')}}" width="100%" style="position:absolute;left:0%;top:10%"/>
+
+<div id="content" style="position:relative;margin-top:30%; padding:5%;text-align:left;">
+<div id="privacy">
+<p>個人情報取得について</p>
+
+<p>個人情報は個人本人に属する大切な情報であり、当社はその個人情報を「お預かりし、利用させていただいている」以上、全てのスタッフがそれを大切に取扱うとともにそれを適切に保護するため、次の事項を『スタンプ付き♪まちがいさがし放題for auスマートパス（以下当サイト）』の当然の責務と認識し、実行します。</p>
+
+<p>株式会社ヒューベースi<br />
+個人情報管理責任者<br />
+吉原大二</p>
+</div>
+
+<div id="detail">
+<p>1、当サイトでは一部サービスのご利用にあたり、お客様の個人情報（メールアドレス）をお尋ねする場合がございます。</p>
+
+<p>2、当サイトが管理する個人情報について、お客様ご本人様が確認または訂正・削除を希望される場合には、相談窓口担当者が迅速に対応させていただきます。なお、ご本人様であると確認できた場合に限り対応させていただくものとし、第三者による個人情報の不正な改竄をふせぎます。またお尋ねした個人情報は、お客様が当サイトを退会する際に自動的に削除されます。</p>
+
+<p>3、個人情報への不正アクセス、個人情報の紛失、破壊、改竄及び漏洩等を予防し是正するため、個人情報を委託する場合は機密保持契約の締結等を通じ、合理的な安全対策を講じます。</p>
+
+<p>4、収集した個人情報の利用は、当サイトがより良いサービスを提供するために限定し、それ以外の目的で利用しないことをお約束いたします。</p>
+
+
+<p>5、当サイトは会員の皆様の個人情報を以下のいずれかに該当する場合を除き、第三者に提供しないことをお約束いたします。<br />
+・会員様ご本人の同意が得られた場合<br />
+・法令により開示が求められた場合
+</p>
+
+<p>6、当サイトは個人情報保護に関するコンプライアンス・プログラムを策定し、実施し、維持し、そして継続的に改善します。</p>
+</div>
+<div id="address">
+<p>
+株式会社ヒューベースi<br />
+東京都目黒区上目黒2-9-1 中目黒GS第1ビル7F<br />
+Email：support@machigai.puzzle-m.net<br />
+TEL：03-5725-5024
+</p>
+<a href="{{ path('Help') }}" id="htohelptop">
+<img id="tohelptop" style="margin-left:20%;margin-top:5%" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop_off.png')}}" width="60%" onclick="changeImage(this.id)"/></a>
+<img src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop.png')}}" class="preload" />
+</div>
+</div>
+
+{% endblock %}

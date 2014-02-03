@@ -1,22 +1,49 @@
-{% extends "::base.html.twig" %}
-
+{% extends "MachigaiGameBundle::base.html.twig" %}
 {% block title %}ニックネーム名登録{% endblock %}
-
 {% block body %}
-<header><h1><img src="{{ asset('images/title_logo.png')}}"></h1></header>
-<section>
- <h2>ニックネーム登録</h2>
- {{ form_start (form) }} 
-  {{ form_widget (form.state, {'attr': { 'value' : 'confirm' } }) }}
-  {{ form_errors (form) }}
-  <p>auIDログインが完了しました。<br />
-登録を続けるにはニックネームを入力してください。</p>
-  {{ form_widget (form.nickname)}}
-  <input type="hidden" name="state" value="confirm">
-  <p>ニックネームはランキングに表示されます。<br />
-本名・住所など個人を特定できる内容は記載しないようご注意ください。<br />
-また、ニックネームはTOP画面の「ヘルプ」→「設定」から変更することができます。</p>
+
+<img src="{{ asset('/bundles/machigaigame/images/parts/1-01_4_bg
+.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
+
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="position:relative;top:10%;width:100%;margin-top:31%">
+
+<section id="nicknameForm" style="position:relative;margin-top:11%">
+ <form action="{{ path('RegisterConfirm') }}" method="post" {{ form_enctype(form) }}>
+ {{ form_errors (form) }}
+<input type="text" id="form_nickname" name="form[nickname]" required="required" style="margin-top:2%;background-image:url(/bundles/machigaigame/images/parts/nicknametextarea.png);background-size:100% 100%; background-repeat:no-repeat;width:84%;height:2.3em;">
+<br />
+  <input type="hidden" name="state" value="confirm"><br />
+<input type="hidden" id="form_tempPass" name="form[tempPass]" value="{{tempPass}}">
+<input type="submit" id="submitButton">
   {{ form_widget (form.confirm) }}
- {{ form_end (form) }}
 </section>
+
+<img id="nickname" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck2_off.png')}}" onclick="changeImage(this.id);submitNickname();" style="position:relative;margin-top:48%">
+<img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck2.png')}}" >
+
+<script>
+var image_path = null;
+var image_id = null;
+$(function(){
+  $('#submitButton').hide();
+  $('#submitEnd').hide();
+  $('#form_confirm').hide();
+})
+function submitNickname(){
+  $('#submitButton').trigger("click");
+}
+function changeImage(imageId){
+  var pre_src = $('#'+imageId).attr('src');
+  var src = pre_src.replace(/_off/g,'');
+  image_path = src;
+  image_id = imageId;
+  $('#'+imageId).attr("src",src);
+  setTimeout("originalImage();", 200);
+}
+function originalImage(){
+  var pre_src = $('#'+image_id).attr('src');
+  var src = image_path.replace(/.png/g,'_off.png');
+  $('#'+image_id).attr("src",src);
+}
+</script>
 {% endblock %}

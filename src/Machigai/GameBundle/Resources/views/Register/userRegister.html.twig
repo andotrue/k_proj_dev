@@ -1,0 +1,55 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+{% block title %}{% endblock %}
+{% block body %}
+<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+  <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+  <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/timeCalculater.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/machigaigame/js/changeImage.js') }}"></script>
+  <script type='text/javascript' src="{{ asset('bundles/machigaigame/js/android.js') }}"></script>
+  <link rel="apple-touch-icon" href="" />
+  <link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css')  }}" />
+  <link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
+
+  <link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css>Error')  }}" />
+<style>
+ #form_mailAddress {width:100%;padding:1%;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+ .invisible {opacity:0;}
+ #form_password {width:100%;padding:1%;margin-top:19%;position:relative;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+ .registerForm {width:80%;margin-top:53%;position:relative;left:8%;}
+</style>
+<img src="{{ asset('/bundles/machigaigame/images/parts/1-01_7_bg.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
+
+
+<section>
+  <div class="registerForm">
+  <form action="{{ path('RegisterUserConfirm') }}" method="post" {{ form_enctype(form) }}>
+  {{ form_errors (form) }}
+  {{ form_rest(form) }}
+  {{ form (form) }} 
+  <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
+  {% if error is not empty %}
+  {{error}}
+  {% endif %}
+  </div>
+   <div class="linkButtons" style="position:relative;margin-top:33%;z-index:2; text-align:center">
+
+   <a href="{{path('Top')}}" id="htopImage">
+   <img id="topImage" width="35%" style="margin-right:9%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
+   <img src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" class="preload">
+
+   <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
+   <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck.png')}}"  >
+   </div>
+  </div>
+</section>
+<script>
+$(function(){
+	$('#form_confirm').hide();
+})
+function submitRegister(){
+	$('#form_confirm').trigger("click");
+}
+</script>
+</div>
+{% endblock %}

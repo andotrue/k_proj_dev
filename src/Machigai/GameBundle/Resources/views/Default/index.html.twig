@@ -1,42 +1,79 @@
 {% extends "MachigaiGameBundle::base.html.twig" %}
 {% block body %}
-<header id="title" class="top_bg">
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/bookmark_bubble.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/example.js') }}"></script>
+	<link rel="apple-touch-icon-precomposed" href="{{ asset('/bundles/machigaigame/images/parts/icon_256template_ios7.png') }}">
+<header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
- <p id="user_name"> 【ユーザー名】さん</p>
- <div id="auIDLogin" style="padding:20px">
-  <a href="{{ path('Register')  }}" alt="auIDでログイン"><img src="{{ asset('/bundles/machigaigame/images/parts/button_auID.png')  }}" width="60%" /></a>
- </header>
- <section>
-  <p>auIDでログインすると以下の機能が使えるよ！<br />
-（追加料金はかかりません。）</p>
+ <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
+ {% if user is empty %}
+  <div >
+  <a href="{{path('RegisterUser')}}">
+  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_touroku.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
+  {% if user is not empty %}
+
+  {% else %}
+  <a href="{{ path('Login')  }}" alt="login">
+  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_login.png')}}" style="margin-left:10%" width="35%" onclick="changeImage(this.id);"/></a>
+  {% if user is empty %}
+ <section style="margin-top:2%;background-image:url(/bundles/machigaigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
+  <p style="width:80%;margin: 0 auto;white-space:nowrap;">会員登録すると以下の機能が使えるよ！</p>
+  <p style="width:50%;margin: 0 auto;white-space:nowrap;">（追加料金はかかりません。）</p>
   <nav>
-   <ul style="list-style-type:disc;">
-    <li style="display:inline-block;width:45%;">ポイント</li>
-    <li style="display:inline-block;width:45%;">問題の保存</li><br />
-    <li style="display:inline-block;width:45%;">ランキング</li>
-    <li style="display:inline-block;width:45%;">ショップ</li>
+   <ul style="list-style-type:disc;width:100%;white-space:nowrap;">
+    <li style="display:inline-block;width:17%;padding:1%">・ポイント</li>
+    <li style="display:inline-block;width:20%;padding:1%">・問題の保存</li>
+    <li style="display:inline-block;width:20%;padding:1%">・ランキング</li>
+    <li style="display:inline-block;width:17%;padding:1%">・ショップ</li>
    </ul>
   </nav>
  </div>
  </section>
+ {% endif %}
+  </div>
+  {% endif %}
+  
+ {% endif %}
+ </header>
+
  <section id="current_point" class="top_bg">
   <img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
-  <p>xx  pt</p>
+  <p style="font-size:1em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
  </section>
  <section id="menu" class="top_bg">
-  <a href='{{ path('GameSelect') }}' style="padding-right:9%;"><img alt="まちがいさがし" src="{{asset('/bundles/machigaigame/images/parts/button_game.png')}}" width="35%" /></a>
-  <a href='{{ path('Shop') }}'><img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" width="35%" /></a><br />
-  <a href='{{ path('Ranking') }}' style="padding-right:9%;"><img alt="ランキング" src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" width="35%" /></a>
-  <a href='{{ path('Help') }}'><img alt="ヘルプ" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" width="35%" /></a>
+<img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/><a href='{{ path('GameSelect') }}' id="hgame_button" style="padding-right:9%;"></a>
+<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_game.png')}}" />
+  {% if user is empty %}
+  	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_gray.png')}}" width="35%" />
+  {% else %}
+  	<a href='{{ path('Shop') }}' id="hshop_button">
+  	<img alt="ショップ" id="shop_button" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/><img src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" class="preload"/></a>
+  {% endif %}<br />
+  <a href='{{ path('Ranking') }}' id="hranking_button">
+  <img alt="ランキング" id="ranking_button" style="padding-right:9%" src="{{asset('/bundles/machigaigame/images/parts/button_ranking_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
+  <img src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" class="preload"/>
+  <a href='{{ path('Help') }}' id="hhelp_button">
+  <img alt="ヘルプ" id="help_button" src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
+  <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" />
+
  </section>
- <section id="news">
+ <section id="news" class="top_bg">
   <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
-  <p>テキストテキストテキストテキス トテキストテキストテキストテキストテキストテキストテキスト</p>
- </section>
+  <div class="news" style="color:rgb(255,254,255);">
+  {% for i in 0..2 %}
+   <p style="text-align:left;width:80%;margin: 0 auto;">{{news[i].getTitle}}<br />{{news[i].getDescription|raw}}</p><br />
+  {% endfor %} 
+  </div>
+{% if user is not empty %}
+   <a href="{{ path('Logout')  }}" alt="ログアウト">
+  <img id="userLogout" src="" style="margin-left:10%" width="70%" height="50px" onclick="changeImage(this.id);"/></a>
+ {% endif %}
 <section style="padding-top:2em;">
 <div class="pre_pass white">
 <p><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
 </div>
+</section>
+
 </section>
 {% endblock %}
 

@@ -1,7 +1,38 @@
-{% extends "::base.html.twig" %}
+{% extends "MachigaiGameBundle::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Shop:confirm{% endblock %}
+{% block title %}MachigaiGameBundle:Shop:download{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Shop:confirm page</h1>
+<script>
+var image_path = null;
+var image_id = null;
+function changeImage(imageId){
+  var pre_src = $('#'+imageId).attr('src');
+  var src = pre_src.replace(/_off/g,'');
+  image_path = src;
+  image_id = imageId;
+  $('#'+imageId).attr("src",src);
+  setTimeout("originalImage();", 200);
+}
+function originalImage(){
+  var pre_src = $('#'+image_id).attr('src');
+  var src = image_path.replace(/.png/g,'_off.png');
+  $('#'+image_id).attr("src",src);
+}
+</script>
+<div style="">
+<img src="{{ asset('/bundles/machigaigame/images/parts/2-03-2_bg.png') }}" width="100%" style="position:absolute;left:0%top:0%;"/>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%" style="position:absolute;top:0%;left:0%"/>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop_download.png') }}" width="100%" style="position:relative;margin-top:15%"/>
+<div style="position:relative;margin-top:16%">
+<a href="{{path('downloadExecute',{"id":id})}}"><img id="downloadExecute" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_download_off.png')}}" width="60%" style="padding:5%" onclick="changeImage(this.id);"></a><br />
+<a href="{{path('Shop')}}"><img id="toshop" src="{{ asset('/bundles/machigaigame/images/parts/button_toshop_off.png')}}" width="25%" style="padding:3%" onclick="changeImage(this.id);"></a>
+<a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_totop_off.png')}}" width="25%" style="padding:3%" onclick="changeImage(this.id);"></a>
+</div>
+
+<div class="preload">
+<img src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_download.png')}}" >
+<img src="{{ asset('/bundles/machigaigame/images/parts/button_toshop.png')}}" >
+<img src="{{ asset('/bundles/machigaigame/images/parts/button_totop.png')}}" >
+</div>
 {% endblock %}

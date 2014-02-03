@@ -32,7 +32,7 @@ var rd = bd + 'res/';
 (function () {
     var d = document;
     var c = {
-        COCOS2D_DEBUG:2, //0 to turn debug off, 1 for basic debug, and 2 for full debug
+        COCOS2D_DEBUG:0, //0 to turn debug off, 1 for basic debug, and 2 for full debug
         box2d:false,
         chipmunk:false,
         showFPS:false,
@@ -43,8 +43,22 @@ var rd = bd + 'res/';
         engineDir: '/bundles/machigaigame/js/game/cocos/cocos2d/',
         /*SingleEngineFile:'MoonWarriors-compress.js',*/
         appFiles:[
-            bd + 'src/App.js',
+            bd + "src/IllustFrame.js",
+            bd + "src/Question.js",
+            bd + 'src/PlayData.js',
+            bd + 'src/PlayInfo.js',
             bd + 'src/GameData.js',
+            bd + 'src/Stars.js',
+            bd + 'src/Hearts.js',
+            bd + 'src/Clock.js',
+            bd + 'src/Slider.js',
+            bd + 'src/GameData.js',
+            bd + 'src/BaseLayer.js',
+            bd + 'src/IllustLayer.js',
+            bd + 'src/PopupLayer.js',
+            bd + 'src/ResultLayer.js',
+            bd + 'src/ResultScene.js',
+            bd + 'src/App.js'
 /*            bd + 'src/Heart.js',
             bd + 'src/Star.js',
             bd + 'src/Question.js',

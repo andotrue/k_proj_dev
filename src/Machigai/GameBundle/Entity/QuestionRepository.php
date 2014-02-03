@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class QuestionRepository extends EntityRepository
 {
+	public function questionHistories()  
+    {  
+        return $this->getEntityManager()  
+            ->createQuery('SELECT q, p FROM MachigaiGameBundle:Question q LEFT JOIN q.playHistories p')
+            ->getResult();
+    }
 }

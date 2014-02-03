@@ -1,16 +1,42 @@
-<ul class="panel" style="padding-top:0.8%; ">
-   <li id="item1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
-    <img src="" width="15%" style="text-align:middle;width:80px;height:80px;"/>
-    <div style="display:inline-block;width:55%;">
-	<p style="text-align:left;"><span class="title">タイトル</span>
-	   <span class="description">説明<br />説明</br>説明<br /></span>
-           <span class="updated_at">タイム　</span>
-	</p>
-    </div>
-    <div style="display:inline-block;">
-	<img src="">
-	<span class="point">100pt</span>
-	<a href="" alt="購入"><img src="" width="13%" style="width:90px: height: 25px;"/></a>
-    </div>
+<div style="font-size:0.8em;">
+<ul class="panel" style="padding-top:0.8%;clear:right">
+{% for item in items %}
+{% if item.category.categoryCode == 2 %}
+  <li class="item1" style="display:block; text-align:left;padding:1%; border: 1px solid rgb(253,138,55)">
+    <img src="{{ asset('/bundles/machigaigame/images/stamp/')}}{{item.getItemPath}}_thum.png" style="width:15%;height:15%;"/>
+
+<div style="display:inline-block;width:35%;">
+
+	 <p style="text-align:left;"><span class="title">
+   <p style="font-size:1.2em;white-space:nowrap; ">
+    {{item.getName}}
+   </p></span>
+   <div style="font-size:0.8em">
+  	 <span class="description">{{item.getDescription}}</br></span>
+     <span class="updated_at" style="white-space:nowrap; ">{{item.getCreatedAt|date('Y/m/d')}} UP!</span>
+   </div>
+	 </p>
+</div>
+
+<div style="display:inline-block;width:25%;margin-top7%">
+    <div align="center">
+    {% if date(item.getCreatedAt) > date('-7days') %}
+     <img src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
+    {% endif %}
+	  <p style="font-size:1.1em">{{item.getConsumePoint}}pt</p><br />
+    <span class="detail">
+    {% if item.getId in purchasedItems %}
+  <a href="{{ path('confirm',{"id":item.getId}) }}">
+  <img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
+  </a>
+  {% else %}
+    <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+  {% endif %}
+  </span>
+  </div>
+</div>
    </li>
+{% endif %}
+{% endfor %}
 </ul>
+</div>
