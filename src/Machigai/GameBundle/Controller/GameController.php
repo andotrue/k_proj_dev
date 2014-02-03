@@ -420,4 +420,57 @@ class GameController extends BaseController
 
         return $this->render('MachigaiGameBundle:Game:resultGuestFalse.html.twig',array('questionId'=>$questionId));
     }
+
+    public function saveGameDataAction(){
+
+        $request = $this->get('request');
+
+        $playInfo = $request->query->get('playInfo');
+        $gameStatus = $request->query->get("gameStatus");
+        $userId = $request->query->get("userId");
+        $questionId = (int)($request->query->get('questionId'));
+        $question = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('MachigaiGameBundle:Question')->find($questionId);
+        $users = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('MachigaiGameBundle:User')->findBy(array('id' =>$userId));
+        $user = $users[0];
+
+        for($i = 0;$i<count($playInfo); $i++){
+            $playHistory = new PlayHistory();
+            $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+            $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+            $playHistory->setPlayInfo($playInfo[$i]);
+            $playHistory->setUser($user);
+            $playHistory->setQuestion($question);
+            $playHistory->setGameStatus($gameStatus);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($playHistory);
+            $em->flush();
+        }
+
+
+        $user = $this->getUser();
+        $histories = null;
+        $questions = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT q from MachigaiGameBundle:Question q 
+                                    left join  q.playHistories p 
+                                    order by q.questionNumber asc')
+                ->getResult();
+        if(!empty($user)){
+            $pre_playedQuestions = $this->getDoctrine()
+            ->getRepository('MachigaiGameBundle:PlayHistory')
+            ->findBy(array('user'=>$user->getId()));
+            $playedQuestions = array();
+         
+            foreach ($pre_playedQuestions as $pre_questions) {
+                $playedQuestions[] = $pre_questions->getQuestion()->getId();
+            };
+        }else{
+            $playedQuestions = null;
+        }
+        return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions,'histories'=>$histories));
+    }
 }

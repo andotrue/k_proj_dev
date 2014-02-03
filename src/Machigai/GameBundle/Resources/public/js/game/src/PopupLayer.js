@@ -185,10 +185,39 @@ var PopupLayer = cc.Layer.extend({
 
     },
     save:function () {
-        cc.log("PopupLayer.save");
-        cc.log(document.location);
-        window.location="../select";
+        this.questionId = this.playInfo.QUESTION_ID;
+        var user = this.playInfo.getUserID();
+        var data = this.playInfo._playData.getTouchData();        
+        var MyForm = document.createElement("FORM");
+            document.body.appendChild(MyForm);
 
+        with(MyForm) {
+            method = 'get';
+            action = '../saveGameData';
+            var gameStatus = document.createElement('input');
+                gameStatus.setAttribute('name', 'gameStatus');
+                gameStatus.setAttribute('value', 2);
+                MyForm.appendChild(gameStatus);
+
+            var questionId = document.createElement('input');
+                questionId.setAttribute('name', 'questionId');
+                questionId.setAttribute('value', this.questionId);
+                MyForm.appendChild(questionId);
+
+            var userId = document.createElement('input');
+                userId.setAttribute('name', 'userId');
+                userId.setAttribute('value', user);
+                MyForm.appendChild(userId);
+            
+            for(var i = 0; i < data.length; i++){
+                playInfoData = JSON.stringify(data[i]);
+                playInfo = document.createElement('input');
+                playInfo.setAttribute('name', 'playInfo['+i+']');
+                playInfo.setAttribute('value', playInfoData);
+                MyForm.appendChild(playInfo);
+            }
+            MyForm.submit();
+        }
     },
     popupGiveup:function () {
         this.state = "GIVEUP";

@@ -12,17 +12,17 @@ var PlayInfo = cc.Class.extend({
 	_playData: null,
 	_playDataJSON: null,
 
-	setClickPointsData:function(cilckPoints){
-		cc.log("PlayInfo.setClickPointsData(): reusult = " + this._playData.setClickPointsData(clickPoints) );
-		this._playData.setClickPointsData(clickPoints);
+	setTouchData:function(cilckPoints){
+		cc.log("PlayInfo.setTouchData(): reusult = " + this._playData.setTouchData(clickPoints) );
+		this._playData.setTouchData(clickPoints);
 	},
 	setClockData:function(clockData){
 		cc.log("PlayInfo.setClockData(): reusult = " + this._playData.setClockData(clockData) );
 		this._playData.setClockData(clockData);
 	},
-	getClickPointsData:function(){
-		cc.log("PlayInfo.getClickPointsData(): reusult = " + this._playData.getClickPointsData() );
-		return this._playData.getClickPointsData();
+	getTouchData:function(){
+		cc.log("PlayInfo.getTouchData(): reusult = " + this._playData.getTouchData() );
+		return this._playData.getTouchData();
 	},
 	getClockData:function(){
 		cc.log("PlayInfo.getClockData(): reusult = " + this._playData.getClockData() );
