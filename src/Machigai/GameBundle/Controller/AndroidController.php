@@ -12,7 +12,7 @@ use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
-class AndroidController extends BaseController
+class AndroidController extends Controller
 {
 	public function getCommonAccessToken(){
 		return 'h6C43S5SS7wMu7JNuy3LM8E4';
@@ -333,18 +333,13 @@ class AndroidController extends BaseController
         $request = $this->get('request');
 
         $data=$request->request->get('playInfo');
-        $userToken = $request->request->get('userToken');
+        $syncToken = $request->request->get('userToken');
         $status = $request->request->get("status");
-        $userId = 167; 
         $questionId = (int)($request->request->get('questionId'));
-        //TODO: userTokenからuserを取得する実装が必要。
-//        $user = $this->getUser();
-//        $userId = $user->getId();
 
         $users = $this->getDoctrine()
                 ->getManager()
-                ->getRepository('MachigaiGameBundle:User')->findBy(array('id' =>$userId));
-//                ->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$userToken));
+                ->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
         $user = $users[0];
         $question = $this->getDoctrine()
                 ->getManager()
@@ -490,5 +485,33 @@ class AndroidController extends BaseController
         }
 
         return $this->render('MachigaiGameBundle:Copyright:'. $pageName .'.html.twig');
+     }
+     /*
+     *
+     * Android端末でのWebViewでのアクセス時のセッションをスタートする。
+     * GET /sync/session/start?syncToken=xxxxx&redirect=xxxxxxx
+     */
+     public function sessionStartAction(){
+            $request = $this->get('request');
+            $session = $request->getSession();  
+
+            $syncToken = $request->query->get("syncToken");
+            $redirect = $request->query->get("redirect");
+            //開発モード時,セッションを生成する。
+
+            $users = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
+
+            if( empty($users) ) {
+                //TODO: auIDログインページへリダイレクト
+                return new Response('<html><body><h1>ユーザが存在しません。</h1></body></html>');
+            }else{
+                $user = $users[0];
+                $session->set('auId', $user->getAuId());
+                $session->set('id',  $user->getId());
+                $session->set('smartPassResult', true );
+                return $this->redirect($this->generateUrl($redirect));
+            }
      }
 }
