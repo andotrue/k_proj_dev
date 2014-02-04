@@ -177,7 +177,7 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,749);
+        var yes = this.createYesButton(360,769);
         var no = this.createNoButton(360,679);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
