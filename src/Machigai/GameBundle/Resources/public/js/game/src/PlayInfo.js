@@ -20,7 +20,7 @@ var PlayInfo = cc.Class.extend({
 
 	getUserID:function(){
 		if(this.isUser){
-			return this._user['id'];
+			return this._user['userId'];
 		}else{
 			return null;
 		}
@@ -67,17 +67,17 @@ var PlayInfo = cc.Class.extend({
 			return 0;
 		}
 	},
-	setClickPointsData:function(cilckPoints){
-		cc.log("PlayInfo.setClickPointsData(): reusult = " + this._playData.setClickPointsData(clickPoints) );
-		this._playData.setClickPointsData(clickPoints);
+	setTouchData:function(cilckPoints){
+		cc.log("PlayInfo.setTouchData(): reusult = " + this._playData.setTouchData(clickPoints) );
+		this._playData.setTouchData(clickPoints);
 	},
 	setClockData:function(clockData){
 		cc.log("PlayInfo.setClockData(): reusult = " + this._playData.setClockData(clockData) );
 		this._playData.setClockData(clockData);
 	},
-	getClickPointsData:function(){
-		cc.log("PlayInfo.getClickPointsData(): reusult = " + this._playData.getClickPointsData() );
-		return this._playData.getClickPointsData();
+	getTouchData:function(){
+		cc.log("PlayInfo.getTouchData(): reusult = " + this._playData.getTouchData() );
+		return this._playData.getTouchData();
 	},
 	getClockData:function(){
 		cc.log("PlayInfo.getClockData(): reusult = " + this._playData.getClockData() );
@@ -133,10 +133,10 @@ var PlayInfo = cc.Class.extend({
 
 	},
 	_sendPlayHistory:function(){
-		//token, user_id, QUESTION_ID,  _playData,(	_clickPointsData: [], _clockData: [],)
+		//token, user_id, QUESTION_ID,  _playData,(	_touchData: [], _clockData: [],)
 		if(userId === undefined || this._playData.length < 1 ) throw "data not sufficient.";
 
-		array = [userId,startedAt, clickPointsData,clockData];
+		array = [userId,startedAt, touchData,clockData];
 
 		var xhttp=new XMLHttpRequest();
 		xhttp.open("POST","/sync/playHistory/" + this.QUESTION_ID,false);
