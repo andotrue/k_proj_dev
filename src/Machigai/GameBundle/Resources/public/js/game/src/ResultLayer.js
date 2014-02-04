@@ -68,7 +68,6 @@ var ResultLayer = cc.Layer.extend({
                     var user = this.playInfo.getUserID();
                     var data = this.playInfo._playData.getTouchData();
                     clearTime = this.playInfo.getClearTime();
-//                    qId = this.playInfo.QUESTION_ID;
                     var MyForm = document.createElement("FORM");
                     document.body.appendChild(MyForm);
 
@@ -103,35 +102,23 @@ var ResultLayer = cc.Layer.extend({
                     
 //                    window.location = "/machigai/app_dev.php/game/resultUserClear?questionId="+qId+"&clearTime="+clearTime+"&playInfoData="+playInfoData;
                 }else{
-                    qId = this.playInfo.QUESTION_ID;
-                    window.location = "/game/resultUserFalse?questionId="+qId;
+//                    qId = this.playInfo.QUESTION_ID;
+//                    window.location = "/game/resultUserFalse?questionId="+qId;
 
-/*
                     this.questionId = this.playInfo.QUESTION_ID;
-                    var user = this.playInfo.getUserID();
                     var data = this.playInfo._playData.getTouchData();
-                    clearTime = this.playInfo.getClearTime();
 
                     var MyForm = document.createElement("FORM");
                     document.body.appendChild(MyForm);
 
                     with(MyForm) {
                         method = 'get';
-                        action = '../resultUserClear';
-                        var clearTime = document.createElement('input');
-                            clearTime.setAttribute('name', 'clearTime');
-                            clearTime.setAttribute('value', clearTime);
-                            MyForm.appendChild(clearTime);
+                        action = '../resultUserFalse';
 
                         var questionId = document.createElement('input');
                             questionId.setAttribute('name', 'questionId');
                             questionId.setAttribute('value', this.questionId);
                             MyForm.appendChild(questionId);
-
-                        var userId = document.createElement('input');
-                            userId.setAttribute('name', 'userId');
-                            userId.setAttribute('value', user);
-                            MyForm.appendChild(userId);
                         
                         for(var i = 0; i < data.length; i++){
                             playInfoData = JSON.stringify(data[i]);
@@ -142,8 +129,6 @@ var ResultLayer = cc.Layer.extend({
                         }
                         MyForm.submit();
                     }
-*/
-
                 }
             }
 
