@@ -365,3 +365,8 @@ AndroidCopyright:
     defaults: { _controller: MachigaiGameBundle:Android:copyright }
     requirements:
         _method: GET
+AndroidSessionStart:
+    pattern: /sync/session/start
+    defaults: { _controller: MachigaiGameBundle:Android:sessionStart }
+    requirements:
+        _method: GET
