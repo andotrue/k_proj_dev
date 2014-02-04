@@ -32,18 +32,46 @@
 		var mm = getMinuteString();
 		var ss = getSecondString();
 		var ms = getMillisecondString();//.slice(2);
-		var colon = ":";
+		var colon = "c";
 		return (mm + colon + ss + colon + ms);
     }
 
 window.onload = function(){		
 	$('#clearTime').html(clearTimeString());
-}
 
+	var numb = $('#clearTime').text();
+	$('#clearTime').empty();
+	var numarr = numb.split("");
+	for ( i = 0; i < numarr.length; i++){
+		if(numarr[i] == 1){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_1.png')}}' />");
+		}else if(numarr[i] == 2){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_2.png')}}' />");
+		}else if(numarr[i] == 3){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_3.png')}}' />");
+		}else if(numarr[i] == 4){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_4.png')}}' />");
+		}else if(numarr[i] == 5){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_5.png')}}' />");
+		}else if(numarr[i] == 6){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_6.png')}}' />");
+		}else if(numarr[i] == 7){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_7.png')}}' />");
+		}else if(numarr[i] == 8){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_8.png')}}' />");
+		}else if(numarr[i] == 9){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_9.png')}}' />");
+		}else if(numarr[i] == 0){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_0.png')}}' />");
+		}else if(numarr[i] == "c"){
+			$('#clearTime').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_coron.png')}}' />");
+		}
+	}
+}
 </script>
 <img src="{{asset('/bundles/machigaigame/images/parts/2-01_3_web_bg.png')}}" style="position:absolute;margin-left:-1%;width:100%"/>
 
-<p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;color:white;"></p>
+<p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;"></p>
 <p id="getPoint" style="position:absolute;top:37%;width:100%;text-align:center;font-size:2.3em;color:white;">ポイントの獲得には会員登録が必要です。</p>
 <p id="currentPoint" style="position:absolute;top:53%;width:100%;text-align:center;font-size:2.3em;color:white;">ポイントの獲得には会員登録が必要です。</p>
 

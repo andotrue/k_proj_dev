@@ -9,12 +9,72 @@
 <link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
 <link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/html5reset-1.6.1.css>Error')  }}" />
 
+<script>
+$(function(){
+	var numb = $('#getPoint').text();
+	$('#getPoint').empty();
+	var numarr = numb.split("");
+	for ( i = 0; i < numarr.length; i++){
+		if(numarr[i] == 1){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_1.png')}}' />");
+		}else if(numarr[i] == 2){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_2.png')}}' />");
+		}else if(numarr[i] == 3){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_3.png')}}' />");
+		}else if(numarr[i] == 4){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_4.png')}}' />");
+		}else if(numarr[i] == 5){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_5.png')}}' />");
+		}else if(numarr[i] == 6){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_6.png')}}' />");
+		}else if(numarr[i] == 7){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_7.png')}}' />");
+		}else if(numarr[i] == 8){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_8.png')}}' />");
+		}else if(numarr[i] == 9){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_9.png')}}' />");
+		}else if(numarr[i] == 0){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_0.png')}}' />");
+		}else if(numarr[i] == "p"){
+			$('#getPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_pt.png')}}' style='position:absolute;top:6%;'/>");
+		}
+	}
+	var numb = $('#currentPoint').text();
+	$('#currentPoint').empty();
+	var numarr = numb.split("");
+	for ( i = 0; i < numarr.length; i++){
+		if(numarr[i] == 1){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_1.png')}}' />");
+		}else if(numarr[i] == 2){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_2.png')}}' />");
+		}else if(numarr[i] == 3){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_3.png')}}' />");
+		}else if(numarr[i] == 4){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_4.png')}}' />");
+		}else if(numarr[i] == 5){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_5.png')}}' />");
+		}else if(numarr[i] == 6){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_6.png')}}' />");
+		}else if(numarr[i] == 7){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_7.png')}}' />");
+		}else if(numarr[i] == 8){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_8.png')}}' />");
+		}else if(numarr[i] == 9){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_9.png')}}' />");
+		}else if(numarr[i] == 0){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_0.png')}}' />");
+		}else if(numarr[i] == "p"){
+			$('#currentPoint').append("<img src='{{asset('/bundles/machigaigame/images/parts/result_number_pt.png')}}' style='position:absolute;top:6%;'/>");
+		}
+	}
+})
+</script>
 
 <img src="{{asset('/bundles/machigaigame/images/parts/2-01_4_web_bg.png')}}" style="position:absolute;margin-left:-1%;width:100%"/>
 
 <p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;color:white;">--:--:--</p>
-<p id="getPoint" style="position:absolute;top:33%;width:100%;text-align:center;font-size:5em;color:white;">0pt</p>
-<p id="currentPoint" style="position:absolute;top:49%;width:100%;text-align:center;font-size:5em;color:white;">{{currentPoint}}pt</p>
+<p id="getPoint" style="position:absolute;top:33%;width:100%;text-align:center;font-size:5em;color:white;margin-left:-4%">0pt</p>
+<p id="currentPoint" style="position:absolute;top:49%;width:100%;text-align:center;font-size:5em;color:white;margin-left:-4%">{{currentPoint}}pt</p>
 <div id="buttons" style="position:absolute; top:80%; width:100%; text-align:center">
 <a href="{{ path('GamePlay',{'id':questionId}) }}">
 <img id="tryOthers" src="{{asset('/bundles/machigaigame/images/parts/button_retry_off.png')}}" style="width:65%" onclick="changeImage(this.id);"/>

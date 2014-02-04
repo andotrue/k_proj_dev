@@ -124,6 +124,10 @@ JsonDownload:
     requirements:
         _method: GET
 
+PrivacyPolicy:
+    pattern: /help/privacyPolicy
+    defaults: { _controller: MachigaiGameBundle:Help:privacyPolicy }
+
 RankingRegister:
     pattern:  /game/rankingRegister
     defaults: { _controller: MachigaiGameBundle:Game:rankingRegister }

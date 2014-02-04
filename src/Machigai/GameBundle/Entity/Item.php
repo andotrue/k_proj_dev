@@ -403,4 +403,25 @@ class Item
     {
         return $this->itemPath;
     }
+
+    /**
+     * Get itemThumPath
+     *
+     * @return string 
+     */
+    public function getItemThumPath()
+    {
+	/** スタンプ **/
+	if ( $this->getCategory()->getCategoryCode() == 2 ){
+	  return "/bundles/machigaigame/images/stamp/".$this->getItemPath()."_thum.png";
+	}
+	/** 壁紙 **/
+	elseif ( $this->getCategory()->getCategoryCode() == 1 ){
+	  return "/bundles/machigaigame/images/wallpaper/".$this->getItemPath()."_thum.png";
+	}
+	/** その他 **/
+	elseif ( $this->getCategory()->getCategoryCode() == 0 ){
+	  return "/bundles/machigaigame/images/other/".$this->getItemPath()."_thum.png";
+	}
+    }
 }
