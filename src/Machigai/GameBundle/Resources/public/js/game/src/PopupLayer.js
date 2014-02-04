@@ -196,7 +196,7 @@ var PopupLayer = cc.Layer.extend({
             action = '../saveGameData';
             var gameStatus = document.createElement('input');
                 gameStatus.setAttribute('name', 'gameStatus');
-                gameStatus.setAttribute('value', 2);
+                gameStatus.setAttribute('value', 3);
                 MyForm.appendChild(gameStatus);
 
             var questionId = document.createElement('input');

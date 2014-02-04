@@ -41,7 +41,7 @@ var IllustFrame = cc.Layer.extend({
 		 * dx,dy は画像中の移動量
 		 * offsetX,Y は今の画像の左上のX,Yを表す
 		 */
-		this.dx = dy;
+		this.dx = dx;
 		this.dy = dy;
 
 		this.offsetX = this.currentX - Math.round(dx / this.scale);
@@ -89,7 +89,7 @@ var IllustFrame = cc.Layer.extend({
             var dis = this;
 
             var image = new Image();
-            image.src = image_file_path;
+            image.src = this.image_file_path;
             image.onload = function(){
                 dis.setImage(dis.MODE_INIT,this);
             };
