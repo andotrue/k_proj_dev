@@ -315,7 +315,7 @@ class GameController extends BaseController
         $playInfo=json_encode($playInfo);//jscon encode the array
         return new Response($playInfo,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
     }
-    public function rankingRegister(){
+    public function rankingRegisterAction(){
         $request = $this->get('request');
         /* get data like below from view
 
@@ -335,13 +335,31 @@ class GameController extends BaseController
         $userId = $user->getId();
         $month = date('n');
         $year = date('Y');
-        $ranking = $this->getDoctrine()
+        $rankings = $this->getDoctrine()
                 ->getEntityManager()
                 ->createQuery('SELECT r from MachigaiGameBundle:Ranking r
                                     where r.level = :gameLevel and r.year = :year and r.month = :month order by r.rank asc')
                 ->setParameters(array('gameLevel'=>$gameLevel,'year'=>$year,'month'=>$month))
                 ->getResult();
-        if($clearTime >= $ranking[9]->getClearTime()){
+	/** ランキング初登録 **/
+	if(empty($rankings)){
+	/**
+		$em = $this->getDoctrine()->getManager();
+		$newRank = new Ranking();
+		$newRank->setUser($userId);
+                $newRank->setPlayHistoryId($playHistory[0]->getId());
+                $newRank->setYear($year);
+                $newRank->setMonth($month);
+                $newRank->setLevel($gameLevel);
+		$newRank->setRank(1);
+                $newRank->setBonusPoint($bonusPoint);
+                $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
+		$em->persist($newRank);                    
+		$em->flush();                    
+                break;
+	**/
+	}
+        elseif($clearTime >= $rankings[9]->getClearTime()){
             return $this->render('MachigaiGameBundle:Game:');//
         }else{
             $playHistory = $this->getDoctrine()
@@ -351,7 +369,7 @@ class GameController extends BaseController
                 ->setParameters(array('user'=>$userId,'question'=>$questionId))
                 ->getResult();
 
-            foreach ($ranking as $rank) {
+            foreach ($rankings as $rank) {
                 if($clearTime < $rank->getClearTime()){
                     $rankId = $rank->getId();
                     $em = $this->getDoctrine()->getEntityManager();
@@ -364,6 +382,7 @@ class GameController extends BaseController
                     $newRank->setRank($rank->getRank());
                     $newRank->setBonusPoint($bonusPoint);
                     $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
+                    $em->persist($newRank);                    
                     $em->flush();                    
                     break;
                 }
@@ -419,5 +438,58 @@ class GameController extends BaseController
         $questionId = $request->query->get('questionId');
 
         return $this->render('MachigaiGameBundle:Game:resultGuestFalse.html.twig',array('questionId'=>$questionId));
+    }
+
+    public function saveGameDataAction(){
+
+        $request = $this->get('request');
+
+        $playInfo = $request->query->get('playInfo');
+        $gameStatus = $request->query->get("gameStatus");
+        $userId = $request->query->get("userId");
+        $questionId = (int)($request->query->get('questionId'));
+        $question = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('MachigaiGameBundle:Question')->find($questionId);
+        $users = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('MachigaiGameBundle:User')->findBy(array('id' =>$userId));
+        $user = $users[0];
+
+        for($i = 0;$i<count($playInfo); $i++){
+            $playHistory = new PlayHistory();
+            $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+            $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+            $playHistory->setPlayInfo($playInfo[$i]);
+            $playHistory->setUser($user);
+            $playHistory->setQuestion($question);
+            $playHistory->setGameStatus($gameStatus);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($playHistory);
+            $em->flush();
+        }
+
+
+        $user = $this->getUser();
+        $histories = null;
+        $questions = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT q from MachigaiGameBundle:Question q 
+                                    left join  q.playHistories p 
+                                    order by q.questionNumber asc')
+                ->getResult();
+        if(!empty($user)){
+            $pre_playedQuestions = $this->getDoctrine()
+            ->getRepository('MachigaiGameBundle:PlayHistory')
+            ->findBy(array('user'=>$user->getId()));
+            $playedQuestions = array();
+         
+            foreach ($pre_playedQuestions as $pre_questions) {
+                $playedQuestions[] = $pre_questions->getQuestion()->getId();
+            };
+        }else{
+            $playedQuestions = null;
+        }
+        return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions,'histories'=>$histories));
     }
 }

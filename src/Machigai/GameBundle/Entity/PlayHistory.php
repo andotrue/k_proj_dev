@@ -234,10 +234,9 @@ class PlayHistory
      * @param \DateTime $updatedAt
      * @return PlayHistory
      */
-    public function setUpdatedAt()
+    public function setUpdatedAt($updatedAt)
     {
-//        $this->updatedAt = new \DateTime(); //TODO: setUpdateAtを実現化
-
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 

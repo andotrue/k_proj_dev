@@ -25,7 +25,7 @@ var BaseLayer = cc.Layer.extend({
             this.answeredPoints.push(null);
         }
 
-        var objs = this.playInfo.getClickPointsData();
+        var objs = this.playInfo.getTouchData();
         if (objs === null){
             this.objs = {};
         }else{
@@ -291,9 +291,12 @@ var BaseLayer = cc.Layer.extend({
             if( apx - margin < px && apx + margin > px &&
                 apy - margin < py && apy + margin > py ){
                 if( this.answeredPoints[i] !== true ){
-
                        cc.log(" touch OK ! ");
                        this.answeredPoints[i] =true;
+                       var date = new Date();
+                       var touchDatum = {x: px, y:py, result:true , touchedAt: date };
+                       this.playInfo._playData.setTouchData(touchDatum);
+
                        return this.runOK();
                 }else{
                     trueFlag = true;
@@ -302,6 +305,11 @@ var BaseLayer = cc.Layer.extend({
         }
 
         if( trueFlag === false ){
+            this.answeredPoints[i] =true;
+            var date = new Date();
+            touchDatum = {x: px, y:py, result:false , touchedAt: date };
+            this.playInfo._playData.setTouchData(touchDatum);
+
             return this.runNG();
             cc.log(" touch  ! ");            
         }
