@@ -511,7 +511,7 @@ class AndroidController extends Controller
                 $session->set('auId', $user->getAuId());
                 $session->set('id',  $user->getId());
                 $session->set('smartPassResult', true );
-                return $this->redirect($this->generateUrl('Shop'));
+                return $this->redirect($this->generateUrl($redirect));
             }
      }
 }
