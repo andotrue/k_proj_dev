@@ -87,7 +87,7 @@ class PlayHistory
      *
      * @ORM\Column(name="game_status", type="integer", nullable=true)
      */
-    private $gameStatus;
+    private $gameStatus = 1;
 
     /**
      * @var text
@@ -95,6 +95,14 @@ class PlayHistory
      * @ORM\Column(name="play_info", type="text", nullable=true)
      */
     private $playInfo;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_saved_game", type="boolean")
+     */
+
+    private $isSavedGame = false;
 
 
     public function __construct()
@@ -387,5 +395,28 @@ class PlayHistory
     public function removeQuestion(\Machigai\GameBundle\Entity\Question $question)
     {
         $this->question->removeElement($question);
+    }
+
+    /**
+     * Set isSavedGame
+     *
+     * @param boolean $isSavedGame
+     * @return PlayHistory
+     */
+    public function setIsSavedGame($isSavedGame)
+    {
+        $this->isSavedGame = $isSavedGame;
+
+        return $this;
+    }
+
+    /**
+     * Get isSavedGame
+     *
+     * @return boolean 
+     */
+    public function getIsSavedGame()
+    {
+        return $this->isSavedGame;
     }
 }

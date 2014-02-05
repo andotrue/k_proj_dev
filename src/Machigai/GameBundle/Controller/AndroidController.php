@@ -278,7 +278,6 @@ class AndroidController extends Controller
         $logger->info("getQuestionDataAction:");
         $request = $this->get('request');
         $syncToken = $request->query->get('syncToken');
-        $syncToken = "aaaaa"; //TODO: 解除必要
         $questions = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:Question')
             ->findAll();
@@ -301,14 +300,16 @@ class AndroidController extends Controller
             $questionData['question'][$i]['clearPoint'] = $questions[$i]->getClearPoint();
             $questionData['question'][$i]['timeLimit'] = $questions[$i]->getTimeLimit();
             if(!empty($playHistories)){
-                $logger->info("getQuestionDataAction: playHistory is null.");
+                $logger->info("getQuestionDataAction: playHistory exists.");
                 $playHistory = $playHistories[0];
-                $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo(); //TODO: ユーザトークンに対応
-                $questionData['question'][$i]['status'] = $playHistory->getGameStatus(); //TOOD:　ユーザトークンに対応
+                $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo();
+                $questionData['question'][$i]['status'] = $playHistory->getGameStatus();
+                $questionData['question'][$i]['isSavedGame'] = $playHistory[$i]->getIsSavedGame();
             }else{
-            $logger->info("getQuestionDataAction: playHistory exists.");
+            $logger->info("getQuestionDataAction: playHistory is null.");
                 $questionData['question'][$i]['playInfoData'] = null;
                 $questionData['question'][$i]['status'] = "1";
+                $questionData['question'][$i]['isSavedGame'] = false;
             }
             $questionData['question'][$i]['is_delete'] = false;
         }
@@ -335,6 +336,7 @@ class AndroidController extends Controller
         $data=$request->request->get('playInfo');
         $syncToken = $request->request->get('userToken');
         $status = $request->request->get("status");
+        $isSavedGame = $request->request->get("isSavedGame");
         $questionId = (int)($request->request->get('questionId'));
 
         $users = $this->getDoctrine()
@@ -355,7 +357,7 @@ class AndroidController extends Controller
        
 
         if(empty($playHistories)){
-            $logger->info("uploadDataAction: playHistory is null.");
+//            $logger->info("uploadDataAction: playHistory is null.");
             $playHistory = new PlayHistory();
 //            $playHistory->setCreatedAt(new DateTime());
 //            $playHistory->setUpdatedAt();
@@ -363,17 +365,19 @@ class AndroidController extends Controller
             $playHistory->setPlayInfo($data);
             $playHistory->setUser($user);
             $playHistory->setGameStatus($status);
+            $playHistory->setIsSavedGame($isSavedGame);
             $em = $this->getDoctrine()->getManager();
             $em->persist($playHistory);
             $this->applyRanking($playHistory);
             $em->flush();
-            $logger->info("uploadDataAction: playHistory is saved.");
+//            $logger->info("uploadDataAction: playHistory is saved.");
         }else{
             $playHistory = $playHistories[0];
             $logger->info("uploadDataAction: playHistory exists.");
             $playHistory->setUpdatedAt();
             $playHistory->setGameStatus($status);
             $playHistory->setPlayInfo($data);
+            $playHistory->setIsSavedGame($isSavedGame);
 
             $em = $this->getDoctrine()->getManager();
             $playHistory->setPlayInfo($data);
