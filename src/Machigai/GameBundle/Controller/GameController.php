@@ -44,7 +44,7 @@ class GameController extends BaseController
             $playedQuestions = array();
          
             foreach ($pre_playedQuestions as $pre_questions) {
-                $playedQuestions[] = $pre_questions->getQuestion()->getId();
+                $playedQuestions[$pre_questions->getQuestion()->getId()] = $pre_questions->getGameStatus();
             };
         }else{
             $playedQuestions = null;
@@ -397,16 +397,56 @@ class GameController extends BaseController
         $request = $this->get('request');
         $clearTime = $request->query->get('clearTime');
         $questionId = $request->query->get('questionId');
+        $playInfo = $request->query->get('playInfo');
     
         $question = $this->getDoctrine()
                 ->getEntityManager()
                 ->createQuery('SELECT q from MachigaiGameBundle:Question q
                                     where q.id = :id')
                 ->setParameters(array('id'=>$questionId))
-                ->getResult();
+                ->getResult();    
 
         $clearPoint = $question[0]->getClearPoint();
         $currentPoint = $pre_currentPoint+$clearPoint;
+
+        $histories = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user,'question'=>$question[0]));
+
+        if(empty($histories)){
+            for($i = 0;$i<count($playInfo); $i++){
+                $playHistory = new PlayHistory();
+                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setPlayInfo($playInfo[$i]);
+                $playHistory->setUser($user);
+                $playHistory->setQuestion($question[0]);
+                $playHistory->setGameStatus(4);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($playHistory);
+                $em->flush();
+            }
+        }else{
+            foreach ($histories as $history) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $previousData = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($history->getId());
+                $em->remove($previousData);
+                $em->flush();
+            }
+
+            for($i = 0;$i<count($playInfo); $i++){
+                $playHistory = new PlayHistory();
+                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setPlayInfo($playInfo[$i]);
+                $playHistory->setUser($user);
+                $playHistory->setQuestion($question[0]);
+                $playHistory->setGameStatus(5);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($playHistory);
+                $em->flush();
+            }
+        }
 
         return $this->render('MachigaiGameBundle:Game:resultUserClear.html.twig',array('clearTime'=>$clearTime,'clearPoint'=>$clearPoint,'currentPoint'=>$currentPoint));
     }
@@ -421,7 +461,7 @@ class GameController extends BaseController
         $userId = $user->getId();
         $currentPoint = $user->getCurrentPoint();
 
-        $request = $this->get('request');
+/*        $request = $this->get('request');
         $questionId = $request->query->get('questionId');
     
         $question = $this->getDoctrine()
@@ -430,6 +470,60 @@ class GameController extends BaseController
                                     where q.id = :id')
                 ->setParameters(array('id'=>$questionId))
                 ->getResult();
+*/
+
+        $request = $this->get('request');
+        $questionId = $request->query->get('questionId');
+        $playInfo = $request->query->get('playInfo');
+    
+        $question = $this->getDoctrine()
+                ->getEntityManager()
+                ->createQuery('SELECT q from MachigaiGameBundle:Question q
+                                    where q.id = :id')
+                ->setParameters(array('id'=>$questionId))
+                ->getResult();    
+
+        $clearPoint = $question[0]->getClearPoint();
+
+        $histories = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user,'question'=>$question[0]));
+
+        if(empty($histories)){
+            for($i = 0;$i<count($playInfo); $i++){
+                $playHistory = new PlayHistory();
+                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setPlayInfo($playInfo[$i]);
+                $playHistory->setUser($user);
+                $playHistory->setQuestion($question[0]);
+                $playHistory->setGameStatus(2);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($playHistory);
+                $em->flush();
+            }
+        }elseif($histories[0]->getGameStatus()!=4 and $histories[0]->getGameStatus()!=5){
+            foreach ($histories as $history) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $previousData = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($history->getId());
+                $em->remove($previousData);
+                $em->flush();
+            }
+
+            for($i = 0;$i<count($playInfo); $i++){
+                $playHistory = new PlayHistory();
+                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setPlayInfo($playInfo[$i]);
+                $playHistory->setUser($user);
+                $playHistory->setQuestion($question[0]);
+                $playHistory->setGameStatus(2);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($playHistory);
+                $em->flush();
+            }
+        }
+
 
         return $this->render('MachigaiGameBundle:Game:resultUserFalse.html.twig',array('questionId'=>$questionId,'currentPoint'=>$currentPoint));
     }
@@ -451,24 +545,47 @@ class GameController extends BaseController
         $question = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('MachigaiGameBundle:Question')->find($questionId);
-        $users = $this->getDoctrine()
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+        $histories = $this->getDoctrine()
                 ->getManager()
-                ->getRepository('MachigaiGameBundle:User')->findBy(array('id' =>$userId));
-        $user = $users[0];
+                ->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user,'question'=>$question));
 
-        for($i = 0;$i<count($playInfo); $i++){
-            $playHistory = new PlayHistory();
-            $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
-            $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
-            $playHistory->setPlayInfo($playInfo[$i]);
-            $playHistory->setUser($user);
-            $playHistory->setQuestion($question);
-            $playHistory->setGameStatus($gameStatus);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($playHistory);
-            $em->flush();
+        if(empty($histories)){
+            for($i = 0;$i<count($playInfo); $i++){
+                $playHistory = new PlayHistory();
+                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setPlayInfo($playInfo[$i]);
+                $playHistory->setUser($user);
+                $playHistory->setQuestion($question);
+                $playHistory->setGameStatus(3);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($playHistory);
+                $em->flush();
+            }
+        }else{
+            foreach ($histories as $history) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $previousData = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($history->getId());
+                $em->remove($previousData);
+                $em->flush();
+            }
+
+            for($i = 0;$i<count($playInfo); $i++){
+                $playHistory = new PlayHistory();
+                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+                $playHistory->setPlayInfo($playInfo[$i]);
+                $playHistory->setUser($user);
+                $playHistory->setQuestion($question);
+                $playHistory->setGameStatus(3);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($playHistory);
+                $em->flush();
+            }
         }
-
 
         $user = $this->getUser();
         $histories = null;
@@ -485,7 +602,7 @@ class GameController extends BaseController
             $playedQuestions = array();
          
             foreach ($pre_playedQuestions as $pre_questions) {
-                $playedQuestions[] = $pre_questions->getQuestion()->getId();
+                $playedQuestions[$pre_questions->getQuestion()->getId()] = $pre_questions->getGameStatus();
             };
         }else{
             $playedQuestions = null;

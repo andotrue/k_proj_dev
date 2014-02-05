@@ -1,3 +1,25 @@
+var agent = navigator.userAgent;
+var orientation = window.orientation;
+var image = new Image();
+image.src = "../warning.png";
+document.body.appendChild(image);
+image.style.display = "none";
+image.style.position = "absolute";
+image.style.top = "0%";
+image.style.left = "0%";
+image.style.width = "400px";
+image.style.height = "300px";
+if(agent.search(/iPhone/) != -1){
+    window.onorientationchange = warning;
+}
+function warning(){
+    if(orientation != 0){
+        image.style.display = "block";
+    }else{
+        image.style.display = "none";  
+    }
+}
+
 var MyGameScene = cc.Scene.extend({
     playInfo: null,
     baseLayer: null,

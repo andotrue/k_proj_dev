@@ -8,7 +8,7 @@ var PlayData = cc.Class.extend({
 	_limitTime: null, // milliseconds
 	_gameStatus: null,
 	_isSaved: null,
-	_clickPointsData: [],
+	_touchData: [],
 	_clockData: [],
 
 	save:function(){
@@ -49,17 +49,17 @@ var PlayData = cc.Class.extend({
 
 		return this.getGameStatus();
 	},
-	setClickPointsData:function(clickPointsData){
-		cc.log("PlayData.setClickPointsData(clickPointsData) : data =  " + clickPointsData.toString() );
-		this._clickPointsData = clickPointsData;
+	setTouchData:function(touchData){
+		cc.log("PlayData.setTouchData(touchData) : data =  " + touchData.toString() );
+		this._touchData.push(touchData);
 	},
 	setClockData:function(clockData){
 		cc.log("PlayData.setClockData(clockData) : data =  " + clockData.toString() );
 		this._clockData = clockData;
 	},
-	getClickPointsData:function(){
-		cc.log("PlayData.getClickPointsData() : data =  " + this._clickPointsData.toString() );
-		return this._clickPointsData;
+	getTouchData:function(){
+		cc.log("PlayData.getTouchData() : data =  " + this._touchData.toString() );
+		return this._touchData;
 	},
 	getClockData:function(){
 		cc.log("PlayData.getClockData() : data =  " + this._clockData.toString() );
@@ -75,7 +75,7 @@ var PlayData = cc.Class.extend({
 			playHistoryId: this._playHistoryId,
 			qcode: this._qcode,
 			level: this._level,
-			clickPointsData: this._clickPointsData,
+			touchData: this._touchData,
 			clockData: this._clockData
 		};
 		cc.log("PlayData.serializeData() : return " + hash.toString() );
@@ -104,9 +104,9 @@ PlayData.create = function(qcode, level){
 	instance._level = level;
 	instance._gameStatus = PlayData.FIRST_PLAY;
 	instance._isSaved = false;
-	instance._clickPointsData = [];
+	instance._touchData = [];
 	instance._clockData = [];
-	cc.log("PlayData.create(): result = ( " +  ", " +	instance._qcode + ", " + instance._level + ", " +instance._gameStatus + ", "  + instance._isSaved + ", " + instance._clickPointsData + ", " + instance._clockData+ " )" );
+	cc.log("PlayData.create(): result = ( " +  ", " +	instance._qcode + ", " + instance._level + ", " +instance._gameStatus + ", "  + instance._isSaved + ", " + instance._touchData + ", " + instance._clockData+ " )" );
 
 	return instance;
 };
@@ -119,9 +119,9 @@ PlayData.loadFromJSON = function(json_data){
 	instance._qcode = json_data["qcode"];
 	instance._level = json_data["level"];
 	instance._limitTime = json_data["limitTime"];
-	instance.setClickPointsData(json_data['clickPointsData']);
+	instance.setTouchData(json_data['touchData']);
 	instance.setClockData(json_data['clockData']);
-	cc.log("PlayData.loadFromJSON(): result = ( " + instance._userId + ", " +	instance._qcode + ", " + instance._level + ", " +instance._gameStatus + ", "  + instance._isSaved + ", " + instance._clickPointsData + ", " + instance._clockData + " )" );
+	cc.log("PlayData.loadFromJSON(): result = ( " + instance._userId + ", " +	instance._qcode + ", " + instance._level + ", " +instance._gameStatus + ", "  + instance._isSaved + ", " + instance._touchData + ", " + instance._clockData + " )" );
 
 	return instance;
 };

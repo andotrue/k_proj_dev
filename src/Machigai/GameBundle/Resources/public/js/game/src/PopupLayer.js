@@ -177,7 +177,7 @@ var PopupLayer = cc.Layer.extend({
         this.addChild(popup);
         popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,749);
+        var yes = this.createYesButton(360,769);
         var no = this.createNoButton(360,679);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
@@ -196,7 +196,7 @@ var PopupLayer = cc.Layer.extend({
             action = '../saveGameData';
             var gameStatus = document.createElement('input');
                 gameStatus.setAttribute('name', 'gameStatus');
-                gameStatus.setAttribute('value', 2);
+                gameStatus.setAttribute('value', 3);
                 MyForm.appendChild(gameStatus);
 
             var questionId = document.createElement('input');

@@ -356,13 +356,21 @@ AndroidGameDataUpload:
     defaults: { _controller: MachigaiGameBundle:Android:uploadData }
     requirements:
         _method: POST
+
 AndroidCopyright:
     pattern: /sync/copyright
     defaults: { _controller: MachigaiGameBundle:Android:copyright }
     requirements:
         _method: GET
+
 AndroidSessionStart:
     pattern: /sync/session/start
     defaults: { _controller: MachigaiGameBundle:Android:sessionStart }
+    requirements:
+        _method: GET
+
+SaveGameData:
+    pattern: /game/saveGameData
+    defaults: { _controller: MachigaiGameBundle:Game:saveGameData }
     requirements:
         _method: GET
