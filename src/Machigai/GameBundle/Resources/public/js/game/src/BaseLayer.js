@@ -22,7 +22,7 @@ var BaseLayer = cc.Layer.extend({
 
         //正答を初期化
         for(var i=0; i< this.playInfo.MACHIGAI_LIMIT; i++){
-            this.answeredPoints.push(null);
+            this.answeredPoints.push(false);
         }
 
         var objs = this.playInfo.getTouchData();
@@ -257,7 +257,7 @@ var BaseLayer = cc.Layer.extend({
     },
     checkAnswer:function (touch){
 		
-		var margin = 20;
+		var margin = 50;
 		
 		// ポイントを取得
         var deviceLocation = touch.getLocation();
@@ -290,9 +290,9 @@ var BaseLayer = cc.Layer.extend({
             
             if( apx - margin < px && apx + margin > px &&
                 apy - margin < py && apy + margin > py ){
-                if( this.answeredPoints[i] !== true ){
+                if( !this.answeredPoints[i] ){
                        cc.log(" touch OK ! ");
-                       this.answeredPoints[i] =true;
+                       this.answeredPoints[i] = true;
                        var date = new Date();
                        var touchDatum = {x: px, y:py, result:true , touchedAt: date };
                        this.playInfo._playData.setTouchData(touchDatum);
@@ -305,7 +305,6 @@ var BaseLayer = cc.Layer.extend({
         }
 
         if( trueFlag === false ){
-            this.answeredPoints[i] =true;
             var date = new Date();
             touchDatum = {x: px, y:py, result:false , touchedAt: date };
             this.playInfo._playData.setTouchData(touchDatum);
@@ -481,7 +480,7 @@ var BaseLayer = cc.Layer.extend({
             var apx = parseInt(ap.x);
             var apy = parseInt(ap.y);
 
-			if( this.answeredPoints[i] == true ){
+			if( this.answeredPoints[i] ){
 				
 				var upperPict = this.illusts.frames[0];
 				var upperPictIllust = this.illusts.frames[0].illust;
@@ -538,6 +537,9 @@ var BaseLayer = cc.Layer.extend({
 
 					apx = apx - upperPict.currentX;
 					apy = apy + upperPict.currentY;
+
+					if(okLeft < 0)okLeft = 0;
+					if(okTop < 0)okTop = 0;
 
 					var rect = cc.rect(okLeft,okTop,okWidth,okHeight);
 					upperOk.setTextureRect(rect);
