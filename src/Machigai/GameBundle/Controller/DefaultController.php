@@ -5,7 +5,8 @@ namespace Machigai\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends BaseController
 {
     public function indexAction()
@@ -22,6 +23,20 @@ class DefaultController extends BaseController
 
         $id = $session->get('id');
         if(!empty($id)){
+            //クッキー削除
+            $cookie = new Cookie('myCookie', "");
+            $response = new Response();
+            $response->headers->setCookie($cookie);
+            $response->send();
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $user = $em->getRepository('MachigaiGameBundle:User')->find($id);
+            $user->setSyncToken("");
+            $em->flush();
+
+            $request = $this->get('request');
+            $cookies = $request->cookies;
+
 	        $session->remove('id');
 
 	        //表示していないが、とりあえず
@@ -30,7 +45,7 @@ class DefaultController extends BaseController
 	            'ログアウトしました。'
 	        );
         }
-        return $this->redirect($this->generateUrl('Top'));                
+        return $this->redirect($this->generateUrl('Top'));
 	}
     public function errorAction()
     {
