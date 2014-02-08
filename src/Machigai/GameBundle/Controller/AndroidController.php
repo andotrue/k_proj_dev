@@ -12,6 +12,9 @@ use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
+include_once "Auth/OpenID.php";
+include_once "Auth/OpenID/FileStore.php";
+include_once "Auth/OpenID/Consumer.php";
 use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
@@ -22,8 +25,8 @@ class AndroidController extends Controller
 
     public function auIdAction()
   {
-        $logger = $this->get('logger');                            
-        $logger->info('inf auIdAction');                           
+        $logger = $this->get('logger');
+        $logger->info('inf auIdAction');
        
         $realm = "https://machigai.puzzle-m.ne.jp/";               
         $formId = "test";
