@@ -203,7 +203,7 @@
 
                 <div id="selectBox" style="margin-top: 25px; float: right; margin-right: 10px;">
                     <span style="color:rgb(94,109,114)">並べ替え</span>
-                    <select id="sortSelect">
+                    <select id="sortSelect" onChange="sortSelect()">
                         <option selected="selected" value=""></option>
                         <option value="1">古い順</option>
                         <option value="2">新しい順</option>
@@ -405,6 +405,7 @@
 </div>
 
 <div id="popup" style="
+     display: none;
      position: absolute;
      width: 280px;
      height: 180px;
@@ -431,27 +432,36 @@
                  gameStart(1);"/>
 </div>
 
-
-<div id="popup_continue" style="z-index:4;position:absolute;margin-top:50%;width:100%;left:10%">
-    <img src="{{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }}"
-         style="position:absolute;left:5%;top:50%;width:90%"/>
+<div id="popup_continue" style="
+     display: none;
+     position: absolute;
+     width: 280px;
+     height: 180px;
+     background-image:url({{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }});
+     background-size: cover;">
 
     <button type="button" onclick="cancel()" 
-            style="position:absolute;top:52%;left:82%;margin-top:7%;padding:5%;width:10%;height:6%;filter:alpha(opacity=0);-moz-opacity: 0;opacity:0;
-            "></button>
+            style="position:absolute;right: 10px;top:10px;width:50px;height:50px;"></button>
 
-    <p class="gameTitle" 
-       style="position:absolute;top:50%;left:13%;margin-top:5%;padding:5%;width:50%;font-size:1.5em"></p>
+    <div class="gameTitle"
+       style="
+       padding-left: 5px;
+       font-size: 1em;
+       margin-top: 25px;
+       width: 235px;
+       height: 30px;
+       overflow: hidden;
+       "></div>
 
     <img id="play_continue" 
          src="{{ asset('/bundles/machigaigame/images/parts/button_game_start2_off.png')  }}"
-         style="position:absolute;top:40%;left:20%;margin-top:17%;padding:5%;width:50%"
+         style="margin: auto; margin-top: 20px;width:50%" 
          onclick="changeImage(this.id);
                  gameStart();"/>
 
     <img id="play_reset"
          src="{{ asset('/bundles/machigaigame/images/parts/button_game_start1_off.png')  }}"
-         style="position:absolute;top:50%;left:20%;margin-top:28%;padding:5%;width:50%" 
+         style="margin: auto; margin-top: 20px;width:50%" 
          onclick="changeImage(this.id);
                  gameStart();"/>
 
