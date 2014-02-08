@@ -21,81 +21,82 @@ class AndroidController extends Controller
     public $connectTo = "connect.auone.jp";
 
     public function auIdAction()
-    {
-        $logger = $this->get('logger');
-        $logger->info("inf auIdAction");
-
-        $realm = "https://machigai.puzzle-m.ne.jp/";
+  {
+        $logger = $this->get('logger');                            
+        $logger->info('inf auIdAction');                           
+       
+        $realm = "https://machigai.puzzle-m.ne.jp/";               
         $formId = "test";
-        $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";
-
-        $associationDirPath = "/tmp";
-        $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";
-        $connectTo = "st.connect.auone.jp";
+        $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";   
+       
+        $associationDirPath = "/tmp";                              
+        $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";       
+        $connectTo = "https://connect.auone.jp";                   
         $authUrl = $connectTo . $preDealPath;
 
-
-
-        // アソシエーションを保存するストアを作成
-        $logger->info(" new Auth_OpenID_FileStore");
-        $store = new Auth_OpenID_FileStore($associationDirPath);
-
+       
+       
+        // アソシエーションを保存するストアを作成                  
+        $logger->info(' new Auth_OpenID_FileStore');               
+        $store = new Auth_OpenID_FileStore($associationDirPath);   
+       
         // RP(Consumer)のインスタンスを生成
-        $logger->info(" new Auth_OpenID_Consumer");
-        $consumer =& new Auth_OpenID_Consumer($store);
+        $logger->info(' new Auth_OpenID_Consumer');
+        $consumer =& new Auth_OpenID_Consumer($store);             
+       
+        //認証方法に該当する URI をセットし、Discovery などを実行  
+        $logger->info(' $consumer->begin(' . $authUrl . ')');      
+        $auth_request = $consumer->begin($authUrl);                
+       
+        // SREG・PAPE 等の OpenID 拡張機能を利用する場合は、ここでその処理を追加。
+        // 詳細については、ライブラリに添付のサンプルコードを参照してください。
+        // OP が OpenID1.0 しかサポートしない場合には、常にリダイレクトを行います。
+        // KDDI が加盟店向けに提供する機能は、OpenID2.0 に準拠したものとなります。
 
-        //認証方法に該当する URI をセットし、Discovery などを実行 
-        $logger->info(" $consumer->begin(" . $authURL . ")");
-        $auth_request = $consumer->begin($authUrl);
-        
-        // SREG・PAPE 等の OpenID 拡張機能を利用する場合は、ここでその処理を追加。 
-        // 詳細については、ライブラリに添付のサンプルコードを参照してください。
-        // OP が OpenID1.0 しかサポートしない場合には、常にリダイレクトを行います。 
-        // KDDI が加盟店向けに提供する機能は、OpenID2.0 に準拠したものとなります。
-
-        $logger->info(" $auth_request->shouldSendRedirect()");
-        if ($auth_request->shouldSendRedirect()) {
-
-            $logger->info(" true: redirect");
-
-           // リダイレクト先 URL を取得。
+  //      $logger->info(" $auth_request->shouldSendRedirect()");
+        if ($auth_request->shouldSendRedirect()) {                 
+       
+            $logger->info(' true: redirect');                      
+       
+           // リダイレクト先 URL を取得。                          
            $redirect_url = $auth_request->redirectURL($realm, $returnToUrl);
             if (Auth_OpenID::isFailure($redirect_url)) {
-            // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。
-                return $this->redirect("Error");
+            // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。
+                return $this->redirect("Error");                   
             } else {
-            // リダイレクトを実行。 header("Location: ".$redirect_url);
+            // リダイレクトを実行。 header("Location: ".$redirect_url);        
             //OpenID 認証要求
                 //TODO:リダイレクト方法を検証する
-                $logger->info(" false: Auth_OpenID::isFailure");
+                $logger->info(' false: Auth_OpenID::isFailure');
                 return $this->redirect($redirect_url);
             }
         } else {
-            $logger->info(" false: redirect");
+            $logger->info(' false: redirect');
         // OpenID2.0 の場合は常に自動 POST 。
-        // 以下、自動ポストのサンプル。携帯電話(EZ 端末)等のケースで、OpenID2.0 であってもリダイレクトを
-        // 行いたい場合には、上のリダイレクト処理を実行すること。 $form_id = 'openid_message';
-            $form_html = $auth_request->htmlMarkup( $realm, 
-                                                $returnToUrl, 
-                                                false,// OpenID の immediate モードを使用するかどうか。
+        // 以下、自動ポストのサンプル。携帯電話(EZ 端末)等のケースで、OpenID2.0 であってもリダイレクトを
+        // 行いたい場合には、上のリダイレクト処理を実行すること。 $form_id = 'openid_message';
+            $form_html = $auth_request->htmlMarkup( $realm,
+                                                $returnToUrl,
+                                                false,// OpenID の immediate モードを使用するかどうか。
                                                 array('id' => $formId) // フォームに追加設定する
                                                     // attribute のリスト例
                                                 );
-                                                 
+
             if (Auth_OpenID::isFailure($form_html)) {
-                $logger->info(" true: Auth_OpenID::isFailure");
-                // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。 
+                $logger->info(' true: Auth_OpenID::isFailure');
+                // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。
             } else {
-                $logger->info(" false: Auth_OpenID::isFailure -> first success.");
+                $logger->info(' false: Auth_OpenID::isFailure -> first success.');
                 // HTML を表示。
-                print $form_html;
+                $logger->info($form_html);
+                return new Response($form_html);
             }
         }
     }
 
     public function auIdAssociationAction(){
         $logger = $this->get('logger');
-        $logger->info("inf auIdAssociationAction");
+        $logger->info('inf auIdAssociationAction');
         $associationDirPath = "/tmp";
         $return_to = "/auIdComplete";
         // RP(Consumer)のインスタンス生成までは認証リクエスト時と同じ
