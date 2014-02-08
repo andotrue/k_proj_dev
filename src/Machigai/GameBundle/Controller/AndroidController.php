@@ -11,22 +11,21 @@ use Machigai\GameBundle\Entity\Question;
 use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
-require_once 'Auth/OpenID/FileStore.php';
+/*require_once 'Auth/OpenID/FileStore.php';
 require_once 'Auth/OpenID/Consumer.php';
 require_once 'Auth/OpenID.php';
 
 use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
-
+*/
 class AndroidController extends Controller
 {
-
     public $connectTo = "st.connect.auone.jp";
 
     public function auIdAction()
     {
-        $realm = "https://machigai.puzzle-m.ne.jp/";
+/*        $realm = "https://machigai.puzzle-m.ne.jp/";
         $formId = "test";
         $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";
 
@@ -81,10 +80,10 @@ class AndroidController extends Controller
                 print $form_html;
             }
         }
-    }
+*/    }
 
     public function auIdAssociationAction(){
-        $associationDirPath = "/tmp";
+/*        $associationDirPath = "/tmp";
         $return_to = "/auIdComplete";
         // RP(Consumer)のインスタンス生成までは認証リクエスト時と同じ
         $store = new Auth_OpenID_FileStore($associationDirPath);
@@ -114,11 +113,15 @@ class AndroidController extends Controller
 //                $this->redirect('Top',array());
             }
         }
-    }
+*/    }
 
 	public function getCommonAccessToken(){
 		return 'h6C43S5SS7wMu7JNuy3LM8E4';
 	}
+    private function hasValidCommonToken($token){
+        $result = ( $this->getCommonAccessToken() == $token );
+        return $result;
+    }
 
 	public function indexAction(){
 		$user = $this->getUserInfo();
@@ -157,9 +160,14 @@ class AndroidController extends Controller
 
 	//ゲスト用トークンが必要
 	public function noticesAction(){
+        $request = $this->get("request");
+        $syncToken = $request->query->get("token");
+
 		//ゲスト用トークンチェック
-		if(!$this->hasValidCommonToken()) 
-			return $this->getErrorJsonResponse('Invalid User')->send();
+		if(!$this->hasValidCommonToken($syncToken)){
+            $response = $this->getErrorJsonResponse('Invalid User');
+            return $response;
+        }
 
 		$news = $this->getDoctrine()
 			->getRepository('MachigaiGameBundle:News')
@@ -368,7 +376,7 @@ class AndroidController extends Controller
 		return ($common_token == $request_token);
 	}
 
-	public function getErrorJsonResponseAction($text){
+	public function getErrorJsonResponse($text){
 		$json = json_encode(array('error'=> $text));
 		$response = new Response($json);
 		$response->headers->set('Content-Type', 'application/json');
@@ -664,5 +672,14 @@ class AndroidController extends Controller
                 $session->set('smartPassResult', true );
             }
             return $this->redirect($this->generateUrl($redirect));            
+     }
+     public function sessionFinishAction(){
+        $session = $request->getSession();  
+        $session->remove('id');
+        $session->remove('nickname');
+        $session->remove('syncToken');
+        $session->remove('auId');
+        $responseData=json_encode(array("status" => "OK"));//json encode the array
+        return new Response($responseData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
      }
 }
