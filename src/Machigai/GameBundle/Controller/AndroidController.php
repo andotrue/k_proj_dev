@@ -11,9 +11,111 @@ use Machigai\GameBundle\Entity\Question;
 use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
+require_once 'Auth/OpenID/FileStore.php';
+require_once 'Auth/OpenID/Consumer.php';
+require_once 'Auth/OpenID.php';
+
+use \Auth_OpenID_FileStore;
+use \Auth_OpenID;
+use \Auth_OpenID_Consumer;
 
 class AndroidController extends Controller
 {
+
+    public $connectTo = "st.connect.auone.jp";
+
+    public function auIdAction()
+    {
+        $realm = "https://machigai.puzzle-m.ne.jp/";
+        $formId = "test";
+        $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";
+
+        $associationDirPath = "/tmp";
+        $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";
+        $connectTo = "st.connect.auone.jp";
+        $authUrl = $connectTo . $preDealPath;
+
+
+        // アソシエーションを保存するストアを作成
+        $store = new Auth_OpenID_FileStore($associationDirPath);
+
+        // RP(Consumer)のインスタンスを生成
+        $consumer =& new Auth_OpenID_Consumer($store);
+        //認証方法に該当する URI をセットし、Discovery などを実行 
+        $auth_request = $consumer->begin($authUrl);
+        
+        // SREG・PAPE 等の OpenID 拡張機能を利用する場合は、ここでその処理を追加。 
+        // 詳細については、ライブラリに添付のサンプルコードを参照してください。
+        // OP が OpenID1.0 しかサポートしない場合には、常にリダイレクトを行います。 
+        // KDDI が加盟店向けに提供する機能は、OpenID2.0 に準拠したものとなります。
+
+        if ($auth_request->shouldSendRedirect()) {
+
+
+           // リダイレクト先 URL を取得。
+           $redirect_url = $auth_request->redirectURL($realm, $returnToUrl);
+            if (Auth_OpenID::isFailure($redirect_url)) {
+            // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。
+                return $this->redirect("Error");
+            } else {
+            // リダイレクトを実行。 header("Location: ".$redirect_url);
+            //OpenID 認証要求
+                //TODO:リダイレクト方法を検証する
+                return $this->redirect($redirect_url);
+            }
+        } else {
+        // OpenID2.0 の場合は常に自動 POST 。
+        // 以下、自動ポストのサンプル。携帯電話(EZ 端末)等のケースで、OpenID2.0 であってもリダイレクトを
+        // 行いたい場合には、上のリダイレクト処理を実行すること。 $form_id = 'openid_message';
+            $form_html = $auth_request->htmlMarkup( $realm, 
+                                                $returnToUrl, 
+                                                false,// OpenID の immediate モードを使用するかどうか。
+                                                array('id' => $formId) // フォームに追加設定する
+                                                    // attribute のリスト例
+                                                );
+                                                 
+            if (Auth_OpenID::isFailure($form_html)) {
+                // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。 
+            } else {
+                // HTML を表示。
+                print $form_html;
+            }
+        }
+    }
+
+    public function auIdAssociationAction(){
+        $associationDirPath = "/tmp";
+        $return_to = "/auIdComplete";
+        // RP(Consumer)のインスタンス生成までは認証リクエスト時と同じ
+        $store = new Auth_OpenID_FileStore($associationDirPath);
+        $consumer =& new Auth_OpenID_Consumer($store);
+        // Return_to をセットして、認証を完了(OP-Identifier による認証時の再 Discovery 等)
+        $response = $consumer->complete($return_to);
+        if ($response->status == Auth_OpenID_CANCEL) { // Cancel メッセージが帰ってきた場合の処理
+        } else if ($response->status == Auth_OpenID_FAILURE) { // エラーが帰ってきた場合の処理
+            $this->redirect("Error");
+        } else if ($response->status == Auth_OpenID_SUCCESS) { // 認証成功。以下の方法でユーザの OpenID を取得
+            $openid = $response->getDisplayIdentifier();
+            //ユーザを探す。
+            $users = $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:User')
+                ->findBy(array("auId"=>$syncToken));
+            if(empty($users)){
+                //ユーザのニックネーム登録ページヘ。
+                $this->redirect('AndroidRegisterEntry',array("openId" => $openId));
+            }else{
+                //ユーザのログイン完了
+                $user = $users[0];
+                $syncToken = $user->getSyncToken();
+                $nickname = $user->getNickname();
+
+                //セッションを登録。
+                return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
+//                $this->redirect('Top',array());
+            }
+        }
+    }
+
 	public function getCommonAccessToken(){
 		return 'h6C43S5SS7wMu7JNuy3LM8E4';
 	}
@@ -405,13 +507,59 @@ class AndroidController extends Controller
 
      public function auIdLoginAction(){
         //TODO: auIdLoginを実装。
-        //TODO: OpenIDを渡す。
-        $openId = uniqid();
+
+/*        $connectTo = "st.connect.auone.jp";
+
+        //(a)OpenId前処理
+        $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";
+
+        //(b)OpenID認証要求
+        $url = 'http://www.php.net/search.php';
+        $data = array(
+            'pattern' => 'htmlspe',
+            'show' => 'quickref',
+        );
+        $headers = array(
+            'User-Agent: My User Agent 1.0',    //ユーザエージェントの指定
+            'Authorization: Basic '.base64_encode('user:pass'),//ベーシック認証
+        );
+        $options = array('http' => array(
+            'method' => 'POST',
+            'content' => http_build_query($data),
+            'header' => implode("\r\n", $headers),
+        ));
+        $contents = file_get_contents($url, false, stream_context_create($options));
+        //(C)OpenID認証キャンセル
+
+        //(d)OpenID認証応答チェック
+
+        //(e)OpenID事後処理
+
+
+        //TODO: OpenIDを取得後。
+        $openId;
+        $users = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('MachigaiGameBundle:User')->findBy(array('auId' =>$openId));
+
+        if( empty($users) ) {
+            //TODO: 登録ページヘ遷移
+//            return new Response('<html><body><h1>ユーザが存在しません。</h1></body></html>');
+        }else{
+            $user = $users[0];
+            $session->set('auId', $user->getAuId());
+            $session->set('id',  $user->getId());
+            $session->set('smartPassResult', true );
+//            return $this->redirect($this->generateUrl($redirect));
+            return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
+        }
+*/
         return $this->redirect($this->generateUrl('AndroidRegisterEntry'));
 //        return $this->redirect($this->generateUrl('AndroidRegisterEntry'), array('openId' => $openId));
      }
      public function registerEntryAction(){
         //TODO: 初回アクセス時はフォーム表示、次回アクセス時は確認画面を表示。
+
         $openId = uniqid();
 //        $openId = $this->get('request')->query("openId");
 //        var_dump($openId);
@@ -489,7 +637,7 @@ class AndroidController extends Controller
         }
 
         return $this->render('MachigaiGameBundle:Copyright:'. $pageName .'.html.twig');
-     }
+     } 
      /*
      *
      * Android端末でのWebViewでのアクセス時のセッションをスタートする。
@@ -508,14 +656,13 @@ class AndroidController extends Controller
                     ->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
 
             if( empty($users) ) {
-                //TODO: auIDログインページへリダイレクト
-                return new Response('<html><body><h1>ユーザが存在しません。</h1></body></html>');
+                //ゲストユーザの場合は何もしない。   
             }else{
                 $user = $users[0];
                 $session->set('auId', $user->getAuId());
                 $session->set('id',  $user->getId());
                 $session->set('smartPassResult', true );
-                return $this->redirect($this->generateUrl($redirect));
             }
+            return $this->redirect($this->generateUrl($redirect));            
      }
 }
