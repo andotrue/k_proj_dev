@@ -1,3 +1,15 @@
+AuIdLogin:
+    pattern: /auIdLogin
+    defaults: { _controller: MachigaiGameBundle:Android:auId }
+    requirements: 
+        _method: GET
+auIdAssociation:
+    pattern: /auIdAssociation
+    defaults: { _controller: MachigaiGameBundle:Android:auIdAssociation }
+auIdComplete:
+    pattern: /auIdComplete
+    defaults: { _controller: MachigaiGameBundle:Android:auIdComplete }
+
 Top:
     path: /top
     defaults: { _controller: MachigaiGameBundle:Default:index }
@@ -372,7 +384,11 @@ AndroidSessionStart:
     defaults: { _controller: MachigaiGameBundle:Android:sessionStart }
     requirements:
         _method: GET
-
+AndroidSessionFinish:
+    pattern: /sync/session/finish
+    defaults: { _controller: MachigaiGameBundle:Android:sessionFinish }
+    requirements:
+        _method: POST
 SaveGameData:
     pattern: /game/saveGameData
     defaults: { _controller: MachigaiGameBundle:Game:saveGameData }
