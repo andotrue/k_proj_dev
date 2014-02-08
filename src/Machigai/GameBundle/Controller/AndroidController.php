@@ -99,7 +99,7 @@ class AndroidController extends Controller
 
     public function auIdAssociationAction(){
         $logger = $this->get('logger');
-        $logger->info("inf auIdAssociationAction");
+        $logger->info('inf auIdAssociationAction');
         $associationDirPath = "/tmp";
         $return_to = "/auIdComplete";
         // RP(Consumer)のインスタンス生成までは認証リクエスト時と同じ
