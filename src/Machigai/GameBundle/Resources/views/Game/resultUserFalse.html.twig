@@ -73,21 +73,21 @@ $(function(){
 
 <img src="{{asset('/bundles/machigaigame/images/parts/2-01_4_web_bg.png')}}" style="position:absolute;margin-left:-1%;width:100%"/>
 
-<p id="clearTime" style="position:absolute;top:16%;width:100%;text-align:center;font-size:5em;color:white;">--:--:--</p>
-<p id="getPoint" style="position:absolute;top:33%;width:100%;text-align:center;font-size:5em;color:white;margin-left:-4%">0pt</p>
-<p id="currentPoint" style="position:absolute;top:49%;width:100%;text-align:center;font-size:5em;color:white;margin-left:-4%">{{currentPoint}}pt</p>
-<div id="buttons" style="position:absolute; top:80%; width:100%; text-align:center">
+<p id="clearTime" style="position:absolute;top:200px;width:100%;text-align:center;font-size:5em;color:white;">--:--:--</p>
+<p id="getPoint" style="position:absolute;top:500px;width:100%;text-align:center;font-size:5em;color:white;margin-left:-4%">0pt</p>
+<p id="currentPoint" style="position:absolute;top:730px;width:100%;text-align:center;font-size:5em;color:white;margin-left:-4%">{{currentPoint}}pt</p>
+<div id="buttons" style="position:absolute; top:1180; width:100%; text-align:center">
 <a href="{{ path('GamePlay',{'id':questionId}) }}">
 <img id="tryOthers" src="{{asset('/bundles/machigaigame/images/parts/button_retry_off.png')}}" style="width:65%" onclick="changeImage(this.id);"/>
 </a>
 <a href="{{ path('GameSelect') }}">
-<img id="toTop" src="{{asset('/bundles/machigaigame/images/parts/button_otherselect_off.png')}}" style="width:65%;margin-top:2%" onclick="changeImage(this.id);"/>
+<img id="toTop" src="{{asset('/bundles/machigaigame/images/parts/button_otherselect_off.png')}}" style="width:65%;margin-top:10px" onclick="changeImage(this.id);"/>
 </a>
 <a href="{{ path('Shop') }}">
-<img id="toShop" src="{{asset('/bundles/machigaigame/images/parts/button_resultshop_off.png')}}" style="width:65%;margin-top:2%" onclick="changeImage(this.id);"/>
+<img id="toShop" src="{{asset('/bundles/machigaigame/images/parts/button_resultshop_off.png')}}" style="width:65%;margin-top:10px" onclick="changeImage(this.id);"/>
 </a>
 <a href="{{ path('Ranking') }}">
-<img id="toRanking" src="{{asset('/bundles/machigaigame/images/parts/button_resultranking_off.png')}}" style="width:65%;margin-top:2%" onclick="changeImage(this.id);"/>
+<img id="toRanking" src="{{asset('/bundles/machigaigame/images/parts/button_resultranking_off.png')}}" style="width:65%;margin-top:10px" onclick="changeImage(this.id);"/>
 </a>
 </div>
 
