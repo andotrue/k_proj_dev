@@ -128,14 +128,18 @@ var PopupLayer = cc.Layer.extend({
         this.state = "MISS";
         var label = cc.Sprite.create( gsDir + "label/miss.png" );
         this.addChild(label);
-        popup.setPosition(360,this.MIDDLE_Y );
+		var popupY = this.getPopupPosAndScrollTop();
+
+		popup.setPosition(360, popupY );
     },
 
     popupClear:function () {
         this.state = "CLEAR";
         var label = cc.Sprite.create( gsDir + "label/clear.png" );
         this.addChild(label);
-        popup.setPosition(360,this.MIDDLE_Y );
+		var popupY = this.getPopupPosAndScrollTop();
+
+		popup.setPosition(360, popupY );
     },
 
     popupPlay:function () {
@@ -144,7 +148,7 @@ var PopupLayer = cc.Layer.extend({
         var i =this.game_status = 1;
         var popup = cc.Sprite.create( gsDir + ss[i] );
         this.addChild(popup);
-        popup.setPosition(360,this.MIDDLE_Y);
+        popup.setPosition(360,this.getContentSize().height - 500);
     },
     popupHint:function () {
 //        cc.unregisterTouchDelegate(this);
@@ -152,10 +156,12 @@ var PopupLayer = cc.Layer.extend({
 
         var popup = cc.Sprite.create( gsDir + "popup/popup_game_hint.png" );
         this.addChild(popup);
-        popup.setPosition(360,this.MIDDLE_Y );
+		
+		var popupY = this.getPopupPosAndScrollTop();
 
-		var yes = this.createYesButton(360,620);
-		var no = this.createNoButton(360,535);
+        popup.setPosition(360, popupY);
+		var yes = this.createYesButton(360,popupY - 84);
+		var no = this.createNoButton(360,popupY - 169);
 		var menu = cc.Menu.create([yes,no]);
 		menu.setPosition(0,0);
 		this.addChild(menu);
@@ -175,10 +181,12 @@ var PopupLayer = cc.Layer.extend({
 //        path = gsDir + this.is_guest ? "popup/save.png" : "popup/save_guest.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
-        popup.setPosition(360,this.MIDDLE_Y );
 
-        var yes = this.createYesButton(360,769);
-        var no = this.createNoButton(360,679);
+		var popupY = this.getPopupPosAndScrollTop();
+		popup.setPosition(360,popupY );
+
+        var yes = this.createYesButton(360,popupY + 65);
+        var no = this.createNoButton(360,popupY - 25);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -223,10 +231,12 @@ var PopupLayer = cc.Layer.extend({
         this.state = "GIVEUP";
         var popup = cc.Sprite.create( gsDir + "popup/popup_game_giveup.png" );
         this.addChild(popup);
-        popup.setPosition(360,this.MIDDLE_Y );
+		
+		var popupY = this.getPopupPosAndScrollTop();
+        popup.setPosition(360,popupY );
 
-        var yes = this.createYesButton(360,710);
-        var no = this.createNoButton(360,605);
+        var yes = this.createYesButton(360,popupY + 4);
+        var no = this.createNoButton(360,popupY - 100);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
         this.addChild(menu);
@@ -324,5 +334,11 @@ var PopupLayer = cc.Layer.extend({
         cc.unregisterTouchDelegate(this);
         this.clock = null;
         this._super();
-    }
+    },
+	getPopupPosAndScrollTop:function(){
+		var diff = this.baseLayer.HEIGHT - this.getContentSize().height;	
+		this.baseLayer.setPositionY(-diff);
+		var popupY = diff + this.getContentSize().height - 500;
+		return popupY;
+	}
 });
