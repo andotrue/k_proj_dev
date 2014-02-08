@@ -409,6 +409,12 @@ class GameController extends BaseController
         $clearPoint = $question[0]->getClearPoint();
         $currentPoint = $pre_currentPoint+$clearPoint;
 
+		$user = $this->getUser();
+		$user->setCurrentPoint($currentPoint);
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($user);
+		$em->flush();
+		
         $histories = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user,'question'=>$question[0]));
