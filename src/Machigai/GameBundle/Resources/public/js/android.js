@@ -8,3 +8,11 @@ $(document).ready(function(){
 		});
 	}
 });
+
+function goTop(){
+    if(window["droid"]){
+        droid.goTop();
+    } else {
+        window.location = '/top';
+    }
+}

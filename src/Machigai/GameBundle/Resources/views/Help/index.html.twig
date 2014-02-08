@@ -19,8 +19,6 @@ function originalImage(){
 	var src = image_path.replace(/.png/g,'_off.png');
 	$('#'+image_id).attr("src",src);
 }
-var droid = function(){}
-droid.getBack = function(){window.location = '{{path('Top')}}';};
 </script>
   <br /> 
   <br /> 
@@ -40,7 +38,7 @@ droid.getBack = function(){window.location = '{{path('Top')}}';};
  
  {% block footer %}
  <footer style="margin-top:10%;">
-<img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: droid.getBack();" />
+<img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: goTop();" />
 <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}"  />
  </footer>
  {% endblock %}
