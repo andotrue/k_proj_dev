@@ -11,21 +11,24 @@ use Machigai\GameBundle\Entity\Question;
 use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
-/*require_once 'Auth/OpenID/FileStore.php';
+require_once 'Auth/OpenID/FileStore.php';
 require_once 'Auth/OpenID/Consumer.php';
 require_once 'Auth/OpenID.php';
 
 use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
-*/
+
 class AndroidController extends Controller
 {
     public $connectTo = "st.connect.auone.jp";
 
     public function auIdAction()
     {
-/*        $realm = "https://machigai.puzzle-m.ne.jp/";
+        $logger = $this->get('logger');
+        $logger->info("inf auIdAction");
+
+        $realm = "https://machigai.puzzle-m.ne.jp/";
         $formId = "test";
         $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";
 
@@ -35,12 +38,17 @@ class AndroidController extends Controller
         $authUrl = $connectTo . $preDealPath;
 
 
+
         // アソシエーションを保存するストアを作成
+        $logger->info(" new Auth_OpenID_FileStore");
         $store = new Auth_OpenID_FileStore($associationDirPath);
 
         // RP(Consumer)のインスタンスを生成
+        $logger->info(" new Auth_OpenID_Consumer");
         $consumer =& new Auth_OpenID_Consumer($store);
+
         //認証方法に該当する URI をセットし、Discovery などを実行 
+        $logger->info(" $consumer->begin(" . $authURL . ")");
         $auth_request = $consumer->begin($authUrl);
         
         // SREG・PAPE 等の OpenID 拡張機能を利用する場合は、ここでその処理を追加。 
@@ -48,8 +56,10 @@ class AndroidController extends Controller
         // OP が OpenID1.0 しかサポートしない場合には、常にリダイレクトを行います。 
         // KDDI が加盟店向けに提供する機能は、OpenID2.0 に準拠したものとなります。
 
+        $logger->info(" $auth_request->shouldSendRedirect()");
         if ($auth_request->shouldSendRedirect()) {
 
+            $logger->info(" true: redirect");
 
            // リダイレクト先 URL を取得。
            $redirect_url = $auth_request->redirectURL($realm, $returnToUrl);
@@ -60,9 +70,11 @@ class AndroidController extends Controller
             // リダイレクトを実行。 header("Location: ".$redirect_url);
             //OpenID 認証要求
                 //TODO:リダイレクト方法を検証する
+                $logger->info(" false: Auth_OpenID::isFailure");
                 return $this->redirect($redirect_url);
             }
         } else {
+            $logger->info(" false: redirect");
         // OpenID2.0 の場合は常に自動 POST 。
         // 以下、自動ポストのサンプル。携帯電話(EZ 端末)等のケースで、OpenID2.0 であってもリダイレクトを
         // 行いたい場合には、上のリダイレクト処理を実行すること。 $form_id = 'openid_message';
@@ -74,22 +86,27 @@ class AndroidController extends Controller
                                                 );
                                                  
             if (Auth_OpenID::isFailure($form_html)) {
+                $logger->info(" true: Auth_OpenID::isFailure");
                 // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。 
             } else {
+                $logger->info(" false: Auth_OpenID::isFailure -> first success.");
                 // HTML を表示。
                 print $form_html;
             }
         }
-*/    }
+    }
 
     public function auIdAssociationAction(){
-/*        $associationDirPath = "/tmp";
+        $logger = $this->get('logger');
+        $logger->info("inf auIdAssociationAction");
+        $associationDirPath = "/tmp";
         $return_to = "/auIdComplete";
         // RP(Consumer)のインスタンス生成までは認証リクエスト時と同じ
         $store = new Auth_OpenID_FileStore($associationDirPath);
         $consumer =& new Auth_OpenID_Consumer($store);
         // Return_to をセットして、認証を完了(OP-Identifier による認証時の再 Discovery 等)
         $response = $consumer->complete($return_to);
+
         if ($response->status == Auth_OpenID_CANCEL) { // Cancel メッセージが帰ってきた場合の処理
         } else if ($response->status == Auth_OpenID_FAILURE) { // エラーが帰ってきた場合の処理
             $this->redirect("Error");
@@ -113,7 +130,7 @@ class AndroidController extends Controller
 //                $this->redirect('Top',array());
             }
         }
-*/    }
+    }
 
 	public function getCommonAccessToken(){
 		return 'h6C43S5SS7wMu7JNuy3LM8E4';
