@@ -11,9 +11,6 @@ use Machigai\GameBundle\Entity\Question;
 use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
-require_once 'Auth/OpenID/FileStore.php';
-require_once 'Auth/OpenID/Consumer.php';
-require_once 'Auth/OpenID.php';
 
 use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
