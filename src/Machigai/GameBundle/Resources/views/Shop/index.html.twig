@@ -33,7 +33,7 @@
 
 </section>
 <footer style="margin:3% auto 5% auto;position:relative">
-<img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" onclick="changeImage(this.id);javascript: droid.getBack();">
+<img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" onclick="changeImage(this.id);javascript: goTop();">
 <img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" class="preload">
 </footer>
 
@@ -47,8 +47,6 @@ var current_mode = 0;
 var image_path = null;
 var image_id = null;
 var target = ".item1";
-var droid = function(){}
-droid.getBack = function(){window.location = '{{path('Top')}}';};
 $(function(){
   $('#wallpaper').hide();
 })
@@ -109,14 +107,14 @@ var page = 0;
 });
 
 function sortSelect(){
-	var optionValue = $('#sortSelect').val();
-	if(optionValue == 1){
-		window.location = "{{path('ShopSort',{"field":"name"})}}";
-	}else if(optionValue == 2){
-		window.location = "{{path('ShopSort',{"field":"createdAt"})}}";
-	}else if(optionValue == 3){
-		window.location = "{{path('ShopSort',{"field":"orderByOld"})}}";
-	}else if(optionValue == 4){
+  var optionValue = $('#sortSelect').val();
+  if(optionValue == 1){
+    window.location = "{{path('ShopSort',{"field":"name"})}}";
+  }else if(optionValue == 2){
+    window.location = "{{path('ShopSort',{"field":"createdAt"})}}";
+  }else if(optionValue == 3){
+    window.location = "{{path('ShopSort',{"field":"orderByOld"})}}";
+  }else if(optionValue == 4){
     window.location = "{{path('ShopSort',{"field":"popularity"})}}";
   }
 }
