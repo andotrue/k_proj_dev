@@ -339,6 +339,7 @@ SyncQuestionData:
     requirements: 
         _method: GET
 
+
 AndroidAuIdLogin:
     pattern: /sync/register/auIdLogin
     defaults: { _controller: MachigaiGameBundle:Android:auIdLogin }

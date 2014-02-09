@@ -13,7 +13,8 @@ class RegisterController extends BaseController
     //AuIDログイン
     public function loginAction(Request $request)
     {
-
+        $this->redirect($this->generateUrl('AuIdLogin'));
+    /*
         if(!empty($login)){
             $session = $request->getSession();
 
@@ -58,6 +59,7 @@ class RegisterController extends BaseController
         }
         $caution = null;
         return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
+    */        
     }
     public function loginCheckAction(Request $request){
         $userData = new User();

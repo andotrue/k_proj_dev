@@ -7,10 +7,13 @@ use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
+
 class DefaultController extends BaseController
 {
     public function indexAction()
     {
+        $logger = $this->get('logger');
+        $logger->info('inf auIdAction');
         $user = $this->getUser();
         $news = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:News')
