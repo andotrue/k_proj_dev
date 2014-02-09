@@ -12,10 +12,10 @@ use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
-include_once "Auth/OpenID.php";
+/*include_once "Auth/OpenID.php";
 include_once "Auth/OpenID/FileStore.php";
 include_once "Auth/OpenID/Consumer.php"; 
-use \Auth_OpenID_FileStore;
+*/use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
 
@@ -424,6 +424,7 @@ class AndroidController extends Controller
             $questionData['question'][$i]['id'] = $questions[$i]->getId();
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
+            $questionData['question'][$i]['title'] = $questions[$i]->getQuestionTitle();
             $questionData['question'][$i]['otetsukiLimit'] = $questions[$i]->getFailLimit();
             $questionData['question'][$i]['clearPoint'] = $questions[$i]->getClearPoint();
             $questionData['question'][$i]['timeLimit'] = $questions[$i]->getTimeLimit();
