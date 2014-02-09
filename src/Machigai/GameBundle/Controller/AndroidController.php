@@ -6,7 +6,6 @@ use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Machigai\GameBundle\Entity\User;
-use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
@@ -464,54 +463,22 @@ class AndroidController extends BaseController
         $status = $request->request->get("status");
         $isSavedGame = $request->request->get("isSavedGame");
         $questionId = (int)($request->request->get('questionId'));
-
+		
         $users = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
         $user = $users[0];
-        $question = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('MachigaiGameBundle:Question')->find($questionId);
-        $questionId = $question->getId();
 
-        $playHistories = $this->getDoctrine()
-                ->getManager()
-                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
-                                    where p.user = :user and p.question = :question')
-                ->setParameters(array('user'=>$user,'question'=>$question))
-                ->getResult();
-       
+		$params = array(
+			"data" => $data,
+			"user" => $user,
+			"status" => $status,
+			"isSavedGame" => $isSavedGame,
+			"questionId" => $questionId
+		);
 
-        if(empty($playHistories)){
-//            $logger->info("uploadDataAction: playHistory is null.");
-            $playHistory = new PlayHistory();
-//            $playHistory->setCreatedAt(new DateTime());
-//            $playHistory->setUpdatedAt();
-            $playHistory->addQuestion($question);
-            $playHistory->setPlayInfo($data);
-            $playHistory->setUser($user);
-            $playHistory->setGameStatus($status);
-            $playHistory->setIsSavedGame($isSavedGame);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($playHistory);
-            $this->applyRanking($playHistory);
-            $em->flush();
-//            $logger->info("uploadDataAction: playHistory is saved.");
-        }else{
-            $playHistory = $playHistories[0];
-            $logger->info("uploadDataAction: playHistory exists.");
-            $playHistory->setUpdatedAt();
-            $playHistory->setGameStatus($status);
-            $playHistory->setPlayInfo($data);
-            $playHistory->setIsSavedGame($isSavedGame);
-
-            $em = $this->getDoctrine()->getManager();
-            $playHistory->setPlayInfo($data);
-            $em->persist($playHistory);
-            $this->applyRanking($playHistory);
-            $em->flush();
-            $logger->info("uploadDataAction: playHistory is saved.");
-        }
+		// 処理の共通化
+		$this->saveGameData($params);
 
         $responseData=json_encode(array("status" => "OK"));//json encode the array
         $logger->info("downloadAction: all done.");
@@ -521,13 +488,6 @@ class AndroidController extends BaseController
     http://symfony2forum.org/threads/5-Using-Symfony2-jQuery-and-Ajax
     */
     }
-    /*
-    *
-    *   Rankingに登録処理を行う
-    */
-     public function applyRanking($playHistory){
-        //TODO: Ranking登録処理。
-     }
 
      public function auIdLoginAction(){
         //TODO: auIdLoginを実装。
