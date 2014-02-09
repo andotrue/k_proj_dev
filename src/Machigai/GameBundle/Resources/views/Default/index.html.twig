@@ -57,8 +57,11 @@
   {% endfor %} 
   </div>
 {% if user is not empty %}
-   <a href="{{ path('Logout')  }}" alt="ログアウト">
-  <img id="userLogout" src="" style="margin-left:10%" width="70%" height="50px" onclick="changeImage(this.id);"/></a>
+	<p style="text-align:center;">
+		<a href="{{ path('Logout')  }}" alt="ログアウト">
+			<img id="userLogout" src="{{ asset('/bundles/machigaigame/images/parts/button_logout.png') }}" width="60%" onclick="changeImage(this.id);"/>
+		</a>
+	</p>
  {% endif %}
 <section style="padding-top:2em;">
 <div class="pre_pass white">
