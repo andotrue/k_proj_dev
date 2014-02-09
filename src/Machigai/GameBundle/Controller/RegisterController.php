@@ -288,6 +288,8 @@ https://machigai.puzzle-m.net\n
     public function sentEmailAction(){
         return $this->render('MachigaiGameBundle:Register:sentEmail.html.twig');
     }
+
+    // au ID Login では使用されない /
     public function beforeRegisterNicknameAction($pass){
         $tempPasswords = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
@@ -319,12 +321,15 @@ https://machigai.puzzle-m.net\n
         }
         return $this->render('MachigaiGameBundle:Register:authError.html.twig');
     }
+    // au ID Login では使用されない /
     public function reissuePasswordAction(){
         return $this->render('MachigaiGameBundle:Register:reissuePassword.html.twig');
     }
+    // au ID Login では使用されない /
     public function sendEmailAction(){
         return $this->render('MachigaiGameBundle:Register:reissuePassword.html.twig');
     }
+    // au ID Login では使用されない /
     public function emailTimeoverAction(){
         return $this->render('MachigaiGameBundle:Register:emailTimeover.html.twig');
     }
