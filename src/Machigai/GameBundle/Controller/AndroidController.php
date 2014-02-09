@@ -2,21 +2,24 @@
 
 namespace Machigai\GameBundle\Controller;
 
-use Machigai\GameBundle\Controller\BaseController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Machigai\GameBundle\Entity\User;
+use Machigai\GameBundle\Entity\Question;
+use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
 include_once "Auth/OpenID.php";
 include_once "Auth/OpenID/FileStore.php";
-include_once "Auth/OpenID/Consumer.php";
+include_once "Auth/OpenID/Consumer.php"; 
 use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
 
-class AndroidController extends BaseController
+class AndroidController extends Controller
 {
     public $connectTo = "connect.auone.jp";
 
@@ -286,11 +289,11 @@ class AndroidController extends BaseController
                 'playStartedAt' => $playHistoryDB[0]->getPlayStartedAt(), 
                 'playEndedAt' => $playHistoryDB[0]->getPlayEndedAt(),
                 'clearTime' => $playHistoryDB[0]->getClearTime(),
-                'suspendedTime' => $playHistoryDB[0]->getSuspendTime(),
+                'suspendedTime' => $playHistoryDB[0]->getSuspendedTime(),
                 'gameStatus' => $playHistoryDB[0]->getGameStatus(),
                 'playInfo' => $playHistoryDB[0]->getPlayInfo(), // Javascriptでは playData
                 );
-		}else{
+        }else{
             $playHistory = null;       
         }
         if (!empty($user) && empty($playHistory)){

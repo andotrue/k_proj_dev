@@ -234,10 +234,6 @@ GameFail:
     pattern: /game/fail
     defaults: { _controller: MachigaiGameBundle:Game:fail }
 
-Register:
-    pattern: /register/
-    defaults: { _controller: MachigaiGameBundle:Register:index }
-
 RegisterUser:
     pattern: /register/userRegister
     defaults: { _controller: MachigaiGameBundle:Register:userRegister }
@@ -263,7 +259,7 @@ ReissuePassword:
     defaults: { _controller: MachigaiGameBundle:Register:reissuePassword }
 
 Login:
-    pattern: /register/login
+    pattern: /login
     defaults: { _controller: MachigaiGameBundle:Register:login }
 
 LoginCheck:
@@ -273,10 +269,6 @@ LoginCheck:
 RegisterConfirm:
     pattern: /register/confirm/
     defaults: { _controller: MachigaiGameBundle:Register:confirm }
-
-RegisterLogin:
-    pattern: /register/login
-    defaults: { _controller: MachigaiGameBundle:Register:login }
 
 complete:
     pattern: /register/complete/
@@ -342,6 +334,7 @@ SyncQuestionData:
     defaults: { _controller: MachigaiGameBundle:Android:getQuestionData }
     requirements: 
         _method: GET
+
 
 AndroidAuIdLogin:
     pattern: /sync/register/auIdLogin
