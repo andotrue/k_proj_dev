@@ -5,9 +5,9 @@
 <img src="{{ asset('/bundles/machigaigame/images/parts/1-01_4_bg
 .png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
 
-<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="position:relative;top:10%;width:100%;margin-top:31%">
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_nicknameregist.png')}}" style="position:absolute;width:100%;left:0;top:17%;">
 
-<section id="nicknameForm" style="position:relative;margin-top:11%">
+<section id="nicknameForm" style="position:relative;margin-top:53%">
  <form action="{{ path('AndroidRegisterConfirm') }}" method="post" {{ form_enctype(form) }}>
  {{ form_errors (form) }}
 <input type="text" id="form_nickname" name="form[nickname]" required="required" style="margin-top:2%;background-image:url(/bundles/machigaigame/images/parts/nicknametextarea.png);background-size:100% 100%; background-repeat:no-repeat;width:84%;height:2.3em;">
@@ -18,7 +18,7 @@
   {{ form_widget (form.confirm) }}
 </section>
 
-<img id="nickname" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck2_off.png')}}" onclick="changeImage(this.id);submitNickname();" style="position:relative; width:70%;margin-top:48%">
+<img id="nickname" width="70%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck2_off.png')}}" onclick="changeImage(this.id);submitNickname();" style="position:relative; width:70%; margin-top:48%">
 <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck2.png')}}" >
 
 <script>
