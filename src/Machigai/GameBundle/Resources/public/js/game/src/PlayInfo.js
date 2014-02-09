@@ -85,6 +85,7 @@ var PlayInfo = cc.Class.extend({
 	},
 	setClock:function(clock){
 		this.clock = clock;
+		clock._clockData = this._playData._clockData;
 		clock.setPlayInfo(this);
 	},
 	getClearTime:function(){

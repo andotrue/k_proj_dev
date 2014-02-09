@@ -160,6 +160,7 @@ var PopupLayer = cc.Layer.extend({
     },
     popupHint:function () {
 //        cc.unregisterTouchDelegate(this);
+		this.playInfo.clock.interruptTimer();
         this.state = "HINT";
 
         var popup = cc.Sprite.create( gsDir + "popup/popup_game_hint.png" );
@@ -175,6 +176,7 @@ var PopupLayer = cc.Layer.extend({
 		this.addChild(menu);
     },
     hint:function () {
+		this.playInfo.clock.resumeTimer();
         cc.log("PopupLayer.hint");
 		if(this.baseLayer.getHint == false){
 			this.baseLayer.dispHint();
@@ -184,6 +186,8 @@ var PopupLayer = cc.Layer.extend({
 		}
     },
     popupSave:function () {
+		
+		this.playInfo.clock.interruptTimer();
         this.state = "SAVE";
         path = gsDir + "popup/popup_game_save.png";
 //        path = gsDir + this.is_guest ? "popup/save.png" : "popup/save_guest.png";
@@ -210,9 +214,16 @@ var PopupLayer = cc.Layer.extend({
         with(MyForm) {
             method = 'post';
             action = '../saveGameData';
+			
+			var status = this.playInfo._playData._gameStatus;
+			// 中断した時はランキング対象にならない
+			if(status == 1){
+				status = 2;
+			}
+			
             var gameStatus = document.createElement('input');
                 gameStatus.setAttribute('name', 'gameStatus');
-                gameStatus.setAttribute('value', 3);
+                gameStatus.setAttribute('value', status);
                 MyForm.appendChild(gameStatus);
 
             var questionId = document.createElement('input');
@@ -240,6 +251,7 @@ var PopupLayer = cc.Layer.extend({
         }
     },
     popupGiveup:function () {
+		this.playInfo.clock.interruptTimer();
         this.state = "GIVEUP";
         var popup = cc.Sprite.create( gsDir + "popup/popup_game_giveup.png" );
         this.addChild(popup);
@@ -255,10 +267,51 @@ var PopupLayer = cc.Layer.extend({
 
     },
     giveup:function () {
-        cc.log("PopupLayer.giveup");
+        this.questionId = this.playInfo.QUESTION_ID;
+
+		cc.log("PopupLayer.giveup");
         cc.log(document.location);
 
-        window.location="../select";
+		var MyForm = document.createElement("FORM");
+            document.body.appendChild(MyForm);
+
+        with(MyForm) {
+			method = 'post';
+			action = '../saveGameData';
+			
+			var status = this.playInfo._playData._gameStatus;
+			if( status == 1){
+				status = 2;
+			}
+			
+            var gameStatus = document.createElement('input');
+                gameStatus.setAttribute('name', 'gameStatus');
+                gameStatus.setAttribute('value', status);
+                MyForm.appendChild(gameStatus);
+			
+			var questionId = document.createElement('input');
+				questionId.setAttribute('name', 'questionId');
+				questionId.setAttribute('value', this.questionId);
+				MyForm.appendChild(questionId);
+
+			var isSavedGame = document.createElement('input');
+				isSavedGame.setAttribute('name', 'isSavedGame');
+				isSavedGame.setAttribute('value', 'false');
+				MyForm.appendChild(isSavedGame);
+
+			var playInfoData = {};
+			playInfoData["clockData"] = this.playInfo._playData._clockData;
+			playInfoData["touchData"] = this.playInfo._playData._touchData;
+
+			var pidTxt = JSON.stringify(playInfoData);
+
+			var playInfo = document.createElement('input');
+			playInfo.setAttribute('name', 'playInfo');
+			playInfo.setAttribute('value', pidTxt);
+			MyForm.appendChild(playInfo);
+
+			MyForm.submit();
+		}
     },
     popupGameoverSuccess:function(){
         this.state = "GAMEOVER_SUCCESS";
@@ -307,6 +360,8 @@ var PopupLayer = cc.Layer.extend({
                 break;
             case 'NO':
                 cc.log('NO');
+				this.playInfo.clock.resumeTimer();
+				
                 this.removeFromParent();
                 break;
             default:

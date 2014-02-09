@@ -84,19 +84,18 @@ var ResultLayer = cc.Layer.extend({
                             questionId.setAttribute('value', this.questionId);
                             MyForm.appendChild(questionId);
 
-                        var userId = document.createElement('input');
-                            userId.setAttribute('name', 'userId');
-                            userId.setAttribute('value', user);
-                            MyForm.appendChild(userId);
-                        
-                        for(var i = 0; i < data.length; i++){
-                            playInfoData = JSON.stringify(data[i]);
-                            var playInfo = document.createElement('input');
-                            playInfo.setAttribute('name', 'playInfo['+i+']');
-                            playInfo.setAttribute('value', playInfoData);
-                            MyForm.appendChild(playInfo);
-                        }
-                        MyForm.submit();
+						var playInfoData = {};
+						playInfoData["clockData"] = this.playInfo._playData._clockData;
+						playInfoData["touchData"] = this.playInfo._playData._touchData;
+
+						var pidTxt = JSON.stringify(playInfoData);
+
+						var playInfo = document.createElement('input');
+						playInfo.setAttribute('name', 'playInfo');
+						playInfo.setAttribute('value', pidTxt);
+						MyForm.appendChild(playInfo);
+
+						MyForm.submit();
                     }
                         
                     
@@ -120,14 +119,18 @@ var ResultLayer = cc.Layer.extend({
                             questionId.setAttribute('value', this.questionId);
                             MyForm.appendChild(questionId);
                         
-                        for(var i = 0; i < data.length; i++){
-                            playInfoData = JSON.stringify(data[i]);
-                            playInfo = document.createElement('input');
-                            playInfo.setAttribute('name', 'playInfo['+i+']');
-                            playInfo.setAttribute('value', playInfoData);
-                            MyForm.appendChild(playInfo);
-                        }
-                        MyForm.submit();
+						var playInfoData = {};
+						playInfoData["clockData"] = this.playInfo._playData._clockData;
+						playInfoData["touchData"] = this.playInfo._playData._touchData;
+
+						var pidTxt = JSON.stringify(playInfoData);
+
+						var playInfo = document.createElement('input');
+						playInfo.setAttribute('name', 'playInfo');
+						playInfo.setAttribute('value', pidTxt);
+						MyForm.appendChild(playInfo);
+
+						MyForm.submit();
                     }
                 }
             }
