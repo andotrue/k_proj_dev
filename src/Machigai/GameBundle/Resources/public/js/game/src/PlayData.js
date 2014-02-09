@@ -53,6 +53,9 @@ var PlayData = cc.Class.extend({
 		cc.log("PlayData.setTouchData(touchData) : data =  " + touchData.toString() );
 		this._touchData.push(touchData);
 	},
+	setTouchDataArray:function(touchData){
+		this._touchData = touchData;
+	},
 	setClockData:function(clockData){
 		cc.log("PlayData.setClockData(clockData) : data =  " + clockData.toString() );
 		this._clockData = clockData;
@@ -119,8 +122,9 @@ PlayData.loadFromJSON = function(json_data){
 	instance._qcode = json_data["qcode"];
 	instance._level = json_data["level"];
 	instance._limitTime = json_data["limitTime"];
-	instance.setTouchData(json_data['touchData']);
-	instance.setClockData(json_data['clockData']);
+	
+	instance.setTouchDataArray(json_data.playInfo['touchData']);
+	instance.setClockData(json_data.playInfo['clockData']);
 	cc.log("PlayData.loadFromJSON(): result = ( " + instance._userId + ", " +	instance._qcode + ", " + instance._level + ", " +instance._gameStatus + ", "  + instance._isSaved + ", " + instance._touchData + ", " + instance._clockData + " )" );
 
 	return instance;
