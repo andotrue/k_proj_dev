@@ -200,7 +200,7 @@ var PopupLayer = cc.Layer.extend({
             document.body.appendChild(MyForm);
 
         with(MyForm) {
-            method = 'get';
+            method = 'post';
             action = '../saveGameData';
             var gameStatus = document.createElement('input');
                 gameStatus.setAttribute('name', 'gameStatus');
@@ -212,19 +212,23 @@ var PopupLayer = cc.Layer.extend({
                 questionId.setAttribute('value', this.questionId);
                 MyForm.appendChild(questionId);
 
-            var userId = document.createElement('input');
-                userId.setAttribute('name', 'userId');
-                userId.setAttribute('value', user);
-                MyForm.appendChild(userId);
-            
-            for(var i = 0; i < data.length; i++){
-                playInfoData = JSON.stringify(data[i]);
-                playInfo = document.createElement('input');
-                playInfo.setAttribute('name', 'playInfo['+i+']');
-                playInfo.setAttribute('value', playInfoData);
-                MyForm.appendChild(playInfo);
-            }
-            MyForm.submit();
+            var isSavedGame = document.createElement('input');
+                isSavedGame.setAttribute('name', 'isSavedGame');
+                isSavedGame.setAttribute('value', 'true');
+                MyForm.appendChild(isSavedGame);
+			
+			var playInfoData = {};
+			playInfoData["clockData"] = this.playInfo._playData._clockData;
+			playInfoData["touchData"] = this.playInfo._playData._touchData;
+			
+			var pidTxt = JSON.stringify(playInfoData);
+			
+			var playInfo = document.createElement('input');
+			playInfo.setAttribute('name', 'playInfo');
+			playInfo.setAttribute('value', pidTxt);
+			MyForm.appendChild(playInfo);
+
+			MyForm.submit();
         }
     },
     popupGiveup:function () {

@@ -392,5 +392,3 @@ AndroidSessionFinish:
 SaveGameData:
     pattern: /game/saveGameData
     defaults: { _controller: MachigaiGameBundle:Game:saveGameData }
-    requirements:
-        _method: GET
