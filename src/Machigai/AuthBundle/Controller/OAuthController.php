@@ -8,17 +8,20 @@ use Symfony\Component\HttpFoundation\Response;
 class OAuthController extends Controller {
 
 	public function responseTokenAction() {
-		
+		$logger = $this->get('logger');
+
 		// au ID OAuth連携用パラメータ
 		$clientId = "AJlZDAAAAUK3x8nX";
 		$clientSecret = "8A6a-TTacq1Hk7yACeR6w3YZCv_w-ykW";
-		$scope = "";//"apass4web";
+		$scope = "apass4web";
+		$responseType = "code";
 		
+		$redirectUrl = "https://machigai.puzzle-m.net/auth/oauth/response_token?method=redirect";
 		//$redirectUrl = "https://" . $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?method=redirect";
-		$redirectUrl = $this->get('router')->generate('response_token', array('method' => 'redirect'), true);
+		//$redirectUrl = $this->get('router')->generate('response_token', array('method' => 'redirect'), true);
 		$authzReqUrl = "https://oa.connect.auone.jp/net/opi/hny_oauth_rt_net/cca" .
-				"?ID=OpenAPIAcpt&response_type=code&client_id=" . $clientId .
-				"&redirect_uri=" . $redirectUrl . "&scope=" . urlencode($scope);
+				"?ID=OpenAPIAcpt&response_type=" . $responseType . "&client_id=" . $clientId .
+				"&redirect_uri=" . urlencode($redirectUrl) . "&scope=" . urlencode($scope);
 		
 		$tokenReqUrl = "https://oa.connect.auone.jp/net/opi/hny_oauth_rt_net/cca" .
 				"?ID=OpenAPITokenCodeReq";
@@ -34,7 +37,7 @@ class OAuthController extends Controller {
 		// パラメータ定義
 		$method = empty($GET["method"]) ? "get" : $query->get("method");
 		$state = $session->get("state", null);  // return null if state doesn't exist.
-		$code = null;
+		$code = $query->get("code", null);
 		$accessToken = null;
 		$refreshToken = null;
 		$refreshLimit = null;

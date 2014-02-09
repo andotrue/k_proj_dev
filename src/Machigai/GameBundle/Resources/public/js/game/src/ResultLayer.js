@@ -77,7 +77,7 @@ var ResultLayer = cc.Layer.extend({
                         var gameStatus = document.createElement('input');
                             gameStatus.setAttribute('name', 'clearTime');
                             gameStatus.setAttribute('value', clearTime);
-                            MyForm.appendChild(clearTime);
+                            MyForm.appendChild(gameStatus);
 
                         var questionId = document.createElement('input');
                             questionId.setAttribute('name', 'questionId');
@@ -91,7 +91,7 @@ var ResultLayer = cc.Layer.extend({
                         
                         for(var i = 0; i < data.length; i++){
                             playInfoData = JSON.stringify(data[i]);
-                            playInfo = document.createElement('input');
+                            var playInfo = document.createElement('input');
                             playInfo.setAttribute('name', 'playInfo['+i+']');
                             playInfo.setAttribute('value', playInfoData);
                             MyForm.appendChild(playInfo);

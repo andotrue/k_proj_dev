@@ -23,9 +23,11 @@ function originalImage(){
   <br /> 
   <br /> 
   <br /> 
+{% if user is not empty %}
   <a href="{{ path('Setting') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_setting.png')  }}" width="100%"/></a>
+{% endif %}
   <a href="{{ path('HelpHowtoplay') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_asobikata.png')  }}" width="100%"/></a>
-  <a href="{{path('PrivacyPolicy')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_privacypolicy.png')  }}" width="100%"/ ></a>
+  <a href="{{path('PrivacyPolicy')}}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_privacypolicy.png')  }}" width="100%"/></a>
   <a href="{{ path('HelpTerms') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_kiyaku.png')  }}" width="100%"/></a>
   <a href="{{ path('HelpInquiry') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_otoiawase.png')  }}" width="100%"/></a>
 {% if user is not empty %}
