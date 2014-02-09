@@ -7,6 +7,10 @@ use Machigai\GameBundle\Entity\PlayHistory;
 
 class BaseController extends Controller
 {
+    /** DEBUGモード　*/
+    public $MODE = "DEBUG";
+    public $DEBUG = "DEBUG";
+
 	public function getUser()
 	{        
         $session = $this->get('session');

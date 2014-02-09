@@ -13,53 +13,44 @@ class RegisterController extends BaseController
     //AuIDログイン
     public function loginAction(Request $request)
     {
-        $this->redirect($this->generateUrl('AuIdLogin'));
-    /*
-        if(!empty($login)){
-            $session = $request->getSession();
-
-            //開発モード時,セッションを生成する。
-            $MODE = 'DEV';
-            $user_type = 'loggedIn';
-
-
-            if( $MODE == 'DEV'){
-                if($user_type == 'loggedIn'){
-                    //ログインユーザの場合
-                    $session->set('auId', 'auid1');
-                    $session->set('id', '167');
-                    $session->set('smartPassResult', true );
-                }elseif($user_type == 'notLoggedIn'){
-                    //非ログインユーザの場合
-                    $session->set('auId', 'auid1');
-                    $session->set('id', null );
-                    $session->set('smartPassResult', true );
-                }else{
-                    $session->set('auId', null );
-                    $session->set('id', null );
-                    $session->set('smartPassResult', null );
-                }
-            }
-
-            $id = $session->get('id');
-            if( empty($id) ) {
-                //auIDログインページへリダイレクト
-                return $this->redirect('https://auone.jp');
-            }else{
-                return $this->redirect($this->generateUrl('Top'));
-            }
-        }else{
-            $form = $this->createFormBuilder()
-             ->setMethod('GET')
-             ->add('mailAddress', 'email',array('label'=>false))
-             ->add('password', 'password',array('label'=>false))
-             ->add('confirm', 'submit', array('label'=>'内容を確認'))
-             ->getForm();
-            $userData = $form->getData();
+        $logger = $this->get('logger');
+        $logger = $logger->info('RegisterControloginAction');
+        //プロダクションモードのとき
+        if ($this->MODE != $this->DEBUG){
+            $this->redirect($this->generateUrl('AuIdLogin'));
         }
-        $caution = null;
-        return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
-    */        
+
+        //
+        $session = $request->getSession();
+
+        //開発モード時,セッションを生成する。
+        $user_type = 'loggedIn';
+
+
+        if($user_type == 'loggedIn'){
+            //ログインユーザの場合
+            $session->set('auId', 'auid1');
+            $session->set('id', '167');
+            $session->set('smartPassResult', true );
+        }elseif($user_type == 'notLoggedIn'){
+            //非ログインユーザの場合
+            $session->set('auId', 'auid1');
+            $session->set('id', null );
+            $session->set('smartPassResult', true );
+        }else{
+            $session->set('auId', null );
+            $session->set('id', null );
+            $session->set('smartPassResult', null );
+        }
+
+        $id = $session->get('id');
+        if( empty($id) ) {
+            //auIDログインページへリダイレクト
+            return $this->redirect('https://auone.jp');
+        }else{
+            return $this->redirect($this->generateUrl('Top'));
+        }
+//        return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
     }
     public function loginCheckAction(Request $request){
         $userData = new User();
