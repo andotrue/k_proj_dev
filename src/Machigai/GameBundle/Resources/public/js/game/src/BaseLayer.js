@@ -90,6 +90,39 @@ var BaseLayer = cc.Layer.extend({
         }
         return bRet;
     },
+	dispSaveData:function(){
+		
+		if(this.dispSaveDataCallFlg)return;
+		
+		this.dispSaveDataCallFlg = true;
+		
+		if(this.playInfo._playData._touchData){
+			for(var i in this.playInfo._playData._touchData){
+				var data = this.playInfo._playData._touchData[i];
+
+				var objs = this.playInfo.MACHIGAI_POINT_DATA;
+				var trueFlg = false;
+				
+				for( var i in objs ){
+					var ap = objs[i];
+
+					var apx = parseInt(ap.x);
+					var apy = parseInt(ap.y);
+
+					if( apx == data.x && apy == data.y ){
+
+						this.answeredPoints[i] = true;
+						this.stars.increment();
+						trueFlg = true;
+					}
+				}
+				
+				if(!trueFlg){
+			        this.hearts.decrement();
+				}
+			}
+		}
+	},
     _initSelf:function(){
         cc.log("BaseLayer._initSelf()");
         this.setAnchorPoint(0,0);
@@ -294,7 +327,7 @@ var BaseLayer = cc.Layer.extend({
                        cc.log(" touch OK ! ");
                        this.answeredPoints[i] = true;
                        var date = new Date();
-                       var touchDatum = {x: px, y:py, result:true , touchedAt: date };
+                       var touchDatum = {x: apx, y:apy, result:true , touchedAt: date };
                        this.playInfo._playData.setTouchData(touchDatum);
 
                        return this.runOK();
@@ -308,9 +341,9 @@ var BaseLayer = cc.Layer.extend({
             var date = new Date();
             touchDatum = {x: px, y:py, result:false , touchedAt: date };
             this.playInfo._playData.setTouchData(touchDatum);
-
-            return this.runNG();
-            cc.log(" touch  ! ");            
+			
+			   return this.runNG();
+	           cc.log(" touch  ! ");            
         }
     },
     runOK:function () {

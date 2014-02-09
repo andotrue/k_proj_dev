@@ -126,9 +126,14 @@ var PlayInfo = cc.Class.extend({
 			this._error_redirect_to("../select");
 		}
 		this._data = data;
+		if(data.playHistory){
+			var playInfo = JSON.parse(data.playHistory.playInfo);
+			this._data.playHistory.playInfo = playInfo;
+			this._data.playInfo = data.playHistory.playInfo;
+		}
 		this._user = this._data["user"];
 		this._definition = this._data["question"];
-//		this._playDataJSON = this._data["playHistory"];
+		this._playDataJSON = this._data.playHistory;
 		csrf_token = this._data["csrf_token"];
 
 	},
@@ -211,7 +216,7 @@ var PlayInfo = cc.Class.extend({
 		if(this._playDataJSON === null){
 			this._playData = PlayData.create(this.QCODE, this.LEVEL);
 		}else{
-			this._playData = PlayData.loadFromJSON();
+			this._playData = PlayData.loadFromJSON(this._playDataJSON);
 		}
 	}
 });
