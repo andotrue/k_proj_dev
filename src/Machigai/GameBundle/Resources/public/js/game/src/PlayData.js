@@ -121,9 +121,23 @@ PlayData.loadFromJSON = function(json_data){
 	instance._playHistoryId = json_data["playHistoryId"];
 	instance._qcode = json_data["qcode"];
 	instance._level = json_data["level"];
+	instance._gameStatus = json_data["gameStatus"];
+	instance._isSaved = true;
 	instance._limitTime = json_data["limitTime"];
 	
-	instance.setTouchDataArray(json_data.playInfo['touchData']);
+	var newClockData = [];
+	for(var i in json_data.playInfo['clockData']){
+		var obj = json_data.playInfo['clockData'][i];
+		if(obj["resumed"]){
+			obj["resumed"] = new Date(obj["resumed"]);
+		}
+		if(obj["interrupted"]){
+			obj["interrupted"] = new Date(obj["interrupted"]);
+		}
+		newClockData.push(obj);
+	}
+	
+	instance.setTouchDataArray(newClockData);
 	instance.setClockData(json_data.playInfo['clockData']);
 	cc.log("PlayData.loadFromJSON(): result = ( " + instance._userId + ", " +	instance._qcode + ", " + instance._level + ", " +instance._gameStatus + ", "  + instance._isSaved + ", " + instance._touchData + ", " + instance._clockData + " )" );
 

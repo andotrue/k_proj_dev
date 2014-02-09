@@ -44,7 +44,11 @@ class GameController extends BaseController
             $playedQuestions = array();
          
             foreach ($pre_playedQuestions as $pre_questions) {
-                $playedQuestions[$pre_questions->getQuestion()->getId()] = $pre_questions->getGameStatus();
+				if($pre_questions->getIsSavedGame()){
+	                $playedQuestions[$pre_questions->getQuestion()->getId()] = 99;
+				} else {
+					$playedQuestions[$pre_questions->getQuestion()->getId()] = $pre_questions->getGameStatus();
+				}
             };
         }else{
             $playedQuestions = null;
@@ -427,7 +431,7 @@ class GameController extends BaseController
                 $playHistory->setPlayInfo($playInfo[$i]);
                 $playHistory->setUser($user);
                 $playHistory->setQuestion($question[0]);
-                $playHistory->setGameStatus(4);
+                $playHistory->setGameStatus(3);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($playHistory);
                 $em->flush();
@@ -447,7 +451,7 @@ class GameController extends BaseController
                 $playHistory->setPlayInfo($playInfo[$i]);
                 $playHistory->setUser($user);
                 $playHistory->setQuestion($question[0]);
-                $playHistory->setGameStatus(5);
+                $playHistory->setGameStatus(4);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($playHistory);
                 $em->flush();
@@ -503,7 +507,7 @@ class GameController extends BaseController
                 $playHistory->setPlayInfo($playInfo[$i]);
                 $playHistory->setUser($user);
                 $playHistory->setQuestion($question[0]);
-                $playHistory->setGameStatus(2);
+                $playHistory->setGameStatus(3);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($playHistory);
                 $em->flush();
@@ -523,7 +527,7 @@ class GameController extends BaseController
                 $playHistory->setPlayInfo($playInfo[$i]);
                 $playHistory->setUser($user);
                 $playHistory->setQuestion($question[0]);
-                $playHistory->setGameStatus(2);
+                $playHistory->setGameStatus(4);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($playHistory);
                 $em->flush();
@@ -549,8 +553,10 @@ class GameController extends BaseController
         $questionId = (int)($request->get('questionId'));
         $isSavedGame = $request->get("isSavedGame");
 		
-		if(empty($isSavedGame)){
+		if(empty($isSavedGame) || $isSavedGame == "false"){
 			$isSavedGame = false;
+		} else {
+			$isSavedGame = true;
 		}
 		
         $user = $this->getUser();

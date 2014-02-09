@@ -85,6 +85,7 @@ var PlayInfo = cc.Class.extend({
 	},
 	setClock:function(clock){
 		this.clock = clock;
+		clock._clockData = this._playData._clockData;
 		clock.setPlayInfo(this);
 	},
 	getClearTime:function(){
@@ -132,6 +133,7 @@ var PlayInfo = cc.Class.extend({
 			this._data.playInfo = data.playHistory.playInfo;
 		}
 		this._user = this._data["user"];
+		this._user["userId"] = uid;
 		this._definition = this._data["question"];
 		this._playDataJSON = this._data.playHistory;
 		csrf_token = this._data["csrf_token"];
