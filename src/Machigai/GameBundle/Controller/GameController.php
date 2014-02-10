@@ -214,7 +214,7 @@ class GameController extends BaseController
                 'playStartedAt' => $playHistoryDB[0]->getPlayStartedAt(), 
                 'playEndedAt' => $playHistoryDB[0]->getPlayEndedAt(),
                 'clearTime' => $playHistoryDB[0]->getClearTime(),
-                'suspendedTime' => $playHistoryDB[0]->getSuspendedTime(),
+                'suspendedTime' => $playHistoryDB[0]->getSuspendTime(),
                 'gameStatus' => $playHistoryDB[0]->getGameStatus(),
                 'playInfo' => $playHistoryDB[0]->getPlayInfo(), // Javascriptでは playData
                 );

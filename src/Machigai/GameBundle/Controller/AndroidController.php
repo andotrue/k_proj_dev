@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Machigai\GameBundle\Entity\User;
 use Machigai\GameBundle\Entity\Question;
-use Machigai\GameBundle\Entity\PlayHistory;
+use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
@@ -20,7 +20,7 @@ use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
 
-class AndroidController extends Controller
+class AndroidController extends BaseController
 {
     public $connectTo = "st.connect.auone.jp";
 
@@ -290,7 +290,7 @@ class AndroidController extends Controller
                 'playStartedAt' => $playHistoryDB[0]->getPlayStartedAt(), 
                 'playEndedAt' => $playHistoryDB[0]->getPlayEndedAt(),
                 'clearTime' => $playHistoryDB[0]->getClearTime(),
-                'suspendedTime' => $playHistoryDB[0]->getSuspendedTime(),
+                'suspendedTime' => $playHistoryDB[0]->getSuspendTime(),
                 'gameStatus' => $playHistoryDB[0]->getGameStatus(),
                 'playInfo' => $playHistoryDB[0]->getPlayInfo(), // Javascriptでは playData
                 );
