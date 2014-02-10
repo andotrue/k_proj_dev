@@ -16,7 +16,8 @@ class OAuthController extends Controller {
 		$scope = "apass4web";
 		$responseType = "code";
 		
-		$redirectUrl = "https://machigai.puzzle-m.net/auth/oauth/response_token?method=redirect";
+		$redirectUrl = "https://machigai.puzzle-m.net/top/auth/oauth/response_token?method=redirect";
+		//$redirectUrl = "https://machigai.puzzle-m.net/top";
 		//$redirectUrl = "https://" . $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?method=redirect";
 		//$redirectUrl = $this->get('router')->generate('response_token', array('method' => 'redirect'), true);
 		$authzReqUrl = "https://oa.connect.auone.jp/net/opi/hny_oauth_rt_net/cca" .
@@ -35,14 +36,14 @@ class OAuthController extends Controller {
 		$query = $request->query;
 
 		// パラメータ定義
-		$method = empty($GET["method"]) ? "get" : $query->get("method");
+		$method = empty($_GET["method"]) ? "get" : $query->get("method");
 		$state = $session->get("state", null);  // return null if state doesn't exist.
 		$code = $query->get("code", null);
 		$accessToken = null;
 		$refreshToken = null;
 		$refreshLimit = null;
 		
-		$SERVER["SCRIPT_NAME"] = $this->get('router')->generate('response_token');
+		$_SERVER["SCRIPT_NAME"] = $this->get('router')->generate('response_token');
 		
 		// methodパラメータ別に処理実施
 		switch ($method) {
