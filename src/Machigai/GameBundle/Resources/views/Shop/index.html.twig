@@ -51,7 +51,7 @@ $(function(){
   if(current_mode == 0){
     $('#wallpaper').hide();
   }else{
-    $('#stamp').hide();    
+    $('#stamp').hide();
     changeImageTab("wallpaper_tab");
   }
 })
@@ -72,24 +72,13 @@ var page = 0;
   }
   function rewritePageNum(){
     if(target == '.item1'){
-      var max = parseInt($('.item1').size());
+      var max = parseInt($('.item1').size()-1);
     }else{
-      var max = parseInt($('.wallpaper1').size());
+      var max = parseInt($('.wallpaper1').size()-1);
     }
     $('.page').html(page+1);
-    if((max%20)==0){
-      if(parseInt(max/20)==0){
-        $('#maxPage').html(1);
-      }else{
-        $('#maxPage').html(parseInt(max/20));
-      }
-    }else{
-      if(parseInt(max/20)==0){
-        $('#maxPage').html(1);
-      }else{
-        $('#maxPage').html(parseInt(max/20+1));
-      }
-    }
+    var maxPage = Math.ceil(parseFloat(max) / 20);
+    $('#maxPage').html(maxPage);
   }
   $('#prev').click(function() {
     if (page > 0) {
@@ -142,24 +131,13 @@ function change_tabs(data){
 
 function rewritePageNum(){
     if(target == '.item1'){
-      var max = parseInt($('.item1').size());
+      var max = parseInt($('.item1').size()-1);
     }else{
-      var max = parseInt($('.wallpaper1').size());
+      var max = parseInt($('.wallpaper1').size()-1);
     }
     $('.page').html(page+1);
-    if((max%20)==0){
-      if(parseInt(max/20)==0){
-        $('#maxPage').html(1);
-      }else{
-        $('#maxPage').html(parseInt(max/20));
-      }
-    }else{
-      if(parseInt(max/20)==0){
-        $('#maxPage').html(1);
-      }else{
-        $('#maxPage').html(parseInt(max/20+1));
-      }
-    }
+    var maxPage = Math.ceil(parseFloat(max) / 20);
+    $('#maxPage').html(maxPage);
   }
 
 var current_tab = "stamp_tab";
