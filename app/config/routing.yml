@@ -1,6 +1,6 @@
 machigai_auth:
     resource: "@MachigaiAuthBundle/Resources/config/routing.yml"
-    prefix:   /auth
+    prefix:   /top/auth
 
 machigai_game:
     resource: "@MachigaiGameBundle/Resources/config/routing.yml"

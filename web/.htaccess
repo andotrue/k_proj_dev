@@ -4,7 +4,6 @@
 # start page (path "/") because otherwise Apache will apply the rewriting rules
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
 DirectoryIndex app.php
-#DirectoryIndex app_dev.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
@@ -33,6 +32,7 @@ DirectoryIndex app.php
     RewriteCond %{ENV:REDIRECT_STATUS} ^$
     RewriteRule ^app\.php(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
     #RewriteRule ^app_dev\.php(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
+    #RewriteRule ^app_dev\.php(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
 
     # If the requested filename exists, simply serve it.
     # We only want to let Apache serve files and not directories.
@@ -49,8 +49,10 @@ DirectoryIndex app.php
         # When mod_rewrite is not available, we instruct a temporary redirect of
         # the start page to the front controller explicitly so that the website
         # and the generated links can still be used.
-        #RedirectMatch 302 ^/$ /app.php/
+        RedirectMatch 302 ^/$ /app.php/
         #RedirectMatch 302 ^/$ /app_dev.php/
          RedirectTemp cannot be used instead
+        #RedirectMatch 302 ^/$ /app_dev.php/
+        # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>

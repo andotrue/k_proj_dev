@@ -159,7 +159,7 @@ Shop:
     defaults: { _controller: MachigaiGameBundle:Shop:index }
 
 ShopSort:
-    pattern: /shop/{field}/
+    pattern: /shop/{field}
     defaults: { _controller: MachigaiGameBundle:Shop:indexSort }
 
 ShopWallpaper:
