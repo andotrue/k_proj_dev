@@ -35,7 +35,7 @@ class AndroidController extends Controller
        
         $associationDirPath = "/tmp";                              
         $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";       
-        $connectTo = "https://connect.auone.jp";                   
+        $connectTo = "https://st.connect.auone.jp";                   
         $authUrl = $connectTo . $preDealPath;
 
        
