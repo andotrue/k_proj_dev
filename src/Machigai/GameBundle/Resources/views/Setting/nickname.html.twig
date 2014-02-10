@@ -35,7 +35,12 @@ function originalImage(){
 	$('#'+image_id).attr("src",src);
 }
 function submitNickname(){
-	$('#form_confirm').trigger('click');
+	var nickname = $('#form_nickname').val();
+	if(nickname.indexOf(/\S/) == -1){
+		alert("ニックネームを入力してください。");
+	}else{
+		$('#form_confirm').trigger('click');
+	}
 }
 </script>
 {% endblock %}
