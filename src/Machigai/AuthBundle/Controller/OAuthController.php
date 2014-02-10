@@ -72,7 +72,7 @@ class OAuthController extends Controller {
 				$state_query = $query->get("state");
 
 				if (!empty($state_query) && $state_query != $state) {
-					$response_html = '<html><body>Unmatch[' . $query('state') .
+					$response_html = '<html><body>Unmatch[' . $query->get('state') .
 							' <=> ' . $state . ']<br /><br /><a href="' .
 							$_SERVER["SCRIPT_NAME"] . '">Retry</a></body></html>"';
 					return new Response($response_html);
