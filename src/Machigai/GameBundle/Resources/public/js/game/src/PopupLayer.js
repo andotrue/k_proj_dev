@@ -189,7 +189,12 @@ var PopupLayer = cc.Layer.extend({
 		
 		this.playInfo.clock.interruptTimer();
         this.state = "SAVE";
-        path = gsDir + "popup/popup_game_save.png";
+		
+		if(this.playInfo.isGuest()){
+	        path = gsDir + "popup/popup_game_save_guest.png";
+		} else {
+	        path = gsDir + "popup/popup_game_save.png";
+		}
 //        path = gsDir + this.is_guest ? "popup/save.png" : "popup/save_guest.png";
         var popup = cc.Sprite.create(path);
         this.addChild(popup);
@@ -197,7 +202,12 @@ var PopupLayer = cc.Layer.extend({
 		var popupY = this.getPopupPosAndScrollTop();
 		popup.setPosition(360,popupY );
 
-        var yes = this.createYesButton(360,popupY + 65);
+        var yes = null;
+		if(this.playInfo.isGuest()){
+			yes = this.createGrayYesButton(360,popupY + 65);
+		} else {
+			yes = this.createYesButton(360,popupY + 65);
+		}
         var no = this.createNoButton(360,popupY - 25);
         var menu = cc.Menu.create([yes,no]);
         menu.setPosition(0,0);
@@ -362,10 +372,22 @@ var PopupLayer = cc.Layer.extend({
 				
                 this.removeFromParent();
                 break;
+			case 'GRAY_YES':
+				break;
             default:
                 cc.log('default');
         }
     },
+	createGrayYesButton:function (x,y) {
+        var yes = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/button_yes_gray.png",
+            bd+"res/game_scene/button/button_yes_gray_off.png",
+            this.menuCallBack.bind(this)
+        );
+        yes.setPosition(x, y);
+        yes.name = "GRAY_YES";
+        return yes;
+    },	
     createYesButton:function (x,y) {
         var yes = cc.MenuItemImage.create(
             bd+"res/game_scene/button/button_yes.png",
