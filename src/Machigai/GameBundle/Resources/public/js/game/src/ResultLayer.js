@@ -20,8 +20,6 @@ var ResultLayer = cc.Layer.extend({
         this.playInfo = playInfo;
         this._super();
 
-//        this.isGuest = isGuest;
-//        this.isCleared = isCleared;
         this.acquiredPoint = acquiredPoint;
         this.clearTime = clearTime;
         this.currentPoint = currentPoint;

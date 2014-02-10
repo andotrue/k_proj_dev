@@ -2,10 +2,9 @@ var ResultScene = cc.Scene.extend({
     ctor:function(playInfo){
         cc.log("ResultScene.onEnter");
         this._super();
-//        this.playData = playInfo.getPlayData();
-        this.playInfo = playInfo;
-//        this.userId = this.playData.getUserId(); TODO:getUserId が変。
-        this.userId = playInfo.getUserId;
+
+		this.playInfo = playInfo;
+        this.userId = playInfo.getUserID();
         if (playInfo.isGuest()){
             this.isGuest = true;
             this.currentPoint =null;
