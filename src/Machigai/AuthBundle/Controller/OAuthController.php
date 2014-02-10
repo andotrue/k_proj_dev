@@ -56,8 +56,11 @@ class OAuthController extends Controller {
 					$session->set("state", $state);
 					$authzReqUrl .= "&state=" . $state;
 					// metaリフレッシュで認可要求
-					$response_html = '<html><head><meta http-equiv="refresh" content="1" url="' . $authzReqUrl . '"></head><body>[AUTHZ_REQ] Please wait...</body></html>';
-					return new Response($response_html);
+					
+					return $this->redirect($authzReqUrl);
+					
+					//$response_html = '<html><head><meta http-equiv="refresh" content="1" url="' . $authzReqUrl . '"></head><body>[AUTHZ_REQ] Please wait...</body></html>';
+					//return new Response($response_html);
 					
 				}
 				break;
@@ -69,7 +72,7 @@ class OAuthController extends Controller {
 				$state_query = $query->get("state");
 
 				if (!empty($state_query) && $state_query != $state) {
-					$response_html = '<html><body>Unmatch[' . $query('state') .
+					$response_html = '<html><body>Unmatch[' . $query->get('state') .
 							' <=> ' . $state . ']<br /><br /><a href="' .
 							$_SERVER["SCRIPT_NAME"] . '">Retry</a></body></html>"';
 					return new Response($response_html);

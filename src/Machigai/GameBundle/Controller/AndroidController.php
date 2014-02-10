@@ -12,29 +12,30 @@ use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
-/*include_once "Auth/OpenID.php";
+
+include_once "Auth/OpenID.php";
 include_once "Auth/OpenID/FileStore.php";
 include_once "Auth/OpenID/Consumer.php"; 
-*/use \Auth_OpenID_FileStore;
+use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
 
 class AndroidController extends Controller
 {
-    public $connectTo = "connect.auone.jp";
+    public $connectTo = "st.connect.auone.jp";
 
     public function auIdAction()
   {
         $logger = $this->get('logger');
         $logger->info('inf auIdAction');
        
-        $realm = "https://machigai.puzzle-m.ne.jp/";               
+        $realm = "https://st.machigai.puzzle-m.net/";               
         $formId = "test";
-        $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";   
+        $returnToUrl = "https://st.machigai.puzzle-m.net/auIdAssociation";   
        
         $associationDirPath = "/tmp";                              
         $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";       
-        $connectTo = "https://connect.auone.jp";                   
+        $connectTo = "https://st.connect.auone.jp";                   
         $authUrl = $connectTo . $preDealPath;
 
        
@@ -417,6 +418,7 @@ class AndroidController extends Controller
         $user = $users[0];
 
         for ($i = 0; $i < count($questions); $i++) {
+            //問題の配信停止は、 $questionData['question'][$i]['is_delete']のフラグをフロントエンドで確認して行う。
             $playHistories = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:PlayHistory')
                 ->findBy(array('user' => $user , 'question'=> $questions[$i] ));
