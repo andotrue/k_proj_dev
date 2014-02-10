@@ -42,11 +42,11 @@ function submitForm(){
 	var title = $('#form_title').val();
 	var email = $('#form_email').val();
 	var content = $('#form_content').val();
-	if(!title){
+	if(!title.match(/\S/)){
 		alert("件名を入力してください。");
-	}else if(!email || email.indexOf("@")==-1){
+	}else if(!email.match(/^[A-Za-z0-9]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
 		alert("メールアドレスを入力してください。");
-	}else if(!content){
+	}else if(!content.match(/\S/)){
 		alert("本文を入力してください。");
 	}else{
 		$('#form_confirm').trigger('click');
