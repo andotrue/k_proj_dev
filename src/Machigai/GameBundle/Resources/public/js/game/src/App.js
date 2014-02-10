@@ -9,16 +9,6 @@ image.style.top = "0%";
 image.style.left = "0%";
 image.style.width = "400px";
 image.style.height = "300px";
-if(agent.search(/iPhone/) != -1){
-    window.onorientationchange = warning;
-}
-function warning(){
-    if(orientation != 0){
-        image.style.display = "block";
-    }else{
-        image.style.display = "none";  
-    }
-}
 
 var MyGameScene = cc.Scene.extend({
     playInfo: null,
