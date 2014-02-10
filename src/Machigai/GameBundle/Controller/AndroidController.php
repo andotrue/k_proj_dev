@@ -28,9 +28,9 @@ class AndroidController extends Controller
         $logger = $this->get('logger');
         $logger->info('inf auIdAction');
        
-        $realm = "https://machigai.puzzle-m.ne.jp/";               
+        $realm = "https://machigai.puzzle-m.net/";               
         $formId = "test";
-        $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";   
+        $returnToUrl = "https://machigai.puzzle-m.net/auIdAssociation";   
        
         $associationDirPath = "/tmp";                              
         $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";       
