@@ -22,16 +22,16 @@ use \Auth_OpenID_Consumer;
 
 class AndroidController extends Controller
 {
-    public $connectTo = "connect.auone.jp";
+    public $connectTo = "st.connect.auone.jp";
 
     public function auIdAction()
   {
         $logger = $this->get('logger');
         $logger->info('inf auIdAction');
        
-        $realm = "https://machigai.puzzle-m.net/";               
+        $realm = "https://st.machigai.puzzle-m.net/";               
         $formId = "test";
-        $returnToUrl = "https://machigai.puzzle-m.net/auIdAssociation";   
+        $returnToUrl = "https://st.machigai.puzzle-m.net/auIdAssociation";   
        
         $associationDirPath = "/tmp";                              
         $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";       
