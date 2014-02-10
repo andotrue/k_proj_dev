@@ -3,17 +3,16 @@
 {% block title %}登録内容変更{% endblock %}
 
 {% block contents %}
-<img src="{{asset('/bundles/machigaigame/images/parts/header_nicknamechange_check.png')}}" width="100%" />
+<img src="{{asset('/bundles/machigaigame/images/parts/header_nicknamechange_check.png')}}" width="100%" style="position:relative;margin-top:14%" />
 <section>
- <p style="padding:1em 2em;text-align:left;">下記の内容でよろしければ、登録ボタンを押してください。</p>
- <p style="padding:2%">ニックネーム</p>
+ <p style="padding:1em 2em;text-align:left;color:rgb(22,101,179)">以下の内容でよろしければ登録ボタンを押してください。</p>
+ <p style="position:relative;color:rgb(22,101,179)">ニックネーム</p>
+ <p style="color:rgb(22,101,179);margin-top:2%;1.3em">{{ form.vars['value']['nickname']}}</p>
  <br />
- <font color="blue">{{ form.vars['value']['nickname']}}</font>
- <br />	
  <div style="padding:3%">
  {{ form(form) }}
 </div>
-<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" style="width:35%;align:center;" onclick="changeImage(this.id);modifyNickname()">
+<img id="modifynickname" src="{{ asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" style="width:35%;align:center;" onclick="changeImage(this.id);modifyNickname()">
 <img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_update_off.png')}}" style="width:35%;align:center;" onclick="changeImage(this.id);submitNickname()">
 
 <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_modify.png')}}">

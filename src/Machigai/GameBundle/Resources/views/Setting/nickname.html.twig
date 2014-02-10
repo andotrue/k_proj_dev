@@ -12,13 +12,22 @@
  {{ form (form) }}
  </div>
 </form>
-<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_nicknamechange_off.png')}}" style="width:35%;align:center; margin:1%" onclick="changeImage(this.id);submitNickname();" >
+<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck2_off.png')}}" style="width:60%;align:center; margin:1%" onclick="changeImage(this.id);submitNickname();" >
+<a href="{{path('Setting')}}">
+ <img id="buttomReturn" src="{{ asset('/bundles/machigaigame/images/parts/buttom_return_off.png')}}" style="width:60%;align:center; margin:1%" onclick="changeImage(this.id);" >
+</a>
 </section>
-<img src="{{ asset('/bundles/machigaigame/images/parts/button_nicknamechange.png')}}" class="preload" >
+<img src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck2_off.png')}}" class="preload" >
+<img src="{{ asset('/bundles/machigaigame/images/parts/buttom_return_off.png')}}" class="preload" >
+
+
+
 <script>
 var image_path = null;
 var image_id = null;
 $(function(){
+	$('#button_tohelp').hide();
+	$('#toapptop').hide();
 	$('#form_confirm').hide();
 })
 function changeImage(imageId){
