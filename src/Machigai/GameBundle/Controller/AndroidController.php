@@ -417,6 +417,7 @@ class AndroidController extends Controller
         $user = $users[0];
 
         for ($i = 0; $i < count($questions); $i++) {
+            //問題の配信停止は、 $questionData['question'][$i]['is_delete']のフラグをフロントエンドで確認して行う。
             $playHistories = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:PlayHistory')
                 ->findBy(array('user' => $user , 'question'=> $questions[$i] ));
