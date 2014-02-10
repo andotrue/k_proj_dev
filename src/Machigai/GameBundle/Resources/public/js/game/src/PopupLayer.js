@@ -206,8 +206,6 @@ var PopupLayer = cc.Layer.extend({
     },
     save:function () {
         this.questionId = this.playInfo.QUESTION_ID;
-        var user = this.playInfo.getUserID();
-        var data = this.playInfo._playData.getTouchData();        
         var MyForm = document.createElement("FORM");
             document.body.appendChild(MyForm);
 

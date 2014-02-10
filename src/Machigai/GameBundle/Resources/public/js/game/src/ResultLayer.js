@@ -63,7 +63,6 @@ var ResultLayer = cc.Layer.extend({
                 if( this.isCleared === true ) {
                     
                     this.questionId = this.playInfo.QUESTION_ID;
-                    var user = this.playInfo.getUserID();
                     var data = this.playInfo._playData.getTouchData();
                     clearTime = this.playInfo.getClearTime();
                     var MyForm = document.createElement("FORM");
