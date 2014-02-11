@@ -154,7 +154,6 @@ class BaseController extends Controller
     
             $newRank = new Ranking();
             $newRank->setUser($user);
-            $newRank->setPlayHistory($playHistory);
             $newRank->setYear($year);
             $newRank->setMonth($month);
             $newRank->setLevel($gameLevel);
@@ -197,7 +196,6 @@ class BaseController extends Controller
                         $newRank = $newRanks[0];
                     }
                     $newRank->setUser($user);
-                    $newRank->setPlayHistory($playHistory);
                     $newRank->setYear($year);
                     $newRank->setMonth($month);
                     $newRank->setLevel($gameLevel);
@@ -232,7 +230,6 @@ class BaseController extends Controller
 			if ($isRegistered == false && empty($newRanks) &&  count($rankings) < 10){
                     $newRank = new Ranking(); 
                     $newRank->setUser($user);
-                    $newRank->setPlayHistory($playHistory[0]);
                     $newRank->setYear($year);
                     $newRank->setMonth($month);
                     $newRank->setLevel($gameLevel);

@@ -351,7 +351,6 @@ class GameController extends BaseController
 		$em = $this->getDoctrine()->getManager();
 		$newRank = new Ranking();
 		$newRank->setUser($userId);
-                $newRank->setPlayHistoryId($playHistory[0]->getId());
                 $newRank->setYear($year);
                 $newRank->setMonth($month);
                 $newRank->setLevel($gameLevel);
@@ -379,7 +378,6 @@ class GameController extends BaseController
                     $em = $this->getDoctrine()->getEntityManager();
                     $newRank = $em->getRepository('MachigaiGameBundle:Ranking')->findBy(array('id'=>$rankId));
                     $newRank->setUser($userId);
-                    $newRank->setPlayHistoryId($playHistory[0]->getId());
                     $newRank->setYear($year);
                     $newRank->setMonth($month);
                     $newRank->setLevel($gameLevel);
@@ -410,19 +408,35 @@ class GameController extends BaseController
                 ->setParameters(array('id'=>$questionId))
                 ->getResult();    
 
-        $clearPoint = $question[0]->getClearPoint();
-        $currentPoint = $pre_currentPoint+$clearPoint;
 
 		$user = $this->getUser();
-		$user->setCurrentPoint($currentPoint);
 		$em = $this->getDoctrine()->getManager();
 
-		$em->persist($user);
-		$em->flush();
-		
         $histories = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user,'question'=>$question[0]));
+
+		$currentPoint = $pre_currentPoint;
+		$clearPoint = 0;
+		
+		// 初回クリア
+		if(empty($histories)){
+	        $clearPoint = 
+				$question[0]->getBonusPoint() + $question[0]->getClearPoint();;
+		}
+		if(!empty($histories)){
+			$history = $histories[0];
+			$status = $history->getGameStatus();
+			if($status != 3 && $status != 4){
+				$clearPoint = $clearPoint +  $question[0]->getClearPoint();
+			}
+		}
+		$currentPoint = $currentPoint+$clearPoint;
+
+		$user->setCurrentPoint($currentPoint);
+		
+		$em->persist($user);
+		$em->flush();
 
         //TODO: クリアタイム計算
         $duration = 0;

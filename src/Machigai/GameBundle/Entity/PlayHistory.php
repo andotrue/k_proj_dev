@@ -77,12 +77,6 @@ class PlayHistory
     protected $question;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ranking", mappedBy="playHistory") 
-     * @ORM\JoinColumn(name="ranking_id", referencedColumnName="id")
-     */ 
-    protected $ranking;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="game_status", type="integer", nullable=true)
@@ -303,29 +297,6 @@ class PlayHistory
     public function getQuestion()
     {
         return $this->question;
-    }
-
-    /**
-     * Set ranking
-     *
-     * @param \Machigai\GameBundle\Entity\Ranking $ranking
-     * @return PlayHistory
-     */
-    public function setRanking(\Machigai\GameBundle\Entity\Ranking $ranking = null)
-    {
-        $this->ranking = $ranking;
-
-        return $this;
-    }
-
-    /**
-     * Get ranking
-     *
-     * @return \Machigai\GameBundle\Entity\Ranking 
-     */
-    public function getRanking()
-    {
-        return $this->ranking;
     }
 
     /**
