@@ -26,8 +26,10 @@ class AndroidController extends BaseController
 
     public function auIdAction()
   {
+        if($this->MODE == $this->DEBUG) $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
+
         $logger = $this->get('logger');
-        $logger->info('inf auIdAction');
+        $logger->info('in auIdAction');
        
         $realm = "https://st.machigai.puzzle-m.net/";               
         $formId = "test";
