@@ -13,10 +13,10 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
 
-/*include_once "Auth/OpenID.php";
+include_once "Auth/OpenID.php";
 include_once "Auth/OpenID/FileStore.php";
 include_once "Auth/OpenID/Consumer.php"; 
-*/use \Auth_OpenID_FileStore;
+use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
 
@@ -26,7 +26,7 @@ class AndroidController extends BaseController
 
     public function auIdAction()
   {
-        if($this->MODE == $this->DEBUG) $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
+        if($this->MODE == "DEBUG") return $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
 
         $logger = $this->get('logger');
         $logger->info('in auIdAction');
