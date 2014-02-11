@@ -1,3 +1,9 @@
+afterAuIdLoginAction:
+    pattern: /afterAuIdLogin
+    defaults: { _controller: MachigaiGameBundle:Android:afterAuIdLogin }
+    requirements: 
+        _method: GET
+
 AuIdLogin:
     pattern: /auIdLogin
     defaults: { _controller: MachigaiGameBundle:Android:auId }
@@ -279,7 +285,7 @@ LoginAfterSettingName:
     defaults: { _controller: MachigaiGameBundle:Register:loginAfterSettingName }
 
 Register:
-    pattern: /register/{temp}
+    pattern: /register
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
 ResultUserClear:

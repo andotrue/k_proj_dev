@@ -28,3 +28,10 @@ function goTop(){
         window.location = '/top';
     }
 }
+
+//AndrodではsyncTokenをPreferenceManagerに渡す処理, webapp版ではなにもしない。
+function registerUserIfAndroid(syncToken){
+    if(window["droid"]){
+        droid.registerUser(syncToken);
+    }
+}

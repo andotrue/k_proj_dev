@@ -125,7 +125,7 @@ class RegisterController extends BaseController
         }
     }
 
-    public function indexAction($temp)
+    public function indexAction()
     {
 	$form = $this->createFormBuilder()
 	 ->setMethod('GET')
@@ -133,7 +133,7 @@ class RegisterController extends BaseController
      ->add('tempPass','hidden')
 	 ->add('confirm', 'submit', array('label'=>'内容を確認'))
 	 ->getForm();
-        return $this->render('MachigaiGameBundle:Register:index.html.twig', array('tempPass'=>$temp,'form' => $form->createView()) );
+        return $this->render('MachigaiGameBundle:Register:index.html.twig', array('tempPass'=>"test",'form' => $form->createView()) );
     }
 
     public function completeAction(Request $request)
@@ -171,7 +171,8 @@ class RegisterController extends BaseController
     }
     public function confirmAction(Request $request){
        $nickname = new User();
-
+       $session = $this->get("query")->getSession();
+       $syncTokenPre = $sesion->get("syncTokenPre");
         $form = $this->createFormBuilder()
         ->setMethod('GET')
         ->add('nickname', 'hidden')
