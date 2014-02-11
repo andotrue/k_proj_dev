@@ -33,10 +33,10 @@ var BaseLayer = cc.Layer.extend({
         }
     },
     init:function (parent) {
-		
+
 		this.onIllust0 = false;
 		this.onIllust1 = false;
-		
+
         cc.log("BaseLayer.init");
         var bRet = false;
         if (this._super()) {
@@ -58,9 +58,9 @@ var BaseLayer = cc.Layer.extend({
             var LabelOtetsuki = cc.Sprite.create( gsDir + "label/game_otetsuki.png" );
             var LabelMachigai = cc.Sprite.create( gsDir + "label/game_machigai.png" );
             var LabelTimelimit = cc.Sprite.create( gsDir + "label/game_timelimit.png" );
-			
+
             this.initStarsAndHearts();
-           
+
             //Layerの子要素に。
             this.addChild(LabelOtetsuki);
             this.addChild(LabelMachigai);
@@ -91,18 +91,18 @@ var BaseLayer = cc.Layer.extend({
         return bRet;
     },
 	dispSaveData:function(){
-		
+
 		if(this.dispSaveDataCallFlg)return;
-		
+
 		this.dispSaveDataCallFlg = true;
-		
+
 		if(this.playInfo._playData._touchData){
 			for(var i in this.playInfo._playData._touchData){
 				var data = this.playInfo._playData._touchData[i];
 
 				var objs = this.playInfo.MACHIGAI_POINT_DATA;
 				var trueFlg = false;
-				
+
 				for( var i in objs ){
 					var ap = objs[i];
 
@@ -116,7 +116,7 @@ var BaseLayer = cc.Layer.extend({
 						trueFlg = true;
 					}
 				}
-				
+
 				if(!trueFlg){
 			        this.hearts.decrement();
 				}
@@ -162,7 +162,18 @@ var BaseLayer = cc.Layer.extend({
         popupGiveup.setPosition(535, 259);
         popupGiveup.name = "GIVEUP";
 
-        var menu = cc.Menu.create([popupHint,popupSave,popupGiveup]);
+        var qcode = this.playInfo.QCODE;
+        var level = this.playInfo.LEVEL;
+
+        var copyrightImage = cc.MenuItemImage.create(
+            bd+"../../../../../sync/game/file/"+level+"/"+qcode+"/copyright",
+            bd+"../../../../../sync/game/file/"+level+"/"+qcode+"/copyright",
+            this.menuCallBack.bind(this)
+        );
+        copyrightImage.setPosition(426, 138);
+        copyrightImage.name = "COPYRIGHT";
+
+        var menu = cc.Menu.create([popupHint,popupSave,popupGiveup,copyrightImage]);
         menu.setPosition(0,0);
         this.addChild(menu);
     },
@@ -200,19 +211,19 @@ var BaseLayer = cc.Layer.extend({
 		var ill1 = this.illusts.frames[1].illust;
 		var ill1R  = ill1.getTextureRect();
 		var point1 = ill1.convertToNodeSpace(touch.getLocation());
-		
+
 		this.onIllust0 = false;
 		this.onIllust1 = false;
-		
+
 		if(point0.x >= 0 && point0.x <= ill0R.width && point0.y >= 0 && point0.y <= ill0R.height) {
-			
+
 			this.onIllust0 = true;
-			
+
 		} else if (point1.x >= 0 && point1.x <= ill1R.width && point1.y >= 0 && point1.y <= ill1R.height) {
 
 			this.onIllust1 = true;
 		}
-		
+
 		if( this.onIllust0 || this.onIllust1 ){
 			this.canMoveIllust = true;
             this.isIllustTouched = true;
@@ -238,16 +249,16 @@ var BaseLayer = cc.Layer.extend({
 		this.touchedTo = touch.getLocation();
 		var dx = this.touchedTo.x - this.touchedFrom.x;
 		var dy = this.touchedTo.y - this.touchedFrom.y;
-		
+
 		if (this.canMoveIllust === true &&
 				(this.onIllust0 || this.onIllust1) ){
             this.illusts.move(dx, dy,touch);
             this.touchedFrom = this.touchedTo;
         } else {
-			
+
 			//cc.log("rect " + this.getRect().height);
-			
-			
+
+
 			var thr = this.HEIGHT - this.getContentSize().height;
 			var posy = this.getPositionY() + dy;
 
@@ -289,14 +300,14 @@ var BaseLayer = cc.Layer.extend({
         return true;
     },
     checkAnswer:function (touch){
-		
+
 		var margin = 50;
-		
+
 		// ポイントを取得
         var deviceLocation = touch.getLocation();
         cc.log(" touched point in device location: ( " + deviceLocation.x +  "," + deviceLocation.y + ")" );
 		var illustF = this.illusts.frames[0];
-		
+
 		var point = this.illusts.frames[0].illust.convertToNodeSpace(deviceLocation);
 		if( this.onIllust1 ){
 			point = this.illusts.frames[1].illust.convertToNodeSpace(deviceLocation);
@@ -309,7 +320,7 @@ var BaseLayer = cc.Layer.extend({
 
 		// 正解ポイントの取得
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
-		
+
         var trueFlag = false;
 		for( var i in objs ){
             var ap = objs[i];
@@ -320,7 +331,7 @@ var BaseLayer = cc.Layer.extend({
             var py  = makeY;    // 座標系の変換
 
             cc.log(apx + " " + apy + " " + px + " " + py);
-            
+
             if( apx - margin < px && apx + margin > px &&
                 apy - margin < py && apy + margin > py ){
                 if( !this.answeredPoints[i] ){
@@ -341,9 +352,9 @@ var BaseLayer = cc.Layer.extend({
             var date = new Date();
             touchDatum = {x: px, y:py, result:false , touchedAt: date };
             this.playInfo._playData.setTouchData(touchDatum);
-			
+
 			   return this.runNG();
-	           cc.log(" touch  ! ");            
+	           cc.log(" touch  ! ");
         }
     },
     runOK:function () {
@@ -354,14 +365,14 @@ var BaseLayer = cc.Layer.extend({
     },
     runNG:function () {
 		var upperPos = this.getUpperPos();
-		
+
 		//        cc.runAction();
-		
+
 		var upperNg = cc.Sprite.create( gsDir + "other/ng.png" );
 		var lowerNg = cc.Sprite.create( gsDir + "other/ng.png" );
 		this.illusts.frames[0].illust.addChild(upperNg);
 		this.illusts.frames[1].illust.addChild(lowerNg);
-		
+
 		upperNg.setPosition(upperPos.x, upperPos.y);
 		lowerNg.setPosition(upperPos.x, upperPos.y);
 
@@ -369,11 +380,11 @@ var BaseLayer = cc.Layer.extend({
 			upperNg.removeFromParent();
 			lowerNg.removeFromParent();
 		}, 3000);
-		
+
         this.hearts.decrement();
     },
 	getUpperPos: function() {
-		
+
 		var illust = this.illusts.frames[0].illust;
 		if( this.onIllust1 ){
 			illust = this.illusts.frames[1].illust;
@@ -460,7 +471,7 @@ var BaseLayer = cc.Layer.extend({
 
 		var upperPictIllust = upperPict.illust;
 		var lowerPictIllust = lowerPict.illust;
-		
+
 		var apx = parseInt(pointHint.x);
 		var apy = parseInt(pointHint.y);
 
@@ -478,10 +489,10 @@ var BaseLayer = cc.Layer.extend({
 
 		upperHint.setPosition(apx, apy);
 		lowerHint.setPosition(apx, apy);
-		
+
 		var opa = 255;
 		var minus = 20;
-		
+
 		var eventId = setInterval(
 			function(){
 				if(opa - minus <= 0){
@@ -496,25 +507,25 @@ var BaseLayer = cc.Layer.extend({
 				}
 			}, 100
 		);
-		
+
 //		setTimeout( function(){
 //			dis.upperHint.setVisible(false);
 //			dis.lowerHint.setVisible(false);
 //		}, 3000);
-		
+
 		return true;
 	},
 	updateAnswerMark: function(new_scale){
-		
+
 		var objs = this.playInfo.MACHIGAI_POINT_DATA;
-		
+
 		for( var i in objs ){
             var ap = objs[i];
             var apx = parseInt(ap.x);
             var apy = parseInt(ap.y);
 
 			if( this.answeredPoints[i] ){
-				
+
 				var upperPict = this.illusts.frames[0];
 				var upperPictIllust = this.illusts.frames[0].illust;
 				var lowerPictIllust = this.illusts.frames[1].illust;
@@ -532,7 +543,7 @@ var BaseLayer = cc.Layer.extend({
 					var okHeight	= okSize.height;
 					var okLeft		= 0;
 					var okTop		= 0;
-					
+
 					var leftAp		= apx - (okWidth / 2);
 					var topAp		= apy - (okHeight / 2);
 
@@ -540,7 +551,7 @@ var BaseLayer = cc.Layer.extend({
 					var right		= leftAp + okWidth;
 					var curBottom	= upperPict.currentY + upperPict.currentHeight;
 					var bottom		= topAp + okHeight;
-					
+
 					if( upperPict.currentX > leftAp ){
 						//左を切る
 						okLeft	= upperPict.currentX - leftAp;
@@ -563,8 +574,8 @@ var BaseLayer = cc.Layer.extend({
 						okTop	= curBottom - bottom;
 						apy		= apy + (okTop / 2);
 					}
-					
-					
+
+
 					// 座標系の変換
 					apy = upperPictIllust.getContentSize().height - apy;
 
@@ -577,20 +588,20 @@ var BaseLayer = cc.Layer.extend({
 					var rect = cc.rect(okLeft,okTop,okWidth,okHeight);
 					upperOk.setTextureRect(rect);
 					lowerOk.setTextureRect(rect);
-					
+
 					upperOk.setPosition(apx, apy);
 					lowerOk.setPosition(apx, apy);
 
 					upperPictIllust.addChild(upperOk);
-					lowerPictIllust.addChild(lowerOk);				
+					lowerPictIllust.addChild(lowerOk);
 				}
 			}
-		}				
+		}
 	},
 	dispTitle: function(){
-		
+
 		// タイトルのマーキー表示
-		
+
 		var labelWidth = 140;
 		var labelHeight = 40;
 		var labelX = 195;
@@ -598,7 +609,7 @@ var BaseLayer = cc.Layer.extend({
 		var title  = this.playInfo.TITLE;
 		var MIN_LENGTH = 500;
 		var length = title.length * 40;
-		
+
 		if( length < MIN_LENGTH){
 			length = MIN_LENGTH;
 		}
@@ -607,23 +618,23 @@ var BaseLayer = cc.Layer.extend({
 		tencil.drawPoly(
 			[
 			cc.p(-labelWidth,labelHeight),
-			cc.p(-labelWidth,-labelHeight), 
+			cc.p(-labelWidth,-labelHeight),
 			cc.p(labelWidth, -labelHeight),
 			cc.p(labelWidth,labelHeight)
 			],
 			new cc.Color4F(0,0,0,0),
 			0,
 			new cc.Color4F(0,0,0,0));
-		
+
 		tencil.setPosition(cc.p(labelX,labelY));
 
 		var titleLabel = cc.LabelTTF.create(title, "Arial", 38);
 		titleLabel.setPosition(cc.p(labelX + labelWidth,labelY));
 		titleLabel.setColor(new cc.Color4F(0,0,0,0));
 		titleLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
-		
+
 		var clipNode = cc.ClippingNode.create(tencil);
-		
+
 		clipNode.addChild(titleLabel);
 		this.addChild(clipNode);
 
@@ -631,10 +642,10 @@ var BaseLayer = cc.Layer.extend({
 
         titleLabel.runAction(cc.MoveBy.create(0, cc.p(labelWidth * 2, 0)));
 
-       	var go = cc.MoveBy.create(10, cc.p(-moveQ, 0));       	
-        var goBack = cc.MoveBy.create(0, cc.p(moveQ, 0));        
+       	var go = cc.MoveBy.create(10, cc.p(-moveQ, 0));
+        var goBack = cc.MoveBy.create(0, cc.p(moveQ, 0));
         var seq = cc.Sequence.create(go, goBack, null);
         titleLabel.runAction((cc.RepeatForever.create(seq) ));
-		
+
 	}
 });
