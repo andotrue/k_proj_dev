@@ -54,6 +54,9 @@ class BaseController extends Controller
 	public function saveGameData($params){
         $logger = $this->get('logger');
         $logger->info('Android.saveGameData');
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $params["user"];
 
         $question = $this->getDoctrine()
                 ->getManager()
@@ -70,6 +73,7 @@ class BaseController extends Controller
 
         $data = json_decode($params["data"], true);
         $clockData = $data["clockData"];
+        $touchData = $data["touchData"];
         $logger->info("Android.saveGameData: " . $data["clockData"]["0"]["resumed"]);
 
         foreach($clockData as $datum){
@@ -84,6 +88,42 @@ class BaseController extends Controller
         }
         $logger->info("Android.saveGameData: duration = " . $duration);
 
+
+        //questionのmachigaiLimitを計算//
+        $level = $question->getLevel();
+        $qcode = $question->getQcode();
+        //xmlファイルパス生成
+//        $filePath = $_SERVER . "/sync/game/file/" . $level . "/" . $qcode . "/xml";
+        $fileName = sprintf("%05d", $qcode);
+        $filePath = getcwd() . "/" . "../src/Machigai/GameBundle/Resources/questions/" . $level . "/" . $qcode . "/" . "MS" . $fileName  . ".xml";
+        $logger->info("Android.saveGameData: xmlFilePath = " . $filePath);
+        //xmlファイル取得
+        $xmlString = file_get_contents($filePath);
+        $logger->info("Android.saveGameData: xmlString = " . $xmlString);
+        //xml->オブジェクト
+        $xml = simplexml_load_string($xmlString);
+        //xml->count
+        $machigaiLimit = count($xml->point);    
+        $logger->info("Android.saveGameData: machigaiLimit = " . $machigaiLimit);
+
+        //クリアかどうかの判別
+        $isClear = false;
+        $countResultOfMachigaiLimit = 0;
+        foreach ($touchData as $datum) {
+            if($datum["result"] != true){
+                $logger->info(" result is false");
+            }else{
+                $logger->info(" result is true");
+                $countResultOfMachigaiLimit +=1;                
+            }
+        }
+
+        if( $countResultOfMachigaiLimit == $machigaiLimit ){
+            $isClear = true;
+        }
+        $logger->info(" \$isClear is $isClear");
+
+
         if(empty($playHistories)){
             $logger->info("Android.saveGameData: playHistory is null.");
             $playHistory = new PlayHistory();
@@ -93,10 +133,17 @@ class BaseController extends Controller
             $playHistory->setPlayInfo($params["data"]);
             $playHistory->setUser($params["user"]);
             $playHistory->setGameStatus($params["status"]);
-            $playHistory->setClearTime($duration);
             $playHistory->setIsSavedGame($params["isSavedGame"]);
-            $em = $this->getDoctrine()->getManager();
-            $logger->info("Android.saveGameData: playHistory is null. Before persist.");
+            if($isClear == true){
+                //初回クリア：userにポイント付与
+                $addPoint = $question->getClearPoint() + $question->getBonusPoint();
+                $newCurrentPoint = $user->getCurrentPoint() + $addPoint;
+                $user->setCurrentPoint($newCurrentPoint);
+                $logger->info(" point is added to User. point = " . $newCurrentPoint);
+
+                $playHistory->setClearTime($duration);
+                $em->persist($user);
+            }
             $em->persist($playHistory);
             $this->applyRanking($playHistory);
             $em->flush();
@@ -108,11 +155,19 @@ class BaseController extends Controller
             $playHistory->setUpdatedAt($updatedAt->format("Y-m-d H:i:s"));
             $playHistory->setGameStatus($params["status"]);
             $playHistory->setPlayInfo($params["data"]);
-            $playHistory->setClearTime($duration);
             $playHistory->setIsSavedGame($params["isSavedGame"]);
-
-            $em = $this->getDoctrine()->getManager();
             $playHistory->setPlayInfo($params["data"]);
+            if($isClear == true){
+                if($playHistory->getClearTime() == null){
+                    //はじめて該当問題をクリアしたときにポイント付与
+                    $addPoint = $question->getClearPoint();
+                    $newCurrentPoint = $user->getCurrentPoint() + $addPoint;
+                    $user->setCurrentPoint($newCurrentPoint);
+                    $em->persist($user);                 
+                    $logger->info(" point is added to User. point = " . $newCurrentPoint);
+                };
+                $playHistory->setClearTime($duration);
+            }
             $em->persist($playHistory);
             $this->applyRanking($playHistory);
             $em->flush();
