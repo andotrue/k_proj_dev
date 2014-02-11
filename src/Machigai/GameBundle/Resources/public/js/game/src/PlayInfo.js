@@ -46,10 +46,12 @@ var PlayInfo = cc.Class.extend({
 	},
 	setSucceed:function(){
 		this._isSucceed = true;
+		this.clock.stopTimer();
 		return this._isSucceed;
 	},
 	setFail:function(){
 		this._isSucceed = false;
+		this.clock.stopTimer();
 		return this._isSucceed;
 	},
 	getCurrentPoint:function(){

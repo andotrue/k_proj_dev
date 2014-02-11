@@ -416,12 +416,32 @@ class GameController extends BaseController
 		$user = $this->getUser();
 		$user->setCurrentPoint($currentPoint);
 		$em = $this->getDoctrine()->getManager();
+
 		$em->persist($user);
 		$em->flush();
 		
         $histories = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user,'question'=>$question[0]));
+
+        //TODO: クリアタイム計算
+        $duration = 0;
+
+
+        $data = json_decode($playInfo, true);
+        $clockData = $data["clockData"];
+
+        foreach($clockData as $datum){
+            //AndroidとWebAppでは時刻計算手法が違う。
+            //Android: 整数（long型）
+            //WebApp:  時刻形式
+            $interrupted = null;
+            $resumed = null;
+            $interrupted  = (int)$datum['interrupted'];
+            $resumed =  (int)$datum['resumed'];
+            $duration += $interrupted - $resumed;
+        }
+
 
         if(empty($histories)){
             for($i = 0;$i<count($playInfo); $i++){
@@ -432,6 +452,7 @@ class GameController extends BaseController
                 $playHistory->setUser($user);
                 $playHistory->setQuestion($question[0]);
                 $playHistory->setGameStatus(3);
+                $playHistory->setClearTime($duration);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($playHistory);
                 $em->flush();
@@ -452,11 +473,19 @@ class GameController extends BaseController
                 $playHistory->setUser($user);
                 $playHistory->setQuestion($question[0]);
                 $playHistory->setGameStatus(4);
+                $playHistory->setClearTime($duration);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($playHistory);
                 $em->flush();
             }
         }
+        //TODO: ランキング対象は初回クリア(status=3)の場合のみ//
+        /*
+            if($playHistory->getGameStatus()){
+                $this->applyRanking($playHistory);
+            }
+        */
+        $this->applyRanking($playHistory);
 
         return $this->render('MachigaiGameBundle:Game:resultUserClear.html.twig',array('clearTime'=>$clearTime,'clearPoint'=>$clearPoint,'currentPoint'=>$currentPoint));
     }
