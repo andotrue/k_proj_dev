@@ -176,29 +176,29 @@
 
 <div id="allquestions">
     <div id="level_tab" style="margin-top: 20px;">
-        <img id="easy" 
+        <img id="easy"
              src="{{ asset('/bundles/machigaigame/images/parts/tab_easy_off.png') }}"
              width="30%" onclick='changeTab(this.id);
                      changeLevel("easy");'/>
 
-        <img id="normal" 
+        <img id="normal"
              src="{{ asset('/bundles/machigaigame/images/parts/tab_normal.png') }}"
              width="30%" onclick='changeTab(this.id);
                      changeLevel("normal")' >
 
-        <img id="hard" 
+        <img id="hard"
              src="{{ asset('/bundles/machigaigame/images/parts/tab_hard.png') }}"
              width="30%" onclick='changeTab(this.id);
                      changeLevel("hard");' />
     </div>
 
-    <div id="white_background" 
+    <div id="white_background"
          style="background: url({{ asset('/bundles/machigaigame/images/parts/game_selectbg.png')  }});
          background-size:cover;
          background-repeat:no-repeat;">
 
         <section id="select_area" >
-            <div id="order_header" 
+            <div id="order_header"
                  >
 
                 <div id="selectBox" style="margin-top: 25px; float: right; margin-right: 10px;">
@@ -222,7 +222,7 @@
 
                     <span class="page"></span>/ <span class="maxPage"></span>
                     <a style="padding-left:10%;">
-                        <img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}" 
+                        <img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
                              width="7.5%" class="next"/>
                     </a>
                 </nav>
@@ -398,8 +398,8 @@
         中断問題、複数回クリアされた問題はランキング対象に
         なりませんのでご注意ください。
     </p></div>
-<a href="{{path('Top')}}" style="margin-top: 10px; margin-bottom: 10px;"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);"></a>
-<img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
+<a href="{{path('Top')}}" style="margin-top: 10px; margin-bottom: 10px;"><img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);"></a>
+<img id="preToTopImage" class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
 </div>
 </section>
 </div>
@@ -412,11 +412,11 @@
      background-image:url({{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }});
      background-size: cover;">
 
-    <button type="button" onclick="cancel()" 
+    <button type="button" onclick="cancel()"
             style="position:absolute;right: 10px;top:10px;width:50px;height:50px;
             filter: alpha(opacity=0);
             -moz-opacity:0;
-            opacity:0;            
+            opacity:0;
             "></button>
 
     <div class="gameTitle"
@@ -429,9 +429,9 @@
        overflow: hidden;
        "></div>
 
-    <img id="play_game" 
-         src="{{ asset('/bundles/machigaigame/images/parts/button_game_start3_off.png')  }}" 
-         style="margin: auto; margin-top: 50px;width:60%" 
+    <img id="play_game"
+         src="{{ asset('/bundles/machigaigame/images/parts/button_game_start3_off.png')  }}"
+         style="margin: auto; margin-top: 50px;width:60%"
          onclick="changeImage(this.id);
                  gameStart(1);"/>
 </div>
@@ -444,11 +444,11 @@
      background-image:url({{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }});
      background-size: cover;">
 
-    <button type="button" onclick="cancel()" 
+    <button type="button" onclick="cancel()"
             style="position:absolute;right: 10px;top:10px;width:50px;height:50px;
             filter: alpha(opacity=0);
             -moz-opacity:0;
-            opacity:0;            
+            opacity:0;
             "></button>
 
     <div class="gameTitle"
@@ -461,15 +461,15 @@
        overflow: hidden;
        "></div>
 
-    <img id="play_continue" 
+    <img id="play_continue"
          src="{{ asset('/bundles/machigaigame/images/parts/button_game_start2_off.png')  }}"
-         style="margin: auto; margin-top: 20px;width:50%" 
+         style="margin: auto; margin-top: 20px;width:50%"
          onclick="changeImage(this.id);
                  gameStart();"/>
 
     <img id="play_reset"
          src="{{ asset('/bundles/machigaigame/images/parts/button_game_start1_off.png')  }}"
-         style="margin: auto; margin-top: 20px;width:50%" 
+         style="margin: auto; margin-top: 20px;width:50%"
          onclick="changeImage(this.id);
                  gameStart();"/>
 

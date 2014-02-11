@@ -8,6 +8,16 @@ $(document).ready(function(){
 				$(this).attr("href", "javascript:droid.goTop();");
 			}
 		});
+		var pre_src_path = $('#toTopImage').attr('src');
+		if(pre_src_path){
+			var src_path = pre_src_path.replace(/button_back_totop_off/g,'button_toapptop_off');
+			$('#toTopImage').attr("src",src_path);
+			$('#toTopImage').width("60%");
+
+			var pre_src_path2 = $('#preToTopImage').attr('src');
+			var src_path2 = pre_src_path2.replace(/button_back_totop_off/g,'button_toapptop_off');
+			$('#preToTopImage').attr("src",src_path2);
+		}
 	}
 });
 
