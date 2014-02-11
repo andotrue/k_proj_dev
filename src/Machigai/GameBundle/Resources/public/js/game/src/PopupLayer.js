@@ -41,6 +41,9 @@ var PopupLayer = cc.Layer.extend({
                 case 'GAMEOVER_FAIL':
                     this.popupGameoverFail();
                     break;
+                case 'LINKURL':
+                    this.popupLinkUrl();
+                    break;
 
                 default:
             }
@@ -104,7 +107,7 @@ var PopupLayer = cc.Layer.extend({
                 cc.log("Popup.onTouchEnded: PLAY. now removing self. start the timer.");
 
                 var baseLayer = this.baseLayer;
-				
+
 				// 表示更新
 				baseLayer.dispSaveData();
 				var illust1 = baseLayer.illusts.frames[0];
@@ -165,7 +168,7 @@ var PopupLayer = cc.Layer.extend({
 
         var popup = cc.Sprite.create( gsDir + "popup/popup_game_hint.png" );
         this.addChild(popup);
-		
+
 		var popupY = this.getPopupPosAndScrollTop();
 
         popup.setPosition(360, popupY);
@@ -186,10 +189,10 @@ var PopupLayer = cc.Layer.extend({
 		}
     },
     popupSave:function () {
-		
+
 		this.playInfo.clock.interruptTimer();
         this.state = "SAVE";
-		
+
 		if(this.playInfo.isGuest()){
 	        path = gsDir + "popup/popup_game_save_guest.png";
 		} else {
@@ -222,13 +225,13 @@ var PopupLayer = cc.Layer.extend({
         with(MyForm) {
             method = 'post';
             action = '../saveGameData';
-			
+
 			var status = this.playInfo._playData._gameStatus;
 			// 中断した時はランキング対象にならない
 			if(status == 1){
 				status = 2;
 			}
-			
+
             var gameStatus = document.createElement('input');
                 gameStatus.setAttribute('name', 'gameStatus');
                 gameStatus.setAttribute('value', status);
@@ -243,13 +246,13 @@ var PopupLayer = cc.Layer.extend({
                 isSavedGame.setAttribute('name', 'isSavedGame');
                 isSavedGame.setAttribute('value', 'true');
                 MyForm.appendChild(isSavedGame);
-			
+
 			var playInfoData = {};
 			playInfoData["clockData"] = this.playInfo._playData._clockData;
 			playInfoData["touchData"] = this.playInfo._playData._touchData;
-			
+
 			var pidTxt = JSON.stringify(playInfoData);
-			
+
 			var playInfo = document.createElement('input');
 			playInfo.setAttribute('name', 'playInfo');
 			playInfo.setAttribute('value', pidTxt);
@@ -263,7 +266,7 @@ var PopupLayer = cc.Layer.extend({
         this.state = "GIVEUP";
         var popup = cc.Sprite.create( gsDir + "popup/popup_game_giveup.png" );
         this.addChild(popup);
-		
+
 		var popupY = this.getPopupPosAndScrollTop();
         popup.setPosition(360,popupY );
 
@@ -286,17 +289,17 @@ var PopupLayer = cc.Layer.extend({
         with(MyForm) {
 			method = 'post';
 			action = '../saveGameData';
-			
+
 			var status = this.playInfo._playData._gameStatus;
 			if( status == 1){
 				status = 2;
 			}
-			
+
             var gameStatus = document.createElement('input');
                 gameStatus.setAttribute('name', 'gameStatus');
                 gameStatus.setAttribute('value', status);
                 MyForm.appendChild(gameStatus);
-			
+
 			var questionId = document.createElement('input');
 				questionId.setAttribute('name', 'questionId');
 				questionId.setAttribute('value', this.questionId);
@@ -348,6 +351,30 @@ var PopupLayer = cc.Layer.extend({
         cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, nextScene, cc.c3b(255,255,255)));
         this.removeFromParent();
     },
+    popupLinkUrl:function () {
+        cc.log("popupLinkUrl()");
+        this.playInfo.clock.interruptTimer();
+        this.state = "LINKURL";
+
+        var popup = cc.Sprite.create( gsDir + "popup/common.png" );
+        this.addChild(popup);
+
+        var popupY = this.getPopupPosAndScrollTop();
+
+        popup.setPosition(360, popupY);
+        var str = this.createToTopString(360,popupY + 25);
+        var yes = this.createYesButton(360,popupY - 54);
+        var no = this.createNoButton(360,popupY - 139);
+        var menu = cc.Menu.create([yes,no]);
+        menu.setPosition(0,0);
+        this.addChild(menu);
+        this.addChild(str);
+    },
+    linkUrl:function () {
+        cc.log("linkUrl()");
+        this.questionId = this.playInfo.QUESTION_ID;
+        window.location = "/sync/copyright?id="+this.questionId;
+    },
     menuCallBack:function (sender) {
         cc.log('PopupLayer.menuCallBack');
         switch(sender.name){
@@ -364,12 +391,15 @@ var PopupLayer = cc.Layer.extend({
                     case 'GIVEUP':
                         this.giveup();
                         break;
+                    case 'LINKURL':
+                        this.linkUrl();
+                        break;
                 }
                 break;
             case 'NO':
                 cc.log('NO');
 				this.playInfo.clock.resumeTimer();
-				
+
                 this.removeFromParent();
                 break;
 			case 'GRAY_YES':
@@ -387,7 +417,7 @@ var PopupLayer = cc.Layer.extend({
         yes.setPosition(x, y);
         yes.name = "GRAY_YES";
         return yes;
-    },	
+    },
     createYesButton:function (x,y) {
         var yes = cc.MenuItemImage.create(
             bd+"res/game_scene/button/button_yes.png",
@@ -408,6 +438,12 @@ var PopupLayer = cc.Layer.extend({
         no.name = "NO";
         return no;
     },
+    createToTopString:function(x,y){
+        var toTop = cc.LabelTTF.create("著作権を確認しますか？", "Arial", 35);
+        toTop.setPosition(x, y);
+        toTop.name = "TOTOP";
+        return toTop;
+    },
     onEnter:function () {
         cc.log("PopupLayer.onEnter");
        if(sys.platform == "browser")
@@ -423,7 +459,7 @@ var PopupLayer = cc.Layer.extend({
         this._super();
     },
 	getPopupPosAndScrollTop:function(){
-		var diff = this.baseLayer.HEIGHT - this.getContentSize().height;	
+		var diff = this.baseLayer.HEIGHT - this.getContentSize().height;
 		this.baseLayer.setPositionY(-diff);
 		var popupY = diff + this.getContentSize().height - 500;
 		return popupY;
