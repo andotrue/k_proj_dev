@@ -121,7 +121,7 @@ class BaseController extends Controller
         if( $countResultOfMachigaiLimit == $machigaiLimit ){
             $isClear = true;
         }
-        $logger->info(" \$isClear is $isClear");
+        $logger->info(" \$isClear is $isClear");    
 
 
         if(empty($playHistories)){
@@ -135,7 +135,7 @@ class BaseController extends Controller
             $playHistory->setGameStatus($params["status"]);
             $playHistory->setIsSavedGame($params["isSavedGame"]);
             if($isClear == true){
-                //初回クリア：userにポイント付与
+                //初回挑戦でクリア：userにポイント付与
                 $addPoint = $question->getClearPoint() + $question->getBonusPoint();
                 $newCurrentPoint = $user->getCurrentPoint() + $addPoint;
                 $user->setCurrentPoint($newCurrentPoint);
@@ -143,9 +143,11 @@ class BaseController extends Controller
 
                 $playHistory->setClearTime($duration);
                 $em->persist($user);
+                //初回挑戦でクリアなので、ランキング計算
+                $this->applyRanking($playHistory);
+
             }
             $em->persist($playHistory);
-            $this->applyRanking($playHistory);
             $em->flush();
             $logger->info("Android.saveGameData: playHistory is saved.");
         }else{
@@ -169,7 +171,6 @@ class BaseController extends Controller
                 $playHistory->setClearTime($duration);
             }
             $em->persist($playHistory);
-            $this->applyRanking($playHistory);
             $em->flush();
             $logger->info("Android.saveGameData: playHistory is saved.");
         }
@@ -189,7 +190,7 @@ class BaseController extends Controller
         $question = $playHistory->getQuestion();
         $user = $playHistory->getUser();
 
-        $clearTime = $playHistory->getclearTime();
+        $clearTime = $playHistory->getClearTime();
         $gameLevel = $question->getLevel();
         $bonusPoint = $question->getBonusPoint();
         $month = date('n');
@@ -213,7 +214,9 @@ class BaseController extends Controller
             $newRank->setMonth($month);
             $newRank->setLevel($gameLevel);
             $newRank->setRank(1);
-            $newRank->setBonusPoint($bonusPoint);
+            $newRank->setClearTime($clearTime);            
+//            $newRank->setClearPoint(1);
+//            $newRank->setBonusPoint($bonusPoint);
             $newRank->setCreatedAt(date("Y-m-d H:i:s"));
             $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
             $em->persist($newRank);                    
@@ -222,7 +225,7 @@ class BaseController extends Controller
     
         }else{
            $logger->info('Android.applyRanking: rankings exists;');
-           $isRegistered = false; 
+           $isRegistered = false;
            $playHistory = $this->getDoctrine()
                 ->getManager()
                 ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
@@ -255,7 +258,8 @@ class BaseController extends Controller
                     $newRank->setMonth($month);
                     $newRank->setLevel($gameLevel);
                     $newRank->setRank($rank->getRank());
-                    $newRank->setBonusPoint($bonusPoint);
+                    $newRank->setClearTime($clearTime);            
+//                    $newRank->setBonusPoint($bonusPoint);
                     $newRank->setCreatedAt(date("Y-m-d H:i:s"));
                     $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
                     $em->persist($newRank);
@@ -289,7 +293,8 @@ class BaseController extends Controller
                     $newRank->setMonth($month);
                     $newRank->setLevel($gameLevel);
                     $newRank->setRank(count($rankings) + 1);
-                    $newRank->setBonusPoint($bonusPoint);
+                    $newRank->setClearTime($clearTime);            
+//                    $newRank->setBonusPoint($bonusPoint);
                     $newRank->setCreatedAt(date("Y-m-d H:i:s"));
                     $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
                     $em->persist($newRank);
