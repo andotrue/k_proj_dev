@@ -15,11 +15,11 @@
 
 {% block contents %}
 <style>
-#form_title{position:relative;margin-top:50%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
-#form_email{position:relative;margin-top:16%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
-#form_content{position:relative;margin-top:16%;width:87%;font-size:1.2em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea2.png')}});background-repeat:no-repeat;background-size:100% 100%;height:5em;}
+#form_title{position:relative;margin-top:55%;width:87%;height:4%;font-size:1.5em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+#form_email{position:relative;margin-top:17%;width:87%;height:4%;font-size:1.5em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+#form_content{position:relative;margin-top:16%;width:87%;height:18%;font-size:1.5em; background-image: url({{asset('/bundles/machigaigame/images/parts/otoiawase_txtarea2.png')}});background-repeat:no-repeat;background-size:100% 100%;height:5em;}
 body,*{padding:0;border:none;margin:0;}
-         
+
 	 body{ text-align: center;}
 </style>
 <script>
@@ -39,7 +39,18 @@ function originalImage(){
 	$('#'+image_id).attr("src",src);
 }
 function submitForm(){
-	$('#form_confirm').trigger('click');
+	var title = $('#form_title').val();
+	var email = $('#form_email').val();
+	var content = $('#form_content').val();
+	if(!title.match(/\S/)){
+		alert("件名を入力してください。");
+	}else if(!email.match(/^[A-Za-z0-9]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
+		alert("メールアドレスを入力してください。");
+	}else if(!content.match(/\S/)){
+		alert("本文を入力してください。");
+	}else{
+		$('#form_confirm').trigger('click');
+	}
 }
 </script>
 <img src="{{asset('/bundles/machigaigame/images/parts/2-04-4-1_bg.png')}}" style="position:absolute;left:0%;top:0%;opacity:1.4;width:100%;height:auto"/>

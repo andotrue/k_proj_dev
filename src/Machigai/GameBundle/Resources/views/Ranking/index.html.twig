@@ -12,10 +12,43 @@ var current_level = "easy";
 var monthTab = "this_month";
 
 $(function(){
-	$('.game_lavel_2').hide();
-	$('.game_lavel_3').hide();
+	var curId = "#current_month";
+	var lastId = "#previous_month";
+	var levelClassPrefix = "game_level_";
+	var MAX_LEVEL = 3;
+
+	//current_monthの場合
+	for(var i=1; i<= MAX_LEVEL; i++){
+		var levelClass = "."+levelClassPrefix + i;
+		var targetClass = levelClassPrefix+i;
+		var obj = $( curId + " " + levelClass);
+		if (obj.size() == 0){
+			targetClass = "<div class="+targetClass+"></div>";
+			$(curId).append(targetClass);
+			var target = curId+" "+levelClass;
+			$("<p>データがありません。</p>").appendTo(target);
+		}
+	}
+	//previous_monthの場合
+	for(var i=1; i<= MAX_LEVEL; i++){
+		var levelClass = "."+levelClassPrefix + i;
+		var targetClass = levelClassPrefix+i;
+		var obj = $( lastId + " " + levelClass);
+		if (obj.size() == 0){
+			targetClass = "<div class="+targetClass+"></div>";
+			$(lastId).append(targetClass);
+			var target = lastId+" "+levelClass;
+			$("<p>データがありません。</p>").appendTo(target);
+		}
+	}
+
+	$('.game_level_2').hide();
+	$('.game_level_3').hide();
 	$('#previous_month').hide();
 })
+function writeNoData(targetId,targetClass){
+	target = targetId+" "+targetClass;
+}
 function change_show_conditions(data){
 	var another_month = new Array(1,2);
 	var other_mode = new Array(1,2,3);
@@ -30,13 +63,13 @@ function change_show_conditions(data){
 	}else{
 		mode = data-2;
 		var chosen_mode = data-1;
-		chosen_mode = '.game_lavel_'+chosen_mode;
+		chosen_mode = '.game_level_'+chosen_mode;
 		other_mode.splice(mode,1);
-		other_mode1 = '.game_lavel_'+other_mode[0];
-		other_mode2 = '.game_lavel_'+other_mode[1];
+		other_mode1 = '.game_level_'+other_mode[0];
+		other_mode2 = '.game_level_'+other_mode[1];
 		$(other_mode1).hide();
 		$(other_mode2).hide();
-		$(chosen_mode).show();	
+		$(chosen_mode).show();
 	};
 }
 function changeImage(imageId){
@@ -92,18 +125,18 @@ function changeMonth(month){
 		monthTab = month;
 	}
 }
-window.onload = function(){		
+window.onload = function(){
 	var j = 1;
 	while(j <= 3){
 		var i = 1;
 		while(i <= 10){
-			var previousTime = $('.lavel_'+j+'previousMonthTime'+i).html();
+			var previousTime = $('.level_'+j+'previousMonthTime'+i).html();
 			previousTime = Time.milliSecondsToArray(previousTime)[0]+":"+Time.milliSecondsToArray(previousTime)[1]+":"+Time.milliSecondsToArray(previousTime)[2];
-			$('.lavel_'+j+'previousMonthTime'+i).html(previousTime);
+			$('.level_'+j+'previousMonthTime'+i).html(previousTime);
 
-			var currentTime = $('.lavel_'+j+'currentMonthTime'+i).html();
+			var currentTime = $('.level_'+j+'currentMonthTime'+i).html();
 			currentTime = Time.milliSecondsToArray(currentTime)[0]+":"+Time.milliSecondsToArray(currentTime)[1]+":"+Time.milliSecondsToArray(currentTime)[2];
-			$('.lavel_'+j+'currentMonthTime'+i).html(currentTime);
+			$('.level_'+j+'currentMonthTime'+i).html(currentTime);
 			i++
 		};
 		j++
@@ -130,10 +163,10 @@ window.onload = function(){
 <div style="font-size:1em">
  <div id="current_month">
   {% for rank in ranking_this_month %}
-  <div class="game_lavel_{{rank.getLevel()}}">
+  <div class="game_level_{{rank.getLevel()}}">
    <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
     <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}}<br />
-    <span>タイム　</span><div style="position:relative;left:-55%;float:right;" class="lavel_{{rank.getLevel()}}currentMonthTime{{ rank.getRank() }}">{{rank.getClearTime()}}</div>
+    <span>タイム　</span><div style="position:relative;left:-55%;float:right;" class="level_{{rank.getLevel()}}currentMonthTime{{ rank.getRank() }}">{{rank.getClearTime()}}</div>
    </li>
   </div>
   {% endfor %}
@@ -141,12 +174,12 @@ window.onload = function(){
 
   <div id="previous_month">
   {% for rank in ranking_previous_month %}
-  <div class="game_lavel_{{rank.getLevel()}}">
-   <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">  	
-    <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}} さん<br />
-    <span>タイム</span><div style="position:relative;left:-55%;float:right;" class="lavel_{{rank.getLevel()}}previousMonthTime{{ rank.getRank() }}">{{rank.getClearTime()}}</div>
-   </li>
-  </div>
+   <div class="game_level_{{rank.getLevel()}}">
+    <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
+     <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}} さん<br />
+     <span>タイム</span><div style="position:relative;left:-55%;float:right;" class="level_{{rank.getLevel()}}previousMonthTime{{ rank.getRank() }}">{{rank.getClearTime()}}</div>
+    </li>
+   </div>
   {% endfor %}
 </div>
 </div>

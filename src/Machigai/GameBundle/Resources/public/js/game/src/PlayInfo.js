@@ -19,7 +19,7 @@ var PlayInfo = cc.Class.extend({
 	_isPlayed: false,
 
 	getUserID:function(){
-		if(this.isUser){
+		if(this.isUser()){
 			return this._user['userId'];
 		}else{
 			return null;
@@ -29,7 +29,7 @@ var PlayInfo = cc.Class.extend({
 		return !this.isUser();
 	},
 	isUser:function(){
-		if(this._user["userId"]){
+		if(this._user["userId"] && this._user["userId"] != "0"){
 			return true;
 		}else{
 			return false;

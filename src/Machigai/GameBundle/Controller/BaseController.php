@@ -12,7 +12,7 @@ class BaseController extends Controller
     public $DEBUG = "DEBUG";
 
 	public function getUser()
-	{        
+	{
         $session = $this->get('session');
         $id = $session->get('id');
         if(!empty($id)){
@@ -42,16 +42,16 @@ class BaseController extends Controller
                 $toSec   = strtotime($to);
                 $differences = $toSec - $fromSec;
                 //30days
-                if($differences < 2592000){
+                if($differences < 2592000 && $differences != 0){
                     $purchasedItems[] = $purchasedItem->getItem()->getId();
                 }
-            }       
+            }
         }
         return $purchasedItems;
     }
-	
+
 	public function saveGameData($params){
-		
+
         $question = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('MachigaiGameBundle:Question')->find($params["questionId"]);
@@ -62,7 +62,7 @@ class BaseController extends Controller
                                     where p.user = :user and p.question = :question')
                 ->setParameters(array('user'=>$params["user"],'question'=>$question))
                 ->getResult();
-       
+
 
         if(empty($playHistories)){
 //            $logger->info("uploadDataAction: playHistory is null.");
@@ -92,9 +92,9 @@ class BaseController extends Controller
             $em->persist($playHistory);
             $this->applyRanking($playHistory);
             $em->flush();
-        }		
+        }
 	}
-	
+
     /*
     *
     *   Rankingに登録処理を行う
@@ -102,7 +102,7 @@ class BaseController extends Controller
      public function applyRanking($playHistory){
         //TODO: Ranking登録処理。
      }
-	
+
 /*
     //TODO: AndroidController.php の auIdActionと同一アクションなので、一方に集約する。
     public function auIdAction()
@@ -110,47 +110,47 @@ class BaseController extends Controller
         $connectTo = "connect.auone.jp";
         $logger = $this->get('logger');
         $logger->info('inf auIdAction');
-       
-        $realm = "https://machigai.puzzle-m.ne.jp/";               
+
+        $realm = "https://machigai.puzzle-m.ne.jp/";
         $formId = "test";
-        $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";   
-       
-        $associationDirPath = "/tmp";                              
-        $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";       
-        $connectTo = "https://connect.auone.jp";                   
+        $returnToUrl = "https://machigai.puzzle-m.ne.jp/auIdAssociation";
+
+        $associationDirPath = "/tmp";
+        $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";
+        $connectTo = "https://connect.auone.jp";
         $authUrl = $connectTo . $preDealPath;
 
-       
-       
-        // アソシエーションを保存するストアを作成                  
-        $logger->info(' new Auth_OpenID_FileStore');               
-        $store = new Auth_OpenID_FileStore($associationDirPath);   
-       
+
+
+        // アソシエーションを保存するストアを作成
+        $logger->info(' new Auth_OpenID_FileStore');
+        $store = new Auth_OpenID_FileStore($associationDirPath);
+
         // RP(Consumer)のインスタンスを生成
         $logger->info(' new Auth_OpenID_Consumer');
-        $consumer =& new Auth_OpenID_Consumer($store);             
-       
-        //認証方法に該当する URI をセットし、Discovery などを実行  
-        $logger->info(' $consumer->begin(' . $authUrl . ')');      
-        $auth_request = $consumer->begin($authUrl);                
-       
+        $consumer =& new Auth_OpenID_Consumer($store);
+
+        //認証方法に該当する URI をセットし、Discovery などを実行
+        $logger->info(' $consumer->begin(' . $authUrl . ')');
+        $auth_request = $consumer->begin($authUrl);
+
         // SREG・PAPE 等の OpenID 拡張機能を利用する場合は、ここでその処理を追加。
         // 詳細については、ライブラリに添付のサンプルコードを参照してください。
         // OP が OpenID1.0 しかサポートしない場合には、常にリダイレクトを行います。
         // KDDI が加盟店向けに提供する機能は、OpenID2.0 に準拠したものとなります。
 
   //      $logger->info(" $auth_request->shouldSendRedirect()");
-        if ($auth_request->shouldSendRedirect()) {                 
-       
-            $logger->info(' true: redirect');                      
-       
-           // リダイレクト先 URL を取得。                          
+        if ($auth_request->shouldSendRedirect()) {
+
+            $logger->info(' true: redirect');
+
+           // リダイレクト先 URL を取得。
            $redirect_url = $auth_request->redirectURL($realm, $returnToUrl);
             if (Auth_OpenID::isFailure($redirect_url)) {
             // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。
-                return $this->redirect("Error");                   
+                return $this->redirect("Error");
             } else {
-            // リダイレクトを実行。 header("Location: ".$redirect_url);        
+            // リダイレクトを実行。 header("Location: ".$redirect_url);
             //OpenID 認証要求
                 //TODO:リダイレクト方法を検証する
                 $logger->info(' false: Auth_OpenID::isFailure');

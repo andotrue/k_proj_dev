@@ -13,8 +13,7 @@
 
   <div id="selectBox" style="width:50%;height:30%;position:relative;left:40%;z-index:2">
     <span style="position:relative;left:-13%;top:-1%;font-size:0.8em;">並べ替え</span>
-    <img style="position:absolute;left:60%;top:7%;height:60%" src="{{ asset('/bundles/machigaigame/images/parts/game_sort.png')}}" width="50%";>
-    <select id="sortSelect" style="position:absolute;top:7%;left:60%;width:50%;height:60%;opacity:0;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
+    <select id="sortSelect" style="position:absolute;top:7%;left:60%;width:50%;height:60%;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
   </div>
 
   </p>
@@ -33,7 +32,7 @@
 
 </section>
 <footer style="margin:3% auto 5% auto;position:relative">
-  <img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop_off.png')}}" width="60%" onclick="changeImage(this.id);javascript: goTop();">
+  <img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
   <img src="{{ asset('/bundles/machigaigame/images/parts/button_toapptop.png')}}" class="preload">
 </footer>
 
@@ -51,7 +50,7 @@ $(function(){
   if(current_mode == 0){
     $('#wallpaper').hide();
   }else{
-    $('#stamp').hide();    
+    $('#stamp').hide();
     changeImageTab("wallpaper_tab");
   }
 })
@@ -72,24 +71,13 @@ var page = 0;
   }
   function rewritePageNum(){
     if(target == '.item1'){
-      var max = parseInt($('.item1').size());
+      var max = parseInt($('.item1').size()-1);
     }else{
-      var max = parseInt($('.wallpaper1').size());
+      var max = parseInt($('.wallpaper1').size()-1);
     }
     $('.page').html(page+1);
-    if((max%20)==0){
-      if(parseInt(max/20)==0){
-        $('#maxPage').html(1);
-      }else{
-        $('#maxPage').html(parseInt(max/20));
-      }
-    }else{
-      if(parseInt(max/20)==0){
-        $('#maxPage').html(1);
-      }else{
-        $('#maxPage').html(parseInt(max/20+1));
-      }
-    }
+    var maxPage = Math.ceil(parseFloat(max) / 20);
+    $('#maxPage').html(maxPage);
   }
   $('#prev').click(function() {
     if (page > 0) {
@@ -142,24 +130,13 @@ function change_tabs(data){
 
 function rewritePageNum(){
     if(target == '.item1'){
-      var max = parseInt($('.item1').size());
+      var max = parseInt($('.item1').size()-1);
     }else{
-      var max = parseInt($('.wallpaper1').size());
+      var max = parseInt($('.wallpaper1').size()-1);
     }
     $('.page').html(page+1);
-    if((max%20)==0){
-      if(parseInt(max/20)==0){
-        $('#maxPage').html(1);
-      }else{
-        $('#maxPage').html(parseInt(max/20));
-      }
-    }else{
-      if(parseInt(max/20)==0){
-        $('#maxPage').html(1);
-      }else{
-        $('#maxPage').html(parseInt(max/20+1));
-      }
-    }
+    var maxPage = Math.ceil(parseFloat(max) / 20);
+    $('#maxPage').html(maxPage);
   }
 
 var current_tab = "stamp_tab";
