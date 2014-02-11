@@ -187,7 +187,7 @@ class BaseController extends Controller
                     $rankId = $rank->getId();
                     $newRank = null;
                     $logger->info('Android.applyRanking: find newRanks');
-                    $newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->findBy(array('User'=>$user, 'level' => $gameLevel, 'year' => $year, 'month' => $month));
+                    $newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->findBy(array('user'=>$user, 'level' => $gameLevel, 'year' => $year, 'month' => $month));
 
                     $logger->info('Android.applyRanking: newRanks empty;');
 
@@ -225,7 +225,11 @@ class BaseController extends Controller
                 }
             }
 
-            if ($isRegistered == false && count($rankings) < 10){
+			$newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->
+					findBy(array('user'=>$user, 'level' => $gameLevel,
+						'year' => $year, 'month' => $month));
+			
+			if ($isRegistered == false && empty($newRanks) &&  count($rankings) < 10){
                     $newRank = new Ranking(); 
                     $newRank->setUser($user);
                     $newRank->setPlayHistory($playHistory[0]);

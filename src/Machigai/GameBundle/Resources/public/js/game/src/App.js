@@ -1,14 +1,5 @@
 var agent = navigator.userAgent;
 var orientation = window.orientation;
-var image = new Image();
-image.src = "../warning.png";
-document.body.appendChild(image);
-image.style.display = "none";
-image.style.position = "absolute";
-image.style.top = "0%";
-image.style.left = "0%";
-image.style.width = "400px";
-image.style.height = "300px";
 
 var MyGameScene = cc.Scene.extend({
     playInfo: null,
