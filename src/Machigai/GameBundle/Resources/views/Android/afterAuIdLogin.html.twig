@@ -1,0 +1,12 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+{% block body %}
+<script>
+
+
+
+$(function(){
+  registerUserIfAndroid("{{ syncToken }}");
+  goTop();
+})
+</script>
+{% endblock %}

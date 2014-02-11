@@ -34,13 +34,14 @@ class DefaultController extends BaseController
 
             $em = $this->getDoctrine()->getEntityManager();
             $user = $em->getRepository('MachigaiGameBundle:User')->find($id);
-            $user->setSyncToken("");
             $em->flush();
 
             $request = $this->get('request');
             $cookies = $request->cookies;
 
-	        $session->remove('id');
+            $session->remove('id');
+//            $session->remove('auId');
+            $session->remove('syncToken');
 
 	        //表示していないが、とりあえず
 	        $this->get('session')->getFlashBag()->add(

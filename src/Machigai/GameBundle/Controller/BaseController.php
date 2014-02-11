@@ -4,6 +4,7 @@ namespace Machigai\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Machigai\GameBundle\Entity\PlayHistory;
+use Machigai\GameBundle\Entity\Ranking;
 
 class BaseController extends Controller
 {
@@ -51,6 +52,8 @@ class BaseController extends Controller
     }
 
 	public function saveGameData($params){
+        $logger = $this->get('logger');
+        $logger->info('Android.saveGameData');
 
         $question = $this->getDoctrine()
                 ->getManager()
@@ -62,10 +65,27 @@ class BaseController extends Controller
                                     where p.user = :user and p.question = :question')
                 ->setParameters(array('user'=>$params["user"],'question'=>$question))
                 ->getResult();
+        //TODO: クリアタイム計算
+        $duration = 0;
 
+        $data = json_decode($params["data"], true);
+        $clockData = $data["clockData"];
+        $logger->info("Android.saveGameData: " . $data["clockData"]["0"]["resumed"]);
+
+        foreach($clockData as $datum){
+            //AndroidとWebAppでは時刻計算手法が違う。
+            //Android: 整数（long型）
+            //WebApp:  時刻形式
+            $interrupted = null;
+            $resumed = null;
+            $interrupted  = (int)$datum['interrupted'];
+            $resumed =  (int)$datum['resumed'];
+            $duration += $interrupted - $resumed;
+        }
+        $logger->info("Android.saveGameData: duration = " . $duration);
 
         if(empty($playHistories)){
-//            $logger->info("uploadDataAction: playHistory is null.");
+            $logger->info("Android.saveGameData: playHistory is null.");
             $playHistory = new PlayHistory();
 //            $playHistory->setCreatedAt(new DateTime());
 //            $playHistory->setUpdatedAt();
@@ -73,18 +93,22 @@ class BaseController extends Controller
             $playHistory->setPlayInfo($params["data"]);
             $playHistory->setUser($params["user"]);
             $playHistory->setGameStatus($params["status"]);
+            $playHistory->setClearTime($duration);
             $playHistory->setIsSavedGame($params["isSavedGame"]);
             $em = $this->getDoctrine()->getManager();
+            $logger->info("Android.saveGameData: playHistory is null. Before persist.");
             $em->persist($playHistory);
             $this->applyRanking($playHistory);
             $em->flush();
-//            $logger->info("uploadDataAction: playHistory is saved.");
+            $logger->info("Android.saveGameData: playHistory is saved.");
         }else{
+            $logger->info("Android.saveGameData: playHistory exists.");
             $playHistory = $playHistories[0];
 			$updatedAt = new \DateTime();
             $playHistory->setUpdatedAt($updatedAt->format("Y-m-d H:i:s"));
             $playHistory->setGameStatus($params["status"]);
             $playHistory->setPlayInfo($params["data"]);
+            $playHistory->setClearTime($duration);
             $playHistory->setIsSavedGame($params["isSavedGame"]);
 
             $em = $this->getDoctrine()->getManager();
@@ -92,16 +116,132 @@ class BaseController extends Controller
             $em->persist($playHistory);
             $this->applyRanking($playHistory);
             $em->flush();
+            $logger->info("Android.saveGameData: playHistory is saved.");
         }
 	}
 
-    /*
-    *
-    *   Rankingに登録処理を行う
+    /**
+       Ranking登録処理
     */
-     public function applyRanking($playHistory){
-        //TODO: Ranking登録処理。
-     }
+    public function applyRanking($playHistory){
+        $logger = $this->get('logger');
+        $logger->info('Android.applyRanking');
+
+
+        $em = $this->getDoctrine()->getManager();
+        $request = $this->get('request');
+
+        $question = $playHistory->getQuestion();
+        $user = $playHistory->getUser();
+
+        $clearTime = $playHistory->getclearTime();
+        $gameLevel = $question->getLevel();
+        $bonusPoint = $question->getBonusPoint();
+        $month = date('n');
+        $year = date('Y');
+        $logger->info('Android.applyRanking:before get rankings;');
+
+        $rankings = $this->getDoctrine()
+                ->getManager()
+                ->createQuery('SELECT r from MachigaiGameBundle:Ranking r
+                                    where r.level = :gameLevel and r.year = :year and r.month = :month order by r.rank asc')
+                ->setParameters(array('gameLevel'=>$gameLevel,'year'=>$year,'month'=>$month))
+                ->getResult();
+//        $logger->info('Android.applyRanking:after get rankings;' .get_class($rankings) ) ;    
+        // ランキング初登録 //
+        if(empty($rankings)){
+            $logger->info('Android.applyRanking: rankings are empty;');
+    
+            $newRank = new Ranking();
+            $newRank->setUser($user);
+            $newRank->setYear($year);
+            $newRank->setMonth($month);
+            $newRank->setLevel($gameLevel);
+            $newRank->setRank(1);
+            $newRank->setBonusPoint($bonusPoint);
+            $newRank->setCreatedAt(date("Y-m-d H:i:s"));
+            $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
+            $em->persist($newRank);                    
+            $em->flush();                    
+            return;
+    
+        }else{
+           $logger->info('Android.applyRanking: rankings exists;');
+           $isRegistered = false; 
+           $playHistory = $this->getDoctrine()
+                ->getManager()
+                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
+                                    where p.user = :user and p.question = :question')
+                ->setParameters(array('user'=>$user,'question'=>$question))
+                ->getResult();
+
+            $logger->info('Android.applyRanking: before foreach');
+            foreach ($rankings as $rank) {
+
+                $logger->info('Android.applyRanking: before if:');
+                if($clearTime < $rank->getClearTime()){
+                    $isRegistered =true;                 
+                    $logger->info('Android.applyRanking: after if');
+
+                    $rankId = $rank->getId();
+                    $newRank = null;
+                    $logger->info('Android.applyRanking: find newRanks');
+                    $newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->findBy(array('user'=>$user, 'level' => $gameLevel, 'year' => $year, 'month' => $month));
+
+                    $logger->info('Android.applyRanking: newRanks empty;');
+
+                    if(empty($newRanks)){
+                        $newRank = new Ranking(); 
+                    }else{
+                        $newRank = $newRanks[0];
+                    }
+                    $newRank->setUser($user);
+                    $newRank->setYear($year);
+                    $newRank->setMonth($month);
+                    $newRank->setLevel($gameLevel);
+                    $newRank->setRank($rank->getRank());
+                    $newRank->setBonusPoint($bonusPoint);
+                    $newRank->setCreatedAt(date("Y-m-d H:i:s"));
+                    $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
+                    $em->persist($newRank);
+
+                    for($i = $rankId; $i < count($rankings); $i++ ){
+                        if($i == 10 ){
+                            //削除
+                            $afterRank = $rankings[$i];
+                            $em->remove($afterRank);
+                        }else{
+                            $afterRank = $rankings[$i];
+                            $afterRank->setRank($i+1);
+                            $afterRank->setUpdatedAt(date("Y-m-d H:i:s"));                            
+                            $em->persist($afterRank);
+                        }
+                    }
+
+                    $em->flush();
+                    break;
+                }
+            }
+
+			$newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->
+					findBy(array('user'=>$user, 'level' => $gameLevel,
+						'year' => $year, 'month' => $month));
+			
+			if ($isRegistered == false && empty($newRanks) &&  count($rankings) < 10){
+                    $newRank = new Ranking(); 
+                    $newRank->setUser($user);
+                    $newRank->setYear($year);
+                    $newRank->setMonth($month);
+                    $newRank->setLevel($gameLevel);
+                    $newRank->setRank(count($rankings) + 1);
+                    $newRank->setBonusPoint($bonusPoint);
+                    $newRank->setCreatedAt(date("Y-m-d H:i:s"));
+                    $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
+                    $em->persist($newRank);
+                    $em->flush();
+            }
+        }     
+    }
 
 /*
     //TODO: AndroidController.php の auIdActionと同一アクションなので、一方に集約する。

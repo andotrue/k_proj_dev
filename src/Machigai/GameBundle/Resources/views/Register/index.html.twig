@@ -1,7 +1,6 @@
 {% extends "MachigaiGameBundle::base.html.twig" %}
 {% block title %}ニックネーム名登録{% endblock %}
 {% block body %}
-
 <img src="{{ asset('/bundles/machigaigame/images/parts/1-01_4_bg
 .png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
 
@@ -30,7 +29,12 @@ $(function(){
   $('#form_confirm').hide();
 })
 function submitNickname(){
-  $('#submitButton').trigger("click");
+  var nickname = $('#form_nickname').val();
+  if(!nickname.match(/\S/)){
+    alert("ニックネームを入力してください。");
+  }else{
+    $('#submitButton').trigger('click');
+  }
 }
 function changeImage(imageId){
   var pre_src = $('#'+imageId).attr('src');

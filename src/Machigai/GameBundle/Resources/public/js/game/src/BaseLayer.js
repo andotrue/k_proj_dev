@@ -170,10 +170,18 @@ var BaseLayer = cc.Layer.extend({
             bd+"../../../../../sync/game/file/"+level+"/"+qcode+"/copyright",
             this.menuCallBack.bind(this)
         );
-        copyrightImage.setPosition(426, 138);
+        copyrightImage.setPosition(436, 138);
         copyrightImage.name = "COPYRIGHT";
 
-        var menu = cc.Menu.create([popupHint,popupSave,popupGiveup,copyrightImage]);
+        var popupLinkUrl = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/button_game_link_url.png",
+            bd+"res/game_scene/button/button_game_link_url.png",
+            this.menuCallBack.bind(this)
+        );
+        popupLinkUrl.setPosition(601, 138);
+        popupLinkUrl.name = "LINKURL";
+
+        var menu = cc.Menu.create([popupHint,popupSave,popupGiveup,copyrightImage,popupLinkUrl]);
         menu.setPosition(0,0);
         this.addChild(menu);
     },

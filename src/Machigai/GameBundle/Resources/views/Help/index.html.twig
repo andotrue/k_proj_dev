@@ -20,9 +20,9 @@ function originalImage(){
 	$('#'+image_id).attr("src",src);
 }
 </script>
-  <br /> 
-  <br /> 
-  <br /> 
+  <br />
+  <br />
+  <br />
 {% if user is not empty %}
   <a href="{{ path('Setting') }}"><img src="{{ asset('/bundles/machigaigame/images/parts/button_help_setting.png')  }}" width="100%"/></a>
 {% endif %}
@@ -37,10 +37,10 @@ function originalImage(){
    <a href="{{ path('UserSetting') }}"><img alt="userSetting" src="{{ asset('/bundles/machigaigame/images/parts/button_help_setting.png')  }}" width="100%"/></a>
   -->
  {% endblock %}
- 
+
  {% block footer %}
  <footer style="margin-top:10%;">
-<img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: goTop();" />
-<img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}"  />
+<img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: goTop();" />
+<img id="preToTopImage" class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}"  />
  </footer>
  {% endblock %}

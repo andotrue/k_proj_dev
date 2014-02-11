@@ -17,7 +17,7 @@ $(function(){
   $('#submitButton').hide();
 //  $('#loginAndTop').hide();
   $('#form_confirm').hide();
-  droid.registerUser("{{ syncToken }}","{{ nickname }}");
+  registerUserIfAndroid("{{ syncToken }}");
 })
 function changeImage(imageId){
   var pre_src = $('#'+imageId).attr('src');
@@ -33,7 +33,7 @@ function originalImage(){
   $('#'+image_id).attr("src",src);
 }
 function submitButton(){
-  droid.backToTop();
+  goTop();
 }
 </script>
 {% endblock %}

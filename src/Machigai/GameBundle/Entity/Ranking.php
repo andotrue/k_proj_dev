@@ -85,13 +85,6 @@ class Ranking
     protected $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="PlayHistory", inversedBy="ranking") 
-     * @ORM\JoinColumn(name="play_history_id", referencedColumnName="id")
-     */ 
-    protected $playHistory;
-
-
-    /**
      * Get id
      *
      * @return integer 
@@ -332,26 +325,4 @@ class Ranking
         return $this->user;
     }
 
-    /**
-     * Set playHistory
-     *
-     * @param \Machigai\GameBundle\Entity\PlayHistory $playHistory
-     * @return Ranking
-     */
-    public function setPlayHistory(\Machigai\GameBundle\Entity\PlayHistory $playHistory = null)
-    {
-        $this->playHistory = $playHistory;
-
-        return $this;
-    }
-
-    /**
-     * Get playHistory
-     *
-     * @return \Machigai\GameBundle\Entity\PlayHistory 
-     */
-    public function getPlayHistory()
-    {
-        return $this->playHistory;
-    }
 }

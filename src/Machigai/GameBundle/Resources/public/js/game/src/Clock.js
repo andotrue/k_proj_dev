@@ -41,11 +41,11 @@ var Clock = cc.Layer.extend({
 		that._timer = setInterval(that.updateClock, 233);
 	},
 	resumeTimer:function(){
-		that._clockData.push({ 'resumed': new Date() });
+		that._clockData.push({ 'resumed': new Date().getTime() });
 		that._status = that._PLAYING;
 	},
 	interruptTimer:function(){
-		that._clockData[ that._clockData.length -1 ]['interrupted'] = new Date();
+		that._clockData[ that._clockData.length -1 ]['interrupted'] = new Date().getTime();
 		that._status = that._INTERRUPTED;
 	},
 	stopTimer:function(){
@@ -60,7 +60,7 @@ var Clock = cc.Layer.extend({
 		var duration = 0;
 		for (var i = that._clockData.length - 1; i >= 0; i--) {
 			if( ( i == that._clockData.length - 1 ) && that._clockData[i]['interrupted'] === undefined ){
-				duration += new Date() - that._clockData[i]['resumed'];
+				duration += new Date().getTime() - that._clockData[i]['resumed'];
 			}else{
 				duration += that._clockData[i]['interrupted'] - that._clockData[i]['resumed'];
 			}
