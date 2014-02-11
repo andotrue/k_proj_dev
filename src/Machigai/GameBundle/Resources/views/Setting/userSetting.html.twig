@@ -6,6 +6,10 @@
 <script>
 var image_path = null;
 var image_id = null;
+$(function(){
+	$('#button_tohelp').hide();
+	$('#toapptop').hide();
+})
 function changeImage(imageId){
 	var pre_src = $('#'+imageId).attr('src');
 	var src = pre_src.replace(/_off/g,'');
@@ -20,16 +24,15 @@ function originalImage(){
 	$('#'+image_id).attr("src",src);
 }
 </script>
-<img src="{{asset('/bundles/machigaigame/images/parts/2-04-4_bg.png')}}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/machigaigame/images/parts/2-04-5_bg.png')}}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
-<img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_top.png')}}" width="100%" style="position:absolute;left:0%;top:10%"/>
+<img src="{{asset('/bundles/machigaigame/images/parts/header_user_information.png')}}" width="100%" style="position:relative;margin-top:14%"/>
 <div style="position:relative;margin-top:55%">
-
-
-
 <!--<a href="{{path('ChangeEmail')}}">登録メールアドレス変更</a><br />-->
 <!--<a href="{{path('ChangePassword')}}">パスワード変更</a><br />-->
-<a href="{{path('DeleteUser')}}">ユーザー情報削除</a><br />
+<a href="{{path('DeleteUser')}}"><img id="userDelete" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
+<img class="preload" id="preuserDelete" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete.png')}}" width="67%"/>
+
 <!--<a href="{{path('Logout')}}">ログアウト</a><br />-->
 <!--
  <a href="{{ path('ChangeEmail') }}"><img id="otoiawase" src="{{ asset('/bundles/machigaigame/images/parts/button_otoiawase_off.png') }}" width="67%;" onclick="changeImage(this.id);"/></a>
@@ -45,5 +48,4 @@ function originalImage(){
  <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop.png')}}" />
 </div>
 </div>
-
 {% endblock %}
