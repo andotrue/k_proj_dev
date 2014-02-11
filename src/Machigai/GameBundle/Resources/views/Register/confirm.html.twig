@@ -17,9 +17,10 @@
 {{ form_end (form) }}
 </div>
 </section>
-<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_regist_off.png')}}" onclick="changeImage(this.id);submitNickname()" style="position:relative;margin-top:15%%">
-<img src="{{ asset('/bundles/machigaigame/images/parts/button_regist.png')}}" class="preload">
-
+<img id="nicknamechange" src="{{ asset('/bundles/machigaigame/images/parts/button_regist_off.png')}}" onclick="changeImage(this.id);submitNickname()" style="position:relative;margin-top:15%;width:30%">
+<img src="{{ asset('/bundles/machigaigame/images/parts/button_regist.png')}}" class="preload"><br />
+<img id="buttonReturn" src="{{ asset('/bundles/machigaigame/images/parts/buttom_return_off.png')}}" onclick="changeImage(this.id);history.back();" style="position:relative;margin-top:5%;width:60%">
+<img src="{{ asset('/bundles/machigaigame/images/parts/buttom_return.png')}}" class="preload">
 <script>
 var image_path = null;
 var image_id = null;
