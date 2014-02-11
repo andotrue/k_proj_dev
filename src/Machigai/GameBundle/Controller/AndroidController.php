@@ -99,6 +99,9 @@ class AndroidController extends BaseController
     }
 
     public function auIdAssociationAction(){
+
+		session_start();
+		
         $logger = $this->get('logger');
         $logger->info('inf auIdAssociationAction');
         $associationDirPath = "/tmp";
@@ -111,7 +114,7 @@ class AndroidController extends BaseController
 
         if ($response->status == Auth_OpenID_CANCEL) { // Cancel メッセージが帰ってきた場合の処理
         } else if ($response->status == Auth_OpenID_FAILURE) { // エラーが帰ってきた場合の処理
-            $this->redirect("Error");
+            return $this->redirect("Error");
         } else if ($response->status == Auth_OpenID_SUCCESS) { // 認証成功。以下の方法でユーザの OpenID を取得
             $openid = $response->getDisplayIdentifier();
             //ユーザを探す。
@@ -120,7 +123,7 @@ class AndroidController extends BaseController
                 ->findBy(array("auId"=>$syncToken));
             if(empty($users)){
                 //ユーザのニックネーム登録ページヘ。
-                $this->redirect('AndroidRegisterEntry',array("openId" => $openId));
+                return $this->redirect('AndroidRegisterEntry',array("openId" => $openId));
             }else{
                 //ユーザのログイン完了
                 $user = $users[0];
@@ -131,7 +134,9 @@ class AndroidController extends BaseController
                 return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
 //                $this->redirect('Top',array());
             }
-        }
+        } else {
+            return $this->redirect("Error");
+		}
     }
 
 	public function getCommonAccessToken(){
