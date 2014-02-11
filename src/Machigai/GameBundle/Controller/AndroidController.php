@@ -483,6 +483,7 @@ class AndroidController extends BaseController
             $questionData['question'][$i]['title'] = $questions[$i]->getQuestionTitle();
             $questionData['question'][$i]['otetsukiLimit'] = $questions[$i]->getFailLimit();
             $questionData['question'][$i]['clearPoint'] = $questions[$i]->getClearPoint();
+            $questionData['question'][$i]['bonusPoint'] = $questions[$i]->getBonusPoint();
             $questionData['question'][$i]['timeLimit'] = $questions[$i]->getTimeLimit();
             if(!empty($playHistories)){
                 $logger->info("getQuestionDataAction: playHistory exists.");
