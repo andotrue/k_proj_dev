@@ -27,7 +27,7 @@ class AndroidController extends BaseController
 
     public function auIdAction()
   {
-//        if($this->MODE == "DEBUG") return $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
+        if($this->MODE == "DEBUG") return $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
 
         $logger = $this->get('logger');
         $logger->info('in auIdAction');
