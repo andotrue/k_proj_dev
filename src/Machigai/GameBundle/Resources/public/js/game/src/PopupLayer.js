@@ -108,12 +108,14 @@ var PopupLayer = cc.Layer.extend({
 
                 var baseLayer = this.baseLayer;
 
-				// 表示更新
-				baseLayer.dispSaveData();
-				var illust1 = baseLayer.illusts.frames[0];
-				var illust2 = baseLayer.illusts.frames[1];
-				illust1.setImage(illust1.MODE_SCALE);
-				illust2.setImage(illust2.MODE_SCALE);
+				if(baseLayer.playInfo._playData.isSaved()){
+					// 表示更新
+					baseLayer.dispSaveData();
+					var illust1 = baseLayer.illusts.frames[0];
+					var illust2 = baseLayer.illusts.frames[1];
+					illust1.setImage(illust1.MODE_SCALE);
+					illust2.setImage(illust2.MODE_SCALE);
+				}
 
                 this.baseLayer.clock.startTimer();
                 this.removeFromParent();

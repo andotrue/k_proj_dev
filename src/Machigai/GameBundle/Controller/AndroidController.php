@@ -361,6 +361,7 @@ class AndroidController extends BaseController
                 'playEndedAt' => $playHistoryDB[0]->getPlayEndedAt(),
                 'clearTime' => $playHistoryDB[0]->getClearTime(),
                 'suspendedTime' => $playHistoryDB[0]->getSuspendTime(),
+                'isSavedGame' => $playHistoryDB[0]->getIsSavedGame(),
                 'gameStatus' => $playHistoryDB[0]->getGameStatus(),
                 'playInfo' => $playHistoryDB[0]->getPlayInfo(), // Javascriptでは playData
                 );
