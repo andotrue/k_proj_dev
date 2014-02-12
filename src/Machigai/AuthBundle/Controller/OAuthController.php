@@ -146,14 +146,26 @@ class OAuthController extends Controller {
 					//認証エラー
 					return new Response("<html><body>$smartPassResponse->code : " . urldecode($smartPassResponse->message) . "</body></html>");
 				}elseif( $smartPassResponse->status == "success"){
-
 					if($smartPassResponse->aspuser == true){
 						//認証OK
 						$smartPassResult = true;
-					}else{						
-						//認証NO
-						$smartPassResult = false;
+
+						$session = $this->getSession();
+						$session->set("smartPassResult", true);
+						//TODO: syncTokenをcookieに設定
+						$session->set("syncToken", $accessToken);
+						$session->$refreshToken;
+						$session->$refreshLimit;
+						//TODO:	スマートパス認証DBテーブルに情報を保存。次回アクセス時はクッキー情報から認証済みかどうかを確認する。
+						return new Response("認証成功：\$syncToken=$accessToken, \$refreshToken=$refreshToken, \$refreshLimit=$refreshLimit; ");
+						return $this->redirect($this->generateUrl('Top'));
+
+					}else{			
+						//認証NG	
+						//TODO:認証失敗時の遷移先を確認
+						return new Response("認証失敗：\$syncToken=$accessToken, \$refreshToken=$refreshToken, \$refreshLimit=$refreshLimit; ");
 					}
+
 				}else{
 					//通信エラー
 					return $this->redirect($this->generateUrl('Error'));
@@ -170,32 +182,12 @@ class OAuthController extends Controller {
 		}
 
 
-		//スマートパス認証結果がOKの場合	
-		if($smartPassResult == true){
-			$session = $this->getSession();
-			$session->set("smartPassResult", true);
-			//TODO: syncTokenをcookieに設定
-			$session->set("syncToken", $accessToken);
-			$session->$refreshToken;
-			$session->$refreshLimit;
-			//TODO:	スマートパス認証DBテーブルに情報を保存。次回アクセス時はクッキー情報から認証済みかどうかを確認する。
-			return new Response("認証成功：\$syncToken=$accessToken, \$refreshToken=$refreshToken, \$refreshLimit=$refreshLimit; ");
-			return $this->redirect($this->generateUrl('Top'));
-
-
-		}else{
-			//TODO:認証失敗時の遷移先を確認
-			return new Response("認証失敗：\$syncToken=$accessToken, \$refreshToken=$refreshToken, \$refreshLimit=$refreshLimit; ");
-		}
-
-
-/*
 		$pass_array = array('state' => $state, 'code' => $code, 
 			'accessToken' => $accessToken, 'refreshToken' => $refreshToken,
 			'refreshLimit' => $refreshLimit);
 		
 		return $this->render('MachigaiAuthBundle:OAuth:response_token.html.twig', $pass_array);
-*/		
+		
 	}
 
 }
