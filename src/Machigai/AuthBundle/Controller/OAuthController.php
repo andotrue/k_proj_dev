@@ -127,11 +127,14 @@ class OAuthController extends Controller {
 				$smartPathReqUrl = "https://auth.au-market.com/pass/AuthSpUser";
 				$data = array( 'ver' => '1.0' );
 				$headers = array(
-					"Authorization" => "Bearer $accessToken",
-					"x-sr-id" => "10012"
+					"Authorization: Bearer $accessToken",
+					'Content-Type: application/x-www-form-urlencodedl; charset=UTF-8',
+					'Content-Length: ' .strlen( http_build_query( $data )),
+					"x-sr-id: 10012"
 				);
+
 				$options = array('http' => array(
-				    'method' => 'GET',
+				    'method' => 'POST',
 				    'content' => http_build_query($data),
 				    'header' => implode("\r\n", $headers),
 				));
