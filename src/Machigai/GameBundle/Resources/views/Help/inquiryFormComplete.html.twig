@@ -8,7 +8,7 @@
 <img src="{{asset('/bundles/machigaigame/images/parts/header_otoiawase_sendend.png')}}" width="100%" style="position:absolute;top:10%;left:0%"/>
 
 <div style="position:relative;margin-top:55%">
-<a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/machigaigame/images/parts/button_returnto_top_off2.png')}}" width="65%" onclick="changeImage(this.id)" /></a>
-<img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_returnto_top2.png')}}"/>
+<a href="{{path('Top')}}"><img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
+<img id="preToTopImage" class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
 </div>
 {% endblock %}
