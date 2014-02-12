@@ -92,6 +92,7 @@ class OAuthController extends Controller {
 				
 				// サーバ発行したcodeパラメータ設定
 				$code_query = $query->get('code');
+				$logger->info("code_query = $code_query");
 				if (!empty($code_query)) {
 					$code = $query->get("code"); //$code = $_GET['code'];
 					// 連携パラメータにcode付与
@@ -101,14 +102,16 @@ class OAuthController extends Controller {
 				// 連携実施(アクセストークン取得要求/アクセストークン取得応答)
 				$ch = curl_init();
 				curl_setopt($ch, CURLOPT_URL, $tokenReqUrl);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($ch, CURLOPT_HEADER, 1);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_HEADER, true);
 				curl_setopt($ch, CURLOPT_POST, true);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $tokenParams);
-				list($header, $body) = explode("¥r¥n¥r¥n", curl_exec($ch));
+				$result = curl_exec($ch);
+				$array = split("[¥r¥n]", $result);
 				curl_close($ch);
 
 				// サーバレスポンスをJSON変換
+				$body = $array[count($array) - 2];
 				$jobj = json_decode($body);
 				// サーバエラー時はメッセージ表示して終了
 				if (!empty($jobj->error) || !empty($jobj->error_description)) {
