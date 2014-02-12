@@ -5,6 +5,8 @@ use Machigai\GameBundle\Entity\PurchaseHistory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\HttpFoundation\Response;
+
 class ShopController extends BaseController
 {
     public function indexAction()
@@ -70,16 +72,27 @@ class ShopController extends BaseController
     {
 	return $this->render('MachigaiGameBundle:Shop:confirm.html.twig',array('id'=>$id));
     }
-    public function downloadExecuteAction($id){
+	
+	public function download2(){
+
+	}
+	
+	public function downloadExecuteAction($id){
         $user = $this->getUser();
         $item = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
         ->findOneById($id);
         $purchasedItems = $this->getPurchasedItems();
-
+        $categoryCode = $item->getCategory()->getCategoryCode();
+        $itemPath = $item->getItemPath();
+        if($categoryCode==1){
+            $itemPath = "/../Resources/public/images/wallpaper/".$itemPath.".png";
+        }elseif($categoryCode==2){
+            $itemPath = "/../Resources/public/images/stamp/".$itemPath.".png";
+        }
         $itemPoint = $item->getConsumePoint();
         if(in_array($id,$purchasedItems)){
-            $this->download();
+            return $this->download($itemPath);
         }else{
             $remainder = $user->getCurrentPoint()-$itemPoint;
 
@@ -93,32 +106,31 @@ class ShopController extends BaseController
             $purchasedInfo->setUpdatedAt(date("Y-m-d H:i:s"));
 
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($purchasedInfo);      
+            $em->persist($purchasedInfo);
             $em->flush();
 
             $em = $this->getDoctrine()->getEntityManager();
             $user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
             $user_id->setCurrentPoint($remainder);
             $em->flush();
-          
-            $this->download();
+
+            return $this->download($itemPath);
         }
     }
-    public function download(){
-        //ダウンロード
-        $image_file = dirname(__FILE__).'/../Resources/questions/1/105/MS00105_1.png';
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . $image_file);
-        header('Content-Length:' . filesize($image_file));
-        header('Pragma: no-cache');
-        header('Cache-Control: no-cache');
-        readfile($image_file);
-        exit;
-        
-/*      ブラウザ出力
-        $file = dirname(__FILE__).'/../Resources/questions/1/105/MS00105_1.png';
-        $response = new BinaryFileResponse($file);
-        $response->headers->set('Content-Type', 'image/png');
-        return  $response->send();
-*/      }
+	
+    public function download($itemPath){
+
+        $image_file = dirname(__FILE__).$itemPath;
+		
+        $response = new Response($image_file);
+		$response->headers->set('Content-type', 'application/octect-stream');
+		$response->headers->set('Cache-Control', 'private');
+		$response->headers->set('Content-type', mime_content_type($image_file));
+		$response->headers->set('Content-Disposition', 'attachment; filename="' . basename($image_file) . '"');
+		$response->headers->set('Content-length', filesize($image_file));
+		$response->sendHeaders();
+		$response->setContent(readfile($image_file));
+		
+		return $response;
+	}
 }
