@@ -122,20 +122,22 @@ class OAuthController extends Controller {
 				$accessToken = $jobj->access_token;
 				$refreshToken = $jobj->refresh_token;
 				$refreshLimit = $jobj->expires_in;
-
 				//認証状態を問い合わせ
 				$smartPathReqUrl = "https://auth.au-market.com/pass/AuthSpUser";
+				//$smartPathReqUrl = "http://www.sabeevo.com/";
 				$data = array( 'ver' => '1.0' );
 				$headers = array(
-					"Authorization: Bearer $accessToken",
+					"Authorization: Bearer " .$accessToken,
+					'Connection: close',
 					'Content-Type: application/x-www-form-urlencodedl; charset=UTF-8',
 					'Content-Length: ' .strlen( http_build_query( $data )),
-					"x-sr-id: 10012"
+					"x-sr-id :5403"
 				);
 
 				$options = array('http' => array(
+				    'protocol_version' => '1.1',
 				    'method' => 'POST',
-				    'content' => http_build_query($data),
+				    'content' => http_build_query( $data ),
 				    'header' => implode("\r\n", $headers),
 				));
 				$contents = file_get_contents($smartPathReqUrl, false, stream_context_create($options));
@@ -144,12 +146,12 @@ class OAuthController extends Controller {
 
 				if($smartPassResponse->status == "error"){
 					//認証エラー
-					return new Response("<html><body>$smartPassResponse->code : " . urldecode($smartPassResponse->message) . "</body></html>");
+					return new Response("<html><body>$smartPassResponse->code : " .  "</body></html>");
 				}elseif( $smartPassResponse->status == "success"){
 					if($smartPassResponse->aspuser == true){
 						//認証OK
 						$smartPassResult = true;
-
+						
 						$session = $this->getSession();
 						$session->set("smartPassResult", true);
 						//TODO: syncTokenをcookieに設定
