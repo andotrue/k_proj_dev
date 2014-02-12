@@ -137,7 +137,9 @@ var PlayInfo = cc.Class.extend({
 		this._user = this._data["user"];
 		this._user["userId"] = uid;
 		this._definition = this._data["question"];
-		this._playDataJSON = this._data.playHistory;
+		if(this._data.playHistory && this._data.playHistory.isSavedGame){
+			this._playDataJSON = this._data.playHistory;
+		}
 		csrf_token = this._data["csrf_token"];
 
 	},
