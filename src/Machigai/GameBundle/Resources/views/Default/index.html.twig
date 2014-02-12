@@ -7,9 +7,11 @@
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
  <div>
- {% if user is empty %}	
-	<a href="{{path('AuIdLogin')}}">
-		<img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" width="50%" onclick="changeImage(this.id);"/></a>
+ {% if user is empty %}
+  <a href="{{path('RegisterUser')}}">
+  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_touroku.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
+  <a href="{{ path('Login')  }}" alt="login">
+  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_login.png')}}" style="margin-left:10%" width="35%" onclick="changeImage(this.id);"/></a>
 		<section style="margin-top:2%;background-image:url(/bundles/machigaigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
 			<p style="width:80%;margin: 0 auto;white-space:nowrap;">会員登録すると以下の機能が使えるよ！</p>
 			<p style="width:50%;margin: 0 auto;white-space:nowrap;">（追加料金はかかりません。）</p>
@@ -24,7 +26,7 @@
 		</section>
  {% else %}
   	<!--ゲスト時には何も表示しない -->
- {% endif %} 
+ {% endif %}
  </div>
 </header>
 
@@ -54,7 +56,7 @@
   <div class="news" style="color:rgb(255,254,255);">
   {% for i in 0..2 %}
    <p style="text-align:left;width:80%;margin: 0 auto;">{{news[i].getTitle}}<br />{{news[i].getDescription|raw}}</p><br />
-  {% endfor %} 
+  {% endfor %}
   </div>
 {% if user is not empty %}
 	<p style="text-align:center;">
@@ -93,8 +95,8 @@
 	width:100%;
 	text-indent:-9999px;
 	}
-	
-/*black */	
+
+/*black */
 .pre_pass.black{
 	background-image: linear-gradient(bottom, rgb(0,0,0) 4%, rgb(0,0,0) 47%, rgb(59,59,59) 52%, rgb(65,65,65) 100%);
 	background-image: -webkit-gradient(
@@ -110,14 +112,14 @@
 	}
 .pre_pass.black a{
 	background:url(../img/txt_02.png) no-repeat center;
-	}	
-	
-/*white */			
+	}
+
+/*white */
 .pre_pass.white{
 	background:#fff;
 	}
-	
-/*gradation */		
+
+/*gradation */
 .pre_pass.grada{
 	background-image: linear-gradient(bottom, rgb(172,172,172) 0%, rgb(255,255,255) 59%, rgb(255,255,255) 77%, rgb(255,255,255) 94%);
 	background-image: -webkit-gradient(

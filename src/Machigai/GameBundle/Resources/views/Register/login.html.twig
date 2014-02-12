@@ -27,7 +27,7 @@
 <section class="registerForm">
   <div >
   <form action="{{ path('LoginCheck') }}" method="post" {{ form_enctype(form) }}>
-  
+
   {{ form_errors (form) }}
   {{ form_rest(form) }}
   {{ form (form) }}
@@ -40,7 +40,7 @@
     <a href="{{path('Top')}}" id="htopImage">
    <img id="topImage" width="35%" style="margin-right:9%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
    <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
-    
+
    <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login_off.png')}}" onclick="changeImage(this.id);{{ form_rest(form) }}submitRegister()" >
    <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login.png')}}" >
    </div>
@@ -49,11 +49,18 @@
 
 <script>
 $(function(){
-//	$('#form').hide();
 	$('#form_confirm').hide();
 })
 function submitRegister(){
-	$('#form_confirm').trigger("click");
+  var mail_address = $('#form_mailAddress').val();
+  var password = $('#form_password').val();
+  if(!mail_address.match(/[\S]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
+    alert("メールアドレスを入力してください。");
+  }else if(!password.match(/\S/)){
+    alert("パスワードを入力してください。");
+  }else{
+    $('#form_confirm').trigger("click");
+  }
 }
 </script>
 </div>

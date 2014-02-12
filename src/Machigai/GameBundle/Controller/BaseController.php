@@ -19,16 +19,16 @@ class BaseController extends Controller
 	{
         $session = $this->get('session');
         $id = $session->get('id');
-		
+
 		$request = $this->get('request');
 		$cookies = $request->cookies;
-		
+
 		// クッキーチェック
 		if(empty($id) && $cookies->has('myCookie')){
-			
- 
+
+
 			$syncToken = $cookies->get("myCookie");
-			
+
         	$user = $this->getDoctrine()
 				->getRepository('MachigaiGameBundle:User')
 				->findBy(array("syncToken" => $syncToken));
@@ -38,19 +38,23 @@ class BaseController extends Controller
 				$session->set("id", $id);
 			}
 		}
-		
+
         if(!empty($id)){
         	$user = $this->getDoctrine()
 	        ->getRepository('MachigaiGameBundle:User')
 	        ->find($id);
-			
+
+            if(empty($user)) {
+                $session->remove($id);
+                return null;
+            }
 			if(!$cookies->has('myCookie')){
 				$cookie = new Cookie('myCookie', $user->getSyncToken(), time() + 3600 * 24 * 30);
 				$response = new Response();
 				$response->headers->setCookie($cookie);
 				$response->send();
 			}
-			
+
 			return $user;
         }else{
         	//GUESTの場合NULLを返す
@@ -134,7 +138,7 @@ class BaseController extends Controller
         //xml->オブジェクト
         $xml = simplexml_load_string($xmlString);
         //xml->count
-        $machigaiLimit = count($xml->point);    
+        $machigaiLimit = count($xml->point);
         $logger->info("Android.saveGameData: machigaiLimit = " . $machigaiLimit);
 
         //クリアかどうかの判別
@@ -145,14 +149,14 @@ class BaseController extends Controller
                 $logger->info(" result is false");
             }else{
                 $logger->info(" result is true");
-                $countResultOfMachigaiLimit +=1;                
+                $countResultOfMachigaiLimit +=1;
             }
         }
 
         if( $countResultOfMachigaiLimit == $machigaiLimit ){
             $isClear = true;
         }
-        $logger->info(" \$isClear is $isClear");    
+        $logger->info(" \$isClear is $isClear");
 
 
         if(empty($playHistories)){
@@ -196,7 +200,7 @@ class BaseController extends Controller
                     $addPoint = $question->getClearPoint();
                     $newCurrentPoint = $user->getCurrentPoint() + $addPoint;
                     $user->setCurrentPoint($newCurrentPoint);
-                    $em->persist($user);                 
+                    $em->persist($user);
                     $logger->info(" point is added to User. point = " . $newCurrentPoint);
                 };
                 $playHistory->setClearTime($duration);
@@ -234,26 +238,26 @@ class BaseController extends Controller
                                     where r.level = :gameLevel and r.year = :year and r.month = :month order by r.rank asc')
                 ->setParameters(array('gameLevel'=>$gameLevel,'year'=>$year,'month'=>$month))
                 ->getResult();
-//        $logger->info('Android.applyRanking:after get rankings;' .get_class($rankings) ) ;    
+//        $logger->info('Android.applyRanking:after get rankings;' .get_class($rankings) ) ;
         // ランキング初登録 //
         if(empty($rankings)){
             $logger->info('Android.applyRanking: rankings are empty;');
-    
+
             $newRank = new Ranking();
             $newRank->setUser($user);
             $newRank->setYear($year);
             $newRank->setMonth($month);
             $newRank->setLevel($gameLevel);
             $newRank->setRank(1);
-            $newRank->setClearTime($clearTime);            
+            $newRank->setClearTime($clearTime);
 //            $newRank->setClearPoint(1);
 //            $newRank->setBonusPoint($bonusPoint);
             $newRank->setCreatedAt(date("Y-m-d H:i:s"));
             $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
-            $em->persist($newRank);                    
-            $em->flush();                    
+            $em->persist($newRank);
+            $em->flush();
             return;
-    
+
         }else{
            $logger->info('Android.applyRanking: rankings exists;');
            $isRegistered = false;
@@ -269,7 +273,7 @@ class BaseController extends Controller
 
                 $logger->info('Android.applyRanking: before if:');
                 if($clearTime < $rank->getClearTime()){
-                    $isRegistered =true;                 
+                    $isRegistered =true;
                     $logger->info('Android.applyRanking: after if');
 
                     $rankId = $rank->getId();
@@ -280,7 +284,7 @@ class BaseController extends Controller
                     $logger->info('Android.applyRanking: newRanks empty;');
 
                     if(empty($newRanks)){
-                        $newRank = new Ranking(); 
+                        $newRank = new Ranking();
                     }else{
                         $newRank = $newRanks[0];
                     }
@@ -289,7 +293,7 @@ class BaseController extends Controller
                     $newRank->setMonth($month);
                     $newRank->setLevel($gameLevel);
                     $newRank->setRank($rank->getRank());
-                    $newRank->setClearTime($clearTime);            
+                    $newRank->setClearTime($clearTime);
 //                    $newRank->setBonusPoint($bonusPoint);
                     $newRank->setCreatedAt(date("Y-m-d H:i:s"));
                     $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
@@ -303,7 +307,7 @@ class BaseController extends Controller
                         }else{
                             $afterRank = $rankings[$i];
                             $afterRank->setRank($i+1);
-                            $afterRank->setUpdatedAt(date("Y-m-d H:i:s"));                            
+                            $afterRank->setUpdatedAt(date("Y-m-d H:i:s"));
                             $em->persist($afterRank);
                         }
                     }
@@ -316,22 +320,22 @@ class BaseController extends Controller
 			$newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->
 					findBy(array('user'=>$user, 'level' => $gameLevel,
 						'year' => $year, 'month' => $month));
-			
+
 			if ($isRegistered == false && empty($newRanks) &&  count($rankings) < 10){
-                    $newRank = new Ranking(); 
+                    $newRank = new Ranking();
                     $newRank->setUser($user);
                     $newRank->setYear($year);
                     $newRank->setMonth($month);
                     $newRank->setLevel($gameLevel);
                     $newRank->setRank(count($rankings) + 1);
-                    $newRank->setClearTime($clearTime);            
+                    $newRank->setClearTime($clearTime);
 //                    $newRank->setBonusPoint($bonusPoint);
                     $newRank->setCreatedAt(date("Y-m-d H:i:s"));
                     $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
                     $em->persist($newRank);
                     $em->flush();
             }
-        }     
+        }
     }
 
 /*
