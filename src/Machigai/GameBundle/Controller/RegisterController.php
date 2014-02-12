@@ -125,7 +125,10 @@ class RegisterController extends BaseController
         }elseif($password != $checkData[0]->getPassword()){
             $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
-        }else{
+        }elseif(!empty($checkData[0]->getTempPass())){
+            $caution = "アカウントが有効化されていません。メールのURLをクリックしてアカウントを有効にしてください";
+            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
+		} else {
                 $userId = $checkData[0]->getId();
                 $session = $request->getSession();
                 //開発モード時,セッションを生成する。
