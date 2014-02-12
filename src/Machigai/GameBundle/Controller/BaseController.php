@@ -5,6 +5,9 @@ namespace Machigai\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Machigai\GameBundle\Entity\PlayHistory;
 use Machigai\GameBundle\Entity\Ranking;
+use Machigai\GameBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Response;
 
 class BaseController extends Controller
 {
@@ -16,10 +19,36 @@ class BaseController extends Controller
 	{
         $session = $this->get('session');
         $id = $session->get('id');
+		
+		$request = $this->get('request');
+		$cookies = $request->cookies;
+		
+		// クッキーチェック
+		if(empty($id) && $cookies->has('myCookie')){
+			
+ 
+			$syncToken = $cookies->get("myCookie");
+			
+        	$user = $this->getDoctrine()
+				->getRepository('MachigaiGameBundle:User')
+				->findBy(array("syncToken" => $syncToken));
+
+			if(!empty($user)){
+				$id = $user[0]->getId();
+				$session->set("id", $id);
+			}
+		}
+		
         if(!empty($id)){
         	$user = $this->getDoctrine()
 	        ->getRepository('MachigaiGameBundle:User')
 	        ->find($id);
+			
+			$cookie = new Cookie('myCookie', $user->getSyncToken(), time() + 3600 * 24 * 30);
+			$response = new Response();
+			$response->headers->setCookie($cookie);
+			$response->send();
+			
 			return $user;
         }else{
         	//GUESTの場合NULLを返す

@@ -27,9 +27,8 @@ class DefaultController extends BaseController
         $id = $session->get('id');
         if(!empty($id)){
             //クッキー削除
-            $cookie = new Cookie('myCookie', "");
             $response = new Response();
-            $response->headers->setCookie($cookie);
+            $response->headers->clearCookie("myCookie");
             $response->send();
 
             $em = $this->getDoctrine()->getEntityManager();
@@ -37,8 +36,8 @@ class DefaultController extends BaseController
             $em->flush();
 
             $request = $this->get('request');
-            $cookies = $request->cookies;
-
+            //$cookies = $request->cookies;
+			
             $session->remove('id');
 //            $session->remove('auId');
             $session->remove('syncToken');
