@@ -460,7 +460,7 @@ class AndroidController extends BaseController
         $logger = $this->get('logger');
         $logger->info("getQuestionDataAction:");
         $request = $this->get('request');
-        $syncToken = $request->query->get('syncToken');
+        $syncToken = $request->query->get('token');
         $questions = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:Question')
             ->findAll();
@@ -469,13 +469,22 @@ class AndroidController extends BaseController
         $users = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:User')
             ->findBy(array('syncToken' => $syncToken));
-        $user = $users[0];
+		
+		if(empty($users)){
+			$user = null;
+		} else {
+	        $user = $users[0];
+		}
 
         for ($i = 0; $i < count($questions); $i++) {
             //問題の配信停止は、 $questionData['question'][$i]['is_delete']のフラグをフロントエンドで確認して行う。
-            $playHistories = $this->getDoctrine()
-                ->getRepository('MachigaiGameBundle:PlayHistory')
-                ->findBy(array('user' => $user , 'question'=> $questions[$i] ));
+			if($user == null){
+				$playHistories = null;
+			} else {
+				$playHistories = $this->getDoctrine()
+					->getRepository('MachigaiGameBundle:PlayHistory')
+					->findBy(array('user' => $user , 'question'=> $questions[$i] ));
+			}
 
             $questionData['question'][$i]['id'] = $questions[$i]->getId();
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
@@ -490,7 +499,7 @@ class AndroidController extends BaseController
                 $playHistory = $playHistories[0];
                 $questionData['question'][$i]['playInfoData'] = $playHistory->getPlayInfo();
                 $questionData['question'][$i]['status'] = $playHistory->getGameStatus();
-                $questionData['question'][$i]['isSavedGame'] = $playHistory[$i]->getIsSavedGame();
+                $questionData['question'][$i]['isSavedGame'] = $playHistory->getIsSavedGame();
             }else{
             $logger->info("getQuestionDataAction: playHistory is null.");
                 $questionData['question'][$i]['playInfoData'] = null;
