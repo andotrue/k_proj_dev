@@ -78,6 +78,23 @@ class ShopController extends BaseController
 	}
 	
 	public function downloadExecuteAction($id){
+		
+		$request = $this->get('request');
+		$session = $request->getSession();  
+		
+		$syncToken = $request->query->get("syncToken");
+		$users = $this->getDoctrine()
+				->getManager()
+				->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
+		if( empty($users) ) {
+			//ゲストユーザの場合は何もしない。   
+		}else{
+			$user = $users[0];
+			$session->set('auId', $user->getAuId());
+			$session->set('id',  $user->getId());
+			$session->set('smartPassResult', true );
+		}
+		
         $user = $this->getUser();
         $item = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
@@ -121,15 +138,10 @@ class ShopController extends BaseController
     public function download($itemPath){
 
         $image_file = dirname(__FILE__).$itemPath;
+		$filename = basename($image_file);
 		
-        $response = new Response($image_file);
-		$response->headers->set('Content-type', 'application/octect-stream');
-		$response->headers->set('Cache-Control', 'private');
-		$response->headers->set('Content-type', mime_content_type($image_file));
-		$response->headers->set('Content-Disposition', 'attachment; filename="' . basename($image_file) . '"');
-		$response->headers->set('Content-length', filesize($image_file));
-		$response->sendHeaders();
-		$response->setContent(readfile($image_file));
+        $response = new BinaryFileResponse($image_file);
+		$response->trustXSendfileTypeHeader();
 		
 		return $response;
 	}
