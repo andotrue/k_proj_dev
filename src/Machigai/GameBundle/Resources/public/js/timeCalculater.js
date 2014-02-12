@@ -4,13 +4,28 @@ var	Time  = {
 	milliSecondsToArray: function(milliSeconds){
 		this._milliSeconds = milliSeconds;
 
-		var mm = this._getMinuteString();
-		var ss = this._getSecondString();
-		var ms = this._getMillisecondString().slice(-2);
+		//var mm = this._getMinuteString();
+		//var ss = this._getSecondString();
+		//var ms = this._getMillisecondString().slice(-2);
 
+		var original_time = milliSeconds;
+		time = original_time/1000;
+		var seconds = Math.floor(parseInt(time));
+		mm=""+(seconds%3600/600|0)+(seconds%3600/60%10|0);
+		var ss=""+(seconds%60/10|0)+(seconds%60%10);
+
+		var minute_to_ms = 60000*mm;
+		var second_to_ms = 1000*ss;
+		var ms = original_time-minute_to_ms-second_to_ms;
+		ms = ""+ms;
+		ms = ms.substr(0,2);
+		var lengthOfNum = String(ms).length;
+		if(lengthOfNum==1){
+			ms = ""+0+ms;
+		}
 		return [mm,ss,ms];
 	},
-	milliSecondsToStringWithColon: function(milliSeconds){
+/*	milliSecondsToStringWithColon: function(milliSeconds){
 		return this.milliSecondsToString(milliSeconds,":",":");
 	},
 	milliSecondsToString: function(milliSeconds,separator1,separator2){
@@ -44,4 +59,5 @@ var	Time  = {
 		var colon = ":";
 		return (mm + colon + ss + colon + ms);
     }
+*/
 };
