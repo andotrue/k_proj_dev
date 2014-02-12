@@ -169,7 +169,7 @@ class AndroidController extends BaseController
         $request = $this->get("request");
         $logger = $this->get("logger");
         $logger->info("afterAuIdLoginAction");
-//        $syncToken = $request->query->get("syncToken");
+        $syncToken = $request->query->get("syncToken");
         $logger->info("\$syncToken = " . $syncToken);
         if(empty($syncToken)){
             return  new Response('<html><body>エラー：トークンが存在しません。。</body></html>');
