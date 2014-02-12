@@ -11,13 +11,17 @@
 <h2>メールアドレス変更</h2>
 <section>
   <div class="registerForm">
-  {{ form (form) }} 
-   <div class="linkButtons">
-   <a href="{{path('Top')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
-    </div>
-   <div class="linkButtons">
-   <img id="registerConfirm" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
-   </div>
+  {{ form (form) }}
+
+  <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
+    {% if caution is not empty %}
+      {{caution}}
+    {% endif %}
+  </div>
+  <div style="text-align:center">
+   <a href="{{path('Top')}}"><img class="linkButtons" style="width:30%" id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
+   <img class="linkButtons" id="registerConfirm" style="width:30%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
+  </div>
   </div>
 </section>
 <script>

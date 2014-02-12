@@ -71,11 +71,12 @@ class SettingController extends BaseController
     public function changeEmailAction(){
     	$pre_userId = $this->getUser();
 	    $userId = $pre_userId->getId();
+        $caution = null;
 
     	$form = $this->createFormBuilder()
          ->setMethod('GET')
          ->setAction($this->generateUrl('ChangeEmailConfirm'))
-         ->add('mailAddress', 'text',array('label'=>false))
+         ->add('mailAddress', 'email',array('label'=>false))
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
  /*       $form->handleRequest($request);
@@ -92,19 +93,29 @@ class SettingController extends BaseController
         $newEmail = $form->getData();
          	return $this->render('MachigaiGameBundle:Setting:changeEmailConfirm.html.twig', array('form' => $form->createView()));
          }else{
-*/         	return $this->render('MachigaiGameBundle:Setting:changeEmail.html.twig',array('form' => $form->createView()));
+*/         	return $this->render('MachigaiGameBundle:Setting:changeEmail.html.twig',array('caution'=>$caution,'form' => $form->createView()));
 
     }
     public function changeEmailConfirmAction(Request $request){
          $form = $this->createFormBuilder()
          ->setMethod('GET')
          ->setAction($this->generateUrl('ChangeEmailSent'))
-         ->add('mailAddress', 'hidden',array('label'=>false))
+         ->add('mailAddress', 'email',array('label'=>false))
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
          $form->bind($request);
          $newEmail = $form->getData();
-         return $this->render('MachigaiGameBundle:Setting:changeEmailConfirm.html.twig',array('newEmail'=>$newEmail,'form' => $form->createView()));
+
+        $userData = $this->getDoctrine()
+         ->getRepository('MachigaiGameBundle:User')
+         ->findBy(array('mailAddress'=>$newEmail['mailAddress']));
+
+        if(!empty($userData)){
+            $caution = "このメールアドレスはすでに使われています。";
+            return $this->render('MachigaiGameBundle:Setting:changeEmail.html.twig',array('caution'=>$caution,'form' => $form->createView()));
+        }else{
+            return $this->render('MachigaiGameBundle:Setting:changeEmailConfirm.html.twig',array('newEmail'=>$newEmail,'form' => $form->createView()));
+        }
     }
     public function changeEmailSentAction(Request $request){
     	$form = $this->createFormBuilder()
@@ -169,7 +180,7 @@ https://machigai.puzzle-m.net\n
         $form = $this->createFormBuilder()
          ->setMethod('GET')
          ->setAction($this->generateUrl('ChangePasswordConfirm'))
-         ->add('password', 'text',array('label'=>false))
+         ->add('password', 'password',array('label'=>false))
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
     	return $this->render('MachigaiGameBundle:Setting:changePassword.html.twig',array('form' => $form->createView()));
@@ -196,10 +207,15 @@ https://machigai.puzzle-m.net\n
          ->getForm();
          $form->bind($request);
          $password = $form->getData();
+         $password = $password['password'];
+
+         $salt = "lkjfa74uhfdou593krtbf9lsmfk1gfrjurl";
+         $password = $password.$salt;
+         $password = hash('sha512',$password);
 
          $em = $this->getDoctrine()->getEntityManager();
          $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
-         $user->setPassword(hash('sha512',$password['password']));
+         $user->setPassword($password);
          $em->flush();
         return $this->render('MachigaiGameBundle:Setting:changePasswordComplete.html.twig');
     }

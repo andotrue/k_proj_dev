@@ -81,7 +81,7 @@ ChangeEmailSent:
     defaults: { _controller: MachigaiGameBundle:Setting:changeEmailSent }
 
 ChangeEmailComplete:
-    pattern: /setting/changeEmailComplete/
+    pattern: /setting/changeEmailComplete/{pass}
     defaults: { _controller: MachigaiGameBundle:Setting:changeEmailComplete }
 
 SendEmail:
