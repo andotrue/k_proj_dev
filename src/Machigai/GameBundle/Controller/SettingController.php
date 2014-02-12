@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Machigai\GameBundle\Entity\User;
 use Machigai\GameBundle\Form\UserType;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Response;
 
 class SettingController extends BaseController
 {
@@ -157,7 +159,7 @@ https://machigai.puzzle-m.net\n
 
     	return $this->render('MachigaiGameBundle:Setting:changeEmailSent.html.twig',array('form' => $form->createView()));
     }
-    public function changeEmailCompleteAction($pass){
+    public function changeEmailCompleteAction($pass,Request $request){
         $salt = "adsofaief048u49wtuhlkmfgosaihfguaeaisdufgha8yw";
         $check = array();
         $userData = $this->getDoctrine()
@@ -175,6 +177,37 @@ https://machigai.puzzle-m.net\n
         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
         $user->setMailAddress($newEmail);
         $em->flush();
+
+
+
+        $session = $request->getSession();
+
+        $id = $session->get('id');
+        if(!empty($id)){
+            //クッキー削除
+            $response = new Response();
+            $response->headers->clearCookie("myCookie");
+            $response->send();
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $user = $em->getRepository('MachigaiGameBundle:User')->find($id);
+            $em->flush();
+
+            $request = $this->get('request');
+            //$cookies = $request->cookies;
+
+            $session->remove('id');
+//            $session->remove('auId');
+            $session->remove('syncToken');
+
+            //表示していないが、とりあえず
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'ログアウトしました。'
+            );
+        }
+
+
     	return $this->render('MachigaiGameBundle:Setting:changeEmailComplete.html.twig');
     }
     public function changePasswordAction(){
