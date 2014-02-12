@@ -28,8 +28,8 @@ function originalImage(){
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <img src="{{asset('/bundles/machigaigame/images/parts/header_user_information.png')}}" width="100%" style="position:relative;margin-top:14%"/>
 <div style="position:relative;margin-top:55%">
-<!--<a href="{{path('ChangeEmail')}}">登録メールアドレス変更</a><br />-->
-<!--<a href="{{path('ChangePassword')}}">パスワード変更</a><br />-->
+<a href="{{path('ChangeEmail')}}">登録メールアドレス変更</a><br />
+<a href="{{path('ChangePassword')}}">パスワード変更</a><br />
 <a href="{{path('DeleteUser')}}"><img id="userDelete" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
 <img class="preload" id="preuserDelete" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete.png')}}" width="67%"/>
 

@@ -44,7 +44,7 @@ function submitForm(){
 	var content = $('#form_content').val();
 	if(!title.match(/\S/)){
 		alert("件名を入力してください。");
-	}else if(!email.match(/^[A-Za-z0-9]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
+	}else if(!email.match(/[\S]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
 		alert("メールアドレスを入力してください。");
 	}else if(!content.match(/\S/)){
 		alert("本文を入力してください。");
