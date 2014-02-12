@@ -31,7 +31,11 @@ $(function(){
 function submitNickname(){
   var nickname = $('#form_nickname').val();
   if(!nickname.match(/\S/)){
-    alert("ニックネームを入力してください。");
+    if(navigator.userAgent.indexOf('Android') > 0){
+        droid.alert("ニックネームを入力してください。");
+    }else{
+      alert("ニックネームを入力してください。");
+    }
   }else{
     $('#submitButton').trigger('click');
   }

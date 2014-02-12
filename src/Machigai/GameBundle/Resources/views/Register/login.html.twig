@@ -55,9 +55,17 @@ function submitRegister(){
   var mail_address = $('#form_mailAddress').val();
   var password = $('#form_password').val();
   if(!mail_address.match(/[\S]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
-    alert("メールアドレスを入力してください。");
-  }else if(!password.match(/\S/)){
-    alert("パスワードを入力してください。");
+    if(navigator.userAgent.indexOf('Android') > 0){
+      droid.alert("メールアドレスを入力してください。")
+    }else{
+      alert("メールアドレスを入力してください。");
+    }
+  }else if(!password.match(/\S/) || password.length < 6){
+    if(navigator.userAgent.indexOf('Android') > 0){
+      droid.alert("パスワードは半角英数６文字以上入力してください。");
+    }else{
+      alert("パスワードは半角英数６文字以上入力してください。");
+    }
   }else{
     $('#form_confirm').trigger("click");
   }

@@ -56,11 +56,11 @@ function submitRegister(){
     }else{
       alert("メールアドレスを入力してください。");
     }
-  }else if(!password.match(/\S/)){
+  }else if(!password.match(/\S/) || password.length < 6){
     if(navigator.userAgent.indexOf('Android') > 0){
-      droid.alert("パスワードを入力してください。");
+      droid.alert("パスワードは半角英数６文字以上入力してください。");
     }else{
-      alert("パスワードを入力してください。");
+      alert("パスワードは半角英数６文字以上入力してください。");
     }
   }else{
     $('#form_confirm').trigger("click");

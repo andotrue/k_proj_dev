@@ -36,7 +36,11 @@ $(function(){
 function submitRegister(){
   var mail_address = $('#form_mailAddress').val();
   if(!mail_address.match(/[\S]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
-    alert("メールアドレスを入力してください。");
+    if(navigator.userAgent.indexOf('Android') > 0){
+      droid.alert("メールアドレスを入力してください。")
+    }else{
+      alert("メールアドレスを入力してください。");
+    }
   }else{
   	$('#form_confirm').trigger("click");
   }
