@@ -28,8 +28,8 @@ function originalImage(){
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <img src="{{asset('/bundles/machigaigame/images/parts/header_user_information.png')}}" width="100%" style="position:relative;margin-top:14%"/>
 <div style="position:relative;margin-top:55%">
-<a href="{{path('ChangeEmail')}}">登録メールアドレス変更</a><br />
-<a href="{{path('ChangePassword')}}">パスワード変更</a><br />
+<a href="{{path('ChangeEmail')}}"><img id="changeEmailAddress" src="{{asset('/bundles/machigaigame/images/parts/button_change_mailaddress_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
+<a href="{{path('ChangePassword')}}"><img id="changePass" src="{{asset('/bundles/machigaigame/images/parts/button_change_password_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
 <a href="{{path('DeleteUser')}}"><img id="userDelete" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
 <img class="preload" id="preuserDelete" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete.png')}}" width="67%"/>
 
@@ -46,6 +46,9 @@ function originalImage(){
 <div style="position:relative;margin-top:7%">
  <a href="{{ path('Help') }}"><img id="tohelptop" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a>
  <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/buttom_return_helptop.png')}}" />
+ <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete.png')}}" />
+ <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_change_password.png')}}" />
+ <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_change_mailaddress.png')}}" />
 </div>
 </div>
 {% endblock %}
