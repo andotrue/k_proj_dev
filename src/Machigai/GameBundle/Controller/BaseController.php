@@ -44,10 +44,12 @@ class BaseController extends Controller
 	        ->getRepository('MachigaiGameBundle:User')
 	        ->find($id);
 			
-			$cookie = new Cookie('myCookie', $user->getSyncToken(), time() + 3600 * 24 * 30);
-			$response = new Response();
-			$response->headers->setCookie($cookie);
-			$response->send();
+			if(!$cookies->has('myCookie')){
+				$cookie = new Cookie('myCookie', $user->getSyncToken(), time() + 3600 * 24 * 30);
+				$response = new Response();
+				$response->headers->setCookie($cookie);
+				$response->send();
+			}
 			
 			return $user;
         }else{
