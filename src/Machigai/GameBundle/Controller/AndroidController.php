@@ -27,7 +27,7 @@ class AndroidController extends BaseController
 
     public function auIdAction()
   {
-//        if($this->MODE == "DEBUG") return $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
+        if($this->MODE == "DEBUG") return $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
 
         $logger = $this->get('logger');
         $logger->info('in auIdAction');
@@ -169,7 +169,7 @@ class AndroidController extends BaseController
         $request = $this->get("request");
         $logger = $this->get("logger");
         $logger->info("afterAuIdLoginAction");
-//        $syncToken = $request->query->get("syncToken");
+        $syncToken = $request->query->get("syncToken");
         $logger->info("\$syncToken = " . $syncToken);
         if(empty($syncToken)){
             return  new Response('<html><body>エラー：トークンが存在しません。。</body></html>');
