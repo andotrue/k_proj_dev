@@ -211,92 +211,97 @@ https://machigai.puzzle-m.net\n
     }
     public function deleteUserCompleteAction(Request $request){
     	$user = $this->getUser();
-        $userId = $user->getId();
+        if(empty($user)){
+            return $this->render('MachigaiGameBundle:Setting:deleteUserComplete.html.twig');
+        }else{
+            $userId = $user->getId();
 
-        //PlayHistory id取得
-        $playHistories = $this->getDoctrine()
-         ->getRepository('MachigaiGameBundle:PlayHistory')
-         ->findBy(array('user'=>$user));
+            //PlayHistory id取得
+            $playHistories = $this->getDoctrine()
+             ->getRepository('MachigaiGameBundle:PlayHistory')
+             ->findBy(array('user'=>$user));
 
-        if(!empty($playHistories)){
-            $playHistoryId = array();
-            foreach ($playHistories as $playHistory) {
-                $playHistoryId[] = $playHistory->getId();
-            }
-/*
-            //TODO: question_playhistoryテーブル 不要であれば削除
+            if(!empty($playHistories)){
+                $playHistoryId = array();
+                foreach ($playHistories as $playHistory) {
+                    $playHistoryId[] = $playHistory->getId();
+                }
+    /*
+                //TODO: question_playhistoryテーブル 不要であれば削除
 
-            $question_playhistories = $this->getDoctrine()
-             ->getRepository('MachigaiGameBundle:question_playhistory')
-             ->findBy(array('playhistory_id'=>$playHistoryId));
+                $question_playhistories = $this->getDoctrine()
+                 ->getRepository('MachigaiGameBundle:question_playhistory')
+                 ->findBy(array('playhistory_id'=>$playHistoryId));
 
-            //レコードに対象のplayhistory_idが存在する場合 該当のquestion_playhistory削除
-            if(!empty($question_playhistories)){
-                foreach ($question_playhistories as $qp) {
+                //レコードに対象のplayhistory_idが存在する場合 該当のquestion_playhistory削除
+                if(!empty($question_playhistories)){
+                    foreach ($question_playhistories as $qp) {
+                        $em = $this->getDoctrine()->getEntityManager();
+                        $data = $em->getRepository('MachigaiGameBundle:question_playhistory')->find($qp->getId());
+                        $em->remove($data);
+                        $em->flush();
+                    }
+                }
+    */            //PlayHistory 削除
+                foreach ($playHistoryId as $play_id) {
                     $em = $this->getDoctrine()->getEntityManager();
-                    $data = $em->getRepository('MachigaiGameBundle:question_playhistory')->find($qp->getId());
+                    $data = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($play_id);
                     $em->remove($data);
                     $em->flush();
                 }
             }
-*/            //PlayHistory 削除
-            foreach ($playHistoryId as $play_id) {
-                $em = $this->getDoctrine()->getEntityManager();
-                $data = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($play_id);
-                $em->remove($data);
-                $em->flush();
+
+            $purchaseHistories = $this->getDoctrine()
+             ->getRepository('MachigaiGameBundle:PurchaseHistory')
+             ->findBy(array('user'=>$user));
+
+            //PurchaseHistory 削除
+            if(!empty($purchaseHistories)){
+                $purchaseHistoryId = array();
+                foreach ($purchaseHistories as $p_h) {
+                    $purchaseHistoryId[] = $p_h->getId();
+                }
+
+                foreach ($purchaseHistoryId as $purchase_id) {
+                    $em = $this->getDoctrine()->getEntityManager();
+                    $data = $em->getRepository('MachigaiGameBundle:PurchaseHistory')->find($purchase_id);
+                    $em->remove($data);
+                    $em->flush();
+                }
             }
+
+            $rankings = $this->getDoctrine()
+             ->getRepository('MachigaiGameBundle:Ranking')
+             ->findBy(array('user'=>$user));
+
+            //Ranking 削除
+            if(!empty($rankings)){
+                $rankingId = array();
+                foreach ($rankings as $ranking) {
+                    $rankingId[] = $ranking->getId();
+                }
+
+                foreach ($rankingId as $rank) {
+                    $em = $this->getDoctrine()->getEntityManager();
+                    $data = $em->getRepository('MachigaiGameBundle:Ranking')->find($rank);
+                    $em->remove($data);
+                    $em->flush();
+                }
+            }
+
+            //ログアウト
+        	$session = $request->getSession();
+            $session->remove('id');
+            $session->remove("syncToken");
+
+            //ユーザー削除
+            $em = $this->getDoctrine()->getEntityManager();
+            $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+            $em->remove($user);
+            $em->flush();
+
+        	return $this->render('MachigaiGameBundle:Setting:deleteUserComplete.html.twig');
         }
-
-        $purchaseHistories = $this->getDoctrine()
-         ->getRepository('MachigaiGameBundle:PurchaseHistory')
-         ->findBy(array('user'=>$user));
-
-        //PurchaseHistory 削除
-        if(!empty($purchaseHistories)){
-            $purchaseHistoryId = array();
-            foreach ($purchaseHistories as $p_h) {
-                $purchaseHistoryId[] = $p_h->getId();
-            }
-
-            foreach ($purchaseHistoryId as $purchase_id) {
-                $em = $this->getDoctrine()->getEntityManager();
-                $data = $em->getRepository('MachigaiGameBundle:PurchaseHistory')->find($purchase_id);
-                $em->remove($data);
-                $em->flush();
-            }
-        }
-
-        $rankings = $this->getDoctrine()
-         ->getRepository('MachigaiGameBundle:Ranking')
-         ->findBy(array('user'=>$user));
-
-        //Ranking 削除
-        if(!empty($rankings)){
-            $rankingId = array();
-            foreach ($rankings as $ranking) {
-                $rankingId[] = $ranking->getId();
-            }
-
-            foreach ($rankingId as $rank) {
-                $em = $this->getDoctrine()->getEntityManager();
-                $data = $em->getRepository('MachigaiGameBundle:Ranking')->find($rank);
-                $em->remove($data);
-                $em->flush();
-            }
-        }
-
-        //ログアウト
-    	$session = $request->getSession();
-        $session->remove('id');
-        $session->remove("syncToken");
-
-        //ユーザー削除
-        $em = $this->getDoctrine()->getEntityManager();
-        $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
-        $em->remove($user);
-        $em->flush();
-
-    	return $this->render('MachigaiGameBundle:Setting:deleteUserComplete.html.twig');
     }
+
 }
