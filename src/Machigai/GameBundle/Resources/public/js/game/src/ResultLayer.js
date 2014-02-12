@@ -48,12 +48,12 @@ var ResultLayer = cc.Layer.extend({
 //                var currentPointSprite = this.createPointSprite(this.currentPoint + "pt",360,100,60,0,0,0);
             }
             if (this.playInfo.isSucceed === true){
-//               var clearTimeSprite = this.clearTime( Math.Floor(this.clearTime / 1000 )+ "秒",360,350,60,0,0,0);           
+//               var clearTimeSprite = this.clearTime( Math.Floor(this.clearTime / 1000 )+ "秒",360,350,60,0,0,0);
             }
 
             if(this.isGuest === true){
                 if( this.isCleared === true ){
-                    clearTime = this.playInfo.getClearTime();
+                    var clearTime = this.playInfo.getClearTime();
                     window.location = "/game/resultGuestClear?clearTime="+clearTime;
                 }else{
                     qId = this.playInfo.QUESTION_ID;
@@ -61,10 +61,10 @@ var ResultLayer = cc.Layer.extend({
                 }
             }else{
                 if( this.isCleared === true ) {
-                    
+
                     this.questionId = this.playInfo.QUESTION_ID;
                     var data = this.playInfo._playData.getTouchData();
-                    clearTime = this.playInfo.getClearTime();
+                    var clearTime = this.playInfo.getClearTime();
                     var MyForm = document.createElement("FORM");
                     document.body.appendChild(MyForm);
 
@@ -94,8 +94,8 @@ var ResultLayer = cc.Layer.extend({
 
 						MyForm.submit();
                     }
-                        
-                    
+
+
 //                    window.location = "/machigai/app_dev.php/game/resultUserClear?questionId="+qId+"&clearTime="+clearTime+"&playInfoData="+playInfoData;
                 }else{
 //                    qId = this.playInfo.QUESTION_ID;
@@ -115,7 +115,7 @@ var ResultLayer = cc.Layer.extend({
                             questionId.setAttribute('name', 'questionId');
                             questionId.setAttribute('value', this.questionId);
                             MyForm.appendChild(questionId);
-                        
+
 						var playInfoData = {};
 						playInfoData["clockData"] = this.playInfo._playData._clockData;
 						playInfoData["touchData"] = this.playInfo._playData._touchData;
@@ -136,7 +136,7 @@ var ResultLayer = cc.Layer.extend({
         }
         return bRet;
     },
- 
+
     initMenuForUserSuccess:function () {
         cc.log("initMenuForUser");
         this.state = "SAVE";
@@ -281,13 +281,13 @@ var ResultLayer = cc.Layer.extend({
 
         window.location="../../top";
     },
- 
+
     tryAnother:function(){
         cc.log("PopupLayer.result");
 
         window.location="../../game/select";
     },
- 
+
     toTop:function(){
         cc.log("PopupLayer.result");
 
