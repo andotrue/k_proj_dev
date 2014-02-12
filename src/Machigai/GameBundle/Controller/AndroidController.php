@@ -23,21 +23,24 @@ use \Auth_OpenID_Consumer;
 class AndroidController extends BaseController
 {
     public $connectTo = "st.connect.auone.jp";
+//    public $connectTo = "connect.auone.jp";
 
     public function auIdAction()
   {
-        if($this->MODE == "DEBUG") return $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
+//        if($this->MODE == "DEBUG") return $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
 
         $logger = $this->get('logger');
         $logger->info('in auIdAction');
-       
-        $realm = "https://st.machigai.puzzle-m.net/";               
+        $realm = "http://st.machigai.puzzle-m.net:80/";        
+//        $realm = "https://machigai.puzzle-m.net:443/";               
         $formId = "test";
-        $returnToUrl = "https://st.machigai.puzzle-m.net/auIdAssociation";   
+        $returnToUrl = "http://st.machigai.puzzle-m.net/auIdAssociation";   
+//        $returnToUrl = "https://machigai.puzzle-m.net/auIdAssociation";   
        
         $associationDirPath = "/tmp";                              
         $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";       
-        $connectTo = "https://st.connect.auone.jp";                   
+        $connectTo = "http://st.connect.auone.jp";                   
+//        $connectTo = "https://connect.auone.jp";                   
         $authUrl = $connectTo . $preDealPath;
 
        
@@ -68,7 +71,7 @@ class AndroidController extends BaseController
            $redirect_url = $auth_request->redirectURL($realm, $returnToUrl);
             if (Auth_OpenID::isFailure($redirect_url)) {
             // Discovery 処理などが失敗した場合には、ここでエラー処理(エラー画面の表示など)を行う。
-                return $this->redirect("Error");                   
+                return $this->redirect($this->generateUrl('Error'));                   
             } else {
             // リダイレクトを実行。 header("Location: ".$redirect_url);        
             //OpenID 認証要求
@@ -111,35 +114,48 @@ class AndroidController extends BaseController
         // RP(Consumer)のインスタンス生成までは認証リクエスト時と同じ
         $store = new Auth_OpenID_FileStore($associationDirPath);
         $consumer =& new Auth_OpenID_Consumer($store);
-        // Return_to をセットして、認証を完了(OP-Identifier による認証時の再 Discovery 等)
+        // Return_to を取得セットして、認証を完了(OP-Identifier による認証時の再 Discovery 等)
         $response = $consumer->complete($return_to);
-
+/*
         if ($response->status == Auth_OpenID_CANCEL) { // Cancel メッセージが帰ってきた場合の処理
         } else if ($response->status == Auth_OpenID_FAILURE) { // エラーが帰ってきた場合の処理
             return $this->redirect("Error");
         } else if ($response->status == Auth_OpenID_SUCCESS) { // 認証成功。以下の方法でユーザの OpenID を取得
-            $openid = $response->getDisplayIdentifier();
+*/      //    $openid = $response->getDisplayIdentifier();
             //ユーザを探す。
+            $request = $this->get("request");
+            $openId = $this->get("request")->query->get("openid.claimed_id");
+            $logger->info("openid.claimed_id = $openId");
+
             $users = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:User')
-                ->findBy(array("auId"=>$syncToken));
+                ->findBy(array("auId"=>$openId));
             if(empty($users)){
                 //ユーザのニックネーム登録ページヘ。
-                return $this->redirect('AndroidRegisterEntry',array("openId" => $openId));
+                //シンクトークン発行
+                $syncToken = uniqid();
+                $session = $request->getSession();
+                $session->set('syncTokenPre', $syncToken);
+
+                return $this->redirect($this->generateUrl('AndroidRegisterEntry'));
             }else{
-                //ユーザのログイン完了
                 $user = $users[0];
+                $session = $request->getSession();
+                $session->set('id', $user->getId());
+    //            $session->set('auId', $auId);
+                $session->set('syncToken', $syncToken);
+                $session->set('smartPassResult', true );
+
                 $syncToken = $user->getSyncToken();
                 $nickname = $user->getNickname();
 
                 //セッションを登録。
-                return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
-//                $this->redirect('Top',array());
+                return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
             }
-        } else {
+/*        } else {
             return $this->redirect("Error");
 		}
-    }
+ */   }
 
     /**
         au Id loginが完了した後の処理
@@ -153,7 +169,7 @@ class AndroidController extends BaseController
         $request = $this->get("request");
         $logger = $this->get("logger");
         $logger->info("afterAuIdLoginAction");
-        $syncToken = $request->query->get("syncToken");
+//        $syncToken = $request->query->get("syncToken");
         $logger->info("\$syncToken = " . $syncToken);
         if(empty($syncToken)){
             return  new Response('<html><body>エラー：トークンが存在しません。。</body></html>');
@@ -164,7 +180,7 @@ class AndroidController extends BaseController
         if(empty($users)){
             //ユーザのニックネーム登録ページヘ。
             $session = $request->getSession();
-            $session->set('syncTokenPre', $syncToken);
+            $syncToken = $session->get('syncTokenPre');
 
             return $this->redirect($this->generateUrl('AndroidRegisterEntry'));
         }else{
