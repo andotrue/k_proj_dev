@@ -100,7 +100,7 @@ class SettingController extends BaseController
          $form = $this->createFormBuilder()
          ->setMethod('GET')
          ->setAction($this->generateUrl('ChangeEmailSent'))
-         ->add('mailAddress', 'email',array('label'=>false))
+         ->add('mailAddress', 'hidden',array('label'=>false))
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
          $form->bind($request);
@@ -114,6 +114,7 @@ class SettingController extends BaseController
             $caution = "このメールアドレスはすでに使われています。";
             return $this->render('MachigaiGameBundle:Setting:changeEmail.html.twig',array('caution'=>$caution,'form' => $form->createView()));
         }else{
+            $newEmail = $newEmail['mailAddress'];
             return $this->render('MachigaiGameBundle:Setting:changeEmailConfirm.html.twig',array('newEmail'=>$newEmail,'form' => $form->createView()));
         }
     }

@@ -1,25 +1,21 @@
-{% extends "MachigaiGameBundle::base.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 {% block title %}{% endblock %}
 {% block body %}
 <style>
  #form_mailAddress {width:100%;padding:1%;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
- .invisible {opacity:0;}
  #form_password {width:100%;padding:1%;margin-top:19%;position:relative;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
- .registerForm {width:80%;margin-top:53%;position:relative;left:8%;}
- .linkButtons {position:relative;left:8%;margin-top:33%;float:left;}
 </style>
+<img src="{{ asset('/bundles/machigaigame/images/parts/1-01_2_bg.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
 
-{{newEmail['mailAddress']}}
+<div style="position:relative;margin-top:70%">{{newEmail}}</div>
 
 <section>
   <div class="registerForm">
-  {{ form (form) }} 
-   <div class="linkButtons">
-   <a href="{{path('Top')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
-    </div>
-   <div class="linkButtons">
-   <img id="registerConfirm" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
-   </div>
+  {{ form (form) }}
+
+   <img id="topImage" style="position:relative;width:35%;margin-top:15%" src="{{ asset('/bundles/machigaigame/images/parts/button_modify_off.png')}}" onclick="changeImage(this.id);history.back()">
+   <img id="registerConfirm" style="position:relative;width:35%" src="{{ asset('/bundles/machigaigame/images/parts/button_send_mail_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
+
   </div>
 </section>
 <script>
