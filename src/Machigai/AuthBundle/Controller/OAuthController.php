@@ -171,7 +171,7 @@ class OAuthController extends Controller {
 
 
 		//スマートパス認証結果がOKの場合	
-		if(smartPassResult == true){
+		if($smartPassResult == true){
 			$session = $this->getSession();
 			$session->set("smartPassResult", true);
 			//TODO: syncTokenをcookieに設定
