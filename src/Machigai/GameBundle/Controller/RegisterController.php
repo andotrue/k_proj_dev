@@ -215,6 +215,7 @@ class RegisterController extends BaseController
          $em = $this->getDoctrine()->getEntityManager();
          $user = $em->getRepository('MachigaiGameBundle:User')->findBy(array('tempPass'=>$tempPass));
          $user[0]->setNickname($nickname);
+         $user[0]->setTempPass("");
          $em->flush();
 
          $userData = $this->getDoctrine()
