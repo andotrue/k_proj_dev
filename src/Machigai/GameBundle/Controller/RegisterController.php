@@ -146,10 +146,15 @@ class RegisterController extends BaseController
                         $user->setSyncToken($syncToken);
                         $em->flush();
 
-                        $cookie = new Cookie('myCookie', $syncToken);
-                        $response = new Response();
-                        $response->headers->setCookie($cookie);
-                        $response->send();
+                        $request = $this->get('request');
+                        $cookies = $request->cookies;
+
+                        if(!$cookies->has('myCookie')){
+                            $cookie = new Cookie('myCookie', $user->getSyncToken(), time() + 3600 * 24 * 30);
+                            $response = new Response();
+                            $response->headers->setCookie($cookie);
+                            $response->send();
+                        }
 
                     }elseif($user_type == 'notLoggedIn'){
                         //非ログインユーザの場合
@@ -167,7 +172,9 @@ class RegisterController extends BaseController
                     //auIDログインページへリダイレクト
                     return $this->redirect('https://auone.jp');
                 }else{
-                    return $this->redirect($this->generateUrl('Top'));
+                    //
+                    return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
+//                    return $this->redirect($this->generateUrl('Top'));
                 }
         }
     }
@@ -214,7 +221,7 @@ class RegisterController extends BaseController
          $email = $userData[0]->getMailAddress();
          $pass = $userData[0]->getPassword();
 
-        return $this->render('MachigaiGameBundle:Register:complete.html.twig',array('email'=>$email,'pass'=>$pass));
+        return $this->render('MachigaiGameBundle:Register:complete.html.twig',array( 'syncToken'=> $user->getSyncToken(), 'email'=>$email,'pass'=>$pass) );
     }
     public function confirmAction(Request $request){
        $nickname = new User();
@@ -271,7 +278,7 @@ class RegisterController extends BaseController
              ->add('confirm', 'submit', array('label'=>'内容を確認'))
              ->getForm();
             $error = "入力されたメールアドレスはすでに使用されています";
-;            return $this->render('MachigaiGameBundle:Register:userRegister.html.twig',array('error'=>$error,'form' => $form->createView()));
+            return $this->render('MachigaiGameBundle:Register:userRegister.html.twig',array('error'=>$error,'form' => $form->createView()));
          }
 
         return $this->render('MachigaiGameBundle:Register:userConfirm.html.twig',array('userData'=>$userData,'form' => $form->createView()));
@@ -408,7 +415,10 @@ https://machigai.puzzle-m.net\n
                     //auIDログインページへリダイレクト
                     return $this->redirect('https://auone.jp');
                 }else{
-                    return $this->redirect($this->generateUrl('Top'));
+                
+                    return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
+
+//                    return $this->redirect($this->generateUrl('Top'));
                 }
     }
 }
