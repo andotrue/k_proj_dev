@@ -336,7 +336,7 @@ class BaseController extends Controller
                     //$em->flush();
                     $newRankings[] = $newRank;
             }
-            $test = array();
+            $sort = array();
             foreach ($newRankings as $key => $value) {
                 $sort[$key] = $value->getClearTime();
             }
