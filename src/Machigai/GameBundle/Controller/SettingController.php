@@ -138,7 +138,7 @@ class SettingController extends BaseController
 尚、このメールに心当たりのない方は破棄していただきますようお願い申し上げます。\n
 下記URLをクリックするとメールアドレス変更が完了します。\n
 その後、TOPページより新しいメールアドレスで再度ログインをお願い致します。\n\n".
-"https://machigai.puzzle-m.net/app_dev.php/setting/changeEmailComplete/".$tempData.
+"https://machigai.puzzle-m.net/setting/changeEmailComplete/".$tempData.
 "\n※URL有効期限：メール配信後24時間※有効期限を過ぎると登録が行えません。\n
 お手数ですがはじめからやり直してください。今後とも「まちがいさがし放題」をどうぞよろしくお願いいたします。\n
 https://machigai.puzzle-m.net\n
@@ -176,9 +176,8 @@ https://machigai.puzzle-m.net\n
     	$em = $this->getDoctrine()->getEntityManager();
         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
         $user->setMailAddress($newEmail);
+        $user->setTempPass(null);
         $em->flush();
-
-
 
         $session = $request->getSession();
 
