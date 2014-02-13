@@ -135,14 +135,10 @@ class OAuthController extends Controller {
 				
 				//認証状態を問い合わせ
 				$smartPathReqUrl = "https://auth.au-market.com/pass/AuthSpUser";
-				//$smartPathReqUrl = "http://www.sabeevo.com/";
 				$data = array( 'ver' => '1.0' );
 				$headers = array(
 					"Authorization: Bearer " .$accessToken,
-					'Connection: close',
-					'Content-Type: application/x-www-form-urlencodedl; charset=UTF-8',
-					'Content-Length: ' .strlen( http_build_query( $data )),
-					"x-sr-id :5403"
+					"x-sr-id :5403",
 				);
 
 				$options = array('http' => array(

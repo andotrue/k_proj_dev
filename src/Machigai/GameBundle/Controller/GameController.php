@@ -321,17 +321,8 @@ class GameController extends BaseController
     }
     public function rankingRegisterAction(){
         $request = $this->get('request');
-        /* get data like below from view
 
-        {
-            'clearTime':clearTime,
-            'questionId':question_id,
-            'gameLevel':gameLevel,
-            'bonusPoint':bonusPoint
-        }
-
-        */
-        $clearTime = $request->request->get('clearTime');
+		$clearTime = $request->request->get('clearTime');
         $questionId = $request->request->get('questionId');
         $gameLevel = $request->request->get('gameLevel');
         $bonusPoint = $request->request->get('bonusPoint');
@@ -345,52 +336,63 @@ class GameController extends BaseController
                                     where r.level = :gameLevel and r.year = :year and r.month = :month order by r.rank asc')
                 ->setParameters(array('gameLevel'=>$gameLevel,'year'=>$year,'month'=>$month))
                 ->getResult();
-	/** ランキング初登録 **/
-	if(empty($rankings)){
-	/**
-		$em = $this->getDoctrine()->getManager();
-		$newRank = new Ranking();
-		$newRank->setUser($userId);
-                $newRank->setYear($year);
-                $newRank->setMonth($month);
-                $newRank->setLevel($gameLevel);
-		$newRank->setRank(1);
-                $newRank->setBonusPoint($bonusPoint);
-                $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
-		$em->persist($newRank);                    
-		$em->flush();                    
-                break;
-	**/
-	}
-        elseif($clearTime >= $rankings[9]->getClearTime()){
-            return $this->render('MachigaiGameBundle:Game:');//
-        }else{
-            $playHistory = $this->getDoctrine()
-                ->getEntityManager()
-                ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
-                                    where p.user = :user and p.question = :question')
-                ->setParameters(array('user'=>$userId,'question'=>$questionId))
-                ->getResult();
 
-            foreach ($rankings as $rank) {
-                if($clearTime < $rank->getClearTime()){
-                    $rankId = $rank->getId();
-                    $em = $this->getDoctrine()->getEntityManager();
-                    $newRank = $em->getRepository('MachigaiGameBundle:Ranking')->findBy(array('id'=>$rankId));
-                    $newRank->setUser($userId);
-                    $newRank->setYear($year);
-                    $newRank->setMonth($month);
-                    $newRank->setLevel($gameLevel);
-                    $newRank->setRank($rank->getRank());
-                    $newRank->setBonusPoint($bonusPoint);
-                    $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
-                    $em->persist($newRank);                    
-                    $em->flush();                    
-                    break;
-                }
-            }
-        }
+		$em = $this->getDoctrine()->getManager();
+		
+		$users = array();
+		foreach( $rankings as $ranking ){
+			$users[]= $ranking->getUser();
+		}
+		
+		// すでにランクインしている場合
+		if(in_array($user,$users)){
+
+			foreach($rankings as $ranking){
+				
+				if($ranking->getUser() == $user &&
+						$ranking->getClearTime() > $clearTime){
+					
+					$ranking->setClearTime($clearTime);
+				}
+			}
+		} else {
+			
+			$newRank = new Ranking();
+			$newRank->setUser($user->getId());
+			$newRank->setYear($year);
+			$newRank->setMonth($month);
+			$newRank->setLevel($gameLevel);
+			$newRank->setBonusPoint($bonusPoint);
+			$newRank->setUpdatedAt(date("Y-m-d H:i:s"));
+			$newRank->setClearTime($clearTime);
+			
+			$rankings[] = $newRank;
+		}
+		
+		uksort($rankings, $this->rankingSort);	
+		
+		if(count($rankings) > 10){
+			
+			$ranking = $rankings[count($rankings) - 1];
+			
+			if($ranking->getId() != null){
+				$em->remove($ranking);
+			}
+		}
+		
+		$rank = 1;
+		foreach($rankings as $ranking){
+			
+			$ranking->setRank($rank);
+			$em->persist($ranking);                    
+			$em->flush();
+			$rank += 1;
+		}
     }
+	function rankingSort($a, $b)
+	{
+		return $a->getClearTime() <> $b->getClearTime();
+	}
     public function resultUserClearAction(){
         $user = $this->getUser();
         $userId = $user->getId();
