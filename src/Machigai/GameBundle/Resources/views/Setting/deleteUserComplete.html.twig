@@ -24,11 +24,15 @@ function originalImage(){
 	$('#'+image_id).attr("src",src);
 }
 </script>
+<p style="margin-top:30%;color:rgb(22,101,179);">ユーザー情報の削除が完了しました。</p>
+<!--
 <img src="{{asset('/bundles/machigaigame/images/parts/2-04-5-4_bg.png')}}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <img src="{{asset('/bundles/machigaigame/images/parts/header_user_delete_complete.png')}}" width="100%" style="position:relative;margin-top:14%"/>
 <div style="position:relative;margin-top:40%">
-<a href="{{path('Top')}}"><img id="toTopImage" src="{{asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id)"/></a>
+-->
+
+<a href="{{path('Top')}}"><img style="margin-top:15%" id="toTopImage" src="{{asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id)"/></a>
 <img class="preload" id="preToTopImage" src="{{asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" width="30%"/>
 </div>
 {% endblock %}
