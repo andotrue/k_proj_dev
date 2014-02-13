@@ -12,6 +12,13 @@ class DefaultController extends BaseController
 {
     public function indexAction()
     {
+        //スマートパスが有効かどうか
+        $request = $this->get('request');
+        $cookies = $request->cookies;
+        $smartContract = $request->cookies->get('smartContract'); 
+        if(empty($smartContract) || $smartContract != "true" ) $this->redirect($this->generateUrl('response_token'));
+
+
         $logger = $this->get('logger');
         $logger->info('inf auIdAction');
         $user = $this->getUser();

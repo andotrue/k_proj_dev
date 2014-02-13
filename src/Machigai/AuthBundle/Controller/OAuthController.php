@@ -44,10 +44,6 @@ class OAuthController extends Controller {
 		$refreshLimit = null;
 
 		$cookies = $request->cookies;
-
-		if($cookies->has("smartContract")){
-			return redirect($this->generateUrl('Top'));
-		}
 		
 		$_SERVER["SCRIPT_NAME"] = $this->get('router')->generate('response_token');
 		
@@ -192,7 +188,7 @@ class OAuthController extends Controller {
 		}
 
 
-		$pass_array = array('state' => $state, 'code' => $code, 
+//*		$pass_array = array('state' => $state, 'code' => $code, 
 			'accessToken' => $accessToken, 'refreshToken' => $refreshToken,
 			'refreshLimit' => $refreshLimit);
 		
