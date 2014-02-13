@@ -97,7 +97,11 @@ class RegisterController extends BaseController
          ->getRepository('MachigaiGameBundle:User')
          ->findBy(array('mailAddress'=>$mailAddress));
 
-         $tmpPass = $checkData[0]->getTempPass();
+        if(!empty($checkData)){
+            $tmpPass = $checkData[0]->getTempPass();
+        }else{
+            $tmpPass = null;
+        }
         if(empty($checkData)){
             $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
