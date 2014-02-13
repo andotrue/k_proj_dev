@@ -82,13 +82,13 @@ class ShopController extends BaseController
 		$request = $this->get('request');
 		$session = $request->getSession();
 
-//		$syncToken = $request->query->get("syncToken");
+		$syncToken = $request->query->get("syncToken");
         $user = $this->getUser();
 
 
-//		$users = $this->getDoctrine()
-//				->getManager()
-//				->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
+		$users = $this->getDoctrine()
+				->getManager()
+				->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
 		if( empty($user) ) {
 			//ゲストユーザの場合は何もしない。
 		}else{
