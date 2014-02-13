@@ -313,7 +313,7 @@ class RegisterController extends BaseController
 
          $message = \Swift_Message::newInstance()
         ->setSubject('【まちがいさがし放題】会員登録のご案内')
-        ->setFrom('machigai.puzzle-m.net')
+        ->setFrom('regist@machigai.puzzle-m.net')
         ->setTo($userData['mailAddress'])
         ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」で会員登録をされるお客様へお送りしています。\nこのメールを受信された時点では登録は完了しておりませんので、ご注意下さい。\n
 尚、このメールに心当たりのない方は破棄していただきますようお願い申し上げます。\n
