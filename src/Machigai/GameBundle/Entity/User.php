@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Machigai\GameBundle\Entity\UserRepository")
  */
-class User 
+class User
 {
     /**
      * @var integer
@@ -58,7 +58,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="temp_pass", type="string", length=255)
+     * @ORM\Column(name="temp_pass", type="string", length=255, nullable=true)
      */
     private $tempPass;
 
@@ -132,13 +132,13 @@ class User
      * @ORM\Column(name="updated_at", type="datetimetz")
      */
     private $updatedAt;
-    
+
 
     /**
      * @ORM\OneToMany(targetEntity="PurchaseHistory", mappedBy="user")
      */
     protected $purchaseHistories;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="user")
      */
@@ -160,7 +160,7 @@ class User
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -183,7 +183,7 @@ class User
     /**
      * Get auId
      *
-     * @return string 
+     * @return string
      */
     public function getAuId()
     {
@@ -206,7 +206,7 @@ class User
     /**
      * Get nickname
      *
-     * @return string 
+     * @return string
      */
     public function getNickname()
     {
@@ -229,7 +229,7 @@ class User
     /**
      * Get currentPoint
      *
-     * @return integer 
+     * @return integer
      */
     public function getCurrentPoint()
     {
@@ -252,7 +252,7 @@ class User
     /**
      * Get easyClearTimeThisMonth
      *
-     * @return integer 
+     * @return integer
      */
     public function getEasyClearTimeThisMonth()
     {
@@ -275,7 +275,7 @@ class User
     /**
      * Get normalClearTimeThisMonth
      *
-     * @return integer 
+     * @return integer
      */
     public function getNormalClearTimeThisMonth()
     {
@@ -298,7 +298,7 @@ class User
     /**
      * Get hardClearTimeThisMonth
      *
-     * @return integer 
+     * @return integer
      */
     public function getHardClearTimeThisMonth()
     {
@@ -321,7 +321,7 @@ class User
     /**
      * Get easyClearTimeLastMonth
      *
-     * @return integer 
+     * @return integer
      */
     public function getEasyClearTimeLastMonth()
     {
@@ -344,7 +344,7 @@ class User
     /**
      * Get normalClearTimeLastMonth
      *
-     * @return integer 
+     * @return integer
      */
     public function getNormalClearTimeLastMonth()
     {
@@ -367,7 +367,7 @@ class User
     /**
      * Get hardClearTimeLastMonth
      *
-     * @return integer 
+     * @return integer
      */
     public function getHardClearTimeLastMonth()
     {
@@ -390,7 +390,7 @@ class User
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -413,7 +413,7 @@ class User
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -436,7 +436,7 @@ class User
     /**
      * Get suspendInfo
      *
-     * @return array 
+     * @return array
      */
     public function getSuspendInfo()
     {
@@ -469,7 +469,7 @@ class User
     /**
      * Get purchaseHistories
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPurchaseHistories()
     {
@@ -502,7 +502,7 @@ class User
     /**
      * Get playHistories
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPlayHistories()
     {
@@ -535,7 +535,7 @@ class User
     /**
      * Get rankings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRankings()
     {
@@ -571,7 +571,7 @@ class User
     /**
      * Get syncToken
      *
-     * @return string 
+     * @return string
      */
     public function getSyncToken()
     {
@@ -610,7 +610,7 @@ class User
     /**
      * Get mailAddress
      *
-     * @return string 
+     * @return string
      */
     public function getMailAddress()
     {
@@ -633,7 +633,7 @@ class User
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -656,7 +656,7 @@ class User
     /**
      * Get tempPass
      *
-     * @return string 
+     * @return string
      */
     public function getTempPass()
     {
