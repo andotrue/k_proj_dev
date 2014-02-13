@@ -72,22 +72,17 @@ class OAuthController extends Controller {
 					$state_query = $query->get("state");
 
 					if (!empty($state_query) && $state_query != $state) {
-						$response_html = '<html><body>Unmatch[' . $query->get('state') .
-								' <=> ' . $state . ']<br /><br /><a href="' .
-								$_SERVER["SCRIPT_NAME"] . '">Retry</a></body></html>"';
-						return new Response($response_html);
+						//リトライ
+						$session->set("state", null);
+						return $this->redirect($authzReqUrl);
 					}
 
 					// サーバエラー時はメッセージ表示して終了
 					$error_query = $query->get('error');
 					$error_description_query = $query->get('error_description');
 					if (!empty($error_query) || !empty($error_description_query)) {
-						$error_message = $query->get('error') . '[' . 
-								$query->get('error_description') . ']';
-						$a_link = '<a href="' . $_SERVER["SCRIPT_NAME"] .
-								'?method=retry">Retry</a>';
-						return new Response("<html><body>" . $error_message .
-								'<br /><br />' . $a_link . "</body></html>");
+						//サーバーエラー
+						return $this->redirect("Error");
 					}
 
 					// サーバ発行したcodeパラメータ設定
@@ -113,10 +108,8 @@ class OAuthController extends Controller {
 					$jobj = json_decode($body);
 					// サーバエラー時はメッセージ表示して終了
 					if (!empty($jobj->error) || !empty($jobj->error_description)) {
-						print "<html><body>";
-						$error_message = $jobj->error . '[' . $jobj->error_description . ']';
-						$a_link = '<a href="' . $_SERVER["SCRIPT_NAME"] . '?method=retry">Retry</a>';
-						return new Response("<html><body>" . $error_message . "<br /><br />" . $a_link . "</body></html>");
+						// サーバーエラー
+						return $this->redirect("Error");
 					}
 					// 取得データをセッション/変数格納
 					$accessToken = $jobj->access_token;
@@ -150,7 +143,7 @@ class OAuthController extends Controller {
 
 				if($smartPassResponse->status == "error"){
 					//認証エラー
-					return new Response("<html><body>$smartPassResponse->code : " .  "</body></html>");
+					return $this->redirect("Error");
 				}elseif( $smartPassResponse->status == "success"){
 					if($smartPassResponse->aspuser == true){
 						
