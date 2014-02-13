@@ -80,19 +80,16 @@ class ShopController extends BaseController
 	public function downloadExecuteAction($id){
 
 		$request = $this->get('request');
-		$session = $request->getSession();
+		$session = $request->getSession();  
 
 		$syncToken = $request->query->get("syncToken");
-        $user = $this->getUser();
-
-
 		$users = $this->getDoctrine()
 				->getManager()
 				->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
-		if( empty($user) ) {
-			//ゲストユーザの場合は何もしない。
+		if( empty($users) ) {
+			//ゲストユーザの場合は何もしない。   
 		}else{
-//			$user = $users[0];
+			$user = $users[0];
 			$session->set('auId', $user->getAuId());
 			$session->set('id',  $user->getId());
 			$session->set('smartPassResult', true );
