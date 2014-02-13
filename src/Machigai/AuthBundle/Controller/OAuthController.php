@@ -174,21 +174,9 @@ class OAuthController extends Controller {
 				}
 
 				break;
-
-				
-			// === リトライ時 ===
-			case 'retry':
-				$session->clear();
-				header("Location: " . $_SERVER["SCRIPT_NAME"]);
-				exit;
 		}
 
-
-//*		$pass_array = array('state' => $state, 'code' => $code, 
-			'accessToken' => $accessToken, 'refreshToken' => $refreshToken,
-			'refreshLimit' => $refreshLimit);
-		
-		return $this->render('MachigaiAuthBundle:OAuth:response_token.html.twig', $pass_array);
+		return $this->redirect('http://auone.jp');
 		
 	}
 
