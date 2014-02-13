@@ -64,6 +64,7 @@ class OAuthController extends Controller {
 				break;				
 			// === 認可要求からの戻り処理(認可応答) ===
 			case 'redirect':
+				$response = new Response();
 				
 				if(!$cookies->has("smartToken")){
 
@@ -122,7 +123,8 @@ class OAuthController extends Controller {
 					$refreshToken = $jobj->refresh_token;
 					$refreshLimit = $jobj->expires_in;
 					
-					$cookies->set("smartToken", $accessToken, $refreshLimit);
+					$cookie = new Cookie("smartToken", $accessToken, time() + (int)$refreshLimit );
+					$response->headers->setCookie($cookie);
 					
 				} else {
 					$accessToken = $cookies->get("smartToken");
@@ -152,22 +154,26 @@ class OAuthController extends Controller {
 				}elseif( $smartPassResponse->status == "success"){
 					if($smartPassResponse->aspuser == true){
 						
-						$cookies->set("smartContract", "true", 3600 * 24);
+						$cookie = new Cookie('smartContract', "true", time() + 3600 * 24);
+						$response->headers->setCookie($cookie);
+						$response->send();
+
 						
 						//認証OK
 						return $this->redirect($this->generateUrl('Top'));
 
 					}else{			
 						//認証NG	
+						$response->send();
 						return $this->redirect("http://auone.jp/");
 					}
 
 				}else{
 					//通信エラー
 					//TODO: 通信エラー
+					$response->send();
 					return $this->redirect($this->generateUrl('Error'));
 				}
-
 				break;
 		}
 
