@@ -51,22 +51,17 @@ class OAuthController extends Controller {
 		switch ($method) {
 			// === アクセストークン未取得での接続時 ===
 			case 'get':
-				if (empty($state)) {
-					
-					// stateパラメータに固有乱数を設定し、連携URLに付与
-					$state = md5(uniqid(rand(), TRUE));
-					$session->set("state", $state);
-					$authzReqUrl .= "&state=" . $state;
-					// metaリフレッシュで認可要求
-					
-					return $this->redirect($authzReqUrl);
-					
-					//$response_html = '<html><head><meta http-equiv="refresh" content="1" url="' . $authzReqUrl . '"></head><body>[AUTHZ_REQ] Please wait...</body></html>';
-					//return new Response($response_html);
-					
-				}
-				break;
+				// stateパラメータに固有乱数を設定し、連携URLに付与
+				$state = md5(uniqid(rand(), TRUE));
+				$session->set("state", $state);
+				$authzReqUrl .= "&state=" . $state;
+				// metaリフレッシュで認可要求
 				
+				return $this->redirect($authzReqUrl);
+				
+				//$response_html = '<html><head><meta http-equiv="refresh" content="1" url="' . $authzReqUrl . '"></head><body>[AUTHZ_REQ] Please wait...</body></html>';
+				//return new Response($response_html);			
+				break;				
 			// === 認可要求からの戻り処理(認可応答) ===
 			case 'redirect':
 				
