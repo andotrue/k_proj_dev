@@ -16,28 +16,6 @@ class RegisterController extends BaseController
          if(!empty($login)){
             $session = $request->getSession();
 
-            //開発モード時,セッションを生成する。
-            $MODE = 'DEV';
-            $user_type = 'loggedIn';
-
-            if( $MODE == 'DEV'){
-                if($user_type == 'loggedIn'){
-                    //ログインユーザの場合
-                    $session->set('auId', 'auid1');
-                    $session->set('id', '167');
-                    $session->set('smartPassResult', true );
-                }elseif($user_type == 'notLoggedIn'){
-                    //非ログインユーザの場合
-                    $session->set('auId', 'auid1');
-                    $session->set('id', null );
-                    $session->set('smartPassResult', true );
-                }else{
-                    $session->set('auId', null );
-                    $session->set('id', null );
-                    $session->set('smartPassResult', null );
-                }
-            }
-
             $id = $session->get('id');
             if( empty($id) ) {
                 //auIDログインページへリダイレクト
@@ -118,8 +96,8 @@ class RegisterController extends BaseController
         $checkData = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
          ->findBy(array('mailAddress'=>$mailAddress));
-		
-		$tmpPass = $checkData[0]->getTempPass();
+
+         $tmpPass = $checkData[0]->getTempPass();
         if(empty($checkData)){
             $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
@@ -213,19 +191,21 @@ class RegisterController extends BaseController
 
 //        $pre_userId = $this->getUser();
 //        $userId = $pre_userId->getId();
-
-         $em = $this->getDoctrine()->getEntityManager();
-         $user = $em->getRepository('MachigaiGameBundle:User')->findBy(array('tempPass'=>$tempPass));
-         $user[0]->setNickname($nickname);
-         $user[0]->setTempPass("");
-         $em->flush();
-
-         $userData = $this->getDoctrine()
+        $userData = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
          ->findBy(array('tempPass'=>$tempPass));
 
-         $email = $userData[0]->getMailAddress();
-         $pass = $userData[0]->getPassword();
+         $user = $userData[0];
+         $userId = $user->getId();
+
+         $em = $this->getDoctrine()->getEntityManager();
+         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+         $user->setNickname($nickname);
+         $user->setTempPass(null);
+         $em->flush();
+
+         $email = $user->getMailAddress();
+         $pass = $user->getPassword();
 
         return $this->render('MachigaiGameBundle:Register:complete.html.twig',array( 'syncToken'=> $user->getSyncToken(), 'email'=>$email,'pass'=>$pass) );
     }
@@ -301,17 +281,19 @@ class RegisterController extends BaseController
          $password = $userData['password'].$salt;
          $password = hash('sha512',$password);
          $tempData = hash('sha512',date("Y-m-d H:i:s").$salt);
+         $syncToken = uniqid();
 
          $data = new User();
          $data->setMailAddress($userData['mailAddress']);
          $data->setPassword($password);
+         $data->setSyncToken($syncToken);
          $data->setCreatedAt(date("Y-m-d H:i:s"));
          $data->setUpdatedAt(date("Y-m-d H:i:s"));
          $data->setTempPass($tempData);
 
          $message = \Swift_Message::newInstance()
         ->setSubject('【まちがいさがし放題】会員登録のご案内')
-        ->setFrom('machigai.puzzle-m.net')
+        ->setFrom('regist@machigai.puzzle-m.net')
         ->setTo($userData['mailAddress'])
         ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」で会員登録をされるお客様へお送りしています。\nこのメールを受信された時点では登録は完了しておりませんので、ご注意下さい。\n
 尚、このメールに心当たりのない方は破棄していただきますようお願い申し上げます。\n
@@ -355,6 +337,11 @@ https://machigai.puzzle-m.net\n
              ->getRepository('MachigaiGameBundle:User')
              ->findBy(array('tempPass'=>$pass));
 
+            $tempPass = $checkPass[0]->getTempPass();
+            if(empty($tempPass)){
+                return $this->render('MachigaiGameBundle:Register:emailTimeover.html.twig');
+            }
+
             $from = $checkPass[0]->getCreatedAt();
             $from = ($from->format('Y-m-d H:i:s'));
             $to = date("Y-m-d H:i:s", time());
@@ -371,7 +358,7 @@ https://machigai.puzzle-m.net\n
             }
             return $this->render('MachigaiGameBundle:Register:beforeRegisterNickname.html.twig',array('tempPass'=>$pass));
         }
-        return $this->render('MachigaiGameBundle:Register:authError.html.twig');
+        return $this->render('MachigaiGameBundle:Register:emailTimeover.html.twig');
     }
     // au ID Login では使用されない /
     public function reissuePasswordAction(){
@@ -388,6 +375,7 @@ https://machigai.puzzle-m.net\n
     public function loginAfterSettingNameAction($email,$pass, Request $request){
         $mailAddress = $email;
         $password = $pass;
+        $syncToken = null;
 
         $checkData = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
@@ -421,7 +409,7 @@ https://machigai.puzzle-m.net\n
                     //auIDログインページへリダイレクト
                     return $this->redirect('https://auone.jp');
                 }else{
-                
+
                     return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
 
 //                    return $this->redirect($this->generateUrl('Top'));
