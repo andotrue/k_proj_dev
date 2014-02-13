@@ -4,6 +4,8 @@ namespace Machigai\AuthBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
+
 
 class OAuthController extends Controller {
 
@@ -82,7 +84,7 @@ class OAuthController extends Controller {
 					$error_description_query = $query->get('error_description');
 					if (!empty($error_query) || !empty($error_description_query)) {
 						//サーバーエラー
-						return $this->redirect("Error");
+						return $this->redirect($this->generateUrl("Error"));
 					}
 
 					// サーバ発行したcodeパラメータ設定
@@ -109,7 +111,7 @@ class OAuthController extends Controller {
 					// サーバエラー時はメッセージ表示して終了
 					if (!empty($jobj->error) || !empty($jobj->error_description)) {
 						// サーバーエラー
-						return $this->redirect("Error");
+						return $this->redirect($this->generateUrl("Error"));
 					}
 					// 取得データをセッション/変数格納
 					$accessToken = $jobj->access_token;
@@ -143,7 +145,7 @@ class OAuthController extends Controller {
 
 				if($smartPassResponse->status == "error"){
 					//認証エラー
-					return $this->redirect("Error");
+					return $this->redirect($this->generateUrl("Error"));
 				}elseif( $smartPassResponse->status == "success"){
 					if($smartPassResponse->aspuser == true){
 						
