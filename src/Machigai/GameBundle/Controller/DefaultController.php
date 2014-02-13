@@ -16,7 +16,7 @@ class DefaultController extends BaseController
         $request = $this->get('request');
         $cookies = $request->cookies;
         $smartContract = $request->cookies->get('smartContract'); 
-        if(empty($smartContract) || $smartContract != "true" ) return $this->redirect($this->generateUrl('response_token'));
+//        if(empty($smartContract) || $smartContract != "true" ) return $this->redirect($this->generateUrl('response_token'));
 
 
         $logger = $this->get('logger');

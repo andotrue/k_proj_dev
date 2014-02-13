@@ -460,19 +460,17 @@ class GameController extends BaseController
 
 
         if(empty($histories)){
-            for($i = 0;$i<count($playInfo); $i++){
-                $playHistory = new PlayHistory();
-                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
-                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
-                $playHistory->setPlayInfo($playInfo[$i]);
-                $playHistory->setUser($user);
-                $playHistory->setQuestion($question[0]);
-                $playHistory->setGameStatus(3);
-                $playHistory->setClearTime($duration);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($playHistory);
-                $em->flush();
-            }
+			$playHistory = new PlayHistory();
+			$playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+			$playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+			$playHistory->setPlayInfo($playInfo);
+			$playHistory->setUser($user);
+			$playHistory->setQuestion($question[0]);
+			$playHistory->setGameStatus(3);
+			$playHistory->setClearTime($duration);
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($playHistory);
+			$em->flush();
         }else{
             foreach ($histories as $history) {
                 $em = $this->getDoctrine()->getEntityManager();
@@ -481,19 +479,17 @@ class GameController extends BaseController
                 $em->flush();
             }
 
-            for($i = 0;$i<count($playInfo); $i++){
-                $playHistory = new PlayHistory();
-                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
-                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
-                $playHistory->setPlayInfo($playInfo[$i]);
-                $playHistory->setUser($user);
-                $playHistory->setQuestion($question[0]);
-                $playHistory->setGameStatus(4);
-                $playHistory->setClearTime($duration);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($playHistory);
-                $em->flush();
-            }
+			$playHistory = new PlayHistory();
+			$playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+			$playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+			$playHistory->setPlayInfo($playInfo);
+			$playHistory->setUser($user);
+			$playHistory->setQuestion($question[0]);
+			$playHistory->setGameStatus(4);
+			$playHistory->setClearTime($duration);
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($playHistory);
+			$em->flush();
         }
         //TODO: ランキング対象は初回クリア(status=3)の場合のみ//
         /*
@@ -545,18 +541,16 @@ class GameController extends BaseController
                 ->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user,'question'=>$question[0]));
 
         if(empty($histories)){
-            for($i = 0;$i<count($playInfo); $i++){
-                $playHistory = new PlayHistory();
-                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
-                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
-                $playHistory->setPlayInfo($playInfo[$i]);
-                $playHistory->setUser($user);
-                $playHistory->setQuestion($question[0]);
-                $playHistory->setGameStatus(3);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($playHistory);
-                $em->flush();
-            }
+			$playHistory = new PlayHistory();
+			$playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+			$playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+			$playHistory->setPlayInfo($playInfo);
+			$playHistory->setUser($user);
+			$playHistory->setQuestion($question[0]);
+			$playHistory->setGameStatus(3);
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($playHistory);
+			$em->flush();
         }elseif($histories[0]->getGameStatus()!=4 and $histories[0]->getGameStatus()!=5){
             foreach ($histories as $history) {
                 $em = $this->getDoctrine()->getEntityManager();
@@ -565,18 +559,16 @@ class GameController extends BaseController
                 $em->flush();
             }
 
-            for($i = 0;$i<count($playInfo); $i++){
-                $playHistory = new PlayHistory();
-                $playHistory->setCreatedAt(date("Y-m-d H:i:s"));
-                $playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
-                $playHistory->setPlayInfo($playInfo[$i]);
-                $playHistory->setUser($user);
-                $playHistory->setQuestion($question[0]);
-                $playHistory->setGameStatus(4);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($playHistory);
-                $em->flush();
-            }
+			$playHistory = new PlayHistory();
+			$playHistory->setCreatedAt(date("Y-m-d H:i:s"));
+			$playHistory->setUpdatedAt(date("Y-m-d H:i:s"));
+			$playHistory->setPlayInfo($playInfo);
+			$playHistory->setUser($user);
+			$playHistory->setQuestion($question[0]);
+			$playHistory->setGameStatus(4);
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($playHistory);
+			$em->flush();
         }
 
 

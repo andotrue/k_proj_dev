@@ -129,7 +129,7 @@ var PlayInfo = cc.Class.extend({
 			this._error_redirect_to("../select");
 		}
 		this._data = data;
-		if(data.playHistory){
+		if( data && data.playHistory && data.playHistory.isSaveGame){
 			var playInfo = JSON.parse(data.playHistory.playInfo);
 			this._data.playHistory.playInfo = playInfo;
 			this._data.playInfo = data.playHistory.playInfo;
