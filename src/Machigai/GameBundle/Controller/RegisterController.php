@@ -118,6 +118,8 @@ class RegisterController extends BaseController
         $checkData = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
          ->findBy(array('mailAddress'=>$mailAddress));
+
+         $tmpPass = $checkData[0]->getTempPass();
         if(empty($checkData)){
             $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
@@ -125,7 +127,7 @@ class RegisterController extends BaseController
         }elseif($password != $checkData[0]->getPassword()){
             $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
-        }elseif(!empty($checkData[0]->getTempPass())){
+        }elseif(!empty($tmpPass)){
             $caution = "アカウントが有効化されていません。メールのURLをクリックしてアカウントを有効にしてください";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
 		} else {
