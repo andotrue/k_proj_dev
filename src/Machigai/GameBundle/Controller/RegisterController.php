@@ -218,7 +218,10 @@ class RegisterController extends BaseController
          ->findBy(array('tempPass'=>$tempPass));
 
          $user = $userData[0];
+         $userId = $user->getId();
 
+         $em = $this->getDoctrine()->getEntityManager();
+         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
          $user->setNickname($nickname);
          $em->flush();
 
