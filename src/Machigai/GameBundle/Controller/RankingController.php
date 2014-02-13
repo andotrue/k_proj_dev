@@ -19,10 +19,10 @@ class RankingController extends BaseController
     }
     $ranking_this_month = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Ranking')
-        ->findBy(array('month'=>$month,'year'=>$year));
+        ->findBy(array('month'=>$month,'year'=>$year),array('rank'=>'ASC'));
     $ranking_previous_month = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Ranking')
-        ->findBy(array('month'=>$pre_month,'year'=>$pre_year));
+        ->findBy(array('month'=>$pre_month,'year'=>$pre_year),array('rank'=>'ASC'));
 	return $this->render('MachigaiGameBundle:Ranking:index.html.twig',array('ranking_this_month' => $ranking_this_month, 'ranking_previous_month' => $ranking_previous_month));
     }
 }

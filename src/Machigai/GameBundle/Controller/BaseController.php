@@ -8,7 +8,6 @@ use Machigai\GameBundle\Entity\Ranking;
 use Machigai\GameBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
-
 class BaseController extends Controller
 {
     /** DEBUGモード　*/
@@ -268,6 +267,7 @@ class BaseController extends Controller
                 ->setParameters(array('user'=>$user,'question'=>$question))
                 ->getResult();
 
+            $newRankings = array();
             $logger->info('Android.applyRanking: before foreach');
             foreach ($rankings as $rank) {
 
@@ -315,8 +315,8 @@ class BaseController extends Controller
                     $em->flush();
                     break;
                 }
+                $newRankings[] = $rank;
             }
-
 			$newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->
 					findBy(array('user'=>$user, 'level' => $gameLevel,
 						'year' => $year, 'month' => $month));
@@ -329,15 +329,26 @@ class BaseController extends Controller
                     $newRank->setLevel($gameLevel);
                     $newRank->setRank(count($rankings) + 1);
                     $newRank->setClearTime($clearTime);
-//                    $newRank->setBonusPoint($bonusPoint);
+//                  $newRank->setBonusPoint($bonusPoint);
                     $newRank->setCreatedAt(date("Y-m-d H:i:s"));
                     $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
-                    $em->persist($newRank);
-                    $em->flush();
+                    //$em->persist($newRank);
+                    //$em->flush();
+                    $newRankings[] = $newRank;
+            }
+            $test = array();
+            foreach ($newRankings as $key => $value) {
+                $sort[$key] = $value->getClearTime();
+            }
+            array_multisort($sort,SORT_ASC,$newRankings);
+            for ($i=0; $i<count($newRankings) ; $i++) {
+                $rank = $i+1;
+                $newRankings[$i]->setRank($rank);
+                $em->persist($newRankings[$i]);
+                $em->flush();
             }
         }
     }
-
 /*
     //TODO: AndroidController.php の auIdActionと同一アクションなので、一方に集約する。
     public function auIdAction()
