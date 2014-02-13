@@ -250,6 +250,7 @@ https://machigai.puzzle-m.net\n
          $em = $this->getDoctrine()->getEntityManager();
          $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
          $user->setPassword($password);
+         $user->setTempPass(null);
          $em->flush();
         return $this->render('MachigaiGameBundle:Setting:changePasswordComplete.html.twig');
     }
