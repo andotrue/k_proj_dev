@@ -24,15 +24,24 @@ function originalImage(){
 	$('#'+image_id).attr("src",src);
 }
 </script>
+<!--
+背景
 <img src="{{asset('/bundles/machigaigame/images/parts/2-04-5_bg.png')}}" width="100%" style="position:absolute;left:0%;top:0%"/>
+
+ヘッダー
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
-<img src="{{asset('/bundles/machigaigame/images/parts/header_user_information.png')}}" width="100%" style="position:relative;margin-top:14%"/>
+
+バナー ユーザー情報について
+<img src="{{asset('/bundles/machigaigame/images/parts/header_user_information.png')}}" width="100%" style="position:relative;margin-top:14%"/>-->
 <div style="position:relative;margin-top:55%">
-<a href="{{path('ChangeEmail')}}"><img id="changeEmailAddress" src="{{asset('/bundles/machigaigame/images/parts/button_change_mailaddress_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
+	<a href="{{path('ChangeEmail')}}">登録メールアドレス変更</a><br />
+	<a href="{{path('ChangePassword')}}">パスワード変更</a><br />
+	<a href="{{path('DeleteUser')}}">ユーザー情報削除</a><br />
+<!--<a href="{{path('ChangeEmail')}}"><img id="changeEmailAddress" src="{{asset('/bundles/machigaigame/images/parts/button_change_mailaddress_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
 <a href="{{path('ChangePassword')}}"><img id="changePass" src="{{asset('/bundles/machigaigame/images/parts/button_change_password_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
 <a href="{{path('DeleteUser')}}"><img id="userDelete" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
 <img class="preload" id="preuserDelete" src="{{asset('/bundles/machigaigame/images/parts/button_user_delete.png')}}" width="67%"/>
-
+-->
 <!--<a href="{{path('Logout')}}">ログアウト</a><br />-->
 <!--
  <a href="{{ path('ChangeEmail') }}"><img id="otoiawase" src="{{ asset('/bundles/machigaigame/images/parts/button_otoiawase_off.png') }}" width="67%;" onclick="changeImage(this.id);"/></a>
