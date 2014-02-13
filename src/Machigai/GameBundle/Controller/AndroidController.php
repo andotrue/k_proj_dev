@@ -13,10 +13,10 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use \DateTime;
 
 
-include_once "Auth/OpenID.php";
+/*include_once "Auth/OpenID.php";
 include_once "Auth/OpenID/FileStore.php";
 include_once "Auth/OpenID/Consumer.php"; 
-use \Auth_OpenID_FileStore;
+*/use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
 
@@ -446,8 +446,7 @@ class AndroidController extends BaseController
         }catch(FileNotFoundException $e){
             $logger = $this->get('logger');
             $logger->info("FileNotFound AndroidController.gameFileAcition:". $file);
-            $file = dirname(__FILE__).'/../Resources/questions/defaultCopyright.png';
-            $response = new BinaryFileResponse($file);
+            throw $this->createNotFoundException('The product does not exist');
         }
 //        $response->prepare($request);
         if ($type == 'xml'){
