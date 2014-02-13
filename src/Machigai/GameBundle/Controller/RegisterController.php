@@ -217,13 +217,13 @@ class RegisterController extends BaseController
          ->getRepository('MachigaiGameBundle:User')
          ->findBy(array('tempPass'=>$tempPass));
 
-         $em = $this->getDoctrine()->getEntityManager();
-         $user = $em->getRepository('MachigaiGameBundle:User')->findBy(array('tempPass'=>$tempPass));
-         $user[0]->setNickname($nickname);
+         $user = $userData[0];
+
+         $user->setNickname($nickname);
          $em->flush();
 
-         $email = $userData[0]->getMailAddress();
-         $pass = $userData[0]->getPassword();
+         $email = $user->getMailAddress();
+         $pass = $user->getPassword();
 
         return $this->render('MachigaiGameBundle:Register:complete.html.twig',array( 'syncToken'=> $user->getSyncToken(), 'email'=>$email,'pass'=>$pass) );
     }
