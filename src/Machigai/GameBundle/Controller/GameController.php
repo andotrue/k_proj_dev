@@ -45,7 +45,7 @@ class GameController extends BaseController
          
             foreach ($pre_playedQuestions as $pre_questions) {
 				if($pre_questions->getIsSavedGame()){
-	                $playedQuestions[$pre_questions->getQuestion()->getId()] = 99;
+	                $playedQuestions[$pre_questions->getQuestion()->getId()] = 5;
 				} else {
 					$playedQuestions[$pre_questions->getQuestion()->getId()] = $pre_questions->getGameStatus();
 				}
