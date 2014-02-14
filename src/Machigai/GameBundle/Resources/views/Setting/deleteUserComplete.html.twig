@@ -4,6 +4,7 @@
 
 {% block contents %}
 <script>
+logout();
 var image_path = null;
 var image_id = null;
 $(function(){
@@ -32,7 +33,7 @@ function originalImage(){
 <div style="position:relative;margin-top:40%">
 -->
 
-<a href="{{path('Top')}}"><img style="margin-top:15%" id="toTopImage" src="{{asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id)"/></a>
+<a href="javascript:goTop();"><img style="margin-top:15%" id="toTopImage" src="{{asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id)"/></a>
 <img class="preload" id="preToTopImage" src="{{asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" width="30%"/>
 </div>
 {% endblock %}

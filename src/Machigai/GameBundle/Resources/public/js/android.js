@@ -5,7 +5,7 @@ $(document).ready(function(){
 			if( $(this).attr("href") &&
 				$(this).attr("href").search(/\/top$/) != -1 &&
 				window["droid"]){
-				$(this).attr("href", "javascript:droid.goTop();");
+				$(thi).attr("href", "javascript:droid.goTop();");
 			}
 		});
 		var pre_src_path = $('#toTopImage').attr('src');
@@ -29,9 +29,17 @@ function goTop(){
     }
 }
 
-//AndrodではsyncTokenをPreferenceManagerに渡す処理, webapp版ではなにもしない。
+//AndroidではsyncTokenをPreferenceManagerに渡す処理, webapp版ではなにもしない。
 function registerUserIfAndroid(syncToken){
     if(window["droid"]){
         droid.registerUser(syncToken);
     }
 }
+//AndroidではsyncTokenをPreferenceManagerから削除する処理, webapp版ではなにもしない。
+function logout(){
+    if(window["droid"]){
+        droid.logout();
+    }
+}
+
+
