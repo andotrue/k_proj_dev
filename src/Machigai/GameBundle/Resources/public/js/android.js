@@ -5,7 +5,7 @@ $(document).ready(function(){
 			if( $(this).attr("href") &&
 				$(this).attr("href").search(/\/top$/) != -1 &&
 				window["droid"]){
-				$(thi).attr("href", "javascript:droid.goTop();");
+				$(this).attr("href", "javascript:droid.goTop();");
 			}
 		});
 		var pre_src_path = $('#toTopImage').attr('src');
