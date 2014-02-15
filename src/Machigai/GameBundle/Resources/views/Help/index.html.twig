@@ -40,7 +40,8 @@ function originalImage(){
 
  {% block footer %}
  <footer style="margin-top:10%;">
-<img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);javascript: goTop();" />
-<img id="preToTopImage" class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}"  />
+<a href="{{path('Top')}}" /><img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);" />    
+<img id="preToTopImage" class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}"  /></a>
+<script></script>
  </footer>
  {% endblock %}

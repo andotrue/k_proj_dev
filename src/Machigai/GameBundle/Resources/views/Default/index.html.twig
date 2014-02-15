@@ -54,8 +54,8 @@
  <section id="news" class="top_bg">
   <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
   <div class="news" style="color:rgb(255,254,255);">
-  {% for i in 0..2 %}
-   <p style="text-align:left;width:80%;margin: 0 auto;">{{news[i].getTitle}}<br />{{news[i].getDescription|raw}}</p><br />
+  {% for new in news %}
+   <p style="text-align:left;width:80%;margin: 0 auto;">{{new.getTitle}}<br />{{new.getDescription|raw}}</p><br />
   {% endfor %}
   </div>
 {% if user is not empty %}
