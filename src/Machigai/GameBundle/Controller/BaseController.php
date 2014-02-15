@@ -258,8 +258,6 @@ class BaseController extends Controller
             return;
 
         }else{
-           $logger->info('Android.applyRanking: rankings exists;');
-           $isRegistered = false;
            $playHistory = $this->getDoctrine()
                 ->getManager()
                 ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
@@ -267,87 +265,48 @@ class BaseController extends Controller
                 ->setParameters(array('user'=>$user,'question'=>$question))
                 ->getResult();
 
-            $newRankings = array();
-            $logger->info('Android.applyRanking: before foreach');
-            foreach ($rankings as $rank) {
+		   $existMe = false;
+		   foreach($rankings as $rank){
+				if( $rank->getUser() != null && $rank->getUser()->getId() == $user->getId() ){
+					$existMe = true;
+					// 自分自身
+					if( $rank->getClearTime() > $clearTime ){
+						$rank->setClearTime($clearTime);
+					}
+				}
+			}
 
-                $logger->info('Android.applyRanking: before if:');
-                if($clearTime < $rank->getClearTime()){
-                    $isRegistered =true;
-                    $logger->info('Android.applyRanking: after if');
-
-                    $rankId = $rank->getId();
-                    $newRank = null;
-                    $logger->info('Android.applyRanking: find newRanks');
-                    $newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->findBy(array('user'=>$user, 'level' => $gameLevel, 'year' => $year, 'month' => $month));
-
-                    $logger->info('Android.applyRanking: newRanks empty;');
-
-                    if(empty($newRanks)){
-                        $newRank = new Ranking();
-                    }else{
-                        $newRank = $newRanks[0];
-                    }
-                    $newRank->setUser($user);
-                    $newRank->setYear($year);
-                    $newRank->setMonth($month);
-                    $newRank->setLevel($gameLevel);
-                    $newRank->setRank($rank->getRank());
-                    $newRank->setClearTime($clearTime);
-//                    $newRank->setBonusPoint($bonusPoint);
-                    $newRank->setCreatedAt(date("Y-m-d H:i:s"));
-                    $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
-                    $em->persist($newRank);
-
-                    for($i = $rankId; $i < count($rankings); $i++ ){
-                        if($i == 10 ){
-                            //削除
-                            $afterRank = $rankings[$i];
-                            $em->remove($afterRank);
-                        }else{
-                            $afterRank = $rankings[$i];
-                            $afterRank->setRank($i+1);
-                            $afterRank->setUpdatedAt(date("Y-m-d H:i:s"));
-                            $em->persist($afterRank);
-                        }
-                    }
-
-                    $em->flush();
-                    break;
-                }
-                $newRankings[] = $rank;
-            }
-			$newRanks = $em->getRepository('MachigaiGameBundle:Ranking')->
-					findBy(array('user'=>$user, 'level' => $gameLevel,
-						'year' => $year, 'month' => $month));
-
-			if ($isRegistered == false && empty($newRanks) &&  count($rankings) < 10){
-                    $newRank = new Ranking();
-                    $newRank->setUser($user);
-                    $newRank->setYear($year);
-                    $newRank->setMonth($month);
-                    $newRank->setLevel($gameLevel);
-                    $newRank->setRank(count($rankings) + 1);
-                    $newRank->setClearTime($clearTime);
-//                  $newRank->setBonusPoint($bonusPoint);
-                    $newRank->setCreatedAt(date("Y-m-d H:i:s"));
-                    $newRank->setUpdatedAt(date("Y-m-d H:i:s"));
-                    //$em->persist($newRank);
-                    //$em->flush();
-                    $newRankings[] = $newRank;
-            }
+			if(!$existMe){
+				$newRank = new Ranking();
+				$newRank->setUser($user);
+				$newRank->setYear($year);
+				$newRank->setMonth($month);
+				$newRank->setLevel($gameLevel);
+				$newRank->setClearTime($clearTime);
+				$newRank->setCreatedAt(date("Y-m-d H:i:s"));
+				$newRank->setUpdatedAt(date("Y-m-d H:i:s"));
+				$rankings[] = $newRank;
+			}
+			
             $sort = array();
-            foreach ($newRankings as $key => $value) {
+            foreach ($rankings as $key => $value) {
                 $sort[$key] = $value->getClearTime();
             }
-            array_multisort($sort,SORT_ASC,$newRankings);
-            for ($i=0; $i<count($newRankings) ; $i++) {
+            array_multisort($sort,SORT_ASC,$rankings);
+            for ($i=0; $i<count($rankings) ; $i++) {
                 $rank = $i+1;
-                $newRankings[$i]->setRank($rank);
-                $em->persist($newRankings[$i]);
+                $rankings[$i]->setRank($rank);
+                $em->persist($rankings[$i]);
                 $em->flush();
             }
-        }
+
+			if(count($rankings) > 10){
+				$em->remove($rankings[10]);
+                $em->persist($rankings[10]);
+				$em->flush();
+			}
+			
+		}
     }
 /*
     //TODO: AndroidController.php の auIdActionと同一アクションなので、一方に集約する。
