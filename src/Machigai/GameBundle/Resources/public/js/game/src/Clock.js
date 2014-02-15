@@ -26,7 +26,7 @@ var Clock = cc.Layer.extend({
 	},
 	updateClock:function(){
 		if (that.getCurrentDuration() <=0){
-			that._status = that._FINISHED;
+//			that._status = that._FINISHED;
 			that.stopTimer();
 			that.parent.baseLayer.gameoverFail();
 			that.updateDigitsByStr("00:00:00");
@@ -42,15 +42,15 @@ var Clock = cc.Layer.extend({
 	},
 	resumeTimer:function(){
 		that._clockData.push({ 'resumed': new Date().getTime() });
-		that._status = that._PLAYING;
+//		that._status = that._PLAYING;
 	},
 	interruptTimer:function(){
 		that._clockData[ that._clockData.length -1 ]['interrupted'] = new Date().getTime();
-		that._status = that._INTERRUPTED;
+//		that._status = that._INTERRUPTED;
 	},
 	stopTimer:function(){
 		that.interruptTimer();
-		that._status = that._FINISHED;
+//		that._status = that._FINISHED;
 		that._finishTime = that._clockData[that._clockData.length - 1 ]['interrupted'];
 	},
 	getClearTime:function(){
@@ -105,7 +105,7 @@ var Clock = cc.Layer.extend({
     _initTimes:function(){
 //		cc.log("Clock._initTimes");
 		var playInfo = that._playInfo;
-		that._status = that._LOADING;
+//		that._status = that._LOADING;
 //		cc.log("Clock._initTime: _initial_time_ms = " + playInfo.TIME_LIMIT * that.TIME_LIMIT_RATIO);
 		that._initial_time_ms = playInfo.TIME_LIMIT * that.TIME_LIMIT_RATIO ;
 		if(playInfo.playData !== undefined){
