@@ -30,12 +30,14 @@
 <body>
 	{% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+{% block foot %}
 <footer>
-  <div>
+  <div id="copyright_area">
     <p>©マガジン・マガジン</p>
     <p>©Hubase-i</p>
   </div>
 </footer>
+{% endblock %}
 </body>
 </html>
 

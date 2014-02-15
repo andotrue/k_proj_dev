@@ -200,7 +200,7 @@
         <section id="select_area" >
             <div id="order_header"
                  >
-
+<!--
                 <div id="selectBox" style="margin-top: 25px; float: right; margin-right: 10px;">
                     <span style="color:rgb(94,109,114)">並べ替え</span>
                     <select id="sortSelect" onChange="sortSelect()">
@@ -211,6 +211,7 @@
                         <option value="4">中断問題</option>
                     </select>
                 </div>
+-->
                 <div style="clear: both"></div>
             </div>
 
@@ -239,7 +240,7 @@
 	{% for question in questions %}
 	{% if question.getLevel() == 1 %}
                             <li class="easy">
-		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 99 %}
+		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 5 %}
                                 <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/machigaigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getId}}, '{{question.getQuestionTitle}}');"/>
 		{% elseif playedQuestions[question.getId()] is not defined or playedQuestions[question.getId()] == 1 %}
@@ -264,7 +265,7 @@
 	{% for question in questions %}
 	{% if question.getLevel() == 2 %}
                             <li class="normal">
-		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 99 %}
+		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 5 %}
                                 <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/machigaigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getId}}, '{{question.getQuestionTitle}}');"/>
 		{% elseif playedQuestions[question.getId()] is not defined or playedQuestions[question.getId()] == 1 %}
@@ -288,7 +289,7 @@
 	{% for question in questions %}
 	{% if question.getLevel() == 3 %}
                             <li class="hard">
-		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 99 %}
+		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 5 %}
                                 <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/machigaigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getId}}, '{{question.getQuestionTitle}}');"/>
 		{% elseif playedQuestions[question.getId()] is not defined or playedQuestions[question.getId()] == 1 %}
@@ -316,7 +317,7 @@
 		{% for question in histories %}
 	{% if question.getQuestion().getLevel() == 1 %}
                             <li class="easy">
-		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 99 %}
+		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 5 %}
                                 <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/machigaigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getId}}, '{{question.getQuestionTitle}}');"/>
 		{% elseif question.getGameStatus() is empty or question.getGameStatus() == 1 %}
@@ -346,13 +347,13 @@
 		{% elseif question.getGameStatus() == 2 %}
                                 <img id="image{{question.getQuestion().getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_notfirst_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getQuestion().getId}}, '{{question.getQuestion().getQuestionTitle}}');"/>
-		{% elseif question.getGameStatus() == 3 %}
+		{% elseif question.getGameStatus() == 5 %}
                                 <img id="image{{question.getQuestion().getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getQuestion().getId}}, '{{question.getQuestion().getQuestionTitle}}');"/>
-		{% elseif question.getGameStatus() == 4 %}
+		{% elseif question.getGameStatus() == 3 %}
                                 <img id="image{{question.getQuestion().getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_game_clearfirst_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getQuestion().getId}}, '{{question.getQuestion().getQuestionTitle}}');"/>
-		{% elseif question.getGameStatus() == 5 %}
+		{% elseif question.getGameStatus() == 4 %}
                                 <img id="image{{question.getQuestion().getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_game_clearnotfirst_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getQuestion().getId}}, '{{question.getQuestion().getQuestionTitle}}');"/>
 		{% endif %}
@@ -370,13 +371,13 @@
 		{% elseif question.getGameStatus() == 2 %}
                                 <img id="image{{question.getQuestion().getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_game_challenge_notfirst_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getQuestion().getId}}, '{{question.getQuestion().getQuestionTitle}}');"/>
-		{% elseif question.getGameStatus() == 3 %}
+		{% elseif question.getGameStatus() == 5 %}
                                 <img id="image{{question.getQuestion().getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getQuestion().getId}}, '{{question.getQuestion().getQuestionTitle}}');"/>
-		{% elseif question.getGameStatus() == 4 %}
+		{% elseif question.getGameStatus() == 3 %}
                                 <img id="image{{question.getQuestion().getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_game_clearfirst_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getQuestion().getId}}, '{{question.getQuestion().getQuestionTitle}}');"/>
-		{% elseif question.getGameStatus() == 5 %}
+		{% elseif question.getGameStatus() == 4 %}
                                 <img id="image{{question.getQuestion().getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_game_clearnotfirst_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getQuestion().getId}}, '{{question.getQuestion().getQuestionTitle}}');"/>
 		{% endif %}

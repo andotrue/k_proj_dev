@@ -1,1 +1,15 @@
-<p>メールアドレスの有効期間は２４時間です。お手数ですがはじめからやり直してください。</p>
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
+{% block title %}{% endblock %}
+{% block body %}
+<style>
+body{background: url({{asset('/bundles/machigaigame/images/parts/2-01_bg_.png')}})}
+</style>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header
+.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
+<p style="padding:5%;font-size:1em;text-align:left;position:relative;margin-top:40%;color:rgb(22,101,179)">エラーが発生しました。<br />はじめからやり直してください。<br /><br />URLの有効期限切れにご注意ください。</p>
+
+<a href="{{path('Top')}}">
+<img style="position:relative;margin-top:14%" id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
+</a>
+<img id="preToTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" class="preload">
+{% endblock %}

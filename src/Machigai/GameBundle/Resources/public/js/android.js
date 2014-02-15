@@ -29,9 +29,17 @@ function goTop(){
     }
 }
 
-//AndrodではsyncTokenをPreferenceManagerに渡す処理, webapp版ではなにもしない。
+//AndroidではsyncTokenをPreferenceManagerに渡す処理, webapp版ではなにもしない。
 function registerUserIfAndroid(syncToken){
     if(window["droid"]){
         droid.registerUser(syncToken);
     }
 }
+//AndroidではsyncTokenをPreferenceManagerから削除する処理, webapp版ではなにもしない。
+function logout(){
+    if(window["droid"]){
+        droid.logout();
+    }
+}
+
+

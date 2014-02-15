@@ -145,7 +145,7 @@ var Clock = cc.Layer.extend({
 	},
     _getMillisecondString:function(){
 		var time = that.getCurrentDuration();
-		var target = Math.floor(time % 1000);
+		var target = Math.floor( (time % 1000) / 10);
 //		cc.log("Clock._getMillisecondString: str = " + that._padding( target, "0", 4 ));
 		return that._padding( target, "0", 2 );
     },

@@ -1,13 +1,17 @@
+Root:
+    path: /
+    defaults: { _controller: MachigaiGameBundle:Default:index }
+
 afterAuIdLoginAction:
     pattern: /afterAuIdLogin
     defaults: { _controller: MachigaiGameBundle:Android:afterAuIdLogin }
-    requirements: 
+    requirements:
         _method: GET
 
 AuIdLogin:
     pattern: /auIdLogin
     defaults: { _controller: MachigaiGameBundle:Android:auId }
-    requirements: 
+    requirements:
         _method: GET
 auIdAssociation:
     pattern: /auIdAssociation
@@ -27,25 +31,25 @@ Logout:
 Error:
     path: /error
     defaults: { _controller: MachigaiGameBundle:Default:error }
-    requirements: 
+    requirements:
         _method: GET
 
 Help:
     pattern: /help/
     defaults: { _controller: MachigaiGameBundle:Help:index }
-    requirements: 
+    requirements:
         _method: GET
 
 HelpHowtoplay:
     pattern: /help/howtoplay
     defaults: { _controller: MachigaiGameBundle:Help:howtoplay }
-    requirements: 
+    requirements:
         _method: GET
 
 HelpTerms:
     pattern: /help/terms
     defaults: { _controller: MachigaiGameBundle:Help:terms }
-    requirements: 
+    requirements:
         _method: GET
 
 HelpInquiryForm:
@@ -81,7 +85,7 @@ ChangeEmailSent:
     defaults: { _controller: MachigaiGameBundle:Setting:changeEmailSent }
 
 ChangeEmailComplete:
-    pattern: /setting/changeEmailComplete/
+    pattern: /setting/changeEmailComplete/{changeEmailActivationCode}
     defaults: { _controller: MachigaiGameBundle:Setting:changeEmailComplete }
 
 SendEmail:
@@ -115,19 +119,19 @@ DeleteUserComplete:
 SettingNicknameregister:
     pattern: /setting/nickname
     defaults: { _controller: MachigaiGameBundle:Setting:nicknameRegister }
-    requirements: 
+    requirements:
         _method: POST
 
 SettingNickname:
     pattern: /setting/nickname
     defaults: { _controller: MachigaiGameBundle:Setting:nickname }
-    requirements: 
+    requirements:
         _method: GET
 
 Setting:
     pattern: /setting/
     defaults: { _controller: MachigaiGameBundle:Setting:index }
-    requirements: 
+    requirements:
         _method: GET
 
 JsonUpload:
@@ -257,7 +261,7 @@ SentEmail:
     defaults: { _controller: MachigaiGameBundle:Register:sentEmail }
 
 BeforeNickname:
-    pattern: /register/beforeRegisterNickname
+    pattern: /register/beforeRegisterNickname/{pass}
     defaults: { _controller: MachigaiGameBundle:Register:beforeRegisterNickname }
 
 ReissuePassword:
@@ -289,7 +293,7 @@ LoginAfterSettingName:
     defaults: { _controller: MachigaiGameBundle:Register:loginAfterSettingName }
 
 Register:
-    pattern: /register
+    pattern: /register/{temp}
     defaults: { _controller: MachigaiGameBundle:Register:index }
 
 ResultUserClear:
@@ -321,24 +325,24 @@ SyncNotice:
 SyncGameFile:
     pattern: /sync/game/file/{level}/{qcode}/{type}
     defaults: { _controller: MachigaiGameBundle:Android:gameFile }
-    requirements: 
+    requirements:
         _method: GET
 
 SyncGame:
     pattern: /sync/game/{id}/{uid}
     defaults: { _controller: MachigaiGameBundle:Android:game }
-    requirements: 
+    requirements:
         _method: GET
 SyncGameData:
     pattern: /sync/game/{id}/{fileName}
     defaults: { _controller: MachigaiGameBundle:Android:gameData }
-    requirements: 
+    requirements:
         _method: GET
 
 SyncQuestionData:
     pattern: /sync/game/getQuestionData
     defaults: { _controller: MachigaiGameBundle:Android:getQuestionData }
-    requirements: 
+    requirements:
         _method: GET
 
 

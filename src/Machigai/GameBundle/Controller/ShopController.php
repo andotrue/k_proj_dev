@@ -72,16 +72,16 @@ class ShopController extends BaseController
     {
 	return $this->render('MachigaiGameBundle:Shop:confirm.html.twig',array('id'=>$id));
     }
-	
+
 	public function download2(){
 
 	}
-	
+
 	public function downloadExecuteAction($id){
-		
+
 		$request = $this->get('request');
 		$session = $request->getSession();  
-		
+
 		$syncToken = $request->query->get("syncToken");
 		$users = $this->getDoctrine()
 				->getManager()
@@ -94,7 +94,7 @@ class ShopController extends BaseController
 			$session->set('id',  $user->getId());
 			$session->set('smartPassResult', true );
 		}
-		
+
         $user = $this->getUser();
         $item = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
@@ -134,15 +134,15 @@ class ShopController extends BaseController
             return $this->download($itemPath);
         }
     }
-	
+
     public function download($itemPath){
 
         $image_file = dirname(__FILE__).$itemPath;
 		$filename = basename($image_file);
-		
+
         $response = new BinaryFileResponse($image_file);
 		$response->trustXSendfileTypeHeader();
-		
+
 		return $response;
 	}
 }

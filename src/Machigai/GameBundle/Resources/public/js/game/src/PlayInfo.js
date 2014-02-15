@@ -129,7 +129,7 @@ var PlayInfo = cc.Class.extend({
 			this._error_redirect_to("../select");
 		}
 		this._data = data;
-		if(data.playHistory){
+		if( data && data.playHistory && data.playHistory.playInfo){
 			var playInfo = JSON.parse(data.playHistory.playInfo);
 			this._data.playHistory.playInfo = playInfo;
 			this._data.playInfo = data.playHistory.playInfo;
@@ -140,6 +140,7 @@ var PlayInfo = cc.Class.extend({
 		if(this._data.playHistory && this._data.playHistory.isSavedGame){
 			this._playDataJSON = this._data.playHistory;
 		}
+		
 		csrf_token = this._data["csrf_token"];
 
 	},
@@ -224,5 +225,11 @@ var PlayInfo = cc.Class.extend({
 		}else{
 			this._playData = PlayData.loadFromJSON(this._playDataJSON);
 		}
+		
+		// ゲームステータスを同期
+		if( this._data && this._data.playHistory && this._data.playHistory.playInfo){
+			this._playData._gameStatus = this._data.playHistory.gameStatus;
+		}
+
 	}
 });

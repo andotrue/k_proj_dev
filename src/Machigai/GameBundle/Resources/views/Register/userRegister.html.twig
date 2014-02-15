@@ -16,17 +16,17 @@
  #form_mailAddress {width:100%;padding:1%;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
  .invisible {opacity:0;}
  #form_password {width:100%;padding:1%;margin-top:19%;position:relative;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
- .registerForm {width:80%;margin-top:53%;position:relative;left:8%;}
+ .registerForm {width:80%;margin-top:26%;position:relative;left:8%;}
 </style>
-<img src="{{ asset('/bundles/machigaigame/images/parts/1-01_7_bg.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
-
+<img src="{{ asset('/bundles/machigaigame/images/parts/1-01_1_bg.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
+<img src="{{ asset('/bundles/machigaigame/images/parts/bar_kaiin.png')  }}" width="100%" style="position:relative;margin-top:29%"/>
 
 <section>
   <div class="registerForm">
   <form action="{{ path('RegisterUserConfirm') }}" method="post" {{ form_enctype(form) }}>
   {{ form_errors (form) }}
   {{ form_rest(form) }}
-  {{ form (form) }} 
+  {{ form (form) }}
   <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
   {% if error is not empty %}
   {{error}}
@@ -38,7 +38,7 @@
    <img id="topImage" width="35%" style="margin-right:9%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
    <img src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" class="preload">
 
-   <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" style="width:70%;" >
+   <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" style="width:35%;" >
    <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck.png')}}"  >
    </div>
   </div>
@@ -48,7 +48,23 @@ $(function(){
 	$('#form_confirm').hide();
 })
 function submitRegister(){
-	$('#form_confirm').trigger("click");
+  var mail_address = $('#form_mailAddress').val();
+  var password = $('#form_password').val();
+  if(!mail_address.match(/[\S]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
+    if(navigator.userAgent.indexOf('Android') > 0){
+      droid.alert("メールアドレスを入力してください。")
+    }else{
+      alert("メールアドレスを入力してください。");
+    }
+  }else if(!password.match(/\S/) || password.length < 6){
+    if(navigator.userAgent.indexOf('Android') > 0){
+      droid.alert("パスワードは半角英数６文字以上入力してください。");
+    }else{
+      alert("パスワードは半角英数６文字以上入力してください。");
+    }
+  }else{
+    $('#form_confirm').trigger("click");
+  }
 }
 </script>
 </div>

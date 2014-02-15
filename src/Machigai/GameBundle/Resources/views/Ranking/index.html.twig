@@ -144,7 +144,10 @@ window.onload = function(){
 }
 
 </script>
-<img src="{{ asset('/bundles/machigaigame/images/parts/2-02_bg.png') }}" style="position:absolute;left:0;top:0;width:100%;height:160%;"/>
+<style>
+#copyright_area{position:relative;margin-top:66%}
+</style>
+<img src="{{ asset('/bundles/machigaigame/images/parts/rankingbg.png') }}" style="position:absolute;left:0;top:0;width:100%;height:160%;"/>
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_ranking.png') }}" style="position:absolute;left:0;top:0;width:100%;height:auto;"/>
 <section style="position:relative;margin-top:10%">
@@ -188,7 +191,7 @@ window.onload = function(){
 </div>
 </section>
  <footer style="position:relative;margin:25% auto 5% auto;">
-     <a href="{{path('Top')}}"><img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
+     <a href="javascript:goTop();"><img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
      <img id="preToTopImage" class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
  </footer>
 {% endblock %}

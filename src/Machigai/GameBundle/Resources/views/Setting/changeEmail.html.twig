@@ -1,23 +1,28 @@
-{% extends "MachigaiGameBundle::base.html.twig" %}
+{% extends "MachigaiGameBundle:Help:base.html.twig" %}
 {% block title %}{% endblock %}
 {% block body %}
 <style>
  #form_mailAddress {width:100%;padding:1%;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
- .invisible {opacity:0;}
  #form_password {width:100%;padding:1%;margin-top:19%;position:relative;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
- .registerForm {width:80%;margin-top:53%;position:relative;left:8%;}
- .linkButtons {position:relative;left:8%;margin-top:33%;float:left;}
+ .registerForm {width:80%;margin-top:12%;position:relative;left:8%;}
 </style>
-<h2>メールアドレス変更</h2>
+<img src="{{ asset('/bundles/machigaigame/images/parts/header.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
 <section>
+  <p style="padding:3%;position:relative;margin-top:50%;color:rgb(22,101,179)">変更後のメールアドレスを入力し登録内容確認ボタンを押してください。</p>
   <div class="registerForm">
-  {{ form (form) }} 
-   <div class="linkButtons">
-   <a href="{{path('Top')}}"><img id="topImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
-    </div>
-   <div class="linkButtons">
-   <img id="registerConfirm" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" >
-   </div>
+  <p style="color:rgb(22,101,179)">メールアドレス</p>
+  {{ form (form) }}
+  <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
+  {% if caution is not empty %}
+      {{caution}}
+  {% endif %}
+  </div>
+  <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
+  </div>
+  <div style="text-align:center">
+   <img class="linkButtons" style="width:65%;margin-top:17%" id="toConfirm" src="{{ asset('/bundles/machigaigame/images/parts/button_otoiawasecheck_off.png')}}" onclick="changeImage(this.id);submitRegister()"><br />
+   <img class="linkButtons" id="returnButton" style="width:65%;margin-top:5%" src="{{ asset('/bundles/machigaigame/images/parts/buttom_return_off.png')}}" onclick="changeImage(this.id);history.back()" >
+  </div>
   </div>
 </section>
 <script>
@@ -29,7 +34,16 @@ $(function(){
 	$('#form_confirm').hide();
 })
 function submitRegister(){
-	$('#form_confirm').trigger("click");
+  var mail_address = $('#form_mailAddress').val();
+  if(!mail_address.match(/[\S]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
+    if(navigator.userAgent.indexOf('Android') > 0){
+      droid.alert("メールアドレスを入力してください。")
+    }else{
+      alert("メールアドレスを入力してください。");
+    }
+  }else{
+  	$('#form_confirm').trigger("click");
+  }
 }
 function changeImage(imageId){
   var pre_src = $('#'+imageId).attr('src');
