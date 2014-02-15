@@ -159,7 +159,7 @@ class KeyValueStore
     public function setCreatedAtValue()
     {
         $now = new \DateTime();
-        $this->createdAt = $now->format("Y-m-d\TH:i:sP");
+        $this->createdAt = $now->format("Y-m-d\TH:i:s");
     }    
 
     /**
@@ -168,6 +168,6 @@ class KeyValueStore
     public function setUpdatedAtValue()
     {
         $now = new \DateTime();
-        $this->updatedAt = $now->format("Y-m-d\TH:i:sP");
+        $this->updatedAt = $now->format("Y-m-d\TH:i:s");
     }        
 }
