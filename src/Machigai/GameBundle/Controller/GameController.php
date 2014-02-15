@@ -458,7 +458,6 @@ class GameController extends BaseController
             $duration += $interrupted - $resumed;
         }
 
-        //TODO:初回プレイ時に中断データを作成したケースの処理が必要
         if(empty($histories)){
 			$playHistory = new PlayHistory();
 			$playHistory->setCreatedAt(date("Y-m-d H:i:s"));
@@ -471,6 +470,7 @@ class GameController extends BaseController
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($playHistory);
 			$em->flush();
+            $this->applyRanking($playHistory);
         }elseif($histories[0]->getGameStatus()!=3 and $histories[0]->getGameStatus()!=4){
             //未クリアの場合→ステータスは２回目以降のクリアへ
             foreach ($histories as $history) {
@@ -492,7 +492,7 @@ class GameController extends BaseController
 			$em->persist($playHistory);
 			$em->flush();
         }else{
-            //すでにクリア済み（ステータスが３か４）の場合、→ステータスは変更しない。TODO:初回プレイ時に中断データを作成した場合もここに来てしまう。
+            //すでにクリア済み（ステータスが３か４）の場合、→ステータスは変更しない
             $em = $this->getDoctrine()->getEntityManager();
             $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($histories[0]->getId());
             $playHistory->setPlayInfo($playInfo);
@@ -507,7 +507,6 @@ class GameController extends BaseController
                 $this->applyRanking($playHistory);
             }
         */
-        $this->applyRanking($playHistory);
 
         return $this->render('MachigaiGameBundle:Game:resultUserClear.html.twig',array('clearTime'=>$clearTime,'clearPoint'=>$clearPoint,'currentPoint'=>$currentPoint));
     }
@@ -550,7 +549,6 @@ class GameController extends BaseController
                 ->getManager()
                 ->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('user'=>$user,'question'=>$question[0]));
 
-        //TODO:初回プレイ時に中断データを作成したケースの処理が必要
         if(empty($histories)){
 			$playHistory = new PlayHistory();
 			$playHistory->setCreatedAt(date("Y-m-d H:i:s"));
