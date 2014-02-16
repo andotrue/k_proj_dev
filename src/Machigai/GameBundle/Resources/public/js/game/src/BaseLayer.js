@@ -165,11 +165,7 @@ var BaseLayer = cc.Layer.extend({
         var qcode = this.playInfo.QCODE;
         var level = this.playInfo.LEVEL;
 
-        var copyrightImage = cc.MenuItemImage.create(
-            bd+"../../../../../sync/game/file/"+level+"/"+qcode+"/copyright",
-            bd+"../../../../../sync/game/file/"+level+"/"+qcode+"/copyright",
-            this.menuCallBack.bind(this)
-        );
+        var copyrightImage = cc.Sprite.create( bd+"../../../../../sync/game/file/"+level+"/"+qcode+"/copyright");
         copyrightImage.setPosition(436, 138);
         copyrightImage.name = "COPYRIGHT";
 
@@ -180,10 +176,22 @@ var BaseLayer = cc.Layer.extend({
         );
         popupLinkUrl.setPosition(601, 138);
         popupLinkUrl.name = "LINKURL";
+        //copyrightImageがあるかどうかでlinkURLを表示するかどうかを判断する
+        var thisbl = this;
 
-        var menu = cc.Menu.create([popupHint,popupSave,popupGiveup,copyrightImage,popupLinkUrl]);
-        menu.setPosition(0,0);
-        this.addChild(menu);
+        var a = setInterval(function(){
+            var isCopyrightImage = ( copyrightImage._contentSize._height !== 0 );
+            var menu = null;
+            if (isCopyrightImage){
+                menu = cc.Menu.create([popupHint,popupSave,popupGiveup,popupLinkUrl]);
+            }else{
+                menu = cc.Menu.create([popupHint,popupSave,popupGiveup]);
+            }
+
+            menu.setPosition(0,0);
+            thisbl.addChild(menu);
+            thisbl.addChild(copyrightImage);
+        }, 500);
     },
     onTouchesBegan: function(touches, event){
         cc.log('onTouchesBegan:' + touches.length);
