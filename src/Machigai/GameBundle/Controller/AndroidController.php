@@ -10,6 +10,8 @@ use Machigai\GameBundle\Entity\User;
 use Machigai\GameBundle\Entity\Question;
 use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\HttpFoundation\File\Exception\FatalErrorException;
+use Symfony\Component\HttpFoundation\File\Exception\Exception;
 use \DateTime;
 
 
@@ -703,19 +705,30 @@ class AndroidController extends BaseController
      }
      public function copyrightAction(){
         $request = $this->get("request");
+        $errorFlg = true;
+        try{
+            $questionId = $request->query->get("id");
+            if(!empty($questionId)){
+                $question = $this->getDoctrine()->getManager()->getRepository('MachigaiGameBundle:Question')->find($questionId);
+                if(!empty($question)){
+                    $url = $question->getCopyrightUrl();
+                    if(!empty($url)){
+                        //URLが存在する場合
+                        $errorFlg = false;
+                    }
+                }
+            }
 
-        $questionId = $request->query->get("id");
-        $pages = array(
-            1 =>"default",
-            2 =>"sample1"
-            );
-        if(array_key_exists($questionId, $pages)){
-            $pageName  = $pages[$questionId]; 
-        }else{
-            $pageName = "default"; 
+        }catch(Exception $e){
+            $logger = $this->get('logger');
+            $logger->info("UrlNotFound AndroidController.copyrightAction:". $file);
+            throw $this->createNotFoundException('お探しのページは見つかりませんでした。');
         }
 
-        return $this->render('MachigaiGameBundle:Copyright:'. $pageName .'.html.twig');
+        //URLが取得できなかった場合
+        if($errorFlg == true)  throw $this->createNotFoundException('お探しのページは見つかりませんでした。');
+        //URLが取得できた場合
+        return $this->redirect($url);
      } 
      /*
      *
