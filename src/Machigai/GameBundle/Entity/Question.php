@@ -108,6 +108,13 @@ class Question
     private $copyrightFileName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="copyright_url", type="text", nullable=true)
+     */
+    private $copyrightUrl;
+
+    /**
      * @ORM\OneToMany(targetEntity="PlayHistory", mappedBy="question")
      */
     protected $playHistories;
@@ -509,5 +516,28 @@ class Question
     public function getQcode()
     {
         return $this->qcode;
+    }
+
+    /**
+     * Set copyrightUrl
+     *
+     * @param string $copyrightUrl
+     * @return Question
+     */
+    public function setCopyrightUrl($copyrightUrl)
+    {
+        $this->copyrightUrl = $copyrightUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get copyrightUrl
+     *
+     * @return string 
+     */
+    public function getCopyrightUrl()
+    {
+        return $this->copyrightUrl;
     }
 }
