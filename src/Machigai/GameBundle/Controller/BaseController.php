@@ -295,16 +295,18 @@ class BaseController extends Controller
             array_multisort($sort,SORT_ASC,$rankings);
             for ($i=0; $i<count($rankings) ; $i++) {
                 $rank = $i+1;
-                $rankings[$i]->setRank($rank);
-                $em->persist($rankings[$i]);
-                $em->flush();
+        
+                if($rank <= 10){
+                    $rankings[$i]->setRank($rank);
+                    $em->persist($rankings[$i]);
+                }else{
+                    if($rankings[$i]->getId() != null){
+                        $em->remove($rankings[$i]);
+                    }
+                }
             }
 
-			if(count($rankings) > 10){
-				$em->remove($rankings[10]);
-                $em->persist($rankings[10]);
-				$em->flush();
-			}
+            $em->flush();
 			
 		}
     }
