@@ -176,7 +176,8 @@ var PopupLayer = cc.Layer.extend({
         popup.setPosition(360, popupY);
 		var yes = this.createYesButton(360,popupY - 84);
 		var no = this.createNoButton(360,popupY - 169);
-		var menu = cc.Menu.create([yes,no]);
+        var cancel = this.createCancelButton(640,popupY + 170);
+		var menu = cc.Menu.create([yes,no, cancel]);
 		menu.setPosition(0,0);
 		this.addChild(menu);
     },
@@ -214,7 +215,8 @@ var PopupLayer = cc.Layer.extend({
 			yes = this.createYesButton(360,popupY + 65);
 		}
         var no = this.createNoButton(360,popupY - 25);
-        var menu = cc.Menu.create([yes,no]);
+        var cancel = this.createCancelButton(640,popupY + 170);
+        var menu = cc.Menu.create([yes,no, cancel]);
         menu.setPosition(0,0);
         this.addChild(menu);
 
@@ -274,7 +276,8 @@ var PopupLayer = cc.Layer.extend({
 
         var yes = this.createYesButton(360,popupY + 4);
         var no = this.createNoButton(360,popupY - 100);
-        var menu = cc.Menu.create([yes,no]);
+        var cancel = this.createCancelButton(640,popupY + 170);
+        var menu = cc.Menu.create([yes,no, cancel]);
         menu.setPosition(0,0);
         this.addChild(menu);
 
@@ -367,7 +370,8 @@ var PopupLayer = cc.Layer.extend({
         var str = this.createToTopString(360,popupY + 25);
         var yes = this.createYesButton(360,popupY - 54);
         var no = this.createNoButton(360,popupY - 139);
-        var menu = cc.Menu.create([yes,no]);
+        var cancel = this.createCancelButton(640,popupY + 125);
+        var menu = cc.Menu.create([yes,no, cancel]);
         menu.setPosition(0,0);
         this.addChild(menu);
         this.addChild(str);
@@ -399,6 +403,7 @@ var PopupLayer = cc.Layer.extend({
                 }
                 break;
             case 'NO':
+            case 'CANCEL':
                 cc.log('NO');
 				this.playInfo.clock.resumeTimer();
 
@@ -439,6 +444,18 @@ var PopupLayer = cc.Layer.extend({
         no.setPosition(x, y);
         no.name = "NO";
         return no;
+    },
+
+    createCancelButton: function(x,y){
+        var cancel = cc.MenuItemImage.create(
+            bd+"res/game_scene/button/popup_icon_cancel.png",
+            bd+"res/game_scene/button/popup_icon_cancel.png",
+            this.menuCallBack.bind(this)
+        );
+        cancel.setOpacity(0);
+        cancel.setPosition(x, y);
+        cancel.name = "CANCEL";
+        return cancel;
     },
     createToTopString:function(x,y){
         var toTop = cc.LabelTTF.create("著作権を確認しますか？", "Arial", 35);
