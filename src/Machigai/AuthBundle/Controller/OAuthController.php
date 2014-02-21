@@ -147,7 +147,7 @@ class OAuthController extends Controller {
 					//認証エラー
 					return $this->redirect($this->generateUrl("Error"));
 				}elseif( $smartPassResponse->status == "success"){
-					if($smartPassResponse->aspuser == true){
+					if($smartPassResponse->aspuser == "true"){
 						
 						$cookie = new Cookie('smartContract', "true", time() + 3600 * 24);
 						$response->headers->setCookie($cookie);
