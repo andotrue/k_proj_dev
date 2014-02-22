@@ -10,6 +10,7 @@ var PlayData = cc.Class.extend({
 	_isSaved: null,
 	_touchData: [],
 	_clockData: [],
+	_isHintUsed: false,
 
 	save:function(){
 		cc.log("PlayData.save : isSaved() =" + this.isSaved());
@@ -124,6 +125,7 @@ PlayData.loadFromJSON = function(json_data){
 	instance._gameStatus = json_data["gameStatus"];
 	instance._isSaved = true;
 	instance._limitTime = json_data["limitTime"];
+	instance._isHintUsed = json_data.playInfo['isHintUsed'];
 	
 	for(var i in json_data.playInfo['clockData']){
 		var obj = json_data.playInfo['clockData'][i];

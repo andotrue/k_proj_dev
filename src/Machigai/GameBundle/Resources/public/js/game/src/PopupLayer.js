@@ -186,6 +186,7 @@ var PopupLayer = cc.Layer.extend({
         cc.log("PopupLayer.hint");
 		if(this.baseLayer.getHint == false){
 			this.baseLayer.dispHint();
+            this.baseLayer.playInfo._playData._isHintUsed = true;
 			cc.log("PopupLayer.hint:give hint");
 		}else{
 			cc.log("PopupLayer.hint:already given hint");
@@ -254,6 +255,7 @@ var PopupLayer = cc.Layer.extend({
 			var playInfoData = {};
 			playInfoData["clockData"] = this.playInfo._playData._clockData;
 			playInfoData["touchData"] = this.playInfo._playData._touchData;
+            playInfoData["isHintUsed"] = this.playInfo._playData._isHintUsed;
 
 			var pidTxt = JSON.stringify(playInfoData);
 
