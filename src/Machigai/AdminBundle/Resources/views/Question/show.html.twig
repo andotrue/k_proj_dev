@@ -1,0 +1,84 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>問題詳細</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>問題番号（表示）</th>
+                <td>{{ entity.questionNumber }}</td>
+            </tr>
+            <tr>
+                <th>レベル</th>
+                <td>{{ entity.level }}</td>
+            </tr>
+            <tr>
+                <th>問題タイトル</th>
+                <td>{{ entity.questionTitle }}</td>
+            </tr>
+            <tr>
+                <th>問題フォルダ番号</th>
+                <td>{{ entity.qcode }}</td>
+            </tr>
+            <tr>
+                <th>失敗可能回数</th>
+                <td>{{ entity.failLimit }}</td>
+            </tr>
+            <tr>
+                <th>タイムリミット</th>
+                <td>{{ entity.timeLimit }}</td>
+            </tr>
+            <tr>
+                <th>クリアポイント</th>
+                <td>{{ entity.clearPoint }}</td>
+            </tr>
+            <tr>
+                <th>ボーナスポイント</th>
+                <td>{{ entity.bonusPoint }}</td>
+            </tr>
+            <tr>
+                <th>配布開始日時</th>
+                <td>{{ entity.distributedFrom | date("Y/m/d h:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>配布終了日時</th>
+                <td>{{ entity.distributedTo | date("Y/m/d h:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>Isdelete</th>
+                <td>{{ entity.isDelete }}</td>
+            </tr>
+            <tr>
+                <th>作成日時</th>
+                <td>{{ entity.createdAt | date("Y/m/d h:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>更新日時</th>
+                <td>{{ entity.updatedAt | date("Y/m/d h:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>著作権URL</th>
+                <td>{{ entity.copyrightUrl }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('question') }}">
+            問題一覧に戻る
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('question_edit', { 'id': entity.id }) }}">
+            編集
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -11,15 +11,19 @@ security:
             memory:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-
+                    admin: { password: bb87a29949f3a1ee0559f8a57357487151281386, roles: [ 'ROLE_ADMIN' ] }
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm:   sha1
+            iterations: 1
+            encode_as_base64: false
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         login:
-            pattern:  ^/demo/secured/login$
+            pattern:  ^/admin/login$
             security: false
 
         secured_area:
@@ -36,6 +40,39 @@ security:
         android:
             pattern: ^/sync/
             security: false
+        admin:
+            pattern:    ^/admin/
+            form_login:
+                # ログインが必要な際に、ここにリダイレクトされます
+                login_path: machigai_admin_login
+                # true であれば、リダイレクトする代わりにログインフォームへフォワードします
+                use_forward:                    false
 
+                # ログインフォームの送信先はここになります
+                check_path:                     /admin/login_check
+
+                # デフォルトでは、ログインフォームは POST である *必要* があります。 GET ではありません。
+                post_only:                      true
+
+                # ログイン成功後のリダイレクトオプション。詳細は以下を読んでください。
+                always_use_default_target_path: false
+                default_target_path:            /admin
+                target_path_parameter:          _target_path
+                use_referer:                    false
+
+                # ログイン失敗後のリダイレクトオプション。詳細は以下を読んでください。
+                failure_path:                   null
+                failure_forward:                false
+
+                # ユーザ名とパスワードフィールドの名前
+                username_parameter:             _username
+                password_parameter:             _password
+
+                # csrf トークンオプション
+                csrf_parameter:                 _csrf_token
+                intention:                      authenticate
+            logout:
+                path:   /admin/logout
+                target: /admin/
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

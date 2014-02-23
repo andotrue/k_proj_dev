@@ -1,0 +1,15 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>問題作成</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('question') }}">
+            問題一覧に戻る
+        </a>
+    </li>
+</ul>
+{% endblock %}

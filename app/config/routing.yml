@@ -1,3 +1,7 @@
+machigai_admin:
+    resource: "@MachigaiAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
 machigai_auth:
     resource: "@MachigaiAuthBundle/Resources/config/routing.yml"
     prefix:   /top/auth

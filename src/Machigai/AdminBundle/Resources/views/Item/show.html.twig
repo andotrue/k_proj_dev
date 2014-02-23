@@ -1,0 +1,68 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>アイテム</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>アイテム番号</th>
+                <td>{{ entity.itemCode }}</td>
+            </tr>
+            <tr>
+                <th>アイテム名</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>ファイル名</th>
+                <td>{{ entity.itemPath }}</td>
+            </tr>
+            <tr>
+                <th>消費ポイント</th>
+                <td>{{ entity.consumePoint }}</td>
+            </tr>
+            <tr>
+                <th>説明</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>人気ランク</th>
+                <td>{{ entity.popularityRank }}</td>
+            </tr>
+            <tr>
+                <th>配布開始日時</th>
+                <td>{{ entity.distributedFrom | date("Y/m/d h:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>配布終了日時</th>
+                <td>{{ entity.distributedTo | date("Y/m/d h:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>作成日時</th>
+                <td>{{ entity.createdAt | date("Y/m/d h:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>更新日時</th>
+                <td>{{ entity.updatedAt | date("Y/m/d h:i:s") }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('item') }}">
+            アイテム一覧に戻る
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('item_edit', { 'id': entity.id }) }}">
+            編集
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

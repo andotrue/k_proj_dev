@@ -1,0 +1,128 @@
+machigai_admin_homepage:
+    pattern:  /
+    defaults: { _controller: MachigaiAdminBundle:Default:index }
+
+machigai_admin_login:
+    pattern:  /login
+    defaults: { _controller: MachigaiAdminBundle:Default:login }
+
+machigai_admin_login_check:
+    pattern:  /login_check
+    defaults: { _controller: MachigaiAdminBundle:Default:loginCheck }
+
+machigai_admin_logout:
+    pattern:  /logout
+    defaults: { _controller: MachigaiAdminBundle:Default:logout }
+
+question:
+    pattern: /question/
+    defaults: { _controller: MachigaiAdminBundle:Question:index }
+
+question_show:
+    pattern: /question/show/{id}
+    defaults: { _controller: MachigaiAdminBundle:Question:show }
+
+question_edit:
+    pattern: /question/edit/{id}
+    defaults: { _controller: MachigaiAdminBundle:Question:edit }
+
+question_new:
+    pattern: /question/new
+    defaults: { _controller: MachigaiAdminBundle:Question:new }
+
+question_create:
+    pattern: /question/create
+    defaults: { _controller: MachigaiAdminBundle:Question:create }
+
+question_delete:
+    pattern: /question/delete/{id}
+    defaults: { _controller: MachigaiAdminBundle:Question:delete }
+
+question_update:
+    pattern: /question/update/{id}
+    defaults: { _controller: MachigaiAdminBundle:Question:update }
+
+user:
+    pattern: /user/
+    defaults: { _controller: MachigaiAdminBundle:User:index }
+
+user_show:
+    pattern: /user/show/{id}
+    defaults: { _controller: MachigaiAdminBundle:User:show }
+
+user_edit:
+    pattern: /user/edit/{id}
+    defaults: { _controller: MachigaiAdminBundle:User:edit }
+
+user_new:
+    pattern: /user/new
+    defaults: { _controller: MachigaiAdminBundle:User:new }
+
+user_create:
+    pattern: /user/create
+    defaults: { _controller: MachigaiAdminBundle:User:create }
+
+user_delete:
+    pattern: /user/delete/{id}
+    defaults: { _controller: MachigaiAdminBundle:User:delete }
+
+user_update:
+    pattern: /user/update/{id}
+    defaults: { _controller: MachigaiAdminBundle:User:update }
+
+item:
+    pattern: /item/
+    defaults: { _controller: MachigaiAdminBundle:Item:index }
+
+item_show:
+    pattern: /item/show/{id}
+    defaults: { _controller: MachigaiAdminBundle:Item:show }
+
+item_edit:
+    pattern: /item/edit/{id}
+    defaults: { _controller: MachigaiAdminBundle:Item:edit }
+
+item_new:
+    pattern: /item/new
+    defaults: { _controller: MachigaiAdminBundle:Item:new }
+
+item_create:
+    pattern: /item/create
+    defaults: { _controller: MachigaiAdminBundle:Item:create }
+
+item_delete:
+    pattern: /item/delete/{id}
+    defaults: { _controller: MachigaiAdminBundle:Item:delete }
+
+item_update:
+    pattern: /item/update/{id}
+    defaults: { _controller: MachigaiAdminBundle:Item:update }
+
+ranking:
+    pattern: /ranking/
+    defaults: { _controller: MachigaiAdminBundle:Ranking:index }
+
+ranking_show:
+    pattern: /ranking/show/{id}
+    defaults: { _controller: MachigaiAdminBundle:Ranking:show }
+
+ranking_edit:
+    pattern: /ranking/edit/{id}
+    defaults: { _controller: MachigaiAdminBundle:Ranking:edit }
+
+ranking_new:
+    pattern: /ranking/new
+    defaults: { _controller: MachigaiAdminBundle:Ranking:new }
+
+ranking_create:
+    pattern: /ranking/create
+    defaults: { _controller: MachigaiAdminBundle:Ranking:create }
+
+ranking_delete:
+    pattern: /ranking/delete/{id}
+    defaults: { _controller: MachigaiAdminBundle:Ranking:delete }
+
+ranking_update:
+    pattern: /ranking/update/{id}
+    defaults: { _controller: MachigaiAdminBundle:Ranking:update }
+

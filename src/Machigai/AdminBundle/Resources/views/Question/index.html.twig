@@ -1,0 +1,65 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>問題一覧</h1>
+
+    {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>レベル</th>
+                <th>問題番号<br />（表示）</th>
+                <th>問題<br />タイトル</th>
+                <th>失敗可能<br />回数</th>
+                <th>タイム<br />リミット</th>
+                <th>クリア<br />ポイント</th>
+                <th>ボーナス<br />ポイント</th>
+                <th>配布開始<br />日時</th>
+                <th>配布終了<br />日時</th>
+                <th>削除済み<br />フラグ</th>
+                <th>著作権<br />URL</th>
+                <th>フォルダ<br />番号</th>
+                <th>アクション</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('question_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.questionNumber }}</td>
+                <td>{{ entity.level }}</td>
+                <td>{{ entity.qcode }}</td>
+                <td>{{ entity.questionTitle }}</td>
+                <td>{{ entity.failLimit }}</td>
+                <td>{{ entity.timeLimit }}</td>
+                <td>{{ entity.clearPoint }}</td>
+                <td>{{ entity.bonusPoint }}</td>
+                <td>{{ entity.distributedFrom | date("Y/m/d h:i:s")  }}</td>
+                <td>{{ entity.distributedTo | date("Y/m/d h:i:s") }}</td>
+                <td>{{ entity.isDelete }}</td>
+                <td>{{ entity.copyrightUrl }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('question_show', { 'id': entity.id }) }}">詳細</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('question_edit', { 'id': entity.id }) }}">編集</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
+
+        <ul>
+        <li>
+            <a href="{{ path('question_new') }}">
+                新規作成
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
