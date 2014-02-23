@@ -280,6 +280,14 @@ ForgetPasswordConfirm:
     pattern: /forget_password_confirm
     defaults: { _controller: MachigaiGameBundle:Register:forgetPasswordConfirm }
 
+ForgetPasswordSend:
+    pattern: /forget_password_send
+    defaults: { _controller: MachigaiGameBundle:Register:forgetPasswordSend }
+
+ForgetPasswordComplete:
+    pattern: /forget_password_complete
+    defaults: { _controller: MachigaiGameBundle:Register:forgetPasswordComplete }
+
 RegisterConfirm:
     pattern: /register/confirm/
     defaults: { _controller: MachigaiGameBundle:Register:confirm }
