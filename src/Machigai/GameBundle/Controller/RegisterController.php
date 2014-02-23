@@ -177,6 +177,32 @@ class RegisterController extends BaseController
         return $this->render('MachigaiGameBundle:Register:index.html.twig', array('tempPass'=>$temp,'form' => $form->createView()) );
     }
 
+	public function forgetPasswordAction(){
+		$form = $this->createFormBuilder()
+				->setMethod("GET")
+				->add('mailAddress', 'text',array('label'=>"メールアドレス"))
+				->getForm();
+		
+		$caution = null;
+		return $this->render('MachigaiGameBundle:Register:forget_password.html.twig',
+					array('caution'=>$caution, "form" => $form->createView())
+				);
+	}
+	
+	public function forgetPasswordConfirmAction(Request $request){
+        $form = $this->createFormBuilder()
+        ->setMethod('GET')
+        ->add('mailAddress','hidden')
+        ->add('confirm', 'submit')
+        ->getForm();
+        $form->bind($request);
+        $data = $form->getData();
+		$mailAddress = $data["mailAddress"];
+
+        return $this->render('MachigaiGameBundle:Register:forget_password_confirm.html.twig',
+				array('mailAddress'=>$mailAddress,'form' => $form->createView()));
+	}
+	
     public function completeAction(Request $request)
     {
         $nickname = new User();

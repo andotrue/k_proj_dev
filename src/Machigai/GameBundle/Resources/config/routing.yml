@@ -272,6 +272,14 @@ LoginCheck:
     pattern: /register/loginCheck
     defaults: { _controller: MachigaiGameBundle:Register:loginCheck }
 
+ForgetPassword:
+    pattern: /forget_password
+    defaults: { _controller: MachigaiGameBundle:Register:forgetPassword }
+
+ForgetPasswordConfirm:
+    pattern: /forget_password_confirm
+    defaults: { _controller: MachigaiGameBundle:Register:forgetPasswordConfirm }
+
 RegisterConfirm:
     pattern: /register/confirm/
     defaults: { _controller: MachigaiGameBundle:Register:confirm }
