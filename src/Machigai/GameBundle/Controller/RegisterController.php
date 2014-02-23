@@ -177,7 +177,96 @@ class RegisterController extends BaseController
         return $this->render('MachigaiGameBundle:Register:index.html.twig', array('tempPass'=>$temp,'form' => $form->createView()) );
     }
 
-    public function completeAction(Request $request)
+	public function forgetPasswordAction(){
+		$form = $this->createFormBuilder()
+				->setMethod("GET")
+				->add('mailAddress', 'text',array('label'=>"メールアドレス"))
+				->getForm();
+		
+		$caution = null;
+		return $this->render('MachigaiGameBundle:Register:forget_password.html.twig',
+					array('caution'=>$caution, "form" => $form->createView())
+				);
+	}
+	
+	public function forgetPasswordConfirmAction(Request $request){
+        $form = $this->createFormBuilder()
+        ->setMethod('GET')
+        ->add('mailAddress','hidden')
+        ->add('confirm', 'submit')
+        ->getForm();
+        $form->bind($request);
+        $data = $form->getData();
+		$mailAddress = $data["mailAddress"];
+
+        return $this->render('MachigaiGameBundle:Register:forget_password_confirm.html.twig',
+				array('mailAddress'=>$mailAddress,'form' => $form->createView()));
+	}
+
+	public function forgetPasswordSendAction(Request $request){
+		
+//		$mailAddress = $request->request->get("mailAddress");
+		$tmp = $request->request->all();
+		$mailAddress = $tmp["form"]["mailAddress"];
+		
+		// ユーザーの検索
+        $checkData = $this->getDoctrine()
+         ->getRepository('MachigaiGameBundle:User')
+         ->findBy(array('mailAddress'=>$mailAddress));
+
+		
+		// パスワードの生成
+		for ($i = 0, $str = null; $i < 6; ) { 
+			$num = mt_rand(0x30, 0x7A); // ASCII文字コード 
+			if ((0x30 <= $num && $num <= 0x39) || (0x41 <= $num && $num <= 0x5A) 
+			|| (0x61 <= $num && $num <= 0x7A)) { 
+				$str .= chr($num); // 文字コードを文字に変換 
+				$i++; 
+			} 
+		} 
+		
+		$password = $str;
+		$salt = "lkjfa74uhfdou593krtbf9lsmfk1gfrjurl";
+        $password = $password.$salt;
+        $password = hash('sha512',$password);
+		
+		// パスワードの変更
+		$user = $checkData[0];
+		$user->setPassword($password);
+
+		$em = $this->getDoctrine()->getEntityManager();
+		$em->persist($user);
+		$em->flush();
+		
+		// パスワードのメール送信
+         $message = \Swift_Message::newInstance()
+        ->setSubject('【まちがいさがし放題】会員登録のご案内')
+        ->setFrom('regist@machigai.puzzle-m.net')
+        ->setTo($user->getMailAddress())
+        ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」でパスワード再発行をされたお客様へお送りしています。\n
+				\n
+				新しいパスワード：" .$str.
+				"\n
+https://machigai.puzzle-m.net\n
+\n
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿\n
+※このメールアドレスは配信専用です。返信されないようお願いいたします。"
+/*            $this->renderView(
+                'HelloBundle:Hello:email.txt.twig',
+                array('name' => $name)
+                    )
+*/                )
+            ;
+         $this->get('mailer')->send($message);
+		
+		return $this->redirect($this->generateUrl("ForgetPasswordComplete"));
+	}
+	
+	public function forgetPasswordCompleteAction(Request $request){
+        return $this->render('MachigaiGameBundle:Register:forget_password_complete.html.twig');
+	}
+	
+	public function completeAction(Request $request)
     {
         $nickname = new User();
 
