@@ -257,8 +257,10 @@ https://machigai.puzzle-m.net\n
                     )
 */                )
             ;
+		try {
          $this->get('mailer')->send($message);
-		
+		} catch( Exception $ex ){
+		} 
 		return $this->redirect($this->generateUrl("ForgetPasswordComplete"));
 	}
 	
@@ -404,8 +406,12 @@ https://machigai.puzzle-m.net\n
                     )
 */                )
             ;
-         $this->get('mailer')->send($message);
-
+		 
+		try {
+	        $this->get('mailer')->send($message);
+		} catch (Exception $ex){
+		}
+		
          $em = $this->getDoctrine()->getEntityManager();
          $em->persist($data);
          $em->flush();
