@@ -240,17 +240,18 @@ class RegisterController extends BaseController
 		
 		// パスワードのメール送信
          $message = \Swift_Message::newInstance()
-        ->setSubject('【まちがいさがし放題】会員登録のご案内')
+        ->setSubject('【まちがいさがし放題】パスワード再発行')
         ->setFrom('regist@machigai.puzzle-m.net')
         ->setTo($user->getMailAddress())
-        ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」でパスワード再発行をされたお客様へお送りしています。\n
-				\n
-				新しいパスワード：" .$str.
-				"\n
-https://machigai.puzzle-m.net\n
-\n
-＿＿＿＿＿＿＿＿＿＿＿＿＿＿\n
-※このメールアドレスは配信専用です。返信されないようお願いいたします。"
+        ->setBody("本メールは「スタンプ付き♪まちがいさがし放題for auスマートパス」でパスワード再発行をされたお客様へお送りしています。\n".
+				"\n".
+				"新しいパスワード：" .$str.
+				"\n".
+				"※ログイン後、TOPの「ヘルプ」→「ユーザー登録について」→「パスワード変更」より、パスワードを変更していただくことをお勧めします。".
+				"\n".
+				"https://machigai.puzzle-m.net\n".
+				"\n".
+				"※このメールアドレスは配信専用です。返信されないようお願いいたします。"
 /*            $this->renderView(
                 'HelloBundle:Hello:email.txt.twig',
                 array('name' => $name)
