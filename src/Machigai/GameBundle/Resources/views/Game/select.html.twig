@@ -122,6 +122,8 @@
             $(other_mode1).attr("src", not1);
             $(other_mode2).attr("src", not2);
             current_level = level;
+            page = 0;
+            draw();
         }
     }
 </script>
@@ -143,32 +145,33 @@
                 draw();
             }
         });
-        function draw() {
-            var target = "li." + current_level;
-            var str = 'li.' + current_level + ':first,li.' + current_level + ':gt("' + page * 24 + '"):lt(24)';
-            $(target).hide();
-            $(str).show();
-            var max = parseInt($(target).size());
-            rewritePageNum();
-            function rewritePageNum() {
-                $('.page').html(page + 1);
-                if ((max % 24) == 0) {
-                    if (parseInt(max / 24) == 0) {
-                        $('.maxPage').html(1);
-                    } else {
-                        $('.maxPage').html(parseInt(max / 24));
-                    }
+        draw();
+    });
+
+    function draw() {
+        var target = "li." + current_level;
+        var str = 'li.' + current_level + ':first,li.' + current_level + ':gt("' + page * 24 + '"):lt(24)';
+        $(target).hide();
+        $(str).show();
+        var max = parseInt($(target).size());
+        rewritePageNum();
+        function rewritePageNum() {
+            $('.page').html(page + 1);
+            if ((max % 24) == 0) {
+                if (parseInt(max / 24) == 0) {
+                    $('.maxPage').html(1);
                 } else {
-                    if (parseInt(max / 24) == 0) {
-                        $('.maxPage').html(1);
-                    } else {
-                        $('.maxPage').html(parseInt(max / 24 + 1));
-                    }
+                    $('.maxPage').html(parseInt(max / 24));
+                }
+            } else {
+                if (parseInt(max / 24) == 0) {
+                    $('.maxPage').html(1);
+                } else {
+                    $('.maxPage').html(parseInt(max / 24 + 1));
                 }
             }
         }
-        draw();
-    });
+    }
 </script>
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_mondaiselect.png')  }}"
