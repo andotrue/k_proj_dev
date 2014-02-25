@@ -267,7 +267,7 @@
                                 <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/machigaigame/images/parts/button_game_clearnotfirst_off.png')  }}" onclick="changeImage(this.id);
                                         popup({{question.getId}}, '{{question.getQuestionTitle}}');"/>
 		{% endif %}
-                                <br /><span>No{{question.getId}}</span></li>
+                                <br /><span>No{{question.getQuestionNumber}}</span></li>
 	{% endif %}
 	{% endfor %}
                             </span>
