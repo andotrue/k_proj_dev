@@ -12,7 +12,7 @@
   現在のポイント：{{user.getCurrentPoint}} pt <br />
   <div id="selectBox" style="width:50%;height:30%;position:relative;left:40%;z-index:2">
     <span style="position:relative;left:-13%;top:-1%;font-size:0.8em;">並べ替え</span>
-    <select id="sortSelect" style="position:absolute;top:7%;left:60%;width:50%;height:60%;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
+    <select id="sortSelect" style="position:absolute;top:7%;left:60%;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
   </div>
   </p>
   <div id="category_tab" class="bottom_blue_line" style="position:relative;padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp_off.png') }}" width="47%" style="padding-right:2%;" onclick="changeImageTab(this.id);change_tabs(0)" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}" width="47%" onclick="changeImageTab(this.id);change_tabs(1)" />
