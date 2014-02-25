@@ -78,7 +78,7 @@ class GameController extends BaseController
                 break;
             case 'suspended':
                 if($user==null){
-                    $histories = array();
+                    $questions = array();
                     break;
                 }else{
                     $pre_histories = $this->getDoctrine()
