@@ -201,7 +201,7 @@ GameSelect:
     defaults: { _controller: MachigaiGameBundle:Game:select }
 
 SortQuestion:
-    pattern: /game/select/{sort}
+    pattern: /game/select/{sort}/{level}
     defaults: { _controller: MachigaiGameBundle:Game:sortQuestions }
 
 GamePlay:

@@ -21,6 +21,7 @@ class GameController extends BaseController
     public function selectAction()
     {
         $user = $this->getUser();
+        //historiesは未使用
         $histories = null;
 /*        $questions = $this->getDoctrine()
                 ->getEntityManager()
@@ -53,12 +54,12 @@ class GameController extends BaseController
         }else{
             $playedQuestions = null;
         }
-    	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions,'histories'=>$histories));
+        $level = "easy";
+    	return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions, 'histories'=>$histories, 'sort'=> 'null', 'level' => $level));
     }
-    public function sortQuestionsAction($sort){
+    public function sortQuestionsAction($sort, $level){
         $user = $this->getUser();
         if($user!=null){$userId = $user->getId();};
-        $histories = null;
   
         $questions = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Question')
@@ -66,10 +67,14 @@ class GameController extends BaseController
   
         switch ($sort) {
             case 'DESC':
+                $questions = $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:Question')
+                ->findBy(array(),array('distributedFrom'=>'desc', 'id'=>'desc'));
+                break;
             case 'ASC' :
                 $questions = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:Question')
-                ->findBy(array(),array('createdAt'=>$sort));
+                ->findBy(array(),array('distributedFrom'=>'asc', 'id'=> 'asc'));
                 break;
             case 'suspended':
                 if($user==null){
@@ -80,12 +85,12 @@ class GameController extends BaseController
                     ->getRepository('MachigaiGameBundle:PlayHistory')
                     ->getSuspended($userId);
 
-                    $histories = $this->getDoctrine()
+                    $questions = $this->getDoctrine()
                     ->getEntityManager()
-                    ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p 
-                                        left join  p.question q 
+                    ->createQuery('SELECT q from MachigaiGameBundle:Question q 
+                                        left join  q.playHistories p 
                                         left join p.user u 
-                                        where u.id = :id and p.gameStatus = 3 
+                                        where u.id = :id and p.isSavedGame = 1
                                         order by q.id asc')
                     ->setParameter('id', $user->getId())
                     ->getResult();
@@ -100,12 +105,15 @@ class GameController extends BaseController
                     ->getRepository('MachigaiGameBundle:PlayHistory')
                     ->getNotCleared($userId);
 
-                    $histories = $this->getDoctrine()
+                    $questions = $this->getDoctrine()
                     ->getEntityManager()
-                    ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p 
-                                        left join  p.question q 
-                                        left join p.user u 
-                                        where u.id = :id and p.gameStatus = 2 
+                    ->createQuery('SELECT q from MachigaiGameBundle:Question q 
+                                        where q.id not in (
+                                            select q1.id from MachigaiGameBundle:Question q1
+                                            left join  q1.playHistories p 
+                                            left join p.user u 
+                                            where  u.id = :id and ( p.gameStatus = 3 or p.gameStatus = 4 )
+                                        )
                                         order by q.id asc')
                     ->setParameter('id', $user->getId())
                     ->getResult();
@@ -114,10 +122,27 @@ class GameController extends BaseController
                 default:
                     break;
         }
-        $list = $this->makeList($histories);
         $playedQuestions = null;
-        return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions,'histories'=>$histories));
+        if(!empty($user)){
+            $pre_playedQuestions = $this->getDoctrine()
+            ->getRepository('MachigaiGameBundle:PlayHistory')
+            ->findBy(array('user'=>$user->getId()));
+            $playedQuestions = array();
+         
+            foreach ($pre_playedQuestions as $pre_questions) {
+                if($pre_questions->getIsSavedGame()){
+                    $playedQuestions[$pre_questions->getQuestion()->getId()] = 5;
+                } else {
+                    $playedQuestions[$pre_questions->getQuestion()->getId()] = $pre_questions->getGameStatus();
+                }
+            };
+        }
+        //historiesは未使用
+        $histories = null;
+
+        return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions,'histories'=>$histories, 'sort'=>$sort, 'level' => $level));
     }
+    //makelistは未使用    
     public function makeList($histories){
         $list = array();
         for ($i=0; $i < count($histories); $i++) { 
