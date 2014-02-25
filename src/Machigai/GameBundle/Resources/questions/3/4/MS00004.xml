@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>4</id>
+ <name>ﾊﾟｰﾃｨの主役はｷﾐだ!</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>336</x><!--point のx座標 -->
+  <y>117</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>348</x><!--point のx座標 -->
+  <y>195</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>374</x><!--point のx座標 -->
+  <y>450</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>207</x><!--point のx座標 -->
+  <y>244</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>165</x><!--point のx座標 -->
+  <y>357</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>67</x><!--point のx座標 -->
+  <y>380</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>32</x><!--point のx座標 -->
+  <y>223</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>106</x><!--point のx座標 -->
+  <y>47</y><!--point のy座標-->
+ </point>
+</different>

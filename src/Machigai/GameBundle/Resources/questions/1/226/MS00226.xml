@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>226</id>
+ <name>おーにさん、こちら♪</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>104</x><!--point のx座標 -->
+  <y>80</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>443</x><!--point のx座標 -->
+  <y>36</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>241</x><!--point のx座標 -->
+  <y>196</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>26</x><!--point のx座標 -->
+  <y>453</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>396</x><!--point のx座標 -->
+  <y>383</y><!--point のy座標-->
+ </point>
+</different>

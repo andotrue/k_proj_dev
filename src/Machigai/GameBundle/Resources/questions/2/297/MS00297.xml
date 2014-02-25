@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>297</id>
+ <name>おサカナになりたい</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>41</x><!--point のx座標 -->
+  <y>176</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>165</x><!--point のx座標 -->
+  <y>344</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>398</x><!--point のx座標 -->
+  <y>46</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>413</x><!--point のx座標 -->
+  <y>230</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>330</x><!--point のx座標 -->
+  <y>371</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>700</x><!--point のx座標 -->
+  <y>98</y><!--point のy座標-->
+ </point>
+</different>

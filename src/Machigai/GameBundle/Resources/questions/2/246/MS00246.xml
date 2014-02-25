@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>246</id>
+ <name>めざせ！合格!!</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>327</x><!--point のx座標 -->
+  <y>36</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>166</x><!--point のx座標 -->
+  <y>120</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>108</x><!--point のx座標 -->
+  <y>325</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>556</x><!--point のx座標 -->
+  <y>147</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>374</x><!--point のx座標 -->
+  <y>386</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>624</x><!--point のx座標 -->
+  <y>404</y><!--point のy座標-->
+ </point>
+</different>

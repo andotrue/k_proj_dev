@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>144</id>
+ <name>お寝坊さんにオススメ！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>98</x><!--point のx座標 -->
+  <y>34</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>194</x><!--point のx座標 -->
+  <y>102</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>278</x><!--point のx座標 -->
+  <y>82</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>399</x><!--point のx座標 -->
+  <y>208</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>382</x><!--point のx座標 -->
+  <y>344</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>241</x><!--point のx座標 -->
+  <y>351</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>172</x><!--point のx座標 -->
+  <y>409</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>93</x><!--point のx座標 -->
+  <y>322</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>79</x><!--point のx座標 -->
+  <y>438</y><!--point のy座標-->
+ </point>
+</different>

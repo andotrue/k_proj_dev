@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>310</id>
+ <name>夜の帳がおりたら</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>42</x><!--point のx座標 -->
+  <y>47</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>357</x><!--point のx座標 -->
+  <y>118</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>539</x><!--point のx座標 -->
+  <y>23</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>129</x><!--point のx座標 -->
+  <y>410</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>356</x><!--point のx座標 -->
+  <y>379</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>575</x><!--point のx座標 -->
+  <y>252</y><!--point のy座標-->
+ </point>
+</different>

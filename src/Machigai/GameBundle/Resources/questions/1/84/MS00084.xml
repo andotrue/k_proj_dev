@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>84</id>
+ <name>呼ばれて飛び出て!?</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>20</x><!--point のx座標 -->
+  <y>53</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>93</x><!--point のx座標 -->
+  <y>215</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>320</x><!--point のx座標 -->
+  <y>68</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>454</x><!--point のx座標 -->
+  <y>241</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>389</x><!--point のx座標 -->
+  <y>420</y><!--point のy座標-->
+ </point>
+</different>

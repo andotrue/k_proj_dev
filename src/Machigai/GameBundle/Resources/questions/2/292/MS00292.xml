@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>292</id>
+ <name>ガムボールマシンde大パニック</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>131</x><!--point のx座標 -->
+  <y>64</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>329</x><!--point のx座標 -->
+  <y>52</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>656</x><!--point のx座標 -->
+  <y>62</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>169</x><!--point のx座標 -->
+  <y>336</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>303</x><!--point のx座標 -->
+  <y>387</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>610</x><!--point のx座標 -->
+  <y>265</y><!--point のy座標-->
+ </point>
+</different>

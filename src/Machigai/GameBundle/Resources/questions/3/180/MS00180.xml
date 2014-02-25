@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>180</id>
+ <name>わんぱくに楽しむ夏休み</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>26</x><!--point のx座標 -->
+  <y>46</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>263</x><!--point のx座標 -->
+  <y>117</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>379</x><!--point のx座標 -->
+  <y>101</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>350</x><!--point のx座標 -->
+  <y>237</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>152</x><!--point のx座標 -->
+  <y>257</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>53</x><!--point のx座標 -->
+  <y>258</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>26</x><!--point のx座標 -->
+  <y>440</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>374</x><!--point のx座標 -->
+  <y>430</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>256</id>
+ <name>大きなお口をア～ンと…</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>86</x><!--point のx座標 -->
+  <y>70</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>156</x><!--point のx座標 -->
+  <y>203</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>56</x><!--point のx座標 -->
+  <y>398</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>440</x><!--point のx座標 -->
+  <y>102</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>415</x><!--point のx座標 -->
+  <y>438</y><!--point のy座標-->
+ </point>
+</different>

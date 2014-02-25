@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>252</id>
+ <name>海水浴で大はしゃぎ！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>33</x><!--point のx座標 -->
+  <y>30</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>91</x><!--point のx座標 -->
+  <y>134</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>245</x><!--point のx座標 -->
+  <y>169</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>350</x><!--point のx座標 -->
+  <y>83</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>61</x><!--point のx座標 -->
+  <y>316</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>183</x><!--point のx座標 -->
+  <y>262</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>380</x><!--point のx座標 -->
+  <y>328</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>180</x><!--point のx座標 -->
+  <y>460</y><!--point のy座標-->
+ </point>
+</different>

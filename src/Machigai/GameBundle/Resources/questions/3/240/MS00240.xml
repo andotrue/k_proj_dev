@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>240</id>
+ <name>くまずきんちゃん</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>121</x><!--point のx座標 -->
+  <y>71</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>358</x><!--point のx座標 -->
+  <y>126</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>33</x><!--point のx座標 -->
+  <y>178</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>267</x><!--point のx座標 -->
+  <y>239</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>308</x><!--point のx座標 -->
+  <y>303</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>213</x><!--point のx座標 -->
+  <y>301</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>68</x><!--point のx座標 -->
+  <y>329</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>229</x><!--point のx座標 -->
+  <y>406</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>68</x><!--point のx座標 -->
+  <y>460</y><!--point のy座標-->
+ </point>
+</different>

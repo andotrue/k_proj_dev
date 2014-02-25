@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>76</id>
+ <name>そんなバナナ！？</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>28</x><!--point のx座標 -->
+  <y>70</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>188</x><!--point のx座標 -->
+  <y>58</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>106</x><!--point のx座標 -->
+  <y>370</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>206</x><!--point のx座標 -->
+  <y>348</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>419</x><!--point のx座標 -->
+  <y>267</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>433</x><!--point のx座標 -->
+  <y>393</y><!--point のy座標-->
+ </point>
+</different>

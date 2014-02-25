@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>55</id>
+ <name>冒険のはじまり！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>90</x><!--point のx座標 -->
+  <y>83</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>149</x><!--point のx座標 -->
+  <y>288</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>292</x><!--point のx座標 -->
+  <y>437</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>488</x><!--point のx座標 -->
+  <y>429</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>476</x><!--point のx座標 -->
+  <y>219</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>578</x><!--point のx座標 -->
+  <y>78</y><!--point のy座標-->
+ </point>
+</different>

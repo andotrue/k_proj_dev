@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>316</id>
+ <name>雨の日はお出かけ日和</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>142</x><!--point のx座標 -->
+  <y>85</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>353</x><!--point のx座標 -->
+  <y>111</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>624</x><!--point のx座標 -->
+  <y>101</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>113</x><!--point のx座標 -->
+  <y>279</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>387</x><!--point のx座標 -->
+  <y>379</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>576</x><!--point のx座標 -->
+  <y>354</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>206</id>
+ <name>突撃！お宅の晩御飯</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>85</x><!--point のx座標 -->
+  <y>60</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>57</x><!--point のx座標 -->
+  <y>249</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>79</x><!--point のx座標 -->
+  <y>433</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>175</x><!--point のx座標 -->
+  <y>350</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>177</x><!--point のx座標 -->
+  <y>203</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>184</x><!--point のx座標 -->
+  <y>110</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>388</x><!--point のx座標 -->
+  <y>238</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>379</x><!--point のx座標 -->
+  <y>428</y><!--point のy座標-->
+ </point>
+</different>

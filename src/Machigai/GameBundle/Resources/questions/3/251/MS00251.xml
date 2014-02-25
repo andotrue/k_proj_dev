@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>251</id>
+ <name>野外コンサートに行こう♪</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>92</x><!--point のx座標 -->
+  <y>25</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>24</x><!--point のx座標 -->
+  <y>245</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>198</x><!--point のx座標 -->
+  <y>150</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>319</x><!--point のx座標 -->
+  <y>142</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>399</x><!--point のx座標 -->
+  <y>167</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>159</x><!--point のx座標 -->
+  <y>309</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>226</x><!--point のx座標 -->
+  <y>420</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>352</x><!--point のx座標 -->
+  <y>346</y><!--point のy座標-->
+ </point>
+</different>

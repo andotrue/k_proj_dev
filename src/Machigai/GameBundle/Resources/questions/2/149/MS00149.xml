@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>149</id>
+ <name>フルーツ大好き！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>26</x><!--point のx座標 -->
+  <y>63</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>356</x><!--point のx座標 -->
+  <y>88</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>550</x><!--point のx座標 -->
+  <y>22</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>642</x><!--point のx座標 -->
+  <y>339</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>425</x><!--point のx座標 -->
+  <y>285</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>457</x><!--point のx座標 -->
+  <y>435</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>249</x><!--point のx座標 -->
+  <y>291</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>296</id>
+ <name>ビーチにおいでよ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>405</x><!--point のx座標 -->
+  <y>49</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>204</x><!--point のx座標 -->
+  <y>235</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>403</x><!--point のx座標 -->
+  <y>194</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>681</x><!--point のx座標 -->
+  <y>158</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>463</x><!--point のx座標 -->
+  <y>320</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>602</x><!--point のx座標 -->
+  <y>346</y><!--point のy座標-->
+ </point>
+</different>

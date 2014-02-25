@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>171</id>
+ <name>宝島めざして進めー！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>164</x><!--point のx座標 -->
+  <y>63</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>281</x><!--point のx座標 -->
+  <y>87</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>75</x><!--point のx座標 -->
+  <y>165</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>182</x><!--point のx座標 -->
+  <y>189</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>282</x><!--point のx座標 -->
+  <y>305</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>49</x><!--point のx座標 -->
+  <y>267</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>178</x><!--point のx座標 -->
+  <y>341</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>42</x><!--point のx座標 -->
+  <y>393</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>343</x><!--point のx座標 -->
+  <y>414</y><!--point のy座標-->
+ </point>
+</different>

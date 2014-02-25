@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>202</id>
+ <name>みんなで楽しく!?大そうじ！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>95</x><!--point のx座標 -->
+  <y>53</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>56</x><!--point のx座標 -->
+  <y>150</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>150</x><!--point のx座標 -->
+  <y>145</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>370</x><!--point のx座標 -->
+  <y>131</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>166</x><!--point のx座標 -->
+  <y>222</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>366</x><!--point のx座標 -->
+  <y>296</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>207</x><!--point のx座標 -->
+  <y>370</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>97</x><!--point のx座標 -->
+  <y>446</y><!--point のy座標-->
+ </point>
+</different>

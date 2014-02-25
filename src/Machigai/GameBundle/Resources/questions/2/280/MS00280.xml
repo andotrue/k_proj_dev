@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>280</id>
+ <name>秋の味覚をいただきま～す</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>101</x><!--point のx座標 -->
+  <y>196</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>401</x><!--point のx座標 -->
+  <y>138</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>536</x><!--point のx座標 -->
+  <y>108</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>58</x><!--point のx座標 -->
+  <y>410</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>218</x><!--point のx座標 -->
+  <y>390</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>424</x><!--point のx座標 -->
+  <y>348</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>584</x><!--point のx座標 -->
+  <y>428</y><!--point のy座標-->
+ </point>
+</different>
