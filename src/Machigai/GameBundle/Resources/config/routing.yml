@@ -285,7 +285,7 @@ ForgetPasswordSend:
     defaults: { _controller: MachigaiGameBundle:Register:forgetPasswordSend }
 
 ForgetPasswordComplete:
-    pattern: /forget_password_complete
+    pattern: /forget_password_complete/{forgetPasswordActivationCode}
     defaults: { _controller: MachigaiGameBundle:Register:forgetPasswordComplete }
 
 RegisterConfirm:

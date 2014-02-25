@@ -98,7 +98,10 @@ class ShopController extends BaseController
 		$request = $this->get('request');
 		$session = $request->getSession();  
 
-		$syncToken = $request->query->get("syncToken");
+
+        $syncToken = $request->query->get("syncToken");
+        $mode = $request->query->get("mode");
+
 		$users = $this->getDoctrine()
 				->getManager()
 				->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
@@ -112,6 +115,7 @@ class ShopController extends BaseController
 		}
 
         $user = $this->getUser();
+        
         $item = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
         ->findOneById($id);
@@ -125,7 +129,11 @@ class ShopController extends BaseController
         }
         $itemPoint = $item->getConsumePoint();
         if(in_array($id,$purchasedItems)){
-            return $this->download($itemPath);
+            if( empty($mode) ||  $mode != 'file'){
+                return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
+            }else{
+                return $this->download($itemPath);
+            }
         }else{
             $remainder = $user->getCurrentPoint()-$itemPoint;
 
@@ -147,7 +155,11 @@ class ShopController extends BaseController
             $user_id->setCurrentPoint($remainder);
             $em->flush();
 
-            return $this->download($itemPath);
+            if( empty($mode) ||  $mode != 'file'){
+                return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
+            }else{
+                return $this->download($itemPath);
+            }
         }
     }
 
