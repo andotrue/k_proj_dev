@@ -491,7 +491,7 @@ class GameController extends BaseController
 			$playHistory->setUser($user);
 			$playHistory->setQuestion($question[0]);
 			$playHistory->setGameStatus(3);
-			$playHistory->setClearTime($duration);
+			$playHistory->setClearTime($clearTime);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($playHistory);
 			$em->flush();
@@ -512,7 +512,7 @@ class GameController extends BaseController
 			$playHistory->setUser($user);
 			$playHistory->setQuestion($question[0]);
 			$playHistory->setGameStatus(4);
-			$playHistory->setClearTime($duration);
+			$playHistory->setClearTime($clearTime);
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($playHistory);
 			$em->flush();
