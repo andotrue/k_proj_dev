@@ -32,15 +32,14 @@
   {{error}}
   {% endif %}
   </div>
-   <div class="linkButtons" style="position:relative;margin-top:33%;z-index:2; text-align:center">
+   <div class="linkButtons" style="position:relative;margin-top:20%;z-index:2; text-align:center">
 
-   <a href="{{path('Top')}}" id="htopImage">
-   <img id="toTopImage" width="50%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
-   <br />
-   <img src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" class="preload">
-
-   <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" style="width:35%;" >
+   <img id="registerConfirm" width="50%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" style="width:35%;" >
    <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck.png')}}"  >
+   <br /><br />
+   <a href="{{path('Top')}}" id="htopImage">
+   <img id="toTopImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
+   <img src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" class="preload">
    </div>
   </div>
 </section>
