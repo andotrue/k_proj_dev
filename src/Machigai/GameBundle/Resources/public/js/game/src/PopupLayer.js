@@ -159,6 +159,23 @@ var PopupLayer = cc.Layer.extend({
         this.state = "PLAY";
         var ss = ["popup/popup_gamestart.png", "popup/popup_gamestart_first.png", "popup/popup_gamestart_guest.png","popup/popup_gamestart_notfirst.png"];
         var i =this.game_status = 1;
+        if (this.playInfo.isGuest()){
+            i = 2;
+        }else{
+            var status = this.playInfo._playData._gameStatus;
+            switch(status){
+                case 1:
+                    i = 1;
+                    break;
+                case 2:
+                    i = 3;
+                    break;
+                case 3:
+                case 4:
+                    i = 0;
+                    break;
+            }
+        }
         var popup = cc.Sprite.create( gsDir + ss[i] );
         this.addChild(popup);
         popup.setPosition(360,this.getContentSize().height - 500);
