@@ -15,10 +15,11 @@ use Symfony\Component\HttpFoundation\File\Exception\Exception;
 use \DateTime;
 
 
-/*include_once "Auth/OpenID.php";
+include_once "Auth/OpenID.php";
 include_once "Auth/OpenID/FileStore.php";
 include_once "Auth/OpenID/Consumer.php"; 
-*/use \Auth_OpenID_FileStore;
+
+use \Auth_OpenID_FileStore;
 use \Auth_OpenID;
 use \Auth_OpenID_Consumer;
 
@@ -36,7 +37,7 @@ class AndroidController extends BaseController
         $realm = "http://st.machigai.puzzle-m.net:80/";        
 //        $realm = "https://machigai.puzzle-m.net:443/";               
         $formId = "test";
-        $returnToUrl = "http://st.machigai.puzzle-m.net/auIdAssociation";   
+        $returnToUrl = "https://st.machigai.puzzle-m.net/auIdAssociation";   
 //        $returnToUrl = "https://machigai.puzzle-m.net/auIdAssociation";   
        
         $associationDirPath = "/tmp";                              
@@ -125,8 +126,7 @@ class AndroidController extends BaseController
         } else if ($response->status == Auth_OpenID_SUCCESS) { // 認証成功。以下の方法でユーザの OpenID を取得
 */      //    $openid = $response->getDisplayIdentifier();
             //ユーザを探す。
-            $request = $this->get("request");
-            $openId = $this->get("request")->query->get("openid.claimed_id");
+            $openId = $request->query->get("openid_claimed_id");
             $logger->info("openid.claimed_id = $openId");
 
             $users = $this->getDoctrine()
@@ -145,11 +145,11 @@ class AndroidController extends BaseController
                 $session = $request->getSession();
                 $session->set('id', $user->getId());
     //            $session->set('auId', $auId);
-                $session->set('syncToken', $syncToken);
-                $session->set('smartPassResult', true );
-
                 $syncToken = $user->getSyncToken();
                 $nickname = $user->getNickname();
+
+				$session->set('syncToken', $syncToken);
+                $session->set('smartPassResult', true );
 
                 //セッションを登録。
                 return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
@@ -174,7 +174,7 @@ class AndroidController extends BaseController
         $syncToken = $request->query->get("syncToken");
         $logger->info("\$syncToken = " . $syncToken);
         if(empty($syncToken)){
-            return  new Response('<html><body>エラー：トークンが存在しません。。</body></html>');
+            return  new Response('<html><body>エラー：トークンが存在しません。</body></html>');
         }
         $users = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:User')
