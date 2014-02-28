@@ -16,10 +16,20 @@ class GameController extends BaseController
 {
     public function indexAction()
     {   
+        $request = $this->get('request');
+        $cookies = $request->cookies;
+        $smartContract = $request->cookies->get('smartContract'); 
+        if(empty($smartContract) || $smartContract != "true" ) return $this->redirect($this->generateUrl('response_token'));
+
         return $this->render('MachigaiGameBundle:Game:index.html.twig');   
     }
     public function selectAction()
     {
+        $request = $this->get('request');
+        $cookies = $request->cookies;
+        $smartContract = $request->cookies->get('smartContract'); 
+        if(empty($smartContract) || $smartContract != "true" ) return $this->redirect($this->generateUrl('response_token'));
+
         $user = $this->getUser();
         //historiesは未使用
         $histories = null;

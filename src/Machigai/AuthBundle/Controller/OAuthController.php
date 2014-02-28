@@ -176,10 +176,10 @@ class OAuthController extends Controller {
 							//認証OK
 							return $this->redirect($this->generateUrl('Top'));
 
-						}else{			
+						}else{	
 							//認証NG	
 							$response->send();
-							return $this->redirect("http://auone.jp/");
+							return $this->redirect("http://pass.auone.jp/gate/?ru=https%3A%2F%2Fmachigai.puzzle-m.net%2Ftop");
 						}
 
 					}else{
