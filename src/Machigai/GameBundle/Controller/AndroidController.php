@@ -126,6 +126,7 @@ class AndroidController extends BaseController
         } else if ($response->status == Auth_OpenID_SUCCESS) { // 認証成功。以下の方法でユーザの OpenID を取得
 */      //    $openid = $response->getDisplayIdentifier();
             //ユーザを探す。
+	        $request = $this->get("request");
             $openId = $request->query->get("openid_claimed_id");
             $logger->info("openid.claimed_id = $openId");
 
