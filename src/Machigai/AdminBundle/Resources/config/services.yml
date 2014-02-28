@@ -1,0 +1,11 @@
+parameters:
+#    machigai_admin.example.class: Machigai\AdminBundle\Example
+
+services:
+    pager:
+        class: Machigai\AdminBundle\Classes\Pager
+        arguments: ["@service_container", "@doctrine.orm.entity_manager"]
+        scope: request
+#    machigai_admin.example:
+#        class: %machigai_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

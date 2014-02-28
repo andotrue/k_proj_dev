@@ -11,13 +11,19 @@ class ShopController extends BaseController
 {
     public function indexAction()
     {
+    $request= $this->get('request');
+    $categoryCode = $request->query->get("categoryCode");
+
     $user = $this->getUser();
     $purchasedItems = $this->getPurchasedItems();
+    $purchaseHistory = $this->getDoctrine()
+    ->getRepository('MachigaiGameBundle:PurchaseHistory')
+    ->findAll();
 
     $items = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
         ->findAll();
-	return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items, 'categoryCode'=>1, 'user'=>$user,'purchasedItems'=>$purchasedItems));
+	return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items, 'sortId'=> '0', 'categoryCode'=>1, 'user'=>$user,'purchasedItems'=>$purchasedItems));
     }
     public function indexSortAction($field){
         $request= $this->get('request');
@@ -28,20 +34,30 @@ class ShopController extends BaseController
         ->getRepository('MachigaiGameBundle:PurchaseHistory')
         ->findAll();
 
-        if($field == "orderByOld"){
-            $sort = "DESC";
-            $field = "createdAt";
-        }elseif($field == "popularity"){
+        if($field == "1"){
             $sort = "ASC";
-            $field = "popularityRank";
+            $fieldName = "name";
+        }elseif($field == "2"){
+            $sort = "DESC";
+            $fieldName = "distributedFrom";
+
+        }elseif($field == "3"){
+            $sort = "ASC";
+            $fieldName = "distributedFrom";
+
+        }elseif($field == "4"){
+            $sort = "ASC";
+            $fieldName = "popularityRank";
+
         }else{
             $sort = "ASC";
-            $field = $field;
+            $fieldName = 'id';
         }
         $items = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
-        ->findBy(array(),array($field=>$sort));
-    return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items, 'categoryCode'=>$categoryCode,'user'=>$user,'purchasedItems'=>$purchasedItems));
+        ->findBy(array(),array($fieldName=>$sort));
+
+    return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items, 'sortId'=> $field, 'categoryCode'=>$categoryCode,'user'=>$user,'purchasedItems'=>$purchasedItems));
     }
 
     public function wallpaperAction()
@@ -82,7 +98,10 @@ class ShopController extends BaseController
 		$request = $this->get('request');
 		$session = $request->getSession();  
 
-		$syncToken = $request->query->get("syncToken");
+
+        $syncToken = $request->query->get("syncToken");
+        $mode = $request->query->get("mode");
+
 		$users = $this->getDoctrine()
 				->getManager()
 				->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
@@ -96,6 +115,7 @@ class ShopController extends BaseController
 		}
 
         $user = $this->getUser();
+        
         $item = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
         ->findOneById($id);
@@ -109,7 +129,11 @@ class ShopController extends BaseController
         }
         $itemPoint = $item->getConsumePoint();
         if(in_array($id,$purchasedItems)){
-            return $this->download($itemPath);
+            if( empty($mode) ||  $mode != 'file'){
+                return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
+            }else{
+                return $this->download($itemPath);
+            }
         }else{
             $remainder = $user->getCurrentPoint()-$itemPoint;
 
@@ -131,7 +155,11 @@ class ShopController extends BaseController
             $user_id->setCurrentPoint($remainder);
             $em->flush();
 
-            return $this->download($itemPath);
+            if( empty($mode) ||  $mode != 'file'){
+                return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
+            }else{
+                return $this->download($itemPath);
+            }
         }
     }
 

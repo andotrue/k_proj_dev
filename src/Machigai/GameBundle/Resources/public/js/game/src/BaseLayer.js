@@ -144,6 +144,8 @@ var BaseLayer = cc.Layer.extend({
 		popupHint.setDisabledImage(
 				cc.Sprite.create(bd+"res/game_scene/button/game_icon_hint_gray.png"));
         popupHint.name = "HINT";
+        if( this.playInfo._playData._isHintUsed)
+            popupHint.setEnabled(false);
 		this.popupHint = popupHint;
 
         var popupSave = cc.MenuItemImage.create(

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}間違い探し{% endblock %}</title>
+	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.min.js') }}"></script>
+	<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
+
+        <style>
+	 body,*{padding:0;border:none;margin:0;}
+         img{vertical-align:text-bottom;}
+         td{text-align:center;padding-left:0.5em;padding-right:0.5em;}
+         nav{ text-align: center;}
+         nav a{text-decoration: initial; font-size: 1.1em; padding: 0.5em; }
+	     tr:nth-child(even) { background:#dedede; }
+		 tr:nth-child(odd)  { background:#c6e2e2; }
+		 li{list-style-type: none;}
+		 tr li{ text-align: center;}
+		 th{background:gray; color:white; padding:1em; }
+		 header{width:1960px;height:59px; text-align: left; background-color:rgb(63,169,246);}
+		 label{display:inline-block;padding:0.5em;width:250px;}
+	</style>
+        {% block stylesheets %}{% endblock %}
+</head>
+<body>
+ <div id="background">
+ 	{% block header %}<header><img src="{{ asset('bundles/machigaigame/images/parts/header.png') }}" height="60px"><h1 style="font-size:1.5em;display:inline;width:600px;vertical-align:top;color:white;">管理画面</h1><span style="padding-left:300px;width:200px;"><a href="{{ path('machigai_admin_logout') }}" style="vertical-align:top;">ログアウト</a></span></header>{% endblock %}
+ 	{% block leftNav %}
+	 	<div id="leftNav" style="position:absolute; width:150px;vertical-align:top;">
+	 		<nav>
+	 			<ul>
+	 				<li><a href="{{ path('user') }}">ユーザ</a></li>
+	 				<li><a href="{{ path('question') }}">問題</a></li>
+	 				<li><a href="{{ path('item') }}">アイテム</a></li>
+	 				<li><a href="{{ path('ranking') }}">ランキング</a></li>
+	 			</ul>
+	 		</nav>
+	 	</div>
+	 {% endblock %}
+	<div id="contents" style="position:relative; margin-left: 150px; width:1800px;">{% block contents %}{% endblock %}</div>
+ </div>
+        {% block javascripts %}{% endblock %}
+{% block foot %}
+<footer>
+</footer>
+{% endblock %}
+</body>
+</html>
+

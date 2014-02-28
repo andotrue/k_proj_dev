@@ -1,0 +1,92 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>ユーザ</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Auid</th>
+                <td>{{ entity.auId }}</td>
+            </tr>
+            <tr>
+                <th>Synctoken</th>
+                <td>{{ entity.syncToken }}</td>
+            </tr>
+            <tr>
+                <th>Nickname</th>
+                <td>{{ entity.nickname }}</td>
+            </tr>
+            <tr>
+                <th>Mailaddress</th>
+                <td>{{ entity.mailAddress }}</td>
+            </tr>
+<!--            <tr>
+                <th>Password</th>
+                <td>{{ entity.password }}</td>
+            </tr>
+-->            <tr>
+                <th>Temppass</th>
+                <td>{{ entity.tempPass }}</td>
+            </tr>
+            <tr>
+                <th>Currentpoint</th>
+                <td>{{ entity.currentPoint }}</td>
+            </tr>
+            <tr>
+                <th>Easycleartimethismonth</th>
+                <td>{{ entity.easyClearTimeThisMonth }}</td>
+            </tr>
+            <tr>
+                <th>Normalcleartimethismonth</th>
+                <td>{{ entity.normalClearTimeThisMonth }}</td>
+            </tr>
+            <tr>
+                <th>Hardcleartimethismonth</th>
+                <td>{{ entity.hardClearTimeThisMonth }}</td>
+            </tr>
+            <tr>
+                <th>Easycleartimelastmonth</th>
+                <td>{{ entity.easyClearTimeLastMonth }}</td>
+            </tr>
+            <tr>
+                <th>Normalcleartimelastmonth</th>
+                <td>{{ entity.normalClearTimeLastMonth }}</td>
+            </tr>
+            <tr>
+                <th>Hardcleartimelastmonth</th>
+                <td>{{ entity.hardClearTimeLastMonth }}</td>
+            </tr>
+<!--            <tr>
+                <th>Suspendinfo</th>
+                <td>{{ entity.suspendInfo }}</td>
+            </tr>
+-->            <tr>
+                <th>Createdat</th>
+                <td>{{ entity.createdAt | date("Y/m/d h:i:s")}}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{{ entity.updatedAt | date("Y/m/d h:i:s")}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('user') }}">
+            ユーザ一覧に戻る
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
+            編集
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

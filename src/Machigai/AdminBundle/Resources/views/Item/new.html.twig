@@ -1,0 +1,15 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>アイテム新規作成</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('item') }}">
+            一覧に戻る
+        </a>
+    </li>
+</ul>
+{% endblock %}

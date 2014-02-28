@@ -505,6 +505,9 @@ class AndroidController extends BaseController
 			}
 
             $questionData['question'][$i]['id'] = $questions[$i]->getId();
+            $questionData['question'][$i]['questionNumber'] = $questions[$i]->getQuestionNumber();
+            $questionData['question'][$i]['distributedFrom'] = $questions[$i]->getDistributedFrom()->format("Y-m-d H:i:s");
+            $questionData['question'][$i]['distributedTo'] = $questions[$i]->getDistributedTo()->format("Y-m-d H:i:s");
             $questionData['question'][$i]['qcode'] = $questions[$i]->getQcode();
             $questionData['question'][$i]['level'] = $questions[$i]->getLevel();
             $questionData['question'][$i]['title'] = $questions[$i]->getQuestionTitle();

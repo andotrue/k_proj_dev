@@ -19,6 +19,7 @@
  .registerForm {width:80%;margin:0 auto;position:relative;margin-top:54%;}
  .linkButtons {position:relative;margin-top:23%;}
  #mailAddress{position:relative;margin-top:37%;}
+ #form_confirm{opacity:0;}
 </style>
 <img src="{{ asset('/bundles/machigaigame/images/parts/1-01_7_bg
 .png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
@@ -31,18 +32,22 @@
   {{ form_errors (form) }}
   {{ form_rest(form) }}
   {{ form (form) }}
+  <p style="margin-top: 5px; font-size: 0.7em; text-align: right;">
+    <a href="/forget_password">パスワードを忘れた方はこちら</a>
+  </p>
   <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
   {% if caution is not empty %}
   {{caution}}
   {% endif %}
   </div>
    <div class="linkButtons">
-    <a href="{{path('Top')}}" id="htopImage">
-   <img id="topImage" width="35%" style="margin-right:9%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
-   <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
-
    <img id="registerConfirm" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login_off.png')}}" onclick="changeImage(this.id);{{ form_rest(form) }}submitRegister()" >
    <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/buttom_login.png')}}" >
+   <br /><br />
+    <a href="{{path('Top')}}" id="htopImage">
+   <img id="toTopImage" width="35%" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" onclick="changeImage(this.id);"></a>
+   <br />
+   <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}" >
    </div>
   </div>
 </section>

@@ -1,0 +1,58 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>ランキング一覧</h1>
+    {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ユーザID</th>
+                <th>年</th>
+                <th>月</th>
+                <th>レベル</th>
+                <th>ランク</th>
+                <th>クリアタイム</th>
+                <th>ボーナスポイント</th>
+<!--                <th>Createdat</th>
+                <th>Updatedat</th>
+-->                <th>アクション</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('ranking_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.user.id }}</td>
+                <td>{{ entity.year }}</td>
+                <td>{{ entity.month }}</td>
+                <td>{{ entity.level }}</td>
+                <td>{{ entity.rank }}</td>
+                <td>{{ entity.clearTime }}</td>
+                <td>{{ entity.bonusPoint }}</td>
+<!--                <td>{{ entity.createdAt | date("Y/m/d h:i:s") }}</td>
+                <td>{{ entity.updatedAt | date("Y/m/d h:i:s") }}</td>
+-->                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('ranking_show', { 'id': entity.id }) }}">詳細</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('ranking_edit', { 'id': entity.id }) }}">編集</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
+        <ul>
+        <li>
+            <a href="{{ path('ranking_new') }}">
+                新規作成
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

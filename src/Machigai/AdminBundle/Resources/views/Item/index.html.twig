@@ -1,0 +1,60 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>アイテム一覧</h1>
+    {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>アイテム番号</th>
+                <th>アイテム名</th>
+                <th>ファイル名</th>
+                <th>消費ポイント</th>
+                <th>説明</th>
+                <th>人気ランク</th>
+                <th>配布開始日時</th>
+                <th>配布終了日時</th>
+<!--                <th>Createdat</th>
+                <th>Updatedat</th>
+-->                <th>アクション</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('item_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.itemCode }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.itemPath }}</td>
+                <td>{{ entity.consumePoint }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.popularityRank }}</td>
+                <td>{{ entity.distributedFrom  | date("Y/m/d h:i:s") }}</td>
+                <td>{{ entity.distributedTo | date("Y/m/d h:i:s") }}</td>
+<!--                <td>{{ entity.createdAt | date("Y/m/d h:i:s") }}</td>
+                <td>{{ entity.updatedAt | date("Y/m/d h:i:s") }}</td>
+-->                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('item_show', { 'id': entity.id }) }}">詳細</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('item_edit', { 'id': entity.id }) }}">編集</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
+        <ul>
+        <li>
+            <a href="{{ path('item_new') }}">
+                新規作成
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

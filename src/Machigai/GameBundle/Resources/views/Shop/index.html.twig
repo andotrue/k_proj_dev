@@ -10,12 +10,10 @@
 <section>
   <p style="text-align:right;padding-right:2%; font-size:1em;position:relative">
   現在のポイント：{{user.getCurrentPoint}} pt <br />
-<!--
   <div id="selectBox" style="width:50%;height:30%;position:relative;left:40%;z-index:2">
     <span style="position:relative;left:-13%;top:-1%;font-size:0.8em;">並べ替え</span>
-    <select id="sortSelect" style="position:absolute;top:7%;left:60%;width:50%;height:60%;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
+    <select id="sortSelect" style="position:absolute;top:7%;left:60%;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
   </div>
--->
   </p>
   <div id="category_tab" class="bottom_blue_line" style="position:relative;padding:5% 0 0 0;"><img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp_off.png') }}" width="47%" style="padding-right:2%;" onclick="changeImageTab(this.id);change_tabs(0)" /><img id="wallpaper_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}" width="47%" onclick="changeImageTab(this.id);change_tabs(1)" />
   </div>
@@ -96,19 +94,24 @@ var page = 0;
       draw();
     }
   });
+
+  //選択
+  $sortId = {{sortId}};
+  if ($sortId != 0) $('#sortSelect option')[$sortId].selected = true;
+
   draw();
 });
 
 function sortSelect(){
   var optionValue = $('#sortSelect').val();
   if(optionValue == 1){
-    window.location = "{{path('ShopSort',{"field":"name" })}}?categoryCode=" + (current_mode + 1);
+    window.location = "{{path('ShopSort',{"field":"1" })}}?categoryCode=" + (current_mode + 1);
   }else if(optionValue == 2){
-    window.location = "{{path('ShopSort',{"field":"createdAt"})}}?categoryCode=" + (current_mode + 1);
+    window.location = "{{path('ShopSort',{"field":"2"})}}?categoryCode=" + (current_mode + 1);
   }else if(optionValue == 3){
-    window.location = "{{path('ShopSort',{"field":"orderByOld"})}}?categoryCode=" + (current_mode + 1);
+    window.location = "{{path('ShopSort',{"field":"3"})}}?categoryCode=" + (current_mode + 1);
   }else if(optionValue == 4){
-    window.location = "{{path('ShopSort',{"field":"popularity"})}}?categoryCode=" + (current_mode + 1);
+    window.location = "{{path('ShopSort',{"field":"4"})}}?categoryCode=" + (current_mode + 1);
   }
 }
 function change_tabs(data){

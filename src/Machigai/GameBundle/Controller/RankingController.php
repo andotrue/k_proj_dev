@@ -11,10 +11,11 @@ class RankingController extends BaseController
     {
     $month = date('n');
     $year = date('Y');
-    $pre_year = $year-1;
     if($month == 1){
+      $pre_year = $year-1;
       $pre_month = 12;
     }else{
+      $pre_year = $year;
       $pre_month = $month-1;
     }
     $ranking_this_month = $this->getDoctrine()
@@ -23,6 +24,7 @@ class RankingController extends BaseController
     $ranking_previous_month = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Ranking')
         ->findBy(array('month'=>$pre_month,'year'=>$pre_year),array('rank'=>'ASC'));
+        
 	return $this->render('MachigaiGameBundle:Ranking:index.html.twig',array('ranking_this_month' => $ranking_this_month, 'ranking_previous_month' => $ranking_previous_month));
     }
 }

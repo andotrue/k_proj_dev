@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>293</id>
+ <name>夏の夜の過ごし方</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>92</x><!--point のx座標 -->
+  <y>91</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>337</x><!--point のx座標 -->
+  <y>83</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>653</x><!--point のx座標 -->
+  <y>12</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>13</x><!--point のx座標 -->
+  <y>337</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>408</x><!--point のx座標 -->
+  <y>253</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>497</x><!--point のx座標 -->
+  <y>349</y><!--point のy座標-->
+ </point>
+</different>

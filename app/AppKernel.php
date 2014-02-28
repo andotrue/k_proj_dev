@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Machigai\GameBundle\MachigaiGameBundle(),
             new Machigai\AuthBundle\MachigaiAuthBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Machigai\AdminBundle\MachigaiAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

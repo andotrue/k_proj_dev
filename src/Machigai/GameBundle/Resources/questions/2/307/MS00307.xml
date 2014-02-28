@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>307</id>
+ <name>夢だと言って!?</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>49</x><!--point のx座標 -->
+  <y>158</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>76</x><!--point のx座標 -->
+  <y>444</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>248</x><!--point のx座標 -->
+  <y>124</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>431</x><!--point のx座標 -->
+  <y>51</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>614</x><!--point のx座標 -->
+  <y>78</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>383</x><!--point のx座標 -->
+  <y>431</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>544</x><!--point のx座標 -->
+  <y>411</y><!--point のy座標-->
+ </point>
+</different>

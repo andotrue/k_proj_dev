@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>125</id>
+ <name>おなじみの声が聞こえたら</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>233</x><!--point のx座標 -->
+  <y>34</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>249</x><!--point のx座標 -->
+  <y>113</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>71</x><!--point のx座標 -->
+  <y>48</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>135</x><!--point のx座標 -->
+  <y>94</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>68</x><!--point のx座標 -->
+  <y>201</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>308</x><!--point のx座標 -->
+  <y>326</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>246</x><!--point のx座標 -->
+  <y>362</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>140</x><!--point のx座標 -->
+  <y>403</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>25</x><!--point のx座標 -->
+  <y>387</y><!--point のy座標-->
+ </point>
+</different>
