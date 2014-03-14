@@ -5,14 +5,14 @@ namespace Machigai\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Machigai\GameBundle\Entity\PlayHistory;
 use Machigai\GameBundle\Entity\Ranking;
-use Machigai\GameBundle\Entity\User;
+use Machigai\GameBundle\Entity\Log;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 class BaseController extends Controller
 {
     /** DEBUGモード　*/
     public $MODE = "DEBUG";
-    public $DEBUG = "DEBUG";
+    public $DEBUG = false;
 
 	public function getUser()
 	{
@@ -171,6 +171,15 @@ class BaseController extends Controller
             if($isClear == true){
                 //初回挑戦でクリア：userにポイント付与
                 $addPoint = $question->getClearPoint() + $question->getBonusPoint();
+				
+				$log = new Log();
+				$log->setUserId($user->getId());
+				$log->setType("point");
+				$log->setName("game_clear_get_point: " .$addPoint);
+				$log->setCreatedAt(date("Y-m-d H:i:s"));
+				$em->persist($log);
+				$em->flush();
+				
                 $newCurrentPoint = $user->getCurrentPoint() + $addPoint;
                 $user->setCurrentPoint($newCurrentPoint);
                 $logger->info(" point is added to User. point = " . $newCurrentPoint);
@@ -197,6 +206,15 @@ class BaseController extends Controller
                 if($playHistory->getClearTime() == null){
                     //はじめて該当問題をクリアしたときにポイント付与
                     $addPoint = $question->getClearPoint();
+
+					$log = new Log();
+					$log->setUserId($user->getId());
+					$log->setType("point");
+					$log->setName("game_clear_get_point: " .$addPoint);
+					$log->setCreatedAt(date("Y-m-d H:i:s"));
+					$em->persist($log);
+					$em->flush();
+
                     $newCurrentPoint = $user->getCurrentPoint() + $addPoint;
                     $user->setCurrentPoint($newCurrentPoint);
                     $em->persist($user);

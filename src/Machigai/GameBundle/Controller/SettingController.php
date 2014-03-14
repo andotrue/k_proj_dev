@@ -2,13 +2,10 @@
 
 namespace Machigai\GameBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Machigai\GameBundle\Entity\User;
 use Machigai\GameBundle\Entity\KeyValueStore;
-use Machigai\GameBundle\Form\UserType;
-use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\Response;
+use Machigai\GameBundle\Entity\Log;
 use \DateTime;
 use \DateInterval;
 
@@ -269,6 +266,16 @@ https://machigai.puzzle-m.net\n
     }
     public function deleteUserCompleteAction(Request $request){
     	$user = $this->getUser();
+		
+		$em = $this->getDoctrine()->getEntityManager();
+		$log = new Log();
+		$log->setUserId($user->getId());
+		$log->setType("withdraw");
+		$log->setName("withdraw complete");
+		$log->setCreatedAt(date("Y-m-d H:i:s"));
+		$em->persist($log);
+		$em->flush();		
+		
         if(empty($user)){
             return $this->render('MachigaiGameBundle:Setting:deleteUserComplete.html.twig');
         }else{

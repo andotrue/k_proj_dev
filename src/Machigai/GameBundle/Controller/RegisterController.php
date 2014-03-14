@@ -3,7 +3,7 @@
 namespace Machigai\GameBundle\Controller;
 use Machigai\GameBundle\Entity\User;
 use Machigai\GameBundle\Entity\KeyValueStore;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Machigai\GameBundle\Entity\Log;
 use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -117,6 +117,18 @@ class RegisterController extends BaseController
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
 		} else {
                 $userId = $checkData[0]->getId();
+				
+				$em = $this->getDoctrine()->getEntityManager();
+				$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+				
+				$log = new Log();
+				$log->setUserId($user->getId());
+				$log->setType("login");
+				$log->setName("login complete");
+				$log->setCreatedAt(date("Y-m-d H:i:s"));
+				$em->persist($log);
+				$em->flush();
+				
                 $session = $request->getSession();
                 //開発モード時,セッションを生成する。
                 $MODE = 'DEV';
@@ -358,6 +370,14 @@ class RegisterController extends BaseController
          $user->setNickname($nickname);
          $user->setTempPass(null);
          $em->flush();
+		 
+		 $log = new Log();
+		 $log->setUserId($user->getId());
+		 $log->setType("register");
+		 $log->setName("nickname setting complete");
+		 $log->setCreatedAt(date("Y-m-d H:i:s"));
+		 $em->persist($log);
+		 $em->flush();	 
 
          $email = $user->getMailAddress();
          $pass = $user->getPassword();

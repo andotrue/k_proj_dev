@@ -3,6 +3,7 @@
 namespace Machigai\GameBundle\Controller;
 
 use Machigai\GameBundle\Controller\BaseController;
+use Machigai\GameBundle\Entity\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class RankingController extends BaseController
@@ -31,8 +32,6 @@ class RankingController extends BaseController
 	// 月初に実行されることを想定
 	public function summaryAction(){
 
-		$bonus_point = 500;
-		
 		$em = $this->getDoctrine()->getEntityManager();
 		//　トランザクション開始
 		$em->getConnection()->beginTransaction();
@@ -63,8 +62,28 @@ class RankingController extends BaseController
 			// 取得者にポイントを加算
 			foreach($ranking_previous_month as $data){
 				
+				$rps = $this->getDoctrine()
+				 ->getRepository('MachigaiGameBundle:RankingPoint')
+				 ->findBy(
+						 array(
+							'level'=>$data->getLevel(),
+							'rank'=>$data->getRank()
+						 )
+				);
+				$rp = $rps[0];
+				$bonus_point = $rp->getBonusPoint();
+				
 				$data->setBonusPoint($bonus_point);
 				$user = $data->getUser();
+				
+				$log = new Log();
+				$log->setUserId($user->getId());
+				$log->setType("point");
+				$log->setName("ranking_get_point: " .$bonus_point);
+				$log->setCreatedAt(date("Y-m-d H:i:s"));
+				$em->persist($log);
+				$em->flush();
+				
 				$user->setCurrentPoint($user->getCurrentPoint() + $bonus_point);
 				
 				$em->persist($data);
