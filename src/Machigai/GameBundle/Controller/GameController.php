@@ -4,12 +4,11 @@ namespace Machigai\GameBundle\Controller;
 
 use \DateTime;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Machigai\GameBundle\Controller\BaseController;
+use Machigai\GameBundle\Entity\Log;
 use Machigai\GameBundle\Entity\Ranking;
 use Machigai\GameBundle\Entity\PlayHistory;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class GameController extends BaseController
@@ -19,7 +18,7 @@ class GameController extends BaseController
         $request = $this->get('request');
         $cookies = $request->cookies;
         $smartContract = $request->cookies->get('smartContract'); 
-        if(empty($smartContract) || $smartContract != "true" ) return $this->redirect($this->generateUrl('response_token'));
+        if(!$this->DEBUG && (empty($smartContract) || $smartContract != "true") ) return $this->redirect($this->generateUrl('response_token'));
 
         return $this->render('MachigaiGameBundle:Game:index.html.twig');   
     }
@@ -28,7 +27,7 @@ class GameController extends BaseController
         $request = $this->get('request');
         $cookies = $request->cookies;
         $smartContract = $request->cookies->get('smartContract'); 
-        if(empty($smartContract) || $smartContract != "true" ) return $this->redirect($this->generateUrl('response_token'));
+        if(!$this->DEBUG && (empty($smartContract) || $smartContract != "true") ) return $this->redirect($this->generateUrl('response_token'));
 
         $user = $this->getUser();
         //historiesは未使用
@@ -468,12 +467,24 @@ class GameController extends BaseController
 				$clearPoint = $clearPoint +  $question[0]->getClearPoint();
 			}
 		}
-		$currentPoint = $currentPoint+$clearPoint;
+		// ポイント取得のログ追加
+		if($clearPoint != 0){
+			
+			$log = new Log();
+			$log->setUserId($user->getId());
+			$log->setType("point");
+			$log->setName("game_clear_get_point: " .$clearPoint);
+			$log->setCreatedAt(date("Y-m-d H:i:s"));
+			$em->persist($log);
+			$em->flush();
 
-		$user->setCurrentPoint($currentPoint);
-		
-		$em->persist($user);
-		$em->flush();
+			$currentPoint = $currentPoint+$clearPoint;
+
+			$user->setCurrentPoint($currentPoint);
+
+			$em->persist($user);
+			$em->flush();
+		}
 
         //TODO: クリアタイム計算
         $duration = 0;

@@ -2,10 +2,8 @@
 
 namespace Machigai\GameBundle\Controller;
 use Machigai\GameBundle\Entity\PurchaseHistory;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Machigai\GameBundle\Entity\Log;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\HttpFoundation\Response;
 
 class ShopController extends BaseController
 {
@@ -150,6 +148,14 @@ class ShopController extends BaseController
             $em->persist($purchasedInfo);
             $em->flush();
 
+			$log = new Log();
+			$log->setUserId($user->getId());
+			$log->setType("point");
+			$log->setName("shop_use_point: " .$itemPoint);
+			$log->setCreatedAt(date("Y-m-d H:i:s"));
+			$em->persist($log);
+			$em->flush();
+			
             $em = $this->getDoctrine()->getEntityManager();
             $user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
             $user_id->setCurrentPoint($remainder);
