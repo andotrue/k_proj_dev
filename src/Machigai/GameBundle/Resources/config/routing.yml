@@ -200,6 +200,10 @@ Ranking:
     pattern: /ranking/
     defaults: { _controller: MachigaiGameBundle:Ranking:index }
 
+RankingSummary:
+    pattern: /ranking/summary
+    defaults: { _controller: MachigaiGameBundle:Ranking:summary }
+
 GameSelect:
     pattern: /game/select
     defaults: { _controller: MachigaiGameBundle:Game:select }
