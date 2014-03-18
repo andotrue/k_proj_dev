@@ -8,6 +8,12 @@ afterAuIdLoginAction:
     requirements:
         _method: GET
 
+lp:
+    pattern: /lp
+    defaults: { _controller: MachigaiGameBundle:Default:lp }
+    requirements:
+        _method: GET
+
 AuIdLogin:
     pattern: /auIdLogin
     defaults: { _controller: MachigaiGameBundle:Android:auId }
