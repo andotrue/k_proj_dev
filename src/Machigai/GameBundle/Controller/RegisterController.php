@@ -381,8 +381,14 @@ class RegisterController extends BaseController
 
          $email = $user->getMailAddress();
          $pass = $user->getPassword();
+		 
+		 // リワード
+		 $cid = "cid";
+		 $ad  = "ad";
+		 $uid = "uid";
+		 $key = "key";
 
-        return $this->render('MachigaiGameBundle:Register:complete.html.twig',array( 'syncToken'=> $user->getSyncToken(), 'email'=>$email,'pass'=>$pass) );
+        return $this->render('MachigaiGameBundle:Register:complete.html.twig',array( 'syncToken'=> $user->getSyncToken(), 'email'=>$email,'pass'=>$pass, 'cid'=>$cid, 'ad' => $ad, 'uid' => $uid, 'key' => $key ) );
     }
     public function confirmAction(Request $request){
        $nickname = new User();

@@ -61,4 +61,9 @@ class DefaultController extends BaseController
     {
 	return $this->render('MachigaiGameBundle:Default:error.html.twig');
     }
+	
+	public function lpAction()
+	{
+		return $this->render('MachigaiGameBundle:Default:lp.html.twig');
+	}
 }
