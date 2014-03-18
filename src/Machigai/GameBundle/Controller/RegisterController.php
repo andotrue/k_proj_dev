@@ -381,14 +381,29 @@ class RegisterController extends BaseController
 
          $email = $user->getMailAddress();
          $pass = $user->getPassword();
-		 
-		 // リワード
-		 $cid = "cid";
-		 $ad  = "ad";
-		 $uid = "uid";
-		 $key = "key";
 
-        return $this->render('MachigaiGameBundle:Register:complete.html.twig',array( 'syncToken'=> $user->getSyncToken(), 'email'=>$email,'pass'=>$pass, 'cid'=>$cid, 'ad' => $ad, 'uid' => $uid, 'key' => $key ) );
+		if( false ){						// TODO リワードかどうか
+			// リワード
+			$cid = "cid";					// TODO キャンペーン
+			$ad  = "ad";					// TODO 性か地点のID
+			$uid = hash('sha256',"uid");	// TODO auIDのハッシュ値
+			$key = "key";					// TODO 秘密鍵
+
+			$to_digest = "$ad:$cid:$uid:$key";
+			$digest = hash('sha256', $to_digest);
+
+			return $this->render('MachigaiGameBundle:Register:complete.html.twig',
+					array( 'syncToken'=> $user->getSyncToken(), 'email'=>$email,'pass'=>$pass,
+						'cid'=>$cid, 'ad' => $ad, 'uid' => $uid, 'digest' => $digest, 'reword' => true ) );
+		
+		} else {
+
+			return $this->render('MachigaiGameBundle:Register:complete.html.twig',
+					array( 'syncToken'=> $user->getSyncToken(), 'email'=>$email,'pass'=>$pass, 'reword' => false) );
+			
+		}
+		
+
     }
     public function confirmAction(Request $request){
        $nickname = new User();
