@@ -1,0 +1,239 @@
+@charset "utf-8";
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.header img{
+	width: 100%;
+    border:none;
+}
+
+.bar img{
+	width: 100%;
+    border:none;
+}
+
+.bg_size_auto {
+    background: url("../img/common/2-01_bg_.png") no-repeat;
+    width:100%;
+    background-size: cover;
+
+}
+
+.bg_size_auto2 {
+    background: url("../img/common/top_textarea.png") no-repeat;
+    width:100%;
+    background-size: cover;
+
+}
+.bg_size_auto3 {
+    background: url("../img/common/top_textarea2.png") no-repeat;
+    width:100%;
+    background-size: cover;
+
+}
+
+.txt_mrg{
+	margin-right: 10px;
+	margin-left: 10px;
+	
+}
+
+
+/**space**/
+.space {
+	margin-top: 5px;
+}
+
+/**space**/
+.space2 {
+	margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* page header*/
+.pageHeader {
+    background-polor:#FFFFFF;
+    text-align: center;
+	padding:0px 0px 0px;
+}
+
+/** section header base */
+.sectionHeader h1 {
+    padding: 0px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+.content {
+	margin:10px 0px 10px;
+}
+.content a{
+	display:block;
+}
+
+.banner {
+    margin:auto;
+    text-align:center;
+}
+
+.clearfix {
+    float: none;
+    clear: both;
+}
+
+.bar-pink{
+    border: 1px solid       #cc9999;
+    background:             #ff6699;
+    color:                  #ffffff;
+    font-weight: bold;
+    text-shadow: 0 -1px 1px #cc6699;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ff99cc), to(#ff6699)); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #ff99cc, #ff6699); /* Chrome 10+, Saf5.1+ */
+    background-image:    -moz-linear-gradient(top, #ff99cc, #ff6699); /* FF3.6 */
+    background-image:     -ms-linear-gradient(top, #ff99cc, #ff6699); /* IE10 */
+    background-image:      -o-linear-gradient(top, #ff99cc, #ff6699); /* Opera 11.10+ */
+    background-image:         linear-gradient(top, #ff99cc, #ff6699); 
+}
+
+.btn-pink {
+	border: none;
+	background:#fea3cc;
+	color: white;
+	background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0.1, #fe82b6),color-stop(0.62, #fea3cc));
+	display: block;
+	font-weight: bold;
+	height: 35px;
+	line-height: 35px;
+	margin: 0 auto;
+	text-align: center;
+	text-decoration: none;
+	width: 80%;
+	-webkit-border-radius: 5px;
+}
+
+.bar-blue{
+    border: 1px solid       #0683cd;
+    background:             #82c7f0;
+    color:                  #ffffff;
+    font-weight: bold;
+    text-shadow: 0 -1px 1px #044d78;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#b9e3f9), to(#82c7f0)); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #b9e3f9, #82c7f0); /* Chrome 10+, Saf5.1+ */
+    background-image:    -moz-linear-gradient(top, #b9e3f9, #82c7f0); /* FF3.6 */
+    background-image:     -ms-linear-gradient(top, #b9e3f9, #82c7f0); /* IE10 */
+    background-image:      -o-linear-gradient(top, #b9e3f9, #82c7f0); /* Opera 11.10+ */
+    background-image:         linear-gradient(top, #b9e3f9, #82c7f0); 
+}
+
+.btn-blue {
+	border: none;
+	background:#82c7f0;
+	color: white;
+	background-image: -webkit-gradient(linear,left bottom,left top, color-stop(0.1, #b9e3f9),color-stop(0.62, #82c7f0));
+	display: block;
+	font-weight: bold;
+	height: 35px;
+	line-height: 35px;
+	margin: 0 auto;
+	text-align: center;
+	text-decoration: none;
+	width: 80%;
+	-webkit-border-radius: 5px;
+}
+
+
+
+.header {
+    text-align:center;
+    padding:10px 0px 10px;
+}
+
+.header h1 {
+    color:#ffffff;
+    //text-shadow:2px 2px 5px #cc6699;
+    font-family:Geneva, Arial, Helvetica, sans-serif;
+	font-size:medium;
+}
+
+.explain {
+	color:#;
+text-align:left;
+	padding:15%;
+}
+
+.explain a{
+	text-align:center;
+}
+
+.checkbox {
+	padding: 5px 0 5px;
+	position:relative;
+}
+.checkbox input{
+	width: 15px;
+	height: 15px;
+	left: 20px;
+	top:50%;
+}
+
+.checkbox label{
+	
+}
+
+.footer {
+    text-align:center;
+    padding:10px 0px 10px;
+}
+
+.footer small {
+    color:#ffffff;
+    //text-shadow:2px 2px 5px #cc6699;
+    font-family:Geneva, Arial, Helvetica, sans-serif;
+}
+
+.goTop {
+    float:right;
+    padding-right:20px;
+}
+
+.goTop a {
+    color:#f05a8e;
+}
+
+.goBack {
+    float: left;
+    padding-left:20px;
+    
+}
+
+.goBack a {
+    color:#f05a8e;
+}
+
+.topBanner {
+	
+}
+
+.topBanner img {
+	width: 100%;
+	margin:0;
+	padding:0;
+	border:0;
+	vertical-align:bottom;
+}
+
+
