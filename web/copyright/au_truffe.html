@@ -1,16 +1,163 @@
 ﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
+<!--画像ウィンドウ表示start-->
+<style type=text/css> 
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+a:link {color:#000;}
+a:visited {color:#000;}
+a:active {color:#000;}
+a:hover {color:#000;}
+
+body {
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+	text-align: center;
+	color: #000;
+	font-size: 12px;
+	background: #fff;
+}
+
+header,
+section,
+footer {
+	display: block;
+}
+
+header h1 {
+	margin-bottom: 20px;
+	padding: 10px 0;
+	background: #000;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+section {
+	width: 100%;
+}
+
+footer {
+	padding: 30px 0;
+	width: 100%;
+}
+
+/* ContentsArea
+-------------------------- */
+#contents {
+	margin: 0 auto;
+	padding: 10px 0 50px 0;
+	width: 100%;
+}
+
+p {
+	padding: 10px 0;
+}
+
+#open01 {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+}
+#open02 {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+}
+#open03 {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+}
+
+.close_overlay {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-indent: -9999px;
+	position: absolute;
+	background: #000;
+	opacity: 0.5;
+	z-index: 5;
+}
+
+.modal_window {
+	top: 50%;
+	left: 50%;
+	margin: -150px 0 0 -200px;
+	width: 400px;
+	height: 300px;
+	text-align: center;
+	display: block;
+	background: #fff;
+	position: absolute;
+	z-index: 10;
+}
+
+.modal_window h2 {
+	margin-bottom: 20px;
+	width: 400px;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	text-indent: 15px;
+	background: #000;
+}
+.modal_window p {
+	padding: 0 15px 15px 15px;
+	font-size: 12px;
+	line-height: 160%;
+	text-align: center;
+}
+
+
+/* CSS3 ModalWindow SET
+-------------------------- */
+@-webkit-keyframes modalFadeIn {
+	0% {opacity:0;display:block;}
+	100% {opacity:1;}
+}
+div#modal div:target {
+	-webkit-animation-name: modalFadeIn; 
+  	-webkit-animation-duration: 1s;
+  	-webkit-animation-iteration-count: 1;
+	opacity: 1;
+	display:block;
+}
+
+</style>
+<!--画像ウィンドウ表示end-->
+
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta charset="UTF-8">
 <link href="css/common.css" rel="stylesheet" type="text/css" media="all">
+<script src="jquery.js" type="text/javascript"></script>
+<link href="/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>
+<script src="/facebox/facebox.js" type="text/javascript"></script>
 
-<link href="css/noMemberTop.css" rel="stylesheet" type="text/css" media="all">
-<link href="css/memberTop.css" rel="stylesheet" type="text/css" media="all">
-
-<title>ライツページテンプレ</title>
+<title>ぜんまいじかけのトリフュ</title>
 </head>
 <body>
+
 	<div class="bg_size_auto">
 		<div class="header">
 <!--画像指定エリア-->
@@ -30,51 +177,78 @@
 		<div class="bg_size_auto3">
 			<div class="txt_mrg">
 <!--テキスト編集エリア-->
-			<font size ="2" color ="8B4513">
-					<center>とあるおもちゃ屋「カトルカール」で</center>
-					<center>売れ残ったクマのぬいぐるみトリュフ。</center>
-					<center>まわりは電池で動くハイテクおもちゃばかり。</center>
-					<center>「いつか自分も動けるようになりたい」と</center>
-                                        <center>願っていました。</center>
-                                        <center>そんなある日、店の主人が</center>
-                                        <center>落ちていたぜんまいをトリュフにさしてみると、</center>
-                                        <center>なぜか動けるようになったのでした…</center>
-				</font>
-
-<br><br>
-【ぜんまいじかけのトリフュ商品情報】
-
-<!--グッズ紹介１-->
-
-　　　　　　　　<p>
-　　　　　　　　<img src="img/truffe/truffe_pencase.png" alt="グッズ画像１" align="middle">
-　　　　　　　　<center>ペンケース　880円</center>
-　　　　　　　　</p>
-　　　　　　　　　　　　　　　　<br>
-
-<!--グッズ紹介２-->
-　　　　　　　　<p>
-　　　　　　　　<img src="img/truffe/truffe_pen.png" alt="グッズ画像２" align="middle">
-　　　　　　　　<center>シャープ　280円</center>
-　　　　　　　　</p>
-
-<!--グッズ紹介２-->
-　　　　　　　　<p>
-　　　　　　　　<img src="img/truffe/truffe_memo.png" alt="グッズ画像３" align="middle">
-　　　　　　　　<center>ミニメモ　100円</center>
-<br>
-　　　　　　　　</p>
-
-<div align="right">＊すべて税抜き価格です。</div>
-
-
+<div align="center">
+					<font size ="2" color ="8B4513">
+						とあるおもちゃ屋「カトルカール」で<br>
+						売れ残ったクマのぬいぐるみトリュフ。<br>
+						まわりは電池で動くハイテクおもちゃばかり。<br>
+						「いつか自分も動けるようになりたい」と<br>
+						願っていました。<br>
+						そんなある日、店の主人が<br>
+						落ちていたぜんまいをトリュフにさしてみると、<br>
+						なぜか動けるようになったのでした…<br>
+					</font>
+				</div>
+				<br><br>
+				<div align="center">
+					<font color ="8B4513">【ぜんまいじかけのトリフュ商品情報】</font>
+				</div>
 				<br>
-<!--戻る-->
-
-<a href="http://www">戻る</a>
-
+<!--グッズ紹介１-->
+				<div align="center">
+					<table>
+					<div id="contents">
+						<tr>
+							<td align="center"><p><a href="#open01"><img src="img/truffe/truffe_pencase.png" width="70%"></a></p></td>
+							<td align="center"><p><a href="#open02"><img src="img/truffe/truffe_memo.png" width="70%"></a></p></td>
+							<td align="center"><p><a href="#open03"><img src="img/truffe/truffe_pen.png" width="70%"></a></p></td>
+						</tr>
+							<!--拡大時表示start-->
+							<div id="modal">
+								<div id="open01">
+									<a href="" class="close_overlay">×</a>
+									<span class="modal_window">
+										<h2><center>ペンケース</center></h2>
+										<img src="img/truffe/truffe_pencase_w.png" width="" height="220" alt=""><br />
+										<a href="">【×】CLOSE</a>
+									</span><!--/.modal_window-->
+								</div><!--/#open01-->
+								<div id="open02">
+									<a href="" class="close_overlay">×</a>
+									<span class="modal_window">
+										<h2><center>ミニメモ</center></h2>
+										<img src="img/truffe/truffe_memo_w.png" width="" height="200" alt=""><br />
+										<a href="">【×】CLOSE</a>
+									</span><!--/.modal_window-->
+								</div><!--/#open02-->
+								<div id="open03">
+									<a href="" class="close_overlay">×</a>
+									<span class="modal_window">
+										<h2><center>シャープ</center></h2>
+										<img src="img/truffe/truffe_pen_w.png" width="" height="200" alt=""><br />
+										<a href="">【×】CLOSE</a>
+									</span><!--/.modal_window-->
+								</div><!--/#open03-->
+							</div><!--/#modal-->
+							<!--拡大時表示end-->
+						</div><!--/#contents-->
+						<tr>			
+							<td align="center"><font size ="2" color ="8B4513">ペンケース</font></td>
+							<td align="center"><font size ="2" color ="8B4513">ミニメモ</font></td>
+							<td align="center"><font size ="2" color ="8B4513">シャープ</font></td>
+						</tr>
+						<tr>			
+							<td align="center"><font size ="2" color ="8B4513">880円</font></td>
+							<td align="center"><font size ="2" color ="8B4513">100円</font></td>
+							<td align="center"><font size ="2" color ="8B4513">280円</font></td>
+						</tr>
+					</table>
+					<br><br>
+					<div align="right"><font color ="8B4513">＊すべて税抜き価格です。</font></div>
+					<br>
 			</div>
-		</div>
+		</div></div>
+
 <br><br>
 </div>
 </body>

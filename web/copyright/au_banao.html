@@ -1,16 +1,163 @@
 ﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
+<!--画像ウィンドウ表示start-->
+<style type=text/css> 
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+a:link {color:#000;}
+a:visited {color:#000;}
+a:active {color:#000;}
+a:hover {color:#000;}
+
+body {
+	font-family: Helvetica, Verdana, Arial, sans-serif;
+	text-align: center;
+	color: #000;
+	font-size: 12px;
+	background: #fff;
+}
+
+header,
+section,
+footer {
+	display: block;
+}
+
+header h1 {
+	margin-bottom: 20px;
+	padding: 10px 0;
+	background: #000;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+section {
+	width: 100%;
+}
+
+footer {
+	padding: 30px 0;
+	width: 100%;
+}
+
+/* ContentsArea
+-------------------------- */
+#contents {
+	margin: 0 auto;
+	padding: 10px 0 50px 0;
+	width: 100%;
+}
+
+p {
+	padding: 10px 0;
+}
+
+#open01 {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+}
+#open02 {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+}
+#open03 {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+}
+
+.close_overlay {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	text-indent: -9999px;
+	position: absolute;
+	background: #000;
+	opacity: 0.5;
+	z-index: 5;
+}
+
+.modal_window {
+	top: 50%;
+	left: 50%;
+	margin: -150px 0 0 -200px;
+	width: 400px;
+	height: 300px;
+	text-align: center;
+	display: block;
+	background: #fff;
+	position: absolute;
+	z-index: 10;
+}
+
+.modal_window h2 {
+	margin-bottom: 20px;
+	width: 400px;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	text-indent: 15px;
+	background: #000;
+}
+.modal_window p {
+	padding: 0 15px 15px 15px;
+	font-size: 12px;
+	line-height: 160%;
+	text-align: center;
+}
+
+
+/* CSS3 ModalWindow SET
+-------------------------- */
+@-webkit-keyframes modalFadeIn {
+	0% {opacity:0;display:block;}
+	100% {opacity:1;}
+}
+div#modal div:target {
+	-webkit-animation-name: modalFadeIn; 
+  	-webkit-animation-duration: 1s;
+  	-webkit-animation-iteration-count: 1;
+	opacity: 1;
+	display:block;
+}
+
+</style>
+<!--画像ウィンドウ表示end-->
+
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta charset="UTF-8">
 <link href="css/common.css" rel="stylesheet" type="text/css" media="all">
-<!--
-<link href="css/noMemberTop.css" rel="stylesheet" type="text/css" media="all">
-<link href="css/memberTop.css" rel="stylesheet" type="text/css" media="all">
--->
-<title>ライツページテンプレ</title>
+<script src="jquery.js" type="text/javascript"></script>
+<link href="/facebox/facebox.css" media="screen" rel="stylesheet" type="text/css"/>
+<script src="/facebox/facebox.js" type="text/javascript"></script>
+
+<title>バナ夫</title>
 </head>
 <body>
+
 	<div class="bg_size_auto">
 		<div class="header">
 <!--画像指定エリア-->
@@ -30,45 +177,78 @@
 		<div class="bg_size_auto3">
 			<div class="txt_mrg">
 <!--テキスト編集エリア-->
+<div align="center">
 				<font size ="2" color ="7e7e7e">
 					フィリピンからの帰国子女『バナ夫』。<br>
 					スレンダーボディにスウィートスマイルで<br>
 					だれもがメロメロ。<br>
 					目が合えば…きっとあなたもバナ夫のとりこ…。<br>
 				</font>
-<!--グッズ紹介１-->
-
-　　　　　　　　<p>
-　　　　　　　　<center><img src="img/banao/banao_pencase.png" alt="グッズ画像１" align="middle"></center>
-                <br>
-　　　　　　　　<div align="left">ﾊﾞﾅ夫ﾍﾟﾝｹｰｽ/ﾊﾞﾅ夫とゆうこ　780円</div>
-　　　　　　　　</p>
-　　　　　　　　　　　　　　　　<br>
-
-<!--グッズ紹介２-->
-　　　　　　　　<p>
-　　　　　　　　<center><img src="img/banao/banao_tissuecase.png" alt="グッズ画像２" align="top"></center>
-　　　　　　　　<br>
-                ﾊﾞﾅ夫ﾃｨｯｼｭｹｰｽ　1500円
-　　　　　　　　</p>
-                                <br>
-<!--グッズ紹介３-->
-　　　　　　　　<p>
-　　　　　　　　<center><img src="img/banao/banao_miniporch.png" alt="グッズ画像3" align="top"></center>
-　　　　　　　　<br>
-                ﾊﾞﾅ夫ぬいぐるみﾐﾆﾎﾟｰﾁ/ﾊﾞﾅ夫　780円
-　　　　　　　　</p>
-                                 <br>
-
-
+				</div>
 				<br><br>
-<!--戻る-->
-
-<a href="http://www">戻る</a>
-
+				<div align="center">
+					<font color ="8B4513">【バナ夫商品情報】</font>
+				</div>
+				<br>
+<!--グッズ紹介１-->
+				<div align="center">
+					<table>
+					<div id="contents">
+						<tr>
+							<td align="center"><p><a href="#open01"><img src="img/banao/banao_pencase.png" width="70%"></a></p></td>
+							<td align="center"><p><a href="#open02"><img src="img/banao/banao_tissuecase.png" width="70%"></a></p></td>
+							<td align="center"><p><a href="#open03"><img src="img/banao/banao_miniporch.png" width="70%"></a></p></td>
+						</tr>
+							<!--拡大時表示start-->
+							<div id="modal">
+								<div id="open01">
+									<a href="" class="close_overlay">×</a>
+									<span class="modal_window">
+										<h2><center>ﾊﾞﾅ夫ﾍﾟﾝｹｰｽ/ﾊﾞﾅ夫とゆうこ</center></h2>
+										<img src="img/banao/banao_pencase_w.png" width="" height="220" alt=""><br />
+										<a href="">【×】CLOSE</a>
+									</span><!--/.modal_window-->
+								</div><!--/#open01-->
+								<div id="open02">
+									<a href="" class="close_overlay">×</a>
+									<span class="modal_window">
+										<h2><center>ﾊﾞﾅ夫ﾃｨｯｼｭｹｰｽ</center></h2>
+										<img src="img/banao/banao_tissuecase_w.png" width="" height="200" alt=""><br />
+										<a href="">【×】CLOSE</a>
+									</span><!--/.modal_window-->
+								</div><!--/#open02-->
+								<div id="open03">
+									<a href="" class="close_overlay">×</a>
+									<span class="modal_window">
+										<h2><center>ﾊﾞﾅ夫ぬいぐるみﾐﾆﾎﾟｰﾁ/ﾊﾞﾅ夫</center></h2>
+										<img src="img/banao/banao_miniporch_w.png" width="" height="200" alt=""><br />
+										<a href="">【×】CLOSE</a>
+									</span><!--/.modal_window-->
+								</div><!--/#open03-->
+							</div><!--/#modal-->
+							<!--拡大時表示end-->
+						</div><!--/#contents-->
+						<tr>			
+							<td align="center"><font size ="2" color ="8B4513">ﾊﾞﾅ夫ﾍﾟﾝｹｰｽ/ﾊﾞﾅ夫とゆうこ</font></td>
+							<td align="center"><font size ="2" color ="8B4513">ﾊﾞﾅ夫ﾃｨｯｼｭｹｰｽ</font></td>
+							<td align="center"><font size ="2" color ="8B4513">ﾊﾞﾅ夫ぬいぐるみﾐﾆﾎﾟｰﾁ/ﾊﾞﾅ夫</font></td>
+						</tr>
+						<tr>			
+							<td align="center"><font size ="2" color ="8B4513">780円</font></td>
+							<td align="center"><font size ="2" color ="8B4513">1500円</font></td>
+							<td align="center"><font size ="2" color ="8B4513">780円</font></td>
+						</tr>
+					</table>
+					<br><br>
+					<div align="right"><font color ="8B4513">＊すべて税抜き価格です。</font></div>
+					<br>
 			</div>
-		</div>
+		</div></div>
+
 <br><br>
 </div>
 </body>
 </html>
+
+
+
