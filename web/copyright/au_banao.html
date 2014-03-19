@@ -242,11 +242,18 @@ div#modal div:target {
 					<br><br>
 					<div align="right"><font color ="8B4513">＊すべて税抜き価格です。</font></div>
 					<br>
+					<a id="back" href="https://machigai.puzzle-m.net/">戻る</a>
 			</div>
 		</div></div>
 
 <br><br>
 </div>
+<script>
+if (navigator.userAgent.indexOf('Android') > 0) {
+	var elm = document.getElementById("back");
+	elm.style.display = "none";
+}
+</script>
 </body>
 </html>
 
