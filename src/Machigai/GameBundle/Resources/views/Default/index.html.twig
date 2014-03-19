@@ -58,6 +58,33 @@
    <p style="text-align:left;width:80%;margin: 0 auto;">{{new.getTitle}}<br />{{new.getDescription|raw}}</p><br />
   {% endfor %}
   </div>
+
+  <img src="{{ asset('/bundles/machigaigame/images/parts/bar_banner.png') }}" width="100%" />
+  <div style="color: #FFF; font-size: 0.6em;width: 90%; margin: auto;">
+  <br />
+  <a href="https://ausp.puzzle-m.net/">
+    <img src="{{ asset('/bundles/machigaigame/images/parts/banner_puzzle.png') }}" width="100%" />
+  </a>
+  <br />
+  <div style="text-align: left;">
+  日本最大パズル誌の問題が毎日更新で遊び放題！さっそく遊んでみよう♪
+  </div>
+  <br />
+  <br />
+  <a href="https://e-aquarium.jp/asp/">
+     <img src="{{ asset('/bundles/machigaigame/images/parts/banner_boe.png') }}" width="100%" />
+  </a>
+  <br />
+  <br />
+  <div style="text-align: left;">
+  全国水族館情報＆イベントNEWS+画像満載！<br />
+  さっそくチェック！<br />
+  <br />
+  <br />
+  </div>
+  <br />
+  </div>
+  
 {% if user is not empty %}
 	<p style="text-align:center;">
 		<a href="{{ path('Logout')  }}" alt="ログアウト">
@@ -65,6 +92,8 @@
 		</a>
 	</p>
  {% endif %}
+        
+        
 <section style="padding-top:2em;">
 <div class="pre_pass white">
 <p><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
