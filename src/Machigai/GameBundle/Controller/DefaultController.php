@@ -66,4 +66,20 @@ class DefaultController extends BaseController
 	{
 		return $this->render('MachigaiGameBundle:Default:lp.html.twig');
 	}
+	
+	public function lpCompanyInfoAction()
+	{
+		return $this->render('MachigaiGameBundle:Default:companyInfo.html.twig');
+	}
+
+	public function lpPrivacyPolicyAction()
+	{
+		return $this->render('MachigaiGameBundle:Default:privacyPolicy.html.twig');
+	}
+
+	public function lpTermsAction()
+	{
+		return $this->render('MachigaiGameBundle:Default:terms.html.twig');
+	}
+	
 }
