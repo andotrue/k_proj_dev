@@ -13,6 +13,21 @@ lp:
     defaults: { _controller: MachigaiGameBundle:Default:lp }
     requirements:
         _method: GET
+LpCompanyInfo:
+    pattern: /lpCompanyInfo
+    defaults: { _controller: MachigaiGameBundle:Default:lpCompanyInfo }
+    requirements:
+        _method: GET
+LpPrivacyPolicy:
+    pattern: /lpPrivacyPolicy
+    defaults: { _controller: MachigaiGameBundle:Default:lpPrivacyPolicy }
+    requirements:
+        _method: GET
+LpHelpTerms:
+    pattern: /lpTerms
+    defaults: { _controller: MachigaiGameBundle:Default:lpTerms }
+    requirements:
+        _method: GET
 
 AuIdLogin:
     pattern: /auIdLogin
