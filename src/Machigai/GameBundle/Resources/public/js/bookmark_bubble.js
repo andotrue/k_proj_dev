@@ -560,7 +560,7 @@ google.bookmarkbubble.Bubble.prototype.build_ = function() {
   // The "Add to Home Screen" text is intended to be the exact same text
   // that is displayed in the menu of Mobile Safari.
   if (this.getIosVersion_() >= this.getVersion_(4, 2)) {
-    bubbleInner.innerHTML = 'ホーム画面へインストールしましょう！<br />矢印をタイップして<b>「ホーム画面に追加」</b>で完了です。';
+    bubbleInner.innerHTML = 'ホーム画面へインストールしましょう！<br />矢印をタップして<b>「ホーム画面に追加」</b>で完了です。';
   } else {
     bubbleInner.innerHTML = 'ホーム画面へインストールしましょう！<br /><b style="font-size:15px">+</b>をタップして<b>「ホーム画面に追加」</b>で完了です。';
   }
