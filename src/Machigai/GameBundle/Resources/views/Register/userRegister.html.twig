@@ -40,19 +40,22 @@
   {{ form (form) }}
   <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
   {% if error is not empty %}
-  {{error}}
+  {{error}}<br /><br />
   {% endif %}
   </div>
    
   <div style="color: red; font-size: 0.7em; text-align: left;">
-        ＜注意＞
-        ご利用のセキュリティソフトやメールソフトによっては、迷惑メールフォルダやゴミ箱に自動振り分けされたり、削除される可能性がございます。<br />
-        下記を受信可能なドメインとして設定してください。          
+    ＜注意＞ ご利用のセキュリティソフトやメールソフ<br>
+    トによっては、迷惑メールフォルダやゴミ箱に自動<br>
+    振り分けされたり削除される可能性があります。<br>
+    下記を受信可能ドメインとして設定して下さい。<br>
   </div>
   <div class="domain_help">
        @machigai.puzzle-m.net
   </div>
-      
+  <div style="color: #167BC0; font-size: 0.7em; text-align: center; margin-top: 10px;">
+       ※長押ししてコピーできます
+  </div>
    <div class="linkButtons" style="position:relative;margin-top:20%;z-index:2; text-align:center">
 
    <img id="registerConfirm" width="50%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" style="width:35%;" >
