@@ -16,7 +16,7 @@
  #form_mailAddress {width:100%;padding:1%;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
  .invisible {opacity:0;}
  #form_password {width:100%;padding:1%;margin-top:19%;position:relative;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
- .registerForm {width:80%;margin-top:26%;position:relative;left:8%;}
+ .registerForm {width:85%;margin-top:26%;position:relative;left:8%;text-align: left;}
  #form_confirm{opacity:0;}
  .domain_help{
     margin-top: 20px;
@@ -41,6 +41,9 @@
   <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
   {% if error is not empty %}
   {{error}}<br /><br />
+  仮登録状態(※)のメールアドレスにて再度会員登録を行う場合、仮登録から24時間以上経過すると再度登録が可能となります。<br />
+  (※)仮登録状態とは、当会員登録画面でメールを送信完了済みですが会員登録は完了していない状態を指します。
+  <br><br>
   {% endif %}
   </div>
    
