@@ -452,21 +452,23 @@ class RegisterController extends BaseController
          ->findBy(array('mailAddress'=>$userData['mailAddress']));
 
 		 // 24時間経過している仮登録ユーザを削除
-         if(!empty($emailCheck) && !empty($emailCheck[0]->getTempPass())){
+         if(!empty($emailCheck)){
+			if(!empty($emailCheck[0]->getTempPass())){
 			 
-            $from = $emailCheck[0]->getCreatedAt();
-            $from = ($from->format('Y-m-d H:i:s'));
-            $to = date("Y-m-d H:i:s", time());
-            $fromSec = strtotime($from);
-            $toSec   = strtotime($to);
-            $differences = $toSec - $fromSec;
+				$from = $emailCheck[0]->getCreatedAt();
+				$from = ($from->format('Y-m-d H:i:s'));
+				$to = date("Y-m-d H:i:s", time());
+				$fromSec = strtotime($from);
+				$toSec   = strtotime($to);
+				$differences = $toSec - $fromSec;
 
-            if($differences > 86400){
-                $em = $this->getDoctrine()->getEntityManager();
-                $user = $em->getRepository('MachigaiGameBundle:User')->find($emailCheck[0]->getId());
-                $em->remove($user);
-                $em->flush();	
-				$emailCheck = null;
+				if($differences > 86400){
+					$em = $this->getDoctrine()->getEntityManager();
+					$user = $em->getRepository('MachigaiGameBundle:User')->find($emailCheck[0]->getId());
+					$em->remove($user);
+					$em->flush();	
+					$emailCheck = null;
+				}
 			}
 		 }
 		 
