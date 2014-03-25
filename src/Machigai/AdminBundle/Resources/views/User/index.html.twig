@@ -3,7 +3,6 @@
 {% block contents -%}
     <h1>ユーザ一覧</h1>
     {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
-
     <table class="records_list">
         <thead>
             <tr>
@@ -19,7 +18,6 @@
                 <th>Easycleartimelastmonth</th>
                 <th>Normalcleartimelastmonth</th>
                 <th>Hardcleartimelastmonth</th>
-                <th>Suspendinfo</th>
                 <th>Createdat</th>
                 <th>更新日時</th>
 -->                <th>アクション</th>
@@ -34,16 +32,17 @@
                 <td>{{ entity.nickname }}</td>
                 <td>{{ entity.mailAddress }}</td>
                 <td>{{ entity.currentPoint }}</td>
-<!--                <td>{{ entity.easyClearTimeThisMonth }}</td>
+<!--            
+                <td>{{ entity.easyClearTimeThisMonth }}</td>
                 <td>{{ entity.normalClearTimeThisMonth }}</td>
                 <td>{{ entity.hardClearTimeThisMonth }}</td>
                 <td>{{ entity.easyClearTimeLastMonth }}</td>
                 <td>{{ entity.normalClearTimeLastMonth }}</td>
                 <td>{{ entity.hardClearTimeLastMonth }}</td>
-                <td>{{ entity.suspendInfo }}</td>
                 <td>{{ entity.createdAt  | date("Y/m/d h:i:s") }}</td>
                 <td>{{ entity.updatedAt  | date("Y/m/d h:i:s") }}</td>
--->                <td>
+-->                
+                <td>
                 <ul>
                     <li>
                         <a href="{{ path('user_show', { 'id': entity.id }) }}">詳細表示</a>

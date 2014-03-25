@@ -9,10 +9,10 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nickname','text', array('label'=>' ' ))
-	  ->add('confirm', 'submit', array('label'=>'登録内容確認'))
-	  ->add('register', 'submit', array('label'=>'登録'))
-	  ->add('ammend', 'button', array('label'=>'修正'))
+        $builder
+	  ->add('nickname', 'text')
+	  ->add('currentPoint', 'text')
+	  ->add('MailAddress', 'email')
 	  ->getForm();
     }
 

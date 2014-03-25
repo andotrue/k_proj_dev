@@ -24,7 +24,6 @@ class QuestionType extends AbstractType
             ->add('distributedFrom')
             ->add('distributedTo')
             ->add('isDelete')
-            ->add('copyrightFileName')
             ->add('copyrightUrl')
             ->add('questionTitle')
             ->add('qcode')
