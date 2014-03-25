@@ -1,0 +1,18 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>お知らせ編集</h1>
+
+    {{ form(edit_form) }}
+
+    <br />
+    
+    {{ form(delete_form) }}
+    
+    <br />
+    
+    <a href="{{ path('news') }}">
+        お知らせ一覧に戻る
+    </a>
+</ul>
+{% endblock %}
