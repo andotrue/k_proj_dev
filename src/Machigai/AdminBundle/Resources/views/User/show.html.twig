@@ -31,7 +31,9 @@
             </tr>
 -->            <tr>
                 <th>Temppass</th>
-                <td>{{ entity.tempPass }}</td>
+                <td>
+                    <div style="width: 600px; overflow-x: scroll">{{ entity.tempPass }}</div>
+                </td>
             </tr>
             <tr>
                 <th>Currentpoint</th>
@@ -61,11 +63,7 @@
                 <th>Hardcleartimelastmonth</th>
                 <td>{{ entity.hardClearTimeLastMonth }}</td>
             </tr>
-<!--            <tr>
-                <th>Suspendinfo</th>
-                <td>{{ entity.suspendInfo }}</td>
-            </tr>
--->            <tr>
+            <tr>
                 <th>Createdat</th>
                 <td>{{ entity.createdAt | date("Y/m/d h:i:s")}}</td>
             </tr>

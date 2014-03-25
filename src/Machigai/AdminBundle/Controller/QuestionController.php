@@ -194,9 +194,16 @@ class QuestionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+			
+			$tmp1 = $entity->getDistributedFrom();
+			$entity->setDistributedFrom($tmp1->format('Y-m-d H:i:s'));
+			$tmp2 = $entity->getDistributedTo();
+			$entity->setDistributedTo($tmp2->format('Y-m-d H:i:s'));
+			
+			$em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('question_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('question_show', array('id' => $id)));
         }
 
         return array(

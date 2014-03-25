@@ -10,7 +10,7 @@
 	<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
 
         <style>
-	 body,*{padding:0;border:none;margin:0;}
+	 body{padding:0;border:none;margin:0;}
          img{vertical-align:text-bottom;}
          td{text-align:center;padding-left:0.5em;padding-right:0.5em;}
          nav{ text-align: center;}
@@ -20,7 +20,7 @@
 		 li{list-style-type: none;}
 		 tr li{ text-align: center;}
 		 th{background:gray; color:white; padding:1em; }
-		 header{width:1960px;height:59px; text-align: left; background-color:rgb(63,169,246);}
+		 header{width:100%;height:59px; text-align: left; background-color:rgb(63,169,246);}
 		 label{display:inline-block;padding:0.5em;width:250px;}
 	</style>
         {% block stylesheets %}{% endblock %}
@@ -40,7 +40,7 @@
 	 		</nav>
 	 	</div>
 	 {% endblock %}
-	<div id="contents" style="position:relative; margin-left: 150px; width:1800px;">{% block contents %}{% endblock %}</div>
+	<div id="contents" style="position:relative; margin-left: 150px; width:50%;">{% block contents %}{% endblock %}</div>
  </div>
         {% block javascripts %}{% endblock %}
 {% block foot %}

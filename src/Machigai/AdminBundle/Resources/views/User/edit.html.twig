@@ -5,12 +5,13 @@
 
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('user') }}">
-            ユーザ一覧に戻る	
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <br />
+
+    {{ form(delete_form) }}
+
+    <br />
+    
+    <a href="{{ path('user') }}">
+        ユーザ一覧に戻る	
+    </a>
 {% endblock %}
