@@ -453,7 +453,8 @@ class RegisterController extends BaseController
 
 		 // 24時間経過している仮登録ユーザを削除
          if(!empty($emailCheck)){
-			if(!empty($emailCheck[0]->getTempPass())){
+			$tp = $emailCheck[0]->getTempPass();
+			if(!empty($tp)){
 			 
 				$from = $emailCheck[0]->getCreatedAt();
 				$from = ($from->format('Y-m-d H:i:s'));
