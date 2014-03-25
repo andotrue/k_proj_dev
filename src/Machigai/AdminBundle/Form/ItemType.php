@@ -23,8 +23,6 @@ class ItemType extends AbstractType
             ->add('popularityRank')
             ->add('distributedFrom')
             ->add('distributedTo')
-            ->add('createdAt')
-            ->add('updatedAt')
             ->add('category', 'entity', array('class' => 'MachigaiGameBundle:ItemCategory', 'property' => 'name'))
         ;
     }

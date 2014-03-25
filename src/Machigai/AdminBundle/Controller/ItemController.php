@@ -194,9 +194,15 @@ class ItemController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+			
+			$tmp1 = $entity->getDistributedFrom();
+			$entity->setDistributedFrom($tmp1->format('Y-m-d H:i:s'));
+			$tmp2 = $entity->getDistributedTo();
+			$entity->setDistributedTo($tmp2->format('Y-m-d H:i:s'));
+			
             $em->flush();
 
-            return $this->redirect($this->generateUrl('item_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('item_show', array('id' => $id)));
         }
 
         return array(
