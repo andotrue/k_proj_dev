@@ -21,7 +21,10 @@ class QuestionType extends AbstractType
             ->add('timeLimit')
             ->add('clearPoint')
             ->add('bonusPoint')
-            ->add('distributedFrom')
+            ->add('distributedFrom',"datetime", array(
+				'model_timezone' => 'UTC',
+				'view_timezone' => "Asia/Tokyo"
+				))
             ->add('distributedTo')
             ->add('isDelete')
             ->add('copyrightUrl')
