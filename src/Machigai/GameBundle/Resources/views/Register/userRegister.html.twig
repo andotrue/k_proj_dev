@@ -18,6 +18,16 @@
  #form_password {width:100%;padding:1%;margin-top:19%;position:relative;background-image:url({{ asset('/bundles/machigaigame/images/parts/nicknametextarea.png')}});background-repeat:no-repeat;background-size:100% 100%;}
  .registerForm {width:80%;margin-top:26%;position:relative;left:8%;}
  #form_confirm{opacity:0;}
+ .domain_help{
+    margin-top: 20px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color: #FFF8DC;
+    font-size: 0.8em;
+    padding: 0.8em;
+    color: blue;
+ }
 </style>
 <img src="{{ asset('/bundles/machigaigame/images/parts/1-01_1_bg.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
 <img src="{{ asset('/bundles/machigaigame/images/parts/bar_kaiin.png')  }}" width="100%" style="position:relative;margin-top:29%"/>
@@ -33,6 +43,16 @@
   {{error}}
   {% endif %}
   </div>
+   
+  <div style="color: red; font-size: 5px; text-align: left;">
+        ＜注意＞
+        ご利用のセキュリティソフトやメールソフトによっては、迷惑メールフォルダやゴミ箱に自動振り分けされたり、削除される可能性がございます。<br />
+        下記を受信可能なドメインとして設定してください。          
+  </div>
+  <div class="domain_help">
+       @machigai.puzzle-m.net
+  </div>
+      
    <div class="linkButtons" style="position:relative;margin-top:20%;z-index:2; text-align:center">
 
    <img id="registerConfirm" width="50%" src="{{ asset('/bundles/machigaigame/images/parts/button_registcheck_off.png')}}" onclick="changeImage(this.id);submitRegister()" style="width:35%;" >

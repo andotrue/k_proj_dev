@@ -451,12 +451,31 @@ class RegisterController extends BaseController
          ->getRepository('MachigaiGameBundle:User')
          ->findBy(array('mailAddress'=>$userData['mailAddress']));
 
+		 // 24時間経過している仮登録ユーザを削除
+         if(!empty($emailCheck) && !empty($emailCheck[0]->getTempPass())){
+			 
+            $from = $emailCheck[0]->getCreatedAt();
+            $from = ($from->format('Y-m-d H:i:s'));
+            $to = date("Y-m-d H:i:s", time());
+            $fromSec = strtotime($from);
+            $toSec   = strtotime($to);
+            $differences = $toSec - $fromSec;
+
+            if($differences > 86400){
+                $em = $this->getDoctrine()->getEntityManager();
+                $user = $em->getRepository('MachigaiGameBundle:User')->find($emailCheck[0]->getId());
+                $em->remove($user);
+                $em->flush();	
+				$emailCheck = null;
+			}
+		 }
+		 
          if(!empty($emailCheck)){
              $form = $this->createFormBuilder()
              ->setMethod('GET')
              ->setAction($this->generateUrl('RegisterUserConfirm'))
              ->add('mailAddress', 'text',array('label'=>false))
-             ->add('password', 'text',array('label'=>false))
+             ->add('password', 'password',array('label'=>false))
              ->add('confirm', 'submit', array('label'=>'内容を確認'))
              ->getForm();
             $error = "入力されたメールアドレスはすでに使用されています";
