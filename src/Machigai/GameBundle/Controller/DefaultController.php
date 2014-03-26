@@ -18,6 +18,7 @@ class DefaultController extends BaseController
         $smartContract = $request->cookies->get('smartContract'); 
         if(!$this->DEBUG && (empty($smartContract) || $smartContract != "true") ) return $this->redirect($this->generateUrl('response_token'));
 
+		$base_url = $request->getSchemeAndHttpHost();
 
         $logger = $this->get('logger');
         $logger->info('inf auIdAction');
@@ -26,7 +27,7 @@ class DefaultController extends BaseController
         ->getRepository('MachigaiGameBundle:News')
         ->findBy(array(),array('startedAt'=>'DESC'));
 
-        return $this->render('MachigaiGameBundle:Default:index.html.twig', array('user' => $user,'news'=>$news));
+        return $this->render('MachigaiGameBundle:Default:index.html.twig', array('user' => $user,'news'=>$news, 'base_url' => $base_url));
     }
     public function logoutAction(Request $request){
         $session = $request->getSession();
@@ -80,6 +81,14 @@ class DefaultController extends BaseController
 	public function lpTermsAction()
 	{
 		return $this->render('MachigaiGameBundle:Default:terms.html.twig');
+	}
+	
+	public function getBannerAction()
+	{
+        $request = $this->get('request');
+		$base_url = $request->getSchemeAndHttpHost();
+        return $this->render('MachigaiGameBundle:Default:banner.html.twig',
+				array('base_url' => $base_url));
 	}
 	
 }
