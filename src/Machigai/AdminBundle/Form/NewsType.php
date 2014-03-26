@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ItemType extends AbstractType
+class NewsType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,15 +15,10 @@ class ItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('itemCode')
-            ->add('name')
-            ->add('itemPath')
-            ->add('consumePoint')
+            ->add('title')
             ->add('description')
-            ->add('popularityRank')
-            ->add('distributedFrom')
-            ->add('distributedTo')
-            ->add('category', 'entity', array('class' => 'MachigaiGameBundle:ItemCategory', 'property' => 'name'))
+            ->add('startedAt')
+            ->add('endedAt')
         ;
     }
     
@@ -33,7 +28,7 @@ class ItemType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Machigai\GameBundle\Entity\Item'
+            'data_class' => 'Machigai\GameBundle\Entity\News'
         ));
     }
 
@@ -42,6 +37,6 @@ class ItemType extends AbstractType
      */
     public function getName()
     {
-        return 'machigai_gamebundle_item';
+        return 'machigai_gamebundle_News';
     }
 }

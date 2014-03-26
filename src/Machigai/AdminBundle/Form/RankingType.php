@@ -22,8 +22,6 @@ class RankingType extends AbstractType
             ->add('rank')
             ->add('clearTime')
             ->add('bonusPoint')
-            ->add('createdAt')
-            ->add('updatedAt')
         ;
     }
     

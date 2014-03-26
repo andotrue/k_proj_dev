@@ -28,6 +28,11 @@ LpHelpTerms:
     defaults: { _controller: MachigaiGameBundle:Default:lpTerms }
     requirements:
         _method: GET
+getBanner:
+    pattern: /getBanner
+    defaults: { _controller: MachigaiGameBundle:Default:getBanner }
+    requirements:
+        _method: GET
 
 AuIdLogin:
     pattern: /auIdLogin

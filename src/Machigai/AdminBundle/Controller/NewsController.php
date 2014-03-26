@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Machigai\GameBundle\Entity\Item;
-use Machigai\AdminBundle\Form\ItemType;
+use Machigai\GameBundle\Entity\News;
+use Machigai\AdminBundle\Form\NewsType;
 
 /**
- * Item controller.
+ * News controller.
  *
- * @Route("/item")
+ * @Route("/News")
  */
-class ItemController extends Controller
+class NewsController extends Controller
 {
 
     /**
-     * Lists all Item entities.
+     * Lists all News entities.
      *
-     * @Route("/", name="item")
+     * @Route("/", name="new")
      * @Method("GET")
      * @Template()
      */
@@ -29,9 +29,9 @@ class ItemController extends Controller
     {
         $pager = $this->get('pager');
         $pager->setInc(20); // 20件表示
-        $pager->setPath('item'); // ページのrouting path
+        $pager->setPath('News'); // ページのrouting path
 
-        $entities = $pager->getRepository('MachigaiGameBundle:Item', array(), array('id' => 'DESC'));
+        $entities = $pager->getRepository('MachigaiGameBundle:News', array(), array('id' => 'DESC'));
 
         return array(
             'pager' => $pager->getParameters(),
@@ -39,15 +39,15 @@ class ItemController extends Controller
         );
     }
     /**
-     * Creates a new Item entity.
+     * Creates a new News entity.
      *
-     * @Route("/", name="item_create")
+     * @Route("/", name="new_create")
      * @Method("POST")
-     * @Template("MachigaiGameBundle:Item:new.html.twig")
+     * @Template("MachigaiGameBundle:News:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Item();
+        $entity = new News();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -56,7 +56,7 @@ class ItemController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('item_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('news_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -66,16 +66,16 @@ class ItemController extends Controller
     }
 
     /**
-    * Creates a form to create a Item entity.
+    * Creates a form to create a News entity.
     *
-    * @param Item $entity The entity
+    * @param News $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Item $entity)
+    private function createCreateForm(News $entity)
     {
-        $form = $this->createForm(new ItemType(), $entity, array(
-            'action' => $this->generateUrl('item_create'),
+        $form = $this->createForm(new NewsType(), $entity, array(
+            'action' => $this->generateUrl('new_create'),
             'method' => 'POST',
         ));
 
@@ -85,15 +85,15 @@ class ItemController extends Controller
     }
 
     /**
-     * Displays a form to create a new Item entity.
+     * Displays a form to create a new News entity.
      *
-     * @Route("/new", name="item_new")
+     * @Route("/new", name="new_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Item();
+        $entity = new News();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -103,9 +103,9 @@ class ItemController extends Controller
     }
 
     /**
-     * Finds and displays a Item entity.
+     * Finds and displays a News entity.
      *
-     * @Route("/{id}", name="item_show")
+     * @Route("/{id}", name="new_show")
      * @Method("GET")
      * @Template()
      */
@@ -113,10 +113,10 @@ class ItemController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MachigaiGameBundle:Item')->find($id);
+        $entity = $em->getRepository('MachigaiGameBundle:News')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Item entity.');
+            throw $this->createNotFoundException('Unable to find News entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -128,9 +128,9 @@ class ItemController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Item entity.
+     * Displays a form to edit an existing News entity.
      *
-     * @Route("/{id}/edit", name="item_edit")
+     * @Route("/{id}/edit", name="new_edit")
      * @Method("GET")
      * @Template()
      */
@@ -138,10 +138,10 @@ class ItemController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MachigaiGameBundle:Item')->find($id);
+        $entity = $em->getRepository('MachigaiGameBundle:News')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Item entity.');
+            throw $this->createNotFoundException('Unable to find News entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -155,16 +155,16 @@ class ItemController extends Controller
     }
 
     /**
-    * Creates a form to edit a Item entity.
+    * Creates a form to edit a News entity.
     *
-    * @param Item $entity The entity
+    * @param News $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Item $entity)
+    private function createEditForm(News $entity)
     {
-        $form = $this->createForm(new ItemType(), $entity, array(
-            'action' => $this->generateUrl('item_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new NewsType(), $entity, array(
+            'action' => $this->generateUrl('news_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -173,20 +173,20 @@ class ItemController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Item entity.
+     * Edits an existing News entity.
      *
-     * @Route("/{id}", name="item_update")
+     * @Route("/{id}", name="new_update")
      * @Method("PUT")
-     * @Template("MachigaiGameBundle:Item:edit.html.twig")
+     * @Template("MachigaiGameBundle:News:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('MachigaiGameBundle:Item')->find($id);
+        $entity = $em->getRepository('MachigaiGameBundle:News')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Item entity.');
+            throw $this->createNotFoundException('Unable to find News entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -194,15 +194,14 @@ class ItemController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-			
-			$tmp1 = $entity->getDistributedFrom();
-			$entity->setDistributedFrom($tmp1->format('Y-m-d H:i:s'));
-			$tmp2 = $entity->getDistributedTo();
-			$entity->setDistributedTo($tmp2->format('Y-m-d H:i:s'));
-			
-            $em->flush();
+			$tmp1 = $entity->getStartedAt();
+			$entity->setStartedAt($tmp1->format('Y-m-d H:i:s'));
+			$tmp2 = $entity->getEndedAt();
+			$entity->setEndedAt($tmp2->format('Y-m-d H:i:s'));
 
-            return $this->redirect($this->generateUrl('item_show', array('id' => $id)));
+			$em->flush();
+
+            return $this->redirect($this->generateUrl('news_edit', array('id' => $id)));
         }
 
         return array(
@@ -212,9 +211,9 @@ class ItemController extends Controller
         );
     }
     /**
-     * Deletes a Item entity.
+     * Deletes a News entity.
      *
-     * @Route("/{id}", name="item_delete")
+     * @Route("/{id}", name="new_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -224,21 +223,21 @@ class ItemController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('MachigaiGameBundle:Item')->find($id);
+            $entity = $em->getRepository('MachigaiGameBundle:News')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Item entity.');
+                throw $this->createNotFoundException('Unable to find News entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('item'));
+        return $this->redirect($this->generateUrl('new'));
     }
 
     /**
-     * Creates a form to delete a Item entity by id.
+     * Creates a form to delete a News entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -247,7 +246,7 @@ class ItemController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('item_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('news_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

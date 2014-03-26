@@ -126,3 +126,31 @@ ranking_update:
     pattern: /ranking/update/{id}
     defaults: { _controller: MachigaiAdminBundle:Ranking:update }
 
+news:
+    pattern: /news/
+    defaults: { _controller: MachigaiAdminBundle:News:index }
+
+news_show:
+    pattern: /news/show/{id}
+    defaults: { _controller: MachigaiAdminBundle:News:show }
+
+news_edit:
+    pattern: /news/edit/{id}
+    defaults: { _controller: MachigaiAdminBundle:News:edit }
+
+news_new:
+    pattern: /news/new
+    defaults: { _controller: MachigaiAdminBundle:News:new }
+
+news_create:
+    pattern: /news/create
+    defaults: { _controller: MachigaiAdminBundle:News:create }
+
+news_delete:
+    pattern: /news/delete/{id}
+    defaults: { _controller: MachigaiAdminBundle:News:delete }
+
+news_update:
+    pattern: /news/update/{id}
+    defaults: { _controller: MachigaiAdminBundle:News:update }
+
