@@ -18,7 +18,10 @@ class DefaultController extends BaseController
         $smartContract = $request->cookies->get('smartContract'); 
         if(!$this->DEBUG && (empty($smartContract) || $smartContract != "true") ) return $this->redirect($this->generateUrl('response_token'));
 
-		$base_url = "http://" .$_SERVER["SERVER_NAME"];
+        $request = $this->get('request');
+		$base_url = $request->getUri();
+		$url = parse_url($base_url);
+		$base_url = "http://" .$url["host"];
 
         $logger = $this->get('logger');
         $logger->info('inf auIdAction');
@@ -85,7 +88,11 @@ class DefaultController extends BaseController
 	
 	public function getBannerAction()
 	{
-		$base_url = "http://" .$_SERVER["SERVER_NAME"];
+        $request = $this->get('request');
+		$base_url = $request->getUri();
+		$url = parse_url($base_url);
+		$base_url = "http://" .$url["host"];
+		
         return $this->render('MachigaiGameBundle:Default:banner.html.twig',
 				array('base_url' => $base_url));
 	}
