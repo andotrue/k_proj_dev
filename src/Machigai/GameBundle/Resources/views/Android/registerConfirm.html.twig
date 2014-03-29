@@ -11,7 +11,6 @@
 <form action="{{ path('AndroidRegisterComplete') }}" method="post" {{ form_enctype(form) }}>
 <div style=""><p>{{nickname['nickname']}}</p></div>
 <input type="hidden" id="form_nickname" name="form[nickname]" value="{{nickname['nickname']}}">
-<input type="hidden" id="form_openId" name="form[openId]" value="{{nickname['openId']}}">
 <input type="submit" id="submitButton">
 <div id="submitEnd">
 {{form_row(form,{ 'attr': {'id': "submitEnd" } } )  }}
