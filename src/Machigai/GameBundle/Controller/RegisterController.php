@@ -134,8 +134,10 @@ class RegisterController extends BaseController
                 $MODE = 'DEV';
                 $user_type = 'loggedIn';
 
+				$auId = $user->getAuId();
+				
 				// 既にAUIDが登録されている
-				if( !empty($user->getAuId()) ){
+				if( !empty($auId) ){
                     return $this->render('MachigaiGameBundle:Register:alreadyExistAuId.html.twig');
 				}
 				
