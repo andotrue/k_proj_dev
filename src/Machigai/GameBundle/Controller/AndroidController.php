@@ -600,7 +600,7 @@ class AndroidController extends BaseController
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
         
-        return $this->render('MachigaiGameBundle:Android:registerEntry.html.twig', array('openId' => $openId, 'form' => $form->createView()) );
+        return $this->render('MachigaiGameBundle:Android:registerEntry.html.twig', array('form' => $form->createView()) );
 
      }
      public function registerConfirmAction(){
