@@ -134,6 +134,11 @@ class RegisterController extends BaseController
                 $MODE = 'DEV';
                 $user_type = 'loggedIn';
 
+				// 既にAUIDが登録されている
+				if( !empty($user->getAuId()) ){
+                    return $this->render('MachigaiGameBundle:Register:alreadyExistAuId.html.twig');
+				}
+				
                 if( $MODE == 'DEV'){
                     if($user_type == 'loggedIn'){
                         //ログインユーザの場合
@@ -175,7 +180,8 @@ class RegisterController extends BaseController
                     return $this->redirect('https://auone.jp');
                 }else{
                     //
-                    return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
+                    //return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
+					return $this->redirect($this->generateUrl('AuIdLogin'));
 //                    return $this->redirect($this->generateUrl('Top'));
                 }
         }

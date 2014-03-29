@@ -2,15 +2,11 @@
 
 namespace Machigai\GameBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Machigai\GameBundle\Entity\User;
-use Machigai\GameBundle\Entity\Question;
 use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use Symfony\Component\HttpFoundation\File\Exception\FatalErrorException;
 use Symfony\Component\HttpFoundation\File\Exception\Exception;
 use \DateTime;
 
@@ -30,7 +26,7 @@ class AndroidController extends BaseController
 
     public function auIdAction()
   {
-        if($this->MODE == "DEBUG") return $this->redirect( "/afterAuIdLogin?syncToken=123456789aaa");
+        if($this->AUID_DEBUG)return $this->redirect( $this->generateUrl ("Login") );
 
         $logger = $this->get('logger');
         $logger->info('in auIdAction');
@@ -130,6 +126,17 @@ class AndroidController extends BaseController
             $openId = $request->query->get("openid_claimed_id");
             $logger->info("openid.claimed_id = $openId");
 
+			// メールアドレス会員の場合
+			$session = $request->getSession();
+ 			$userId = $session->get("id");
+			if( !empty($userId) ){
+				$em = $this->getDoctrine()->getEntityManager();
+				$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+				$user->setAuId($openId);
+				$em->flush();
+				$session->remove("id");
+			}
+			
             $users = $this->getDoctrine()
                 ->getRepository('MachigaiGameBundle:User')
                 ->findBy(array("auId"=>$openId));
@@ -139,6 +146,7 @@ class AndroidController extends BaseController
                 $syncToken = uniqid();
                 $session = $request->getSession();
                 $session->set('syncTokenPre', $syncToken);
+				$session->set("openId", $openId);
 
                 return $this->redirect($this->generateUrl('AndroidRegisterEntry'));
             }else{
@@ -582,68 +590,13 @@ class AndroidController extends BaseController
     }
 
      public function auIdLoginAction(){
-        //TODO: auIdLoginを実装。
-
-/*        $connectTo = "st.connect.auone.jp";
-
-        //(a)OpenId前処理
-        $preDealPath  = "/net/id/hny_rt_net/cca?ID=auOneOpenIDOther";
-
-        //(b)OpenID認証要求
-        $url = 'http://www.php.net/search.php';
-        $data = array(
-            'pattern' => 'htmlspe',
-            'show' => 'quickref',
-        );
-        $headers = array(
-            'User-Agent: My User Agent 1.0',    //ユーザエージェントの指定
-            'Authorization: Basic '.base64_encode('user:pass'),//ベーシック認証
-        );
-        $options = array('http' => array(
-            'method' => 'POST',
-            'content' => http_build_query($data),
-            'header' => implode("\r\n", $headers),
-        ));
-        $contents = file_get_contents($url, false, stream_context_create($options));
-        //(C)OpenID認証キャンセル
-
-        //(d)OpenID認証応答チェック
-
-        //(e)OpenID事後処理
-
-
-        //TODO: OpenIDを取得後。
-        $openId;
-        $users = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('MachigaiGameBundle:User')->findBy(array('auId' =>$openId));
-
-        if( empty($users) ) {
-            //TODO: 登録ページヘ遷移
-//            return new Response('<html><body><h1>ユーザが存在しません。</h1></body></html>');
-        }else{
-            $user = $users[0];
-            $session->set('auId', $user->getAuId());
-            $session->set('id',  $user->getId());
-            $session->set('smartPassResult', true );
-//            return $this->redirect($this->generateUrl($redirect));
-            return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
-        }
-*/
         return $this->redirect($this->generateUrl('AndroidRegisterEntry'));
-//        return $this->redirect($this->generateUrl('AndroidRegisterEntry'), array('openId' => $openId));
      }
-     public function registerEntryAction(){
-        //TODO: 初回アクセス時はフォーム表示、次回アクセス時は確認画面を表示。
 
-        $openId = uniqid();
-//        $openId = $this->get('request')->query("openId");
-//        var_dump($openId);
-//        exit();
+	 public function registerEntryAction(){
         $form = $this->createFormBuilder()
          ->setMethod('POST')
          ->add('nickname', 'text')
-         ->add('openId', 'hidden')
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
         
@@ -652,12 +605,10 @@ class AndroidController extends BaseController
      }
      public function registerConfirmAction(){
         $request = $this->get("request");
-        $nickname = new User();
 
         $form = $this->createFormBuilder()
         ->setMethod('POST')
         ->add('nickname', 'hidden')
-        ->add('openId', 'hidden')
         ->add('confirm', 'submit')
         ->getForm();
         $form->bind($request);
@@ -668,43 +619,67 @@ class AndroidController extends BaseController
      public function registerCompleteAction(){
         $request = $this->get("request");
         $session = $request->getSession();
-        $userData = new User();
 
         $syncToken = $session->get("syncTokenPre");
+		$openId = $session->get("openId");
 
         $form = $this->createFormBuilder()
         ->setMethod('GET')
         ->add('nickname', 'hidden')
-        ->add('openId', 'hidden')
         ->add('confirm', 'submit')
         ->getForm();
         $form->bind($request);
         //ユーザ登録処理, OpenID, syncToken, nicknameを登録する。
         $userData = $form->getData();
         $nickname = $userData["nickname"];
-//        $openId = $userData["openId"];
         $createdAt = new DateTime();
         $updatedAt = new DateTime();
 
         $user = new User();
         $user->setNickname($nickname);
-//        $user->setAuId($openId);
+        $user->setAuId($openId);
         $user->setSyncToken($syncToken);
         $user->setCreatedAt($createdAt->format("Y-m-d H:i:s"));
         $user->setUpdatedAt($updatedAt->format("Y-m-d H:i:s"));
-        $user->setPassword("no_need");
-        $user->setTempPass("no_need");
+        $user->setPassword("");
+        $user->setTempPass("");
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
 
+		 $log = new Log();
+		 $log->setUserId($user->getId());
+		 $log->setType("register");
+		 $log->setName("nickname setting complete");
+		 $log->setCreatedAt(date("Y-m-d H:i:s"));
+		 $em->persist($log);
+		 $em->flush();	 
 
         $session->remove("syncTokenPre");
         $session->set("syncToken", $syncToken);
         $session->set("id", $user->getId());
 //        $session->set("auId", );
 
-        return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig', array('syncToken'=> $syncToken, 'nickname'=> $nickname));
+		if( false ){						// TODO リワードかどうか
+			// リワード
+			$cid = "cid";					// TODO キャンペーン
+			$ad  = "ad";					// TODO 性か地点のID
+			$uid = hash('sha256',"uid");	// TODO auIDのハッシュ値
+			$key = "key";					// TODO 秘密鍵
+
+			$to_digest = "$ad:$cid:$uid:$key";
+			$digest = hash('sha256', $to_digest);
+
+	        return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig',
+					array('syncToken'=> $syncToken, 'nickname'=> $nickname,
+						'cid'=>$cid, 'ad' => $ad, 'uid' => $uid, 'digest' => $digest, 'reword' => true ) );
+
+		} else {
+
+	        return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig',
+					array('syncToken'=> $syncToken, 'nickname'=> $nickname));
+		}
+		
 
      }
      public function copyrightAction(){
