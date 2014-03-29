@@ -8,6 +8,7 @@ use Machigai\GameBundle\Entity\User;
 use Machigai\GameBundle\Controller\BaseController;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\Exception\Exception;
+use Machigai\GameBundle\Entity\Log;
 use \DateTime;
 
 
