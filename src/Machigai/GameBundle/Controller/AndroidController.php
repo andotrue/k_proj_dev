@@ -678,7 +678,7 @@ class AndroidController extends BaseController
 		} else {
 
 	        return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig',
-					array('syncToken'=> $syncToken, 'nickname'=> $nickname));
+					array('syncToken'=> $syncToken, 'nickname'=> $nickname, 'reword' => false));
 		}
 		
 
