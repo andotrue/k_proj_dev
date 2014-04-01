@@ -390,12 +390,12 @@ class RegisterController extends BaseController
          $email = $user->getMailAddress();
          $pass = $user->getPassword();
 
-		if( false ){						// TODO リワードかどうか
+		if( false ){						
 			// リワード
-			$cid = "cid";					// TODO キャンペーン
-			$ad  = "ad";					// TODO 性か地点のID
-			$uid = hash('sha256',"uid");	// TODO auIDのハッシュ値
-			$key = "key";					// TODO 秘密鍵
+			$cid = "6250";					
+			$ad  = "7261";					
+			$uid = hash('sha256',$user->getAuId());
+			$key = "8ccc6ee910d93df31a1e48b542724e5b";
 
 			$to_digest = "$ad:$cid:$uid:$key";
 			$digest = hash('sha256', $to_digest);
