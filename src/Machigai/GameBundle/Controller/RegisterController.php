@@ -393,7 +393,7 @@ class RegisterController extends BaseController
 		if( false ){						
 			// リワード
 			$cid = "6250";					
-			$ad  = "7261";					
+			$ad  = "install";					
 			$uid = hash('sha256',$user->getAuId());
 			$key = "8ccc6ee910d93df31a1e48b542724e5b";
 
