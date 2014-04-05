@@ -390,4 +390,8 @@ class PlayHistory
     {
         return $this->isSavedGame;
     }
+	
+	public function mergeData($target){
+		$target->setUser($this->getUser());
+	}
 }

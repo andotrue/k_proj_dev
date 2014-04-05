@@ -133,6 +133,16 @@ class AndroidController extends BaseController
 			if( !empty($userId) ){
 				$em = $this->getDoctrine()->getEntityManager();
 				$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+				
+				// 先にauIDログインをしてしまった会員の為のデータ統合
+				$auid_users = $em->getRepository('MachigaiGameBundle:User')->findBy(array(
+					'auId' => $openId
+				));
+				if( !empty($auid_users) ){
+					$auid_user = $auid_users[0];
+					$user->mergeUserData($auid_user, $em);
+					$em->remove($auid_user);
+				}
 				$user->setAuId($openId);
 				$em->flush();
 				$session->remove("id");
@@ -169,7 +179,7 @@ class AndroidController extends BaseController
 		}
  */   }
 
-    /**
+   /**
         au Id loginが完了した後の処理
         ・ユーザが登録されていればサーバでのログイン処理 
         ・登録されていなければニックネーム登録画面へ    
