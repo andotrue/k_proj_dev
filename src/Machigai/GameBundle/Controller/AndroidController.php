@@ -671,7 +671,9 @@ class AndroidController extends BaseController
         $session->set("id", $user->getId());
 //        $session->set("auId", );
 
-		if( true ){						
+		$ua = $request->headers->get('User-Agent');
+				
+		if( !strstr($ua, "Android") ){						
 			// リワード
 			$cid = "6250";
 			$ad  = "install";
