@@ -29,7 +29,7 @@ class RankingController extends Controller
     {
         $pager = $this->get('pager');
         $pager->setInc(20); // 20件表示
-        $pager->setPath('Ranking'); // ページのrouting path
+        $pager->setPath('ranking'); // ページのrouting path
 
         $entities = $pager->getRepository('MachigaiGameBundle:Ranking', array(), array('id' => 'DESC'));
 
