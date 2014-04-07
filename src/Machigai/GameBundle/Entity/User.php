@@ -594,6 +594,73 @@ class User
 */            ));
     }
 
+	public function mergeUserData($target, $em){
+
+		// ポイントの合算
+		$this->setCurrentPoint($this->getCurrentPoint() + $target->getCurrentPoint());
+
+		// 自身のクリア履歴から問題dを抽出
+		$myPhs = $this->getPlayHistories();
+		$myPhMap = array();
+		foreach($myPhs as $myPh){
+			$tmp_qid = $myPh->getQuestion()->getId();
+			$myPhMap[$tmp_qid] = $myPh; 
+		}
+		$qids = array_keys($myPhMap);
+		
+		// 問題クリア状況
+		$phs = $target->getPlayHistories();
+		foreach($phs as $ph){
+			
+			$qid = $ph->getQuestion()->getId();
+			if(in_array($qid, $qids)){
+				
+				$my_ph = $myPhMap[$qid];
+				$is_changes = false;
+				if ( $my_ph->getGameStatus() == 4 &&
+						$ph->getGameStatus() == 3 ){
+
+					$is_changes = true;
+					
+				} else if ( $my_ph->getGameStatus() == 2 &&
+						($ph->getGameStatus() == 3 || $ph->getGameStatus() == 4) ){				
+					
+					$is_changes = true;
+					
+				} else if ($my_ph->getGameStatus() == 1 &&
+						$ph->getGameStatus() != 1 ){				
+
+					$is_changes = true;
+				}
+						
+				if($is_changes){
+					$my_ph->mergeData($ph);
+					$em->remove($my_ph);
+				} else {
+					$em->remove($ph);
+				}
+				$em->flush();
+
+			} else {
+				$ph->setUser($this);
+			}
+		}
+
+		// ランキング
+		$rankings = $target->getRankings();
+		foreach($rankings as $ranking){
+			$ranking->setUser($this);
+		}
+		$em->flush();
+		
+		// 購入履歴
+		$purchaseHs = $target->getPurchaseHistories();
+		foreach($purchaseHs as $purchaseH){
+			$purchaseH->setUser($this);
+		}
+		$em->flush();
+	}
+	
     /**
      * Set mailAddress
      *

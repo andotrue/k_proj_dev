@@ -24,7 +24,6 @@
 <img src="{{ asset('/bundles/machigaigame/images/parts/1-01_7_bg
 .png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
 
-
 <section class="registerForm">
   <div >
   <form action="{{ path('LoginCheck') }}" method="post" {{ form_enctype(form) }}>
@@ -35,6 +34,12 @@
   <p style="margin-top: 5px; font-size: 0.7em; text-align: right;">
     <a href="/forget_password">パスワードを忘れた方はこちら</a>
   </p>
+  <div style="margin-top: 10px; font-size: 0.7em; text-align: center;">
+  メールアドレスでログインされたことのある方は以下のフォームよりログインを実行してください。<br />
+（一度ログインすると、以降はメールアドレスによるログインは不要です）
+  </div>
+
+
   <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
   {% if caution is not empty %}
   {{caution}}
