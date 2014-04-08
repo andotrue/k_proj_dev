@@ -15,10 +15,8 @@ $(document).ready(function(){
 			$('#toTopImage').width("60%");
 
 			var pre_src_path2 = $('#preToTopImage').attr('src');
-			if(pre_src_path2){
-				var src_path2 = pre_src_path2.replace(/button_back_totop_off/g,'button_toapptop_off');
-				$('#preToTopImage').attr("src",src_path2);
-			}
+			var src_path2 = pre_src_path2.replace(/button_back_totop_off/g,'button_toapptop_off');
+			$('#preToTopImage').attr("src",src_path2);
 		}
 	}
 });

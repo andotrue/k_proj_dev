@@ -38,7 +38,11 @@
   メールアドレスでログインされたことのある方は以下のフォームよりログインを実行してください。<br />
 （一度ログインすると、以降はメールアドレスによるログインは不要です）
   </div>
-
+  <script>
+        if(navigator.userAgent.indexOf('Android') > 0){
+            $("#message_for_auid").hide();
+        }
+  </script>
 
   <div style="position:relative;margin-top:10%;color:rgb(250,0,127);font-size:0.7em;">
   {% if caution is not empty %}
@@ -60,10 +64,6 @@
 <script>
 $(function(){
 	$('#form_confirm').hide();
-        
-        if(window["droid"]){
-            $("#message_for_auid").hide();
-        }
 });
 function submitRegister(){
   var mail_address = $('#form_mailAddress').val();
