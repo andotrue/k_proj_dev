@@ -105,6 +105,9 @@ class RegisterController extends BaseController
         }else{
             $tmpPass = null;
         }
+		
+		$auid = $checkData[0]->getAuId();
+		
         if(empty($checkData)){
             $caution = "メールアドレスまたはパスワードが間違っています。ご確認の上、再入力をお願いします。";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
@@ -114,6 +117,9 @@ class RegisterController extends BaseController
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
         }elseif(!empty($tmpPass)){
             $caution = "アカウントが有効化されていません。メールのURLをクリックしてアカウントを有効にしてください";
+            return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
+        }elseif(!empty($auid)){
+            $caution = "このメールアドレスは使われていません";
             return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
 		} else {
                 $userId = $checkData[0]->getId();
@@ -183,8 +189,12 @@ class RegisterController extends BaseController
                 }else{
                     //
                     //return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
-					return $this->redirect($this->generateUrl('AuIdLogin'));
-//                    return $this->redirect($this->generateUrl('Top'));
+					$ua = $request->headers->get('User-Agent');
+					if(strpos($ua, "Android") == FALSE){
+						return $this->redirect($this->generateUrl('AuIdLogin'));
+					} else {
+						return $this->redirect($this->generateUrl('Top'));
+					}
                 }
         }
     }
