@@ -34,7 +34,7 @@
   <p style="margin-top: 5px; font-size: 0.7em; text-align: right;">
     <a href="/forget_password">パスワードを忘れた方はこちら</a>
   </p>
-  <div style="margin-top: 10px; font-size: 0.7em; text-align: center;">
+  <div id="message_for_auid" style="margin-top: 10px; font-size: 0.7em; text-align: center;">
   メールアドレスでログインされたことのある方は以下のフォームよりログインを実行してください。<br />
 （一度ログインすると、以降はメールアドレスによるログインは不要です）
   </div>
@@ -60,7 +60,11 @@
 <script>
 $(function(){
 	$('#form_confirm').hide();
-})
+        
+        if(navigator.userAgent.indexOf('Android') > 0){
+            $("#message_for_auid").hide();
+        }
+});
 function submitRegister(){
   var mail_address = $('#form_mailAddress').val();
   var password = $('#form_password').val();
