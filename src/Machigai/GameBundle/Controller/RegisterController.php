@@ -193,7 +193,8 @@ class RegisterController extends BaseController
 					if(strpos($ua, "Android") == FALSE){
 						return $this->redirect($this->generateUrl('AuIdLogin'));
 					} else {
-						return $this->redirect($this->generateUrl('Top'));
+	                    return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
+//						return $this->redirect($this->generateUrl('Top'));
 					}
                 }
         }

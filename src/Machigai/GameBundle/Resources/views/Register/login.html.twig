@@ -61,7 +61,7 @@
 $(function(){
 	$('#form_confirm').hide();
         
-        if(navigator.userAgent.indexOf('Android') > 0){
+        if(window["droid"]){
             $("#message_for_auid").hide();
         }
 });
