@@ -34,7 +34,7 @@ class AndroidController extends BaseController
         $realm = "http://st.machigai.puzzle-m.net:80/";        
 //        $realm = "https://machigai.puzzle-m.net:443/";               
         $formId = "test";
-        $returnToUrl = "http://st.machigai.puzzle-m.net/auIdAssociation";   
+        $returnToUrl = "https://st.machigai.puzzle-m.net/auIdAssociation";   
 //        $returnToUrl = "https://machigai.puzzle-m.net/auIdAssociation";   
        
         $associationDirPath = "/tmp";                              
