@@ -8,12 +8,10 @@
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
  <div>
  {% if user is empty %}
-  <a href="{{ path('AuIdLogin')  }}" alt="login">
-  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/></a>
-     <section style="margin-top:2%;background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
-         <a href="{{ path('Login') }}">メールアドレス会員の方はこちら</a>
-     </section>
-  
+  <a href="{{path('RegisterUser')}}">
+  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_touroku.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
+  <a href="{{ path('Login')  }}" alt="login">
+  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_login.png')}}" style="margin-left:10%" width="35%" onclick="changeImage(this.id);"/></a>
 		<section style="margin-top:2%;background-image:url(/bundles/machigaigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
 			<p style="width:80%;margin: 0 auto;white-space:nowrap;">会員登録すると以下の機能が使えるよ！</p>
 			<p style="width:50%;margin: 0 auto;white-space:nowrap;">（追加料金はかかりません。）</p>
