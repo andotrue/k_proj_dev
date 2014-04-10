@@ -191,8 +191,7 @@ class RegisterController extends BaseController
                     //
                     //return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
 					$ua = $request->headers->get('User-Agent');
-					//if(strpos($ua, "Android") == FALSE){
-					if(false){
+					if(strpos($ua, "Android") == FALSE){
 						return $this->redirect($this->generateUrl('AuIdLogin'));
 					} else {
 	                    return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
