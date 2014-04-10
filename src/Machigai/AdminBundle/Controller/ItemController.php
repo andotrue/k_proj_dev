@@ -53,6 +53,15 @@ class ItemController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+			
+			$tmp1 = $entity->getDistributedFrom();
+			$entity->setDistributedFrom($tmp1->format('Y-m-d H:i:s'));
+			$tmp2 = $entity->getDistributedTo();
+			$entity->setDistributedTo($tmp2->format('Y-m-d H:i:s'));
+
+			$entity->setCreatedAt(date('Y-m-d H:i:s'));
+			$entity->setUpdatedAt(date('Y-m-d H:i:s'));
+			
             $em->persist($entity);
             $em->flush();
 
