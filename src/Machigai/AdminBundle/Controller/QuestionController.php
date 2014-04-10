@@ -53,7 +53,18 @@ class QuestionController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+
+			$tmp1 = $entity->getDistributedFrom();
+			$entity->setDistributedFrom($tmp1->format('Y-m-d H:i:s'));
+			$tmp2 = $entity->getDistributedTo();
+			$entity->setDistributedTo($tmp2->format('Y-m-d H:i:s'));
+			
+			$entity->setCopyrightFileName("");
+
+			$entity->setCreatedAt(date('Y-m-d H:i:s'));
+			$entity->setUpdatedAt(date('Y-m-d H:i:s'));
+
+			$em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('question_show', array('id' => $entity->getId())));
