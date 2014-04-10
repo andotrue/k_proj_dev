@@ -22,8 +22,8 @@ use \Auth_OpenID_Consumer;
 
 class AndroidController extends BaseController
 {
-    public $connectTo = "st.connect.auone.jp";
-//    public $connectTo = "connect.auone.jp";
+//    public $connectTo = "st.connect.auone.jp";
+    public $connectTo = "connect.auone.jp";
 
     public function auIdAction()
   {
