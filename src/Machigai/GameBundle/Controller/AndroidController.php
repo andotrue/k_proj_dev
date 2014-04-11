@@ -610,10 +610,33 @@ class AndroidController extends BaseController
          ->add('nickname', 'text')
          ->add('confirm', 'submit', array('label'=>'内容を確認'))
          ->getForm();
-        
-        return $this->render('MachigaiGameBundle:Android:registerEntry.html.twig', array('form' => $form->createView()) );
+		
+        $request = $this->get("request");
+        $session = $request->getSession();
+		$openId = $session->get("openId");
+		$ua = $request->headers->get('User-Agent');
 
-     }
+		if( !strstr($ua, "Android") ){						
+			// リワード
+			$cid = "6250";
+			$ad  = "install";
+			$uid = hash('sha256', $openId);
+			$key = "8ccc6ee910d93df31a1e48b542724e5b";
+
+			$to_digest = "$ad:$cid:$uid:$key";
+			$digest = hash('sha256', $to_digest);
+
+	        return $this->render('MachigaiGameBundle:Android:registerEntry.html.twig',
+					array('form' => $form->createView(), 	
+					'cid'=>$cid, 'ad' => $ad, 'uid' => $uid, 'digest' => $digest, 'reword' => true ) );
+
+		} else {
+
+	        return $this->render('MachigaiGameBundle:Android:registerEntry.html.twig',
+					array('form' => $form->createView(), 'reword' => false) );
+		}			
+
+	 }
      public function registerConfirmAction(){
         $request = $this->get("request");
 
@@ -671,27 +694,8 @@ class AndroidController extends BaseController
         $session->set("id", $user->getId());
 //        $session->set("auId", );
 
-		$ua = $request->headers->get('User-Agent');
-				
-		if( !strstr($ua, "Android") ){						
-			// リワード
-			$cid = "6250";
-			$ad  = "install";
-			$uid = hash('sha256', $user->getAuId());
-			$key = "8ccc6ee910d93df31a1e48b542724e5b";
-
-			$to_digest = "$ad:$cid:$uid:$key";
-			$digest = hash('sha256', $to_digest);
-
-	        return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig',
-					array('syncToken'=> $syncToken, 'nickname'=> $nickname,
-						'cid'=>$cid, 'ad' => $ad, 'uid' => $uid, 'digest' => $digest, 'reword' => true ) );
-
-		} else {
-
-	        return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig',
-					array('syncToken'=> $syncToken, 'nickname'=> $nickname, 'reword' => false));
-		}
+		return $this->render('MachigaiGameBundle:Android:registerComplete.html.twig',
+				array('syncToken'=> $syncToken, 'nickname'=> $nickname, 'reword' => false));
 		
 
      }
