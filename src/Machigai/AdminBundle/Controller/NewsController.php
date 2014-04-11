@@ -41,7 +41,7 @@ class NewsController extends Controller
     /**
      * Creates a new News entity.
      *
-     * @Route("/", name="new_create")
+     * @Route("/", name="news_create")
      * @Method("POST")
      * @Template("MachigaiGameBundle:News:new.html.twig")
      */
@@ -53,6 +53,15 @@ class NewsController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+			
+			$tmp1 = $entity->getStartedAt();
+			$entity->setStartedAt($tmp1->format('Y-m-d H:i:s'));
+			$tmp2 = $entity->getEndedAt();
+			$entity->setEndedAt($tmp2->format('Y-m-d H:i:s'));
+
+			$entity->setCreatedAt(date('Y-m-d H:i:s'));
+			$entity->setUpdatedAt(date('Y-m-d H:i:s'));
+			
             $em->persist($entity);
             $em->flush();
 
@@ -75,7 +84,7 @@ class NewsController extends Controller
     private function createCreateForm(News $entity)
     {
         $form = $this->createForm(new NewsType(), $entity, array(
-            'action' => $this->generateUrl('new_create'),
+            'action' => $this->generateUrl('news_create'),
             'method' => 'POST',
         ));
 
@@ -87,7 +96,7 @@ class NewsController extends Controller
     /**
      * Displays a form to create a new News entity.
      *
-     * @Route("/new", name="new_new")
+     * @Route("/new", name="news_new")
      * @Method("GET")
      * @Template()
      */
