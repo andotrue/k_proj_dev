@@ -62,7 +62,8 @@ class ItemController extends Controller
 			$entity->setCreatedAt(date('Y-m-d H:i:s'));
 			$entity->setUpdatedAt(date('Y-m-d H:i:s'));
 
-			if( empty($entity->getDescription()) ){
+			$hasDescription = $entity->getDescription();
+			if( empty($hasDescription) ){
 				$entity->setDescription("　");
 			}
 			
@@ -213,7 +214,8 @@ class ItemController extends Controller
 			$tmp2 = $entity->getDistributedTo();
 			$entity->setDistributedTo($tmp2->format('Y-m-d H:i:s'));
 
-			if( empty($entity->getDescription()) ){
+			$hasDescription = $entity->getDescription();
+			if( empty($hasDescription) ){
 				$entity->setDescription("　");
 			}
 			
