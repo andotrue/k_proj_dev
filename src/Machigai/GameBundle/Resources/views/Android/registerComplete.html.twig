@@ -2,16 +2,12 @@
 {% block title %}ニックネーム名登録{% endblock %}
 {% block body %}
 
-{% if reword %}
-<img src ="https://reward.gree.net/wt/a?cid={{cid}}&ad={{ad}}&uid={{uid}}&digest={{digest}}" width="1" height="1">
-{% else %}
 <script>
   registerUserIfAndroid("{{ syncToken }}");
   if(window["droid"]){
       droid.sendReword();
   }
 </script>
-{% endif %}
 
 <img src="{{ asset('/bundles/machigaigame/images/parts/1-01_6_bg
 .png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
