@@ -61,6 +61,11 @@ class ItemController extends Controller
 
 			$entity->setCreatedAt(date('Y-m-d H:i:s'));
 			$entity->setUpdatedAt(date('Y-m-d H:i:s'));
+
+			$hasDescription = $entity->getDescription();
+			if( empty($hasDescription) ){
+				$entity->setDescription("　");
+			}
 			
             $em->persist($entity);
             $em->flush();
@@ -208,6 +213,11 @@ class ItemController extends Controller
 			$entity->setDistributedFrom($tmp1->format('Y-m-d H:i:s'));
 			$tmp2 = $entity->getDistributedTo();
 			$entity->setDistributedTo($tmp2->format('Y-m-d H:i:s'));
+
+			$hasDescription = $entity->getDescription();
+			if( empty($hasDescription) ){
+				$entity->setDescription("　");
+			}
 			
             $em->flush();
 
