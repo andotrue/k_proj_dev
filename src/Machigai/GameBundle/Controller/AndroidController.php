@@ -766,4 +766,24 @@ class AndroidController extends BaseController
         $responseData=json_encode(array("status" => "OK"));//json encode the array
         return new Response($responseData,200,array('Content-Type'=>'application/json'));//make sure it has the correct content type
      }
+	 
+	 public function registDeviceIdAction(){
+        $request = $this->get('request');
+		$token = $request->request->get('token');
+		$regid = $request->request->get('regId');
+
+        $em = $this->getDoctrine()->getManager();
+		$users = $em->getRepository('MachigaiGameBundle:User')->findBy(array(
+			'token' => $token
+		));
+		
+		if(!empty($users)){
+			$user = $users[0];
+			$user->setRegistId($regid);
+			$em->persist($user);
+			$em->flush();
+		}
+        $responseData=json_encode(array("status" => "OK"));
+        return new Response($responseData,200,array('Content-Type'=>'application/json'));
+	}
 }

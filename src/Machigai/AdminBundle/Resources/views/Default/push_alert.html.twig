@@ -1,0 +1,16 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>PUSH通知新規作成</h1>
+
+    <form action="/admin/push_alert/create" method="post">
+        
+        <div>
+            メッセージ内容<br />
+            <textarea style="width: 300px; height: 200px" name="message" ></textarea>
+
+            <br />
+            <input type="submit" value="送信" onClick="return confirm('本当に送信しますか？')" />
+    </form>
+
+{% endblock %}

@@ -437,3 +437,6 @@ AndroidSessionFinish:
 SaveGameData:
     pattern: /game/saveGameData
     defaults: { _controller: MachigaiGameBundle:Game:saveGameData }
+AndroidRegistDeviceId:
+    pattern: /android/add_regist_id
+    defaults: { _controller: MachigaiGameBundle:Android:registDeviceId }
