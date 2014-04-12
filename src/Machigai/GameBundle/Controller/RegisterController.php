@@ -188,8 +188,7 @@ class RegisterController extends BaseController
                     //auIDログインページへリダイレクト
                     return $this->redirect('https://auone.jp');
                 }else{
-					return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig',
-							array('syncToken'=> $syncToken) );
+					return $this->redirect($this->generateUrl('AuIdLogin'));
                 }
         }
     }
