@@ -771,18 +771,32 @@ class AndroidController extends BaseController
         $request = $this->get('request');
 		$token = $request->request->get('token');
 		$regid = $request->request->get('regId');
-
+		$user = null;
+		
         $em = $this->getDoctrine()->getManager();
 		$users = $em->getRepository('MachigaiGameBundle:User')->findBy(array(
 			'syncToken' => $token
 		));
 		
+		$regists = $em->getRepository('MachigaiGameBundle:Regist')->findBy(
+			array("regist_id" => $regid)
+		);
+		
+		$regist = null;
+		if(empty($regists)){
+			$regist = new Regist();
+			$regist->setCreatedAt(date("Y-m-d H:i:s"));
+		} else {
+			$regist = $regists[0];
+		}
+		$regist->setCode($regid);
 		if(!empty($users)){
 			$user = $users[0];
-			$user->setRegistId($regid);
-			$em->persist($user);
-			$em->flush();
+			$regist->setUserId($user->getId());
 		}
+		$em->persist($regist);
+		$em->flush();
+
         $responseData=json_encode(array("status" => "OK"));
         return new Response($responseData,200,array('Content-Type'=>'application/json'));
 	}

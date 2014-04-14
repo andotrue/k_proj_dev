@@ -5,6 +5,12 @@
 
     <form action="/admin/push_alert/create" method="post">
         
+        <select name="mode">
+            <option value="1">全体</option>
+            <option value="2">会員</option>
+            <option value="3">非会員</option>
+        </select>
+        
         <div>
             メッセージ内容<br />
             <textarea style="width: 300px; height: 200px" name="message" ></textarea>

@@ -63,13 +63,6 @@ class User
     private $tempPass;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="regist_id", type="string", length=255, nullable=true)
-     */
-    private $registId;
-	
-    /**
      * @var integer
      *
      * @ORM\Column(name="current_point", type="integer")
@@ -736,28 +729,4 @@ class User
     {
         return $this->tempPass;
     }
-	
-    /**
-     * Set registId
-     *
-     * @param string $registId
-     * @return User
-     */
-    public function setRegistId($registId)
-    {
-        $this->registId = $registId;
-
-        return $this;
-    }
-
-    /**
-     * Get registId
-     *
-     * @return string
-     */
-    public function getRegistId()
-    {
-        return $this->registId;
-    }
-	
 }

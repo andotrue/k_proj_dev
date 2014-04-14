@@ -4,6 +4,7 @@ namespace Machigai\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
+use Machigai\GameBundle\Entity\Regist;
 
 class DefaultController extends Controller
 {
@@ -51,27 +52,57 @@ class DefaultController extends Controller
 		$request = $this->getRequest();
 		$message = $request->request->get('message');
 
+		$mode = $request->request->get('mode');
+		
 		$key = "AIzaSyCWYgtdcZXCBAeJY9Z41LrnKAP0hpZMxpA";
 		
 		$url = 'https://android.googleapis.com/gcm/send';
 		
-        $em = $this->getDoctrine()->getManager();
-		$users = $em->getRepository('MachigaiGameBundle:User')->findBy(array(
-			'regist_id' => null
-		));
+		$em = $this->getDoctrine()->getManager();
+
+		$regs = null;
+		$regRepo = $em->getRepository('MachigaiGameBundle:Regist');
 		
-		foreach($users as $user){
+		if($mode == "1"){
+
+			// 全体
+			$regs = $regRepo->findAll();
+			
+		} else if ($mode == "2"){
+			
+			// 会員
+			$query = $regRepo->createQueryBuilder("r")
+				->where('r.user_id IS NOT NULL')
+			->getQuery();
+		
+			$regs = $query->getResult();			
+			
+		} else if ($mode == "3"){
+
+			// 会員
+			$query = $regRepo->createQueryBuilder("r")
+				->where('r.user_id IS NULL')
+			->getQuery();
+		
+			$regs = $query->getResult();			
+		}
+		
+		foreach($regs as $reg){
 			$data = array(
 				'data.message' => $message,
 				'collapse_key' => "1",
-				'registration_id' => $user->getRegistId(),
+				'registration_id' => $reg->getCode(),
 			);
+			
+			$data = http_build_query($data, "", "&");	
+			
 			$headers = array(
-				'Authorization: key=' .$key,    
+				'Authorization: key=' .$key,
+				"Content-Type: application/x-www-form-urlencoded;charset=UTF-8"
 			);
 			$options = array('http' => array(
 				'method' => 'POST',
-				'content' => http_build_query($data),
+				'content' => $data,
 				'header' => implode("\r\n", $headers),
 			));
 			file_get_contents($url, false, stream_context_create($options));
