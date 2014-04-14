@@ -774,7 +774,7 @@ class AndroidController extends BaseController
 
         $em = $this->getDoctrine()->getManager();
 		$users = $em->getRepository('MachigaiGameBundle:User')->findBy(array(
-			'token' => $token
+			'sync_token' => $token
 		));
 		
 		if(!empty($users)){
