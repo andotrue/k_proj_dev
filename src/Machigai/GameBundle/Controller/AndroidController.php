@@ -779,7 +779,7 @@ class AndroidController extends BaseController
 		));
 		
 		$regists = $em->getRepository('MachigaiGameBundle:Regist')->findBy(
-			array("regist_id" => $regid)
+			array("code" => $regid)
 		);
 		
 		$regist = null;
