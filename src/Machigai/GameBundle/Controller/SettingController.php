@@ -355,7 +355,7 @@ https://machigai.puzzle-m.net\n
             }
 
 			$regists = $em->getRepository('MachigaiGameBundle:Regist')->findBy(
-				array("user_id" => $user.getId())
+				array("user_id" => $userId)
 			);
 			if(!empty($regists)){
                 foreach ($regists as $regist) {
@@ -364,7 +364,7 @@ https://machigai.puzzle-m.net\n
 
                 foreach ($registId as $reg) {
                     $em = $this->getDoctrine()->getEntityManager();
-                    $data = $em->getRepository('MachigaiGameBundle:Ranking')->find($reg);
+                    $data = $em->getRepository('MachigaiGameBundle:Regist')->find($reg);
                     $em->remove($data);
                     $em->flush();
                 }
