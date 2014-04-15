@@ -109,5 +109,7 @@ class DefaultController extends Controller
 			
 			sleep(1);
 		}
+		
+		return $this->redirect($this->generateUrl('push_alert'));
 	}
 }
