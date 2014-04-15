@@ -72,7 +72,7 @@ class DefaultController extends Controller
 			
 			// 会員
 			$query = $regRepo->createQueryBuilder("r")
-				->where('r.user_id IS NOT NULL')
+				->where('r.user_id != 0')
 			->getQuery();
 		
 			$regs = $query->getResult();			
@@ -81,7 +81,7 @@ class DefaultController extends Controller
 
 			// 会員
 			$query = $regRepo->createQueryBuilder("r")
-				->where('r.user_id IS NULL')
+				->where('r.user_id = 0')
 			->getQuery();
 		
 			$regs = $query->getResult();			
