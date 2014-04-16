@@ -1,19 +1,21 @@
 <?php
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Composer\Autoload\ClassLoader;
 
-/**
- * @var ClassLoader $loader
- */
-require __DIR__.'/../vendor/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-require __DIR__.'/../vendor/symfony/src/Symfony/Component/ClassLoader/ApcUniversalClassLoader.php';
+if (!class_exists('Composer\\Autoload\\ClassLoader', false)) {
+    $loader = require __DIR__.'/../vendor/autoload.php';
+} else {
+    $loader = new Composer\Autoload\ClassLoader();
+    $loader->register();
+}
 
-use Symfony\Component\ClassLoader\ApcUniversalClassLoader;
+// intl
+if (!function_exists('intl_get_error_code')) {
+    require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
 
-$loader = new ApcUniversalClassLoader('some caching unique prefix');
-//$loader = require __DIR__.'/../vendor/autoload.php';
+    $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
+}
 
-AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+AnnotationRegistry::registerLoader('class_exists');
 
 return $loader;
