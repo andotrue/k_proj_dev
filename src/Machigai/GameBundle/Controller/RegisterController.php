@@ -13,6 +13,16 @@ use \DateInterval;
 
 class RegisterController extends BaseController
 {
+	
+	//v1.0.2以降のアンドロイド端末からくるメールログイン（AUIDログインリダイレクトを有効）
+	public function mailLoginAction(Request $request)
+	{
+		$session = $request->getSession();
+		$session->set("enableAuId", "true");
+		
+		return $this->loginAction($request);
+	}
+	
     //AuIDログイン
     public function loginAction(Request $request)
     {
@@ -190,8 +200,10 @@ class RegisterController extends BaseController
                 }else{
                     //
                     //return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
+		            $enableAuId = $session->get('enableAuId');
+					
 					$ua = $request->headers->get('User-Agent');
-					if(strpos($ua, "Android") == FALSE){
+					if(strpos($ua, "Android") == FALSE || $enableAuId == "true"){
 						return $this->redirect($this->generateUrl('AuIdLogin'));
 					} else {
 	                    return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
