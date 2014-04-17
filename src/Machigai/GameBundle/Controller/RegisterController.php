@@ -13,11 +13,21 @@ use \DateInterval;
 
 class RegisterController extends BaseController
 {
+	
+	//v1.0.2以降のアンドロイド端末からくるメールログイン（AUIDログインリダイレクトを有効）
+	public function mailLoginAction(Request $request)
+	{
+		$session = $request->getSession();
+		$session->set("enableAuId", "true");
+		
+		return $this->loginAction($request);
+	}
+	
     //AuIDログイン
     public function loginAction(Request $request)
     {
+		$session = $request->getSession();
          if(!empty($login)){
-            $session = $request->getSession();
 
             $id = $session->get('id');
             if( empty($id) ) {
@@ -36,7 +46,9 @@ class RegisterController extends BaseController
             $userData = $form->getData();
         }
         $caution = null;
-        return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
+		$enableAuId = $session->get('enableAuId');
+
+        return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView(), "enableAuId" => $enableAuId));
 /*
         $logger = $this->get('logger');
         $logger = $logger->info('RegisterControloginAction');
@@ -190,8 +202,10 @@ class RegisterController extends BaseController
                 }else{
                     //
                     //return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );
+		            $enableAuId = $session->get('enableAuId');
+					
 					$ua = $request->headers->get('User-Agent');
-					if(strpos($ua, "Android") == FALSE){
+					if(strpos($ua, "Android") == FALSE || $enableAuId == "true"){
 						return $this->redirect($this->generateUrl('AuIdLogin'));
 					} else {
 	                    return $this->render('MachigaiGameBundle:Android:afterAuIdLogin.html.twig', array('syncToken'=> $syncToken) );

@@ -354,6 +354,22 @@ https://machigai.puzzle-m.net\n
                 }
             }
 
+			$regists = $em->getRepository('MachigaiGameBundle:Regist')->findBy(
+				array("user_id" => $userId)
+			);
+			if(!empty($regists)){
+                foreach ($regists as $regist) {
+                    $registId[] = $regist->getId();
+                }
+
+                foreach ($registId as $reg) {
+                    $em = $this->getDoctrine()->getEntityManager();
+                    $data = $em->getRepository('MachigaiGameBundle:Regist')->find($reg);
+                    $em->remove($data);
+                    $em->flush();
+                }
+			}
+			
             //ログアウト
         	$session = $request->getSession();
             $session->remove('id');
