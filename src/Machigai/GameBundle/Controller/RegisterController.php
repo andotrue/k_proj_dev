@@ -26,8 +26,8 @@ class RegisterController extends BaseController
     //AuIDログイン
     public function loginAction(Request $request)
     {
+		$session = $request->getSession();
          if(!empty($login)){
-            $session = $request->getSession();
 
             $id = $session->get('id');
             if( empty($id) ) {
@@ -46,7 +46,9 @@ class RegisterController extends BaseController
             $userData = $form->getData();
         }
         $caution = null;
-        return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView()));
+		$enableAuId = $session->get('enableAuId');
+
+        return $this->render('MachigaiGameBundle:Register:login.html.twig', array('caution'=>$caution,'form' => $form->createView(), "enableAuId" => $enableAuId));
 /*
         $logger = $this->get('logger');
         $logger = $logger->info('RegisterControloginAction');
