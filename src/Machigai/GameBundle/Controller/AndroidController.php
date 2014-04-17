@@ -620,7 +620,8 @@ class AndroidController extends BaseController
 		$openId = $session->get("openId");
 		$ua = $request->headers->get('User-Agent');
 
-		if( !strstr($ua, "Android") ){						
+		//if( !strstr($ua, "Android") ){	
+		if(true){					
 			// リワード
 			$cid = "6250";
 			$ad  = "install";

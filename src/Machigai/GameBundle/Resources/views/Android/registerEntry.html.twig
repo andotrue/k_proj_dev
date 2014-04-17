@@ -7,9 +7,6 @@
 {% else %}
 <script>
   registerUserIfAndroid("{{ syncToken }}");
-  if(window["droid"]){
-      droid.sendReword();
-  }
 </script>
 {% endif %}
 
