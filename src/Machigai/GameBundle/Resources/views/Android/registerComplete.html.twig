@@ -2,6 +2,10 @@
 {% block title %}ニックネーム名登録{% endblock %}
 {% block body %}
 
+<script>
+  registerUserIfAndroid("{{ syncToken }}");
+</script>
+
 <img src="{{ asset('/bundles/machigaigame/images/parts/1-01_6_bg
 .png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
 
@@ -17,7 +21,6 @@ $(function(){
   $('#submitButton').hide();
 //  $('#loginAndTop').hide();
   $('#form_confirm').hide();
-  registerUserIfAndroid("{{ syncToken }}");
 })
 function changeImage(imageId){
   var pre_src = $('#'+imageId).attr('src');

@@ -154,3 +154,10 @@ news_update:
     pattern: /news/update/{id}
     defaults: { _controller: MachigaiAdminBundle:News:update }
 
+push_alert:
+    pattern: /push_alert/
+    defaults: { _controller: MachigaiAdminBundle:Default:pushAlert }
+
+push_alert_create:
+    pattern: /push_alert/create
+    defaults: { _controller: MachigaiAdminBundle:Default:pushAlertCreate }
