@@ -33,7 +33,16 @@ $(function(){
   $('#form_confirm').hide();
 })
 function submitNickname(){
-  $('#submitButton').trigger("click");
+  var nickname = $('#form_nickname').val();
+  if(!nickname.match(/\S/)){
+    if(navigator.userAgent.indexOf('Android') > 0){
+        droid.alert("ニックネームを入力してください。");
+    }else{
+      alert("ニックネームを入力してください。");
+    }
+  }else{
+      $('#submitButton').trigger("click");
+  }
 }
 function changeImage(imageId){
   var pre_src = $('#'+imageId).attr('src');
