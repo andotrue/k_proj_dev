@@ -57,7 +57,7 @@ class RankingController extends BaseController
 							'bonusPoint'=>null),
 						 array(
 							'rank'=>'ASC'),
-						 10);
+						 30);
 			
 			// 取得者にポイントを加算
 			foreach($ranking_previous_month as $data){
