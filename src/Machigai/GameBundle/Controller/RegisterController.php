@@ -583,7 +583,7 @@ https://machigai.puzzle-m.net\n
     public function beforeRegisterNicknameAction($pass){
         $tempPasswords = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
-         ->findAll();
+         ->findBy(array('tempPass'=>$pass));
          $check = array();
         foreach ($tempPasswords as $pw) {
             $check[] = $pw->getTempPass();
