@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>403</id>
+ <name>お菓子の家が食べ放題!?</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>43</x><!--point のx座標 -->
+  <y>125</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>575</x><!--point のx座標 -->
+  <y>181</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>422</x><!--point のx座標 -->
+  <y>162</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>590</x><!--point のx座標 -->
+  <y>332</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>441</x><!--point のx座標 -->
+  <y>368</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>271</x><!--point のx座標 -->
+  <y>425</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>83</x><!--point のx座標 -->
+  <y>418</y><!--point のy座標-->
+ </point>
+</different>

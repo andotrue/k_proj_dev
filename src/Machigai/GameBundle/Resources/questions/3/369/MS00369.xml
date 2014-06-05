@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>369</id>
+ <name>いつもの町のいつもの風景</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>131</x><!--point のx座標 -->
+  <y>58</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>237</x><!--point のx座標 -->
+  <y>94</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>360</x><!--point のx座標 -->
+  <y>70</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>521</x><!--point のx座標 -->
+  <y>109</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>101</x><!--point のx座標 -->
+  <y>376</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>430</x><!--point のx座標 -->
+  <y>432</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>547</x><!--point のx座標 -->
+  <y>402</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>356</id>
+ <name>七夕の思い出</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>210</x><!--point のx座標 -->
+  <y>35</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>389</x><!--point のx座標 -->
+  <y>50</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>278</x><!--point のx座標 -->
+  <y>359</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>140</x><!--point のx座標 -->
+  <y>425</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>452</x><!--point のx座標 -->
+  <y>400</y><!--point のy座標-->
+ </point>
+</different>

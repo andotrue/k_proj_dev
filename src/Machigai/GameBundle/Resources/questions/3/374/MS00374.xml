@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>374</id>
+ <name>おさんぽしましょ、そうしましょ</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>197</x><!--point のx座標 -->
+  <y>25</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>131</x><!--point のx座標 -->
+  <y>113</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>373</x><!--point のx座標 -->
+  <y>124</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>152</x><!--point のx座標 -->
+  <y>193</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>65</x><!--point のx座標 -->
+  <y>252</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>151</x><!--point のx座標 -->
+  <y>343</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>75</x><!--point のx座標 -->
+  <y>429</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>384</x><!--point のx座標 -->
+  <y>386</y><!--point のy座標-->
+ </point>
+</different>

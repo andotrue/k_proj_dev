@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>315</id>
+ <name>風が吹き 雷鳴がとどろく！</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>150</x><!--point のx座標 -->
+  <y>188</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>306</x><!--point のx座標 -->
+  <y>162</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>317</x><!--point のx座標 -->
+  <y>304</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>491</x><!--point のx座標 -->
+  <y>175</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>568</x><!--point のx座標 -->
+  <y>333</y><!--point のy座標-->
+ </point>
+</different>

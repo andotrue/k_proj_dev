@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>354</id>
+ <name>ミニィちゃん スイーツの国へ！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>30</x><!--point のx座標 -->
+  <y>31</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>187</x><!--point のx座標 -->
+  <y>36</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>353</x><!--point のx座標 -->
+  <y>94</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>20</x><!--point のx座標 -->
+  <y>253</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>260</x><!--point のx座標 -->
+  <y>241</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>107</x><!--point のx座標 -->
+  <y>449</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>160</x><!--point のx座標 -->
+  <y>457</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>380</x><!--point のx座標 -->
+  <y>406</y><!--point のy座標-->
+ </point>
+</different>

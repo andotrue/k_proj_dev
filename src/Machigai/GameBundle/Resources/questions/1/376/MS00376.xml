@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>376</id>
+ <name>お空でゆらゆら</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>76</x><!--point のx座標 -->
+  <y>217</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>414</x><!--point のx座標 -->
+  <y>26</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>454</x><!--point のx座標 -->
+  <y>152</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>129</x><!--point のx座標 -->
+  <y>412</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>325</x><!--point のx座標 -->
+  <y>318</y><!--point のy座標-->
+ </point>
+</different>
