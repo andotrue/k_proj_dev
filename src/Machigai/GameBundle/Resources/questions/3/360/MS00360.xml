@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>360</id>
+ <name>家庭菜園はじめました</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>107</x><!--point のx座標 -->
+  <y>87</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>193</x><!--point のx座標 -->
+  <y>17</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>377</x><!--point のx座標 -->
+  <y>58</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>55</x><!--point のx座標 -->
+  <y>292</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>226</x><!--point のx座標 -->
+  <y>230</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>374</x><!--point のx座標 -->
+  <y>298</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>125</x><!--point のx座標 -->
+  <y>426</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>350</x><!--point のx座標 -->
+  <y>444</y><!--point のy座標-->
+ </point>
+</different>

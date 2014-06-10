@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>407</id>
+ <name>スッキリきれいに！</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>33</x><!--point のx座標 -->
+  <y>54</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>281</x><!--point のx座標 -->
+  <y>51</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>89</x><!--point のx座標 -->
+  <y>294</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>246</x><!--point のx座標 -->
+  <y>372</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>415</x><!--point のx座標 -->
+  <y>334</y><!--point のy座標-->
+ </point>
+</different>

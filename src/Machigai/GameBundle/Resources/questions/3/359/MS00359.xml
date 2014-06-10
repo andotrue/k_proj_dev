@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>359</id>
+ <name>ふたりの１日</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>48</x><!--point のx座標 -->
+  <y>96</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>233</x><!--point のx座標 -->
+  <y>64</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>369</x><!--point のx座標 -->
+  <y>60</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>20</x><!--point のx座標 -->
+  <y>248</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>154</x><!--point のx座標 -->
+  <y>269</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>390</x><!--point のx座標 -->
+  <y>272</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>90</x><!--point のx座標 -->
+  <y>384</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>204</x><!--point のx座標 -->
+  <y>357</y><!--point のy座標-->
+ </point>
+</different>

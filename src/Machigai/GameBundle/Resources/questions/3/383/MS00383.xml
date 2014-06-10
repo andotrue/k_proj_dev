@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>383</id>
+ <name>ハイキングでヤッホー！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>52</x><!--point のx座標 -->
+  <y>63</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>208</x><!--point のx座標 -->
+  <y>44</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>161</x><!--point のx座標 -->
+  <y>153</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>64</x><!--point のx座標 -->
+  <y>261</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>383</x><!--point のx座標 -->
+  <y>144</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>362</x><!--point のx座標 -->
+  <y>220</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>274</x><!--point のx座標 -->
+  <y>292</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>259</x><!--point のx座標 -->
+  <y>449</y><!--point のy座標-->
+ </point>
+</different>
