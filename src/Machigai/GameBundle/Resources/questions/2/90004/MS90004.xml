@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>90004</id>
+ <name>エリートバナナ　バナ夫</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>181</x><!--point のx座標 -->
+  <y>72</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>318</x><!--point のx座標 -->
+  <y>77</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>248</x><!--point のx座標 -->
+  <y>245</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>383</x><!--point のx座標 -->
+  <y>261</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>183</x><!--point のx座標 -->
+  <y>361</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>368</x><!--point のx座標 -->
+  <y>375</y><!--point のy座標-->
+ </point>
+</different>
