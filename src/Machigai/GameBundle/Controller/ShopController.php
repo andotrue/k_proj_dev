@@ -96,13 +96,22 @@ class ShopController extends BaseController
 		$request = $this->get('request');
 		$session = $request->getSession();  
 
-
         $syncToken = $request->query->get("syncToken");
         $mode = $request->query->get("mode");
 
-		$users = $this->getDoctrine()
-				->getManager()
-				->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
+		if(!empty($syncToken)){
+			$users = $this->getDoctrine()
+					->getManager()
+					->getRepository('MachigaiGameBundle:User')->findBy(array('syncToken' =>$syncToken));
+		} else {
+ 			$userId = $session->get("id");
+			if( !empty($userId) ){
+				$em = $this->getDoctrine()->getEntityManager();
+				$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
+				$users = array($user);
+			}
+		}
+		
 		if( empty($users) ) {
 			//ゲストユーザの場合は何もしない。   
 		}else{
