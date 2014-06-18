@@ -120,7 +120,7 @@ class ShopController extends BaseController
 			$session->set('id',  $user->getId());
 			$session->set('smartPassResult', true );
 		}
-
+		
         $user = $this->getUser();
         
         $item = $this->getDoctrine()
@@ -134,8 +134,11 @@ class ShopController extends BaseController
         }elseif($categoryCode==2){
             $itemPath = "/../Resources/public/images/stamp/".$itemPath.".png";
         }
+		
+		$alreadyBuy = $session->get('buy_'.$categoryCode . "_" . $id);
+		
         $itemPoint = $item->getConsumePoint();
-        if(in_array($id,$purchasedItems)){
+        if(in_array($id,$purchasedItems) || $alreadyBuy){
             if( empty($mode) ||  $mode != 'file'){
                 return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
             }else{
@@ -143,35 +146,35 @@ class ShopController extends BaseController
             }
         }else{
 			
-			if($mode != "file"){
-				$remainder = $user->getCurrentPoint()-$itemPoint;
+			$remainder = $user->getCurrentPoint()-$itemPoint;
 
-				$purchasedInfo = new PurchaseHistory();
-				$purchasedInfo->setUser($user);
-				$purchasedInfo->setItem($item);
-				$purchasedInfo->setPointBeforePurchase($user->getCurrentPoint());
-				$purchasedInfo->setPointAfterPurchase($remainder);
-				$purchasedInfo->setConsumePoint($itemPoint);
-				$purchasedInfo->setCreatedAt(date("Y-m-d H:i:s"));
-				$purchasedInfo->setUpdatedAt(date("Y-m-d H:i:s"));
+			$purchasedInfo = new PurchaseHistory();
+			$purchasedInfo->setUser($user);
+			$purchasedInfo->setItem($item);
+			$purchasedInfo->setPointBeforePurchase($user->getCurrentPoint());
+			$purchasedInfo->setPointAfterPurchase($remainder);
+			$purchasedInfo->setConsumePoint($itemPoint);
+			$purchasedInfo->setCreatedAt(date("Y-m-d H:i:s"));
+			$purchasedInfo->setUpdatedAt(date("Y-m-d H:i:s"));
 
-				$em = $this->getDoctrine()->getEntityManager();
-				$em->persist($purchasedInfo);
-				$em->flush();
+			$em = $this->getDoctrine()->getEntityManager();
+			$em->persist($purchasedInfo);
+			$em->flush();
 
-				$log = new Log();
-				$log->setUserId($user->getId());
-				$log->setType("point");
-				$log->setName("shop_use_point: " .$itemPoint);
-				$log->setCreatedAt(date("Y-m-d H:i:s"));
-				$em->persist($log);
-				$em->flush();
+			$log = new Log();
+			$log->setUserId($user->getId());
+			$log->setType("point");
+			$log->setName("shop_use_point: " .$itemPoint);
+			$log->setCreatedAt(date("Y-m-d H:i:s"));
+			$em->persist($log);
+			$em->flush();
 
-				$em = $this->getDoctrine()->getEntityManager();
-				$user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
-				$user_id->setCurrentPoint($remainder);
-				$em->flush();				
-			}
+			$em = $this->getDoctrine()->getEntityManager();
+			$user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
+			$user_id->setCurrentPoint($remainder);
+			$em->flush();	
+			
+			$session->set('buy_'.$categoryCode . "_" . $id, true );
 
             if( empty($mode) ||  $mode != 'file'){
                 return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
