@@ -142,33 +142,36 @@ class ShopController extends BaseController
                 return $this->download($itemPath);
             }
         }else{
-            $remainder = $user->getCurrentPoint()-$itemPoint;
-
-            $purchasedInfo = new PurchaseHistory();
-            $purchasedInfo->setUser($user);
-            $purchasedInfo->setItem($item);
-            $purchasedInfo->setPointBeforePurchase($user->getCurrentPoint());
-            $purchasedInfo->setPointAfterPurchase($remainder);
-            $purchasedInfo->setConsumePoint($itemPoint);
-            $purchasedInfo->setCreatedAt(date("Y-m-d H:i:s"));
-            $purchasedInfo->setUpdatedAt(date("Y-m-d H:i:s"));
-
-            $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($purchasedInfo);
-            $em->flush();
-
-			$log = new Log();
-			$log->setUserId($user->getId());
-			$log->setType("point");
-			$log->setName("shop_use_point: " .$itemPoint);
-			$log->setCreatedAt(date("Y-m-d H:i:s"));
-			$em->persist($log);
-			$em->flush();
 			
-            $em = $this->getDoctrine()->getEntityManager();
-            $user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
-            $user_id->setCurrentPoint($remainder);
-            $em->flush();
+			if($mode != "file"){
+				$remainder = $user->getCurrentPoint()-$itemPoint;
+
+				$purchasedInfo = new PurchaseHistory();
+				$purchasedInfo->setUser($user);
+				$purchasedInfo->setItem($item);
+				$purchasedInfo->setPointBeforePurchase($user->getCurrentPoint());
+				$purchasedInfo->setPointAfterPurchase($remainder);
+				$purchasedInfo->setConsumePoint($itemPoint);
+				$purchasedInfo->setCreatedAt(date("Y-m-d H:i:s"));
+				$purchasedInfo->setUpdatedAt(date("Y-m-d H:i:s"));
+
+				$em = $this->getDoctrine()->getEntityManager();
+				$em->persist($purchasedInfo);
+				$em->flush();
+
+				$log = new Log();
+				$log->setUserId($user->getId());
+				$log->setType("point");
+				$log->setName("shop_use_point: " .$itemPoint);
+				$log->setCreatedAt(date("Y-m-d H:i:s"));
+				$em->persist($log);
+				$em->flush();
+
+				$em = $this->getDoctrine()->getEntityManager();
+				$user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
+				$user_id->setCurrentPoint($remainder);
+				$em->flush();				
+			}
 
             if( empty($mode) ||  $mode != 'file'){
                 return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
