@@ -664,7 +664,7 @@ class AndroidController extends BaseController
 		$openId = $session->get("openId");
 
 		if(empty($syncToken)){
-			return $this->generateUrl("Top");
+			return $this->redirect('Top',array());
 		}
 		
         $form = $this->createFormBuilder()
