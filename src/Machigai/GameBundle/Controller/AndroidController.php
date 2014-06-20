@@ -663,6 +663,10 @@ class AndroidController extends BaseController
         $syncToken = $session->get("syncTokenPre");
 		$openId = $session->get("openId");
 
+		if(empty($syncToken)){
+			return $this->generateUrl("Top");
+		}
+		
         $form = $this->createFormBuilder()
         ->setMethod('GET')
         ->add('nickname', 'hidden')
