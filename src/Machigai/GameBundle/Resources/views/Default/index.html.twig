@@ -10,6 +10,10 @@
 	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/bookmark_bubble.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/example.js') }}"></script>
 	<link rel="apple-touch-icon-precomposed" href="{{ asset('/bundles/machigaigame/images/parts/icon_256template_ios7.png') }}">
+<style>
+body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
+</style>
+        
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
