@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>371</id>
+ <name>気分はおかあさん♪</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>61</x><!--point のx座標 -->
+  <y>69</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>308</x><!--point のx座標 -->
+  <y>50</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>42</x><!--point のx座標 -->
+  <y>263</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>196</x><!--point のx座標 -->
+  <y>233</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>300</x><!--point のx座標 -->
+  <y>197</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>58</x><!--point のx座標 -->
+  <y>433</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>295</x><!--point のx座標 -->
+  <y>440</y><!--point のy座標-->
+ </point>
+</different>

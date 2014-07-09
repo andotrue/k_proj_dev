@@ -1,8 +1,19 @@
 {% extends "MachigaiGameBundle::base.html.twig" %}
 {% block body %}
+{% if user is empty %}
+ 
+        <!-- Conversion Pixel - スタンプ付き♪まちがいさがし放題　ｆｏｒ　ａｕスマートパス - DO NOT MODIFY -->
+        <img height='1' src='https://ssl.socdm.com/sa/img?said=cv4120-s&t=2' style='position:absolute;border:none;padding:0;margin:0;' width='1' />
+        <!-- End of Conversion Pixel -->
+{% endif %}     
+
 	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/bookmark_bubble.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/example.js') }}"></script>
 	<link rel="apple-touch-icon-precomposed" href="{{ asset('/bundles/machigaigame/images/parts/icon_256template_ios7.png') }}">
+<style>
+body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
+</style>
+        
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
@@ -26,11 +37,6 @@
 		   		</ul>
 	  		</nav>
 		</section>
-     
-        <!-- Conversion Pixel - スタンプ付き♪まちがいさがし放題　ｆｏｒ　ａｕスマートパス - DO NOT MODIFY -->
-        <img height='1' src='https://ssl.socdm.com/sa/img?said=cv4120-s&t=2' style='position:absolute;border:none;padding:0;margin:0;' width='1' />
-        <!-- End of Conversion Pixel -->
-     
  {% else %}
   	<!--ゲスト時には何も表示しない -->
  {% endif %}

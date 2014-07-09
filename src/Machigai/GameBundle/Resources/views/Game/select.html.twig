@@ -161,9 +161,11 @@
 
     function draw() {
         var target = "li." + current_level;
-        var str = 'li.' + current_level + ':first,li.' + current_level + ':gt("' + page * 24 + '"):lt(24)';
+        var str = 'li.' + current_level + ':gt("' + (page * 24) + 
+                '"):lt("23")';
         $(target).hide();
         $(str).show();
+        $('li.' + current_level + ':eq("' + (page * 24) + '")').show();
         var max = parseInt($(target).size());
         rewritePageNum();
         function rewritePageNum() {
@@ -239,9 +241,6 @@
                              width="7.5%" class="next"/>
                     </a>
                 </nav>
-                <li class="easy"></li>
-                <li class="normal"></li>
-                <li class="hard"></li>
             </div>
 
             <div id="games" style="color:rgb(94,109,114);">

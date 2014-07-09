@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>365</id>
+ <name>くまずきんちゃん</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>198</x><!--point のx座標 -->
+  <y>47</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>214</x><!--point のx座標 -->
+  <y>240</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>67</x><!--point のx座標 -->
+  <y>282</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>378</x><!--point のx座標 -->
+  <y>445</y><!--point のy座標-->
+ </point>
+</different>
