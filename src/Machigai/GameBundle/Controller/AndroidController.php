@@ -287,7 +287,8 @@ class AndroidController extends BaseController
 
 		$news = $this->getDoctrine()
 			->getRepository('MachigaiGameBundle:News')
-			->findAll();
+      ->findBy(array(),array('startedAt'=>'DESC'));
+      
 		$html = "<ul>";
 		for ($i=0; $i < sizeof($news); $i++) {
 			$new = $news[$i];
