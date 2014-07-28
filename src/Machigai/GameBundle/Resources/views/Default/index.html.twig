@@ -42,7 +42,12 @@ body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})
  {% endif %}
  </div>
 </header>
-
+<!--キャンペーン中
+<center>
+<font color = "b11515">【期間限定】ｽﾀﾝﾌﾟ取り放題ｷｬﾝﾍﾟｰﾝ中！<br></font>
+<font color = "1a550a">7/18 12:00～7/28 9:59</br></font>
+</center>
+-->
  <section id="current_point" class="top_bg">
   <img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
   <p style="font-size:1em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
