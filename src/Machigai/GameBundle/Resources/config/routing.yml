@@ -186,6 +186,10 @@ SettingComplete:
     pattern: /setting/complete
     defaults: { _controller: MachigaiGameBundle:Setting:complete }
 
+PrivacyPolicy:
+    pattern: /help/privacyPolicy
+    defaults: { _controller: MachigaiGameBundle:Help:privacyPolicy }
+
 Shop:
     pattern: /shop/
     defaults: { _controller: MachigaiGameBundle:Shop:index }
