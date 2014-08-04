@@ -20,7 +20,7 @@ class ShopController extends BaseController
 
     $items = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
-        ->findAll();
+        ->findBy(array(),array("id"=>"DESC"));
 	return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items, 'sortId'=> '0', 'categoryCode'=>1, 'user'=>$user,'purchasedItems'=>$purchasedItems));
     }
     public function indexSortAction($field){
