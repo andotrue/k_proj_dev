@@ -48,7 +48,7 @@ class ShopController extends BaseController
             $fieldName = "popularityRank";
 
         }else{
-            $sort = "ASC";
+            $sort = "DESC";
             $fieldName = 'id';
         }
         $items = $this->getDoctrine()
