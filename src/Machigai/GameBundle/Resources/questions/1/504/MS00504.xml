@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>504</id>
+ <name>今日もお仕事よろしくね！</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>344</x><!--point のx座標 -->
+  <y>59</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>266</x><!--point のx座標 -->
+  <y>94</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>60</x><!--point のx座標 -->
+  <y>98</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>272</x><!--point のx座標 -->
+  <y>298</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>422</x><!--point のx座標 -->
+  <y>406</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>496</id>
+ <name>にゃんどらきゅら　今夜はハロウィン</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>92</x><!--point のx座標 -->
+  <y>104</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>263</x><!--point のx座標 -->
+  <y>117</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>428</x><!--point のx座標 -->
+  <y>174</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>425</x><!--point のx座標 -->
+  <y>306</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>72</x><!--point のx座標 -->
+  <y>298</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>302</x><!--point のx座標 -->
+  <y>445</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>564</x><!--point のx座標 -->
+  <y>427</y><!--point のy座標-->
+ </point>
+</different>

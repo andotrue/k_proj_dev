@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>489</id>
+ <name>スイスあれこれ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>127</x><!--point のx座標 -->
+  <y>84</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>450</x><!--point のx座標 -->
+  <y>39</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>340</x><!--point のx座標 -->
+  <y>199</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>523</x><!--point のx座標 -->
+  <y>175</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>99</x><!--point のx座標 -->
+  <y>361</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>646</x><!--point のx座標 -->
+  <y>417</y><!--point のy座標-->
+ </point>
+</different>

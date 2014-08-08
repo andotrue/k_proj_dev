@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>425</id>
+ <name>クッキーが焼けたよ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>424</x><!--point のx座標 -->
+  <y>88</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>226</x><!--point のx座標 -->
+  <y>149</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>73</x><!--point のx座標 -->
+  <y>184</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>76</x><!--point のx座標 -->
+  <y>279</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>82</x><!--point のx座標 -->
+  <y>369</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>294</x><!--point のx座標 -->
+  <y>380</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>439</x><!--point のx座標 -->
+  <y>374</y><!--point のy座標-->
+ </point>
+</different>

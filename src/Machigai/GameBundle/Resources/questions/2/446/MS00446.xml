@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>446</id>
+ <name>宝島、発見！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>53</x><!--point のx座標 -->
+  <y>64</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>332</x><!--point のx座標 -->
+  <y>26</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>610</x><!--point のx座標 -->
+  <y>127</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>354</x><!--point のx座標 -->
+  <y>232</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>134</x><!--point のx座標 -->
+  <y>356</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>319</x><!--point のx座標 -->
+  <y>450</y><!--point のy座標-->
+ </point>
+</different>

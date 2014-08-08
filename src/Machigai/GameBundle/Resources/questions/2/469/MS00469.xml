@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>469</id>
+ <name>あなたの願い、かなえましょう</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>394</x><!--point のx座標 -->
+  <y>29</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>469</x><!--point のx座標 -->
+  <y>69</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>166</x><!--point のx座標 -->
+  <y>112</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>98</x><!--point のx座標 -->
+  <y>194</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>525</x><!--point のx座標 -->
+  <y>242</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>125</x><!--point のx座標 -->
+  <y>425</y><!--point のy座標-->
+ </point>
+</different>

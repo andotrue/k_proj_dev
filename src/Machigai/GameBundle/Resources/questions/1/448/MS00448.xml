@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>448</id>
+ <name>深夜のお散歩★</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>117</x><!--point のx座標 -->
+  <y>103</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>61</x><!--point のx座標 -->
+  <y>288</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>381</x><!--point のx座標 -->
+  <y>197</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>154</x><!--point のx座標 -->
+  <y>361</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>231</x><!--point のx座標 -->
+  <y>408</y><!--point のy座標-->
+ </point>
+</different>

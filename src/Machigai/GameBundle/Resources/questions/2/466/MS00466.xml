@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>466</id>
+ <name>お手てつないで帰り道</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>178</x><!--point のx座標 -->
+  <y>94</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>410</x><!--point のx座標 -->
+  <y>84</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>83</x><!--point のx座標 -->
+  <y>201</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>83</x><!--point のx座標 -->
+  <y>297</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>356</x><!--point のx座標 -->
+  <y>304</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>178</x><!--point のx座標 -->
+  <y>348</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>247</x><!--point のx座標 -->
+  <y>337</y><!--point のy座標-->
+ </point>
+</different>

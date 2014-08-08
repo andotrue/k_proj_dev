@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>485</id>
+ <name>暴け！密室トリックの謎</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>149</x><!--point のx座標 -->
+  <y>84</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>349</x><!--point のx座標 -->
+  <y>167</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>554</x><!--point のx座標 -->
+  <y>152</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>652</x><!--point のx座標 -->
+  <y>127</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>126</x><!--point のx座標 -->
+  <y>199</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>164</x><!--point のx座標 -->
+  <y>276</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>375</x><!--point のx座標 -->
+  <y>360</y><!--point のy座標-->
+ </point>
+</different>

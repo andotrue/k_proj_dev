@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>394</id>
+ <name>しあわせいっぱい☆ジューン・ブライド</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>165</x><!--point のx座標 -->
+  <y>112</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>258</x><!--point のx座標 -->
+  <y>145</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>322</x><!--point のx座標 -->
+  <y>110</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>103</x><!--point のx座標 -->
+  <y>240</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>353</x><!--point のx座標 -->
+  <y>307</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>311</x><!--point のx座標 -->
+  <y>462</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>47</x><!--point のx座標 -->
+  <y>380</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>108</x><!--point のx座標 -->
+  <y>430</y><!--point のy座標-->
+ </point>
+</different>

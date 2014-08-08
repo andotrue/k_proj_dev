@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>431</id>
+ <name>ホットケーキが焼けたよ～！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>256</x><!--point のx座標 -->
+  <y>85</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>61</x><!--point のx座標 -->
+  <y>128</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>473</x><!--point のx座標 -->
+  <y>168</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>517</x><!--point のx座標 -->
+  <y>314</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>373</x><!--point のx座標 -->
+  <y>359</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>239</x><!--point のx座標 -->
+  <y>396</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>105</x><!--point のx座標 -->
+  <y>438</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>453</id>
+ <name>超大物ゲット！？</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>229</x><!--point のx座標 -->
+  <y>162</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>436</x><!--point のx座標 -->
+  <y>116</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>128</x><!--point のx座標 -->
+  <y>369</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>286</x><!--point のx座標 -->
+  <y>343</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>431</x><!--point のx座標 -->
+  <y>364</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>557</x><!--point のx座標 -->
+  <y>352</y><!--point のy座標-->
+ </point>
+</different>

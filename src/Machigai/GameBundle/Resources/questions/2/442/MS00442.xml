@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>442</id>
+ <name>唄おう踊ろう祭りだ祭りだ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>82</x><!--point のx座標 -->
+  <y>74</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>136</x><!--point のx座標 -->
+  <y>335</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>364</x><!--point のx座標 -->
+  <y>279</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>356</x><!--point のx座標 -->
+  <y>94</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>505</x><!--point のx座標 -->
+  <y>415</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>586</x><!--point のx座標 -->
+  <y>198</y><!--point のy座標-->
+ </point>
+</different>

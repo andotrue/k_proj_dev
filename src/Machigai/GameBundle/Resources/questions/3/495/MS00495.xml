@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>495</id>
+ <name>今が見頃！紅葉狩り</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>144</x><!--point のx座標 -->
+  <y>224</y><!--point のy座標-->
+ </point>
+</different>

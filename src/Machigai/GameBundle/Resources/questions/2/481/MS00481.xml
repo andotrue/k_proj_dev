@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>481</id>
+ <name>動物とお話ししよう♪</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>164</x><!--point のx座標 -->
+  <y>37</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>556</x><!--point のx座標 -->
+  <y>84</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>370</x><!--point のx座標 -->
+  <y>156</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>203</x><!--point のx座標 -->
+  <y>261</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>671</x><!--point のx座標 -->
+  <y>277</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>593</x><!--point のx座標 -->
+  <y>364</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>47</x><!--point のx座標 -->
+  <y>457</y><!--point のy座標-->
+ </point>
+</different>

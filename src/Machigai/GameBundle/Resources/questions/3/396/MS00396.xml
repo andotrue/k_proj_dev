@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>396</id>
+ <name>木馬に乗ってでかけよう！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>105</x><!--point のx座標 -->
+  <y>108</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>170</x><!--point のx座標 -->
+  <y>19</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>373</x><!--point のx座標 -->
+  <y>81</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>73</x><!--point のx座標 -->
+  <y>256</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>323</x><!--point のx座標 -->
+  <y>232</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>72</x><!--point のx座標 -->
+  <y>434</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>234</x><!--point のx座標 -->
+  <y>421</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>363</x><!--point のx座標 -->
+  <y>394</y><!--point のy座標-->
+ </point>
+</different>
