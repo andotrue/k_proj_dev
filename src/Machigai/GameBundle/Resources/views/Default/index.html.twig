@@ -74,6 +74,7 @@ LINEで使える<br />
   <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" />
 
  </section>
+ <font color ="b1151">
  <section id="news" class="top_bg">
   <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
   <div class="news" style="color:rgb(255,254,255);">
@@ -81,7 +82,7 @@ LINEで使える<br />
    <p style="text-align:left;width:80%;margin: 0 auto;">{{new.getTitle}}<br />{{new.getDescription|raw}}</p><br />
   {% endfor %}
   </div>
-
+</font>
 {{ include(
     'MachigaiGameBundle:Default:banner.html.twig',
     { 'base_url': base_url }
