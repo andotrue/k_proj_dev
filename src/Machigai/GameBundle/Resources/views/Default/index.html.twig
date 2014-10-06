@@ -16,10 +16,8 @@ body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})
         
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
-<br />
-<A Href="#osusume"><img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_kaiyuu.png') }}" width="100%" />
-  </a>
- <br />
+
+ 
  <!-- 壁紙スタンプ無料 -->
 <FONT color="maroon">【10月のイベント】<br />
 LINEで使える<br />
@@ -84,8 +82,6 @@ LINEで使えるスタンプ取り放題！</FONT>
    <p style="text-align:left;width:80%;margin: 0 auto;">{{new.getTitle}}<br />{{new.getDescription|raw}}</p><br />
   {% endfor %}
   </div>
-  
-<A Href="osusume">おすすめサイト</A> 
 
 {{ include(
     'MachigaiGameBundle:Default:banner.html.twig',
