@@ -1,20 +1,3 @@
-<head>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-</head>
-
-<script type="text/javascript">
-$(function(){
-    $('a[href^=#]').click(function(){
-        var speed = 500;
-        var href= $(this).attr("href");
-        var target = $(href == "#" || href == "" ? 'html' : href);
-        var position = target.offset().top;
-        $("html, body").animate({scrollTop:position}, speed, "swing");        return false;
-    });
-});
-</script>
-
-
 {% extends "MachigaiGameBundle::base.html.twig" %}
 {% block body %}
 {% if user is empty %}
@@ -34,7 +17,8 @@ body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
 <br /> <br />
-<a href="#osusume"><img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_kaiyuu.png') }}" width="100%" />
+<a href="#smoothplay">
+<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_kaiyuu.png') }}" width="100%" />
   </a>
  <br /> <br />
  <!-- 壁紙スタンプ無料 -->
@@ -102,13 +86,13 @@ LINEで使えるスタンプ取り放題！</FONT>
   {% endfor %}
   </div>
   
-<a name="osusume">
 
+<div id="smoothplay">
 {{ include(
     'MachigaiGameBundle:Default:banner.html.twig',
     { 'base_url': base_url }
 ) }}
-  </a> 
+</div>
 {% if user is not empty %}
 	<p style="text-align:center;">
 		<a href="{{ path('Logout')  }}" alt="ログアウト">
