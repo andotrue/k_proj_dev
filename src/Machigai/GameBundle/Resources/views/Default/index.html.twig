@@ -13,11 +13,33 @@
 <style>
 body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
 </style>
+    
+        
+        <!-- スムーズスクロール部分の記述 -->
+<script>
+$(function(){
+   // #で始まるアンカーをクリックした場合に処理
+   $('a[href^=#]').click(function() {
+      // スクロールの速度
+      var speed = 400; // ミリ秒
+      // アンカーの値取得
+      var href= $(this).attr("href");
+      // 移動先を取得
+      var target = $(href == "#kaiyuu" || href == "" ? 'html' : href);
+      // 移動先を数値で取得
+      var position = target.offset().top;
+      // スムーススクロール
+      $('body,html').animate({scrollTop:position}, speed, 'swing');
+      return false;
+   });
+});
+</script>
+
         
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
 <br /> <br />
-<a href="#smoothplay">
+<a href="#kaiyuu">
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_kaiyuu.png') }}" width="100%" />
   </a>
  <br /> <br />
@@ -87,7 +109,7 @@ LINEで使えるスタンプ取り放題！</FONT>
   </div>
   
 
-<div id="smoothplay">
+<div id="kaiyuu">
 {{ include(
     'MachigaiGameBundle:Default:banner.html.twig',
     { 'base_url': base_url }
