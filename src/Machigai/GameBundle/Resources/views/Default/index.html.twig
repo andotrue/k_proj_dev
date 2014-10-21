@@ -34,18 +34,32 @@ $(function(){
    });
 });
 </script>
-
         
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
 <br /> <br />
-<a href="#kaiyuu">
+<!--　<a href="#kaiyuu">
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_kaiyuu.png') }}" width="100%" />
   </a>
- <br /> <br />
-<FONT color="maroon">【期間限定定】<br />
+ <br />　-->
+ 
+<br> 
+<a href="mailto:present@machigai.puzzle-m.net?subject=LINEコイン応募&amp;body=何も入力せずに
+このまま送信してください。
+
+当選者の方にはメールにてご連絡させていただきます。
+
+※複数送信されても当選確率は変動致しません。">
+メール送信 
+<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_kaiyuu.png') }}" width="100%" /></a> 
+<br>
+
+<br />
+ <!-- 壁紙スタンプ無料 -->
+<FONT color="maroon">
+【期間限定】<br />
 LINEで使えるスタンプ取り放題！</FONT>
- <br />
+
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
  <div>
  {% if user is empty %}
