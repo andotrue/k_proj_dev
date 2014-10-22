@@ -172,7 +172,11 @@ class OAuthController extends Controller {
 							$response->headers->setCookie($cookie);
 							$response->send();
 
-
+              if($session->get("puzzlelp_access") == "true"){
+                $session->set("puzzlelp_access", null);
+  							return $this->redirect($this->generateUrl('puzzlelp'));
+              }
+              
 							//認証OK
 							return $this->redirect($this->generateUrl('Top'));
 

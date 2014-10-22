@@ -63,7 +63,21 @@ class DefaultController extends BaseController
 	return $this->render('MachigaiGameBundle:Default:error.html.twig');
     }
 	
-	public function lpAction()
+	public function puzzlelpAction()
+	{
+    $request = $this->get('request');
+    $cookies = $request->cookies;
+    $smartContract = $cookies->get('smartContract'); 
+    if(!$this->DEBUG && (empty($smartContract) || $smartContract != "true") ){
+      
+      $session = $request->getSession();
+      $session->set('puzzlelp_access', 'true');
+      return $this->redirect($this->generateUrl('response_token'));
+    }
+    
+		return $this->render('MachigaiGameBundle:Default:puzzlelp.html.twig');
+	}
+  public function lpAction()
 	{
 		return $this->render('MachigaiGameBundle:Default:lp.html.twig');
 	}

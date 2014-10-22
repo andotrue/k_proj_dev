@@ -13,6 +13,11 @@ lp:
     defaults: { _controller: MachigaiGameBundle:Default:lp }
     requirements:
         _method: GET
+puzzlelp:
+    pattern: /puzzlelp
+    defaults: { _controller: MachigaiGameBundle:Default:puzzlelp }
+    requirements:
+        _method: GET
 LpCompanyInfo:
     pattern: /lpCompanyInfo
     defaults: { _controller: MachigaiGameBundle:Default:lpCompanyInfo }
