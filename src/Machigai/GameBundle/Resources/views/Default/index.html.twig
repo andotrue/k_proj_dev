@@ -65,12 +65,19 @@ LINEプリペイド1000円分が当たる！</FONT>
 <br />
 <br />
 
-<div id="kaiyuu">
-{{ include(
-    'MachigaiGameBundle:Default:banner.html.twig',
-    { 'base_url': base_url }
-) }}
-</div>
+ <a href="https://ausp.puzzle-m.net/">
+    <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_puzzle.png') }}" width="100%" />
+  </a>
+  <div style="text-align: left;">
+  </div>
+  <a href="https://e-aquarium.jp/asp/">
+     <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_boe.png') }}" width="100%" />
+  </a>
+  <div style="text-align: left;">
+  </div>
+  <a href="https://bbq-g.com/asp/">
+     <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_bbq.png') }}" width="100%" />
+     
 
 
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
