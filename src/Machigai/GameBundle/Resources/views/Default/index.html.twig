@@ -42,11 +42,7 @@ $(function(){
  
  ↓タップして空メール送信で応募できます！
  
-  {% if user is empty %}
-  <font size="-1">ログアウトしてる！</font>
-  {% else %}
-<font size="-1">ログインしてる！</font>
- {% endif %}
+
  
 
  <br />
@@ -59,7 +55,14 @@ $(function(){
 ※複数送信されても当選確率は変動致しません。"> 
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/line_coin.png') }}" width="100%" /></a> 
 
+  {% if user is empty %}
+  <font size="-1">ログアウトしてる！</font>
+  
+  {% else %}
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_machigai.png') }}" width="100%" />
+ {% endif %}
+ 
+
 
 
 <br>
