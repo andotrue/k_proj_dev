@@ -41,6 +41,13 @@ $(function(){
 
  
  ↓タップして空メール送信で応募できます！
+ 
+  {% if user is empty %}
+  <font size="-1">ログインしてる！</font>
+  {% else %}
+<font size="-1">ログインしてない！</font>
+ {% endif %}
+ 
 
  <br />
   
