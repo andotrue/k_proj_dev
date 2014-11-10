@@ -13,24 +13,92 @@
 <style>
 body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
 </style>
+    
+        
+        <!-- スムーズスクロール部分の記述 -->
+<script>
+$(function(){
+   // #で始まるアンカーをクリックした場合に処理
+   $('a[href^=#]').click(function() {
+      // スクロールの速度
+      var speed = 400; // ミリ秒
+      // アンカーの値取得
+      var href= $(this).attr("href");
+      // 移動先を取得
+      var target = $(href == "#aulogin" || href == "" ? 'html' : href);
+      // 移動先を数値で取得
+      var position = target.offset().top;
+      // スムーススクロール
+      $('body,html').animate({scrollTop:position}, speed, 'swing');
+      return false;
+   });
+});
+</script>
         
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
-<br /> <br />
-<a href="#osusume"><img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/banner_kaiyuu.png') }}" width="100%" />
-  </a>
- <br /> <br />
- <!-- 壁紙スタンプ無料 -->
-<FONT color="maroon">【10月のイベント】<br />
-LINEで使える<br />
- 秋の体育会スタンプ祭り開催！<br />
-10月1日～13日（体育の日）まで<br />
-<br />
-【期間限定】<br />
-LINEで使えるスタンプ取り放題！</FONT>
+<br /><br />
 
+ 
+ ↓タップして空メール送信で応募できます！
+ 
+
+ 
+
+ <br />
+  
+<a href="mailto:present@machigai.puzzle-m.net?subject=LINEコイン応募&amp;body=何も入力せずに
+このまま送信してください。
+ <br />
+当選者の方にはメールにてご連絡させていただきます。
+ <br />
+※複数送信されても当選確率は変動致しません。"> 
+<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/line_coin.png') }}" width="100%" /></a> 
+
+  {% if user is empty %}
+  <font size="-1">↓今すぐauIDログイン↓</font>
+  <a href="#aulogin">
+  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_machigai.png') }}" width="100%" />
+    </a>
+  {% else %}
+  	<a href='{{ path('Shop') }}' id="hshop_button">
+<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_machigai.png') }}" width="100%" />
+  </a>
+ {% endif %}
+ 
+
+
+
+<br>
+ <!-- 壁紙スタンプ無料 -->
+ 
+<FONT color="maroon">
+LINEプリペイド1000円分が当たる！</FONT>
+<br>
+
+<font size="-1">
+2014年11月30日正午の締め切りとします。<br>
+当選者の方には応募メールアドレス宛てに<br>
+12月15日迄にご連絡致します。</font>
+<br />
+<br />
+
+
+  <a href="https://ausp.puzzle-m.net/">
+    <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_puzzle.png') }}" width="100%" />
+  </a>
+  <a href="https://e-aquarium.jp/asp/">
+     <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_boe.png') }}" width="100%" />
+  </a>
+  <div style="text-align: left;">
+  </div>
+  <a href="https://bbq-g.com/asp/">
+     <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_bbq.png') }}" width="100%" />
+       </a>
+
+<div id="aulogin">
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
- <div>
+</div>
  {% if user is empty %}
   <a href="{{ path('AuIdLogin')  }}" alt="login">
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/></a>
@@ -85,13 +153,13 @@ LINEで使えるスタンプ取り放題！</FONT>
   {% endfor %}
   </div>
   
-<a name="osusume">
 
+<div id="kaiyuu">
 {{ include(
     'MachigaiGameBundle:Default:banner.html.twig',
     { 'base_url': base_url }
 ) }}
-  </a> 
+</div>
 {% if user is not empty %}
 	<p style="text-align:center;">
 		<a href="{{ path('Logout')  }}" alt="ログアウト">
