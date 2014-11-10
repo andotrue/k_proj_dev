@@ -98,9 +98,9 @@ LINEプリペイド1000円分が当たる！</FONT>
 
 
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
-<div id="aulogin"></div>
+<div id="aulogin">
  {% if user is empty %}
-  <a href="{{ path('AuIdLogin')  }}" alt="login">
+  <a href="{{ path('AuIdLogin')  }}" alt="login"></div>
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/></a>
      <section style="margin-top:2%;background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
          <a href="{{ path('Login') }}">メールアドレス会員の方はこちら</a>
