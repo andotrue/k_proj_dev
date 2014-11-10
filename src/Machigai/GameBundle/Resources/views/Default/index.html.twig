@@ -19,13 +19,13 @@ body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})
 <script>
 $(function(){
    // #で始まるアンカーをクリックした場合に処理
-   $('a[href^=#kaiyuu]').click(function() {
+   $('a[href^=#]').click(function() {
       // スクロールの速度
-      var speed = 700; // ミリ秒
+      var speed = 400; // ミリ秒
       // アンカーの値取得
       var href= $(this).attr("href");
       // 移動先を取得
-      var target = $(href == "#" || href == "" ? 'html' : href);
+      var target = $(href == "#aulogin" || href == "" ? 'html' : href);
       // 移動先を数値で取得
       var position = target.offset().top;
       // スムーススクロール
@@ -56,10 +56,13 @@ $(function(){
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/line_coin.png') }}" width="100%" /></a> 
 
   {% if user is empty %}
-  <font size="-1">ログアウトしてる！</font>
-  
+  <a href="#aulogin">
+  <font size="-1">今すぐauIDログイン！</font>
+  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_machigai.png') }}" width="100%" />
   {% else %}
+  	<a href='{{ path('Shop') }}' id="hshop_button">
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_machigai.png') }}" width="100%" />
+  </a>
  {% endif %}
  
 
@@ -92,7 +95,7 @@ LINEプリペイド1000円分が当たる！</FONT>
      <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_bbq.png') }}" width="100%" />
        </a>
 
-
+<div id="aulogin">
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
  <div>
  {% if user is empty %}
