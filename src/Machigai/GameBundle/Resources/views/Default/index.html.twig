@@ -68,6 +68,7 @@ LINEプリペイド1000円分が当たる！</FONT>
   <a href="https://e-aquarium.jp/asp/">
      <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_boe.png') }}" width="100%" />
   </a>
+  <a name="auin"></a>
   <div style="text-align: left;">
   </div>
   <a href="https://bbq-g.com/asp/">
@@ -76,7 +77,7 @@ LINEプリペイド1000円分が当たる！</FONT>
 
 
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
-<a name="auin">a</a>
+
  {% if user is empty %}
   <a href="{{ path('AuIdLogin')  }}" alt="login">
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/></a>
