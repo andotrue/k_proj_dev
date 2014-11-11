@@ -13,28 +13,6 @@
 <style>
 body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
 </style>
-    
-        
-        <!-- スムーズスクロール部分の記述 -->
-<script>
-//スムーズスクロール
-jQuery(function(){
-   // #で始まるアンカーをクリックした場合に処理
-   jQuery('a[href^=#]').click(function() {
-	  // スクロールの速度
-	  var speed = 400; // ミリ秒
-	  // アンカーの値取得
-	  var href= jQuery(this).attr("href");
-	  // 移動先を取得
-	  var target = jQuery(href == "#aulogin" || href == "" ? 'html' : href);
-	  // 移動先を数値で取得
-	  var position = target.offset().top;
-	  // スムーススクロール
-	  jQuery('body,html').animate({scrollTop:position}, speed, 'swing');
-	  return false;
-   });
-});
-</script>
         
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
@@ -57,8 +35,7 @@ jQuery(function(){
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/line_coin.png') }}" width="100%" /></a> 
 
   {% if user is empty %}
-  <font size="-1">↓今すぐauIDログイン↓</font>
-  <a href="#aulogin">
+<a href="#auin">
   <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_machigai.png') }}" width="100%" />
     </a>
   {% else %}
@@ -99,7 +76,7 @@ LINEプリペイド1000円分が当たる！</FONT>
 
 
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
-<div id="aulogin">a</div>
+<a name="auin">a</a>
  {% if user is empty %}
   <a href="{{ path('AuIdLogin')  }}" alt="login">
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/></a>
