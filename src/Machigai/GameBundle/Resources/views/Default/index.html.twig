@@ -13,35 +13,40 @@
 <style>
 body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
 </style>
-    
-        
-        <!-- スムーズスクロール部分の記述 -->
-<script>
-$(function(){
-   // #で始まるアンカーをクリックした場合に処理
-   $('a[href^=#kaiyuu]').click(function() {
-      // スクロールの速度
-      var speed = 700; // ミリ秒
-      // アンカーの値取得
-      var href= $(this).attr("href");
-      // 移動先を取得
-      var target = $(href == "#" || href == "" ? 'html' : href);
-      // 移動先を数値で取得
-      var position = target.offset().top;
-      // スムーススクロール
-      $('body,html').animate({scrollTop:position}, speed, 'swing');
-      return false;
-   });
-});
-</script>
         
 <header id="title" class="top_bg" >
  <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
 <br /><br />
 
  
- ↓タップして空メール送信で応募できます！
 
+
+  {% if user is empty %}
+<a href="#auin">
+  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_nologin_machigai.png') }}" width="100%" />
+    </a>
+  {% else %}
+  	<a href='{{ path('Shop') }}' id="hshop_button">
+<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_machigai.png') }}" width="100%" />
+  </a>
+ {% endif %}
+
+
+<script type="text/javascript">
+if(navigator.userAgent.indexOf('iPhone') > 0){
+}else if(navigator.userAgent.indexOf('Android') > 0){
+document.write("</a><a href='https://machigai.puzzle-m.net/movstamp.html'><img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner.png'width='100%' /></a>");
+}else{}
+</script>
+
+<script type="text/javascript">
+if(navigator.userAgent.indexOf('iPhone') > 0){
+}else if(navigator.userAgent.indexOf('Android') > 0){
+document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプみたいに使えちゃう♪<br>");
+}else{}
+</script>
+ <br />
+ ↓タップして空メール送信で応募できます！
  <br />
   
 <a href="mailto:present@machigai.puzzle-m.net?subject=LINEコイン応募&amp;body=何も入力せずに
@@ -51,20 +56,36 @@ $(function(){
  <br />
 ※複数送信されても当選確率は変動致しません。"> 
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/line_coin.png') }}" width="100%" /></a> 
+
+<FONT color="maroon">
+LINEプリペイド1000円分が当たる！</FONT>
 <br>
+
 <font size="-1">
 2014年11月30日正午の締め切りとします。<br>
 当選者の方には応募メールアドレス宛てに<br>
 12月15日迄にご連絡致します。</font>
 <br />
 <br />
- <!-- 壁紙スタンプ無料 -->
-<FONT color="maroon">
-【期間限定】<br />
-LINEで使えるスタンプ取り放題！</FONT>
+
+
+  <a href="https://ausp.puzzle-m.net/">
+    <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_puzzle.png') }}" width="100%" />
+  </a>
+  <a href="https://e-aquarium.jp/asp/">
+     <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_boe.png') }}" width="100%" />
+  </a>
+  <a name="auin"></a>
+  <div style="text-align: left;">
+  </div>
+  <a href="https://bbq-g.com/asp/">
+     <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_bbq.png') }}" width="100%" />
+       </a>
+
+
 
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
- <div>
+  
  {% if user is empty %}
   <a href="{{ path('AuIdLogin')  }}" alt="login">
   <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/></a>

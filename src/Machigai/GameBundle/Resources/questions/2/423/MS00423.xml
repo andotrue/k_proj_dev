@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>423</id>
+ <name>工事中につき迂回してください</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>172</x><!--point のx座標 -->
+  <y>106</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>396</x><!--point のx座標 -->
+  <y>128</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>433</x><!--point のx座標 -->
+  <y>285</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>470</x><!--point のx座標 -->
+  <y>346</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>79</x><!--point のx座標 -->
+  <y>405</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>229</x><!--point のx座標 -->
+  <y>310</y><!--point のy座標-->
+ </point>
+</different>

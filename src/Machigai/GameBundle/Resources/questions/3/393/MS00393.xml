@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>393</id>
+ <name>十二支たちのUKIUKIピクニック</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>75</x><!--point のx座標 -->
+  <y>114</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>224</x><!--point のx座標 -->
+  <y>18</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>350</x><!--point のx座標 -->
+  <y>133</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>178</x><!--point のx座標 -->
+  <y>213</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>305</x><!--point のx座標 -->
+  <y>264</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>35</x><!--point のx座標 -->
+  <y>316</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>24</x><!--point のx座標 -->
+  <y>435</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>227</x><!--point のx座標 -->
+  <y>399</y><!--point のy座標-->
+ </point>
+</different>
