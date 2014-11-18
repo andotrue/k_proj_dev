@@ -12,8 +12,8 @@ class BaseController extends Controller
 {
     /** DEBUGモード　*/
     public $MODE = "DEBUG";
-    public $DEBUG = false;
-	public $AUID_DEBUG = false;
+    public $DEBUG = true;
+	public $AUID_DEBUG = true;
 
 	public function getUser()
 	{

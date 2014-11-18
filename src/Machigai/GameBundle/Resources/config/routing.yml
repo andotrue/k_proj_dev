@@ -453,3 +453,11 @@ SaveGameData:
 AndroidRegistDeviceId:
     pattern: /android/add_regist_id
     defaults: { _controller: MachigaiGameBundle:Android:registDeviceId }
+
+apply_show:
+    pattern: /apply/show/{pageName}
+    defaults: { _controller: MachigaiGameBundle:Apply:show }
+
+apply_complete:
+    pattern: /apply/complete
+    defaults: { _controller: MachigaiGameBundle:Apple:complete }
