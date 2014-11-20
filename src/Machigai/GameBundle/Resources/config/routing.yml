@@ -227,6 +227,10 @@ downloadExecute:
     pattern: /shop/downloadExecute/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:downloadExecute }
 
+downloadExecuteWV:
+    pattern: /shop/downloadExecuteWV/{id}
+    defaults: { _controller: MachigaiGameBundle:Shop:downloadExecuteWV }
+
 Ranking:
     pattern: /ranking/
     defaults: { _controller: MachigaiGameBundle:Ranking:index }

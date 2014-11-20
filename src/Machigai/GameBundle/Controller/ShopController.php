@@ -184,6 +184,31 @@ class ShopController extends BaseController
         }
     }
 
+	public function downloadExecuteWVAction($id){
+
+		$request = $this->get('request');
+    $mode = $request->query->get("mode");
+    
+    $item = $this->getDoctrine()
+      ->getRepository('MachigaiGameBundle:Item')
+      ->findOneById($id);
+    
+    $categoryCode = $item->getCategory()->getCategoryCode();
+    $itemPath = $item->getItemPath();
+    if($categoryCode==1){
+        $itemPath = "/../Resources/public/images/wallpaper/".$itemPath.".png";
+    }elseif($categoryCode==2){
+        $itemPath = "/../Resources/public/images/stamp/".$itemPath.".png";
+    }
+		
+    if( empty($mode) ||  $mode != 'file'){
+        return $this->render('MachigaiGameBundle:Shop:downloadedContentViewWV.html.twig',
+          array('id'=>$id, 'mode' => 'file'));
+    }else{
+        return $this->download($itemPath);
+    }
+  }
+    
     public function download($itemPath){
 
         $image_file = dirname(__FILE__).$itemPath;
