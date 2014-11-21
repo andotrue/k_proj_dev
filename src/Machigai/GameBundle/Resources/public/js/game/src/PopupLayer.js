@@ -216,7 +216,7 @@ var PopupLayer = cc.Layer.extend({
 		
 		this.dispTitle();
 
-        var cancel = this.createCancelButton(640,popupY + 170);
+        var cancel = this.createCancelButton(640,popupY + 120);
 		var menu = cc.Menu.create([cancel]);
 		menu.setPosition(0,0);
 		this.addChild(menu);
@@ -238,7 +238,7 @@ var PopupLayer = cc.Layer.extend({
 		
 		// ヒントボタンを無効に
 		if(this.baseLayer.getHint){
-			this.popupHint.setEnabled(false);
+			popupHint.setEnabled(false);
 		}
 		
         var popupSave = cc.MenuItemImage.create(
