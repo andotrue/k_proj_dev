@@ -236,6 +236,11 @@ var PopupLayer = cc.Layer.extend({
         if( this.playInfo._playData._isHintUsed)
             popupHint.setEnabled(false);
 		
+		// ヒントボタンを無効に
+		if(this.baseLayer.getHint){
+			this.popupHint.setEnabled(false);
+		}
+		
         var popupSave = cc.MenuItemImage.create(
             bd+"res/game_scene/button/game_icon_save.png",
             bd+"res/game_scene/button/game_icon_save.png",
@@ -256,15 +261,15 @@ var PopupLayer = cc.Layer.extend({
         var level = this.playInfo.LEVEL;
 
         var copyrightImage = cc.Sprite.create( bd+"../../../../../sync/game/file/"+level+"/"+qcode+"/copyright");
-        copyrightImage.setPosition(436, 138);
+        copyrightImage.setPosition(436, 750);
         copyrightImage.name = "COPYRIGHT";
 
         var popupLinkUrl = cc.MenuItemImage.create(
             bd+"res/game_scene/button/button_game_link_url.png",
             bd+"res/game_scene/button/button_game_link_url.png",
-            this.baseLayer.menuCallBack.bind(this)
+            this.popupLinkUrl.bind(this)
         );
-        popupLinkUrl.setPosition(601, 138);
+        popupLinkUrl.setPosition(601, 750);
         popupLinkUrl.name = "LINKURL";
         //copyrightImageがあるかどうかでlinkURLを表示するかどうかを判断する
         var thisbl = this;
@@ -335,6 +340,9 @@ var PopupLayer = cc.Layer.extend({
 	},
 	popupHint:function () {
 //        cc.unregisterTouchDelegate(this);
+		
+		this.slider.setVisible(false);
+		
 		this.playInfo.clock.interruptTimer();
         this.state = "HINT";
 
@@ -363,6 +371,8 @@ var PopupLayer = cc.Layer.extend({
 		}
     },
     popupSave:function () {
+
+		this.slider.setVisible(false);
 
 		this.playInfo.clock.interruptTimer();
         this.state = "SAVE";
@@ -438,6 +448,9 @@ var PopupLayer = cc.Layer.extend({
         }
     },
     popupGiveup:function () {
+		
+		this.slider.setVisible(false);
+		
 		this.playInfo.clock.interruptTimer();
         this.state = "GIVEUP";
         var popup = cc.Sprite.create( gsDir + "popup/popup_game_giveup.png" );

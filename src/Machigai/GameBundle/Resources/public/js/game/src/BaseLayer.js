@@ -75,25 +75,15 @@ var BaseLayer = cc.Layer.extend({
             this.clock = this.playInfo.clock;
             this.addChild(this.clock,15);
 
-//            this.slider = new Slider(1.0, 3.0);
-//            this.addChild(this.slider,18);
-
-//			this.initMenu();
-
 			var thr = this.HEIGHT - this.getContentSize().height;
 			this.setPositionY(-thr);
 
             bRet = true;
 
-			// マーキーの表示
-/*			
-			this.dispTitle();
-*/
-
 			// メニューボタン
 			var mainMenu = cc.MenuItemImage.create(
-				bd+"res/game_scene/button/button_game_link_url.png",
-				bd+"res/game_scene/button/button_game_link_url.png",
+				bd+"res/game_scene/button/button_main_manu.png",
+				bd+"res/game_scene/button/button_main_manu.png",
 				this.menuCallBack.bind(this)
 			);
 			mainMenu.name = "MAIN_MENU";
@@ -164,17 +154,6 @@ var BaseLayer = cc.Layer.extend({
         cc.log("Base.onTouchBegan: ( " + touch.getLocation().tox + ", " + touch.getLocation().y + " )");
 
         var touched = this.touchedFrom = touch.getLocation();
-        var slidebar = this.slider.slidebar;
-        var slideicon = this.slider.slideicon;
-
-        if(this.isInside(slidebar,touched)){
-            cc.log("Inside the slidebar area!");
-        }
-
-        if(this.isInside(slideicon,touched)){
-            cc.log("Inside the slideicon area!");
-            this.canMoveSlider = true;
-        }
 		// ２つのイラスト上にポイントがあるかをチェック
 		var ill0 = this.illusts.frames[0].illust;
 		var point0 = ill0.convertToNodeSpace(touch.getLocation());
@@ -413,9 +392,6 @@ var BaseLayer = cc.Layer.extend({
     },
 	dispHint:function(){
 		this.getHint = true;
-
-		// ヒントボタンを無効に
-		this.popupHint.setEnabled(false);
 
 		// 既に正解した答えの番号を取得
 		var alreadyAnsweredIndex = new Array();
