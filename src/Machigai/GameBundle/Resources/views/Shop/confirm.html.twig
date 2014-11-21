@@ -22,7 +22,7 @@ function originalImage(){
 function doDownloadExecute(){
     var userAgent = window.navigator.userAgent.toLowerCase();
     if (userAgent.indexOf('/spass-app/') != -1){
-        location.href = '{{path('downloadExecuteWV',{"id":id})}}';
+        location.href = '{{path('downloadExecuteWV',{"id":id})}}?spia_so=1';
     } else {
         location.href = '{{path('downloadExecute',{"id":id})}}';
     }
