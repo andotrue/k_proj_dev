@@ -367,8 +367,10 @@ var BaseLayer = cc.Layer.extend({
         this.addChild(popup);
     },
     menuCallBack:function(sender){
-        var popup = new PopupLayer(this.parent,this.parent);
-        popup.init(sender.name);
+		if(this.isPopupActive){
+			return;
+		}
+        var popup = new PopupLayer(sender.name,this.parent);
         this.addChild(popup);
     },
     onEnter:function () {

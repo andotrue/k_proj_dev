@@ -14,6 +14,9 @@ var PopupLayer = cc.Layer.extend({
         this.init(type);
     },
     init:function (type) {
+		
+		this.baseLayer.isPopupActive = true;
+		
         cc.log("PopupLayer.init");
         var bRet = false;
         if (this._super()) {
@@ -164,6 +167,11 @@ var PopupLayer = cc.Layer.extend({
 
 		popup.setPosition(360, popupY );
     },
+	
+	removeFromParent:function() {
+		this.baseLayer.isPopupActive = false;
+		this._super();
+	},
 
     popupClear:function () {
         this.state = "CLEAR";
