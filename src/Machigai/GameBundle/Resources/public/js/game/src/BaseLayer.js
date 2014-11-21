@@ -75,10 +75,10 @@ var BaseLayer = cc.Layer.extend({
             this.clock = this.playInfo.clock;
             this.addChild(this.clock,15);
 
-            this.slider = new Slider(1.0, 3.0);
-            this.addChild(this.slider,18);
+//            this.slider = new Slider(1.0, 3.0);
+//            this.addChild(this.slider,18);
 
-            this.initMenu();
+//			this.initMenu();
 
 			var thr = this.HEIGHT - this.getContentSize().height;
 			this.setPositionY(-thr);
@@ -86,7 +86,22 @@ var BaseLayer = cc.Layer.extend({
             bRet = true;
 
 			// マーキーの表示
+/*			
 			this.dispTitle();
+*/
+
+			// メニューボタン
+			var mainMenu = cc.MenuItemImage.create(
+				bd+"res/game_scene/button/button_game_link_url.png",
+				bd+"res/game_scene/button/button_game_link_url.png",
+				this.menuCallBack.bind(this)
+			);
+			mainMenu.name = "MAIN_MENU";
+			mainMenu.setPosition(650, this.MACHIGAI_Y - 25);
+			this.menu = mainMenu;
+			var menu = cc.Menu.create([mainMenu]);
+			menu.setPosition(0,0);
+			this.addChild(menu);
         }
         return bRet;
     },
@@ -133,69 +148,7 @@ var BaseLayer = cc.Layer.extend({
         this.stars = new Stars(self,this.playInfo.MACHIGAI_LIMIT);
         this.hearts = new Hearts(self, this.playInfo.FAIL_LIMIT);
     },
-    initMenu:function(){
-        var popupHint = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/game_icon_hint.png",
-            bd+"res/game_scene/button/game_icon_hint.png",
-            this.menuCallBack.bind(this)
-        );
-//        popupHint.setPosition(506, 50);
-        popupHint.setPosition(185, 259);
-		popupHint.setDisabledImage(
-				cc.Sprite.create(bd+"res/game_scene/button/game_icon_hint_gray.png"));
-        popupHint.name = "HINT";
-        if( this.playInfo._playData._isHintUsed)
-            popupHint.setEnabled(false);
-		this.popupHint = popupHint;
-
-        var popupSave = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/game_icon_save.png",
-            bd+"res/game_scene/button/game_icon_save.png",
-            this.menuCallBack.bind(this)
-        );
-        popupSave.setPosition(360, 259);
-        popupSave.name = "SAVE";
-
-        var popupGiveup = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/game_icon_giveup.png",
-            bd+"res/game_scene/button/game_icon_giveup.png",
-            this.menuCallBack.bind(this)
-        );
-        popupGiveup.setPosition(535, 259);
-        popupGiveup.name = "GIVEUP";
-
-        var qcode = this.playInfo.QCODE;
-        var level = this.playInfo.LEVEL;
-
-        var copyrightImage = cc.Sprite.create( bd+"../../../../../sync/game/file/"+level+"/"+qcode+"/copyright");
-        copyrightImage.setPosition(436, 138);
-        copyrightImage.name = "COPYRIGHT";
-
-        var popupLinkUrl = cc.MenuItemImage.create(
-            bd+"res/game_scene/button/button_game_link_url.png",
-            bd+"res/game_scene/button/button_game_link_url.png",
-            this.menuCallBack.bind(this)
-        );
-        popupLinkUrl.setPosition(601, 138);
-        popupLinkUrl.name = "LINKURL";
-        //copyrightImageがあるかどうかでlinkURLを表示するかどうかを判断する
-        var thisbl = this;
-
-        var a = setInterval(function(){
-            var isCopyrightImage = ( copyrightImage._contentSize._height !== 0 );
-            var menu = null;
-            if (isCopyrightImage){
-                menu = cc.Menu.create([popupHint,popupSave,popupGiveup,popupLinkUrl]);
-            }else{
-                menu = cc.Menu.create([popupHint,popupSave,popupGiveup]);
-            }
-
-            menu.setPosition(0,0);
-            thisbl.addChild(menu);
-            thisbl.addChild(copyrightImage);
-        }, 500);
-    },
-    onTouchesBegan: function(touches, event){
+	onTouchesBegan: function(touches, event){
         cc.log('onTouchesBegan:' + touches.length);
         this.onTouchBegan(touches[0], event);
     },
@@ -277,16 +230,16 @@ var BaseLayer = cc.Layer.extend({
 			//cc.log("rect " + this.getRect().height);
 
 
-			var thr = this.HEIGHT - this.getContentSize().height;
-			var posy = this.getPositionY() + dy;
-
-			if( -thr < posy && posy < 0 ){
-				this.setPositionY(posy);
-			} else if (-thr >= posy ) {
-				this.setPositionY(-thr);
-			} else {
-				this.setPositionY(0);
-			}
+//			var thr = this.HEIGHT - this.getContentSize().height;
+//			var posy = this.getPositionY() + dy;
+//
+//			if( -thr < posy && posy < 0 ){
+//				this.setPositionY(posy);
+//			} else if (-thr >= posy ) {
+//				this.setPositionY(-thr);
+//			} else {
+//				this.setPositionY(0);
+//			}
 		}
         if (this.isIllustTouched === true){
             this.isIllustTouched = false;
@@ -615,55 +568,5 @@ var BaseLayer = cc.Layer.extend({
 				}
 			}
 		}
-	},
-	dispTitle: function(){
-
-		// タイトルのマーキー表示
-
-		var labelWidth = 140;
-		var labelHeight = 40;
-		var labelX = 195;
-		var labelY = 141;
-		var title  = this.playInfo.TITLE;
-		var MIN_LENGTH = 500;
-		var length = title.length * 40;
-
-		if( length < MIN_LENGTH){
-			length = MIN_LENGTH;
-		}
-
-		var tencil = cc.DrawNodeCanvas.create();
-		tencil.drawPoly(
-			[
-			cc.p(-labelWidth,labelHeight),
-			cc.p(-labelWidth,-labelHeight),
-			cc.p(labelWidth, -labelHeight),
-			cc.p(labelWidth,labelHeight)
-			],
-			new cc.Color4F(0,0,0,0),
-			0,
-			new cc.Color4F(0,0,0,0));
-
-		tencil.setPosition(cc.p(labelX,labelY));
-
-		var titleLabel = cc.LabelTTF.create(title, "Arial", 38);
-		titleLabel.setPosition(cc.p(labelX + labelWidth,labelY));
-		titleLabel.setColor(new cc.Color4F(0,0,0,0));
-		titleLabel.setHorizontalAlignment(cc.TEXT_ALIGNMENT_LEFT);
-
-		var clipNode = cc.ClippingNode.create(tencil);
-
-		clipNode.addChild(titleLabel);
-		this.addChild(clipNode);
-
-		var moveQ = length + (labelWidth * 2);
-
-        titleLabel.runAction(cc.MoveBy.create(0, cc.p(labelWidth * 2, 0)));
-
-       	var go = cc.MoveBy.create(10, cc.p(-moveQ, 0));
-        var goBack = cc.MoveBy.create(0, cc.p(moveQ, 0));
-        var seq = cc.Sequence.create(go, goBack, null);
-        titleLabel.runAction((cc.RepeatForever.create(seq) ));
-
 	}
 });
