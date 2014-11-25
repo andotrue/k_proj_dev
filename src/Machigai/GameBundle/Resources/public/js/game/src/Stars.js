@@ -1,10 +1,10 @@
 var Stars = cc.Class.extend({
     _MAX: null,
     _count: 0,
-    _objWidth: 30,
-    _objHeight: 40,
-    _objX: 430,
-    _objY: 1366,
+    _objWidth: 17,
+    _objHeight: 22,
+    _objX: 420,
+    _objY: 1370,
     _sprites: [],
     parent: null,
 

@@ -34,6 +34,16 @@
         }, false);
     </script>
     -->
+    <script type="text/javascript">
+    $(function(){
+	var userAgent = window.navigator.userAgent.toLowerCase();
+	if (userAgent.indexOf('/spass-app/') != -1){
+		// 全てのページの先頭に20pxの空白を挿入
+		$("body").prepend("<div style='width: 100%; height: 40px; background-color: #3D91EE;'>&nbsp;</div>");
+
+        }
+    });
+    </script>
     <style>
         body, canvas, div {
             -moz-user-select: none;
