@@ -574,7 +574,7 @@ var PopupLayer = cc.Layer.extend({
     linkUrl:function () {
         cc.log("linkUrl()");
         this.questionId = this.playInfo.QUESTION_ID;
-        window.location = "/sync/copyright?id="+this.questionId+"&spia_so=1";
+        window.location = "/sync/copyright?id="+this.questionId;
     },
     menuCallBack:function (sender) {
         cc.log('PopupLayer.menuCallBack');
