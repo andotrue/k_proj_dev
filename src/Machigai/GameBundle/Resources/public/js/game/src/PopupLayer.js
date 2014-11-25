@@ -211,7 +211,7 @@ var PopupLayer = cc.Layer.extend({
 		this.playInfo.clock.interruptTimer();
         this.state = "MAIN_MENU";
 
-        var popup = cc.Sprite.create( gsDir + "popup/mainmanu.png" );
+        var popup = cc.Sprite.create( gsDir + "popup/mainmenu.png" );
         this.addChild(popup);
 
 		var popupY = this.getPopupPosAndScrollTop();
@@ -302,7 +302,7 @@ var PopupLayer = cc.Layer.extend({
 
 		var labelWidth = 140;
 		var labelHeight = 40;
-		var labelX = 285;
+		var labelX = 205;
 		var labelY = 750;
 		var title  = this.playInfo.TITLE;
 		var MIN_LENGTH = 500;
@@ -550,7 +550,9 @@ var PopupLayer = cc.Layer.extend({
         this.removeFromParent();
     },
     popupLinkUrl:function () {
-        cc.log("popupLinkUrl()");
+		this.slider.setVisible(false);
+
+		cc.log("popupLinkUrl()");
         this.playInfo.clock.interruptTimer();
         this.state = "LINKURL";
 

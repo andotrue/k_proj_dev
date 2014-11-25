@@ -58,26 +58,26 @@ $(function(){
         " >
             <a href='{{ path('GameSelect') }}'>
                 <img alt="まちがいさがし" 
-                     src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}"
+                     src="{{asset('/bundles/machigaigame/images/parts/sub_machigai.png')}}"
                      /></a>
 
             {% if user is empty %}
-                <img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_gray.png')}}" width="12%" />
+                <img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_on.png')}}" width="12%" />
             {% else %}
                 <a href='{{ path('Shop') }}'>
                 <img alt="ショップ" 
-                     src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" 
+                     src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_off.png')}}" 
                      /></a>
           {% endif %}
 
             <a href='{{ path('Ranking') }}'>
                 <img alt="ランキング" id="ranking_button" 
-                     src="{{asset('/bundles/machigaigame/images/parts/button_ranking_off.png')}}" 
+                     src="{{asset('/bundles/machigaigame/images/parts/sub_rank.png')}}" 
                      /></a>
 
             <a href='{{ path('Help') }}'>
                 <img alt="ヘルプ" 
-                     src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" 
+                     src="{{asset('/bundles/machigaigame/images/parts/sub_help.png')}}" 
                      /></a>
         </div>
     </div>

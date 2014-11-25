@@ -82,8 +82,8 @@ var BaseLayer = cc.Layer.extend({
 
 			// メニューボタン
 			var mainMenu = cc.MenuItemImage.create(
-				bd+"res/game_scene/button/button_main_manu.png",
-				bd+"res/game_scene/button/button_main_manu.png",
+				bd+"res/game_scene/button/game_menu_off.png",
+				bd+"res/game_scene/button/game_menu_on.png",
 				this.menuCallBack.bind(this)
 			);
 			mainMenu.name = "MAIN_MENU";
