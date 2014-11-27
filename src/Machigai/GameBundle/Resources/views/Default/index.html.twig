@@ -12,14 +12,86 @@
 	<link rel="apple-touch-icon-precomposed" href="{{ asset('/bundles/machigaigame/images/parts/icon_256template_ios7.png') }}">
 <style>
 body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
+
+#wv_wrap {
+    top: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#wv_header {
+    padding-left: 45%;
+}
+#wv_blank {
+    height: 50px;
+}
+#wv_header img{
+    margin-top: 7%;
+    margin-bottom: 4%;
+    margin-left: 1%;
+    width: 19%;
+}
 </style>
+
+<script type="text/javascript">
+$(function(){
+	var userAgent = window.navigator.userAgent.toLowerCase();
+	if (userAgent.indexOf('/spass-app/') != -1){
+   
+            $(".ignoreWebview").hide();
+            $("#default_header").hide();
+            $("#wv_header").show();
+            $("#wv_blank").show();
+            $("#wv_wrap").show();
+        }
+});
+</script>
         
+
 <header id="title" class="top_bg" >
- <img src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
+    <div id="wv_wrap" style="display:none">
+        <div style="height: 20px; width: 100%; background-color: #66D842"></div>
+        <div id="wv_header" 
+             style="
+             display: none;
+             background-image:url({{ asset('/bundles/machigaigame/images/parts/wv_header_back.png') }});
+             -moz-background-size:cover;
+             background-size:cover;
+        " >
+            <a href='{{ path('GameSelect') }}'>
+                <img alt="まちがいさがし" 
+                     src="{{asset('/bundles/machigaigame/images/parts/sub_machigai.png')}}"
+                     /></a>
+
+            {% if user is empty %}
+                <img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_on.png')}}" width="12%" />
+            {% else %}
+                <a href='{{ path('Shop') }}'>
+                <img alt="ショップ" 
+                     src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_off.png')}}" 
+                     /></a>
+          {% endif %}
+
+            <a href='{{ path('Ranking') }}'>
+                <img alt="ランキング" id="ranking_button" 
+                     src="{{asset('/bundles/machigaigame/images/parts/sub_rank.png')}}" 
+                     /></a>
+
+            <a href='{{ path('Help') }}'>
+                <img alt="ヘルプ" 
+                     src="{{asset('/bundles/machigaigame/images/parts/sub_help.png')}}" 
+                     /></a>
+        </div>
+    </div>
+    <div id="wv_blank" style="display:none">&nbsp;</div>        
+
+    
+ <img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
 <br /><br />
 
  
 
+<div class="ignoreWebview">
 
   {% if user is empty %}
 <a href="#auin">
@@ -30,7 +102,6 @@ body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})
 <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/iihuuhu_machigai.png') }}" width="100%" />
   </a>
  {% endif %}
-
 
 <script type="text/javascript">
 if(navigator.userAgent.indexOf('iPhone') > 0){
@@ -73,16 +144,16 @@ LINEプリペイド1000円分が当たる！</FONT>
     <img src="http://smpbanner.hubase-i.net/img/tl_banner_puzzle.png" width="100%" />
   </a>
   <a href="https://e-aquarium.jp/asp/">
-     <img src="http://smpbanner.hubase-i.net/img/tl_banner_aqua.png" width="100%" />
+     <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_boe.png') }}" width="100%" />
   </a>
   <a name="auin"></a>
   <div style="text-align: left;">
   </div>
   <a href="https://bbq-g.com/asp/">
-     <img src="http://smpbanner.hubase-i.net/img/tl_banner_bbq.png" width="100%" />
+     <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/tl_banner_bbq.png') }}" width="100%" />
        </a>
 
-
+</div>
 
  <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
   
