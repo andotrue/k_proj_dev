@@ -95,6 +95,8 @@ google.bookmarkbubble.Bubble.prototype.showIfAllowed = function() {
     return false;
   }
 
+  return false;
+
   var userAgent = window.navigator.userAgent.toLowerCase();
   if (userAgent.indexOf('/spass-app/') != -1){
 	return false;

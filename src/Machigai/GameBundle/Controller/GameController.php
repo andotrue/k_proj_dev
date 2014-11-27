@@ -40,19 +40,17 @@ class GameController extends BaseController
                 ->getResult();
 */
 		$now = date("Y-m-d", strtotime("now"));
-		
+
         $questions = $this->getDoctrine()
-                ->getEntityManager()
-                ->createQuery('SELECT q from MachigaiGameBundle:Question q 
-                                    left join  q.playHistories p 
-									where
-									q.distributedFrom <= :now and
-									q.distributedTo >= :now 
-                                    order by q.questionNumber asc')
-				->setParameter("now", $now)
-                ->getResult();
-
-
+          ->getEntityManager()
+          ->createQuery('SELECT q from MachigaiGameBundle:Question q 
+            where
+            q.distributedFrom <= :now and
+            q.distributedTo >= :now 
+                              order by q.questionNumber asc')
+          ->setParameter("now", $now)
+                  ->getResult();
+      
         if(!empty($user)){
             $pre_playedQuestions = $this->getDoctrine()
             ->getRepository('MachigaiGameBundle:PlayHistory')
