@@ -3,20 +3,37 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/bookmark_bubble.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/example.js') }}"></script>
 	
 <style>
 body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
-</style>
 
+#wv_wrap {
+    top: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#wv_header {
+    padding-left: 45%;
+}
+#wv_blank {
+    height: 50px;
+}
+#wv_header img{
+    margin-top: 7%;
+    margin-bottom: 4%;
+    margin-left: 1%;
+    width: 19%;
+}
+</style>
 
 <div style="text-align: center; margin-top: 50px;">
 
  <img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
-<br /><br />
+<br />
     
 <font size="5">ゆく年くる年特別企画！</font>
+<br />
 
    <a href="https://machigai.puzzle-m.net/">
     <img src="http://smpbanner.hubase-i.net/img/lp_nenmatu.png" width="100%" />
