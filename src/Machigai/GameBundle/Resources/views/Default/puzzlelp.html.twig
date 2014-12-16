@@ -3,35 +3,62 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+	
 <style>
-    p {
-        font-size: 0.8em;
-    }
-    body {
-        background-image: url("/bundles/machigaigame/images/parts/lpb_bg.jpg");
-    }
-    .lpb {
-        margin-bottom: 25px;
-    }
+body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
+
+#wv_wrap {
+    top: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#wv_header {
+    padding-left: 45%;
+}
+#wv_blank {
+    height: 50px;
+}
+#wv_header img{
+    margin-top: 7%;
+    margin-bottom: 4%;
+    margin-left: 1%;
+    width: 19%;
+}
 </style>
 
-<div style="text-align: center; margin-top: 50px;">
-    
-    <a href="/">
-        <img class="lpb" src="{{ asset('/bundles/machigaigame/images/parts/lpb_main.png')  }}" width="95%" />
-    </a>
-    
-    <a href="https://ausp.puzzle-m.net/">
-        <img class="lpb" src="{{ asset('/bundles/machigaigame/images/parts/lpb_puzzle.png')  }}" width="90%" />
-    </a>
+<div style="text-align: center; margin-top: 0px;">
 
-    <a href="https://e-aquarium.jp/asp/">
-    <img class="lpb" src="{{ asset('/bundles/machigaigame/images/parts/lpb_aquarium.png')  }}" width="90%" />
-    </a>
+ <img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
+<br />
     
+<font size="5" color="maroon">ゆく年くる年特別企画！</font>
+<br />
+
+<font size"3" color="#006400"><b>幸運を呼ぶ秘テク公開！<br />
+下のプレゼントに応募して幸せＧＥＴ！</b></font>
+<br />
+
+<font size="1">当選者の方には応募メールアドレス宛てにご連絡致します。</font>
+
+
+   <a href="https://machigai.puzzle-m.net/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_nenmatu.png" width="100%" />
+  </a>
+   <a href="https://machigai.puzzle-m.net/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_otoshidama.png" width="100%" />
+  </a>  
+   <a href="https://ausp.puzzle-m.net/">
+    <img src="http://smpbanner.hubase-i.net/img/tl_banner_puzzle.png" width="100%" />
+  </a>
     <a href="https://bbq-g.com/asp/">
-        <img class="lpb" src="{{ asset('/bundles/machigaigame/images/parts/lpb_BBQ.png')  }}" width="90%" />
-    </a>
+     <img src="http://smpbanner.hubase-i.net/img/tl_banner_bbq.png" width="100%" />
+  </a>
+    <a href="https://e-aquarium.jp/asp/">
+     <img src="http://smpbanner.hubase-i.net/img/tl_banner_aqua.png" width="100%" />
+  </a>
+
+  
 </div>
 
 {% endblock %}

@@ -21,9 +21,9 @@ var Slider = cc.Layer.extend({
             var slideicon = cc.Sprite.create( gsDir + "other/game_slideicon.png" );
             this.addChild(slidebar);
             this.addChild(slideicon);
-            slidebar.setPosition(360,383);
+            slidebar.setPosition(360,939);
             slidebar.setScale(1);
-            slideicon.setPosition(140,383);
+            slideicon.setPosition(140,939);
             slideicon.setScale(1);
             this.slidebar = slidebar;
             this.slideicon = slideicon;
