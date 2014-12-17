@@ -51,11 +51,16 @@ class ApplyController extends BaseController
       
       $body = $content;
       
+      var_dump($body);
+      exit;
+      
       // メール送信処理
 			$message = \Swift_Message::newInstance()
 	        ->setSubject('【まちがいさがし放題】応募_' . $title)
+//	        ->setFrom('support@machigai.puzzle-m.net')
+//	        ->setTo('support@machigai.puzzle-m.net')
 	        ->setFrom('support@machigai.puzzle-m.net')
-	        ->setTo('support@machigai.puzzle-m.net')
+	        ->setTo('fujioka@sabeevo.com')
 	        ->setBody($body);
 	        
 	        $this->get('mailer')->send($message);
@@ -67,7 +72,7 @@ class ApplyController extends BaseController
     
     function createMailContent($request){
       
-      $datas = $request->request->all();
+      $datas = $request->all();
       
       $body = "";
       foreach($datas as $key => $val){

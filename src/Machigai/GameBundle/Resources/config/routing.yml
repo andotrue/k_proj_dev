@@ -462,6 +462,10 @@ apply_show:
     pattern: /apply/show/{pageName}
     defaults: { _controller: MachigaiGameBundle:Apply:show }
 
+apply_send:
+    pattern: /apply/sendData
+    defaults: { _controller: MachigaiGameBundle:Apply:sendData }
+
 apply_complete:
     pattern: /apply/complete
     defaults: { _controller: MachigaiGameBundle:Apple:complete }
