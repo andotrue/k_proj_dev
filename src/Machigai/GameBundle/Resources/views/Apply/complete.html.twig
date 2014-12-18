@@ -7,10 +7,23 @@
     p {
         font-size: 0.8em;
     }
+    body {
+        background-image: url({{ asset('/bundles/machigaigame/images/parts/top_bg.png')}});
+    }
+    
 </style>
 <img src="{{ asset('/bundles/machigaigame/images/parts/header.png')  }}" width="100%" />
-<p style="text-align:center;padding:3%;background-image:url(/bundles/machigaigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;">
-応募を受け付けました。
+<p>
+    <br />
+    応募完了致しました。<br />
+    引き続きまちがいさがしをお楽しみ下さい。<br />
+    <br />
+</p>
+<div>
+    <br />
+    <a href="{{path('Top')}}" /><img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);" />    
+    <img id="preToTopImage" class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop.png')}}"  /></a>
+</div>
 </p>
 <br />
 

@@ -51,9 +51,6 @@ class ApplyController extends BaseController
       
       $body = $content;
       
-      var_dump($body);
-      exit;
-      
       // メール送信処理
 			$message = \Swift_Message::newInstance()
 	        ->setSubject('【まちがいさがし放題】応募_' . $title)
@@ -66,8 +63,12 @@ class ApplyController extends BaseController
 	        $this->get('mailer')->send($message);
       
       // 
-      return $this->render('MachigaiGameBundle:Apply:complete.html.twig');
+      return $this->redirect($this->generateUrl('apply_complete'));
       
+    }
+    
+    function completeAction(){
+      return $this->render('MachigaiGameBundle:Apply:complete.html.twig');
     }
     
     function createMailContent($request){

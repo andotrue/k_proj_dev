@@ -468,4 +468,4 @@ apply_send:
 
 apply_complete:
     pattern: /apply/complete
-    defaults: { _controller: MachigaiGameBundle:Apple:complete }
+    defaults: { _controller: MachigaiGameBundle:Apply:complete }
