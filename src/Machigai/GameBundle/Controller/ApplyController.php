@@ -57,7 +57,7 @@ class ApplyController extends BaseController
 //	        ->setFrom('support@machigai.puzzle-m.net')
 //	        ->setTo('support@machigai.puzzle-m.net')
 	        ->setFrom('support@machigai.puzzle-m.net')
-	        ->setTo('fujioka@sabeevo.com')
+	        ->setTo('yamane@hubase-i.net')
 	        ->setBody($body);
 	        
 	        $this->get('mailer')->send($message);
