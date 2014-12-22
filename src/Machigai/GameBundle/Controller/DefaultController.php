@@ -32,7 +32,6 @@ class DefaultController extends BaseController
             $openId = $user->getAuId();
             
             if(!empty($openId)){
-                $openId = $user->getAuId();
 
                 // リワード
                 $cid = "6250";
