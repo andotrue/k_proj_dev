@@ -27,7 +27,41 @@ class DefaultController extends BaseController
         ->getRepository('MachigaiGameBundle:News')
         ->findBy(array(),array('startedAt'=>'DESC'));
 
-        return $this->render('MachigaiGameBundle:Default:index.html.twig', array('user' => $user,'news'=>$news, 'base_url' => $base_url));
+        $session = $request->getSession();
+        $openId = $session->get("openId");
+        
+        if(!empty($openId)){
+            // リワード
+            $cid = "6250";
+            $ad  = "install";
+            $uid = hash('sha256', $openId);
+            $key = "8ccc6ee910d93df31a1e48b542724e5b";
+
+            $to_digest = "$ad:$cid:$uid:$key";
+            $digest = hash('sha256', $to_digest);
+
+            return $this->render('MachigaiGameBundle:Default:index.html.twig',
+                array(
+                    'user' => $user,
+                    'news'=>$news,
+                    'base_url' => $base_url,
+                    'cid'=>$cid,
+                    'ad' => $ad,
+                    'uid' => $uid,
+                    'digest' => $digest,
+                    'reword' => true
+                ));
+
+        } else {
+
+            return $this->render('MachigaiGameBundle:Default:index.html.twig',
+                array(
+                    'user' => $user,
+                    'news'=>$news,
+                    'base_url' => $base_url,
+                    'reword' => false
+                ));
+        }
     }
     public function logoutAction(Request $request){
         $session = $request->getSession();
