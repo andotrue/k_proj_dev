@@ -27,10 +27,10 @@ class DefaultController extends BaseController
         ->getRepository('MachigaiGameBundle:News')
         ->findBy(array(),array('startedAt'=>'DESC'));
 
-        $session = $request->getSession();
-        $openId = $session->get("openId");
+        if(!empty($user) && !empty($user->getAuId())){
         
-        if(!empty($openId)){
+            $openId = $user->getAuId();
+        
             // リワード
             $cid = "6250";
             $ad  = "install";
