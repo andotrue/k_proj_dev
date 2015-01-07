@@ -137,7 +137,7 @@ class DefaultController extends Controller
                         }
                         $logger->info('送信完了 --------------');
 
-			usleep(500000);
+			sleep(1);
 		}
                 $logger->info('---------------------- PUSH通知完了 ----------------------');
 		
