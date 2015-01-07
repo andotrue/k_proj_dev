@@ -49,6 +49,10 @@ class DefaultController extends Controller
 	
 	public function pushAlertCreateAction()
 	{
+            
+                $logger = $this->get('logger');
+                $logger->info('---------------------- PUSH通知開始 ----------------------');
+            
 		$request = $this->getRequest();
 		$message = $request->request->get('message');
 
@@ -86,8 +90,12 @@ class DefaultController extends Controller
 		
 			$regs = $query->getResult();			
 		}
+                $logger->info('送信対象件数： ' . count($regs));
+                
 		
 		foreach($regs as $reg){
+                        $logger->info('送信開始 --------------');
+                        $logger->info('userId : ' . $reg->getUserId());
 			$data = array(
 				'data.message' => $message,
 				'collapse_key' => "1",
@@ -104,11 +112,34 @@ class DefaultController extends Controller
 				'method' => 'POST',
 				'content' => $data,
 				'header' => implode("\r\n", $headers),
+                                'ignore_errors' => true
 			));
-			file_get_contents($url, false, stream_context_create($options));
-			
-			sleep(1);
+			$response = file_get_contents($url, false, stream_context_create($options));
+
+                        preg_match('/HTTP\/1\.[0|1|x] ([0-9]{3})/', $http_response_header[0], $matches);
+                        $status_code = $matches[1];
+                        
+                        $logger->info('http status : ' . $status_code);
+
+                        if($status_code != '200'){
+                            $logger->info('再送信');
+                            // ステータスコードが200以外の場合はリトライ
+                            $response = file_get_contents($url, false, stream_context_create($options));
+                            preg_match('/HTTP\/1\.[0|1|x] ([0-9]{3})/', $http_response_header[0], $matches);
+                            $status_code = $matches[1];
+                            if($status_code != '200'){
+                                $logger->info('再送信失敗');
+                            } else {
+                                $logger->info('再送信成功');
+                            }
+                        } else {
+                            $logger->info('送信完了');
+                        }
+                        $logger->info('送信完了 --------------');
+
+			usleep(500000);
 		}
+                $logger->info('---------------------- PUSH通知完了 ----------------------');
 		
 		return $this->redirect($this->generateUrl('push_alert'));
 	}
