@@ -137,7 +137,7 @@ class DefaultController extends Controller
                         }
                         $logger->error('送信完了 --------------');
 
-			sleep(1);
+			usleep(500000);
 		}
                 $logger->error('---------------------- PUSH通知完了 ----------------------');
 		
