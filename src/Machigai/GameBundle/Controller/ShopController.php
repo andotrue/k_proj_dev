@@ -9,30 +9,39 @@ class ShopController extends BaseController
 {
     public function indexAction()
     {
-    $request= $this->get('request');
-    $categoryCode = $request->query->get("categoryCode");
-
-    $user = $this->getUser();
-    $purchasedItems = $this->getPurchasedItems();
-    $purchaseHistory = $this->getDoctrine()
-    ->getRepository('MachigaiGameBundle:PurchaseHistory')
-    ->findAll();
-
-    $items = $this->getDoctrine()
-        ->getRepository('MachigaiGameBundle:Item')
-        ->findBy(array(),array("id"=>"DESC"));
-	return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items, 'sortId'=> '0', 'categoryCode'=>1, 'user'=>$user,'purchasedItems'=>$purchasedItems));
+        return $this->indexSortAction("0");
     }
     public function indexSortAction($field){
         $request= $this->get('request');
         $categoryCode = $request->query->get("categoryCode");
+        $page = $request->query->get("page");
         $user = $this->getUser();
         $purchasedItems = $this->getPurchasedItems();
-        $purchaseHistory = $this->getDoctrine()
-        ->getRepository('MachigaiGameBundle:PurchaseHistory')
-        ->findAll();
+        
+        // カテゴリーコード
+        if(empty($categoryCode)){
+            $categoryCode = 2;
+        }
+        
+        // ページ
+        if(empty($page)){
+            $page = 1;
+        }
 
-        if($field == "1"){
+        $count = count(
+            $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:Item')
+                ->findBy(array("category" => $categoryCode))
+        );
+        $maxPage = ceil($count / 20);
+        
+        $offset_base = $page -1;
+        $offset = $offset_base * 20;
+
+        if($field == "0"){
+            $sort = "DESC";
+            $fieldName = "id";
+        }elseif($field == "1"){
             $sort = "ASC";
             $fieldName = "name";
         }elseif($field == "2"){
@@ -53,9 +62,24 @@ class ShopController extends BaseController
         }
         $items = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
-        ->findBy(array(),array($fieldName=>$sort));
+        ->findBy(
+            array("category" => $categoryCode),
+            array($fieldName=>$sort),
+            20,
+            $offset
+        );
 
-    return $this->render('MachigaiGameBundle:Shop:index.html.twig',array('items'=>$items, 'sortId'=> $field, 'categoryCode'=>$categoryCode,'user'=>$user,'purchasedItems'=>$purchasedItems));
+        return $this->render(
+            'MachigaiGameBundle:Shop:index.html.twig',
+            array('items'=>$items,
+                'sortId'=> $field,
+                'categoryCode'=>$categoryCode,
+                'user'=>$user,
+                'purchasedItems'=>$purchasedItems,
+                'page' => $page,
+                'maxPage' => $maxPage,
+                'field' => $field,
+            ));
     }
 
     public function wallpaperAction()
