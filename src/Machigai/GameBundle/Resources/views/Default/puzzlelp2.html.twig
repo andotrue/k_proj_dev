@@ -1,0 +1,81 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	
+<style>
+body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
+
+#wv_wrap {
+    top: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#wv_header {
+    padding-left: 45%;
+}
+#wv_blank {
+    height: 50px;
+}
+#wv_header img{
+    margin-top: 7%;
+    margin-bottom: 4%;
+    margin-left: 1%;
+    width: 19%;
+}
+</style>
+
+<div style="text-align: center; margin-top: 0px;">
+
+ <img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
+<br />
+    
+<font size="5" color="maroon">2015年特別企画！</font>
+<br />
+
+<font size"3" color="#006400"><b>幸運を呼ぶ秘テク公開！<br />
+下のプレゼントに応募して幸せＧＥＴ！</b></font>
+<br />
+
+<font size="1">当選者の方には応募メールアドレス宛てにご連絡致します。</font>
+
+
+
+   <a href="https://machigai.puzzle-m.net/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_otoshidama.png" width="100%" />
+  </a>
+     <a href="https://machigai.puzzle-m.net/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_machigai_line.png" width="100%" />
+  </a>
+       <a href="https://machigai.puzzle-m.net/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_machigai_nagareboshi2.png" width="100%" />
+  </a>
+   <a href="https://machigai.puzzle-m.net/shop/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_machigai_neko1.png" width="100%" />
+  </a>
+     <a href="https://machigai.puzzle-m.net/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_machigai_nagareboshi.png" width="100%" />
+  </a>   
+   <a href="https://ausp.puzzle-m.net/">
+    <img src="http://smpbanner.hubase-i.net/img/tl_banner_puzzle.png" width="100%" />
+  </a>
+    <a href="https://bbq-g.com/asp/">
+     <img src="http://smpbanner.hubase-i.net/img/tl_banner_bbq.png" width="100%" />
+  </a>
+    <a href="https://e-aquarium.jp/asp/">
+     <img src="http://smpbanner.hubase-i.net/img/tl_banner_aqua.png" width="100%" />
+  </a>
+   <a href="https://machigai.puzzle-m.net/shop/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_machigai_kouun.png" width="100%" />
+  </a>
+   <a href="https://machigai.puzzle-m.net/shop/">
+    <img src="http://smpbanner.hubase-i.net/img/lp_machigai_osyougatu.png" width="100%" />
+
+  
+</div>
+
+{% endblock %}
+
+
