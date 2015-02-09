@@ -99,11 +99,11 @@ $(function(){
   	<!--auIDスタンプ誘導バナー１ -->
   {% if user is empty %}
 <a href="#auin">
-  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/xmas_nologin_machigai.png') }}" width="100%" />
+  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_nologin_stamp.png') }}" width="100%" />
     </a>
   {% else %}
   	<a href='{{ path('Shop') }}' id="hshop_button">
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/xmas_machigai.png') }}" width="100%" />
+<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp.png') }}" width="100%" />
   </a>
  {% endif %}
 
@@ -134,7 +134,6 @@ if(navigator.userAgent.indexOf('iPhone') > 0){
 document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプみたいに使えちゃう♪<br>");
 }else{}
 </script>
- <br />
  <br />
  ↓タップして空メール送信で応募できます！
  <br />
