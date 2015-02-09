@@ -1,0 +1,450 @@
+@charset "utf-8";
+/* ===============================================
+	▼共通（基本情報）
+=============================================== */
+body{
+	font-family: "メイリオ","Meiryo","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
+	color: #000;
+	font-size: 100%;
+	line-height: 1.6;
+	background: #FFF;
+	text-align: center;
+}
+html >/**/body{
+	font-size: 100%;
+}
+* + html body{
+	font-family: "メイリオ","Meiryo","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS PGothic",Sans-Serif;
+}
+html{
+	width: 100%;
+	height: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+body{
+	width: 100%;
+	position: relative;
+}
+
+/* リンクスタイル */
+a{
+	color: #666666;
+	text-decoration: underline;
+}
+a:hover{
+	color: #666666;
+	text-decoration: underline;
+}
+
+/* ===============================================
+	▼共通（フロート）
+=============================================== */
+/* フロート解除 */
+.clearfix:after{
+	content: "";
+	display: block;
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	visibility: hidden;
+}
+.clearfix{
+	zoom:1;
+}
+* html .clearfix{
+	height: 0px;
+	/*\*//*/
+	height: auto;
+	overflow: hidden;
+	/**/
+}
+.clear { clear: both; height: 0; line-height: 0; font-size: 0; }
+
+/* ===============================================
+	▼共通 (枠)
+=============================================== */
+/* ━━━━ ▼大枠 ━━━━ */
+#wrapper {
+	width: 100%;
+	font-size: 90%;
+	text-align: left;
+	padding: 0;
+	margin: 0 auto;
+	background-color: #CCFFCC;
+}
+#container {
+	width: 100%;
+}
+#sb-site {
+	background-color: #fff;
+}
+
+/* ===============================================
+	▼HEADER CSS設定
+=============================================== */
+header {
+	width: 100%;
+}
+
+/* ━━━━ ▼headImg 設定 ━━━━ */
+header #headImg {
+	position: relative;
+	padding-top: 22%;
+}
+header #headImg img {
+	width: 100%;
+	height: auto;
+}
+header #headImg #headBtn {
+	width: 30%;
+	position: absolute;
+	right: 4%;
+	bottom: 4%;
+}
+header #headImg #headBtn.btnBig {
+	width: 36%;
+}
+header #headImg #headBtn p {
+	padding: 6% 0 0;
+}
+header #headImg #headBtn p img {
+	cursor: pointer;
+}
+
+/* ━━━━ ▼headTop 設定 ━━━━ */
+header #headTop {
+	width: 100%;
+	position: absolute;
+	top: 10px;
+	left: 0px;
+}
+header #headTop #btnGnavi {
+	width: 20%;
+	padding: 4% 0 0;
+}
+header #headTop #btnGnavi span {
+	display: block;
+	padding: 0 40% 0 20%;
+}
+header #btnGnavi img {
+	width: 100%;
+	height: auto;
+	cursor: pointer;
+}
+header #headTop #logo {
+
+	width: 60%;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+header #logo img {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+/* ━━━━ ▼GLOBAL NAVI 設定 ━━━━ */
+#gnavi {
+	min-height: 100%;
+	font-size: 120%;
+	font-weight: bold;
+	background-color: #00CC66;
+}
+#gnavi #gnaviPad {
+	width: 80%;
+	/*min-width: 260px;*/
+	padding: 4% 0;
+	margin: 0 auto;
+}
+#gnavi .btnToggleClose {
+	width: 7%;
+	padding: 0 0 8%;
+}
+#gnavi .btnToggleClose img {
+	width: 100%;
+	height: auto;
+	cursor: pointer;
+}
+#gnavi #menuLogo {
+	width: 100%;
+}
+#gnavi #menuLogo img {
+	width: 100%;
+	height: auto;
+}
+#gnavi .menuTitle {
+	font-size: 110%;
+	border-bottom: 4px solid #fff;
+	padding: 0 0 2px;
+}
+#gnavi ul.menu {
+	padding: 8% 0;
+}
+#gnavi ul.menu.last {
+	border-top: 4px solid #fff;
+}
+#gnavi ul.menu li {
+	padding: 0 0 4%;
+}
+#gnavi ul.menu li#gnTwit {
+	width: 10%;
+	padding: 3% 0 7%;
+}
+#gnavi ul.menu li#gnTwit img {
+	width: 100%;
+	height: auto;
+}
+#gnavi ul li a {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* ━━━━ ▼registBox 設定 ━━━━ */
+#registBox {
+	min-height: 100%;
+	color: #fff;
+	font-size: 120%;
+	text-align: center;
+	background-color: #62d0ff;
+}
+#registBox #registBoxPad {
+	width: 90%;
+	/*min-width: 260px;*/
+	padding: 4% 0;
+	margin: 0 auto;
+}
+#registBox img {
+	width: 100%;
+	height: auto;
+}
+#registBox .btnToggleClose {
+	width: 7%;
+	padding: 0 0 8%;
+}
+#registBox .btnToggleClose img {
+	cursor: pointer;
+}
+#registBox #registLogo {
+	width: 60%;
+	padding: 0 0 15%;
+	margin: 0 auto;
+}
+#registBox .selectMenu {
+	padding: 0 0 15%;
+}
+#registBox .selectMenu li {
+	float: left;
+	width: 46%;
+	padding: 2%;
+}
+#registBox .selectMenu li.center {
+	clear: both;
+	float: none;
+	width: 50%;
+	padding: 2%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+#registBox #btnPremium {
+	padding: 4% 0 0;
+}
+
+/* ===============================================
+	▼FOOTER CSS設定
+=============================================== */
+footer {
+	width: 100%;
+}
+
+/* ━━━━ ▼footSns ━━━━ */
+footer #footSns {
+	padding: 0 4%;
+}
+footer #footSns li {
+	float: left;
+	width: 33%;
+}
+
+/* ━━━━ ▼pagetop ━━━━ */
+footer .pagetop {
+	text-align: right;
+	padding: 5% 4%;
+}
+footer .pagetop img {
+	width: 45%;
+	height: auto;
+}
+
+/* ━━━━ ▼copy ━━━━ */
+footer .copy {
+	display: block;
+	text-align: center;
+	padding: 0 0;
+	margin: 0;
+}
+
+
+/* ===============================================
+	▼munu CSS設定
+=============================================== */
+.menuRibbon {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	background:#E184A5;
+	color:#FEEFEF;
+	line-height:140%;
+	font-weight:bold;
+}
+
+.menuRibbonLight {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	background:#F0ACC0;
+	color:#D75B87;
+	line-height:140%;
+	font-weight:bold;
+}
+
+.menuTab {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	border-width:0 0 0 5px;
+	border-color: #F0ACC0;
+	border-style:solid;
+	background:#E184A5;
+	color:#FEEFEF;
+	line-height:140%;
+	font-weight:bold;
+}
+
+.menuTabLight {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	border-width:0 0 0 5px;
+	border-color:#E184A5;
+	border-style:solid;
+	background:#F0ACC0;
+	color:#D75B87;
+	line-height:140%;
+	font-weight:bold;
+}
+
+.menuTabDouble {
+	margin:0 0 10px 0;
+	padding:3px 8px;
+	border-width:0 5px;
+	border-color: #F0ACC0;
+	border-style:solid;
+	background:#E184A5;
+	color:#FEEFEF;
+	line-height:140%;
+	font-weight:bold;
+	text-align:center;
+	
+}
+
+.menuTabDoubleLight {
+	margin:0 0 10px 0;
+	padding:3px 8px;
+	border-width:0 5px;
+	border-color:#E184A5;
+	border-style:solid;
+	background:#F0ACC0;
+	color:#D75B87;
+	line-height:140%;
+	font-weight:bold;
+	text-align:center;
+}
+
+.menuLine {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	border-width:0 0 5px 0;
+	border-color: #F0ACC0;
+	border-style:solid;
+	background:#E184A5;
+	color:#FEEFEF;
+	line-height:140%;
+	font-weight:bold;
+}
+
+.menuLineLight {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	border-width:0 0 5px 0 ;
+	border-color:#E184A5;
+	border-style:solid;
+	background:#F0ACC0;
+	color:#D75B87;
+	line-height:140%;
+	font-weight:bold;
+}
+
+.menuLineDouble {
+	margin:0 0 10px 0;
+	padding:8px 8px;
+	border-width:5px 0;
+	border-color: #ddff99;
+	border-style:solid;
+	background:#ffffb2;
+	color:#4c4c44;
+	line-height:140%;
+	font-weight:bold;
+	text-align:center;
+	font-size: 130%%;
+}
+
+.menuLineDoubleLightW {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	border-width:5px 0;
+	border-color:#E184A5;
+	border-style:solid;
+	background:#fff;
+	color:#D75B87;
+	line-height:140%;
+	font-weight:bold;
+	text-align:center;
+	font-size: 120%;
+}
+
+.menuLineDoubleLight {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	border-width:5px 0;
+	border-color:#E184A5;
+	border-style:solid;
+	background:#F0ACC0;
+	color:#D75B87;
+	line-height:140%;
+	font-weight:bold;
+	text-align:center;
+		font-size: 120%;
+}
+
+.menuLineLightW {
+	margin:0 0 10px 0;
+	padding:2px 8px;
+	border-width:0 0 5px 0 ;
+	border-color:#E184A5;
+	border-style:solid;
+	background:#fff;
+	color:#D75B87;
+	line-height:140%;
+	font-weight:bold;
+		font-size: 120%;
+}
+
+
+
+/* fitbar */
+
+
