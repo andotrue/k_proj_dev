@@ -95,6 +95,22 @@ $(function(){
  
 <div class="ignoreWebview">
 
+
+  	<!--auIDスタンプ誘導バナー１ -->
+  {% if user is empty %}
+<a href="#auin">
+  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/xmas_nologin_machigai.png') }}" width="100%" />
+    </a>
+  {% else %}
+  	<a href='{{ path('Shop') }}' id="hshop_button">
+<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/xmas_machigai.png') }}" width="100%" />
+  </a>
+ {% endif %}
+
+
+
+
+  	<!--auIDスタンプ誘導バナー２ -->
   {% if user is empty %}
 <a href="#auin">
   <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/xmas_nologin_machigai.png') }}" width="100%" />
@@ -134,20 +150,6 @@ LINEプリペイドが当たる！</FONT>
 2015年2月28日の締め切りとします。<br>
 当選者の方には応募メールアドレス宛てに<br>
 2015年3月15日迄にご連絡致します。</font>
-<br />
-
- <br />
- ↓タップして空メール送信で応募できます！
- <br />
-  
-<a href="http://machigai.puzzle-m.net/apply/show/oubo_page.html"> 
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/line_coin.png') }}" width="100%" /></a> 
-
-<font size="-1">
-2015年2月7日の締め切りとします。<br>
-当選者の方には応募メールアドレス宛てに<br>
-2015年2月20日迄にご連絡致します。</font>
-<br />
 <br />
 
 
