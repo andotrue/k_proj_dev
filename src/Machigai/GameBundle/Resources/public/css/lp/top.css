@@ -184,7 +184,7 @@ div#floating-menu {
             float:right;
             width:26px;
             height:26px;
-            background:transparent url(../img/cancel.png) repeat top left;
+            background:transparent url({{asset('/bundles/machigaigame/images/lp/cancel.png')}}) repeat top left;
             margin-bottom: 0px;
             margin-right:  0px;
             cursor:pointer;
