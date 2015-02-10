@@ -20,6 +20,67 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/machigaigame/css/lp/flexslider.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/bundles/machigaigame/css/lp/top.css') }}">
 
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery-1.3.2.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery-1.9.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery.flexslider-min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/slidebars.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/heightLine.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/common.js') }}"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$('.flexslider').flexslider({
+		animation: "slide",
+		slideshow: true,
+		slideshowSpeed: 3000,
+		animationSpeed: 1000,
+		pauseOnAction: false
+	});
+});
+</script>
+
+
+
+<script>
+
+$(function(){
+	//非表示ボタンがクリックされたときの処理
+	$("#boxclose").click(function(){
+		//画像を非表示にする
+		$("#floating-menu").hide("slow");
+	});
+});
+
+</script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+(function($) {
+	$(document).ready(function() {
+		var mySlidebars = new $.slidebars();
+		$('#btnGnavi').on('click', function() {
+			mySlidebars.slidebars.toggle('left');
+		});
+		$('.rightToggle-btn').on('click', function() {
+			mySlidebars.slidebars.toggle('right');
+		});
+		$('.btnToggleClose').click(function(){mySlidebars.slidebars.close();});
+	});
+}) (jQuery);
+</script>
+
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/box-fixed.js') }}"></script>
+<script type="text/JavaScript">
+$(function(){
+    $("#fixedBox").boxfixed();
+});
+</script>
+
 </head>
 <body>
 <div id="fb-root"></div>
@@ -32,12 +93,7 @@
 		<h1>オススメアプリ</h1>
 		<p>
 				<!-- //▼PANNEL IMAGE(追従バナー)▼// -->
-               	※注意事項を確認の上、応募してください<a href="mailto:present@machigai.puzzle-m.net?subject=LINEコイン応募&amp;body=何も入力せずに
-このまま送信してください。
- &lt;br /&gt;
-当選者の方にはメールにてご連絡させていただきます。
- &lt;br /&gt;
-※複数送信されても当選確率は変動致しません。">
+               	<a href="{{ asset('/bundles/machigaigame/images/lp/btn_menu_4.png') }}">
 				<img src="{{ asset('/bundles/machigaigame/images/lp/bbq_prezent.png') }}">タップして空メール送信で応募できます！<br />
 				</a>
 				<!-- //▲PANNEL IMAGE(追従バナー)▲// -->
@@ -48,13 +104,13 @@
 
 <header>
 
-<!-- //▼MENU(追従)▼// -->
+<!-- //▼MENU▼// -->
 <div id="floating-menu">
 	<div class="menubox" id="menubox">
 		<p id="btnGnavi"><img alt="メニュー" src="{{ asset('/bundles/machigaigame/images/lp/btn_menu_open.png') }}"></p>
 	</div>
 </div>
-<!-- //▲MENU(追従)▲// -->
+<!-- //▲MENU▲// -->
 
 
 <div id="headImg">
@@ -211,66 +267,7 @@
 
 
 </div><!-- End of wrapper -->
-<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery-1.3.2.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery-1.9.0.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery.flexslider-min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/slidebars.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/heightLine.js') }}"></script>
 
-<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/common.js') }}"></script>
-<script type="text/javascript">
-$(window).load(function() {
-	$('.flexslider').flexslider({
-		animation: "slide",
-		slideshow: true,
-		slideshowSpeed: 3000,
-		animationSpeed: 1000,
-		pauseOnAction: false
-	});
-});
-</script>
-
-
-
-<script>
-
-$(function(){
-	//非表示ボタンがクリックされたときの処理
-	$("#boxclose").click(function(){
-		//画像を非表示にする
-		$("#floating-menu").hide("slow");
-	});
-});
-
-</script>
-
-
-
-
-
-
-
-<script type="text/javascript">
-(function($) {
-	$(document).ready(function() {
-		var mySlidebars = new $.slidebars();
-		$('#btnGnavi').on('click', function() {
-			mySlidebars.slidebars.toggle('left');
-		});
-		$('.rightToggle-btn').on('click', function() {
-			mySlidebars.slidebars.toggle('right');
-		});
-		$('.btnToggleClose').click(function(){mySlidebars.slidebars.close();});
-	});
-}) (jQuery);
-</script>
-
-<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/box-fixed.js') }}"></script>
-<script type="text/JavaScript">
-$(function(){
-    $("#fixedBox").boxfixed();
-});
-</script>
 
 
 </body>
