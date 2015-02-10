@@ -148,7 +148,7 @@ div#floating-menu {
             left:5%;
             right:5%;
             background-color:#fff;
-	    background: rgba(255, 255, 255, 0.8); /* 背景色を白に指定して不透明度を0.5に指定 */
+	    background: rgba(255, 255, 255, 1); /* 背景色を白に指定して不透明度を1に指定 */
             color:#7F7F7F;
             padding:10px;
             border:2px solid #ccc;

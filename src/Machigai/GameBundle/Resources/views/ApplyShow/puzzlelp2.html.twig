@@ -1,9 +1,3 @@
-{% extends "MachigaiGameBundle::base.html.twig" %}
-
-{% block title %}{% endblock %}
-
-{% block body %}
-	
 <!doctype html>
 <html lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
@@ -22,20 +16,13 @@
 <meta property="og:image" content="">
 <meta property="og:site_name" content="まちがいさがし　パズルメイト">
 
-<link rel="stylesheet" type="text/css" href="common/css/import.css">
-<link rel="stylesheet" type="text/css" href="common/css/flexslider.css">
-<link rel="stylesheet" type="text/css" href="common/css/top.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('/bundles/machigaigame/css/lp/import.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/bundles/machigaigame/css/lp/flexslider.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/bundles/machigaigame/css/lp/top.css') }}">
 
 </head>
 <body>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 <div id="wrapper">
 <div id="sb-site">
 
@@ -51,7 +38,7 @@
 当選者の方にはメールにてご連絡させていただきます。
  &lt;br /&gt;
 ※複数送信されても当選確率は変動致しません。">
-				<img src="common/img/bbq_prezent.png">タップして空メール送信で応募できます！<br />
+				<img src="{{ asset('/bundles/machigaigame/images/lp/bbq_prezent.png') }}">タップして空メール送信で応募できます！<br />
 				</a>
 				<!-- //▲PANNEL IMAGE(追従バナー)▲// -->
         </p>
@@ -64,7 +51,7 @@
 <!-- //▼MENU(追従)▼// -->
 <div id="floating-menu">
 	<div class="menubox" id="menubox">
-		<p id="btnGnavi"><img alt="メニュー" src="common/img/btn_menu_open.png"></p>
+		<p id="btnGnavi"><img alt="メニュー" src="{{ asset('/bundles/machigaigame/images/lp/btn_menu_open.png') }}"></p>
 	</div>
 </div>
 <!-- //▲MENU(追従)▲// -->
@@ -73,7 +60,7 @@
 <div id="headImg">
 		<a href="https://machigai.puzzle-m.net/top">
 		<!-- //▼MAIN IMAGE▼// -->
-		<img src="common/img/main_image.jpg">
+		<img src="{{ asset('/bundles/machigaigame/images/lp/main_image.jpg') }}">
 		<!-- //△MAIN IMAGE△// -->
 		</a>
 	</div>
@@ -83,7 +70,7 @@
 <article id="headTop" class="clearfix">
 
 <!-- //▼HEADER IMAGE▼// -->
-	<h1 id="logo"><a href="https://machigai.puzzle-m.net/top"><img alt="まちがいさがし　パズルメイト" src="common/img/header2.png"></a></h1>
+	<h1 id="logo"><a href="https://machigai.puzzle-m.net/top"><img alt="まちがいさがし　パズルメイト" src="{{ asset('/bundles/machigaigame/images/lp/header2.png') }}"></a></h1>
 <!-- //△HEADER IMAGE△// -->
 </article>
 
@@ -101,14 +88,14 @@
  &lt;br /&gt;
 当選者の方にはメールにてご連絡させていただきます。
  &lt;br /&gt;
-※複数送信されても当選確率は変動致しません。"><img alt="oubo" src="common/img/20150205_lp_01.png" ></a><a href="">注意事項はこちら</a>
+※複数送信されても当選確率は変動致しません。"><img alt="oubo" src="{{ asset('/bundles/machigaigame/images/lp/20150205_lp_01.png') }}" ></a><a href="">注意事項はこちら</a>
 </p>
 
 
 <!--**△oubo button**-->
 
 <!--**▼yokoku▼-->
-<p class="yokoku">▼次回の予告▼<img alt="yokoku" src="common/img/yokoku.png" ></p>
+<p class="yokoku">▼次回の予告▼<img alt="yokoku" src="{{ asset('/bundles/machigaigame/images/lp/yokoku.png') }}" ></p>
 <!--**△yokoku**-->
 
 <!--**▼title▼-->
@@ -118,9 +105,9 @@
 <!--**▼Slider**-->
 <article class="flexslider">
 <ul class="slides">
-	<li data-thumb="common/img/slide_image_01.jpg" ><a href="https://bbq-g.com/asp/"><img alt="puzzle present campaign 01" src="common/img/slide_image_01.jpg"></a></li>
-	<li data-thumb="common/img/slide_image_02.jpg"><a href="index.html"><img alt="puzzle present campaign 02" src="common/img/slide_image_02.jpg"></a></li>
-	<li data-thumb="common/img/slide_image_03.jpg"><a href="index.html"><img alt="puzzle present campaign 03" src="common/img/slide_image_03.jpg"></a></li>
+	<li><a href="https://bbq-g.com/asp/"><img alt="puzzle present campaign 01" src="{{ asset('/bundles/machigaigame/images/lp/slide_image_01.jpg') }}"></a></li>
+	<li><a href="index.html"><img alt="puzzle present campaign 02" src="{{ asset('/bundles/machigaigame/images/lp/slide_image_02.jpg') }}"></a></li>
+	<li><a href="index.html"><img alt="puzzle present campaign 03" src="{{ asset('/bundles/machigaigame/images/lp/slide_image_03.jpg') }}"></a></li>
 
 </ul>
 </article>
@@ -131,7 +118,7 @@
 
 
 <!--**▼Twitter▼**-->
-<p class="tw"><a href="index.html"><img alt="Twitter" src="common/img/20150205_lp_03.png" ></a></p>
+<p class="tw"><a href="https://twitter.com/hbi_present"><img alt="Twitter" src="{{ asset('/bundles/machigaigame/images/lp/20150205_lp_03.png') }}" ></a></p>
 
 <!--**△Twitter**-->
 
@@ -144,18 +131,18 @@
 </p>
 
 <!--**
-<p class="topBan"><img alt="Twitter" src="common/img/obi_2_640-90.png" ></p>
+<p class="topBan"><img alt="Twitter" src="{{ asset('/bundles/machigaigame/images/lp/obi_2_640-90.png') }}" ></p>
 **-->
 
 <!--**▼topMenu**-->
 <article id="topMenu">
 <ul class="clearfix">
-	<li><a href="https://e-aquarium.jp/asp/"><img alt="水族館ガイド" src="common/img/btn_menu_1.png"></a></li>
-	<li><a href="https://machigai.puzzle-m.net/shop/"><img alt="LOVEスタンプ" src="common/img/btn_menu_2.png"></a></li>
-	<li><a href="https://ausp.puzzle-m.net/"><img alt="GODIVAプレゼント" src="common/img/btn_menu_3.png"></a></li>
-	<li><a href="https://bbq-g.com/asp/"><img alt="松坂牛プレゼント" src="common/img/btn_menu_4.png"></a></li>
-	<li><a href="index.html"><img alt="LINEプリペイドカードプレゼント" src="common/img/btn_menu_5.png"></a></li>
-	<li><a href="index.html"><img alt="クリオネスタンプ" src="common/img/btn_menu_6.png"></a></li>
+	<li><a href="https://e-aquarium.jp/asp/"><img alt="水族館ガイド" src="{{ asset('/bundles/machigaigame/images/lp/btn_menu_1.png') }}"></a></li>
+	<li><a href="https://machigai.puzzle-m.net/shop/"><img alt="LOVEスタンプ" src="{{ asset('/bundles/machigaigame/images/lp/btn_menu_2.png') }}"></a></li>
+	<li><a href="https://ausp.puzzle-m.net/"><img alt="GODIVAプレゼント" src="{{ asset('/bundles/machigaigame/images/lp/btn_menu_3.png') }}"></a></li>
+	<li><a href="https://bbq-g.com/asp/"><img alt="松坂牛プレゼント" src="{{ asset('/bundles/machigaigame/images/lp/btn_menu_4.png') }}"></a></li>
+	<li><a href="https://machigai.puzzle-m.net/"><img alt="LINEプリペイドカードプレゼント" src="{{ asset('/bundles/machigaigame/images/lp/btn_menu_5.png') }}"></a></li>
+	<li><a href="https://machigai.puzzle-m.net/shop/"><img alt="クリオネスタンプ" src="{{ asset('/bundles/machigaigame/images/lp/btn_menu_6.png') }}"></a></li>
 </ul>
 </article>
 
@@ -176,7 +163,7 @@
 </article>
 <!--****-->
 <!--****-->
-<p class="pagetop"><a href="#"><img alt="Back to top" src="common/img/btn_pagetop.png"></a></p>
+<p class="pagetop"><a href="#headTop"><img alt="Back to top" src="{{ asset('/bundles/machigaigame/images/lp/btn_pagetop.png') }}"></a></p>
 <!--****-->
 <!--****-->
 <small class="copy">&copy; 2015 Hubase-i</small>
@@ -194,8 +181,8 @@
 <div class="sb-slidebar sb-left sb-width-custom"  data-sb-width="80%">
 <nav id="gnavi">
 <div id="gnaviPad" id="gnaviPad">
-<p class="btnToggleClose"><span><img alt="メニュー" src="common/img/arrow_left.png"></span></p>
-<h2 id="menuLogo"><img alt="まちがいさがし　パズルメイト" src="common/img/header2.png"></h2>
+<p class="btnToggleClose"><span><img alt="メニュー" src="{{ asset('/bundles/machigaigame/images/lp/arrow_left.png') }}"></span></p>
+<h2 id="menuLogo"><img alt="まちがいさがし　パズルメイト" src="{{ asset('/bundles/machigaigame/images/lp/header2.png') }}"></h2>
 
 <!--***  <p class="menuTitle">まちがいさがし</p>*-->
 <ul class="menu">
@@ -205,13 +192,13 @@
 </ul>
 <p class="menuTitle">プレゼントコーナー</p>
 <ul class="menu">
-	<li><a href="index.html">amazonギフト</a></li>
-	<li><a href="index.html">LINEプリペイド</a></li>
-	<li><a href="index.html">クオカード</a></li>
+	<li><a href="https://machigai.puzzle-m.net/">amazonギフト</a></li>
+	<li><a href="https://machigai.puzzle-m.net/">LINEプリペイド</a></li>
+	<li><a href="https://machigai.puzzle-m.net/">クオカード</a></li>
 </ul>
 <p class="menuTitle">おすすめアプリ</p>
 <ul class="menu"">
-	<!--**  <li id="gnTwit"><a href="index.html"><img alt="Twitter" src="common/img/gn_twitter.png"></a></li>  **-->
+	<!--**  <li id="gnTwit"><a href="index.html"><img alt="Twitter" src="{{ asset('/bundles/machigaigame/images/lp/gn_twitter.png') }}"></a></li>  **-->
 	<li><a href="https://e-aquarium.jp/asp/">水族館ガイド</a></li>
 	<li><a href="https://bbq-g.com/asp/">バーベキューガイド</a></li>
 	<li><a href="https://ausp.puzzle-m.net/">パズルメイト</a></li>
@@ -221,27 +208,16 @@
 </nav>
 </div>
 <!--****-->
-<!--****-->
-<div class="sb-slidebar sb-right sb-width-custom"  data-sb-width="80%">
-	<div id="registBox">
-		<div id="registBoxPad">
-			<p class="btnToggleClose"><span><img alt="メニュー" src="common/img/arrow_right.png"></span></p>
-			<h2 id="registLogo"><a href="https://machigai.puzzle-m.net/top"><img alt="まちがいさがし　パズルメイト" src="common/img/logo_regist.png"></a></h2>
-			<p>Premium会員<br>登録はこちらから</p>
-			<p id="btnPremium"><a href="index.html"><img alt="Premium会員登録" src="common/img/btn_premium.png"></a></p>
-		</div>
-	</div>
-</div>
-<!--****-->
+
 
 </div><!-- End of wrapper -->
-<script type="text/javascript" src="common/js/jquery-1.3.2.js"></script>
-<script type="text/javascript" src="common/js/jquery-1.9.0.min.js"></script>
-<script type="text/javascript" src="common/js/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="common/js/slidebars.min.js"></script>
-<script type="text/javascript" src="common/js/heightLine.js"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery-1.3.2.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery-1.9.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/jquery.flexslider-min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/slidebars.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/heightLine.js') }}"></script>
 
-<script type="text/javascript" src="common/js/common.js"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/common.js') }}"></script>
 <script type="text/javascript">
 $(window).load(function() {
 	$('.flexslider').flexslider({
@@ -289,7 +265,7 @@ $(function(){
 }) (jQuery);
 </script>
 
-<script type="text/javascript" src="common/js/box-fixed.js"></script>
+<script type="text/javascript" src="{{ asset('/bundles/machigaigame/js/lp/common/js/box-fixed.js') }}"></script>
 <script type="text/JavaScript">
 $(function(){
     $("#fixedBox").boxfixed();
@@ -300,6 +276,6 @@ $(function(){
 </body>
 </html>
 
-{% endblock %}
+
 
 
