@@ -93,11 +93,14 @@ header {
 /* ━━━━ ▼headImg 設定 ━━━━ */
 header #headImg {
 	position: relative;
-	padding-top: 22%;
+	padding-top: 18%;
 }
 header #headImg img {
-	width: 100%;
+	width: 90%;
 	height: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 header #headImg #headBtn {
 	width: 30%;
@@ -143,7 +146,7 @@ header #headTop #logo {
 	margin-right:auto;
 }
 header #logo img {
-	width: 100%;
+	width: 80%;
 	height: auto;
 	margin: 0 auto;
 	display:block;
@@ -390,7 +393,7 @@ footer .copy {
 
 .menuLineDouble {
 	margin:0 0 10px 0;
-	padding:8px 8px;
+	padding:5px 8px;
 	border-width:5px 0;
 	border-color: #ddff99;
 	border-style:solid;
@@ -443,7 +446,17 @@ footer .copy {
 		font-size: 120%;
 }
 
+li{
+list-style: none;
+cursor: pointer;
+text-align:center;
+}
+ 
+ul.acordion{
+margin: 0;
+padding: 0;
 
+}
 
 /* fitbar */
 
