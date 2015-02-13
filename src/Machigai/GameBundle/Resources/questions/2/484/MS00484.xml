@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>484</id>
+ <name>神さまは出張中！？</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>496</x><!--point のx座標 -->
+  <y>67</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>673</x><!--point のx座標 -->
+  <y>120</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>22</x><!--point のx座標 -->
+  <y>383</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>231</x><!--point のx座標 -->
+  <y>377</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>340</x><!--point のx座標 -->
+  <y>387</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>638</x><!--point のx座標 -->
+  <y>337</y><!--point のy座標-->
+ </point>
+</different>

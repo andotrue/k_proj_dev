@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>515</id>
+ <name>太陽に向かって</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>79</x><!--point のx座標 -->
+  <y>90</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>404</x><!--point のx座標 -->
+  <y>157</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>252</x><!--point のx座標 -->
+  <y>210</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>461</x><!--point のx座標 -->
+  <y>374</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>268</x><!--point のx座標 -->
+  <y>405</y><!--point のy座標-->
+ </point>
+</different>

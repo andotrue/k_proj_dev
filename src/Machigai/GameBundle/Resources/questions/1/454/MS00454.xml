@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>454</id>
+ <name>トモダチにナロウ</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>38</x><!--point のx座標 -->
+  <y>164</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>233</x><!--point のx座標 -->
+  <y>30</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>440</x><!--point のx座標 -->
+  <y>75</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>94</x><!--point のx座標 -->
+  <y>346</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>252</x><!--point のx座標 -->
+  <y>399</y><!--point のy座標-->
+ </point>
+</different>

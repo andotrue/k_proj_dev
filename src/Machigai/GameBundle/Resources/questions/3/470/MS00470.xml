@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>470</id>
+ <name>得意料理は目玉焼き！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>260</x><!--point のx座標 -->
+  <y>97</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>320</x><!--point のx座標 -->
+  <y>140</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>90</x><!--point のx座標 -->
+  <y>224</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>320</x><!--point のx座標 -->
+  <y>289</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>524</x><!--point のx座標 -->
+  <y>125</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>541</x><!--point のx座標 -->
+  <y>193</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>499</x><!--point のx座標 -->
+  <y>299</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>106</x><!--point のx座標 -->
+  <y>324</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>323</x><!--point のx座標 -->
+  <y>391</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>509</x><!--point のx座標 -->
+  <y>392</y><!--point のy座標-->
+ </point>
+</different>
