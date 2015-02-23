@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <different>
  <id>357</id>
  <name>お届けものでーす！</name>
@@ -26,5 +26,9 @@
  <point><!--図画にある違う部分の座標。 -->
   <x>436</x><!--point のx座標 -->
   <y>294</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>608</x><!--point のx座標 -->
+  <y>412</y><!--point のy座標-->
  </point>
 </different>
