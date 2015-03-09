@@ -110,17 +110,6 @@ $(function(){
 
 
 
-  	<!--auIDスタンプ誘導バナー２ -->
-  {% if user is empty %}
-<a href="#auin">
-  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/xmas_nologin_machigai.png') }}" width="100%" />
-    </a>
-  {% else %}
-  	<a href='{{ path('Shop') }}' id="hshop_button">
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/xmas_machigai.png') }}" width="100%" />
-  </a>
- {% endif %}
-
 <script type="text/javascript">
 if(navigator.userAgent.indexOf('iPhone') > 0){
 }else if(navigator.userAgent.indexOf('Android') > 0){
