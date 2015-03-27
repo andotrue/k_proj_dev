@@ -15,7 +15,8 @@ class ApplyController extends BaseController
       if(!$this->DEBUG && (empty($smartContract) || $smartContract != "true") ){
 
         $session = $request->getSession();
-        $session->set('puzzlelp_access', 'true');
+        $session->set('applyshow_access', $request->getRequestUri());
+        
         return $this->redirect($this->generateUrl('response_token'));
       }
 

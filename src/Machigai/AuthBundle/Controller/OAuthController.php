@@ -175,6 +175,12 @@ class OAuthController extends Controller {
               if($session->get("puzzlelp_access") == "true"){
                 $session->set("puzzlelp_access", null);
   							return $this->redirect($this->generateUrl('puzzlelp'));
+              } 
+              
+              $applyshow = $session->get("applyshow_access");
+              if(!empty($applyshow)){
+                $session->set("applyshow_access", null);
+  							return $this->redirect($applyshow);
               }
               
 							//認証OK
