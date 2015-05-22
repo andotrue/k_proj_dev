@@ -108,6 +108,17 @@ $(function(){
  {% endif %}
 
 
+  	<!--auIDスタンプ誘導バナー１ -->
+  {% if user is empty %}
+<a href="#auin">
+  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" />
+    </a>
+  {% else %}
+  	<a href='{{ path('Shop') }}' id="hshop_button">
+<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" />
+  </a>
+ {% endif %}
+
 
 
 <script type="text/javascript">
@@ -123,8 +134,7 @@ if(navigator.userAgent.indexOf('iPhone') > 0){
 document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプみたいに使えちゃう♪<br>");
 }else{}
 </script>
-  	<a href='{{ path('Shop') }}' id="hshop_button">
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" /></a>
+
  
  
      <!--**▼はちみつクマ１０名▼-->
