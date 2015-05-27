@@ -1,0 +1,68 @@
+{% extends "MachigaiGameBundle::base.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	
+<style>
+body{background: url({{asset('/bundles/machigaigame/images/parts/bg_white.png')}})}
+
+#wv_wrap {
+    top: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#wv_header {
+    padding-left: 45%;
+}
+#wv_blank {
+    height: 50px;
+}
+#wv_header img{
+    margin-top: 7%;
+    margin-bottom: 4%;
+    margin-left: 1%;
+    width: 19%;
+}
+</style>
+
+<div style="text-align: center; margin-top: 0px;">
+
+ <img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/stamplp_header.png') }}" width="100%" />
+<br /><br>
+    
+
+
+   <!--**▼スタンプバナー▼-->
+    <a href="https://machigai.puzzle-m.net/">
+<img src="/bundles/machigaigame/images/parts/stamplp_machigai_neko.png" width="100%" /></a>
+<br><font size="4" color="maroon">スマパス会員の方に<br />すべて無料のスタンプフェスタ<br />
+<blink>開催中</blink><script type="text/javascript"><!--
+if(navigator.userAgent.match(/MSIE|KHTML/))!function(a,b){a=a[a.length-1];setInterval(function(){a.style.visibility=++b%2?'hidden':''},500)}(document.getElementsByTagName('blink'),0)//--></script>
+<br></font>
+
+	<a href="https://e-aquarium.jp/asp/">
+<img src="/bundles/machigaigame/images/parts/stamplp_aqua.png" width="100%" /></a>
+<CENTER>※auIDログインに遷移します</CENTER><br>
+    <a href="https://bbq-g.com/asp/material">
+<img src="/bundles/machigaigame/images/parts/stamplp_bbq.png" width="100%" /></a>
+<CENTER>※auIDログインに遷移します</CENTER><br>
+    <a href="https://tetsudo-club.com/asp/">
+<img src="/bundles/machigaigame/images/parts/stamplp_tetudo.png" width="100%" /></a>
+<br>
+
+
+<CENTER>※auIDログインに遷移します<br><br>
+
+    <a href="https://machigai.puzzle-m.net/">
+<img src="/bundles/machigaigame/images/parts/stamplp_machigai.png" width="100%" /></a>
+<br>
+提供：スタンプ付き♪まちがいさがし放題<br></CENTER>
+<br>
+
+
+  
+</div>
+{% endblock %}
+
