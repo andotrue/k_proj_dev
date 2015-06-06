@@ -74,7 +74,7 @@ class DefaultController extends BaseController
             $response->headers->clearCookie("myCookie");
             $response->send();
 
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository('MachigaiGameBundle:User')->find($id);
             $em->flush();
 

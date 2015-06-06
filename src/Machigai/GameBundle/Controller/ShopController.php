@@ -130,7 +130,7 @@ class ShopController extends BaseController
 		} else {
  			$userId = $session->get("id");
 			if( !empty($userId) ){
-				$em = $this->getDoctrine()->getEntityManager();
+				$em = $this->getDoctrine()->getManager();
 				$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
 				$users = array($user);
 			}
@@ -181,7 +181,7 @@ class ShopController extends BaseController
 			$purchasedInfo->setCreatedAt(date("Y-m-d H:i:s"));
 			$purchasedInfo->setUpdatedAt(date("Y-m-d H:i:s"));
 
-			$em = $this->getDoctrine()->getEntityManager();
+			$em = $this->getDoctrine()->getManager();
 			$em->persist($purchasedInfo);
 			$em->flush();
 
@@ -193,7 +193,7 @@ class ShopController extends BaseController
 			$em->persist($log);
 			$em->flush();
 
-			$em = $this->getDoctrine()->getEntityManager();
+			$em = $this->getDoctrine()->getManager();
 			$user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
 			$user_id->setCurrentPoint($remainder);
 			$em->flush();	

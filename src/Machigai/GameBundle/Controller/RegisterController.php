@@ -137,7 +137,7 @@ class RegisterController extends BaseController
 		} else {
                 $userId = $checkData[0]->getId();
 				
-				$em = $this->getDoctrine()->getEntityManager();
+				$em = $this->getDoctrine()->getManager();
 				$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
 				
 				$log = new Log();
@@ -169,7 +169,7 @@ class RegisterController extends BaseController
                         //クッキー生成
                         $syncToken = uniqid();
 
-                        $em = $this->getDoctrine()->getEntityManager();
+                        $em = $this->getDoctrine()->getManager();
                         $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
                         $user->setSyncToken($syncToken);
                         $em->flush();
@@ -399,7 +399,7 @@ class RegisterController extends BaseController
          $user = $userData[0];
          $userId = $user->getId();
 
-         $em = $this->getDoctrine()->getEntityManager();
+         $em = $this->getDoctrine()->getManager();
          $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
          $user->setNickname($nickname);
          $user->setTempPass(null);
@@ -498,7 +498,7 @@ class RegisterController extends BaseController
 				$differences = $toSec - $fromSec;
 
 				if($differences > 86400){
-					$em = $this->getDoctrine()->getEntityManager();
+					$em = $this->getDoctrine()->getManager();
 					$user = $em->getRepository('MachigaiGameBundle:User')->find($emailCheck[0]->getId());
 					$em->remove($user);
 					$em->flush();	
@@ -569,7 +569,7 @@ https://machigai.puzzle-m.net\n
 		} catch (Exception $ex){
 		}
 		
-         $em = $this->getDoctrine()->getEntityManager();
+         $em = $this->getDoctrine()->getManager();
          $em->persist($data);
          $em->flush();
 
@@ -606,7 +606,7 @@ https://machigai.puzzle-m.net\n
             $differences = $toSec - $fromSec;
 
             if($differences > 86400){
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $user = $em->getRepository('MachigaiGameBundle:User')->find($checkPass[0]->getId());
                 $em->remove($user);
                 $em->flush();

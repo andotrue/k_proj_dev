@@ -1,0 +1,193 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/base.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>じゃんけんポン auスマートパス</title>
+<!-- InstanceEndEditable -->
+<link rel="stylesheet" type="text/css" href="/bundles/machigaigame/game_common/css/common.css">
+<link rel="stylesheet" type="text/css" href="/bundles/machigaigame/game_common/css/base.css">
+<script type="text/javascript" src="/bundles/machigaigame/game_common/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/bundles/machigaigame/game_common/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/bundles/machigaigame/game_common/js/smartpass.core.js"></script>
+<script type="text/javascript" src="/bundles/machigaigame/game_common/js/smartpass.net.js"></script>
+<!-- InstanceBeginEditable name="head" -->
+{% stylesheets '@MachigaiGameBundle/Resources/public/GameJanken/css/*' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+<script type="text/javascript" src="/bundles/machigaigame/game_common/js/smartpass.base.js"></script>
+{% javascripts '@MachigaiGameBundle/Resources/public/GameJanken/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<!-- InstanceEndEditable -->
+</head>
+<body>
+<div class="loadingContainer">
+	<p>ローディング</p>
+</div>
+<div class="rootContainer">
+	<div class="bgContainer">
+	<!-- InstanceBeginEditable name="BackgroundContents" -->
+		<div class="bgMain"></div>
+		
+		<div class="commonBgContainer">
+			<div class="bgColor"></div>
+			<div class="bgGrad"></div>
+			<div class="bgTexture"></div>
+		</div>
+		
+		<!-- ------------ -->
+		<!-- タイトル画面 -->
+		<!-- ------------ -->
+		<div class="titleContainer">
+			<h1>じゃんけんポンの段</h1>
+		</div>
+		
+		<!-- ------------ -->
+		<!-- ゲーム画面 -->
+		<!-- ------------ -->
+		<div class="gameContainer">
+			<div class="stampHideContainer">
+				<!-- ゲームオーバー -->
+				<div class="gameOverContainer"></div>
+				
+				<!-- クリア時の光演出(共通パーツ) -->
+				<div class="shineContainer">
+					<div class="shine0"></div>
+					<div class="shine1"></div>
+					<div class="shine2"></div>
+				</div>
+			</div>
+		</div>
+	<!-- InstanceEndEditable -->
+	</div>
+	<div class="resizeContainer">
+	<!-- InstanceBeginEditable name="BodyContents" -->
+		
+		<!-- ------------ -->
+		<!-- タイトル画面 -->
+		<!-- ------------ -->
+		<div class="titleContainer">
+			<p class="btnStart"><span></span><a href="javascript:void(0)">ゲームスタート</a></p>
+			<div class="btnContainer">
+				<p class="btnBackTop"><a href="../">トップへもどる</a></p>
+				<p class="btnHowto"><a href="javascript:void(0)">あそびかた</a></p>
+			</div>
+		</div>
+		
+		<!-- ------------ -->
+		<!-- ゲーム画面 -->
+		<!-- ------------ -->
+		<div class="gameContainer">
+			
+			<div class="stampHideContainer">
+				
+				<!-- キャラクタ -->
+				<div class="charaContainer">
+					<p></p>
+				</div>
+				
+				<div class="w360">
+				
+					<div class="scoreContainer">
+						<p class="number"></p>
+					</div>
+					<p class="btnStop"><a href="javascript:void(0)">やめる</a></p>
+					
+					<!-- じゃんけん前の演出テキスト -->
+					<div class="textContainer">
+						<p class="textFirst">１回戦！</p>
+						<p class="textSecond">２回戦！</p>
+						<p class="textFinal">最終戦！</p>
+						<p class="textJan">じゃん</p>
+						<p class="textKen">けん</p>
+						<p class="textPon">ぽんっ!</p>
+						<p class="textWin">勝ち!</p>
+						<p class="textLose">負け…</p>
+						<p class="textAiko">あいこで…</p>
+					</div>
+					
+					<!-- 選んだときのじゃんけんパネル -->
+					<div class="selectIconContainer">
+						<div class="selectIcon"><p class="goo"></p></div>
+					</div>
+					
+					<!-- じゃんけんUI -->
+					<div class="jankenContainer">
+						<p class="iconJanken iconGoo"><span></span><a href="javascript:void(0)">グー</a></p>
+						<p class="iconJanken iconChoki"><span></span><a href="javascript:void(0)">チョキ</a></p>
+						<p class="iconJanken iconPar"><span></span><a href="javascript:void(0)">パー</a></p>
+					</div>
+					
+					<!-- ゲームクリア -->
+					<div class="clearContainer">
+						<p class="textGameClear"></p>
+						<p class="btnGetStamp"><a href="javascript:void(0)">限定スタンプGET!!</a></p>
+					</div>
+				</div>
+				
+			</div>
+			
+			<!-- スタンプゲット画面 -->
+			<div class="stampContainer">
+				<p class="btnBack"><a href="javascript:void(0)">もどる</a></p>
+			</div>
+			
+		</div>
+		
+	<!-- InstanceEndEditable -->
+	</div>
+	<div class="footerContainer">
+	<!-- InstanceBeginEditable name="FooterContents" -->
+		
+		<!-- ------------ -->
+		<!-- タイトル画面 -->
+		<!-- ------------ -->
+		<div class="titleContainer">
+        
+			<!-- ヘルプパネル -->
+			<div class="helpContainer">
+				<div class="helpPict">
+					<p class="btnClose"><a href="javascript:void(0)">閉じる</a></p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- ------------ -->
+		<!-- ゲーム画面 -->
+		<!-- ------------ -->
+		<div class="gameContainer">
+			
+			<!-- ゲームオーバー -->
+			<div class="gameOverContainer">
+				<p class="textGameOver"></p>
+			</div>
+			
+			<!-- ゲームクリア/オーバー時のボタン -->
+			<div class="finalButtonContainer">
+				<div class="finalButtonContainerInner">
+					<p class="btnBackTop"><a href="../">トップへもどる</a></p>
+					<p class="btnAgain"><a href="javascript:void(0)">もう一度!</a></p>
+				</div>
+			</div>
+			
+			<!-- スタンプゲット画面 -->
+			<div class="stampContainer">
+				<div class="imgContainer"></div>
+				<p>画像を長押しして保存してください。</p>
+			</div>
+		</div>
+	<!-- InstanceEndEditable -->
+	</div>
+</div>
+<div class="cautionContainer">
+<p>当コンテンツは端末を縦向きにしてお楽しみください。</p>
+</div>
+<div class="loginCheckContainer"></div>
+<div class="loginErrorContainer">
+	<p>認証に失敗しました。再度お試しください。</p>
+	<p><a href="">認証する</a></p>
+</div>
+</body>
+<!-- InstanceEnd --></html>

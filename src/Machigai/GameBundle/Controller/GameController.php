@@ -42,7 +42,7 @@ class GameController extends BaseController
 		$now = date("Y-m-d", strtotime("now"));
 
         $questions = $this->getDoctrine()
-          ->getEntityManager()
+          ->getManager()
           ->createQuery('SELECT q from MachigaiGameBundle:Question q 
             where
             q.distributedFrom <= :now and
@@ -99,7 +99,7 @@ class GameController extends BaseController
                     ->getSuspended($userId);
 
                     $questions = $this->getDoctrine()
-                    ->getEntityManager()
+                    ->getManager()
                     ->createQuery('SELECT q from MachigaiGameBundle:Question q 
                                         left join  q.playHistories p 
                                         left join p.user u 
@@ -119,7 +119,7 @@ class GameController extends BaseController
                     ->getNotCleared($userId);
 
                     $questions = $this->getDoctrine()
-                    ->getEntityManager()
+                    ->getManager()
                     ->createQuery('SELECT q from MachigaiGameBundle:Question q 
                                         where q.id not in (
                                             select q1.id from MachigaiGameBundle:Question q1
@@ -318,19 +318,19 @@ class GameController extends BaseController
         $user = $this->getUser();
         $userId = $user->getId();
         $playHistory = $this->getDoctrine()
-                ->getEntityManager()
+                ->getManager()
                 ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
                                     where p.user = :user and p.question = :question')
                 ->setParameters(array('user'=>$userId,'question'=>$questionId))
                 ->getResult();
         if(empty($playHistory)){
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->findBy(array('userId'=>$userId));
             $playHistory->setPlayInfo($data);
             $em->flush();
         }else{
             $playHistoryId = $playHistory->getId();
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($playHistoryId);
             $playHistory->setPlayInfo($data);
             $em->flush();
@@ -347,7 +347,7 @@ class GameController extends BaseController
         $userId = $user->getId();
 
         $playHistory = $this->getDoctrine()
-                ->getEntityManager()
+                ->getManager()
                 ->createQuery('SELECT p from MachigaiGameBundle:PlayHistory p
                                     where p.user = :user and p.question = :question')
                 ->setParameters(array('user'=>$userId,'question'=>$questionId))
@@ -369,7 +369,7 @@ class GameController extends BaseController
         $month = date('n');
         $year = date('Y');
         $rankings = $this->getDoctrine()
-                ->getEntityManager()
+                ->getManager()
                 ->createQuery('SELECT r from MachigaiGameBundle:Ranking r
                                     where r.level = :gameLevel and r.year = :year and r.month = :month order by r.rank asc')
                 ->setParameters(array('gameLevel'=>$gameLevel,'year'=>$year,'month'=>$month))
@@ -442,7 +442,7 @@ class GameController extends BaseController
         $playInfo = $request->query->get('playInfo');
     
         $question = $this->getDoctrine()
-                ->getEntityManager()
+                ->getManager()
                 ->createQuery('SELECT q from MachigaiGameBundle:Question q
                                     where q.id = :id')
                 ->setParameters(array('id'=>$questionId))
@@ -524,7 +524,7 @@ class GameController extends BaseController
         }elseif($histories[0]->getGameStatus()!=3 and $histories[0]->getGameStatus()!=4){
             //未クリアの場合→ステータスは２回目以降のクリアへ
             foreach ($histories as $history) {
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $previousData = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($history->getId());
                 $em->remove($previousData);
                 $em->flush();
@@ -543,7 +543,7 @@ class GameController extends BaseController
 			$em->flush();
         }else{
             //すでにクリア済み（ステータスが３か４）の場合、→ステータスは変更しない
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $playHistory = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($histories[0]->getId());
             $playHistory->setPlayInfo($playInfo);
             $playHistory->setIsSavedGame(false);
@@ -587,7 +587,7 @@ class GameController extends BaseController
         $playInfo = $request->query->get('playInfo');
     
         $question = $this->getDoctrine()
-                ->getEntityManager()
+                ->getManager()
                 ->createQuery('SELECT q from MachigaiGameBundle:Question q
                                     where q.id = :id')
                 ->setParameters(array('id'=>$questionId))
@@ -613,7 +613,7 @@ class GameController extends BaseController
         }elseif($histories[0]->getGameStatus()!=3 and $histories[0]->getGameStatus()!=4){
             //未クリアの場合→ステータスは２回目以降のプレイ           
             foreach ($histories as $history) {
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $previousData = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($history->getId());
                 $em->remove($previousData);
                 $em->flush();
@@ -677,5 +677,17 @@ class GameController extends BaseController
 		$this->saveGameData($params);
 
 		return $this->redirect("/game/select");
+    }
+    
+    
+    public function jankenAction()
+    {
+    	$request = $this->get('request');
+    	$cookies = $request->cookies;
+    	$smartContract = $request->cookies->get('smartContract');
+    	if(!$this->DEBUG && (empty($smartContract) || $smartContract != "true") ) return $this->redirect($this->generateUrl('response_token'));
+    
+    	//return $this->render('MachigaiGameBundle:Game:select.html.twig',array('playedQuestions'=>$playedQuestions,'user'=>$user,'questions'=>$questions, 'histories'=>$histories, 'sort'=> 'null', 'level' => $level));
+    	return $this->render('MachigaiGameBundle:GameJanken:index.html.twig',array());
     }
 }

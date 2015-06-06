@@ -32,7 +32,7 @@ class RankingController extends BaseController
 	// 月初に実行されることを想定
 	public function summaryAction(){
 
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		//　トランザクション開始
 		$em->getConnection()->beginTransaction();
 		

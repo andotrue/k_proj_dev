@@ -469,3 +469,11 @@ apply_send:
 apply_complete:
     pattern: /apply/complete
     defaults: { _controller: MachigaiGameBundle:Apply:complete }
+
+
+
+GameJanken:
+    pattern: /game/janken
+    defaults: { _controller: MachigaiGameBundle:Game:janken }
+
+

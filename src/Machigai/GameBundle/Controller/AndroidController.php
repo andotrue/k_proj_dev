@@ -136,7 +136,7 @@ class AndroidController extends BaseController
 			$session = $request->getSession();
  			$userId = $session->get("id");
 			if( !empty($userId) ){
-				$em = $this->getDoctrine()->getEntityManager();
+				$em = $this->getDoctrine()->getManager();
 				$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
 				
 				// 先にauIDログインをしてしまった会員の為のデータ統合
@@ -447,7 +447,7 @@ class AndroidController extends BaseController
 
         if(!empty($sync_token)){
         	$users = $this->getDoctrine()
-        	->getEntityManager()
+        	->getManager()
 			->createQuery('SELECT u FROM MachigaiGameBundle:User u where u.syncToken = :sync_token')
 			->setParameter('sync_token', $sync_token)
             ->getResult();  

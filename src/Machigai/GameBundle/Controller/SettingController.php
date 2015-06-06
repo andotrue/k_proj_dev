@@ -56,7 +56,7 @@ class SettingController extends BaseController
     $nickname = $nickname['nickname'];
     $pre_userId = $this->getUser();
     $userId = $pre_userId->getId();
-    $em = $this->getDoctrine()->getEntityManager();
+    $em = $this->getDoctrine()->getManager();
  	$user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
  	$user->setNickName($nickname);
  	$em->flush();
@@ -251,7 +251,7 @@ https://machigai.puzzle-m.net\n
          $password = $password.$salt;
          $password = hash('sha512',$password);
 
-         $em = $this->getDoctrine()->getEntityManager();
+         $em = $this->getDoctrine()->getManager();
          $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
          $user->setPassword($password);
          $user->setTempPass(null);
@@ -267,7 +267,7 @@ https://machigai.puzzle-m.net\n
     public function deleteUserCompleteAction(Request $request){
     	$user = $this->getUser();
 		
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 		$log = new Log();
 		$log->setUserId($user->getId());
 		$log->setType("withdraw");
@@ -301,7 +301,7 @@ https://machigai.puzzle-m.net\n
                 //レコードに対象のplayhistory_idが存在する場合 該当のquestion_playhistory削除
                 if(!empty($question_playhistories)){
                     foreach ($question_playhistories as $qp) {
-                        $em = $this->getDoctrine()->getEntityManager();
+                        $em = $this->getDoctrine()->getManager();
                         $data = $em->getRepository('MachigaiGameBundle:question_playhistory')->find($qp->getId());
                         $em->remove($data);
                         $em->flush();
@@ -309,7 +309,7 @@ https://machigai.puzzle-m.net\n
                 }
     */            //PlayHistory 削除
                 foreach ($playHistoryId as $play_id) {
-                    $em = $this->getDoctrine()->getEntityManager();
+                    $em = $this->getDoctrine()->getManager();
                     $data = $em->getRepository('MachigaiGameBundle:PlayHistory')->find($play_id);
                     $em->remove($data);
                     $em->flush();
@@ -328,7 +328,7 @@ https://machigai.puzzle-m.net\n
                 }
 
                 foreach ($purchaseHistoryId as $purchase_id) {
-                    $em = $this->getDoctrine()->getEntityManager();
+                    $em = $this->getDoctrine()->getManager();
                     $data = $em->getRepository('MachigaiGameBundle:PurchaseHistory')->find($purchase_id);
                     $em->remove($data);
                     $em->flush();
@@ -347,7 +347,7 @@ https://machigai.puzzle-m.net\n
                 }
 
                 foreach ($rankingId as $rank) {
-                    $em = $this->getDoctrine()->getEntityManager();
+                    $em = $this->getDoctrine()->getManager();
                     $data = $em->getRepository('MachigaiGameBundle:Ranking')->find($rank);
                     $em->remove($data);
                     $em->flush();
@@ -363,7 +363,7 @@ https://machigai.puzzle-m.net\n
                 }
 
                 foreach ($registId as $reg) {
-                    $em = $this->getDoctrine()->getEntityManager();
+                    $em = $this->getDoctrine()->getManager();
                     $data = $em->getRepository('MachigaiGameBundle:Regist')->find($reg);
                     $em->remove($data);
                     $em->flush();
@@ -376,7 +376,7 @@ https://machigai.puzzle-m.net\n
             $session->remove("syncToken");
 
             //ユーザー削除
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $user = $em->getRepository('MachigaiGameBundle:User')->find($userId);
             $em->remove($user);
             $em->flush();
