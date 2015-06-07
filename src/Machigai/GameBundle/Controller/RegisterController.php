@@ -107,6 +107,8 @@ class RegisterController extends BaseController
         $salt = "lkjfa74uhfdou593krtbf9lsmfk1gfrjurl";
         $password = $password.$salt;
         $password = hash('sha512',$password);
+$logger = $this->get('logger');
+$logger->info('--------------------loginCheckAction['.__LINE__."]".$password);
 
         $checkData = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')

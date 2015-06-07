@@ -26,6 +26,8 @@ class GameController extends BaseController
     {
         $request = $this->get('request');
         $cookies = $request->cookies;
+        //$logger = $this->get('logger');
+        //$logger->info(print_r($cookies));
         $smartContract = $request->cookies->get('smartContract'); 
         if(!$this->DEBUG && (empty($smartContract) || $smartContract != "true") ) return $this->redirect($this->generateUrl('response_token'));
 
