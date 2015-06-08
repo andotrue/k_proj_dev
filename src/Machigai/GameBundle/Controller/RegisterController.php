@@ -108,7 +108,7 @@ class RegisterController extends BaseController
         $password = $password.$salt;
         $password = hash('sha512',$password);
 $logger = $this->get('logger');
-$logger->info('--------------------loginCheckAction['.__LINE__."]".$password);
+$logger->info('--------------------loginCheckAction['.__LINE__."]encode password---->".$password);
 
         $checkData = $this->getDoctrine()
          ->getRepository('MachigaiGameBundle:User')
@@ -156,6 +156,7 @@ $logger->info('--------------------loginCheckAction['.__LINE__."]".$password);
                 $user_type = 'loggedIn';
 
 				$auId = $user->getAuId();
+$logger->info('--------------------loginCheckAction['.__LINE__."]auId---->".$auId);
 				
 				// 既にAUIDが登録されている
 				if( !empty($auId) ){
@@ -198,6 +199,7 @@ $logger->info('--------------------loginCheckAction['.__LINE__."]".$password);
                     }
                 }
                 $id = $session->get('id');
+$logger->info('--------------------loginCheckAction['.__LINE__."]id---->".$id);
                 if( empty($id) ) {
                     //auIDログインページへリダイレクト
                     return $this->redirect('https://auone.jp');
@@ -207,6 +209,7 @@ $logger->info('--------------------loginCheckAction['.__LINE__."]".$password);
 		            $enableAuId = $session->get('enableAuId');
 					
 					$ua = $request->headers->get('User-Agent');
+$logger->info('--------------------loginCheckAction['.__LINE__."]ua---->".$ua);
 					if(strpos($ua, "Android") == FALSE || $enableAuId == "true"){
 						return $this->redirect($this->generateUrl('AuIdLogin'));
 					} else {
