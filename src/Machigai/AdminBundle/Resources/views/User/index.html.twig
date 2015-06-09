@@ -3,7 +3,7 @@
 {% block contents -%}
     <h1>ユーザ一覧</h1>
     {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
-    <table class="records_list">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
@@ -40,7 +40,7 @@
                 <td>{{ entity.normalClearTimeLastMonth }}</td>
                 <td>{{ entity.hardClearTimeLastMonth }}</td>
                 <td>{{ entity.createdAt  | date("Y/m/d H:i:s") }}</td>
-                <td>{{ entity.updatedAt  | date("Y/m/d H:i:s") }}</td>
+                <td>{% if entity.updatedAt != 0 %}{{ entity.updatedAt  | date("Y/m/d H:i:s") }}{% endif %}}</td>
 -->                
                 <td>
                 <ul>

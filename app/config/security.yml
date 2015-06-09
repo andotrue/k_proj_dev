@@ -11,7 +11,8 @@ security:
             memory:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: bb87a29949f3a1ee0559f8a57357487151281386, roles: [ 'ROLE_ADMIN' ] }
+                    ryan: { password: bb87a29949f3a1ee0559f8a57357487151281386, roles: [ 'ROLE_ADMIN' ] }
+                    admin: { password: 9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684, roles: [ 'ROLE_ADMIN' ] }
     encoders:
         Symfony\Component\Security\Core\User\User:
             algorithm:   sha1
