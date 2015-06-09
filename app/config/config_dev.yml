@@ -17,17 +17,32 @@ monolog:
             type:   stream
             path:   "%kernel.logs_dir%/%kernel.environment%.log"
             level:  debug
+            channels: [!event, !doctrine] #event,#doctrineチャネルを除外
+            formatter: my_formatter # main ハンドラで使うフォーマッタを指定
         console:
             type:   console
             bubble: false
+        doctrine:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_doctrine.log"
+            channels: doctrine
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
-        #firephp:
-        #    type:   firephp
-        #    level:  info
+        firephp:
+            type:   firephp
+            level:  info
         #chromephp:
         #    type:   chromephp
         #    level:  info
+
+# フォーマッタ設定を追加
+services:
+    my_formatter:
+        class: Monolog\Formatter\LineFormatter
+        arguments:
+            # フォーマットを定義
+            ##- "[%%datetime%%] %%channel%%.%%level_name%%: %%message%%\n"
+            - "[%%datetime%%] %%channel%%.%%level_name%%: %%context%% %%extra%%: %%message%%\n"
 
 assetic:
     use_controller: true
