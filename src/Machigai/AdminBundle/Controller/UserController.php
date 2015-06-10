@@ -79,7 +79,7 @@ class UserController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Create', 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }
@@ -168,7 +168,7 @@ class UserController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => '更新'));
+        $form->add('submit', 'submit', array('label' => '更新', 'attr' => array('class' => 'btn btn-primary')));
 
         return $form;
     }
@@ -243,7 +243,7 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('user_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => '削除'))
+            ->add('submit', 'submit', array('label' => '削除', 'attr' => array('class' => 'btn btn-primary')))
             ->getForm()
         ;
     }

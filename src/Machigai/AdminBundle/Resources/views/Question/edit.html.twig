@@ -1,16 +1,24 @@
 {% extends "MachigaiAdminBundle::base.html.twig" %}
 
+{% block stylesheets %}
+	<style type="text/css">
+	<!--
+		#machigai_gamebundle_question_distributedFrom{display:inline;}
+		#machigai_gamebundle_question_distributedFrom_date{display:inline;}
+		#machigai_gamebundle_question_distributedFrom_time{display:inline;}
+		#machigai_gamebundle_question_distributedTo{display:inline;}
+		#machigai_gamebundle_question_distributedTo_date{display:inline;}
+		#machigai_gamebundle_question_distributedTo_time{display:inline;}
+	-->
+	</style>
+{% endblock %}
+
 {% block contents -%}
     <h1>問題編集</h1>
+    <a href="{{ path('question') }}">問題一覧に戻る</a>
 
     {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('question') }}">
-            問題一覧に戻る
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <br />
+	{{ form(delete_form) }}
 {% endblock %}
+

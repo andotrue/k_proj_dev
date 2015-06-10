@@ -4,7 +4,7 @@
     <h1>アイテム一覧</h1>
     {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
 
-    <table class="records_list">
+    <table class="table table-striped table-bordered table-hover compact">
         <thead>
             <tr>
                 <th>ID</th>
@@ -16,9 +16,11 @@
                 <th>人気ランク</th>
                 <th>配布開始日時</th>
                 <th>配布終了日時</th>
-<!--                <th>Createdat</th>
+<!--                
+				<th>Createdat</th>
                 <th>Updatedat</th>
--->                <th>アクション</th>
+-->                
+				<th>アクション</th>
             </tr>
         </thead>
         <tbody>
@@ -33,28 +35,19 @@
                 <td>{{ entity.popularityRank }}</td>
                 <td>{{ entity.distributedFrom  | date("Y/m/d H:i:s") }}</td>
                 <td>{{ entity.distributedTo | date("Y/m/d H:i:s") }}</td>
-<!--                <td>{{ entity.createdAt | date("Y/m/d H:i:s") }}</td>
+<!--                
+				<td>{{ entity.createdAt | date("Y/m/d H:i:s") }}</td>
                 <td>{{ entity.updatedAt | date("Y/m/d H:i:s") }}</td>
--->                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('item_show', { 'id': entity.id }) }}">詳細</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('item_edit', { 'id': entity.id }) }}">編集</a>
-                    </li>
-                </ul>
+-->                
+				<td>
+					<a href="{{ path('item_show', { 'id': entity.id }) }}">詳細</a>|<a href="{{ path('item_edit', { 'id': entity.id }) }}">編集</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
-        <ul>
-        <li>
-            <a href="{{ path('item_new') }}">
-                新規作成
-            </a>
-        </li>
-    </ul>
+
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('item_new') }}'" value="新規作成">
+
     {% endblock %}

@@ -1,15 +1,21 @@
 {% extends "MachigaiAdminBundle::base.html.twig" %}
 
+{% block stylesheets %}
+	<style type="text/css">
+	<!--
+		#machigai_gamebundle_item_distributedFrom{display:inline;}
+		#machigai_gamebundle_item_distributedFrom_date{display:inline;}
+		#machigai_gamebundle_item_distributedFrom_time{display:inline;}
+		#machigai_gamebundle_item_distributedTo{display:inline;}
+		#machigai_gamebundle_item_distributedTo_date{display:inline;}
+		#machigai_gamebundle_item_distributedTo_time{display:inline;}
+	-->
+	</style>
+{% endblock %}
+
 {% block contents -%}
     <h1>アイテム新規作成</h1>
+	<a href="{{ path('item') }}">一覧に戻る</a>
 
     {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('item') }}">
-            一覧に戻る
-        </a>
-    </li>
-</ul>
 {% endblock %}

@@ -1,64 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>{% block title %}間違い探し{% endblock %}</title>
+
+	<link type="text/css" rel="stylesheet" href="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
+	<link type="text/css" rel="stylesheet" href="{{ asset('bundles/machigaigame/css/bootstrap.min.css')  }}" />
+
 	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-1.10.2.min.js') }}"></script>
 	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
 	<script type='text/javascript' src="{{ asset('bundles/machigaigame/js/jquery.timer.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/jquery.center.min.js') }}"></script>
-	<link rel="stylesheet" src="{{ asset('bundles/machigaigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
-	<link type="text/css" rel="stylesheet" src="{{ asset('bundles/machigaigame/css/bootstrap-bootswatch_3.3.2.min.css')  }}" />
-	<link type="text/css" rel="stylesheet" src="http://k_proj_dev.localcentos66/bundles/machigaigame/css/bootstrap-bootswatch_3.3.2.min.css">
+	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/bootstrap.min.js') }}"></script>
+  
+	{% block stylesheets %}{% endblock %}
+</head>
 
-	<style>
-		* {font-family:'メイリオ';font-size:13px;}
-		body{padding:0;border:none;margin:0;}
+	<style type="text/css">
+	<!--
+		body{font-family:'メイリオ';font-size:13px;}
         img{vertical-align:text-bottom;}
         //td{text-align:center;padding-left:0.5em;padding-right:0.5em;}
         nav{ text-align: center;}
         nav a{text-decoration: initial; font-size: 1.1em; padding: 0.5em; }
 	    //tr:nth-child(even) { background:#dedede; }
 		//tr:nth-child(odd)  { background:#c6e2e2; }
-		li{list-style-type: none;}
+		//li{list-style-type: none;}
 		//tr li{ text-align: center;}
 		//th{background:gray; color:white; padding:1em; }
-		header{width:100%;height:59px; text-align: left; background-color:rgb(63,169,246);}
-		label{display:inline-block;padding:0.5em;width:250px;}
+		header{width:100%;height:80px; text-align: left; background-color:rgb(63,169,246);}
+		label{display:inline-block;padding-left:50px;width:200px;}
+	-->
 	</style>
-    
-	{% block stylesheets %}{% endblock %}
-</head>
+
 <body>
 
-<table class="table table-striped">
-<tr>
-<td>
-aaa</td>
-</tr>
-</table>
- <div id="background">
- 	{% block header %}<header><img src="{{ asset('bundles/machigaigame/images/parts/header.png') }}" height="60px"><h1 style="font-size:1.5em;display:inline;width:600px;vertical-align:top;color:white;">管理画面</h1><span style="padding-left:300px;width:200px;"><a href="{{ path('machigai_admin_logout') }}" style="vertical-align:top;">ログアウト</a></span></header>{% endblock %}
+<div id="background">
+ 	{% block header %}
+ 	<header>
+ 		<img src="{{ asset('bundles/machigaigame/images/parts/header.png') }}" class="img-thumbnail" style="height: 60px; margin: 10px">
+ 		<p style="font-size:30px; display:inline; vertical-align:bottom; color:white;">管理画面</p>
+ 		<span style="float:right; margin:25px">
+ 			<a href="{{ path('machigai_admin_logout') }}" style="color:white;"><u>ログアウト</u></a>
+ 		</span>
+ 	</header>
+ 	{% endblock %}
+
  	{% block leftNav %}
-	 	<div id="leftNav" style="position:absolute; width:150px;vertical-align:top;">
-	 		<nav>
-	 			<ul>
-	 				<li><a href="{{ path('user') }}">ユーザ</a></li>
-	 				<li><a href="{{ path('question') }}">問題</a></li>
-	 				<li><a href="{{ path('item') }}">アイテム</a></li>
-	 				<li><a href="{{ path('ranking') }}">ランキング</a></li>
-	 				<li><a href="{{ path('news') }}">お知らせ</a></li>
-	 				<li><a href="{{ path('push_alert') }}">PUSH通知</a></li>
-	 			</ul>
-	 		</nav>
-	 	</div>
-	 {% endblock %}
-	<div id="contents" style="position:relative; margin-left: 150px; width:50%;">{% block contents %}{% endblock %}</div>
- </div>
-        {% block javascripts %}{% endblock %}
+	<div class="col-xs-2" style="position:ralative; top:20px ;">
+		<nav>
+			<ul class="nav nav-pills nav-stacked">
+				<li><a href="{{ path('user') }}">ユーザ</a></li>
+				<li><a href="{{ path('question') }}">問題</a></li>
+				<li><a href="{{ path('item') }}">アイテム</a></li>
+				<li><a href="{{ path('ranking') }}">ランキング</a></li>
+				<li><a href="{{ path('news') }}">お知らせ</a></li>
+				<li><a href="{{ path('push_alert') }}">PUSH通知</a></li>
+			</ul>
+		</nav>
+	</div>
+	{% endblock %}
+	 
+	<div class="col-xs-10">
+	<!-- <div id="contents" style="position:relative; margin-left: 150px; width:50%;"> -->
+		{% block contents %}{% endblock %}
+	</div>
+</div>
+
+{% block javascripts %}{% endblock %}
 {% block foot %}
+
 <footer>
 </footer>
+
 {% endblock %}
 </body>
 </html>

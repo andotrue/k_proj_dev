@@ -2,8 +2,10 @@
 
 {% block contents -%}
     <h1>ユーザ</h1>
+    <a href="{{ path('user') }}">ユーザ一覧に戻る</a>
+	｜<a href="{{ path('user_edit', { 'id': entity.id }) }}">編集</a>
 
-    <table class="record_properties">
+    <table class="table table-striped table-bordered table-hover compact">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -69,22 +71,9 @@
             </tr>
             <tr>
                 <th>Updatedat</th>
-                <td>{{ entity.updatedAt | date("Y/m/d H:i:s")}}</td>
+                <td>{% if entity.updatedAt == "0" %}{{ entity.updatedAt | date("Y/m/d H:i:s")}}{% endif %}</td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('user') }}">
-            ユーザ一覧に戻る
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
-            編集
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+	{{ form(delete_form) }}
 {% endblock %}

@@ -2,8 +2,10 @@
 
 {% block contents -%}
     <h1>問題詳細</h1>
+	<a href="{{ path('question') }}">問題一覧に戻る</a>｜
+	<a href="{{ path('question_edit', { 'id': entity.id }) }}">編集</a>
 
-    <table class="record_properties">
+    <table class="table table-striped table-bordered table-hover compact">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -68,17 +70,6 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('question') }}">
-            問題一覧に戻る
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('question_edit', { 'id': entity.id }) }}">
-            編集
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
+	{{ form(delete_form) }}
 </ul>
 {% endblock %}
