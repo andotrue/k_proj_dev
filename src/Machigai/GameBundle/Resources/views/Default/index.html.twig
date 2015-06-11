@@ -1,38 +1,38 @@
 {% extends "MachigaiGameBundle::base.html.twig" %}
+
 {% block body %}
  
-        <!-- Conversion Pixel - スタンプ付き♪まちがいさがし放題　ｆｏｒ　ａｕスマートパス - DO NOT MODIFY -->
-        <img height='1' src='https://ssl.socdm.com/sa/img?said=cv4120-s&t=2' style='position:absolute;border:none;padding:0;margin:0;' width='1' />
-        <!-- End of Conversion Pixel -->
+<!-- Conversion Pixel -  - DO NOT MODIFY -->
+<img height='1' src='https://ssl.socdm.com/sa/img?said=cv4120-s&t=2' style='position:absolute;border:none;padding:0;margin:0;' width='1' />
+<!-- End of Conversion Pixel -->
 
-        {% if reword %}
-        <img src ="https://reward.gree.net/wt/a?cid={{cid}}&ad={{ad}}&uid={{uid}}&digest={{digest}}" width="1" height="1">
-        {% endif %}
-        
-	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/bookmark_bubble.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/example.js') }}"></script>
-	<link rel="apple-touch-icon-precomposed" href="{{ asset('/bundles/machigaigame/images/parts/icon_256template_ios7.png') }}">
-<style>
-body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
+{% if reword %}
+	<img src ="https://reward.gree.net/wt/a?cid={{cid}}&ad={{ad}}&uid={{uid}}&digest={{digest}}" width="1" height="1">
+{% endif %}
 
-#wv_wrap {
-    top: 0;
-    position: fixed;
-    width: 100%;
-}
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/bookmark_bubble.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/machigaigame/js/example.js') }}"></script>
+<link rel="apple-touch-icon-precomposed" href="{{ asset('/bundles/machigaigame/images/parts/icon_256template_ios7.png') }}">
 
-#wv_header {
-    padding-left: 45%;
-}
-#wv_blank {
-    height: 50px;
-}
-#wv_header img{
-    margin-top: 7%;
-    margin-bottom: 4%;
-    margin-left: 1%;
-    width: 19%;
-}
+<style type="text/css">
+	body{background: url({{asset('/bundles/machigaigame/images/parts/top_bg.png')}})}
+	#wv_wrap {
+	    top: 0;
+	    position: fixed;
+	    width: 100%;
+	}
+	#wv_header {
+	    padding-left: 45%;
+	}
+	#wv_blank {
+	    height: 50px;
+	}
+	#wv_header img{
+	    margin-top: 7%;
+	    margin-bottom: 4%;
+	    margin-left: 1%;
+	    width: 19%;
+	}
 </style>
 
 <script type="text/javascript">
@@ -54,142 +54,119 @@ $(function(){
         <div style="height: 20px; width: 100%; background-color: #66D842"></div>
         <div id="wv_header" 
              style="
-             display: none;
-             background-image:url({{ asset('/bundles/machigaigame/images/parts/wv_header_back.png') }});
-             -moz-background-size:cover;
-             background-size:cover;
-        " >
-            <a href='{{ path('GameSelect') }}'>
-                <img alt="まちがいさがし" 
-                     src="{{asset('/bundles/machigaigame/images/parts/sub_machigai.png')}}"
-                     /></a>
+             	display: none;
+             	background-image:url({{ asset('/bundles/machigaigame/images/parts/wv_header_back.png') }});
+             	-moz-background-size:cover;
+             	background-size:cover;
+             	"
+        >
+        	<a href='{{ path('GameSelect') }}'>
+        		<img alt="まちがいさがし" 
+            		src="{{asset('/bundles/machigaigame/images/parts/sub_machigai.png')}}"
+            		/>
+        	</a>
 
-            {% if user is empty %}
-                <img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_on.png')}}" width="12%" />
-            {% else %}
-                <a href='{{ path('Shop') }}'>
-                <img alt="ショップ" 
-                     src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_off.png')}}" 
-                     /></a>
-          {% endif %}
+        	{% if user is empty %}
+            	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_on.png')}}" width="12%" />
+			{% else %}
+            	<a href='{{ path('Shop') }}'>
+            		<img alt="ショップ" 
+                		src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_off.png')}}" 
+                	/>
+            	</a>
+        	{% endif %}
+        		<a href='{{ path('Ranking') }}'>
+        			<img alt="ランキング" id="ranking_button" 
+            			src="{{asset('/bundles/machigaigame/images/parts/sub_rank.png')}}" 
+            		/>
+        		</a>
 
-            <a href='{{ path('Ranking') }}'>
-                <img alt="ランキング" id="ranking_button" 
-                     src="{{asset('/bundles/machigaigame/images/parts/sub_rank.png')}}" 
-                     /></a>
-
-            <a href='{{ path('Help') }}'>
-                <img alt="ヘルプ" 
-                     src="{{asset('/bundles/machigaigame/images/parts/sub_help.png')}}" 
-                     /></a>
+        	<a href='{{ path('Help') }}'>
+            	<img alt="ヘルプ" 
+                	src="{{asset('/bundles/machigaigame/images/parts/sub_help.png')}}" 
+            	/>
+        	</a>
         </div>
     </div>
     <div id="wv_blank" style="display:none">&nbsp;</div>        
 
-    
- <img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
-<br /><br />
+	<!-- ヘッダーロゴ -->
+	<img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
+	<br /><br />
 
-<img src="http://smpbanner.hubase-i.net/img/tl_banner_machigai.png" width="100%" /></a> 
- 
-<div class="ignoreWebview">
+	<div class="ignoreWebview">
+	  	<!--スタンプ誘導バナー１ -->
+	 	{% if user is empty %}
+			<a href="#auin">
+				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_nologin_stamp.png') }}" width="100%" />
+		    </a>
+		{% else %}
+			<a href='{{ path('Shop') }}' id="hshop_button">
+				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp.png') }}" width="100%" />
+			</a>
+		{% endif %}
+	
+		<!--スタンプ誘導バナー２ -->
+		{% if user is empty %}
+			<a href="#auin">
+				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" />
+			</a>
+		{% else %}
+			<a href='{{ path('Shop') }}' id="hshop_button">
+				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" />
+	 		</a>
+		{% endif %}
 
-
-  	<!--auIDスタンプ誘導バナー１ -->
-  {% if user is empty %}
-<a href="#auin">
-  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_nologin_stamp.png') }}" width="100%" />
-    </a>
-  {% else %}
-  	<a href='{{ path('Shop') }}' id="hshop_button">
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp.png') }}" width="100%" />
-  </a>
- {% endif %}
-
-
-  	<!--auIDスタンプ誘導バナー１ -->
-  {% if user is empty %}
-<a href="#auin">
-  <img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" />
-    </a>
-  {% else %}
-  	<a href='{{ path('Shop') }}' id="hshop_button">
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" />
-  </a>
- {% endif %}
-
-
-
+<!-- Androidのみバナー出力 -->
 <script type="text/javascript">
-if(navigator.userAgent.indexOf('iPhone') > 0){
-}else if(navigator.userAgent.indexOf('Android') > 0){
-document.write("</a><a href='https://machigai.puzzle-m.net/movstamp.html'><img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner.png'width='100%' /></a><br /></a><a href='https://machigai.puzzle-m.net/stamp_ranking.html'><img src='/bundles/machigaigame/images/parts/ugoku_stamp_ranking.png'width='100%' /></a><br /></a><a href='https://machigai.puzzle-m.net/movstamp3.html'><img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner3.png'width='100%' /></a>");
-}else{}
+	if(navigator.userAgent.indexOf('iPhone') > 0){}
+	else if(navigator.userAgent.indexOf('Android') > 0){
+		document.write(
+				"<a href='https://machigai.puzzle-m.net/movstamp.html'>"+
+					"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner.png'width='100%' /></a><br />"+
+				"<a href='https://machigai.puzzle-m.net/stamp_ranking.html'>"+
+					"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_ranking.png'width='100%' /></a><br />"+
+				"<a href='https://machigai.puzzle-m.net/movstamp3.html'>"+
+					"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner3.png'width='100%' /></a>"
+				);
+	}else{}
 </script>
 
+<!-- Androidのみテキスト出力 -->
 <script type="text/javascript">
-if(navigator.userAgent.indexOf('iPhone') > 0){
-}else if(navigator.userAgent.indexOf('Android') > 0){
-document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプみたいに使えちゃう♪<br>");
-}else{}
+	if(navigator.userAgent.indexOf('iPhone') > 0){
+	}else if(navigator.userAgent.indexOf('Android') > 0){
+		document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプみたいに使えちゃう♪<br>");
+	}else{}
 </script>
-<br> 
+
+		<br> 
  
+		<font size="-1"><br> 
+		2015年5月31日の締め切りです。<br>
+		当選者の方には応募メールアドレス宛てに<br>
+		2015年7月15日迄にご連絡致します。</font>
+	 	<br><br>
  
-     <!--**▼ゴディヴァコーヒー２０名▼-->
-<a href="http://machigai.puzzle-m.net/apply/show/oubo_page.html"> 
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/godivacafe_oubo.png') }}" width="70%" /></a> 
-<font size="-1"><br> 
-2015年5月31日の締め切りです。<br>
-当選者の方には応募メールアドレス宛てに<br>
-2015年7月15日迄にご連絡致します。</font>
- <br> <br>
- 
-    <!--**▼アマゾン先着1000▼-->
- <!--<a href="http://machigai.puzzle-m.net/apply/show/oubo_page.html"> 
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/amazon_yoko.png') }}" width="100%" /></a> 
- <FONT color="maroon">
- Ａｍａｚｏｎギフト券５０円分プレゼント！</FONT><br />
-<font size="-1">
-当選者の方には応募メールアドレス宛てに<br>
-2015年4月30日迄にご連絡致します。</font>
- <br /> <br />-->
+	   <!--**▼リクエストコーナー▼-->
+		<a href="mailto:present@machigai.puzzle-m.net?subject=まちがいさがしリクエスト&amp;body=リクエスト内容を本文に記載してください。"> 
+			<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/request.png') }}" width="80%" />
+		</a>
+		<br><br />
 
-    <!--**▼占いコーナー▼-->
-<a href="http://server11.happywoman.jp/hubase/12star/"> 
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/uranai_banner.png') }}" width="100%" /></a> 
-<br><br>
-   <!--**▼リクエストコーナー▼-->
-<a href="mailto:present@machigai.puzzle-m.net?subject=まちがいさがしリクエスト&amp;body=リクエスト内容を本文に記載してください。"> 
-<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/request.png') }}" width="80%" /></a>
-<br><br />
+	</div>
 
-  <a href="https://ausp.puzzle-m.net/">
-    <img src="http://smpbanner.hubase-i.net/img/tl_banner_puzzle.png" width="100%" />
-  </a>
-  <a href="https://e-aquarium.jp/asp/">
-     <img src="http://smpbanner.hubase-i.net/img/tl_banner_aqua.png" width="100%" />
-  </a>
-  <div style="text-align: left;">
-  </div>
-  <a href="https://bbq-g.com/asp/">
-     <img src="http://smpbanner.hubase-i.net/img/tl_banner_bbq.png" width="100%" />
-       </a>
-  <a name="auin"></a>
-</div>
+	{# 非会員への告知  #}
+	{% if user is empty %}
+		<!-- AuIDログイン -->
+		<a href="{{ path('AuIdLogin')  }}" alt="login">
+	  		<img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/>
+	  	</a>
 
-
-
-<!--
- <p id="user_name" style="margin: 0 auto; width:90%;white-space:nowrap;font-size:1em;color:rgb(255,254,255);">{% if user is empty %} ゲスト {% else %} {{user.getNickname}} {% endif %}さん</p>
--->
-
- {% if user is empty %}
-  <a href="{{ path('AuIdLogin')  }}" alt="login">
-  <img id="" src="{{asset('/bundles/machigaigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/></a>
-     <section style="margin-top:2%;background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
-         <a href="{{ path('Login') }}">メールアドレス会員の方はこちら</a>
-     </section>
+		<!-- メアドログイン -->
+     	<section style="margin-top:2%;background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
+        	<a href="{{ path('Login') }}">メールアドレス会員の方はこちら</a>
+     	</section>
   
 		<section style="margin-top:2%;background-image:url(/bundles/machigaigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
 			<p style="width:80%;margin: 0 auto;white-space:nowrap;">会員登録すると以下の機能が使えるよ！</p>
@@ -203,58 +180,74 @@ document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプ
 		   		</ul>
 	  		</nav>
 		</section>
- {% else %}
-  	<!--ゲスト時には何も表示しない -->
- {% endif %}
- </div>
+	
+	{% else %}
+		{# ゲスト時には何も表示しない #}
+	{% endif %}
+	</div>
 </header>
 
- <section id="current_point" class="top_bg">
-  <img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
-  <p style="font-size:1em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
- </section>
- <section id="menu" class="top_bg">
-<img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/><a href='{{ path('GameSelect') }}' id="hgame_button" style="padding-right:9%;"></a>
-<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_game.png')}}" />
-  {% if user is empty %}
-  	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_gray.png')}}" width="35%" />
-  {% else %}
-  	<a href='{{ path('Shop') }}' id="hshop_button">
-  	<img alt="ショップ" id="shop_button" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/><img src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" class="preload"/></a>
-  {% endif %}<br />
-  <a href='{{ path('Ranking') }}' id="hranking_button">
-  <img alt="ランキング" id="ranking_button" style="padding-right:9%" src="{{asset('/bundles/machigaigame/images/parts/button_ranking_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
-  <img src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" class="preload"/>
-  <a href='{{ path('Help') }}' id="hhelp_button">
-  <img alt="ヘルプ" id="help_button" src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/></a>
-  <img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" />
 
- </section>
- <section id="news" class="top_bg">
-  <img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
-  <div class="news" style="color:rgb(102,24,24);">
-  {% for new in news %}
-   <p style="text-align:left;width:80%;margin: 0 auto;">{{new.getTitle}}<br />{{new.getDescription|raw}}</p><br />
-  {% endfor %}
-  </div>
-  
-
-
-{% if user is not empty %}
-	<p style="text-align:center;">
-		<a href="{{ path('Logout')  }}" alt="ログアウト">
-			<img id="userLogout" src="{{ asset('/bundles/machigaigame/images/parts/button_logout.png') }}" width="60%" onclick="changeImage(this.id);"/>
-		</a>
-	</p>
- {% endif %}
-        
-        
-<section style="padding-top:2em;">
-<div class="pre_pass white">
-<p><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
-</div>
+<section id="current_point" class="top_bg">
+	<img alt="現在のポイント" src="{{ asset('/bundles/machigaigame/images/parts/bar_point.png')}}" width="100%" />
+	<p style="font-size:1em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
 </section>
 
+<section id="menu" class="top_bg">
+	<!-- まちがいさがし -->
+	<img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
+	<a href='{{ path('GameSelect') }}' id="hgame_button" style="padding-right:9%;"></a>
+	<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_game.png')}}" />
+  	
+  	<!-- スタンプ＆壁紙 -->
+	{% if user is empty %}
+  		<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_gray.png')}}" width="35%" />
+	{% else %}
+  		<a href='{{ path('Shop') }}' id="hshop_button">
+  			<img alt="ショップ" id="shop_button" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
+  			<img src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" class="preload"/>
+  		</a>
+  	{% endif %}
+  	<br />
+	
+	<!-- ランキング -->
+	<a href='{{ path('Ranking') }}' id="hranking_button">
+ 		<img alt="ランキング" id="ranking_button" style="padding-right:9%" src="{{asset('/bundles/machigaigame/images/parts/button_ranking_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
+ 	</a>
+ 	<img src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" class="preload"/>
+
+	<!-- ヘルプ -->
+ 	<a href='{{ path('Help') }}' id="hhelp_button">
+ 		<img alt="ヘルプ" id="help_button" src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
+ 	</a>
+	<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" />
+</section>
+
+<section id="news" class="top_bg">
+	<!-- お知らせ -->
+	<img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
+	<div class="news" style="color:rgb(102,24,24);">
+	{% for new in news %}
+		<p style="text-align:left;width:80%;margin: 0 auto;">{{new.getTitle}}<br />{{new.getDescription|raw}}</p>
+		<br />
+	{% endfor %}
+  	</div>
+
+	<!-- ログアウト -->
+	{% if user is not empty %}
+		<p style="text-align:center;">
+			<a href="{{ path('Logout')  }}" alt="ログアウト">
+				<img id="userLogout" src="{{ asset('/bundles/machigaigame/images/parts/button_logout.png') }}" width="60%" onclick="changeImage(this.id);"/>
+			</a>
+		</p>
+	{% endif %}
+        
+
+	<section style="padding-top:2em;">
+		<div class="pre_pass white">
+			<p><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
+		</div>
+	</section>
 </section>
 {% endblock %}
 

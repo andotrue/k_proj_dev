@@ -179,7 +179,7 @@ window.onload = function(){
   {% for rank in ranking_previous_month %}
    <div class="game_level_{{rank.getLevel()}}">
     <li id="tab1" style="display:block; text-align:left; padding:1%; border: 1px solid rgb(253,138,55)">
-     <span>{{ rank.getRank() }}位 </span>{{rank.User.nickname()}} さん<br />
+     <span>{{ rank.getRank() }}位 </span>{##{rank.User.nickname()}##}さん<br />
      <span>タイム</span><div style="position:relative;left:-55%;float:right;" class="level_{{rank.getLevel()}}previousMonthTime{{ rank.getRank() }}">{{rank.getClearTime()}}</div>
     </li>
    </div>
