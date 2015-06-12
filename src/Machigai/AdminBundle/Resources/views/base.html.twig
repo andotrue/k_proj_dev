@@ -39,8 +39,11 @@
 <div id="background">
  	{% block header %}
  	<header>
- 		<img src="{{ asset('bundles/machigaigame/images/parts/header.png') }}" class="img-thumbnail" style="height: 60px; margin: 10px">
+ 		<!-- ヘッダーロゴ -->
+ 		<img src="{{ asset('bundles/machigaigame/images/parts/kanahei_header.png') }}" class="img-thumbnail" style="height: 60px; margin: 10px">
+
  		<p style="font-size:30px; display:inline; vertical-align:bottom; color:white;">管理画面</p>
+
  		<span style="float:right; margin:25px">
  			<a href="{{ path('machigai_admin_logout') }}" style="color:white;"><u>ログアウト</u></a>
  		</span>
@@ -54,7 +57,6 @@
 				<li><a href="{{ path('user') }}">ユーザ</a></li>
 				<li><a href="{{ path('question') }}">問題</a></li>
 				<li><a href="{{ path('item') }}">アイテム</a></li>
-				<li><a href="{{ path('ranking') }}">ランキング</a></li>
 				<li><a href="{{ path('news') }}">お知らせ</a></li>
 				<li><a href="{{ path('push_alert') }}">PUSH通知</a></li>
 			</ul>

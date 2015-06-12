@@ -75,11 +75,6 @@ $(function(){
                 	/>
             	</a>
         	{% endif %}
-        		<a href='{{ path('Ranking') }}'>
-        			<img alt="ランキング" id="ranking_button" 
-            			src="{{asset('/bundles/machigaigame/images/parts/sub_rank.png')}}" 
-            		/>
-        		</a>
 
         	<a href='{{ path('Help') }}'>
             	<img alt="ヘルプ" 
@@ -91,7 +86,7 @@ $(function(){
     <div id="wv_blank" style="display:none">&nbsp;</div>        
 
 	<!-- ヘッダーロゴ -->
-	<img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/header.png') }}" width="100%" />
+	<img id="default_header" src="{{ asset('/bundles/machigaigame/images/parts/kanahei_header.png') }}" width="100%" />
 	<br /><br />
 
 	<div class="ignoreWebview">
@@ -175,7 +170,6 @@ $(function(){
 				<ul style="list-style-type:disc;width:100%;white-space:nowrap;">
 			    	<li style="display:inline-block;width:17%;padding:1%">・ポイント</li>
 			    	<li style="display:inline-block;width:20%;padding:1%">・問題の保存</li>
-			    	<li style="display:inline-block;width:20%;padding:1%">・ランキング</li>
 			    	<li style="display:inline-block;width:17%;padding:1%">・ショップ</li>
 		   		</ul>
 	  		</nav>
@@ -210,17 +204,42 @@ $(function(){
   	{% endif %}
   	<br />
 	
-	<!-- ランキング -->
-	<a href='{{ path('Ranking') }}' id="hranking_button">
- 		<img alt="ランキング" id="ranking_button" style="padding-right:9%" src="{{asset('/bundles/machigaigame/images/parts/button_ranking_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
- 	</a>
- 	<img src="{{asset('/bundles/machigaigame/images/parts/button_ranking.png')}}" class="preload"/>
-
 	<!-- ヘルプ -->
  	<a href='{{ path('Help') }}' id="hhelp_button">
  		<img alt="ヘルプ" id="help_button" src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
  	</a>
 	<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" />
+	<br />
+	
+	<!-- バランスタワー -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="バランスタワー"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- まちがいさがし -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="まちがいさがし"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- じゃんけん -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="じゃんけん"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- 絵合わせ -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="絵合わせ"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<br /><br />
+	
+	<!-- ギャラリー -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="ギャラリー"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<br /><br />
+	
 </section>
 
 <section id="news" class="top_bg">
