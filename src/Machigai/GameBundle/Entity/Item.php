@@ -32,6 +32,13 @@ class Item
     /**
      * @var string
      * 
+     * @ORM\Column(name="category_code", type="integer")
+     */
+    private $categoryCode;
+
+    /**
+     * @var string
+     * 
      * @ORM\Column(name="name", type="string", length=32)
      */
     private $name;
@@ -139,6 +146,29 @@ class Item
     public function getItemCode()
     {
         return $this->itemCode;
+    }
+
+    /**
+     * Set categoryCode
+     *
+     * @param string $categoryCode
+     * @return Item
+     */
+    public function setCategoryCode($categoryCode)
+    {
+        $this->categoryCode = $categoryCode;
+
+        return $this;
+    }
+
+    /**
+     * Get categoryCode
+     *
+     * @return integer 
+     */
+    public function getCategoryCode()
+    {
+        return $this->categoryCode;
     }
 
     /**

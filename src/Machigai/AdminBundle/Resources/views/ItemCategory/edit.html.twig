@@ -1,0 +1,10 @@
+{% extends "MachigaiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>アイテムカテゴリ編集</h1>
+	<a href="{{ path('itemcategory') }}">アイテム一覧に戻る</a>
+
+    {{ form(edit_form) }}
+	<br />
+	{{ form(delete_form) }}
+{% endblock %}

@@ -161,3 +161,34 @@ push_alert:
 push_alert_create:
     pattern: /push_alert/create
     defaults: { _controller: MachigaiAdminBundle:Default:pushAlertCreate }
+
+    
+itemcategory:
+    pattern: /itemcategory/
+    defaults: { _controller: MachigaiAdminBundle:ItemCategory:index }
+
+itemcategory_show:
+    pattern: /itemcategory/show/{categoryCode}
+    defaults: { _controller: MachigaiAdminBundle:ItemCategory:show }
+
+itemcategory_edit:
+    pattern: /itemcategory/edit/{categoryCode}
+    defaults: { _controller: MachigaiAdminBundle:ItemCategory:edit }
+
+itemcategory_new:
+    pattern: /itemcategory/new
+    defaults: { _controller: MachigaiAdminBundle:ItemCategory:new }
+
+itemcategory_create:
+    pattern: /itemcategory/create
+    defaults: { _controller: MachigaiAdminBundle:ItemCategory:create }
+
+itemcategory_delete:
+    pattern: /itemcategory/delete/{categoryCode}
+    defaults: { _controller: MachigaiAdminBundle:ItemCategory:delete }
+
+itemcategory_update:
+    pattern: /itemcategory/update/{categoryCode}
+    defaults: { _controller: MachigaiAdminBundle:ItemCategory:update }
+
+    
