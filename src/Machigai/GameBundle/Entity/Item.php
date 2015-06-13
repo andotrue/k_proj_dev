@@ -100,10 +100,30 @@ class Item
     private $updatedAt;
 
     /**
+     * @var integer
+     * 
+     * @ORM\Column(name="group_code", type="integer")
+     */
+    private $groupCode;
+
+    /**
+     * @var integer
+     * 
+     * @ORM\Column(name="platform_code", type="integer")
+     */
+    private $platformCode;
+
+    /**
      * @ORM\ManyToOne(targetEntity="ItemCategory", inversedBy="items") 
      * @ORM\JoinColumn(name="category_code", referencedColumnName="category_code")
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ItemGroup", inversedBy="items") 
+     * @ORM\JoinColumn(name="group_code", referencedColumnName="group_code")
+     */
+    private $group;
 
     /**
      * @ORM\OneToMany(targetEntity="PurchaseHistory", mappedBy="item")
@@ -441,17 +461,89 @@ class Item
      */
     public function getItemThumPath()
     {
-	/** スタンプ **/
-	if ( $this->getCategory()->getCategoryCode() == 2 ){
-	  return "/bundles/machigaigame/images/stamp/".$this->getItemPath()."_thum.png";
-	}
-	/** 壁紙 **/
-	elseif ( $this->getCategory()->getCategoryCode() == 1 ){
-	  return "/bundles/machigaigame/images/wallpaper/".$this->getItemPath()."_thum.png";
-	}
-	/** その他 **/
-	elseif ( $this->getCategory()->getCategoryCode() == 0 ){
-	  return "/bundles/machigaigame/images/other/".$this->getItemPath()."_thum.png";
-	}
+		/** スタンプ **/
+		if ( $this->getCategory()->getCategoryCode() == 2 ){
+		  return "/bundles/machigaigame/images/stamp/".$this->getItemPath()."_thum.png";
+		}
+		/** 壁紙 **/
+		elseif ( $this->getCategory()->getCategoryCode() == 1 ){
+		  return "/bundles/machigaigame/images/wallpaper/".$this->getItemPath()."_thum.png";
+		}
+		/** その他 **/
+		elseif ( $this->getCategory()->getCategoryCode() == 0 ){
+		  return "/bundles/machigaigame/images/other/".$this->getItemPath()."_thum.png";
+		}
     }
+    
+    /**
+     * Set groupCode
+     *
+     * @param integer $groupCode
+     * @return Item
+     */
+    public function setGroupCode($groupCode)
+    {
+    	$this->groupCode = $groupCode;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get groupCode
+     *
+     * @return integer
+     */
+    public function getGroupCode()
+    {
+    	return $this->groupCode;
+    }
+    
+    /**
+     * Set platformCode
+     *
+     * @param string $platformCode
+     * @return Item
+     */
+    public function setPlatformCode($platformCode)
+    {
+    	$this->platformCode = $platformCode;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get platformCode
+     *
+     * @return integer
+     */
+    public function getPlatformCode()
+    {
+    	return $this->platformCode;
+    }
+    
+    /**
+     * Set group
+     *
+     * @param \Machigai\GameBundle\Entity\ItemGroup $group
+     * @return Item
+     */
+    public function setGroup(\Machigai\GameBundle\Entity\ItemGroup $group = null)
+    {
+    	$this->group = $group;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get group
+     *
+     * @return \Machigai\GameBundle\Entity\ItemGroup
+     */
+    public function getGroup()
+    {
+    	return $this->group;
+    }
+    
+    
+    
 }

@@ -191,4 +191,33 @@ itemcategory_update:
     pattern: /itemcategory/update/{categoryCode}
     defaults: { _controller: MachigaiAdminBundle:ItemCategory:update }
 
+
+itemgroup:
+    pattern: /itemgroup/
+    defaults: { _controller: MachigaiAdminBundle:ItemGroup:index }
+
+itemgroup_show:
+    pattern: /itemgroup/show/{groupCode}
+    defaults: { _controller: MachigaiAdminBundle:ItemGroup:show }
+
+itemgroup_edit:
+    pattern: /itemgroup/edit/{groupCode}
+    defaults: { _controller: MachigaiAdminBundle:ItemGroup:edit }
+
+itemgroup_new:
+    pattern: /itemgroup/new
+    defaults: { _controller: MachigaiAdminBundle:ItemGroup:new }
+
+itemgroup_create:
+    pattern: /itemgroup/create
+    defaults: { _controller: MachigaiAdminBundle:ItemGroup:create }
+
+itemgroup_delete:
+    pattern: /itemgroup/delete/{groupCode}
+    defaults: { _controller: MachigaiAdminBundle:ItemGroup:delete }
+
+itemgroup_update:
+    pattern: /itemgroup/update/{groupCode}
+    defaults: { _controller: MachigaiAdminBundle:ItemGroup:update }
+
     

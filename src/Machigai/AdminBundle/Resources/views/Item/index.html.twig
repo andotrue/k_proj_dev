@@ -2,7 +2,8 @@
 
 {% block contents -%}
     <h1>アイテム一覧</h1>
-    <a href="{{ path('itemcategory') }}">アイテムカテゴリ一覧</a>
+    <a href="{{ path('itemcategory') }}">アイテムカテゴリ一覧</a>｜
+    <a href="{{ path('itemgroup') }}">アイテムグループ一覧</a>
   
     {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
 
@@ -16,9 +17,11 @@
                 <th>ファイル名</th>
                 <th>消費ポイント</th>
                 <th>説明</th>
+                <th>グループ</th>
                 <th>人気ランク</th>
                 <th>配布開始日時</th>
                 <th>配布終了日時</th>
+                <th>デバイス</th>
 <!--                
 				<th>Createdat</th>
                 <th>Updatedat</th>
@@ -36,9 +39,11 @@
                 <td>{{ entity.itemPath }}</td>
                 <td>{{ entity.consumePoint }}</td>
                 <td>{{ entity.description }}</td>
+                <td>{{ entity.group.name }}</td>
                 <td>{{ entity.popularityRank }}</td>
                 <td>{{ entity.distributedFrom  | date("Y/m/d H:i:s") }}</td>
                 <td>{{ entity.distributedTo | date("Y/m/d H:i:s") }}</td>
+                <td>{% if entity.platformCode == "1" %}Andのみ{% elseif entity.platformCode == "2" %}iOSのみ{% elseif entity.platformCode == "12" %}両方{% endif %}</td>
 <!--                
 				<td>{{ entity.createdAt | date("Y/m/d H:i:s") }}</td>
                 <td>{{ entity.updatedAt | date("Y/m/d H:i:s") }}</td>

@@ -24,6 +24,17 @@ class ItemType extends AbstractType
             ->add('distributedFrom')
             ->add('distributedTo')
             ->add('category', 'entity', array('class' => 'MachigaiGameBundle:ItemCategory', 'property' => 'name'))
+            ->add('group', 'entity', array('class' => 'MachigaiGameBundle:ItemGroup', 'property' => 'name'))
+            //->add('platformCode')
+            ->add('platformCode', 'choice', array(
+            		'choices' => array('1' => 'Andのみ', '2' => 'iOSのみ', '12' => '両方'), 
+            		'empty_value' => ''
+            ));
+            //->add('platform', 'choice', array(
+            //		'choices' => array('1' => 'Andのみ', '2' => 'iOSのみ', '12' => '両方'),
+            //		//'choices' => getPlatform(),
+            //		'preferred_choices' => array('2'),
+            //))
         ;
     }
     
@@ -44,4 +55,5 @@ class ItemType extends AbstractType
     {
         return 'machigai_gamebundle_item';
     }
+    
 }
