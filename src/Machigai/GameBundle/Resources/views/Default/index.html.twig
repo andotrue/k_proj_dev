@@ -67,7 +67,7 @@ $(function(){
         	{% if user is empty %}
             	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_on.png')}}" width="12%" />
 			{% else %}
-            	<a href='{{ path('Shop',{"category":"1" }) }}'>
+            	<a href='{{ path('Shop',{"categoryCode":"1" }) }}'>
             		<img alt="ショップ" 
                 		src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_off.png')}}" 
                 	/>
@@ -94,7 +94,7 @@ $(function(){
 				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_nologin_stamp.png') }}" width="100%" />
 		    </a>
 		{% else %}
-			<a href='{{ path('Shop',{"category":"1" }) }}' id="hshop_button">
+			<a href='{{ path('Shop',{"categoryCode":"1" }) }}' id="hshop_button">
 				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp.png') }}" width="100%" />
 			</a>
 		{% endif %}
@@ -187,7 +187,7 @@ $(function(){
 	{% if user is empty %}
   		<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_gray.png')}}" width="35%" />
 	{% else %}
-  		<a href='{{ path('Shop',{"category":"1" }) }}' id="hshop_button">
+  		<a href='{{ path('Shop',{"categoryCode":"1" }) }}' id="hshop_button">
   			<img alt="ショップ" id="shop_button" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
   			<img src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" class="preload"/>
   		</a>
@@ -203,7 +203,17 @@ $(function(){
 
 	
 	<!-- 動くスタンプ -->
-	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"category":"1" }) }}'" value="動くスタンプ"
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"3" }) }}'" value="動くスタンプ"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- 背景壁紙 -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"1" }) }}'" value="背景壁紙"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- デコメスタンプ -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"2" }) }}'" value="デコメスタンプ"
 		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
 		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
 	>

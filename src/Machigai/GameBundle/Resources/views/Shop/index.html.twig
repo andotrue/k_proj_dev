@@ -3,57 +3,33 @@
 {% block title %}MachigaiGameBundle:Shop:index{% endblock %}
 
 {% block body %}
-<img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%" style="position:relative;"/>
+<p style="text-align:right;padding-right:2%; font-size:1em;position:relative">
+	現在のポイント：{{user.getCurrentPoint}} pt
+</p>
 
 <section>
-	<p style="text-align:right;padding-right:2%; font-size:1em;position:relative">
-		現在のポイント：{{user.getCurrentPoint}} pt <br />
-		
-		<!-- 並び替え -->
-		<div id="selectBox" style="width:50%;height:30%;position:relative;left:40%;z-index:2">
-	    	<span style="position:relative;left:-13%;top:-1%;font-size:0.8em;">並べ替え</span>
-	    	<select id="sortSelect" style="position:absolute;top:7%;left:60%;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
-	  	</div>
-	</p>
-	
-	<div id="category_tab"　class="bottom_blue_line"　style="position:relative;padding:5% 0 0 0;">
-		<!-- スタンプタブ -->
-		<img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp.png') }}"
-        	width="47%" style="padding-right:2%;"
-        	onclick="changeImageTab(this.id);" />
-        <!-- 壁紙タブ -->
-		<img id="wallpaper_tab"
-           src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}"
-           width="47%"
-           onclick="changeImageTab(this.id);" />
-	</div>
+    <!-- スタンプ -->
+	{% if categoryCode == 2 %}
+		<div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
+    <!-- 壁紙 -->
+	{% else %}
+        <div id="wallpaper">{{ include('MachigaiGameBundle:Shop:wallpaper.html.twig',{}) }}</div>
+	{% endif %}
 
-	<div id="item_area"
-    	class="bottom_blue_line"
-    	style="padding-top:4.8%;padding-bottom:5.2%;position:relative;width:100%; 
-    			background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }});
-    			background-size:cover;
-				background-repeat:no-repeat;" >
-	    <div class="item1"></div>
-	    <div class="wallpaper1"></div>
-	    <!-- スタンプ -->
-		{% if categoryCode == 2 %}
-			<div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
-	    <!-- 壁紙 -->
-		{% else %}
-        	<div id="wallpaper">{{ include('MachigaiGameBundle:Shop:wallpaper.html.twig',{}) }}</div>
-    	{% endif %}
-	</div>
-
+	<!-- ページング -->
 	<nav style="padding-top:3%;position:relative">
+		<!-- ◁ボタン -->
 		<a style="padding-right:20%;">
 			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}"
 					width="7.5%"
 					id="prev"/>
 		</a>
+
 		<span>
 			<span class="page">{{ page }}</span> / <span id="maxPage">{{ maxPage }}</span>
 		</span>
+
+		<!-- ▷ボタン -->
 		<a style="padding-left:20%;">
 			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
 					width="7.5%" id="next" />
@@ -88,13 +64,13 @@
 	    var image_id = current_mode == 0 ? "wallpaper_tab" : "stamp_tab";
     	var image_id1 = current_mode != 0 ? "wallpaper_tab" : "stamp_tab";
     
-    	var pre_src = $('#'+image_id).attr('src');
-    	var src = pre_src.replace(/.png/g,'_off.png');
-    	$('#'+image_id).attr("src",src);
+    	//var pre_src = $('#'+image_id).attr('src');
+    	//var src = pre_src.replace(/.png/g,'_off.png');
+    	//$('#'+image_id).attr("src",src);
 
-    	var pre_src1 = $('#'+image_id1).attr('src');
-    	var src1 = pre_src1.replace(/_off/g,'');
-    	$('#'+image_id1).attr("src",src1);
+    	//var pre_src1 = $('#'+image_id1).attr('src');
+    	//var src1 = pre_src1.replace(/_off/g,'');
+    	//$('#'+image_id1).attr("src",src1);
 	});
 
 	$(function() {

@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ShopController extends BaseController
 {
-    public function indexAction($category)
+    public function indexAction()
     {
         return $this->indexSortAction("0");
     }
