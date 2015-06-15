@@ -1,6 +1,59 @@
 {% extends "MachigaiAdminBundle::base.html.twig" %}
 
+{% block stylesheets %}
+<style>
+@font-face {
+  font-family: 'fontello';
+  src: url('{{ asset('bundles/machigaigame/font/fontello.eot') }}');
+  src: url('{{ asset('bundles/machigaigame/font/fontello.eot') }}') format('embedded-opentype'),
+       url('{{ asset('bundles/machigaigame/font/fontello.woff') }}') format('woff'),
+       url('{{ asset('bundles/machigaigame/font/fontello.ttf') }}') format('truetype'),
+       url('{{ asset('bundles/machigaigame/font/fontello.svg') }}#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+.demo-icon
+{
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* You can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  font-size: 16px; 
+}
+</style>
+{% endblock %}
+
 {% block contents -%}
+
+
+    
     <h1>アイテム一覧</h1>
     <a href="{{ path('itemcategory') }}">アイテムカテゴリ一覧</a>｜
     <a href="{{ path('itemgroup') }}">アイテムグループ一覧</a>
@@ -39,11 +92,12 @@
                 <td>{{ entity.itemPath }}</td>
                 <td>{{ entity.consumePoint }}</td>
                 <td>{{ entity.description }}</td>
+                <!--  <td>{% if entity.group.name is not defined %}{{ entity.group.name }}{% endif %}</td> -->
                 <td>{{ entity.group.name }}</td>
                 <td>{{ entity.popularityRank }}</td>
                 <td>{{ entity.distributedFrom  | date("Y/m/d H:i:s") }}</td>
                 <td>{{ entity.distributedTo | date("Y/m/d H:i:s") }}</td>
-                <td>{% if entity.platformCode == "1" %}Andのみ{% elseif entity.platformCode == "2" %}iOSのみ{% elseif entity.platformCode == "12" %}両方{% endif %}</td>
+                <td>{% if entity.platformCode == "1" %}<i class="demo-icon icon-android">&#x61;</i>{% elseif entity.platformCode == "2" %}<i class="demo-icon icon-apple">&#x69;</i>{% elseif entity.platformCode == "12" %}<i class="demo-icon icon-android">&#x61;</i><i class="demo-icon icon-apple">&#x69;</i>{% endif %}</td>
 <!--                
 				<td>{{ entity.createdAt | date("Y/m/d H:i:s") }}</td>
                 <td>{{ entity.updatedAt | date("Y/m/d H:i:s") }}</td>
@@ -55,6 +109,7 @@
         {% endfor %}
         </tbody>
     </table>
+
     {% include 'MachigaiAdminBundle:Default:pager.parts.html.twig' %}
 
 	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('item_new') }}'" value="新規作成">
