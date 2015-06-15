@@ -196,7 +196,7 @@ PrivacyPolicy:
     defaults: { _controller: MachigaiGameBundle:Help:privacyPolicy }
 
 Shop:
-    pattern: /shop/
+    pattern: /shop/{category}
     defaults: { _controller: MachigaiGameBundle:Shop:index }
 
 ShopSort:

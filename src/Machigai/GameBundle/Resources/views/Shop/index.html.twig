@@ -5,166 +5,171 @@
 {% block body %}
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_shop.png') }}" width="100%" style="position:relative;"/>
 
-
 <section>
-  <p style="text-align:right;padding-right:2%; font-size:1em;position:relative">
-  現在のポイント：{{user.getCurrentPoint}} pt <br />
-  <div id="selectBox" style="width:50%;height:30%;position:relative;left:40%;z-index:2">
-    <span style="position:relative;left:-13%;top:-1%;font-size:0.8em;">並べ替え</span>
-    <select id="sortSelect" style="position:absolute;top:7%;left:60%;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
-  </div>
-  </p>
-  <div id="category_tab"
-       class="bottom_blue_line"
-       style="position:relative;padding:5% 0 0 0;">
-      
-      <img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp.png') }}"
-           width="47%" style="padding-right:2%;"
-           onclick="changeImageTab(this.id);" />
-      <img id="wallpaper_tab"
+	<p style="text-align:right;padding-right:2%; font-size:1em;position:relative">
+		現在のポイント：{{user.getCurrentPoint}} pt <br />
+		
+		<!-- 並び替え -->
+		<div id="selectBox" style="width:50%;height:30%;position:relative;left:40%;z-index:2">
+	    	<span style="position:relative;left:-13%;top:-1%;font-size:0.8em;">並べ替え</span>
+	    	<select id="sortSelect" style="position:absolute;top:7%;left:60%;" onchange="sortSelect()"><option value="0"></option><option value="1">50音順</option><option value="2">新しい順</option><option value="3">古い順</option><option value="4">人気順</option></select>
+	  	</div>
+	</p>
+	
+	<div id="category_tab"　class="bottom_blue_line"　style="position:relative;padding:5% 0 0 0;">
+		<!-- スタンプタブ -->
+		<img id="stamp_tab" src="{{ asset('/bundles/machigaigame/images/parts/tab_stamp.png') }}"
+        	width="47%" style="padding-right:2%;"
+        	onclick="changeImageTab(this.id);" />
+        <!-- 壁紙タブ -->
+		<img id="wallpaper_tab"
            src="{{ asset('/bundles/machigaigame/images/parts/tab_kabegami.png') }}"
            width="47%"
            onclick="changeImageTab(this.id);" />
-  </div>
+	</div>
 
-  <div id="item_area"
-       class="bottom_blue_line"
-       style="padding-top:4.8%;padding-bottom:5.2%;position:relative;width:100%; background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }});
-       background-size:cover;
-       background-repeat:no-repeat;" >
-      
-    <div class="item1"></div>
-    <div class="wallpaper1"></div>
-    {% if categoryCode == 2 %}
-        <div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
-    {% else %}
-        <div id="wallpaper">{{ include('MachigaiGameBundle:Shop:wallpaper.html.twig',{}) }}</div>
-    {% endif %}
-  </div>
+	<div id="item_area"
+    	class="bottom_blue_line"
+    	style="padding-top:4.8%;padding-bottom:5.2%;position:relative;width:100%; 
+    			background: url({{ asset('/bundles/machigaigame/images/parts/shop_contentdetailarea.png') }});
+    			background-size:cover;
+				background-repeat:no-repeat;" >
+	    <div class="item1"></div>
+	    <div class="wallpaper1"></div>
+	    <!-- スタンプ -->
+		{% if categoryCode == 2 %}
+			<div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
+	    <!-- 壁紙 -->
+		{% else %}
+        	<div id="wallpaper">{{ include('MachigaiGameBundle:Shop:wallpaper.html.twig',{}) }}</div>
+    	{% endif %}
+	</div>
 
-  <nav style="padding-top:3%;position:relative">
-      <a style="padding-right:20%;">
-        <img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}"
-             width="7.5%"
-             id="prev"/>
-      </a>
-      <span>
-          <span class="page">{{ page }}</span> / <span id="maxPage">{{ maxPage }}</span>
-      </span>
-      <a style="padding-left:20%;">
-          <img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
-               width="7.5%" id="next" />
-      </a>
-  </nav>
+	<nav style="padding-top:3%;position:relative">
+		<a style="padding-right:20%;">
+			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}"
+					width="7.5%"
+					id="prev"/>
+		</a>
+		<span>
+			<span class="page">{{ page }}</span> / <span id="maxPage">{{ maxPage }}</span>
+		</span>
+		<a style="padding-left:20%;">
+			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
+					width="7.5%" id="next" />
+		</a>
+	</nav>
 
 </section>
+
 <footer style="margin:3% auto 5% auto;position:relative">
-  <img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
-  <img id="preToTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" class="preload">
+	<img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
+	<img id="preToTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" class="preload">
 </footer>
 
 <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl.png') }}" />
 <img class="preload" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy.png') }}" />
 
-
 <script>
-var page        = {{page}};
-var maxPage     = {{ maxPage }};
-var current_mode = {{ categoryCode - 1 }};
-var field        = {{ field }};
-var image_path   = null;
-var target       = ".item1";
+	var page        = {{page}};
+	var maxPage     = {{ maxPage }};
+	var current_mode = {{ categoryCode - 1 }};
+	var field        = {{ field }};
+	var image_path   = null;
+	var target       = ".item1";
 
-$(function(){
-    if(current_mode == 0){
-        $('#stamp').hide();
-    }else{
-        $('#wallpaper').hide();
-    }
+	$(function(){
+    	if(current_mode == 0){
+        	$('#stamp').hide();
+    	}else{
+        	$('#wallpaper').hide();
+    	}
     
-    var image_id = current_mode == 0 ? "wallpaper_tab" : "stamp_tab";
-    var image_id1 = current_mode != 0 ? "wallpaper_tab" : "stamp_tab";
+	    var image_id = current_mode == 0 ? "wallpaper_tab" : "stamp_tab";
+    	var image_id1 = current_mode != 0 ? "wallpaper_tab" : "stamp_tab";
     
-    var pre_src = $('#'+image_id).attr('src');
-    var src = pre_src.replace(/.png/g,'_off.png');
-    $('#'+image_id).attr("src",src);
+    	var pre_src = $('#'+image_id).attr('src');
+    	var src = pre_src.replace(/.png/g,'_off.png');
+    	$('#'+image_id).attr("src",src);
 
-    var pre_src1 = $('#'+image_id1).attr('src');
-    var src1 = pre_src1.replace(/_off/g,'');
-    $('#'+image_id1).attr("src",src1);
-});
+    	var pre_src1 = $('#'+image_id1).attr('src');
+    	var src1 = pre_src1.replace(/_off/g,'');
+    	$('#'+image_id1).attr("src",src1);
+	});
 
-$(function() {
+	$(function() {
+		{#  function draw() {
+    		if(current_mode==0){
+      		target = '.item1';
+    		}else{
+      			target = '.wallpaper1';
+    		}
+    		$(target).hide();
+    		var str = target+':first,'+target+':gt("'+page*20+'"):lt(20)';
+			$(str).show();
+			rewritePageNum(target);
+  		}#}
 
-{#  function draw() {
-    if(current_mode==0){
-      target = '.item1';
-    }else{
-      target = '.wallpaper1';
-    }
-    $(target).hide();
-    var str = target+':first,'+target+':gt("'+page*20+'"):lt(20)';
-  $(str).show();
-    rewritePageNum(target);
-  }#}
-{#  function rewritePageNum(){
-    if(target == '.item1'){
-      var max = parseInt($('.item1').size()-1);
-    }else{
-      var max = parseInt($('.wallpaper1').size()-1);
-    }
-  }
-#}  $('#prev').click(function() {
-    if (page > 1) {
-        window.location =
-                "{{path('ShopSort',{"field":field })}}?categoryCode=" + (current_mode + 1) + "&page={{page-1}}";
-    }
-  });
-  $('#next').click(function() {
-    if (page < maxPage) {
-        window.location =
-                "{{path('ShopSort',{"field":field })}}?categoryCode=" + (current_mode + 1) + "&page={{page+1}}";
-    }
-  });
+		{#  function rewritePageNum(){
+    		if(target == '.item1'){
+      		var max = parseInt($('.item1').size()-1);
+    		}else{
+      			var max = parseInt($('.wallpaper1').size()-1);
+    		}
+  		}
+		#}
+		$('#prev').click(function() {
+    		if (page > 1) {
+        		window.location =
+                	"{{path('ShopSort',{"field":field })}}?categoryCode=" + (current_mode + 1) + "&page={{page-1}}";
+    		}
+  		});
+  		
+		$('#next').click(function() {
+			if (page < maxPage) {
+				window.location =
+					"{{path('ShopSort',{"field":field })}}?categoryCode=" + (current_mode + 1) + "&page={{page+1}}";
+			}
+		});
 
-  //選択
-  $sortId = {{sortId}};
-  if ($sortId != 0) $('#sortSelect option')[$sortId].selected = true;
+		//選択
+		$sortId = {{sortId}};
+		if ($sortId != 0) $('#sortSelect option')[$sortId].selected = true;
+		draw();
+	});
 
-  draw();
-});
+	function sortSelect(){
+		var optionValue = $('#sortSelect').val();
+		if(optionValue == 1){
+		  window.location = "{{path('ShopSort',{"field":"1" })}}?categoryCode=" + (current_mode + 1);
+		}else if(optionValue == 2){
+		  window.location = "{{path('ShopSort',{"field":"2"})}}?categoryCode=" + (current_mode + 1);
+		}else if(optionValue == 3){
+		  window.location = "{{path('ShopSort',{"field":"3"})}}?categoryCode=" + (current_mode + 1);
+		}else if(optionValue == 4){
+		  window.location = "{{path('ShopSort',{"field":"4"})}}?categoryCode=" + (current_mode + 1);
+		}
+	}
 
-function sortSelect(){
-  var optionValue = $('#sortSelect').val();
-  if(optionValue == 1){
-    window.location = "{{path('ShopSort',{"field":"1" })}}?categoryCode=" + (current_mode + 1);
-  }else if(optionValue == 2){
-    window.location = "{{path('ShopSort',{"field":"2"})}}?categoryCode=" + (current_mode + 1);
-  }else if(optionValue == 3){
-    window.location = "{{path('ShopSort',{"field":"3"})}}?categoryCode=" + (current_mode + 1);
-  }else if(optionValue == 4){
-    window.location = "{{path('ShopSort',{"field":"4"})}}?categoryCode=" + (current_mode + 1);
-  }
-}
+	function rewritePageNum(){
+		if(target == '.item1'){
+		  var max = parseInt($('.item1').size()-1);
+		}else{
+		  var max = parseInt($('.wallpaper1').size()-1);
+		}
+		$('.page').html(page+1);
+		var maxPage = Math.ceil(parseFloat(max) / 20);
+		$('#maxPage').html(maxPage);
+	}
 
-function rewritePageNum(){
-    if(target == '.item1'){
-      var max = parseInt($('.item1').size()-1);
-    }else{
-      var max = parseInt($('.wallpaper1').size()-1);
-    }
-    $('.page').html(page+1);
-    var maxPage = Math.ceil(parseFloat(max) / 20);
-    $('#maxPage').html(maxPage);
-  }
-
-var current_tab = "stamp_tab";
-function changeImageTab(imageId){
-    if(imageId == "stamp_tab"){
-        window.location = "{{path('ShopSort',{"field":"0" })}}?categoryCode=2";
-    }else{
-        window.location = "{{path('ShopSort',{"field":"0" })}}?categoryCode=1";
-    }
-}
+	var current_tab = "stamp_tab";
+	function changeImageTab(imageId){
+		if(imageId == "stamp_tab"){
+		    window.location = "{{path('ShopSort',{"field":"0" })}}?categoryCode=2";
+		}else{
+		    window.location = "{{path('ShopSort',{"field":"0" })}}?categoryCode=1";
+		}
+	}
 </script>
+
 {% endblock %}

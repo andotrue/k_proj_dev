@@ -39,13 +39,11 @@
 $(function(){
 	var userAgent = window.navigator.userAgent.toLowerCase();
 	if (userAgent.indexOf('/spass-app/') != -1){
-   
-            
-            $("#default_header").hide();
-            $("#wv_header").show();
-            $("#wv_blank").show();
-            $("#wv_wrap").show();
-        }
+		$("#default_header").hide();
+		$("#wv_header").show();
+		$("#wv_blank").show();
+		$("#wv_wrap").show();
+    }
 });
 </script>
         
@@ -69,7 +67,7 @@ $(function(){
         	{% if user is empty %}
             	<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_on.png')}}" width="12%" />
 			{% else %}
-            	<a href='{{ path('Shop') }}'>
+            	<a href='{{ path('Shop',{"category":"1" }) }}'>
             		<img alt="ショップ" 
                 		src="{{asset('/bundles/machigaigame/images/parts/sub_stamp_off.png')}}" 
                 	/>
@@ -96,7 +94,7 @@ $(function(){
 				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_nologin_stamp.png') }}" width="100%" />
 		    </a>
 		{% else %}
-			<a href='{{ path('Shop') }}' id="hshop_button">
+			<a href='{{ path('Shop',{"category":"1" }) }}' id="hshop_button">
 				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp.png') }}" width="100%" />
 			</a>
 		{% endif %}
@@ -107,41 +105,35 @@ $(function(){
 				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" />
 			</a>
 		{% else %}
-			<a href='{{ path('Shop') }}' id="hshop_button">
+			<a href='{{ path('Shop',{"category":"1" }) }}' id="hshop_button">
 				<img src="{{base_url}}{{ asset('/bundles/machigaigame/images/parts/top_stamp_neko.png') }}" width="100%" />
 	 		</a>
 		{% endif %}
 
-<!-- Androidのみバナー出力 -->
-<script type="text/javascript">
-	if(navigator.userAgent.indexOf('iPhone') > 0){}
-	else if(navigator.userAgent.indexOf('Android') > 0){
-		document.write(
-				"<a href='https://machigai.puzzle-m.net/movstamp.html'>"+
-					"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner.png'width='100%' /></a><br />"+
-				"<a href='https://machigai.puzzle-m.net/stamp_ranking.html'>"+
-					"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_ranking.png'width='100%' /></a><br />"+
-				"<a href='https://machigai.puzzle-m.net/movstamp3.html'>"+
-					"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner3.png'width='100%' /></a>"
-				);
-	}else{}
-</script>
-
-<!-- Androidのみテキスト出力 -->
-<script type="text/javascript">
-	if(navigator.userAgent.indexOf('iPhone') > 0){
-	}else if(navigator.userAgent.indexOf('Android') > 0){
-		document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプみたいに使えちゃう♪<br>");
-	}else{}
-</script>
+		<!-- Androidのみバナー出力 -->
+		<script type="text/javascript">
+			if(navigator.userAgent.indexOf('iPhone') > 0){}
+			else if(navigator.userAgent.indexOf('Android') > 0){
+				document.write(
+						"<a href='https://machigai.puzzle-m.net/movstamp.html'>"+
+							"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner.png'width='100%' /></a><br />"+
+						"<a href='https://machigai.puzzle-m.net/stamp_ranking.html'>"+
+							"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_ranking.png'width='100%' /></a><br />"+
+						"<a href='https://machigai.puzzle-m.net/movstamp3.html'>"+
+							"<img src='/bundles/machigaigame/images/parts/ugoku_stamp_banner3.png'width='100%' /></a>"
+						);
+			}else{}
+		</script>
+		
+		<!-- Androidのみテキスト出力 -->
+		<script type="text/javascript">
+			if(navigator.userAgent.indexOf('iPhone') > 0){
+			}else if(navigator.userAgent.indexOf('Android') > 0){
+				document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプみたいに使えちゃう♪<br>");
+			}else{}
+		</script>
 
 		<br> 
- 
-		<font size="-1"><br> 
-		2015年5月31日の締め切りです。<br>
-		当選者の方には応募メールアドレス宛てに<br>
-		2015年7月15日迄にご連絡致します。</font>
-	 	<br><br>
  
 	   <!--**▼リクエストコーナー▼-->
 		<a href="mailto:present@machigai.puzzle-m.net?subject=まちがいさがしリクエスト&amp;body=リクエスト内容を本文に記載してください。"> 
@@ -174,9 +166,6 @@ $(function(){
 		   		</ul>
 	  		</nav>
 		</section>
-	
-	{% else %}
-		{# ゲスト時には何も表示しない #}
 	{% endif %}
 	</div>
 </header>
@@ -188,6 +177,7 @@ $(function(){
 </section>
 
 <section id="menu" class="top_bg">
+
 	<!-- まちがいさがし -->
 	<img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/machigaigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
 	<a href='{{ path('GameSelect') }}' id="hgame_button" style="padding-right:9%;"></a>
@@ -197,19 +187,28 @@ $(function(){
 	{% if user is empty %}
   		<img alt="ショップ" src="{{asset('/bundles/machigaigame/images/parts/button_shop_gray.png')}}" width="35%" />
 	{% else %}
-  		<a href='{{ path('Shop') }}' id="hshop_button">
+  		<a href='{{ path('Shop',{"category":"1" }) }}' id="hshop_button">
   			<img alt="ショップ" id="shop_button" src="{{asset('/bundles/machigaigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
   			<img src="{{asset('/bundles/machigaigame/images/parts/button_shop.png')}}" class="preload"/>
   		</a>
   	{% endif %}
   	<br />
-	
+
 	<!-- ヘルプ -->
  	<a href='{{ path('Help') }}' id="hhelp_button">
  		<img alt="ヘルプ" id="help_button" src="{{asset('/bundles/machigaigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
  	</a>
 	<img class="preload" src="{{asset('/bundles/machigaigame/images/parts/button_help.png')}}" />
-	<br />
+	<br /><br />
+
+	
+	<!-- 動くスタンプ -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"category":"1" }) }}'" value="動くスタンプ"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<br /><br />
+
 	
 	<!-- バランスタワー -->
 	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="バランスタワー"
