@@ -1,48 +1,130 @@
-<div style="border: solid 3px; font-size: 80px; color: white;background-color: blue;height: 80px;padding: 20px;">
-	背景壁紙
-</div>
+{% block stylesheets %}
+	<style type="text/css">
+	<!--
+		.pagetitle{border: solid 3px; font-size: 80px; color: white;background-color: blue;height: 80px;padding: 20px;}
+		.texttitle{font-size: 30px; text-align:left; padding: 20px; font-weight: bold}
+	-->
+	</style>
+{% endblock %}
 
-<div style="font-size:0.8em;">
-<ul class="panel" style="padding-top:0.8%;clear:right">
-{% for item in items %}
-{% if item.category.categoryCode == 1 %}
-  <li class="wallpaper1" style="display:block; text-align:left;padding-left:1%; border-bottom: 1px solid rgb(253,138,55)">
-    <img src="{{ asset('/bundles/machigaigame/images/wallpaper/')}}{{item.getItemPath}}_thum.png" style="width:25%;"/>
 
-    <div style="display:inline-block;width:45%;padding-left:1%;vertical-align:top;">
-      <p style="text-align:left;">
-        <span class="title">
-          <p style="font-size:1.2em;white-space:nowrap; ">
-            {{item.getName}}
-          </p>
-        </span>
-        <div style="font-size:0.8em">
-          <span class="description">{{item.getDescription}}</br></span>
-          <!--<span class="updated_at" style="white-space:nowrap; ">{{item.getDistributedFrom|date('Y/m/d')}} UP!</span>-->
-        </div>
-      </p>
-    </div>
+<div class="pagetitle">背景壁紙</div>
 
-    <div style="display:inline-block;width:25%;">
-      <div align="center">
-        {% if date(item.getDistributedFrom) > date('-7days') %}
-          <img style="width: 50%" src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
-        {% endif %}
-        <p style="font-size:1.3em">{{item.getConsumePoint}}pt</p><br />
-        <span class="detail">
-          {% if item.getId in purchasedItems %}
-            <a href="{{ path('confirm',{"id":item.getId}) }}">
-              <img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
-            </a>
-          {% else %}
-            <a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
-          {% endif %}
-        </span>
-      </div>
-    </div>
+<!-- 新着 -->
+<div class="texttitle">新着</div>
+<table style="font-size: 20px; width:100%;">
+	<tr>
+	{% for item in items %}
+	<td width="33%">
+  		<!-- サムネイル画像 -->
+    	<img src="{{ asset('/bundles/machigaigame/images/wallpaper/')}}{{item.getItemPath}}_thum.png" style="width:100%;"/>
+    	<br>
+    	<!-- アイテムタイトル -->
+		{{item.getName}}
+	    <br>
+    	<!-- アイテム説明 -->
+		{{item.getDescription}}
 
-   </li>
-{% endif %}
+		<div style="display:inline-block;width:25%;">
+			<div align="center">
+      		<!-- 公開開始から７日以内ならNEWアイコン -->
+        	{% if date(item.getDistributedFrom) > date('-7days') %}
+        		<img style="width: 50%" src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
+        	{% endif %}
+        	<!-- 消費ポイント -->
+        	<p style="font-size:1.3em">{{item.getConsumePoint}}pt</p><br />
+        	<span class="detail">
+        		{% if item.getId in purchasedItems %}
+        			<a href="{{ path('confirm',{"id":item.getId}) }}">
+        				<img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
+        			</a>
+        		{% else %}
+        			<a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+        		{% endif %}
+        	</span>
+      		</div>
+    	</div>
+	</td>
 {% endfor %}
-</ul>
+	</tr>
+</table>
+
+<!-- もっと見る -->
+<div style="text-align: right; font-size: 40px; padding: 40px">
+	<a href={{ path('ShopMore',{"categoryCode":categoryCode }) }}>もっと見る＞</a>
 </div>
+
+<!-- ランキング -->
+<div class="texttitle">ランキング</div>
+<table style="font-size: 20px; width:100%;">
+	<tr>
+	<td width="33%">
+  		<!-- サムネイル画像 -->
+    	<img src="{{ asset('/bundles/machigaigame/images/wallpaper/')}}XXXX_thum.png" style="width:100%;"/><br>
+    	<!-- アイテムタイトル -->
+    	ほげほげ<br>
+    	<!-- アイテム説明 -->
+    	ほげほげ<br>
+
+		<div style="display:inline-block;width:25%;">
+			<div align="center">
+        	<!-- 消費ポイント -->
+        	<p style="font-size:1.3em">XXXXpt</p><br />
+        	<span class="detail">
+				<a href="{{ path('ShopDownload',{"id":"XXX"}) }}"><img id="shopbuyXXX" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+        	</span>
+      		</div>
+    	</div>
+	</td>
+	<td width="33%">
+  		<!-- サムネイル画像 -->
+    	<img src="{{ asset('/bundles/machigaigame/images/wallpaper/')}}XXXX_thum.png" style="width:100%;"/><br>
+    	<!-- アイテムタイトル -->
+    	ほげほげ<br>
+    	<!-- アイテム説明 -->
+    	ほげほげ<br>
+
+		<div style="display:inline-block;width:25%;">
+			<div align="center">
+        	<!-- 消費ポイント -->
+        	<p style="font-size:1.3em">XXXXpt</p><br />
+        	<span class="detail">
+				<a href="{{ path('ShopDownload',{"id":"XXX"}) }}"><img id="shopbuyXXX" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+        	</span>
+      		</div>
+    	</div>
+	</td>
+	<td width="33%">
+  		<!-- サムネイル画像 -->
+    	<img src="{{ asset('/bundles/machigaigame/images/wallpaper/')}}XXXX_thum.png" style="width:100%;"/><br>
+    	<!-- アイテムタイトル -->
+    	ほげほげ<br>
+    	<!-- アイテム説明 -->
+    	ほげほげ<br>
+
+		<div style="display:inline-block;width:25%;">
+			<div align="center">
+        	<!-- 消費ポイント -->
+        	<p style="font-size:1.3em">XXXXpt</p><br />
+        	<span class="detail">
+				<a href="{{ path('ShopDownload',{"id":"XXX"}) }}"><img id="shopbuyXXX" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+        	</span>
+      		</div>
+    	</div>
+	</td>
+	</tr>
+</table>
+
+<!-- フリーワードで探す  -->
+<div class="texttitle">フリーワードで探す </div>
+<div style="text-align: center;">
+	<form action="" method="POST">
+		<input style="width: 80%;" type="text" placeholder="フリーワード（ひらがな）">
+		<br /><br />
+		<input style="width: 30%;" type="submit" value="検索">
+	</form>
+</div>
+
+<!-- カテゴリで探す  -->
+<div class="texttitle">カテゴリで探す </div>
+

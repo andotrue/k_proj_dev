@@ -1,5 +1,5 @@
 <div style="border: solid 3px; font-size: 80px; color: white;background-color: blue;height: 80px;padding: 20px;">
-	デコメスタンプ
+	動くスタンプ
 </div>
 
 <div style="font-size: 30px; text-align:left; padding: 20px;">新着</div>
@@ -9,7 +9,7 @@
 {% for item in items %}
 <td width="33%">
   	<!-- サムネイル画像 -->
-    <img src="{{ asset('/bundles/machigaigame/images/stamp/')}}{{item.getItemPath}}_thum.png" style="width:100%;"/>
+    <img src="{{ asset('/bundles/machigaigame/images/animestamp/')}}{{item.getItemPath}}_thum.png" style="width:100%;"/>
     <br>
 	{{item.getName}}
     <br>

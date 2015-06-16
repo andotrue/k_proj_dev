@@ -9,7 +9,7 @@ class ShopController extends BaseController
 {
     public function indexAction()
     {
-        return $this->indexSortAction("0");
+        return $this->indexSortAction("2");
     }
     public function indexSortAction($field){
         $request= $this->get('request');
@@ -17,6 +17,7 @@ class ShopController extends BaseController
         $page = $request->query->get("page");
         $user = $this->getUser();
         $purchasedItems = $this->getPurchasedItems();
+        $pageCount = 3;
         
         // カテゴリーコード
         if(empty($categoryCode)){
@@ -33,11 +34,12 @@ class ShopController extends BaseController
                 ->getRepository('MachigaiGameBundle:Item')
                 ->findBy(array("category" => $categoryCode))
         );
-        $maxPage = ceil($count / 20);
+        $maxPage = ceil($count / $pageCount);
         
         $offset_base = $page -1;
-        $offset = $offset_base * 20;
+        $offset = $offset_base * $pageCount;
 
+        //並び替え機能が無い場合は、配布開始日で降順
         if($field == "0"){
             $sort = "DESC";
             $fieldName = "id";
@@ -47,49 +49,43 @@ class ShopController extends BaseController
         }elseif($field == "2"){
             $sort = "DESC";
             $fieldName = "distributedFrom";
-
         }elseif($field == "3"){
             $sort = "ASC";
             $fieldName = "distributedFrom";
-
         }elseif($field == "4"){
             $sort = "ASC";
             $fieldName = "popularityRank";
-
         }else{
             $sort = "DESC";
             $fieldName = 'id';
         }
+
         $items = $this->getDoctrine()
-        ->getRepository('MachigaiGameBundle:Item')
-        ->findBy(
-            array("category" => $categoryCode),
-            array($fieldName=>$sort),
-            20,
-            $offset
-        );
+        				->getRepository('MachigaiGameBundle:Item')
+        				->findBy(
+            				array("category" => $categoryCode),
+            				array($fieldName=>$sort),
+            				$pageCount,
+            				$offset
+        				);
 
         return $this->render(
-            'MachigaiGameBundle:Shop:index.html.twig',
-            array('items'=>$items,
-                'sortId'=> $field,
-                'categoryCode'=>$categoryCode,
-                'user'=>$user,
-                'purchasedItems'=>$purchasedItems,
-                'page' => $page,
-                'maxPage' => $maxPage,
-                'field' => $field,
-            ));
+            			'MachigaiGameBundle:Shop:index.html.twig',
+            			array(
+            				'items'=>$items,
+                			'sortId'=> $field,
+                			'categoryCode'=>$categoryCode,
+                			'user'=>$user,
+                			'purchasedItems'=>$purchasedItems,
+                			'page' => $page,
+                			'maxPage' => $maxPage,
+                			'field' => $field,
+            			));
     }
 
-    public function wallpaperAction()
+    public function moreAction()
     {
-	return $this->render('MachigaiGameBundle:Shop:wallpaper.html.twig');
-    }
-
-    public function stampAction()
-    {
-	return $this->render('MachigaiGameBundle:Shop:stamp.html.twig');
+		return $this->render('MachigaiGameBundle:Shop:more.html.twig');
     }
 
     public function downloadAction($id)

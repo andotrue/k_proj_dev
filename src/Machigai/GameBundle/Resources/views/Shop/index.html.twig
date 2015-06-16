@@ -9,16 +9,19 @@
 
 <section>
     <!-- スタンプ -->
-	{% if categoryCode == 2 %}
-		<div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
-    <!-- 壁紙 -->
-	{% else %}
+	{% if categoryCode == 1 %}
         <div id="wallpaper">{{ include('MachigaiGameBundle:Shop:wallpaper.html.twig',{}) }}</div>
+    <!-- スタンプ -->
+	{% elseif categoryCode == 2 %}
+		<div id="stamp">{{ include('MachigaiGameBundle:Shop:stamp.html.twig',{}) }}</div>
+    <!-- 動くスタンプ -->
+	{% elseif categoryCode == 3 %}
+		<div id="stamp">{{ include('MachigaiGameBundle:Shop:animestamp.html.twig',{}) }}</div>
 	{% endif %}
-
+	
 	<!-- ページング -->
 	<nav style="padding-top:3%;position:relative">
-		<!-- ◁ボタン -->
+		<!-- ◁ ボタン -->
 		<a style="padding-right:20%;">
 			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}"
 					width="7.5%"
@@ -29,7 +32,7 @@
 			<span class="page">{{ page }}</span> / <span id="maxPage">{{ maxPage }}</span>
 		</span>
 
-		<!-- ▷ボタン -->
+		<!-- ▷ ボタン -->
 		<a style="padding-left:20%;">
 			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
 					width="7.5%" id="next" />

@@ -203,13 +203,9 @@ ShopSort:
     pattern: /shop/{field}
     defaults: { _controller: MachigaiGameBundle:Shop:indexSort }
 
-ShopWallpaper:
-    pattern: /shop/wallpaper/
-    defaults: { _controller: MachigaiGameBundle:Shop:wallpaper }
-
-ShopStamp:
-    pattern: /shop/stamp/
-    defaults: { _controller: MachigaiGameBundle:Shop:stamp }
+ShopMore:
+    pattern: /shop/more/{categoryCode}
+    defaults: { _controller: MachigaiGameBundle:Shop:more }
 
 ShopDownload:
     pattern: /shop/download/{id}
