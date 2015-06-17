@@ -68,6 +68,34 @@ class ShopController extends BaseController
             				$pageCount,
             				$offset
         				);
+/*
+        $items2 = $this->getDoctrine()
+        ->getRepository('MachigaiGameBundle:Item')
+        ->findBy(
+        		array("category" => $categoryCode),
+        		array($fieldName=>$sort),
+        		array("group by" => "group_code")
+        )
+        //->groupBy('group_code')
+        ;
+        */
+/*
+$em = $this->getDoctrine()->getEntityManager();
+$query = $em->createQuery(
+    'SELECT * FROM MachigaiGameBundle:Item p WHERE p.category = :category_code GROUP BY p.group_code'
+)->setParameter('category_code', $categoryCode); 
+$products = $query->getResult();
+*/
+$categorys = $this->getDoctrine()
+->getRepository('MachigaiGameBundle:Item')->createQueryBuilder('p')
+->where('p.category = :category_code')
+->groupBy('p.group')
+->setParameter('category_code', $categoryCode)
+->getQuery()
+->getResult();
+//var_dump($categorys);
+//exit;
+
 
         return $this->render(
             			'MachigaiGameBundle:Shop:index.html.twig',
