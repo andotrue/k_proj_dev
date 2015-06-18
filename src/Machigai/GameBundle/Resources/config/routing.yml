@@ -204,7 +204,7 @@ ShopSort:
     defaults: { _controller: MachigaiGameBundle:Shop:indexSort }
 
 ShopMore:
-    pattern: /shop/more/{categoryCode}
+    pattern: /shop/more/{categoryCode}/{groupCode}
     defaults: { _controller: MachigaiGameBundle:Shop:more }
 
 ShopDownload:

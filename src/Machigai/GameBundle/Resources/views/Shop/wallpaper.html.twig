@@ -45,7 +45,7 @@
       		</div>
     	</div>
 	</td>
-{% endfor %}
+	{% endfor %}
 	</tr>
 </table>
 
@@ -58,6 +58,7 @@
 <div class="texttitle">ランキング</div>
 <table style="font-size: 20px; width:100%;">
 	<tr>
+	<!-- 1位 -->
 	<td width="33%">
   		<!-- サムネイル画像 -->
     	<img src="{{ asset('/bundles/machigaigame/images/wallpaper/')}}XXXX_thum.png" style="width:100%;"/><br>
@@ -76,6 +77,7 @@
       		</div>
     	</div>
 	</td>
+	<!-- 2位 -->
 	<td width="33%">
   		<!-- サムネイル画像 -->
     	<img src="{{ asset('/bundles/machigaigame/images/wallpaper/')}}XXXX_thum.png" style="width:100%;"/><br>
@@ -94,6 +96,7 @@
       		</div>
     	</div>
 	</td>
+	<!-- 3位 -->
 	<td width="33%">
   		<!-- サムネイル画像 -->
     	<img src="{{ asset('/bundles/machigaigame/images/wallpaper/')}}XXXX_thum.png" style="width:100%;"/><br>
@@ -127,4 +130,7 @@
 
 <!-- カテゴリで探す  -->
 <div class="texttitle">カテゴリで探す </div>
+{% for group in groups %}
+	{{group.getGroupCode}}<br />
+{% endfor %}
 

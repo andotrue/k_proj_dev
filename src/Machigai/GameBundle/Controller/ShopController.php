@@ -39,26 +39,9 @@ class ShopController extends BaseController
         $offset_base = $page -1;
         $offset = $offset_base * $pageCount;
 
-        //並び替え機能が無い場合は、配布開始日で降順
-        if($field == "0"){
-            $sort = "DESC";
-            $fieldName = "id";
-        }elseif($field == "1"){
-            $sort = "ASC";
-            $fieldName = "name";
-        }elseif($field == "2"){
-            $sort = "DESC";
-            $fieldName = "distributedFrom";
-        }elseif($field == "3"){
-            $sort = "ASC";
-            $fieldName = "distributedFrom";
-        }elseif($field == "4"){
-            $sort = "ASC";
-            $fieldName = "popularityRank";
-        }else{
-            $sort = "DESC";
-            $fieldName = 'id';
-        }
+        //配布開始日で降順
+        $sort = "DESC";
+        $fieldName = "distributedFrom";
 
         $items = $this->getDoctrine()
         				->getRepository('MachigaiGameBundle:Item')
@@ -68,34 +51,14 @@ class ShopController extends BaseController
             				$pageCount,
             				$offset
         				);
-/*
-        $items2 = $this->getDoctrine()
-        ->getRepository('MachigaiGameBundle:Item')
-        ->findBy(
-        		array("category" => $categoryCode),
-        		array($fieldName=>$sort),
-        		array("group by" => "group_code")
-        )
-        //->groupBy('group_code')
-        ;
-        */
-/*
-$em = $this->getDoctrine()->getEntityManager();
-$query = $em->createQuery(
-    'SELECT * FROM MachigaiGameBundle:Item p WHERE p.category = :category_code GROUP BY p.group_code'
-)->setParameter('category_code', $categoryCode); 
-$products = $query->getResult();
-*/
-$categorys = $this->getDoctrine()
-->getRepository('MachigaiGameBundle:Item')->createQueryBuilder('p')
-->where('p.category = :category_code')
-->groupBy('p.group')
-->setParameter('category_code', $categoryCode)
-->getQuery()
-->getResult();
-//var_dump($categorys);
-//exit;
 
+		$groups = $this->getDoctrine()
+						->getRepository('MachigaiGameBundle:Item')->createQueryBuilder('p')
+						->where('p.category = :category_code')
+						->groupBy('p.group')
+						->setParameter('category_code', $categoryCode)
+						->getQuery()
+						->getResult();
 
         return $this->render(
             			'MachigaiGameBundle:Shop:index.html.twig',
@@ -108,12 +71,80 @@ $categorys = $this->getDoctrine()
                 			'page' => $page,
                 			'maxPage' => $maxPage,
                 			'field' => $field,
+            				'groups'=>$groups,
             			));
     }
 
-    public function moreAction()
+    public function moreAction($categoryCode, $groupCode)
     {
-		return $this->render('MachigaiGameBundle:Shop:more.html.twig');
+    	$request= $this->get('request');
+        $page = $request->query->get("page");
+        $user = $this->getUser();
+        $purchasedItems = $this->getPurchasedItems();
+        $pageCount = 5;
+        
+        // カテゴリーコード
+        if(empty($categoryCode)){
+            $categoryCode = 2;
+        }
+        
+        // ページ
+        if(empty($page)){
+            $page = 1;
+        }
+
+        if($groupCode == "new")
+        {
+        	$where = array("category" => $categoryCode);
+        	$groupname = "新着";
+        }
+        else
+        {
+        	$where = array("category" => $categoryCode, "group" => $groupCode);
+        	$em = $this->getDoctrine()->getManager();
+	        $entity = $em->getRepository('MachigaiGameBundle:ItemGroup')->find($groupCode);
+        	$groupname = $entity->getName();
+        }
+
+        
+        //全件数取得
+        $count = count(
+            $this->getDoctrine()
+                ->getRepository('MachigaiGameBundle:Item')
+                ->findBy($where)
+        );
+        $maxPage = ceil($count / $pageCount);
+        
+        $offset_base = $page -1;
+        $offset = $offset_base * $pageCount;
+
+        //配布開始日で降順
+        $sort = "DESC";
+        $fieldName = "distributedFrom";
+		
+        $items = $this->getDoctrine()
+        				->getRepository('MachigaiGameBundle:Item')
+        				->findBy(
+        					$where,
+            				array($fieldName=>$sort),
+            				$pageCount,
+            				$offset
+        				);
+
+		return $this->render(
+				'MachigaiGameBundle:Shop:more.html.twig',
+				array(
+						'items'=>$items,
+						'categoryCode'=>$categoryCode,
+						'user'=>$user,
+						'purchasedItems'=>$purchasedItems,
+						'page' => $page,
+						'maxPage' => $maxPage,
+						'groupname' => $groupname,
+				));
+		
+   	
+        //return $this->render('MachigaiGameBundle:Shop:more.html.twig');
     }
 
     public function downloadAction($id)

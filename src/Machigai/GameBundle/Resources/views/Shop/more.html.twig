@@ -1,6 +1,92 @@
+{% block stylesheets %}
+	<style type="text/css">
+	<!--
+		.pagetitle{border: solid 3px; font-size: 80px; color: white;background-color: pink;height: 80px;padding: 20px;}
+		.texttitle{font-size: 30px; text-align:left; padding: 20px; font-weight: bold}
+	</style>
+{% endblock %}
+
 {% extends "MachigaiGameBundle::base.html.twig" %}
 
 {% block title %}MachigaiGameBundle:Shop:more{% endblock %}
 
 {% block body %}
+<!-- ヘッダータイトル -->
+<div class="pagetitle">{{ groupname }}</div>
+
+<!-- 現在のポイント -->
+<p style="font-size:1em; border: solid 5px green; background-color: limegreen; margin: 20px 5%; font-size: 20px; padding: 20px;">
+	現在のポイント：900 pt
+</p>
+
+<table style="font-size: 20px; width:100%;">
+	{% for item in items %}
+	<tr>
+	<td style="width: 50%; padding: 2% 0 0 10%;">
+  		<!-- サムネイル画像 -->
+    	<img src="{{ asset('/bundles/machigaigame/images/stamp/')}}{{item.getItemPath}}_thum.png" style="width:100%; border:solid 5px green;"/>
+    </td>
+    <td style="padding: 2% 0 0 5%; text-align: left; vertical-align: top;">
+    	<!-- アイテムタイトル -->
+		{{item.getName}}
+	    <br>
+    	<!-- アイテム説明 -->
+		{{item.getDescription}}
+
+		<div style="width:40%;">
+      		<!-- 公開開始から７日以内ならNEWアイコン -->
+        	{% if date(item.getDistributedFrom) > date('-7days') %}
+        		<img style="width:50%;" src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
+        	{% endif %}
+        	<!-- 消費ポイント -->
+        	<p style="font-size:1.3em">{{item.getConsumePoint}}pt</p><br />
+        	<span class="detail">
+        		{% if item.getId in purchasedItems %}
+        			<a href="{{ path('confirm',{"id":item.getId}) }}">
+        				<img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" onclick="changeImage(this.id);"/>
+        			</a>
+        		{% else %}
+        			<a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+        		{% endif %}
+        	</span>
+    	</div>
+	</td>
+	</tr>
+	{% endfor %}
+</table>
+
+	<!-- ページング -->
+	<nav style="padding-top:3%;position:relative">
+		{% if page != 1 %}
+		<!-- ◁ ボタン -->
+		<a style="padding-right:20%;"
+			href={{ path('ShopMore',{"categoryCode":categoryCode,"groupCode":"new","page":page-1 }) }}>
+			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}"
+					width="7.5%"
+					id="prev"/>
+		</a>
+		{% endif %}
+
+		<span>
+			<span class="page">{{ page }}</span> / <span id="maxPage">{{ maxPage }}</span>
+		</span>
+
+		<!-- ▷ ボタン -->
+		<a style="padding-left:20%;"
+			href={{ path('ShopMore',{"categoryCode":categoryCode,"groupCode":"new","page":page+1 }) }}>
+			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
+					width="7.5%" id="next" />
+		</a>
+	</nav>
+
+{% block javascripts %}
+<script>
+</script>
+{% endblock %}
+
+<footer style="margin:3% auto 5% auto;position:relative">
+	<img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
+	<img id="preToTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" class="preload">
+</footer>
+
 {% endblock %}

@@ -203,17 +203,17 @@ $(function(){
 
 	
 	<!-- 動くスタンプ -->
-	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"3" }) }}'" value="動くスタンプ"
+	<input {% if user is empty %}disabled{% endif %} class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"3" }) }}'" value="動くスタンプ"
 		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
 		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
 	>
 	<!-- 背景壁紙 -->
-	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"1" }) }}'" value="背景壁紙"
+	<input {% if user is empty %}disabled{% endif %} class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"1" }) }}'" value="背景壁紙"
 		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
 		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
 	>
 	<!-- デコメスタンプ -->
-	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"2" }) }}'" value="デコメスタンプ"
+	<input {% if user is empty %}disabled{% endif %} class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"2" }) }}'" value="デコメスタンプ"
 		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
 		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
 	>
