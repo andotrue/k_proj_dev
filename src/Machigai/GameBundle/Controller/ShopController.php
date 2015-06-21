@@ -140,6 +140,7 @@ class ShopController extends BaseController
 						'purchasedItems'=>$purchasedItems,
 						'page' => $page,
 						'maxPage' => $maxPage,
+						'groupCode' => $groupCode,
 						'groupname' => $groupname,
 				));
 		

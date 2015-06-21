@@ -471,5 +471,12 @@ apply_complete:
 GameJanken:
     pattern: /game/janken
     defaults: { _controller: MachigaiGameBundle:Game:janken }
+    
+Gallery:
+    pattern: /gallery/
+    defaults: { _controller: MachigaiGameBundle:Gallery:index }
+
+
+
 
 

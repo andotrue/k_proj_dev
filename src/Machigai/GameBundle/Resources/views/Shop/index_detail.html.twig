@@ -57,8 +57,19 @@
 	</style>
 {% endblock %}
 
+{% if categoryCode == 1 %}
+<div class="pagetitle">背景壁紙</div>
+{% set code = "wallpaper" %}
 
+{% elseif categoryCode == 2 %}
 <div class="pagetitle">デコメスタンプ</div>
+{% set code = "stamp" %}
+
+{% elseif categoryCode == 3 %}
+<div class="pagetitle">動くスタンプ</div>
+{% set code = "animesstamp" %}
+
+{% endif %}
 
 <!-- 新着 -->
 <div class="texttitle">新着</div>
@@ -67,7 +78,7 @@
 	{% for item in items %}
 	<td width="33%">
   		<!-- サムネイル画像 -->
-    	<img src="{{ asset('/bundles/machigaigame/images/stamp/')}}{{item.getItemPath}}_thum.png" style="width:100%;"/>
+    	<img src="{{ asset('/bundles/machigaigame/images/')}}{{ code }}/{{item.getItemPath}}_thum.png" style="width:100%;"/>
     	<br>
     	<!-- アイテムタイトル -->
 		{{item.getName}}
@@ -106,67 +117,16 @@
 
 <!-- ランキング -->
 <div class="texttitle">ランキング</div>
-<table style="font-size: 20px; width:100%;">
-	<tr>
-	<!-- 1位 -->
-	<td width="33%">
-  		<!-- サムネイル画像 -->
-    	<img src="{{ asset('/bundles/machigaigame/images/stamp/')}}XXXX_thum.png" style="width:100%;"/><br>
-    	<!-- アイテムタイトル -->
-    	ほげほげ<br>
-    	<!-- アイテム説明 -->
-    	ほげほげ<br>
-
-		<div style="display:inline-block;width:25%;">
-			<div align="center">
-        	<!-- 消費ポイント -->
-        	<p style="font-size:1.3em">XXXXpt</p><br />
-        	<span class="detail">
-				<a href="{{ path('ShopDownload',{"id":"XXX"}) }}"><img id="shopbuyXXX" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
-        	</span>
-      		</div>
-    	</div>
-	</td>
-	<!-- 2位 -->
-	<td width="33%">
-  		<!-- サムネイル画像 -->
-    	<img src="{{ asset('/bundles/machigaigame/images/stamp/')}}XXXX_thum.png" style="width:100%;"/><br>
-    	<!-- アイテムタイトル -->
-    	ほげほげ<br>
-    	<!-- アイテム説明 -->
-    	ほげほげ<br>
-
-		<div style="display:inline-block;width:25%;">
-			<div align="center">
-        	<!-- 消費ポイント -->
-        	<p style="font-size:1.3em">XXXXpt</p><br />
-        	<span class="detail">
-				<a href="{{ path('ShopDownload',{"id":"XXX"}) }}"><img id="shopbuyXXX" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
-        	</span>
-      		</div>
-    	</div>
-	</td>
-	<!-- 3位 -->
-	<td width="33%">
-  		<!-- サムネイル画像 -->
-    	<img src="{{ asset('/bundles/machigaigame/images/stamp/')}}XXXX_thum.png" style="width:100%;"/><br>
-    	<!-- アイテムタイトル -->
-    	ほげほげ<br>
-    	<!-- アイテム説明 -->
-    	ほげほげ<br>
-
-		<div style="display:inline-block;width:25%;">
-			<div align="center">
-        	<!-- 消費ポイント -->
-        	<p style="font-size:1.3em">XXXXpt</p><br />
-        	<span class="detail">
-				<a href="{{ path('ShopDownload',{"id":"XXX"}) }}"><img id="shopbuyXXX" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
-        	</span>
-      		</div>
-    	</div>
-	</td>
-	</tr>
-</table>
+    <!-- スタンプ -->
+	{% if categoryCode == 1 %}
+        {{ include('MachigaiGameBundle:Shop:wallpaper_ranking.html.twig',{}) }}
+    <!-- スタンプ -->
+	{% elseif categoryCode == 2 %}
+		{{ include('MachigaiGameBundle:Shop:stamp_ranking.html.twig',{}) }}
+    <!-- 動くスタンプ -->
+	{% elseif categoryCode == 3 %}
+		{{ include('MachigaiGameBundle:Shop:animestamp_ranking.html.twig',{}) }}
+	{% endif %}
 
 <!-- フリーワードで探す  -->
 <div class="texttitle">フリーワードで探す </div>

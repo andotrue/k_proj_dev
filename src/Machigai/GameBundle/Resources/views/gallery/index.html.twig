@@ -20,45 +20,40 @@
 
 {% extends "MachigaiGameBundle::base.html.twig" %}
 
-{% block title %}MachigaiGameBundle:Shop:more{% endblock %}
+{% block title %}MachigaiGameBundle:Gallery:index{% endblock %}
 
 {% block body %}
 <!-- ヘッダータイトル -->
-<div class="pagetitle">{{ groupname }}</div>
-
-<!-- 現在のポイント -->
-<p style="font-size:1em; border: solid 5px green; background-color: limegreen; margin: 20px 5%; font-size: 20px; padding: 20px;">
-	現在のポイント：900 pt
-</p>
+<div class="pagetitle">ギャラリー</div>
 
 <table style="font-size: 20px; width:100%;">
-	{% for item in items %}
+	{% for entity in purchasedItems %}
 	<tr>
 	<td style="width: 50%; padding: 2% 0 0 10%;">
   		<!-- サムネイル画像 -->
-    	<img src="{{ asset('/bundles/machigaigame/images/')}}{{ code }}/{{item.getItemPath}}_thum.png" style="width:100%; border:solid 5px green;"/>
+    	<img src="{{ asset(entity.item.getItemThumPath) }}" style="width:100%; border:solid 5px green;"/>
     </td>
     <td style="padding: 2% 0 0 5%; text-align: left; vertical-align: top;">
     	<!-- アイテムタイトル -->
-		{{item.getName}}
+		{{entity.item.name}}
 	    <br>
     	<!-- アイテム説明 -->
-		{{item.getDescription}}
+		{{entity.item.getDescription}}
 
 		<div style="width:40%;">
       		<!-- 公開開始から７日以内ならNEWアイコン -->
-        	{% if date(item.getDistributedFrom) > date('-7days') %}
+        	{% if date(entity.item.getDistributedFrom) > date('-7days') %}
         		<img style="width:50%;" src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
         	{% endif %}
         	<!-- 消費ポイント -->
-        	<p style="font-size:1.3em">{{item.getConsumePoint}}pt</p><br />
+        	<p style="font-size:1.3em">{{entity.item.getConsumePoint}}pt</p><br />
         	<span class="detail">
-        		{% if item.getId in purchasedItems %}
-        			<a href="{{ path('confirm',{"id":item.getId}) }}">
-        				<img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" onclick="changeImage(this.id);"/>
+        		{% if entity.item.getId in purchasedItems2 %}
+        			<a href="{{ path('confirm',{"id":entity.item.getId}) }}">
+        				<img id="shopredl{{entity.item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" onclick="changeImage(this.id);"/>
         			</a>
         		{% else %}
-        			<a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+        			<a href="{{ path('ShopDownload',{"id":entity.item.getId}) }}"><img id="shopbuy{{entity.item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
         		{% endif %}
         	</span>
     	</div>

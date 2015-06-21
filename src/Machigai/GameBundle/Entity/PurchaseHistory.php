@@ -27,9 +27,15 @@ class PurchaseHistory
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */ 
     protected $user;
+    
     /**
-     * @var integer
+     * @var string
      *
+     * @ORM\Column(name="item_id", type="integer")
+     */
+    private $itemId;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Item", inversedBy="purchaseHistories") 
      * @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      */
@@ -81,6 +87,28 @@ class PurchaseHistory
         return $this->id;
     }
 
+    /**
+     * Set itemId
+     *
+     * @param string $itemId
+     * @return PurchaseHistory
+     */
+    public function setItemId($itemId)
+    {
+        $this->itemId = $itemId;
+
+        return $this;
+    }
+
+    /**
+     * Get itemId
+     *
+     * @return integer 
+     */
+    public function getItemId()
+    {
+        return $this->itemId;
+    }
 
     /**
      * Set pointBeforePurchase
