@@ -243,7 +243,7 @@ $(function(){
 	<br /><br />
 	
 	<!-- ギャラリー -->
-	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="ギャラリー"
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Gallery') }}'" value="ギャラリー"
 		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
 		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
 	>
@@ -252,15 +252,6 @@ $(function(){
 </section>
 
 <section id="news" class="top_bg">
-	<!-- お知らせ -->
-	<img src="{{ asset('/bundles/machigaigame/images/parts/bar_news.png') }}" width="100%" />
-	<div class="news" style="color:rgb(102,24,24);">
-	{% for new in news %}
-		<p style="text-align:left;width:80%;margin: 0 auto;">{{new.getTitle}}<br />{{new.getDescription|raw}}</p>
-		<br />
-	{% endfor %}
-  	</div>
-
 	<!-- ログアウト -->
 	{% if user is not empty %}
 		<p style="text-align:center;">

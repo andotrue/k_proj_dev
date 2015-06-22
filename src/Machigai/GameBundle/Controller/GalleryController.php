@@ -14,76 +14,51 @@ class GalleryController extends BaseController
         $user = $this->getUser();
         $purchasedItems2 = $this->getPurchasedItems();
         
-        $em = $this->getDoctrine()->getManager();
-        $user_id = $em->getRepository('MachigaiGameBundle:User')->find($user->getId());
-        $purchasedItems = $this->getDoctrine()
-        						->getRepository('MachigaiGameBundle:PurchaseHistory')
-        						->findByUser($user_id);
-        
-        $pageCount = 5;
-        
-        // カテゴリーコード
-        $categoryCode = 1;
-        $groupCode = "new";
+        $pageCount = 3;
         
         // ページ
         if(empty($page)){
             $page = 1;
         }
 
-        if($groupCode == "new")
-        {
-        	$where = array("category" => $categoryCode);
-        	$groupname = "新着";
-        }
-        else
-        {
-        	$where = array("category" => $categoryCode, "group" => $groupCode);
-        	$em = $this->getDoctrine()->getManager();
-	        $entity = $em->getRepository('MachigaiGameBundle:ItemGroup')->find($groupCode);
-        	$groupname = $entity->getName();
-        }
-
-        
-        //全件数取得
-        $count = count(
-            $this->getDoctrine()
-                ->getRepository('MachigaiGameBundle:Item')
-                ->findBy($where)
-        );
-        $maxPage = ceil($count / $pageCount);
-        
         $offset_base = $page -1;
         $offset = $offset_base * $pageCount;
-
-        //配布開始日で降順
-        $sort = "DESC";
-        $fieldName = "distributedFrom";
-		
-        $items = $this->getDoctrine()
-        				->getRepository('MachigaiGameBundle:Item')
-        				->findBy(
-        					$where,
-            				array($fieldName=>$sort),
-            				$pageCount,
-            				$offset
-        				);
-
-		return $this->render(
+/*
+        $purchasedItems = $this->getDoctrine()
+			        		->getRepository('MachigaiGameBundle:PurchaseHistory')
+			        		->findBy(
+        						array("user"=>$user->getId()),
+        						//array("createdAt", ">", "now()"),
+        						array("createdAt"=>"DESC"),
+        						$pageCount,
+        						$offset
+        					);
+       						//->andWhere('created_at > ?', 'now()');
+		       						 */
+		$repository = $this->getDoctrine()  
+							->getRepository('MachigaiGameBundle:PurchaseHistory');  
+		$query = $repository->createQueryBuilder('ph')  
+								->where('ph.user = :user_id', 'ph.createdAt >= :date')
+								->setParameter('user_id', $user->getId())
+								->setParameter('date', date('Y-m-d', strtotime('-6 month')))
+								->orderBy('ph.createdAt', 'DESC')
+								->setMaxResults($pageCount)
+								->setFirstResult($offset)
+								->getQuery(); 
+		$purchasedItems = $query->getResult(); 
+        
+        //全件数取得
+        $count = count($purchasedItems2);
+        $maxPage = ceil($count / $pageCount);
+        
+        return $this->render(
 				'MachigaiGameBundle:Gallery:index.html.twig',
 				array(
-						'items'=>$items,
-						'categoryCode'=>$categoryCode,
 						'user'=>$user,
 						'purchasedItems'=>$purchasedItems,
 						'purchasedItems2'=>$purchasedItems2,
 						'page' => $page,
 						'maxPage' => $maxPage,
-						'groupCode' => $groupCode,
-						'groupname' => $groupname,
 				));
-		
-   	
-        //return $this->render('MachigaiGameBundle:Shop:more.html.twig');
     }
 }

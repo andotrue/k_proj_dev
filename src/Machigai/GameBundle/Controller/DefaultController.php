@@ -23,9 +23,6 @@ class DefaultController extends BaseController
         $logger = $this->get('logger');
         $logger->info('inf auIdAction');
         $user = $this->getUser();
-        $news = $this->getDoctrine()
-        ->getRepository('MachigaiGameBundle:News')
-        ->findBy(array(),array('startedAt'=>'DESC'));
 
         if(!empty($user)){
         
@@ -45,7 +42,6 @@ class DefaultController extends BaseController
                 return $this->render('MachigaiGameBundle:Default:index.html.twig',
                     array(
                         'user' => $user,
-                        'news'=>$news,
                         'base_url' => $base_url,
                         'cid'=>$cid,
                         'ad' => $ad,
@@ -59,7 +55,6 @@ class DefaultController extends BaseController
         return $this->render('MachigaiGameBundle:Default:index.html.twig',
             array(
                 'user' => $user,
-                'news'=>$news,
                 'base_url' => $base_url,
                 'reword' => false
             ));
