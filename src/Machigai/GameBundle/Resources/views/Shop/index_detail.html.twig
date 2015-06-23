@@ -1,3 +1,17 @@
+{% if categoryCode == 1 %}
+<div class="pagetitle">背景壁紙</div>
+{% set rank_tmp = "MachigaiGameBundle:Shop:wallpaper_ranking.html.twig" %}
+
+{% elseif categoryCode == 2 %}
+<div class="pagetitle">デコメスタンプ</div>
+{% set rank_tmp = "MachigaiGameBundle:Shop:stamp_ranking.html.twig" %}
+
+{% elseif categoryCode == 3 %}
+<div class="pagetitle">動くスタンプ</div>
+{% set rank_tmp = "MachigaiGameBundle:Shop:animestamp_ranking.html.twig" %}
+
+{% endif %}
+
 {% block stylesheets %}
 	<style type="text/css">
 	<!--
@@ -57,20 +71,6 @@
 	</style>
 {% endblock %}
 
-{% if categoryCode == 1 %}
-<div class="pagetitle">背景壁紙</div>
-{% set code = "wallpaper" %}
-
-{% elseif categoryCode == 2 %}
-<div class="pagetitle">デコメスタンプ</div>
-{% set code = "stamp" %}
-
-{% elseif categoryCode == 3 %}
-<div class="pagetitle">動くスタンプ</div>
-{% set code = "animesstamp" %}
-
-{% endif %}
-
 <!-- 新着 -->
 <div class="texttitle">新着</div>
 <table style="font-size: 20px; width:100%;">
@@ -78,7 +78,8 @@
 	{% for item in items %}
 	<td width="33%">
   		<!-- サムネイル画像 -->
-    	<img src="{{ asset('/bundles/machigaigame/images/')}}{{ code }}/{{item.getItemPath}}_thum.png" style="width:100%;"/>
+    	<img src="{{ asset(item.getItemThumPath) }}" style="width:100%; "/>
+    	
     	<br>
     	<!-- アイテムタイトル -->
 		{{item.getName}}
@@ -94,11 +95,15 @@
         	{% endif %}
         	<!-- 消費ポイント -->
         	<p style="font-size:1.3em">{{item.getConsumePoint}}pt</p><br />
+        	
+        	<!-- ダウンロードボタン -->
         	<span class="detail">
+        		<!-- 再DL -->
         		{% if item.getId in purchasedItems %}
         			<a href="{{ path('confirm',{"id":item.getId}) }}">
         				<img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
         			</a>
+        		<!-- 購入する -->
         		{% else %}
         			<a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
         		{% endif %}
@@ -117,16 +122,7 @@
 
 <!-- ランキング -->
 <div class="texttitle">ランキング</div>
-    <!-- スタンプ -->
-	{% if categoryCode == 1 %}
-        {{ include('MachigaiGameBundle:Shop:wallpaper_ranking.html.twig',{}) }}
-    <!-- スタンプ -->
-	{% elseif categoryCode == 2 %}
-		{{ include('MachigaiGameBundle:Shop:stamp_ranking.html.twig',{}) }}
-    <!-- 動くスタンプ -->
-	{% elseif categoryCode == 3 %}
-		{{ include('MachigaiGameBundle:Shop:animestamp_ranking.html.twig',{}) }}
-	{% endif %}
+{{ include(rank_tmp,{}) }}
 
 <!-- フリーワードで探す  -->
 <div class="texttitle">フリーワードで探す </div>

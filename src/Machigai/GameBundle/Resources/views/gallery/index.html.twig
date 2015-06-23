@@ -24,25 +24,25 @@
     <td style="padding: 2% 0 0 5%; text-align: left; vertical-align: top;">
     	<!-- アイテムタイトル -->
 		{{entity.item.name}}
-	    <br>
+	    <br />
+	    <!-- アイテムカテゴリ名 -->
+	    {{entity.item.category.name}}
+	    <br />
+	    <!-- アイテムグループ名 -->
+	    {{entity.item.group.name}}
+	    <br />
     	<!-- アイテム説明 -->
 		{{entity.item.getDescription}}
 
 		<div style="width:40%;">
-      		<!-- 公開開始から７日以内ならNEWアイコン -->
-        	{% if date(entity.item.getDistributedFrom) > date('-7days') %}
-        		<img style="width:50%;" src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
-        	{% endif %}
         	<!-- 消費ポイント -->
         	<p style="font-size:1.3em">{{entity.item.getConsumePoint}}pt</p><br />
+        	
+        	<!-- ダウンロードボタン -->
         	<span class="detail">
-        		{% if entity.item.getId in purchasedItems2 %}
-        			<a href="{{ path('confirm',{"id":entity.item.getId}) }}">
-        				<img id="shopredl{{entity.item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" onclick="changeImage(this.id);"/>
-        			</a>
-        		{% else %}
-        			<a href="{{ path('ShopDownload',{"id":entity.item.getId}) }}"><img id="shopbuy{{entity.item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
-        		{% endif %}
+    			<a href="{{ path('confirm',{"id":entity.item.getId}) }}">
+    				<img id="shopredl{{entity.item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" onclick="changeImage(this.id);"/>
+    			</a>
         	</span>
     	</div>
 	</td>

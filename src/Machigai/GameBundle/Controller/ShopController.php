@@ -203,10 +203,11 @@ class ShopController extends BaseController
 		
         $user = $this->getUser();
         
+        //アイテムオブジェクト取得
         $item = $this->getDoctrine()
         ->getRepository('MachigaiGameBundle:Item')
         ->findOneById($id);
-        $purchasedItems = $this->getPurchasedItems();
+        //アイテム画像パス取得
         $categoryCode = $item->getCategory()->getCategoryCode();
         $itemPath = $item->getItemPath();
         if($categoryCode==1){
@@ -214,11 +215,17 @@ class ShopController extends BaseController
         }elseif($categoryCode==2){
             $itemPath = "/../Resources/public/images/stamp/".$itemPath.".png";
         }
-		
+        //消費ポイントの取得
+        $itemPoint = $item->getConsumePoint();
+        
 		$alreadyBuy = $session->get('buy_'.$categoryCode . "_" . $id);
 		
-        $itemPoint = $item->getConsumePoint();
-        if(in_array($id,$purchasedItems) || $alreadyBuy){
+        //ダウンロード履歴のアイテムID配列の取得
+        $purchasedItems = $this->getPurchasedItems();
+        
+        //再ダウンロードなら
+        if(in_array($id,$purchasedItems) || $alreadyBuy)
+        {
             if( empty($mode) ||  $mode != 'file'){
                 return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
             }else{

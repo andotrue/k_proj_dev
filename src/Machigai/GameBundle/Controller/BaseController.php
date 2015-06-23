@@ -63,6 +63,11 @@ class BaseController extends Controller
         }
         return null;
 	}
+	
+	/**
+	 * ダウンロード履歴
+	 * 　ダウンロード後半年以内（再DL可能期間内）のアイテムIDを配列で返す
+	 */
     public function getPurchasedItems(){
         $user = $this->getUser();
         $user_id = $user->getId();
@@ -72,15 +77,15 @@ class BaseController extends Controller
         $purchasedItems = array();
         foreach ($pre_purchasedItems as $purchasedItem) {
             $times = $purchasedItem->getCreatedAt();
-            foreach ($times as $from) {
-                $to = date( "Y-m-d H:i:s", time());
-                $fromSec = strtotime($from);
-                $toSec   = strtotime($to);
-                $differences = $toSec - $fromSec;
-                //30days
-                if($differences < 2592000 && $differences != 0){
-                    $purchasedItems[] = $purchasedItem->getItem()->getId();
-                }
+            //var_dump($times);
+            $from = $times->format('Y-m-d H:i:s');
+            //echo $from;
+
+            $to = date( "Y-m-d", strtotime('-6 month'));
+            $fromSec = strtotime($from);
+            $toSec   = strtotime($to);
+            if($fromSec > $toSec){
+            	$purchasedItems[] = $purchasedItem->getItem()->getId();
             }
         }
         return $purchasedItems;
