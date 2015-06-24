@@ -150,26 +150,22 @@ class ShopController extends BaseController
 
     public function downloadAction($id)
     {
-    $user = $this->getUser();
-    $items = $this->getDoctrine()
-        ->getRepository('MachigaiGameBundle:Item')
-        ->findBy(array('id'=>$id));
-	return $this->render('MachigaiGameBundle:Shop:download.html.twig',array('items'=>$items,'user'=>$user));
+	    $user = $this->getUser();
+	    $items = $this->getDoctrine()
+	        ->getRepository('MachigaiGameBundle:Item')
+	        ->findBy(array('id'=>$id));
+		return $this->render('MachigaiGameBundle:Shop:download.html.twig',array('items'=>$items,'user'=>$user));
     }
 
     public function errorAction()
     {
-	return $this->render('MachigaiGameBundle:Shop:error.html.twig');
+		return $this->render('MachigaiGameBundle:Shop:error.html.twig');
     }
 
     public function confirmAction($id)
     {
-	return $this->render('MachigaiGameBundle:Shop:confirm.html.twig',array('id'=>$id));
+		return $this->render('MachigaiGameBundle:Shop:confirm.html.twig',array('id'=>$id));
     }
-
-	public function download2(){
-
-	}
 
 	public function downloadExecuteAction($id){
 
@@ -210,10 +206,15 @@ class ShopController extends BaseController
         //アイテム画像パス取得
         $categoryCode = $item->getCategory()->getCategoryCode();
         $itemPath = $item->getItemPath();
-        if($categoryCode==1){
+        if($categoryCode==1)
+        {
             $itemPath = "/../Resources/public/images/wallpaper/".$itemPath.".png";
-        }elseif($categoryCode==2){
+        }
+        elseif($categoryCode==2){
             $itemPath = "/../Resources/public/images/stamp/".$itemPath.".png";
+        }
+	    elseif($categoryCode==3){
+            $itemPath = "/../Resources/public/images/animestamp/".$itemPath.".png";
         }
         //消費ポイントの取得
         $itemPoint = $item->getConsumePoint();
@@ -226,12 +227,16 @@ class ShopController extends BaseController
         //再ダウンロードなら
         if(in_array($id,$purchasedItems) || $alreadyBuy)
         {
-            if( empty($mode) ||  $mode != 'file'){
+            if( empty($mode) ||  $mode != 'file')
+            {
                 return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
-            }else{
+            }
+            else
+            {
                 return $this->download($itemPath);
             }
-        }else{
+        }
+        else{
 			
 			$remainder = $user->getCurrentPoint()-$itemPoint;
 
@@ -271,33 +276,42 @@ class ShopController extends BaseController
         }
     }
 
-	public function downloadExecuteWVAction($id){
+	public function downloadExecuteWVAction($id)
+	{
 
 		$request = $this->get('request');
-    $mode = $request->query->get("mode");
+	    $mode = $request->query->get("mode");
+	    
+	    $item = $this->getDoctrine()
+	      ->getRepository('MachigaiGameBundle:Item')
+	      ->findOneById($id);
+	    
+	    $categoryCode = $item->getCategory()->getCategoryCode();
+	    $itemPath = $item->getItemPath();
+	    if($categoryCode==1)
+	    {
+	        $itemPath = "/../Resources/public/images/wallpaper/".$itemPath.".png";
+	    }
+	    elseif($categoryCode==2)
+	    {
+	        $itemPath = "/../Resources/public/images/stamp/".$itemPath.".png";
+	    }
+	    elseif($categoryCode==3)
+	    {
+	    	$itemPath = "/../Resources/public/images/animestamp/".$itemPath.".png";
+	    }
+	     
+	    if( empty($mode) ||  $mode != 'file')
+	    {
+	        return $this->render('MachigaiGameBundle:Shop:downloadedContentViewWV.html.twig',array('id'=>$id, 'mode' => 'file'));
+	    }
+	    else{
+	        return $this->download($itemPath);
+	    }
+	}
     
-    $item = $this->getDoctrine()
-      ->getRepository('MachigaiGameBundle:Item')
-      ->findOneById($id);
-    
-    $categoryCode = $item->getCategory()->getCategoryCode();
-    $itemPath = $item->getItemPath();
-    if($categoryCode==1){
-        $itemPath = "/../Resources/public/images/wallpaper/".$itemPath.".png";
-    }elseif($categoryCode==2){
-        $itemPath = "/../Resources/public/images/stamp/".$itemPath.".png";
-    }
-		
-    if( empty($mode) ||  $mode != 'file'){
-        return $this->render('MachigaiGameBundle:Shop:downloadedContentViewWV.html.twig',
-          array('id'=>$id, 'mode' => 'file'));
-    }else{
-        return $this->download($itemPath);
-    }
-  }
-    
-    public function download($itemPath){
-
+    public function download($itemPath)
+    {
         $image_file = dirname(__FILE__).$itemPath;
 		$filename = basename($image_file);
 

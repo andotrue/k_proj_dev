@@ -15,8 +15,41 @@
 	<!--
 		.pagetitle{border: solid 3px; font-size: 80px; color: white;background-color: pink;height: 80px;padding: 20px;}
 		.texttitle{font-size: 30px; text-align:left; padding: 20px; font-weight: bold}
+	-->
 	</style>
 {% endblock %}
+
+
+{% block javascripts %}
+<script  type="text/javascript">
+var game_id = null;
+var game_title = null;
+var current_level = "easy";
+var max = null;
+var image_path = null;
+var image_id = null;
+$(function() {
+    $('#popup').hide();
+    $('#popup_continue').hide();
+})
+function popup(id, gameTitle, point) {
+    game_id = id;
+    game_title = gameTitle;
+    $('.gameTitle').empty();
+    $('<p>' + game_title + ' ' + point + 'ptを交換しますか？</p>').appendTo('.gameTitle');
+    $('#popup').center();
+    $('#popup').show();
+}
+function gameStart() {
+    //window.location = '{{ path("GameIndex")}}' + game_id;
+    window.location = '{{ path("confirm",{"id":'+ game_id +'}) }}
+}
+function cancel() {
+    $('#popup').hide();
+}
+</script>
+{% endblock %}
+
 
 {% extends "MachigaiGameBundle::base.html.twig" %}
 
@@ -46,19 +79,31 @@
 		{{item.getDescription}}
 
 		<div style="width:40%;">
+		
       		<!-- 公開開始から７日以内ならNEWアイコン -->
         	{% if date(item.getDistributedFrom) > date('-7days') %}
         		<img style="width:50%;" src="{{ asset('/bundles/machigaigame/images/parts/shop_newicon.png')  }}" /><br />
         	{% endif %}
+        	
         	<!-- 消費ポイント -->
         	<p style="font-size:1.3em">{{item.getConsumePoint}}pt</p><br />
+        	
         	<span class="detail">
         		{% if item.getId in purchasedItems %}
-        			<a href="{{ path('confirm',{"id":item.getId}) }}">
+	        		<!-- 再ダウンロード -->
+        			<a href="{{ path('confirm',{"id":item.getId}) }}" onclick="popup({{ item.getId }}, '{{ item.getName }}');"">
         				<img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" onclick="changeImage(this.id);"/>
         			</a>
+        			<form action="{{ path('confirm',{"id":item.getId}) }}">
+        				<submit type="submit" 
+        						onclick="return popup({{ item.getId }}, '{{ item.getName }}', '{{ item.getConsumePoint }}');"/>
+        				<img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" />
+        			</form>
         		{% else %}
-        			<a href="{{ path('ShopDownload',{"id":item.getId}) }}"><img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/></a>
+	        		<!-- ダウンロード -->
+        			<a href="{{ path('ShopDownload',{"id":item.getId}) }}">
+        				<img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
+        			</a>
         		{% endif %}
         	</span>
     	</div>
@@ -95,14 +140,37 @@
 	</nav>
 	{% endif %}
 
-{% block javascripts %}
-<script>
-</script>
-{% endblock %}
-
 <footer style="margin:3% auto 5% auto;position:relative">
 	<img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
 	<img id="preToTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" class="preload">
 </footer>
+
+
+<div id="popup" style="
+     display: none;
+     position: absolute;
+     width: 280px;
+     height: 180px;
+     background-image:url({{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }});
+     background-size: cover;">
+
+    <button type="button" onclick="cancel()"
+            style="position:absolute;right: 10px;top:10px;width:50px;height:50px;
+            filter: alpha(opacity=0);
+            -moz-opacity:0;
+            opacity:0;
+            "></button>
+
+    <div class="gameTitle"
+	       style="padding-left: 25px;font-size: 15px;margin-top: 25px;width: 170px;height: 30px;overflow: hidden;">
+	</div>
+
+    <input type="submit" id="yes" alt="はい" value="はい" style="margin: auto; margin-top: 50px;width:30%"
+    		src="{{ asset('')  }}"
+			onclick="return changeImage(this.id); gameStart(1);"/>
+    <input type="submit" id="no" alt="いいえ" value="いいえ" style="margin: auto; margin-top: 50px;width:30%"
+    		src="{{ asset('')  }}"
+			onclick="cancel();"/>
+</div>
 
 {% endblock %}
