@@ -195,6 +195,7 @@ PrivacyPolicy:
     pattern: /help/privacyPolicy
     defaults: { _controller: MachigaiGameBundle:Help:privacyPolicy }
 
+
 Shop:
     pattern: /shop/
     defaults: { _controller: MachigaiGameBundle:Shop:index }
@@ -206,6 +207,10 @@ ShopSort:
 ShopMore:
     pattern: /shop/more/{categoryCode}/{groupCode}
     defaults: { _controller: MachigaiGameBundle:Shop:more }
+
+ShopSearch:
+    pattern: /shop/search/{categoryCode}
+    defaults: { _controller: MachigaiGameBundle:Shop:search }
 
 ShopDownload:
     pattern: /shop/download/{id}
@@ -226,6 +231,7 @@ downloadExecute:
 downloadExecuteWV:
     pattern: /shop/downloadExecuteWV/{id}
     defaults: { _controller: MachigaiGameBundle:Shop:downloadExecuteWV }
+
 
 Ranking:
     pattern: /ranking/

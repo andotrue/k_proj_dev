@@ -79,11 +79,12 @@
 	<td width="33%">
   		<!-- サムネイル画像 -->
     	<img src="{{ asset(item.getItemThumPath) }}" style="width:100%; "/>
-    	
     	<br>
+
     	<!-- アイテムタイトル -->
 		{{item.getName}}
 	    <br>
+
     	<!-- アイテム説明 -->
 		{{item.getDescription}}
 
@@ -127,8 +128,8 @@
 <!-- フリーワードで探す  -->
 <div class="texttitle">フリーワードで探す </div>
 <div style="text-align: center;">
-	<form action="" method="POST">
-		<input style="width: 80%;" type="text" placeholder="フリーワード（ひらがな）">
+	<form action="{{ path('ShopSearch',{"categoryCode":categoryCode}) }}" method="POST">
+		<input name="word" style="width: 80%;" type="text" placeholder="フリーワード（ひらがな）">
 		<br /><br />
 		<input style="width: 30%;" type="submit" value="検索">
 	</form>

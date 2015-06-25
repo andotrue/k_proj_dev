@@ -143,18 +143,87 @@ class ShopController extends BaseController
 						'groupCode' => $groupCode,
 						'groupname' => $groupname,
 				));
+    }
+
+    public function searchAction($categoryCode)
+    {
+    	$request = $this->get('request');
+        $page = $request->query->get("page");
+        $word = $request->request->get('word', '');
+        
+        $user = $this->getUser();
+        $purchasedItems = $this->getPurchasedItems();
+        $pageCount = 5;
+        
+        // カテゴリーコード
+        if(empty($categoryCode)){
+            $categoryCode = 2;
+        }
+        
+        // ページ
+        if(empty($page)){
+            $page = 1;
+        }
+
+    	$where = array("category" => $categoryCode);
+    	$groupname = "フリーワード検索";
+
+        
+        $offset_base = $page -1;
+        $offset = $offset_base * $pageCount;
+
+        //配布開始日で降順
+        $sort = "DESC";
+        $fieldName = "distributedFrom";
 		
-   	
-        //return $this->render('MachigaiGameBundle:Shop:more.html.twig');
+        $repository = $this->getDoctrine()
+						        ->getRepository('MachigaiGameBundle:Item');
+        $query = $repository->createQueryBuilder('i')
+						        ->where('i.category = :category', 'i.name LIKE :word')
+						        ->setParameter('category', $categoryCode)
+						        ->setParameter('word', "%$word%")
+						        ->orderBy('i.distributedFrom', 'DESC')
+						        ->setMaxResults($pageCount)
+						        ->setFirstResult($offset)
+						        ->getQuery();
+        $items = $query->getResult();
+        
+        //全件数取得
+        $count = count($query);
+        $maxPage = ceil($count / $pageCount);
+        
+        
+		return $this->render(
+				'MachigaiGameBundle:Shop:search.html.twig',
+				array(
+						'items'=>$items,
+						'categoryCode'=>$categoryCode,
+						'user'=>$user,
+						'purchasedItems'=>$purchasedItems,
+						'page' => $page,
+						'maxPage' => $maxPage,
+						'groupname' => $groupname,
+						'word' => $word, 
+				));
     }
 
     public function downloadAction($id)
     {
-	    $user = $this->getUser();
+    	//ダウンロード履歴のアイテムID配列の取得
+    	$purchasedItems = $this->getPurchasedItems();
+    	
+    	$user = $this->getUser();
 	    $items = $this->getDoctrine()
 	        ->getRepository('MachigaiGameBundle:Item')
 	        ->findBy(array('id'=>$id));
-		return $this->render('MachigaiGameBundle:Shop:download.html.twig',array('items'=>$items,'user'=>$user));
+		return $this->render(
+						'MachigaiGameBundle:Shop:download.html.twig',
+						array(
+							'items'=>$items,
+							'user'=>$user,
+							'dlcount' => count($purchasedItems),
+						)
+					);
     }
 
     public function errorAction()

@@ -35,14 +35,10 @@ function doDownloadExecute(){
 <img src="{{ asset('/bundles/machigaigame/images/parts/header_shop_download.png') }}" width="100%" style="position:relative;margin-top:15%"/>
 
 <div style="position:relative;margin-top:16%">
-	{% if dlcount >= dl_limit_count %}
-		ダウンロード可能上限数（{{ dl_limit_count }}）を超えました。
-	{% else %}
 	<!-- ダウンロードボタン -->
 	<a href="javascript:doDownloadExecute();">
 		<img id="downloadExecute" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_download_off.png')}}" width="60%" style="padding:5%" onclick="changeImage(this.id);">
 	</a>
-	{% endif %}
 	<br />
 	
 	<!-- ショップへボタン -->
