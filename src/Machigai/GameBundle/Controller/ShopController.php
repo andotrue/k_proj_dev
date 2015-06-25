@@ -164,7 +164,16 @@ class ShopController extends BaseController
 
     public function confirmAction($id)
     {
-		return $this->render('MachigaiGameBundle:Shop:confirm.html.twig',array('id'=>$id));
+    	//ダウンロード履歴のアイテムID配列の取得
+    	$purchasedItems = $this->getPurchasedItems();
+    	
+    	return $this->render(
+    					'MachigaiGameBundle:Shop:confirm.html.twig',
+    					array(
+    						'id'=>$id,
+    						'dlcount' => count($purchasedItems),
+    					)
+    			);
     }
 
 	public function downloadExecuteAction($id){
@@ -229,7 +238,15 @@ class ShopController extends BaseController
         {
             if( empty($mode) ||  $mode != 'file')
             {
-                return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
+                return $this->render(
+                		'MachigaiGameBundle:Shop:downloadedContentView.html.twig',
+                		array(
+                			'id'=>$id, 
+                			'syncToken'=> $syncToken, 
+                			'mode' => 'file'
+                				
+                		)
+                	);
             }
             else
             {
@@ -269,7 +286,15 @@ class ShopController extends BaseController
 			$session->set('buy_'.$categoryCode . "_" . $id, true );
 
             if( empty($mode) ||  $mode != 'file'){
-                return $this->render('MachigaiGameBundle:Shop:downloadedContentView.html.twig',array('id'=>$id, 'syncToken'=> $syncToken, 'mode' => 'file'));
+                return $this->render(
+                				'MachigaiGameBundle:Shop:downloadedContentView.html.twig',
+                				array(
+                					'id'=>$id, 
+                					'syncToken'=> $syncToken, 
+                					'mode' => 'file',
+                					'dlcount' => count($purchasedItems),
+                				)
+                		);
             }else{
                 return $this->download($itemPath);
             }

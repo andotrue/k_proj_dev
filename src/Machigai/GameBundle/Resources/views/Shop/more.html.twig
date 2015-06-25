@@ -20,10 +20,16 @@
 {% endblock %}
 
 
+{% extends "MachigaiGameBundle::base.html.twig" %}
+
+{% block title %}MachigaiGameBundle:Shop:more{% endblock %}
+
+{% block body %}
+
 {% block javascripts %}
-<script  type="text/javascript">
-var game_id = null;
-var game_title = null;
+<script type="text/javascript">
+var item_id = null;
+var title = null;
 var current_level = "easy";
 var max = null;
 var image_path = null;
@@ -32,30 +38,24 @@ $(function() {
     $('#popup').hide();
     $('#popup_continue').hide();
 })
-function popup(id, gameTitle, point) {
-    game_id = id;
-    game_title = gameTitle;
-    $('.gameTitle').empty();
-    $('<p>' + game_title + ' ' + point + 'ptを交換しますか？</p>').appendTo('.gameTitle');
+function popup(id, title, point) {
+    item_id = id;
+    title = title;
+    $('.title').empty();
+    $('<p>' + title + ' ' + point + 'ptを交換しますか？</p>').appendTo('.title');
     $('#popup').center();
     $('#popup').show();
+    return false;
 }
-function gameStart() {
-    //window.location = '{{ path("GameIndex")}}' + game_id;
-    window.location = '{{ path("confirm",{"id":'+ game_id +'}) }}
+function go() {
+	$('#popup').hide();
+	$('#form'+item_id).submit();
 }
 function cancel() {
-    $('#popup').hide();
+	$('#popup').hide();
 }
 </script>
 {% endblock %}
-
-
-{% extends "MachigaiGameBundle::base.html.twig" %}
-
-{% block title %}MachigaiGameBundle:Shop:more{% endblock %}
-
-{% block body %}
 <!-- ヘッダータイトル -->
 <div class="pagetitle">{{ groupname }}</div>
 
@@ -91,19 +91,20 @@ function cancel() {
         	<span class="detail">
         		{% if item.getId in purchasedItems %}
 	        		<!-- 再ダウンロード -->
-        			<a href="{{ path('confirm',{"id":item.getId}) }}" onclick="popup({{ item.getId }}, '{{ item.getName }}');"">
-        				<img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" onclick="changeImage(this.id);"/>
-        			</a>
-        			<form action="{{ path('confirm',{"id":item.getId}) }}">
-        				<submit type="submit" 
+        			<form id="form{{ item.getId }}" name="form{{ item.getId }}" action="{{ path('confirm',{"id":item.getId}) }}" method="post">
+        				<button type="submit" 
         						onclick="return popup({{ item.getId }}, '{{ item.getName }}', '{{ item.getConsumePoint }}');"/>
-        				<img id="shopredl{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" />
+        					<img src="{{ asset('/bundles/machigaigame/images/parts/button_shopredl_off.png') }}" width="100%;" />
+        				</button>
         			</form>
         		{% else %}
 	        		<!-- ダウンロード -->
-        			<a href="{{ path('ShopDownload',{"id":item.getId}) }}">
-        				<img id="shopbuy{{item.getId}}" src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%" onclick="changeImage(this.id);"/>
-        			</a>
+        			<form id="form{{ item.getId }}" name="form{{ item.getId }}" action="{{ path('ShopDownload',{"id":item.getId}) }}" method="post">
+        				<button type="submit" 
+        						onclick="return popup({{ item.getId }}, '{{ item.getName }}', '{{ item.getConsumePoint }}');"/>
+        					<img src="{{ asset('/bundles/machigaigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%;" />
+        				</button>
+        			</form>
         		{% endif %}
         	</span>
     	</div>
@@ -112,62 +113,59 @@ function cancel() {
 	{% endfor %}
 </table>
 
-	<!-- ページング -->
-	{% if maxPage > 1 %}
-	<nav style="padding-top:3%;position:relative">
-		{% if page != 1 %}
-		<!-- ◁ ボタン -->
-		<a style="padding-right:20%;"
-			href={{ path('ShopMore',{"categoryCode":categoryCode,"groupCode":groupCode,"page":page-1 }) }}>
-			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}"
-					width="7.5%"
-					id="prev"/>
-		</a>
-		{% endif %}
-
-		<span>
-			<span class="page">{{ page }}</span> / <span id="maxPage">{{ maxPage }}</span>
-		</span>
-
-		<!-- ▷ ボタン -->
-		{% if page != maxPage %}
-		<a style="padding-left:20%;"
-			href={{ path('ShopMore',{"categoryCode":categoryCode,"groupCode":groupCode,"page":page+1 }) }}>
-			<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
-					width="7.5%" id="next" />
-		</a>
-		{% endif %}
-	</nav>
+<!-- ページング -->
+{% if maxPage > 1 %}
+<nav style="padding-top:3%;position:relative">
+	{% if page != 1 %}
+	<!-- ◁ ボタン -->
+	<a style="padding-right:20%;"
+		href={{ path('ShopMore',{"categoryCode":categoryCode,"groupCode":groupCode,"page":page-1 }) }}>
+		<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}"
+				width="7.5%"
+				id="prev"/>
+	</a>
 	{% endif %}
+
+	<span>
+		<span class="page">{{ page }}</span> / <span id="maxPage">{{ maxPage }}</span>
+	</span>
+
+	<!-- ▷ ボタン -->
+	{% if page != maxPage %}
+	<a style="padding-left:20%;"
+		href={{ path('ShopMore',{"categoryCode":categoryCode,"groupCode":groupCode,"page":page+1 }) }}>
+		<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
+				width="7.5%" id="next" />
+	</a>
+	{% endif %}
+</nav>
+{% endif %}
 
 <footer style="margin:3% auto 5% auto;position:relative">
 	<img id="toTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
 	<img id="preToTopImage" src="{{ asset('/bundles/machigaigame/images/parts/button_back_totop_off.png')}}" class="preload">
 </footer>
 
-
-<div id="popup" style="
-     display: none;
-     position: absolute;
-     width: 280px;
-     height: 180px;
-     background-image:url({{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }});
-     background-size: cover;">
+<!-- ダウンロード確認ポップアップ -->
+<div id="popup" style="display: none;position: absolute;width: 280px;height: 180px;
+				     background-image:url({{ asset('/bundles/machigaigame/images/parts/popup_common.png')  }});
+				     background-size: cover;">
 
     <button type="button" onclick="cancel()"
             style="position:absolute;right: 10px;top:10px;width:50px;height:50px;
             filter: alpha(opacity=0);
             -moz-opacity:0;
             opacity:0;
-            "></button>
+            ">
+    </button>
 
-    <div class="gameTitle"
+    <div class="title"
 	       style="padding-left: 25px;font-size: 15px;margin-top: 25px;width: 170px;height: 30px;overflow: hidden;">
 	</div>
 
     <input type="submit" id="yes" alt="はい" value="はい" style="margin: auto; margin-top: 50px;width:30%"
     		src="{{ asset('')  }}"
-			onclick="return changeImage(this.id); gameStart(1);"/>
+			onclick="go();"/>
     <input type="submit" id="no" alt="いいえ" value="いいえ" style="margin: auto; margin-top: 50px;width:30%"
     		src="{{ asset('')  }}"
 			onclick="cancel();"/>
