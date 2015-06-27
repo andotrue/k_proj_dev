@@ -79,7 +79,7 @@ function cancel() {
 	<tr>
 	<td style="width: 50%; padding: 2% 0 0 10%;">
   		<!-- サムネイル画像 -->
-    	<img src="{{ asset('/bundles/machigaigame/images/')}}{{ code }}/{{item.getItemPath}}_thum.png" style="width:100%; border:solid 5px green;"/>
+    	<img src="{{ asset(item.getItemThumPath) }}" style="width:100%; border:solid 5px green;"/>
     </td>
     <td style="padding: 2% 0 0 5%; text-align: left; vertical-align: top;">
     	<!-- アイテムタイトル -->

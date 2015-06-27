@@ -149,7 +149,8 @@ class ShopController extends BaseController
     {
     	$request = $this->get('request');
         $page = $request->query->get("page");
-        $word = $request->request->get('word', '');
+        $word = $request->query->get("word");
+        $word = $request->request->get('word', $word);
         
         $user = $this->getUser();
         $purchasedItems = $this->getPurchasedItems();
@@ -176,8 +177,23 @@ class ShopController extends BaseController
         $sort = "DESC";
         $fieldName = "distributedFrom";
 		
+        //全件数取得
         $repository = $this->getDoctrine()
 						        ->getRepository('MachigaiGameBundle:Item');
+        $query = $repository->createQueryBuilder('i')
+						        ->where('i.category = :category', 'i.name LIKE :word')
+						        ->setParameter('category', $categoryCode)
+						        ->setParameter('word', "%$word%")
+						        ->orderBy('i.distributedFrom', 'DESC')
+						        ->getQuery();
+        $count = count($query->getResult());
+        
+        //最大ページ数
+        $maxPage = ceil($count / $pageCount);
+        
+        //表示データの取得
+        $repository = $this->getDoctrine()
+					        ->getRepository('MachigaiGameBundle:Item');
         $query = $repository->createQueryBuilder('i')
 						        ->where('i.category = :category', 'i.name LIKE :word')
 						        ->setParameter('category', $categoryCode)
@@ -187,10 +203,6 @@ class ShopController extends BaseController
 						        ->setFirstResult($offset)
 						        ->getQuery();
         $items = $query->getResult();
-        
-        //全件数取得
-        $count = count($query);
-        $maxPage = ceil($count / $pageCount);
         
         
 		return $this->render(

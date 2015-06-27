@@ -1,11 +1,11 @@
 {% if categoryCode == 1 %}
-{% set code = "wallpaper" %}
+{% set categoryName = "背景壁紙" %}
 
 {% elseif categoryCode == 2 %}
-{% set code = "stamp" %}
+{% set categoryName = "デコメスタンプ" %}
 
 {% elseif categoryCode == 3 %}
-{% set code = "animesstamp" %}
+{% set categoryName = "動くスタンプ" %}
 
 {% endif %}
 
@@ -13,7 +13,7 @@
 {% block stylesheets %}
 	<style type="text/css">
 	<!--
-		.pagetitle{border: solid 3px; font-size: 80px; color: white;background-color: pink;height: 80px;padding: 20px;}
+		.pagetitle{border: solid 3px; font-size: 80px; color: white;background-color: pink;height: auto;padding: 20px;}
 		.texttitle{font-size: 30px; text-align:left; padding: 20px; font-weight: bold}
 	-->
 	</style>
@@ -67,7 +67,7 @@ function cancel() {
 </script>
 {% endblock %}
 <!-- ヘッダータイトル -->
-<div class="pagetitle">{{ groupname }}</div>
+<div class="pagetitle">{{ groupname }}<br />{{ categoryName }}</div>
 
 <!-- 検索ワード -->
 検索ワード：{{ word }}<br />
@@ -82,7 +82,7 @@ function cancel() {
 	<tr>
 	<td style="width: 50%; padding: 2% 0 0 10%;">
   		<!-- サムネイル画像 -->
-    	<img src="{{ asset('/bundles/machigaigame/images/')}}{{ code }}/{{item.getItemPath}}_thum.png" style="width:100%; border:solid 5px green;"/>
+    	<img src="{{ asset(item.getItemThumPath) }}" style="width:100%; border:solid 5px green;"/>
     </td>
     <td style="padding: 2% 0 0 5%; text-align: left; vertical-align: top;">
     	<!-- アイテムタイトル -->
@@ -132,7 +132,7 @@ function cancel() {
 	{% if page != 1 %}
 	<!-- ◁ ボタン -->
 	<a style="padding-right:20%;"
-		href={{ path('ShopSearch',{"categoryCode":categoryCode,"page":page-1 }) }}>
+		href="{{ path('ShopSearch',{"categoryCode":categoryCode,"page":page-1 }) }}&word={{ word }}">
 		<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_back.png')  }}"
 				width="7.5%"
 				id="prev"/>
@@ -146,7 +146,7 @@ function cancel() {
 	<!-- ▷ ボタン -->
 	{% if page != maxPage %}
 	<a style="padding-left:20%;"
-		href={{ path('ShopSearch',{"categoryCode":categoryCode,"page":page+1 }) }}>
+		href="{{ path('ShopSearch',{"categoryCode":categoryCode,"page":page+1 }) }}&word={{ word }}">
 		<img src="{{ asset('/bundles/machigaigame/images/parts/button_page_next.png')  }}"
 				width="7.5%" id="next" />
 	</a>
