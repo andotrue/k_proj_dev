@@ -1,12 +1,12 @@
-machigai_admin:
-    resource: "@MachigaiAdminBundle/Resources/config/routing.yml"
+kanahei _admin:
+    resource: "@KanaheiAdminBundle/Resources/config/routing.yml"
     prefix:   /admin
 
-machigai_auth:
-    resource: "@MachigaiAuthBundle/Resources/config/routing.yml"
+kanahei_auth:
+    resource: "@KanaheiAuthBundle/Resources/config/routing.yml"
     prefix:   /top/auth
 
-machigai_game:
-    resource: "@MachigaiGameBundle/Resources/config/routing.yml"
+kanahei_game:
+    resource: "@KanaheiGameBundle/Resources/config/routing.yml"
     prefix:   /
 

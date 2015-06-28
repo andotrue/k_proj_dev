@@ -3,4 +3,8 @@ app/logs/
 app/config/parameters.yml
 .*
 web/app_dev.php
-web/bundles/machigaigame
+web_bup/bundles/machigaigame
+web/bundles/kanaheigame
+
+src/Machigai
+web_bup

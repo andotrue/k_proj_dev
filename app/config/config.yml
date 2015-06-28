@@ -35,7 +35,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ MachigaiGameBundle ]
+    bundles:        [ KanaheiGameBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -65,7 +65,7 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: smtp
-    host:      mail.machigai.puzzle-m.net
-    username:  mail.machigai.puzzle-m.net
+    host:      mail.kanahei.puzzle-m.net
+    username:  mail.kanahei.puzzle-m.net
     password:  
     spool:     { type: memory }

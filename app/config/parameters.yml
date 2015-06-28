@@ -3,11 +3,8 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    #database_name: machigai
     database_name: k_proj_dev
-    #database_user: machigai
     database_user: kprojdev
-    #database_password: 1qazxsw2
     database_password: kprojdevpass
     mailer_transport: smtp
     mailer_host: 127.0.0.1
