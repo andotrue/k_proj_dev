@@ -3,6 +3,7 @@
 {% block title %}KanaheiGameBundle:Shop:download{% endblock %}
 
 {% block body %}
+
 <script>
 var image_path = null;
 var image_id = null;
@@ -20,18 +21,31 @@ function originalImage(){
   $('#'+image_id).attr("src",src);
 }
 </script>
+
 <div style=" font-size:1em;">
 <br />
+
 <img src="{{ asset('/bundles/kanaheigame/images/parts/2-03-1_bg.png') }}" style="position:absolute;left:0;top:0;width:100%;height:auto;"/>
 <img src="{{ asset('/bundles/kanaheigame/images/parts/header_shop.png') }}" width="100%" style="position:absolute;left:0%;top:0%;"/>
 <!--<img src="{{ asset('/bundles/kanaheigame/images/parts/header_shop_contentdetail.png') }}" width="100%" style="position:absolute;top:10%;left:0%;"/> -->
+
 <div class="shop_contentdetailarea" style="padding:2%;margin-top:7%;position:relative">
+	{% if categoryCode != "3" %}
 	<img src="{{ path('downloadExecute', {'id': id }) }}?syncToken={{syncToken}}&mode={{mode}}" width="100%" style="padding-top:2%;" />
+	{% else %}
+	<video>
+  		<source src="{{ path('downloadExecute', {'id': id }) }}?syncToken={{syncToken}}&mode={{mode}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+	</video>
+	{% endif %}
 </div>
+
 <div style="border-bottom: 6px solid rgb(25,152,231);position:relative;"></div>
+
 <div style="position:relative;margin-top:-%">
-<p style="text-align:left;margin-bottom:3%;">表示された画像を長押しして「画像を保存」を選択してください。</p>
-<a href="{{path('confirm', {'id': id })}}"><img id="back" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
+	<p style="text-align:left;margin-bottom:3%;">表示された画像を長押しして「画像を保存」を選択してください。</p>
+	<a href="{{path('confirm', {'id': id })}}">
+		<img id="back" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_off.png')}}" width="35%" onclick="changeImage(this.id);">
+	</a>
 </div>
 
 <img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_back.png')}}" >

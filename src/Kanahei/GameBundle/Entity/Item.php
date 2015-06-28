@@ -473,6 +473,10 @@ class Item
 		elseif ( $this->getCategory()->getCategoryCode() == 0 ){
 		  return "/bundles/kanaheigame/images/other/".$this->getItemPath()."_thum.png";
 		}
+    	/** 動くスタンプ **/
+		elseif ( $this->getCategory()->getCategoryCode() == 3 ){
+		  return "/bundles/kanaheigame/images/animestamp/".$this->getItemPath()."_thum.png";
+		}
     }
     
     /**

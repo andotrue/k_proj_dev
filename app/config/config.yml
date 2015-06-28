@@ -29,7 +29,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-        dl_limit_count: 3
+        dl_limit_count: 100
 
 # Assetic Configuration
 assetic:

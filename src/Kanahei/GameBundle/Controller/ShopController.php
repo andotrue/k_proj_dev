@@ -258,8 +258,7 @@ class ShopController extends BaseController
     }
 
 	public function downloadExecuteAction($id){
-
-		$request = $this->get('request');
+        $request = $this->get('request');
 		$session = $request->getSession();  
 
         $syncToken = $request->query->get("syncToken");
@@ -304,7 +303,7 @@ class ShopController extends BaseController
             $itemPath = "/../Resources/public/images/stamp/".$itemPath.".png";
         }
 	    elseif($categoryCode==3){
-            $itemPath = "/../Resources/public/images/animestamp/".$itemPath.".png";
+            $itemPath = "/../Resources/public/images/animestamp/".$itemPath.".mp4";
         }
         //消費ポイントの取得
         $itemPoint = $item->getConsumePoint();
@@ -317,25 +316,24 @@ class ShopController extends BaseController
         //再ダウンロードなら
         if(in_array($id,$purchasedItems) || $alreadyBuy)
         {
-            if( empty($mode) ||  $mode != 'file')
+        	if( empty($mode) ||  $mode != 'file')
             {
                 return $this->render(
                 		'KanaheiGameBundle:Shop:downloadedContentView.html.twig',
                 		array(
                 			'id'=>$id, 
                 			'syncToken'=> $syncToken, 
-                			'mode' => 'file'
-                				
+                			'mode' => 'file',
+                			'categoryCode' => $categoryCode
                 		)
                 	);
             }
             else
             {
-                return $this->download($itemPath);
+            	return $this->download($itemPath);
             }
         }
         else{
-			
 			$remainder = $user->getCurrentPoint()-$itemPoint;
 
 			$purchasedInfo = new PurchaseHistory();
@@ -366,7 +364,7 @@ class ShopController extends BaseController
 			
 			$session->set('buy_'.$categoryCode . "_" . $id, true );
 
-            if( empty($mode) ||  $mode != 'file'){
+			if( empty($mode) ||  $mode != 'file'){
                 return $this->render(
                 				'KanaheiGameBundle:Shop:downloadedContentView.html.twig',
                 				array(
@@ -374,6 +372,7 @@ class ShopController extends BaseController
                 					'syncToken'=> $syncToken, 
                 					'mode' => 'file',
                 					'dlcount' => count($purchasedItems),
+                					'categoryCode' => $categoryCode
                 				)
                 		);
             }else{
@@ -418,9 +417,12 @@ class ShopController extends BaseController
     
     public function download($itemPath)
     {
-        $image_file = dirname(__FILE__).$itemPath;
-		$filename = basename($image_file);
-
+//$logger = $this->get('logger');
+    	$image_file = dirname(__FILE__).$itemPath;
+//$logger->info($image_file);
+    	$filename = basename($image_file);
+//$logger->info($filename);
+		
         $response = new BinaryFileResponse($image_file);
 		$response->trustXSendfileTypeHeader();
 
