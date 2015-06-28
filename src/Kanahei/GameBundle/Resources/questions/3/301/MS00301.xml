@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>301</id>
+ <name>木馬にゆられて星空散歩</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>13</x><!--point のx座標 -->
+  <y>27</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>224</x><!--point のx座標 -->
+  <y>39</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>374</x><!--point のx座標 -->
+  <y>76</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>84</x><!--point のx座標 -->
+  <y>172</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>211</x><!--point のx座標 -->
+  <y>185</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>371</x><!--point のx座標 -->
+  <y>182</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>203</x><!--point のx座標 -->
+  <y>420</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>306</x><!--point のx座標 -->
+  <y>450</y><!--point のy座標-->
+ </point>
+</different>

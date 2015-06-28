@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}間違い探し{% endblock %}</title>
+	<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery-1.10.2.min.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery.timer.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/timeCalculater.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/changeImage.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/android.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/jquery.center.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/jquery.center.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/warning.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/common.js') }}"></script>
+	
+	<link rel="stylesheet" href="{{ asset('bundles/kanaheigame/css/html5reset-1.6.1.css')  }}" />
+	<link rel="stylesheet" href="{{ asset('bundles/kanaheigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
+
+	<link rel="stylesheet" src="{{ asset('bundles/kanaheigame/css/html5reset-1.6.1.css>Error')  }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="float-menu" content="kanahei.puzzle-m.net/">
+
+	<style>
+		body,*{font-family:メイリオ;padding:0;border:none;margin:0;}
+		img{vertical-align:text-bottom;}
+		body{ text-align: center; background:url( {{asset('/bundles/kanaheigame/images/parts/2-01_bg_.png')}}   );}
+		ul,li{list-style-type:none;}
+ 		.top_bg{background: url({{asset('/bundles/kanaheigame/images/parts/top_bg.png')}})}
+		.bottom_blue_line{border-bottom:3px solid rgb(0,142,238);}
+		.shop_contentdetailarea{background:url({{asset('/bundles/kanaheigame/images/parts/shop_contentdetailarea.png')}});}
+	</style>
+    
+	{% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+
+	{% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+
+	{% block foot %}
+	<footer>
+	  <div id="copyright_area">
+	    <p style="text-align: center;">©マガジン・マガジン</p>
+	    <p style="text-align: center;">©Hubase-i</p>
+	  </div>
+	</footer>
+	{% endblock %}
+    
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-49132943-1']);
+	  _gaq.push(['_setDomainName', 'puzzle-m.net']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+
+</body>
+</html>
+

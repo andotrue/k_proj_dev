@@ -1,0 +1,71 @@
+{% extends "KanaheiGameBundle:Help:base.html.twig" %}
+{% block title %}遊び方{% endblock %}
+
+{% block contents %}
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery-1.10.2.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery.timer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/timeCalculater.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/changeImage.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/android.js') }}"></script>
+
+<style>
+p{padding:2%;text-align: left; font-size: 0.95em;}
+h3{font-size: 1em;padding-left: 2%;}
+tr{margin-bottom: 3%;}
+th{vertical-align: top;padding-top: 3%;}
+td{width:81%;text-align: left;}
+.center{text-align:center;}
+</style>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/2-04-2_bg.PNG')  }}" style="position:absolute;left:0%;top:0%;width:100%;height:auto;opacity:1;"/>
+
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help_asobikata.png')  }}" width="100%" style="position:absolute;left:0%;top:10%"/>
+
+
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_asobikata_game.png')  }}" style="position:absolute;left:0%;top:19%;width:100%"/>
+
+<div style="position:relative;margin-top:40%;width:100%">
+<p class="center"><img src="{{ asset('/bundles/kanaheigame/images/parts/1.png')  }}" alt="ゲーム画面イメージ" width="60%" /></p>
+<p>左右のイラストをくらべて違っている場所をタッチ！正解すると○がつくよ！<br />
+おてつきに気を付けて全部のまちがいを見つけよう！</p>
+<table>
+ <tr><th><img width="100%" src="{{ asset('/bundles/kanaheigame/images/parts/2.png')  }}" alt="まちがいの数" /></th><td><h3>まちがいの数</h3><p>まちがいの数が表示されます。</p></td></tr>
+ <tr><th><img width="100%" src="{{ asset('/bundles/kanaheigame/images/parts/3.png')  }}" alt="おてつき" style="margin-top:5%;"/></th><td><h3>おてつき</h3><p>おてつきの回数が表示されます。</p></td></tr>
+ <tr><th><img width="100%" src="{{ asset('/bundles/kanaheigame/images/parts/4.png')  }}" alt="問題イラスト" style="margin-top:5%;"/></th><td><h3>拡大縮小</h3><p>スライダーを左右に動かすとイラストの拡大／縮小ができます。</p></td></tr>
+ <tr><th><img width="100%" src="{{ asset('/bundles/kanaheigame/images/parts/5.png')  }}" alt="ヒントボタン" style="margin-top:5%;"/></th><td><h3>ヒント</h3><p>答えの場所が一瞬だけ光ります。<br />
+ 一回の挑戦で一度だけ使うことができます。</p></td></tr>
+ <tr><th><img width="100%" src="{{ asset('/bundles/kanaheigame/images/parts/6.png')  }}" alt="保存して中断" style="margin-top:5%;"/></th><td><h3>保存して中断</h3><p>回答途中の問題を保存できます</p>
+ <p style="font-size:0.9">※会員限定の機能です。</p></td></tr>
+ <tr><th><img width="100%" src="{{ asset('/bundles/kanaheigame/images/parts/7.png')  }}" alt="ギブアップ" style="margin-top:5%;"/></th><td><h3>ギブアップ</h3><p>問題を保存しないでゲームを終了します。</p></td></tr>
+</table>
+</div>
+
+<div id="ranking" style="margin-top:4%">
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_asobikata_ranking.png')  }}"  style="width:100%;position:relative;"/>
+<table style="position:relative">
+ <tr><th><img width="100%" src="{{ asset('/bundles/kanaheigame/images/parts/8.png')  }}" alt="ランキング"/></th><td><p>難易度ごとのベストタイムがランキングに反映されます。<br />
+ 上位に入ればポイントゲット！<br />
+ 毎月更新されるので、チャンスは一年中！</p>
+ <p style="font-size:0.9em">※会員限定の機能です。<br />
+ ※ランキングの対象になるのは初めてクリアした問題のみとなります。<br />
+ 同じ問題を２回クリアしても１回目のタイムだけが対象となります。</p></td></tr>
+</table>
+</div>
+
+<div id="shop" style="position:relative;margin-top:5%">
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_asobikata_shop.png')  }}" width="100%" style=""/>
+<table>
+ <tr><th><img width="100%" src="{{ asset('/bundles/kanaheigame/images/parts/9.png')  }}" alt="ショップイメージ" /></th><td><p>パズルを解いてためたポイントをスタンプや壁紙に交換できます。<br />
+ 問題のイラストに出てきた可愛いキャラクターたちのアイテムが続々登場するよ！</p>
+ <p style="font-size:0.9em">※会員限定の機能です。</p></td></tr>
+</table>
+</div>
+<p class="center">
+<img id="tohelptop" style="position:relative;margin-top:8%" src="{{asset('/bundles/kanaheigame/images/parts/buttom_return_helptop_off.png')}}" width="70%" onclick="changeImage(this.id)"/><a href="{{ path('Help') }}" id="htohelptop"></a></p>
+
+<img src="{{asset('/bundles/kanaheigame/images/parts/buttom_return_helptop.png')}}" class="preload"/>
+
+{% block footer %}{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>1</id>
+ <name>春までお休みなさい…</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>358</x><!--point のx座標 -->
+  <y>82</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>238</x><!--point のx座標 -->
+  <y>126</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>260</x><!--point のx座標 -->
+  <y>298</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>268</x><!--point のx座標 -->
+  <y>366</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>213</x><!--point のx座標 -->
+  <y>430</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>108</x><!--point のx座標 -->
+  <y>439</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>40</x><!--point のx座標 -->
+  <y>298</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>42</x><!--point のx座標 -->
+  <y>15</y><!--point のy座標-->
+ </point>
+</different>

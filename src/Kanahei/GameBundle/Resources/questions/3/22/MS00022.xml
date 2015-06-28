@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>22</id>
+ <name>おなかいっぱい!ぶどう狩り</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>210</x><!--point のx座標 -->
+  <y>23</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>315</x><!--point のx座標 -->
+  <y>110</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>375</x><!--point のx座標 -->
+  <y>188</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>266</x><!--point のx座標 -->
+  <y>281</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>258</x><!--point のx座標 -->
+  <y>411</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>88</x><!--point のx座標 -->
+  <y>405</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>31</x><!--point のx座標 -->
+  <y>305</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>126</x><!--point のx座標 -->
+  <y>195</y><!--point のy座標-->
+ </point>
+</different>

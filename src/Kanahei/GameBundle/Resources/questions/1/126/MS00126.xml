@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>126</id>
+ <name>今日は音楽隊♪</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>125</x><!--point のx座標 -->
+  <y>167</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>570</x><!--point のx座標 -->
+  <y>36</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>70</x><!--point のx座標 -->
+  <y>350</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>284</x><!--point のx座標 -->
+  <y>364</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>555</x><!--point のx座標 -->
+  <y>367</y><!--point のy座標-->
+ </point>
+</different>

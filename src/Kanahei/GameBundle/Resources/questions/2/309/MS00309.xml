@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>309</id>
+ <name>ヨガでリフレッシュ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>118</x><!--point のx座標 -->
+  <y>154</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>303</x><!--point のx座標 -->
+  <y>146</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>417</x><!--point のx座標 -->
+  <y>191</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>563</x><!--point のx座標 -->
+  <y>40</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>35</x><!--point のx座標 -->
+  <y>426</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>415</x><!--point のx座標 -->
+  <y>285</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>625</x><!--point のx座標 -->
+  <y>360</y><!--point のy座標-->
+ </point>
+</different>

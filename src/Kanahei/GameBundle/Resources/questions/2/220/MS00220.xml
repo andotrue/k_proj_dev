@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>220</id>
+ <name>赤ずきんちゃん、気をつけて！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>46</x><!--point のx座標 -->
+  <y>127</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>322</x><!--point のx座標 -->
+  <y>102</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>408</x><!--point のx座標 -->
+  <y>213</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>590</x><!--point のx座標 -->
+  <y>84</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>102</x><!--point のx座標 -->
+  <y>359</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>363</x><!--point のx座標 -->
+  <y>325</y><!--point のy座標-->
+ </point>
+</different>

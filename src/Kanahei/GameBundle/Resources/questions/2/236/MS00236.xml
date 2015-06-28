@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>236</id>
+ <name>カエルの国へようこそ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>97</x><!--point のx座標 -->
+  <y>93</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>327</x><!--point のx座標 -->
+  <y>96</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>125</x><!--point のx座標 -->
+  <y>316</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>56</x><!--point のx座標 -->
+  <y>361</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>170</x><!--point のx座標 -->
+  <y>364</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>372</x><!--point のx座標 -->
+  <y>269</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>360</x><!--point のx座標 -->
+  <y>430</y><!--point のy座標-->
+ </point>
+</different>

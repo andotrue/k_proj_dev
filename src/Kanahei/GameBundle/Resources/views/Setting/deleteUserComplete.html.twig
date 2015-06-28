@@ -1,0 +1,39 @@
+{% extends "KanaheiGameBundle:Help:base.html.twig" %}
+
+{% block title %}遊び方{% endblock %}
+
+{% block contents %}
+<script>
+logout();
+var image_path = null;
+var image_id = null;
+$(function(){
+	$('#button_tohelp').hide();
+	$('#toapptop').hide();
+})
+function changeImage(imageId){
+	var pre_src = $('#'+imageId).attr('src');
+	var src = pre_src.replace(/_off/g,'');
+	image_path = src;
+	image_id = imageId;
+	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
+}
+function originalImage(){
+	var pre_src = $('#'+image_id).attr('src');
+	var src = image_path.replace(/.png/g,'_off.png');
+	$('#'+image_id).attr("src",src);
+}
+</script>
+<p style="margin-top:30%;color:rgb(22,101,179);">ユーザー情報の削除が完了しました。</p>
+<!--
+<img src="{{asset('/bundles/kanaheigame/images/parts/2-04-5-4_bg.png')}}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/kanaheigame/images/parts/header_user_delete_complete.png')}}" width="100%" style="position:relative;margin-top:14%"/>
+<div style="position:relative;margin-top:40%">
+-->
+
+<a href="javascript:goTop();"><img style="margin-top:15%" id="toTopImage" src="{{asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id)"/></a>
+<img class="preload" id="preToTopImage" src="{{asset('/bundles/kanaheigame/images/parts/button_back_totop.png')}}" width="30%"/>
+</div>
+{% endblock %}

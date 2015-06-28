@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>222</id>
+ <name>紺碧の海をクルージング！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>50</x><!--point のx座標 -->
+  <y>44</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>132</x><!--point のx座標 -->
+  <y>269</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>378</x><!--point のx座標 -->
+  <y>115</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>599</x><!--point のx座標 -->
+  <y>41</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>346</x><!--point のx座標 -->
+  <y>384</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>617</x><!--point のx座標 -->
+  <y>385</y><!--point のy座標-->
+ </point>
+</different>

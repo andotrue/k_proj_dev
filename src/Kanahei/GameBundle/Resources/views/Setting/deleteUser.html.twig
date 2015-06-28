@@ -1,0 +1,49 @@
+{% extends "KanaheiGameBundle:Help:base.html.twig" %}
+
+{% block title %}遊び方{% endblock %}
+
+{% block contents %}
+<script>
+var image_path = null;
+var image_id = null;
+$(function(){
+	$('#button_tohelp').hide();
+	$('#toapptop').hide();
+})
+function changeImage(imageId){
+	var pre_src = $('#'+imageId).attr('src');
+	var src = pre_src.replace(/_off/g,'');
+	image_path = src;
+	image_id = imageId;
+	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
+}
+function originalImage(){
+	var pre_src = $('#'+image_id).attr('src');
+	var src = image_path.replace(/.png/g,'_off.png');
+	$('#'+image_id).attr("src",src);
+}
+</script>
+<!--
+<img src="{{asset('/bundles/kanaheigame/images/parts/2-04-5-2_bg.png')}}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/kanaheigame/images/parts/header_user_information_delete.png')}}" width="100%" style="position:relative;margin-top:14%"/>
+-->
+<div style="position:relative;margin-top:20%;padding:3%;">
+<div style="text-align:left;">
+	<p style="color:rgb(22,101,179);">登録されている情報を削除します。</p><br />
+	<p style="color:rgb(22,101,179)">※退会すると今までの問題保存データ、ポイントなどは削除されます。<br />※こちらは本サービスの退会であり、auスマートパスの退会ではございません。</p>
+</div>
+<!--
+<a href="{{path('DeleteUserConfirm')}}"><img id="userDelete" src="{{asset('/bundles/kanaheigame/images/parts/button_user_delete_off.png')}}" width="67%" onclick="changeImage(this.id)"/></a><br />
+<img class="preload" id="preuserDelete" src="{{asset('/bundles/kanaheigame/images/parts/button_user_delete.png')}}" width="67%"/>
+-->
+<div style="margin-top:15%">
+	<a href="{{path('DeleteUserConfirm')}}">ユーザー情報削除</a>
+</div>
+<div style="position:relative;margin-top:15%">
+	<img id="buttonReturn" src="{{asset('/bundles/kanaheigame/images/parts/buttom_return_off.png')}}" width="67%" onclick="changeImage(this.id);history.back();"/>
+ <img class="preload" src="{{asset('/bundles/kanaheigame/images/parts/buttom_return.png')}}" />
+</div>
+</div>
+{% endblock %}

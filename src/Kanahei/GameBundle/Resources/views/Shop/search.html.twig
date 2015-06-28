@@ -1,0 +1,187 @@
+{% if categoryCode == 1 %}
+{% set categoryName = "背景壁紙" %}
+
+{% elseif categoryCode == 2 %}
+{% set categoryName = "デコメスタンプ" %}
+
+{% elseif categoryCode == 3 %}
+{% set categoryName = "動くスタンプ" %}
+
+{% endif %}
+
+
+{% block stylesheets %}
+	<style type="text/css">
+	<!--
+		.pagetitle{border: solid 3px; font-size: 80px; color: white;background-color: pink;height: auto;padding: 20px;}
+		.texttitle{font-size: 30px; text-align:left; padding: 20px; font-weight: bold}
+	-->
+	</style>
+{% endblock %}
+
+
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block title %}KanaheiGameBundle:Shop:more{% endblock %}
+
+{% block body %}
+
+{% block javascripts %}
+<script type="text/javascript">
+var item_id = null;
+var title = null;
+var current_level = "easy";
+var max = null;
+var image_path = null;
+var image_id = null;
+$(function() {
+    $('#popup').hide();
+    $('#popup_continue').hide();
+})
+function popup(id, title, point, redl_flg) {
+    item_id = id;
+    title = title;
+
+    if(redl_flg)
+    {
+	    msg = title + ' ' + 'を再ダウンロードしますか？';
+    }
+    else
+    {
+	    msg = title + ' ' + point + 'ptを交換しますか？';
+    }
+    
+    $('.title').empty();
+    $('<p>' + msg + '</p>').appendTo('.title');
+    $('#popup').center();
+    $('#popup').show();
+    return false;
+}
+function go() {
+	$('#popup').hide();
+	$('#form'+item_id).submit();
+}
+function cancel() {
+	$('#popup').hide();
+}
+</script>
+{% endblock %}
+<!-- ヘッダータイトル -->
+<div class="pagetitle">{{ groupname }}<br />{{ categoryName }}</div>
+
+<!-- 検索ワード -->
+検索ワード：{{ word }}<br />
+
+<!-- 現在のポイント -->
+<p style="font-size:1em; border: solid 5px green; background-color: limegreen; margin: 20px 5%; font-size: 20px; padding: 20px;">
+	現在のポイント：900 pt
+</p>
+
+<table style="font-size: 20px; width:100%;">
+	{% for item in items %}
+	<tr>
+	<td style="width: 50%; padding: 2% 0 0 10%;">
+  		<!-- サムネイル画像 -->
+    	<img src="{{ asset(item.getItemThumPath) }}" style="width:100%; border:solid 5px green;"/>
+    </td>
+    <td style="padding: 2% 0 0 5%; text-align: left; vertical-align: top;">
+    	<!-- アイテムタイトル -->
+		{{item.getName}}
+	    <br>
+    	<!-- アイテム説明 -->
+		{{item.getDescription}}
+
+		<div style="width:40%;">
+		
+      		<!-- 公開開始から７日以内ならNEWアイコン -->
+        	{% if date(item.getDistributedFrom) > date('-7days') %}
+        		<img style="width:50%;" src="{{ asset('/bundles/kanaheigame/images/parts/shop_newicon.png')  }}" /><br />
+        	{% endif %}
+        	
+        	<!-- 消費ポイント -->
+        	<p style="font-size:1.3em">{{item.getConsumePoint}}pt</p><br />
+        	
+        	<span class="detail">
+        		{% if item.getId in purchasedItems %}
+	        		<!-- 再ダウンロード -->
+        			<form id="form{{ item.getId }}" name="form{{ item.getId }}" action="{{ path('confirm',{"id":item.getId}) }}" method="post">
+        				<button type="submit" 
+        						onclick="return popup({{ item.getId }}, '{{ item.getName }}', '{{ item.getConsumePoint }}', 1);"/>
+        					<img src="{{ asset('/bundles/kanaheigame/images/parts/button_shopredl_off.png') }}" width="100%;" />
+        				</button>
+        			</form>
+        		{% else %}
+	        		<!-- ダウンロード -->
+        			<form id="form{{ item.getId }}" name="form{{ item.getId }}" action="{{ path('ShopDownload',{"id":item.getId}) }}" method="post">
+        				<button type="submit" 
+        						onclick="return popup({{ item.getId }}, '{{ item.getName }}', '{{ item.getConsumePoint }}');"/>
+        					<img src="{{ asset('/bundles/kanaheigame/images/parts/button_contentdetail_buy_off.png') }}" width="100%;" />
+        				</button>
+        			</form>
+        		{% endif %}
+        	</span>
+    	</div>
+	</td>
+	</tr>
+	{% endfor %}
+</table>
+
+<!-- ページング -->
+{% if maxPage > 1 %}
+<nav style="padding-top:3%;position:relative">
+	{% if page != 1 %}
+	<!-- ◁ ボタン -->
+	<a style="padding-right:20%;"
+		href="{{ path('ShopSearch',{"categoryCode":categoryCode,"page":page-1 }) }}&word={{ word }}">
+		<img src="{{ asset('/bundles/kanaheigame/images/parts/button_page_back.png')  }}"
+				width="7.5%"
+				id="prev"/>
+	</a>
+	{% endif %}
+
+	<span>
+		<span class="page">{{ page }}</span> / <span id="maxPage">{{ maxPage }}</span>
+	</span>
+
+	<!-- ▷ ボタン -->
+	{% if page != maxPage %}
+	<a style="padding-left:20%;"
+		href="{{ path('ShopSearch',{"categoryCode":categoryCode,"page":page+1 }) }}&word={{ word }}">
+		<img src="{{ asset('/bundles/kanaheigame/images/parts/button_page_next.png')  }}"
+				width="7.5%" id="next" />
+	</a>
+	{% endif %}
+</nav>
+{% endif %}
+
+<footer style="margin:3% auto 5% auto;position:relative">
+	<img id="toTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
+	<img id="preToTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" class="preload">
+</footer>
+
+<!-- ダウンロード確認ポップアップ -->
+<div id="popup" style="display: none;position: absolute;width: 280px;height: 180px;
+				     background-image:url({{ asset('/bundles/kanaheigame/images/parts/popup_common.png')  }});
+				     background-size: cover;">
+
+    <button type="button" onclick="cancel()"
+            style="position:absolute;right: 10px;top:10px;width:50px;height:50px;
+            filter: alpha(opacity=0);
+            -moz-opacity:0;
+            opacity:0;
+            ">
+    </button>
+
+    <div class="title"
+	       style="padding-left: 25px;font-size: 15px;margin-top: 25px;width: 170px;height: 30px;overflow: hidden;">
+	</div>
+
+    <input type="submit" id="yes" alt="はい" value="はい" style="margin: auto; margin-top: 50px;width:30%"
+    		src="{{ asset('')  }}"
+			onclick="go();"/>
+    <input type="submit" id="no" alt="いいえ" value="いいえ" style="margin: auto; margin-top: 50px;width:30%"
+    		src="{{ asset('')  }}"
+			onclick="cancel();"/>
+</div>
+
+{% endblock %}

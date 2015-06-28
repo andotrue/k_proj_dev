@@ -1,0 +1,59 @@
+{% extends "KanaheiGameBundle:Help:base.html.twig" %}
+
+{% block title %}ニックネーム変更{% endblock %}
+
+{% block contents %}
+<section>
+ <img src="{{asset('/bundles/kanaheigame/images/parts/header_nicknamechange_change.png')}}" width="100%">
+ <br />
+ <br />
+ <p style="margin-top:5%">変更後のニックネームを入力し、登録内容確認ボタンを押してください。</p>
+ <div style="margin:10%">
+ {{ form (form) }}
+ </div>
+</form>
+<img id="nicknamechange" src="{{ asset('/bundles/kanaheigame/images/parts/button_registcheck2_off.png')}}" style="width:60%;align:center; margin:1%" onclick="changeImage(this.id);submitNickname();" >
+<a href="{{path('Setting')}}">
+ <img id="buttomReturn" src="{{ asset('/bundles/kanaheigame/images/parts/buttom_return_off.png')}}" style="width:60%;align:center; margin:1%" onclick="changeImage(this.id);" >
+</a>
+</section>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/button_registcheck2_off.png')}}" class="preload" >
+<img src="{{ asset('/bundles/kanaheigame/images/parts/buttom_return_off.png')}}" class="preload" >
+
+
+
+<script>
+var image_path = null;
+var image_id = null;
+$(function(){
+	$('#button_tohelp').hide();
+	$('#toapptop').hide();
+	$('#form_confirm').hide();
+})
+function changeImage(imageId){
+	var pre_src = $('#'+imageId).attr('src');
+	var src = pre_src.replace(/_off/g,'');
+	image_path = src;
+	image_id = imageId;
+	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
+}
+function originalImage(){
+	var pre_src = $('#'+image_id).attr('src');
+	var src = image_path.replace(/.png/g,'_off.png');
+	$('#'+image_id).attr("src",src);
+}
+function submitNickname(){
+	var nickname = $('#form_nickname').val();
+	if(!nickname.match(/\S/)){
+		if(navigator.userAgent.indexOf('Android') > 0){
+        	droid.alert("ニックネームを入力してください。");
+    	}else{
+			alert("ニックネームを入力してください。");
+		}
+	}else{
+		$('#form_confirm').trigger('click');
+	}
+}
+</script>
+{% endblock %}

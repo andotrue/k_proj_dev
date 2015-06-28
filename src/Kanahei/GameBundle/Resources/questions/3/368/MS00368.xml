@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>368</id>
+ <name>目指せ！カンフーマスター！！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>117</x><!--point のx座標 -->
+  <y>43</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>353</x><!--point のx座標 -->
+  <y>75</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>31</x><!--point のx座標 -->
+  <y>192</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>343</x><!--point のx座標 -->
+  <y>203</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>78</x><!--point のx座標 -->
+  <y>329</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>226</x><!--point のx座標 -->
+  <y>324</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>140</x><!--point のx座標 -->
+  <y>445</y><!--point のy座標-->
+ </point>
+</different>

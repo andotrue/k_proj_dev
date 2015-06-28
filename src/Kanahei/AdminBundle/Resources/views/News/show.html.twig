@@ -1,0 +1,40 @@
+{% extends "KanaheiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>お知らせ詳細</h1>
+	<a href="{{ path('news') }}">お知らせ一覧に戻る</a>｜<a href="{{ path('news_edit', { 'id': entity.id }) }}">編集</a>
+
+    <table class="table table-striped table-bordered table-hover compact">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>started_at</th>
+                <td>{{ entity.startedAt | date("Y/m/d H:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>ended_at</th>
+                <td>{{ entity.endedAt | date("Y/m/d H:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>作成日時</th>
+                <td>{{ entity.createdAt | date("Y/m/d H:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>更新日時</th>
+                <td>{{ entity.updatedAt | date("Y/m/d H:i:s") }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

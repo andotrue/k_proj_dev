@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>429</id>
+ <name>夢見るクジラ</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>64</x><!--point のx座標 -->
+  <y>151</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>513</x><!--point のx座標 -->
+  <y>82</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>520</x><!--point のx座標 -->
+  <y>164</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>370</x><!--point のx座標 -->
+  <y>187</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>100</x><!--point のx座標 -->
+  <y>327</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>290</x><!--point のx座標 -->
+  <y>314</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>506</x><!--point のx座標 -->
+  <y>406</y><!--point のy座標-->
+ </point>
+</different>

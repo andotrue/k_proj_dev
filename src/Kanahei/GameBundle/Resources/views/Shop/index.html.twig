@@ -1,0 +1,20 @@
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block title %}KanaheiGameBundle:Shop:index{% endblock %}
+
+{% block body %}
+
+<section>
+	{{ include('KanaheiGameBundle:Shop:index_detail.html.twig',{}) }}
+</section>
+
+<footer style="margin:3% auto 5% auto;position:relative">
+	<img id="toTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
+	<img id="preToTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" class="preload">
+</footer>
+
+<img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_shopredl.png') }}" />
+<img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_contentdetail_buy.png') }}" />
+
+
+{% endblock %}

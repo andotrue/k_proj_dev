@@ -1,0 +1,3 @@
+response_token:
+    pattern: /oauth/response_token
+    defaults: { _controller: KanaheiAuthBundle:OAuth:responseToken }

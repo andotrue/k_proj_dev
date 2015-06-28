@@ -1,0 +1,333 @@
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block body %}
+ 
+<!-- Conversion Pixel -  - DO NOT MODIFY -->
+<img height='1' src='https://ssl.socdm.com/sa/img?said=cv4120-s&t=2' style='position:absolute;border:none;padding:0;margin:0;' width='1' />
+<!-- End of Conversion Pixel -->
+
+{% if reword %}
+	<img src ="https://reward.gree.net/wt/a?cid={{cid}}&ad={{ad}}&uid={{uid}}&digest={{digest}}" width="1" height="1">
+{% endif %}
+
+<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/bookmark_bubble.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/example.js') }}"></script>
+<link rel="apple-touch-icon-precomposed" href="{{ asset('/bundles/kanaheigame/images/parts/icon_256template_ios7.png') }}">
+
+<style type="text/css">
+	body{background: url({{asset('/bundles/kanaheigame/images/parts/top_bg.png')}})}
+	#wv_wrap {
+	    top: 0;
+	    position: fixed;
+	    width: 100%;
+	}
+	#wv_header {
+	    padding-left: 45%;
+	}
+	#wv_blank {
+	    height: 50px;
+	}
+	#wv_header img{
+	    margin-top: 7%;
+	    margin-bottom: 4%;
+	    margin-left: 1%;
+	    width: 19%;
+	}
+</style>
+
+<script type="text/javascript">
+$(function(){
+	var userAgent = window.navigator.userAgent.toLowerCase();
+	if (userAgent.indexOf('/spass-app/') != -1){
+		$("#default_header").hide();
+		$("#wv_header").show();
+		$("#wv_blank").show();
+		$("#wv_wrap").show();
+    }
+});
+</script>
+        
+<header id="title" class="top_bg" >
+    <div id="wv_wrap" style="display:none">
+        <div style="height: 20px; width: 100%; background-color: #66D842"></div>
+        <div id="wv_header" 
+             style="
+             	display: none;
+             	background-image:url({{ asset('/bundles/kanaheigame/images/parts/wv_header_back.png') }});
+             	-moz-background-size:cover;
+             	background-size:cover;
+             	"
+        >
+        	<a href='{{ path('GameSelect') }}'>
+        		<img alt="まちがいさがし" 
+            		src="{{asset('/bundles/kanaheigame/images/parts/sub_kanahei.png')}}"
+            		/>
+        	</a>
+
+        	{% if user is empty %}
+            	<img alt="ショップ" src="{{asset('/bundles/kanaheigame/images/parts/sub_stamp_on.png')}}" width="12%" />
+			{% else %}
+            	<a href='{{ path('Shop',{"categoryCode":"1" }) }}'>
+            		<img alt="ショップ" 
+                		src="{{asset('/bundles/kanaheigame/images/parts/sub_stamp_off.png')}}" 
+                	/>
+            	</a>
+        	{% endif %}
+
+        	<a href='{{ path('Help') }}'>
+            	<img alt="ヘルプ" 
+                	src="{{asset('/bundles/kanaheigame/images/parts/sub_help.png')}}" 
+            	/>
+        	</a>
+        </div>
+    </div>
+    <div id="wv_blank" style="display:none">&nbsp;</div>        
+
+	<!-- ヘッダーロゴ -->
+	<img id="default_header" src="{{ asset('/bundles/kanaheigame/images/parts/kanahei_header.png') }}" width="100%" />
+	<br /><br />
+
+	<div class="ignoreWebview">
+	  	<!--スタンプ誘導バナー１ -->
+	 	{% if user is empty %}
+			<a href="#auin">
+				<img src="{{base_url}}{{ asset('/bundles/kanaheigame/images/parts/top_nologin_stamp.png') }}" width="100%" />
+		    </a>
+		{% else %}
+			<a href='{{ path('Shop',{"categoryCode":"1" }) }}' id="hshop_button">
+				<img src="{{base_url}}{{ asset('/bundles/kanaheigame/images/parts/top_stamp.png') }}" width="100%" />
+			</a>
+		{% endif %}
+	
+		<!--スタンプ誘導バナー２ -->
+		{% if user is empty %}
+			<a href="#auin">
+				<img src="{{base_url}}{{ asset('/bundles/kanaheigame/images/parts/top_stamp_neko.png') }}" width="100%" />
+			</a>
+		{% else %}
+			<a href='{{ path('Shop',{"category":"1" }) }}' id="hshop_button">
+				<img src="{{base_url}}{{ asset('/bundles/kanaheigame/images/parts/top_stamp_neko.png') }}" width="100%" />
+	 		</a>
+		{% endif %}
+
+		<!-- Androidのみバナー出力 -->
+		<script type="text/javascript">
+			if(navigator.userAgent.indexOf('iPhone') > 0){}
+			else if(navigator.userAgent.indexOf('Android') > 0){
+				document.write(
+						"<a href='https://kanahei.puzzle-m.net/movstamp.html'>"+
+							"<img src='/bundles/kanaheigame/images/parts/ugoku_stamp_banner.png'width='100%' /></a><br />"+
+						"<a href='https://kanahei.puzzle-m.net/stamp_ranking.html'>"+
+							"<img src='/bundles/kanaheigame/images/parts/ugoku_stamp_ranking.png'width='100%' /></a><br />"+
+						"<a href='https://kanahei.puzzle-m.net/movstamp3.html'>"+
+							"<img src='/bundles/kanaheigame/images/parts/ugoku_stamp_banner3.png'width='100%' /></a>"
+						);
+			}else{}
+		</script>
+		
+		<!-- Androidのみテキスト出力 -->
+		<script type="text/javascript">
+			if(navigator.userAgent.indexOf('iPhone') > 0){
+			}else if(navigator.userAgent.indexOf('Android') > 0){
+				document.write("LINEはもちろん！facebookで投稿すれば<br>スタンプみたいに使えちゃう♪<br>");
+			}else{}
+		</script>
+
+		<br> 
+ 
+	   <!--**▼リクエストコーナー▼-->
+		<a href="mailto:present@kanahei.puzzle-m.net?subject=まちがいさがしリクエスト&amp;body=リクエスト内容を本文に記載してください。"> 
+			<img src="{{base_url}}{{ asset('/bundles/kanaheigame/images/parts/request.png') }}" width="80%" />
+		</a>
+		<br><br />
+
+	</div>
+
+	{# 非会員への告知  #}
+	{% if user is empty %}
+		<!-- AuIDログイン -->
+		<a href="{{ path('AuIdLogin')  }}" alt="login">
+	  		<img id="" src="{{asset('/bundles/kanaheigame/images/parts/button_auID.png')}}" style="margin:auto;" onclick="changeImage(this.id);"/>
+	  	</a>
+
+		<!-- メアドログイン -->
+     	<section style="margin-top:2%;background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
+        	<a href="{{ path('Login') }}">メールアドレス会員の方はこちら</a>
+     	</section>
+  
+		<section style="margin-top:2%;background-image:url(/bundles/kanaheigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;font-size:0.8em">
+			<p style="width:80%;margin: 0 auto;white-space:nowrap;">会員登録すると以下の機能が使えるよ！</p>
+			<p style="width:50%;margin: 0 auto;white-space:nowrap;">（追加料金はかかりません。）</p>
+	  		<nav>
+				<ul style="list-style-type:disc;width:100%;white-space:nowrap;">
+			    	<li style="display:inline-block;width:17%;padding:1%">・ポイント</li>
+			    	<li style="display:inline-block;width:20%;padding:1%">・問題の保存</li>
+			    	<li style="display:inline-block;width:17%;padding:1%">・ショップ</li>
+		   		</ul>
+	  		</nav>
+		</section>
+	{% endif %}
+	</div>
+</header>
+
+
+<section id="current_point" class="top_bg">
+	<img alt="現在のポイント" src="{{ asset('/bundles/kanaheigame/images/parts/bar_point.png')}}" width="100%" />
+	<p style="font-size:1em;color:rgb(255,254,255);padding:1%;">{% if user is empty %} 0 {% else %} {{user.getCurrentPoint}} {% endif %} pt</p>
+</section>
+
+<section id="menu" class="top_bg">
+
+	<!-- まちがいさがし -->
+	<img alt="まちがいさがし" id="game_button" src="{{asset('/bundles/kanaheigame/images/parts/button_game_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
+	<a href='{{ path('GameSelect') }}' id="hgame_button" style="padding-right:9%;"></a>
+	<img class="preload" src="{{asset('/bundles/kanaheigame/images/parts/button_game.png')}}" />
+  	
+  	<!-- スタンプ＆壁紙 -->
+	{% if user is empty %}
+  		<img alt="ショップ" src="{{asset('/bundles/kanaheigame/images/parts/button_shop_gray.png')}}" width="35%" />
+	{% else %}
+  		<a href='{{ path('Shop',{"categoryCode":"1" }) }}' id="hshop_button">
+  			<img alt="ショップ" id="shop_button" src="{{asset('/bundles/kanaheigame/images/parts/button_shop_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
+  			<img src="{{asset('/bundles/kanaheigame/images/parts/button_shop.png')}}" class="preload"/>
+  		</a>
+  	{% endif %}
+  	<br />
+
+	<!-- ヘルプ -->
+ 	<a href='{{ path('Help') }}' id="hhelp_button">
+ 		<img alt="ヘルプ" id="help_button" src="{{asset('/bundles/kanaheigame/images/parts/button_help_off.png')}}" width="35%" onclick="changeImage(this.id);"/>
+ 	</a>
+	<img class="preload" src="{{asset('/bundles/kanaheigame/images/parts/button_help.png')}}" />
+	<br /><br />
+
+	
+	<!-- 動くスタンプ -->
+	<input {% if user is empty %}disabled{% endif %} class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"3" }) }}'" value="動くスタンプ"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- 背景壁紙 -->
+	<input {% if user is empty %}disabled{% endif %} class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"1" }) }}'" value="背景壁紙"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- デコメスタンプ -->
+	<input {% if user is empty %}disabled{% endif %} class="btn btn-primary" type="button" onclick="location.href='{{ path('Shop',{"categoryCode":"2" }) }}'" value="デコメスタンプ"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<br /><br />
+
+	
+	<!-- バランスタワー -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="バランスタワー"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- まちがいさがし -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="まちがいさがし"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- じゃんけん -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="じゃんけん"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<!-- 絵合わせ -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('GameJanken') }}'" value="絵合わせ"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<br /><br />
+	
+	<!-- ギャラリー -->
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('Gallery') }}'" value="ギャラリー"
+		    style='background-color: yellow; height: 200px; width: 200px; border: 11px double white; 
+		    border-radius: 25px; font: bold 25px "メイリオ"; cursor: pointer;'
+	>
+	<br /><br />
+	
+</section>
+
+<section id="news" class="top_bg">
+	<!-- ログアウト -->
+	{% if user is not empty %}
+		<p style="text-align:center;">
+			<a href="{{ path('Logout')  }}" alt="ログアウト">
+				<img id="userLogout" src="{{ asset('/bundles/kanaheigame/images/parts/button_logout.png') }}" width="60%" onclick="changeImage(this.id);"/>
+			</a>
+		</p>
+	{% endif %}
+        
+
+	<section style="padding-top:2em;">
+		<div class="pre_pass white">
+			<p><a href="http://pass.auone.jp/">auスマートパスに戻る</a></p>
+		</div>
+	</section>
+</section>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+ /* =================================================
+ *  	pre_pass
+ * ================================================*/
+ /*common */
+.pre_pass{
+	text-align:center;
+	height:44px;
+	line-height:44px;
+	border:#8f8f8f 1px solid;
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	}
+.pre_pass a{
+	display:block;
+	background:url( {{asset('/bundles/kanaheigame/images/parts/button_tosmartpass.png')}} ) no-repeat center;
+	height:44px;
+	width:100%;
+	text-indent:-9999px;
+	}
+
+/*black */
+.pre_pass.black{
+	background-image: linear-gradient(bottom, rgb(0,0,0) 4%, rgb(0,0,0) 47%, rgb(59,59,59) 52%, rgb(65,65,65) 100%);
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.04, rgb(0,0,0)),
+	color-stop(0.47, rgb(0,0,0)),
+	color-stop(0.52, rgb(59,59,59)),
+	color-stop(1, rgb(65,65,65))
+);
+	border:#000 1px solid;
+	}
+.pre_pass.black a{
+	background:url(../img/txt_02.png) no-repeat center;
+	}
+
+/*white */
+.pre_pass.white{
+	background:#fff;
+	}
+
+/*gradation */
+.pre_pass.grada{
+	background-image: linear-gradient(bottom, rgb(172,172,172) 0%, rgb(255,255,255) 59%, rgb(255,255,255) 77%, rgb(255,255,255) 94%);
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, rgb(172,172,172)),
+	color-stop(0.59, rgb(255,255,255)),
+	color-stop(0.77, rgb(255,255,255)),
+	color-stop(0.94, rgb(255,255,255))
+);
+	border:#800000 1px solid;
+	}
+</style>
+{% endblock %}

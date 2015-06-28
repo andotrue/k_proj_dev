@@ -1,0 +1,38 @@
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block title %}KanaheiGameBundle:Shop:download{% endblock %}
+
+{% block body %}
+<script>
+var image_path = null;
+var image_id = null;
+function changeImage(imageId){
+  var pre_src = $('#'+imageId).attr('src');
+  var src = pre_src.replace(/_off/g,'');
+  image_path = src;
+  image_id = imageId;
+  $('#'+imageId).attr("src",src);
+  setTimeout("originalImage();", 200);
+}
+function originalImage(){
+  var pre_src = $('#'+image_id).attr('src');
+  var src = image_path.replace(/.png/g,'_off.png');
+  $('#'+image_id).attr("src",src);
+}
+</script>
+<div style=" font-size:1em;">
+<br />
+<img src="{{ asset('/bundles/kanaheigame/images/parts/2-03-1_bg.png') }}" style="position:absolute;left:0;top:0;width:100%;height:auto;"/>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_shop.png') }}" width="100%" style="position:absolute;left:0%;top:0%;"/>
+<!--<img src="{{ asset('/bundles/kanaheigame/images/parts/header_shop_contentdetail.png') }}" width="100%" style="position:absolute;top:10%;left:0%;"/> -->
+<div class="shop_contentdetailarea" style="padding:2%;margin-top:7%;position:relative">
+	<img src="{{ path('downloadExecute', {'id': id }) }}?syncToken={{syncToken}}&mode={{mode}}" width="100%" style="padding-top:2%;" />
+</div>
+<div style="border-bottom: 6px solid rgb(25,152,231);position:relative;"></div>
+<div style="position:relative;margin-top:-%">
+<p style="text-align:left;margin-bottom:3%;">表示された画像を長押しして「画像を保存」を選択してください。</p>
+<a href="{{path('confirm', {'id': id })}}"><img id="back" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
+</div>
+
+<img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_back.png')}}" >
+{% endblock %}

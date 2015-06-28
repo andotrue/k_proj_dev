@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>343</id>
+ <name>世界を救え！勇者と旅するRPG</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>37</x><!--point のx座標 -->
+  <y>35</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>239</x><!--point のx座標 -->
+  <y>25</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>352</x><!--point のx座標 -->
+  <y>82</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>288</x><!--point のx座標 -->
+  <y>228</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>43</x><!--point のx座標 -->
+  <y>306</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>135</x><!--point のx座標 -->
+  <y>395</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>245</x><!--point のx座標 -->
+  <y>397</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>389</x><!--point のx座標 -->
+  <y>396</y><!--point のy座標-->
+ </point>
+</different>

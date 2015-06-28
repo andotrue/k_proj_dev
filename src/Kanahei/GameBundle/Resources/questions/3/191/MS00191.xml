@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>191</id>
+ <name>探しものは何ですか？</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>133</x><!--point のx座標 -->
+  <y>44</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>74</x><!--point のx座標 -->
+  <y>150</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>65</x><!--point のx座標 -->
+  <y>199</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>252</x><!--point のx座標 -->
+  <y>135</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>259</x><!--point のx座標 -->
+  <y>222</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>344</x><!--point のx座標 -->
+  <y>299</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>268</x><!--point のx座標 -->
+  <y>441</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>57</x><!--point のx座標 -->
+  <y>299</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>117</x><!--point のx座標 -->
+  <y>415</y><!--point のy座標-->
+ </point>
+</different>

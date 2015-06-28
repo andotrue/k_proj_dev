@@ -1,0 +1,18 @@
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block title %}ヘルプ{% endblock %}
+
+{% block body %}
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+ {% block contents %}
+ {% endblock %}
+
+ {% block footer %}
+ <footer style="margin-top:0%;">
+ <a href="{{path('Help')}}" style="margin-right:7%;"><img id="button_tohelp" src="{{ asset('/bundles/kanaheigame/images/parts/button_tohelp_off.png')}}" width="35%" onclick="changeImage(this.id)"></a><a href="{{path('Top')}}"><img id="toapptop" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id)" /></a>
+ </footer>
+
+ <img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_tohelp.png')}}" >
+ <img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop.png')}}"  />
+ {% endblock %}
+{% endblock %}

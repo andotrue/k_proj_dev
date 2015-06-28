@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>283</id>
+ <name>だるあにまる</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>317</x><!--point のx座標 -->
+  <y>349</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>100</x><!--point のx座標 -->
+  <y>51</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>50</x><!--point のx座標 -->
+  <y>190</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>192</x><!--point のx座標 -->
+  <y>306</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>103</x><!--point のx座標 -->
+  <y>419</y><!--point のy座標-->
+ </point>
+</different>

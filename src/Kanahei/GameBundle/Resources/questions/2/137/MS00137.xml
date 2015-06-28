@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>137</id>
+ <name>ぐるぐるまわれ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>50</x><!--point のx座標 -->
+  <y>5</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>188</x><!--point のx座標 -->
+  <y>215</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>74</x><!--point のx座標 -->
+  <y>293</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>282</x><!--point のx座標 -->
+  <y>426</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>447</x><!--point のx座標 -->
+  <y>315</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>334</x><!--point のx座標 -->
+  <y>46</y><!--point のy座標-->
+ </point>
+</different>

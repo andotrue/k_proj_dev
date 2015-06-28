@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>490</id>
+ <name>小さな妖精たちの収穫祭♪</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>349</x><!--point のx座標 -->
+  <y>76</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>175</x><!--point のx座標 -->
+  <y>134</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>398</x><!--point のx座標 -->
+  <y>186</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>212</x><!--point のx座標 -->
+  <y>207</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>394</x><!--point のx座標 -->
+  <y>350</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>32</x><!--point のx座標 -->
+  <y>364</y><!--point のy座標-->
+ </point>
+</different>

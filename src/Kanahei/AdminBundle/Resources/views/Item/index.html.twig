@@ -1,0 +1,101 @@
+{% extends "KanaheiAdminBundle::base.html.twig" %}
+
+{% block stylesheets %}
+<style>
+@font-face {
+  font-family: 'fontello';
+  src: url('{{ asset('bundles/kanaheigame/font/fontello.eot') }}');
+  src: url('{{ asset('bundles/kanaheigame/font/fontello.eot') }}') format('embedded-opentype'),
+       url('{{ asset('bundles/kanaheigame/font/fontello.woff') }}') format('woff'),
+       url('{{ asset('bundles/kanaheigame/font/fontello.ttf') }}') format('truetype'),
+       url('{{ asset('bundles/kanaheigame/font/fontello.svg') }}#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+.demo-icon
+{
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px; 
+}
+</style>
+{% endblock %}
+
+{% block contents -%}
+
+
+    
+    <h1>アイテム一覧</h1>
+    <a href="{{ path('itemcategory') }}">アイテムカテゴリ一覧</a>｜
+    <a href="{{ path('itemgroup') }}">アイテムグループ一覧</a>
+  
+    {% include 'KanaheiAdminBundle:Default:pager.parts.html.twig' %}
+
+    <table class="table table-striped table-bordered table-hover compact">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>アイテム番号</th>
+                <th>カテゴリ</th>
+                <th>アイテム名</th>
+                <th>ファイル名</th>
+                <th>消費ポイント</th>
+                <th>説明</th>
+                <th>グループ</th>
+                <th>人気ランク</th>
+                <th>配布開始日時</th>
+                <th>配布終了日時</th>
+                <th>デバイス</th>
+<!--                
+				<th>Createdat</th>
+                <th>Updatedat</th>
+-->                
+				<th>アクション</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('item_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.itemCode }}</td>
+                <td>{{ entity.category.name }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.itemPath }}</td>
+                <td>{{ entity.consumePoint }}</td>
+                <td>{{ entity.description }}</td>
+                <!--  <td>{% if entity.group.name is not defined %}{{ entity.group.name }}{% endif %}</td> -->
+                <td>{{ entity.group.name }}</td>
+                <td>{{ entity.popularityRank }}</td>
+                <td>{{ entity.distributedFrom  | date("Y/m/d H:i:s") }}</td>
+                <td>{{ entity.distributedTo | date("Y/m/d H:i:s") }}</td>
+                <td>{% if entity.platformCode == "1" %}<i class="demo-icon icon-android">&#x61;</i>{% elseif entity.platformCode == "2" %}<i class="demo-icon icon-apple">&#x69;</i>{% elseif entity.platformCode == "12" %}<i class="demo-icon icon-android">&#x61;</i><i class="demo-icon icon-apple">&#x69;</i>{% endif %}</td>
+<!--                
+				<td>{{ entity.createdAt | date("Y/m/d H:i:s") }}</td>
+                <td>{{ entity.updatedAt | date("Y/m/d H:i:s") }}</td>
+-->                
+				<td>
+					<a href="{{ path('item_show', { 'id': entity.id }) }}">詳細</a><br />
+					<a href="{{ path('item_edit', { 'id': entity.id }) }}">編集</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% include 'KanaheiAdminBundle:Default:pager.parts.html.twig' %}
+
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('item_new') }}'" value="新規作成">
+
+    {% endblock %}

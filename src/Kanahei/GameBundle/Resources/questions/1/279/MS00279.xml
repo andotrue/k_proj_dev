@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>279</id>
+ <name>今夜はお月見！</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>164</x><!--point のx座標 -->
+  <y>65</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>60</x><!--point のx座標 -->
+  <y>181</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>284</x><!--point のx座標 -->
+  <y>246</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>209</x><!--point のx座標 -->
+  <y>381</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>412</x><!--point のx座標 -->
+  <y>424</y><!--point のy座標-->
+ </point>
+</different>

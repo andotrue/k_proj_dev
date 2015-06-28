@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>263</id>
+ <name>ヨガするパンダを発見！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>17</x><!--point のx座標 -->
+  <y>26</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>227</x><!--point のx座標 -->
+  <y>35</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>352</x><!--point のx座標 -->
+  <y>103</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>537</x><!--point のx座標 -->
+  <y>156</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>258</x><!--point のx座標 -->
+  <y>405</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>341</x><!--point のx座標 -->
+  <y>381</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>506</x><!--point のx座標 -->
+  <y>349</y><!--point のy座標-->
+ </point>
+</different>

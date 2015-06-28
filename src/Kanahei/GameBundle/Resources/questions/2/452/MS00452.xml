@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>452</id>
+ <name>英語でまなぼう！ＡＢＣずかん</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>413</x><!--point のx座標 -->
+  <y>101</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>595</x><!--point のx座標 -->
+  <y>37</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>381</x><!--point のx座標 -->
+  <y>291</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>163</x><!--point のx座標 -->
+  <y>400</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>408</x><!--point のx座標 -->
+  <y>432</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>605</x><!--point のx座標 -->
+  <y>357</y><!--point のy座標-->
+ </point>
+</different>

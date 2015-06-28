@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- スタンプ画像 -->
+	<stamps>
+		<stamp src="/bundles/kanaheigame/game_images/stamps/sp_s_nintama001.png" />
+		<stamp src="/bundles/kanaheigame/game_images/stamps/sp_s_nintama002.png" />
+		<stamp src="/bundles/kanaheigame/game_images/stamps/sp_s_nintama003.png" />
+	</stamps>
+	
+	<!-- １回戦の登場キャラ -->
+	<battle1>
+		<chara src="chara1_1.png" />
+		<chara src="chara1_2.png" />
+		<chara src="chara1_3.png" />
+	</battle1>
+	
+	<!-- ２回戦の登場キャラ -->
+	<battle2>
+		<chara src="chara2_1.png" />
+		<chara src="chara2_2.png" />
+		<chara src="chara2_3.png" />
+	</battle2>
+	
+	<!-- ３回戦の登場キャラ -->
+	<battle3>
+		<chara src="chara3_1.png" />
+		<chara src="chara3_2.png" />
+		<chara src="chara3_3.png" />
+	</battle3>
+</config>

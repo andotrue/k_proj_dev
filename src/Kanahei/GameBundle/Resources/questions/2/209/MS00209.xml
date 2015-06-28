@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>209</id>
+ <name>本日のスペシャルメニュー!?</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>96</x><!--point のx座標 -->
+  <y>145</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>208</x><!--point のx座標 -->
+  <y>98</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>101</x><!--point のx座標 -->
+  <y>349</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>259</x><!--point のx座標 -->
+  <y>387</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>411</x><!--point のx座標 -->
+  <y>333</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>516</x><!--point のx座標 -->
+  <y>314</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>524</x><!--point のx座標 -->
+  <y>169</y><!--point のy座標-->
+ </point>
+</different>

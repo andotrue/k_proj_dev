@@ -1,0 +1,11 @@
+parameters:
+#    kanahei_admin.example.class: Kanahei\AdminBundle\Example
+
+services:
+    pager:
+        class: Kanahei\AdminBundle\Classes\Pager
+        arguments: ["@service_container", "@doctrine.orm.entity_manager"]
+        scope: request
+#    kanahei_admin.example:
+#        class: %kanahei_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

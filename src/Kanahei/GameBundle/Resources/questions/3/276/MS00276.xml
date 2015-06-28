@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>276</id>
+ <name>コスモスの花にかこまれて</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>184</x><!--point のx座標 -->
+  <y>83</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>105</x><!--point のx座標 -->
+  <y>137</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>344</x><!--point のx座標 -->
+  <y>151</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>319</x><!--point のx座標 -->
+  <y>274</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>140</x><!--point のx座標 -->
+  <y>283</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>251</x><!--point のx座標 -->
+  <y>361</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>317</x><!--point のx座標 -->
+  <y>400</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>39</x><!--point のx座標 -->
+  <y>447</y><!--point のy座標-->
+ </point>
+</different>

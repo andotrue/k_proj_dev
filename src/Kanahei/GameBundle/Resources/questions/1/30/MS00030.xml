@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>30</id>
+ <name>はりきっていこう!運動会</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>363</x><!--point のx座標 -->
+  <y>93</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>403</x><!--point のx座標 -->
+  <y>208</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>363</x><!--point のx座標 -->
+  <y>395</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>91</x><!--point のx座標 -->
+  <y>433</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>208</x><!--point のx座標 -->
+  <y>230</y><!--point のy座標-->
+ </point>
+</different>

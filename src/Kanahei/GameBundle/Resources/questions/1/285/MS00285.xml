@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>285</id>
+ <name>ユーの願い叶えるYO！</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>236</x><!--point のx座標 -->
+  <y>66</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>161</x><!--point のx座標 -->
+  <y>202</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>70</x><!--point のx座標 -->
+  <y>429</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>438</x><!--point のx座標 -->
+  <y>73</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>369</x><!--point のx座標 -->
+  <y>379</y><!--point のy座標-->
+ </point>
+</different>

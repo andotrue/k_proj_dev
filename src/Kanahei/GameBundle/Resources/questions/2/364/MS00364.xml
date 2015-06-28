@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>364</id>
+ <name>ウキウキ♪雨降り</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>35</x><!--point のx座標 -->
+  <y>87</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>460</x><!--point のx座標 -->
+  <y>20</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>254</x><!--point のx座標 -->
+  <y>207</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>281</x><!--point のx座標 -->
+  <y>352</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>84</x><!--point のx座標 -->
+  <y>453</y><!--point のy座標-->
+ </point>
+</different>

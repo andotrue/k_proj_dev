@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>318</id>
+ <name>フキの葉の下にいる小さな神様</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>72</x><!--point のx座標 -->
+  <y>180</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>397</x><!--point のx座標 -->
+  <y>128</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>598</x><!--point のx座標 -->
+  <y>87</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>180</x><!--point のx座標 -->
+  <y>339</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>324</x><!--point のx座標 -->
+  <y>374</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>605</x><!--point のx座標 -->
+  <y>381</y><!--point のy座標-->
+ </point>
+</different>

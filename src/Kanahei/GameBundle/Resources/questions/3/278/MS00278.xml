@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>278</id>
+ <name>おやすみ前の読書タイム</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>60</x><!--point のx座標 -->
+  <y>68</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>204</x><!--point のx座標 -->
+  <y>77</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>367</x><!--point のx座標 -->
+  <y>56</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>104</x><!--point のx座標 -->
+  <y>273</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>194</x><!--point のx座標 -->
+  <y>269</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>330</x><!--point のx座標 -->
+  <y>240</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>30</x><!--point のx座標 -->
+  <y>434</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>386</x><!--point のx座標 -->
+  <y>384</y><!--point のy座標-->
+ </point>
+</different>

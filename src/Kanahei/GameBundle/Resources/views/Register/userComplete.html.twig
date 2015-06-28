@@ -1,0 +1,23 @@
+{% extends "KanaheiGameBundle:Help:base.html.twig" %}
+{% block title %}{% endblock %}
+{% block body %}
+<style>
+body{background: url({{asset('/bundles/kanaheigame/images/parts/2-01_bg_.png')}})}
+</style>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header
+.png')}}" style="width:100%;height:auto;position:absolute;left:0;top:0">
+<p style="padding:5%;font-size:1em;text-align:left;position:relative;margin-top:40%;color:rgb(22,101,179)">仮登録が完了しました。<br />自動で送られてくる返信メールに記載されているURLをクリックしていただくと、登録が完了します。</p>
+
+<div style="color: red; font-size: 0.7em; text-align: left; margin: 15px;">
+    ＜注意＞<br>
+    ただ今送信したメールアドレスで再度会員登録を行う場合は、
+    お手数おかけしますが24時間後にお試しください。<br>
+    ※24時間以内に同一メールアドレスによる会員登録は<br>
+    行う事ができません。予めご了承ください。<br>
+</div>
+
+<a href="{{path('Top')}}">
+<img style="position:relative;margin-top:14%" id="toTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
+</a>
+<img id="preToTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" class="preload">
+{% endblock %}

@@ -1,0 +1,488 @@
+Root:
+    path: /
+    defaults: { _controller: KanaheiGameBundle:Default:index }
+
+afterAuIdLoginAction:
+    pattern: /afterAuIdLogin
+    defaults: { _controller: KanaheiGameBundle:Android:afterAuIdLogin }
+    requirements:
+        _method: GET
+
+lp:
+    pattern: /lp
+    defaults: { _controller: KanaheiGameBundle:Default:lp }
+    requirements:
+        _method: GET
+puzzlelp:
+    pattern: /puzzlelp
+    defaults: { _controller: KanaheiGameBundle:Default:puzzlelp }
+    requirements:
+        _method: GET
+LpCompanyInfo:
+    pattern: /lpCompanyInfo
+    defaults: { _controller: KanaheiGameBundle:Default:lpCompanyInfo }
+    requirements:
+        _method: GET
+LpPrivacyPolicy:
+    pattern: /lpPrivacyPolicy
+    defaults: { _controller: KanaheiGameBundle:Default:lpPrivacyPolicy }
+    requirements:
+        _method: GET
+LpHelpTerms:
+    pattern: /lpTerms
+    defaults: { _controller: KanaheiGameBundle:Default:lpTerms }
+    requirements:
+        _method: GET
+getBanner:
+    pattern: /getBanner
+    defaults: { _controller: KanaheiGameBundle:Default:getBanner }
+    requirements:
+        _method: GET
+
+AuIdLogin:
+    pattern: /auIdLogin
+    defaults: { _controller: KanaheiGameBundle:Android:auId }
+    requirements:
+        _method: GET
+auIdAssociation:
+    pattern: /auIdAssociation
+    defaults: { _controller: KanaheiGameBundle:Android:auIdAssociation }
+auIdComplete:
+    pattern: /auIdComplete
+    defaults: { _controller: KanaheiGameBundle:Android:auIdComplete }
+
+Top:
+    path: /top
+    defaults: { _controller: KanaheiGameBundle:Default:index }
+
+Logout:
+    path: /logout
+    defaults: { _controller: KanaheiGameBundle:Default:logout }
+
+Error:
+    path: /error
+    defaults: { _controller: KanaheiGameBundle:Default:error }
+    requirements:
+        _method: GET
+
+Help:
+    pattern: /help/
+    defaults: { _controller: KanaheiGameBundle:Help:index }
+    requirements:
+        _method: GET
+
+HelpHowtoplay:
+    pattern: /help/howtoplay
+    defaults: { _controller: KanaheiGameBundle:Help:howtoplay }
+    requirements:
+        _method: GET
+
+HelpTerms:
+    pattern: /help/terms
+    defaults: { _controller: KanaheiGameBundle:Help:terms }
+    requirements:
+        _method: GET
+
+HelpInquiryForm:
+    pattern: /help/inquiry/form
+    defaults: { _controller: KanaheiGameBundle:Help:form }
+
+HelpInquiryFormDo:
+    pattern: /help/inquiry/form/do
+    defaults: { _controller: KanaheiGameBundle:Help:inquiryFormDo }
+
+HelpInquiryFormComplete:
+    pattern: /help/inquiry/form/complete
+    defaults: { _controller: KanaheiGameBundle:Help:inquiryFormComplete }
+
+HelpInquiry:
+    pattern: /help/inquiry
+    defaults: { _controller: KanaheiGameBundle:Help:inquiry }
+
+UserSetting:
+    pattern: /setting/userSetting
+    defaults: { _controller: KanaheiGameBundle:Setting:userSetting }
+
+ChangeEmail:
+    pattern: /setting/changeEmail
+    defaults: { _controller: KanaheiGameBundle:Setting:changeEmail }
+
+ChangeEmailConfirm:
+    pattern: /setting/changeEmailConfirm
+    defaults: { _controller: KanaheiGameBundle:Setting:changeEmailConfirm }
+
+ChangeEmailSent:
+    pattern: /setting/changeEmailSent
+    defaults: { _controller: KanaheiGameBundle:Setting:changeEmailSent }
+
+ChangeEmailComplete:
+    pattern: /setting/changeEmailComplete/{changeEmailActivationCode}
+    defaults: { _controller: KanaheiGameBundle:Setting:changeEmailComplete }
+
+SendEmail:
+    pattern: /register/sendEmail/
+    defaults: { _controller: KanaheiGameBundle:Register:sendEmail }
+
+ChangePassword:
+    pattern: /setting/changePassword
+    defaults: { _controller: KanaheiGameBundle:Setting:changePassword }
+
+ChangePasswordConfirm:
+    pattern: /setting/changePasswordConfirm
+    defaults: { _controller: KanaheiGameBundle:Setting:changePasswordConfirm }
+
+ChangePasswordComplete:
+    pattern: /setting/changePasswordComplete
+    defaults: { _controller: KanaheiGameBundle:Setting:changePasswordComplete }
+
+DeleteUser:
+    pattern: /setting/deleteUser
+    defaults: { _controller: KanaheiGameBundle:Setting:deleteUser }
+
+DeleteUserConfirm:
+    pattern: /setting/deleteUserConfirm
+    defaults: { _controller: KanaheiGameBundle:Setting:deleteUserConfirm }
+
+DeleteUserComplete:
+    pattern: /setting/deleteUserComplete
+    defaults: { _controller: KanaheiGameBundle:Setting:deleteUserComplete }
+
+SettingNicknameregister:
+    pattern: /setting/nickname
+    defaults: { _controller: KanaheiGameBundle:Setting:nicknameRegister }
+    requirements:
+        _method: POST
+
+SettingNickname:
+    pattern: /setting/nickname
+    defaults: { _controller: KanaheiGameBundle:Setting:nickname }
+    requirements:
+        _method: GET
+
+Setting:
+    pattern: /setting/
+    defaults: { _controller: KanaheiGameBundle:Setting:index }
+    requirements:
+        _method: GET
+
+JsonUpload:
+    pattern:  /game/uploadData
+    defaults: { _controller: KanaheiGameBundle:Game:uploadData }
+    requirements:
+        _method: POST
+
+JsonDownload:
+    pattern:  /game/downloadData
+    defaults: { _controller: KanaheiGameBundle:Game:downloadData }
+    requirements:
+        _method: GET
+
+PrivacyPolicy:
+    pattern: /help/privacyPolicy
+    defaults: { _controller: KanaheiGameBundle:Help:privacyPolicy }
+
+RankingRegister:
+    pattern:  /game/rankingRegister
+    defaults: { _controller: KanaheiGameBundle:Game:rankingRegister }
+    requirements:
+        _method: POST
+
+SettingComplete:
+    pattern: /setting/complete
+    defaults: { _controller: KanaheiGameBundle:Setting:complete }
+
+PrivacyPolicy:
+    pattern: /help/privacyPolicy
+    defaults: { _controller: KanaheiGameBundle:Help:privacyPolicy }
+
+
+Shop:
+    pattern: /shop/
+    defaults: { _controller: KanaheiGameBundle:Shop:index }
+
+ShopSort:
+    pattern: /shop/{field}
+    defaults: { _controller: KanaheiGameBundle:Shop:indexSort }
+
+ShopMore:
+    pattern: /shop/more/{categoryCode}/{groupCode}
+    defaults: { _controller: KanaheiGameBundle:Shop:more }
+
+ShopSearch:
+    pattern: /shop/search/{categoryCode}
+    defaults: { _controller: KanaheiGameBundle:Shop:search }
+
+ShopDownload:
+    pattern: /shop/download/{id}
+    defaults: { _controller: KanaheiGameBundle:Shop:download }
+
+ShopError:
+    pattern: /shop/error/{id}
+    defaults: { _controller: KanaheiGameBundle:Shop:error }
+
+confirm:
+    pattern: /shop/confirm/{id}
+    defaults: { _controller: KanaheiGameBundle:Shop:confirm }
+
+downloadExecute:
+    pattern: /shop/downloadExecute/{id}
+    defaults: { _controller: KanaheiGameBundle:Shop:downloadExecute }
+
+downloadExecuteWV:
+    pattern: /shop/downloadExecuteWV/{id}
+    defaults: { _controller: KanaheiGameBundle:Shop:downloadExecuteWV }
+
+
+Ranking:
+    pattern: /ranking/
+    defaults: { _controller: KanaheiGameBundle:Ranking:index }
+
+RankingSummary:
+    pattern: /ranking/summary
+    defaults: { _controller: KanaheiGameBundle:Ranking:summary }
+
+GameSelect:
+    pattern: /game/select
+    defaults: { _controller: KanaheiGameBundle:Game:select }
+
+SortQuestion:
+    pattern: /game/select/{sort}/{level}
+    defaults: { _controller: KanaheiGameBundle:Game:sortQuestions }
+
+GamePlay:
+    pattern: /game/play/{id}
+    defaults: { _controller: KanaheiGameBundle:Game:play }
+
+GameIndex:
+    pattern: /game/play/
+    defaults: { _controller: KanaheiGameBundle:Game:play }
+
+GameGetPlayHistory:
+    pattern: /game/history
+    defaults: { _controller: KanaheiGameBundle:Game:getPlayHistory}
+
+GameGetData:
+    pattern: /game/data/
+    defaults: { _controller: KanaheiGameBundle:Game:download }
+
+GameDownloadByJSON:
+    pattern: /game/donwloadbyJSON/{id}
+    defaults: { _controller: KanaheiGameBundle:Game:downloadByJSON }
+
+GameDownload:
+    pattern: /game/download/{level}/{qcode}/{type}
+    defaults: { _controller: KanaheiGameBundle:Game:download }
+
+GameFinish:
+    pattern: /game/finish
+    defaults: { _controller: KanaheiGameBundle:Game:finish }
+
+GameClear:
+    pattern: /game/clear
+    defaults: { _controller: KanaheiGameBundle:Game:clear }
+
+GameFail:
+    pattern: /game/fail
+    defaults: { _controller: KanaheiGameBundle:Game:fail }
+
+RegisterUser:
+    pattern: /register/userRegister
+    defaults: { _controller: KanaheiGameBundle:Register:userRegister }
+
+RegisterUserConfirm:
+    pattern: /register/userConfirm
+    defaults: { _controller: KanaheiGameBundle:Register:userConfirm }
+
+RegisterUserComplete:
+    pattern: /register/userComplete
+    defaults: { _controller: KanaheiGameBundle:Register:userComplete }
+
+SentEmail:
+    pattern: /register/sentEmail
+    defaults: { _controller: KanaheiGameBundle:Register:sentEmail }
+
+BeforeNickname:
+    pattern: /register/beforeRegisterNickname/{pass}
+    defaults: { _controller: KanaheiGameBundle:Register:beforeRegisterNickname }
+
+ReissuePassword:
+    pattern: /register/reissuePassword
+    defaults: { _controller: KanaheiGameBundle:Register:reissuePassword }
+
+Login:
+    pattern: /login
+    defaults: { _controller: KanaheiGameBundle:Register:login }
+
+MailLogin:
+    pattern: /mailLogin
+    defaults: { _controller: KanaheiGameBundle:Register:mailLogin }
+
+LoginCheck:
+    pattern: /register/loginCheck
+    defaults: { _controller: KanaheiGameBundle:Register:loginCheck }
+
+ForgetPassword:
+    pattern: /forget_password
+    defaults: { _controller: KanaheiGameBundle:Register:forgetPassword }
+
+ForgetPasswordConfirm:
+    pattern: /forget_password_confirm
+    defaults: { _controller: KanaheiGameBundle:Register:forgetPasswordConfirm }
+
+ForgetPasswordSend:
+    pattern: /forget_password_send
+    defaults: { _controller: KanaheiGameBundle:Register:forgetPasswordSend }
+
+ForgetPasswordComplete:
+    pattern: /forget_password_complete/{forgetPasswordActivationCode}
+    defaults: { _controller: KanaheiGameBundle:Register:forgetPasswordComplete }
+
+RegisterConfirm:
+    pattern: /register/confirm/
+    defaults: { _controller: KanaheiGameBundle:Register:confirm }
+
+complete:
+    pattern: /register/complete/
+    defaults: { _controller: KanaheiGameBundle:Register:complete }
+
+TimeOver:
+    pattern: /register/emailTimeover
+    defaults: { _controller: KanaheiGameBundle:Register:emailTimeover }
+
+LoginAfterSettingName:
+    pattern: /register/loginAfterSettingName/{email}/{pass}
+    defaults: { _controller: KanaheiGameBundle:Register:loginAfterSettingName }
+
+Register:
+    pattern: /register/{temp}
+    defaults: { _controller: KanaheiGameBundle:Register:index }
+
+ResultUserClear:
+    pattern: /game/resultUserClear
+    defaults: { _controller: KanaheiGameBundle:Game:resultUserClear }
+
+ResultGuestClear:
+    pattern: /game/resultGuestClear
+    defaults: { _controller: KanaheiGameBundle:Game:resultGuestClear }
+
+ResultUserFalse:
+    pattern: /game/resultUserFalse
+    defaults: { _controller: KanaheiGameBundle:Game:resultUserFalse }
+
+ResultGuestFalse:
+    pattern: /game/resultGuestFalse
+    defaults: { _controller: KanaheiGameBundle:Game:resultGuestFalse }
+
+SyncUser:
+    pattern: /sync/user
+    defaults: { _controller: KanaheiGameBundle:Android:user }
+    requirements:
+        _method: GET
+SyncNotice:
+    pattern: /sync/notices
+    defaults: { _controller: KanaheiGameBundle:Android:notices }
+    requirements:
+        _method: GET
+SyncGameFile:
+    pattern: /sync/game/file/{level}/{qcode}/{type}
+    defaults: { _controller: KanaheiGameBundle:Android:gameFile }
+    requirements:
+        _method: GET
+
+SyncGame:
+    pattern: /sync/game/{id}/{uid}
+    defaults: { _controller: KanaheiGameBundle:Android:game }
+    requirements:
+        _method: GET
+SyncGameData:
+    pattern: /sync/game/{id}/{fileName}
+    defaults: { _controller: KanaheiGameBundle:Android:gameData }
+    requirements:
+        _method: GET
+
+SyncQuestionData:
+    pattern: /sync/game/getQuestionData
+    defaults: { _controller: KanaheiGameBundle:Android:getQuestionData }
+    requirements:
+        _method: GET
+
+
+AndroidAuIdLogin:
+    pattern: /sync/register/auIdLogin
+    defaults: { _controller: KanaheiGameBundle:Android:auIdLogin }
+    requirements:
+        _method: GET
+
+AndroidRegisterEntry:
+    pattern: /sync/register/entry
+    defaults: { _controller: KanaheiGameBundle:Android:registerEntry }
+    requirements:
+        _method: GET
+
+AndroidRegisterConfirm:
+    pattern: /sync/register/confirm
+    defaults: { _controller: KanaheiGameBundle:Android:registerConfirm }
+    requirements:
+        _method: POST
+
+AndroidRegisterComplete:
+    pattern: /sync/register/complete
+    defaults: { _controller: KanaheiGameBundle:Android:registerComplete }
+    requirements:
+        _method: POST
+
+AndroidGameDataUpload:
+    pattern:  /sync/game/uploadData
+    defaults: { _controller: KanaheiGameBundle:Android:uploadData }
+    requirements:
+        _method: POST
+
+AndroidCopyright:
+    pattern: /sync/copyright
+    defaults: { _controller: KanaheiGameBundle:Android:copyright }
+    requirements:
+        _method: GET
+
+AndroidSessionStart:
+    pattern: /sync/session/start
+    defaults: { _controller: KanaheiGameBundle:Android:sessionStart }
+    requirements:
+        _method: GET
+AndroidSessionFinish:
+    pattern: /sync/session/finish
+    defaults: { _controller: KanaheiGameBundle:Android:sessionFinish }
+    requirements:
+        _method: POST
+SaveGameData:
+    pattern: /game/saveGameData
+    defaults: { _controller: KanaheiGameBundle:Game:saveGameData }
+AndroidRegistDeviceId:
+    pattern: /android/add_regist_id
+    defaults: { _controller: KanaheiGameBundle:Android:registDeviceId }
+
+apply_show:
+    pattern: /apply/show/{pageName}
+    defaults: { _controller: KanaheiGameBundle:Apply:show }
+
+apply_send:
+    pattern: /apply/sendData
+    defaults: { _controller: KanaheiGameBundle:Apply:sendData }
+
+apply_complete:
+    pattern: /apply/complete
+    defaults: { _controller: KanaheiGameBundle:Apply:complete }
+
+
+
+GameJanken:
+    pattern: /game/janken
+    defaults: { _controller: KanaheiGameBundle:Game:janken }
+    
+Gallery:
+    pattern: /gallery/
+    defaults: { _controller: KanaheiGameBundle:Gallery:index }
+
+
+
+
+

@@ -1,0 +1,436 @@
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block title %}問題メニュー{% endblock %}
+
+{% block stylesheets %}<style>
+    #questions ul li{display:inline-block; width:27%;padding:2%;}
+    #questions ul li a img{width:100%}
+    .imageSize {width:85%;}
+</style>
+{% endblock %}
+{% block body %}
+<script>
+    var game_id = null;
+    var game_title = null;
+    var current_level = "easy";
+    var max = null;
+    var image_path = null;
+    var image_id = null;
+    $(function() {
+        $('.normalLevel').hide();
+        $('.hardLevel').hide();
+        $('#popup').hide();
+        $('#popup_continue').hide();
+        $('.easyLevel').show();
+        changeTab('{{level}}');
+        changeLevel('{{level}}');
+    })
+    function changeLevel(level) {
+        var other_mode = new Array('easy', 'normal', 'hard');
+        var mode = new Array()
+        mode['easy'] = 0;
+        mode['normal'] = 1;
+        mode['hard'] = 2;
+        other_mode.splice(mode[level], 1);
+        other_mode1 = '.' + other_mode[0] + 'Level';
+        other_mode2 = '.' + other_mode[1] + 'Level';
+        chosen_mode = "." + level + "Level";
+        $(other_mode1).hide();
+        $(other_mode2).hide();
+        $(chosen_mode).show();
+        current_level = level;
+        rewritePageNum();
+    }
+
+    function popup(id, gameTitle) {
+        game_id = id;
+        game_title = gameTitle;
+        $('.gameTitle').empty();
+        $('<p>' + game_title + '</p>').appendTo('.gameTitle');
+        $('#popup').center();
+        $('#popup').show();
+    }
+
+    function popup_continue(id, gameTitle) {
+        game_id = id;
+        game_title = gameTitle;
+        $('.gameTitle').empty();
+        $('<p>' + game_title + '</p>').appendTo('.gameTitle');
+        $('#popup_continue').center();
+        $('#popup_continue').show();
+    }
+
+    function gameStart() {
+        window.location = '{{ path("GameIndex")}}' + game_id;
+    }
+    function cancel() {
+        $('#popup').hide();
+        $('#popup_continue').hide();
+    }
+    function sortSelect() {
+        var optionValue = $('#sortSelect').val();
+        if (optionValue == 1) {
+            window.location = "{{path('GameSelect')}}" + '/DESC/' + current_level;
+        } else if (optionValue == 2) {
+            window.location = "{{path('GameSelect')}}" + '/ASC/' + current_level;
+        } else if (optionValue == 3) {
+            window.location = "{{path('GameSelect')}}" + '/notCleared/' + current_level;
+        } else if (optionValue == 4) {
+            window.location = "{{path('GameSelect')}}" + '/suspended/' + current_level;
+        }
+    }
+    function rewritePageNum() {
+        var page = 0;
+        var target = "li." + current_level;
+        var max = parseInt($(target).size());
+        $('.page').html(page + 1);
+        if ((max % 24) == 0) {
+            if (parseInt(max / 24) == 0) {
+                $('.maxPage').html(1);
+            } else {
+                $('.maxPage').html(parseInt(max / 24));
+            }
+        } else {
+            if (parseInt(max / 24) == 0) {
+                $('.maxPage').html(1);
+            } else {
+                $('.maxPage').html(parseInt(max / 24 + 1));
+            }
+        }
+    }
+    function changeImage(imageId) {
+        var pre_src = $('#' + imageId).attr('src');
+        var src = pre_src.replace(/_off/g, '');
+        image_path = src;
+        image_id = imageId;
+        $('#' + imageId).attr("src", src);
+        setTimeout("originalImage();", 200);
+    }
+    function originalImage() {
+        var pre_src = $('#' + image_id).attr('src');
+        var src = image_path.replace(/.png/g, '_off.png');
+        $('#' + image_id).attr("src", src);
+    }
+    function changeTab(level) {
+        if (current_level != level) {
+            var other_mode = new Array('easy', 'normal', 'hard');
+            var mode = new Array()
+            mode['easy'] = 0;
+            mode['normal'] = 1;
+            mode['hard'] = 2;
+            other_mode.splice(mode[level], 1);
+            other_mode1 = '#' + other_mode[0];
+            other_mode2 = '#' + other_mode[1];
+            chosen_mode = "#" + level;
+
+            var pre_src = $(chosen_mode).attr('src');
+            var src = pre_src.replace(/.png/g, '_off.png');
+            var pre_not1 = $(other_mode1).attr('src');
+            var not1 = pre_not1.replace(/_off.png/g, '.png');
+            var pre_not2 = $(other_mode2).attr('src');
+            var not2 = pre_not2.replace(/_off.png/g, '.png');
+            $(chosen_mode).attr("src", src);
+            $(other_mode1).attr("src", not1);
+            $(other_mode2).attr("src", not2);
+            current_level = level;
+            page = 0;
+            draw();
+        }
+    }
+</script>
+
+<script>
+    var page = 0;
+    $(function() {
+        $('.prev').click(function() {
+            var target = "li." + current_level;
+            if (page > 0) {
+                page--;
+                draw();
+            }
+        });
+        $('.next').click(function() {
+            var target = "li." + current_level;
+            if (page < ($(target).size() - 1) / 24 - 1) {
+                page++;
+                draw();
+            }
+        });
+        draw();
+    });
+
+    function draw() {
+        var target = "li." + current_level;
+        var str = 'li.' + current_level + ':gt("' + (page * 24) + 
+                '"):lt("23")';
+        $(target).hide();
+        $(str).show();
+        $('li.' + current_level + ':eq("' + (page * 24) + '")').show();
+        var max = parseInt($(target).size());
+        rewritePageNum();
+        function rewritePageNum() {
+            $('.page').html(page + 1);
+            if ((max % 24) == 0) {
+                if (parseInt(max / 24) == 0) {
+                    $('.maxPage').html(1);
+                } else {
+                    $('.maxPage').html(parseInt(max / 24));
+                }
+            } else {
+                if (parseInt(max / 24) == 0) {
+                    $('.maxPage').html(1);
+                } else {
+                    $('.maxPage').html(parseInt(max / 24 + 1));
+                }
+            }
+        }
+    }
+</script>
+
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_mondaiselect.png')  }}"
+     style="width: 100%"/>
+
+<div id="allquestions">
+    <div id="level_tab" style="margin-top: 20px;">
+        <img id="easy"
+             src="{{ asset('/bundles/kanaheigame/images/parts/tab_easy_off.png') }}"
+             width="30%" onclick='changeTab(this.id);
+                     changeLevel("easy");'/>
+
+        <img id="normal"
+             src="{{ asset('/bundles/kanaheigame/images/parts/tab_normal.png') }}"
+             width="30%" onclick='changeTab(this.id);
+                     changeLevel("normal")' >
+
+        <img id="hard"
+             src="{{ asset('/bundles/kanaheigame/images/parts/tab_hard.png') }}"
+             width="30%" onclick='changeTab(this.id);
+                     changeLevel("hard");' />
+    </div>
+
+    <div id="white_background"
+         style="background: url({{ asset('/bundles/kanaheigame/images/parts/game_selectbg.png')  }});
+         background-size:cover;
+         background-repeat:no-repeat;">
+
+        <section id="select_area" >
+            <div id="order_header"
+                 >
+                <div id="selectBox" style="margin-top: 25px; float: right; margin-right: 10px;">
+                    <span style="color:rgb(94,109,114)">並べ替え</span>
+                    <select id="sortSelect" onChange="sortSelect()">
+                        <option selected="selected" value=""></option>
+                        <option value="1" {% if sort == 'DESC' %}selected{% endif %}>古い順</option>
+                        <option value="2" {% if sort == 'ASC' %}selected{% endif %}>新しい順</option>
+                        <option value="3" {% if sort == 'notCleared' %}selected{% endif %}>未クリア問題</option>
+                        <option value="4" {% if sort == 'suspended' %}selected{% endif %}>中断問題</option>
+                    </select>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+
+            <div id="arrow_top" style="margin-top:10px;">
+                <nav style="padding-top:10px">
+                    <a style="padding-right:10%;">
+                        <img src="{{ asset('/bundles/kanaheigame/images/parts/button_page_back.png')  }}"
+                             width="7.5%" class="prev"/></a>
+
+                    <span class="page"></span>/ <span class="maxPage"></span>
+                    <a style="padding-left:10%;">
+                        <img src="{{ asset('/bundles/kanaheigame/images/parts/button_page_next.png')  }}"
+                             width="7.5%" class="next"/>
+                    </a>
+                </nav>
+            </div>
+
+            <div id="games" style="color:rgb(94,109,114);">
+                <div style="margin-bottom:0%;height:30%;display:block">
+                    <div id="questions">
+                        <ul class="easyLevel" >
+	{% for question in questions %}
+	{% if question.getLevel() == 1 %}
+                            <li class="easy">
+		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 5 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
+                                        popup_continue({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is not defined or playedQuestions[question.getId()] == 1 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_challenge_first_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 2 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_challenge_notfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 3 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_clearfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 4 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_clearnotfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% endif %}
+                                <br /><span>No{{question.getQuestionNumber}}</span></li>
+	{% endif %}
+	{% endfor %}
+                            </span>
+                        </ul>
+                        <ul class="normalLevel">
+	{% for question in questions %}
+	{% if question.getLevel() == 2 %}
+                            <li class="normal">
+		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 5 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
+                                        popup_continue({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is not defined or playedQuestions[question.getId()] == 1 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_challenge_first_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 2 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_challenge_notfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 3 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_clearfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 4 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_clearnotfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% endif %}
+                                <span>No{{question.getQuestionNumber}}</span></li>
+	{% endif %}
+	{% endfor %}
+                        </ul>
+                        <ul class="hardLevel">
+	{% for question in questions %}
+	{% if question.getLevel() == 3 %}
+                            <li class="hard">
+		{% if playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 5 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_save_off.png')  }}" onclick="changeImage(this.id);
+                                        popup_continue({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is not defined or playedQuestions[question.getId()] == 1 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_challenge_first_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 2 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_challenge_notfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 3 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_clearfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% elseif playedQuestions[question.getId()] is defined and playedQuestions[question.getId()] == 4 %}
+                                <img id="image{{question.getId}}" class="imageSize"  src="{{ asset('/bundles/kanaheigame/images/parts/button_game_clearnotfirst_off.png')  }}" onclick="changeImage(this.id);
+                                        popup({{question.getId}}, '{{question.getQuestionTitle|replace({"'":"’"})}}');"/>
+		{% endif %}
+                                <br /><span>No{{question.getQuestionNumber}}</span></li>
+	{% endif %}
+	{% endfor %}
+                        </ul>
+                    </div>
+            </div>
+    </div>
+    <!--
+    <nav><a style="padding-right:20%;"><img src="{{ asset('/bundles/kanaheigame/images/parts/button_page_back.png')  }}" width="7.5%" class="prev"/></a><span class="page"></span>/ <span class="maxPage"></span> <a style="padding-left:20%;"><img src="{{ asset('/bundles/kanaheigame/images/parts/button_page_next.png')  }}" width="7.5%" class="next"/></a></nav>
+    -->
+</div>
+<div style="text-align:left;color:rgb(18,77,128);font-size:1em;margin:10px auto; width: 90%"><p>
+        ランキングへの反映は初回挑戦分のみとなります。<br />
+        中断問題、複数回クリアされた問題はランキング対象に
+        なりませんのでご注意ください。
+    </p></div>
+<a href="{{path('Top')}}" style="margin-top: 10px; margin-bottom: 10px;"><img id="toTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);"></a>
+<img id="preToTopImage" class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop.png')}}" >
+</div>
+</section>
+</div>
+
+<div id="popup" style="
+     display: none;
+     position: absolute;
+     width: 280px;
+     height: 180px;
+     background-image:url({{ asset('/bundles/kanaheigame/images/parts/popup_common.png')  }});
+     background-size: cover;">
+
+    <button type="button" onclick="cancel()"
+            style="position:absolute;right: 10px;top:10px;width:50px;height:50px;
+            filter: alpha(opacity=0);
+            -moz-opacity:0;
+            opacity:0;
+            "></button>
+
+    <div class="gameTitle"
+       style="
+       padding-left: 5px;
+       font-size: 1em;
+       margin-top: 25px;
+       width: 235px;
+       height: 30px;
+       overflow: hidden;
+       "></div>
+
+    <img id="play_game"
+         src="{{ asset('/bundles/kanaheigame/images/parts/button_game_start3_off.png')  }}"
+         style="margin: auto; margin-top: 50px;width:60%"
+         onclick="changeImage(this.id);
+                 gameStart(1);"/>
+</div>
+
+<div id="popup_continue" style="
+     display: none;
+     position: absolute;
+     width: 280px;
+     height: 180px;
+     background-image:url({{ asset('/bundles/kanaheigame/images/parts/popup_common.png')  }});
+     background-size: cover;">
+
+    <button type="button" onclick="cancel()"
+            style="position:absolute;right: 10px;top:10px;width:50px;height:50px;
+            filter: alpha(opacity=0);
+            -moz-opacity:0;
+            opacity:0;
+            "></button>
+
+    <div class="gameTitle"
+       style="
+       padding-left: 5px;
+       font-size: 1em;
+       margin-top: 25px;
+       width: 235px;
+       height: 30px;
+       overflow: hidden;
+       "></div>
+
+    <img id="play_continue"
+         src="{{ asset('/bundles/kanaheigame/images/parts/button_game_start2_off.png')  }}"
+         style="margin: auto; margin-top: 10px;width:50%"
+         onclick="changeImage(this.id);
+                 gameStart();"/>
+
+    <img id="play_reset"
+         src="{{ asset('/bundles/kanaheigame/images/parts/button_game_start1_off.png')  }}"
+         style="margin: auto; margin-top: 10px;width:50%"
+         onclick="changeImage(this.id);
+                 gameStart();"/>
+
+    <p style="margin:auto; margin-top: 0px;padding:5px;width:70%;font-size:0.6em">
+        ※「はじめから遊ぶ」を選択すると中断データは削除されます。</p>
+</div>
+
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_mondaiselect.png')  }}"
+     width="100%" style="position:absolute;top:0;left:0;"/>
+
+
+<!-- 通信中 -->
+<div style="position:fixed;top:0;left:0;width:100%; height:100%;z-index:100;background-color:rgba(0,0,0,0.4);visibility:hidden;">
+    <img src="{{ asset('/bundles/kanaheigame/images/parts/popup_questiondownload.png')}}" width="70%" style="position:absolute;top:40%;left:15%;" />
+</div>
+<!-- 中断データポップアップ -->
+<div style="position:fixed;top:0;left:0;width:100%; height:100%;z-index:100;background-color:rgba(0,0,0,0.4);visibility:hidden;">
+    <span>No.1</span>
+    <h2>問題タイトル</h2>
+</div>
+
+
+{% endblock %}
+{% block javascripts %}
+
+<img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_game_start1.png')  }}"/>
+<img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_game_start2.png')  }}"/>
+<img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_game_start3.png')  }}"/>
+
+{% endblock %}
+

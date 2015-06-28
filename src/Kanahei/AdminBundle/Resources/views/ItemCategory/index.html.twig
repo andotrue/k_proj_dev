@@ -1,0 +1,31 @@
+{% extends "KanaheiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>アイテムカテゴリ一覧</h1>
+    {% include 'KanaheiAdminBundle:Default:pager.parts.html.twig' %}
+
+    <table class="table table-striped table-bordered table-hover compact">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>カテゴリ名</th>
+				<th>アクション</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('itemcategory_show', { 'categoryCode': entity.categoryCode }) }}">{{ entity.categoryCode }}</a></td>
+                <td>{{ entity.name }}</td>
+				<td>
+					<a href="{{ path('itemcategory_show', { 'categoryCode': entity.categoryCode }) }}">詳細</a>|<a href="{{ path('itemcategory_edit', { 'categoryCode': entity.categoryCode }) }}">編集</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'KanaheiAdminBundle:Default:pager.parts.html.twig' %}
+
+	<input class="btn btn-primary" type="button" onclick="location.href='{{ path('itemcategory_new') }}'" value="新規作成">
+
+    {% endblock %}

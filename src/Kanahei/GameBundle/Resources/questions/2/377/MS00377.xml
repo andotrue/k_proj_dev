@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>377</id>
+ <name>今日はHAPPYお誕生日会</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>37</x><!--point のx座標 -->
+  <y>73</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>257</x><!--point のx座標 -->
+  <y>35</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>563</x><!--point のx座標 -->
+  <y>120</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>301</x><!--point のx座標 -->
+  <y>251</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>52</x><!--point のx座標 -->
+  <y>381</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>544</x><!--point のx座標 -->
+  <y>419</y><!--point のy座標-->
+ </point>
+</different>

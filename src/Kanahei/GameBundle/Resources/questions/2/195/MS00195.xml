@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>195</id>
+ <name>レッツ　プレイ　ミュージック</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>68</x><!--point のx座標 -->
+  <y>137</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>182</x><!--point のx座標 -->
+  <y>54</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>319</x><!--point のx座標 -->
+  <y>41</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>75</x><!--point のx座標 -->
+  <y>306</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>231</x><!--point のx座標 -->
+  <y>290</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>372</x><!--point のx座標 -->
+  <y>242</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>199</x><!--point のx座標 -->
+  <y>442</y><!--point のy座標-->
+ </point>
+</different>

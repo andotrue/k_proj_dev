@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>186</id>
+ <name>スノーボーダーの季節！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>38</x><!--point のx座標 -->
+  <y>208</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>62</x><!--point のx座標 -->
+  <y>453</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>257</x><!--point のx座標 -->
+  <y>289</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>417</x><!--point のx座標 -->
+  <y>52</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>425</x><!--point のx座標 -->
+  <y>238</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>348</x><!--point のx座標 -->
+  <y>350</y><!--point のy座標-->
+ </point>
+</different>

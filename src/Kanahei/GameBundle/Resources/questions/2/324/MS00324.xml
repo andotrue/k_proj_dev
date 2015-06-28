@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>324</id>
+ <name>花から花へ</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>78</x><!--point のx座標 -->
+  <y>256</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>386</x><!--point のx座標 -->
+  <y>132</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>437</x><!--point のx座標 -->
+  <y>191</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>338</x><!--point のx座標 -->
+  <y>404</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>662</x><!--point のx座標 -->
+  <y>146</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>591</x><!--point のx座標 -->
+  <y>415</y><!--point のy座標-->
+ </point>
+</different>

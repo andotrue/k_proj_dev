@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>228</id>
+ <name>空の上に迷いこんだら</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>93</x><!--point のx座標 -->
+  <y>106</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>306</x><!--point のx座標 -->
+  <y>80</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>236</x><!--point のx座標 -->
+  <y>137</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>181</x><!--point のx座標 -->
+  <y>264</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>66</x><!--point のx座標 -->
+  <y>326</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>236</x><!--point のx座標 -->
+  <y>413</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>335</x><!--point のx座標 -->
+  <y>275</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>371</x><!--point のx座標 -->
+  <y>375</y><!--point のy座標-->
+ </point>
+</different>

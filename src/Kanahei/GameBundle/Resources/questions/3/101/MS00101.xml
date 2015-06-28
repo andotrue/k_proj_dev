@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>101</id>
+ <name>宇宙旅行にしゅっぱ～つ！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>387</x><!--point のx座標 -->
+  <y>16</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>201</x><!--point のx座標 -->
+  <y>37</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>37</x><!--point のx座標 -->
+  <y>34</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>223</x><!--point のx座標 -->
+  <y>242</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>328</x><!--point のx座標 -->
+  <y>208</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>103</x><!--point のx座標 -->
+  <y>277</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>101</x><!--point のx座標 -->
+  <y>356</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>312</x><!--point のx座標 -->
+  <y>434</y><!--point のy座標-->
+ </point>
+</different>

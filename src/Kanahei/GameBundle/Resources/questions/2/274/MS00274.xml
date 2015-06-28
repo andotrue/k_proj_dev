@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>274</id>
+ <name>海の仲間が待ってるよ！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>109</x><!--point のx座標 -->
+  <y>77</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>252</x><!--point のx座標 -->
+  <y>158</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>400</x><!--point のx座標 -->
+  <y>48</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>499</x><!--point のx座標 -->
+  <y>64</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>78</x><!--point のx座標 -->
+  <y>343</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>236</x><!--point のx座標 -->
+  <y>388</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>381</x><!--point のx座標 -->
+  <y>386</y><!--point のy座標-->
+ </point>
+</different>

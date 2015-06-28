@@ -1,0 +1,52 @@
+{% extends "KanaheiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>ランキング詳細</h1>
+	<a href="{{ path('ranking') }}"> アイテム一覧に戻る</a>
+
+    <table class="table table-striped table-bordered table-hover compact">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>ユーザID</th>
+                <td>{{ entity.user.id }}</td>
+            </tr>
+            <tr>
+                <th>年</th>
+                <td>{{ entity.year }}</td>
+            </tr>
+            <tr>
+                <th>月</th>
+                <td>{{ entity.month }}</td>
+            </tr>
+            <tr>
+                <th>レベル</th>
+                <td>{{ entity.level }}</td>
+            </tr>
+            <tr>
+                <th>ランク</th>
+                <td>{{ entity.rank }}</td>
+            </tr>
+            <tr>
+                <th>クリアタイム</th>
+                <td>{{ entity.clearTime }}</td>
+            </tr>
+            <tr>
+                <th>ボーナスポイント</th>
+                <td>{{ entity.bonusPoint }}</td>
+            </tr>
+            <tr>
+                <th>作成日時</th>
+                <td>{{ entity.createdAt | date("Y/m/d H:i:s") }}</td>
+            </tr>
+            <tr>
+                <th>更新日時</th>
+                <td>{{ entity.updatedAt | date("Y/m/d H:i:s") }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>98</id>
+ <name>ボクらの町へようこそ！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>102</x><!--point のx座標 -->
+  <y>104</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>72</x><!--point のx座標 -->
+  <y>277</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>91</x><!--point のx座標 -->
+  <y>460</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>265</x><!--point のx座標 -->
+  <y>130</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>259</x><!--point のx座標 -->
+  <y>251</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>279</x><!--point のx座標 -->
+  <y>387</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>415</x><!--point のx座標 -->
+  <y>231</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>466</x><!--point のx座標 -->
+  <y>359</y><!--point のy座標-->
+ </point>
+</different>

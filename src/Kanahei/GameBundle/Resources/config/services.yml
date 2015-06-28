@@ -1,0 +1,7 @@
+parameters:
+#    kanahei_game.example.class: Kanahei\GameBundle\Example
+
+services:
+#    kanahei_game.example:
+#        class: %kanahei_game.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

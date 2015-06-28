@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>103</id>
+ <name>ボクのワタシのマイロボット</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>320</x><!--point のx座標 -->
+  <y>36</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>260</x><!--point のx座標 -->
+  <y>143</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>45</x><!--point のx座標 -->
+  <y>45</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>323</x><!--point のx座標 -->
+  <y>321</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>369</x><!--point のx座標 -->
+  <y>417</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>233</x><!--point のx座標 -->
+  <y>429</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>107</x><!--point のx座標 -->
+  <y>321</y><!--point のy座標-->
+ </point>
+</different>

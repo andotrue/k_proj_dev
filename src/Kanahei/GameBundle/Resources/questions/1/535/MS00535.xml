@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>535</id>
+ <name>いっしょに作る？</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>157</x><!--point のx座標 -->
+  <y>124</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>299</x><!--point のx座標 -->
+  <y>298</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>373</x><!--point のx座標 -->
+  <y>389</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>50</x><!--point のx座標 -->
+  <y>430</y><!--point のy座標-->
+ </point>
+</different>

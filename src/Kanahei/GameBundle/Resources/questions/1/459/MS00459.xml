@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>459</id>
+ <name>かわいいキャラ弁のできあがり！</name>
+ <difficulty>1</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>232</x><!--point のx座標 -->
+  <y>82</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>401</x><!--point のx座標 -->
+  <y>154</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>134</x><!--point のx座標 -->
+  <y>214</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>357</x><!--point のx座標 -->
+  <y>303</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>81</x><!--point のx座標 -->
+  <y>249</y><!--point のy座標-->
+ </point>
+</different>

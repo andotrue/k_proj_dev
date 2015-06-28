@@ -1,0 +1,56 @@
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block title %}スタンプ付き間違い探し放題{% endblock %}
+
+{% block body %}
+<style>
+    p {
+        font-size: 0.8em;
+    }
+</style>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header.png')  }}" width="100%" />
+<p style="text-align:center;padding:3%;background-image:url(/bundles/kanaheigame/images/parts/top_textarea.png);background-size:100% 100%; background-repeat:no-repeat;">
+パズル誌発行部数業界No.1の（株）マガジン・マガジンが監修する、間違いさがしが遊び放題です！<br /><br />
+問題をクリアしたり、全国ランキングの上位に入ればポイントをゲット！<br /><br />
+貯めたポイントでスタンプや壁紙がもらえるよ！<br />
+</p>
+<br />
+<a style="text-decoration: none" href="https://kanahei.puzzle-m.net/">
+<img style="width: 80%" src="{{ asset('/bundles/kanaheigame/images/parts/button_letsplay.png')}}" />
+</a>
+
+<br />
+<br />
+<p>
+ｕＩＤログインページに移動します。<br />
+ご利用には、ａｕＩＤでのログインが必要となります。
+</p>
+<br />
+<img style="width: 40%; margin-right: 2%" src="{{ asset('/bundles/kanaheigame/images/parts/sample_q_1.png')}}" />
+<img style="width: 40%" src="{{ asset('/bundles/kanaheigame/images/parts/sample_q_2.png')}}" />
+
+
+<div style="clear: both"></div>
+<br />
+<p>
+画像を見比べて、間違いをタッチ！<br />
+お手つきや制限時間に気をつけて<br />
+全部の間違いを見つけよう！    
+</p>
+<br />
+
+<img style="width: 25%" src="{{ asset('/bundles/kanaheigame/images/parts/button_shop.png')}}" />
+<img style="width: 25%" src="{{ asset('/bundles/kanaheigame/images/parts/button_game.png')}}" />
+<img style="width: 25%" src="{{ asset('/bundles/kanaheigame/images/parts/button_ranking.png')}}" />
+
+<br />
+<br />
+<a href="{{path('LpCompanyInfo')}}"><img src="{{ asset('/bundles/kanaheigame/images/parts/button_lp_companyinfo.png')  }}" width="100%"/></a>
+<a href="{{path('LpPrivacyPolicy')}}"><img src="{{ asset('/bundles/kanaheigame/images/parts/button_help_privacypolicy.png')  }}" width="100%"/></a>
+<a href="{{ path('LpHelpTerms') }}"><img src="{{ asset('/bundles/kanaheigame/images/parts/button_help_kiyaku.png')  }}" width="100%"/></a>
+<br />
+<br />
+
+{% endblock %}
+
+

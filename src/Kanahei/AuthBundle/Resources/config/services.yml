@@ -1,0 +1,7 @@
+parameters:
+#    kanahei_auth.example.class: Kanahei\AuthBundle\Example
+
+services:
+#    kanahei_auth.example:
+#        class: %kanahei_auth.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

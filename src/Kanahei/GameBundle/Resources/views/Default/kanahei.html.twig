@@ -1,0 +1,34 @@
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<style>
+body{background: url({{asset('/bundles/kanaheigame/images/parts/top_bg.png')}})}
+</style> 
+
+ <img id="default_header" src="{{ asset('/bundles/kanaheigame/images/parts/header.png') }}" width="100%" />
+<br /><br />
+
+<div style="text-align: center; margin-top: 50px;">
+    
+    <a href="/">
+        <img class="lpb" src="{{ asset('/bundles/kanaheigame/images/parts/lpb_main.png')  }}" width="95%" />
+    </a>
+    
+    <a href="https://ausp.puzzle-m.net/">
+        <img class="lpb" src="{{ asset('/bundles/kanaheigame/images/parts/lpb_puzzle.png')  }}" width="90%" />
+    </a>
+
+    <a href="https://e-aquarium.jp/asp/">
+    <img class="lpb" src="{{ asset('/bundles/kanaheigame/images/parts/lpb_aquarium.png')  }}" width="90%" />
+    </a>
+    
+    <a href="https://bbq-g.com/asp/">
+        <img class="lpb" src="{{ asset('/bundles/kanaheigame/images/parts/lpb_BBQ.png')  }}" width="90%" />
+    </a>
+</div>
+
+{% endblock %}
+
+

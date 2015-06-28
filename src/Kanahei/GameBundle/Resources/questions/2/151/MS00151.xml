@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>151</id>
+ <name>夏が待ちきれない！</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>103</x><!--point のx座標 -->
+  <y>58</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>95</x><!--point のx座標 -->
+  <y>359</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>271</x><!--point のx座標 -->
+  <y>244</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>484</x><!--point のx座標 -->
+  <y>98</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>450</x><!--point のx座標 -->
+  <y>318</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>626</x><!--point のx座標 -->
+  <y>214</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>629</x><!--point のx座標 -->
+  <y>376</y><!--point のy座標-->
+ </point>
+</different>

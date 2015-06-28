@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>302</id>
+ <name>ステキなプレゼント!?</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>290</x><!--point のx座標 -->
+  <y>123</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>326</x><!--point のx座標 -->
+  <y>219</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>361</x><!--point のx座標 -->
+  <y>272</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>240</x><!--point のx座標 -->
+  <y>310</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>208</x><!--point のx座標 -->
+  <y>352</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>235</x><!--point のx座標 -->
+  <y>453</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>148</x><!--point のx座標 -->
+  <y>215</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>63</x><!--point のx座標 -->
+  <y>181</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>28</x><!--point のx座標 -->
+  <y>362</y><!--point のy座標-->
+ </point>
+</different>

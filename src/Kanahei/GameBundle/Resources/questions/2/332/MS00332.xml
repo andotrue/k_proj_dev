@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>332</id>
+ <name>雪と氷のスノーマン・タウン</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>179</x><!--point のx座標 -->
+  <y>150</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>163</x><!--point のx座標 -->
+  <y>285</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>445</x><!--point のx座標 -->
+  <y>181</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>569</x><!--point のx座標 -->
+  <y>77</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>401</x><!--point のx座標 -->
+  <y>343</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>589</x><!--point のx座標 -->
+  <y>364</y><!--point のy座標-->
+ </point>
+</different>

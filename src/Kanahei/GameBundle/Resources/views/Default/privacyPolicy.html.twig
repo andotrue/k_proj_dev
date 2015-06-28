@@ -1,0 +1,103 @@
+{% extends "KanaheiGameBundle:Help:base.html.twig" %}
+
+{% block title %}プライバシーポリシー{% endblock %}
+
+{% block contents %}
+<style>
+p{margin-top:15%;}
+body {
+    background-image: url(/bundles/kanaheigame/images/parts/2-04-3-4_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+</style>
+<script>
+$(function(){
+	$('#button_tohelp').hide();
+	$('#toapptop').hide();
+	$('#copyright_area').hide();
+})
+</script>
+<img alt="privacy policy" src="{{ asset('/bundles/kanaheigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/kanaheigame/images/parts/header_help_privacypolicy.png')}}" width="100%" style="position:relative;margin-top:15%"/>
+
+<div id="content" style="position:relative;margin-top:5%; padding:5%;text-align:left;">
+<div id="privacy">
+
+<p>個人情報取得について</p>
+
+<p>個人情報は個人本人に属する大切な情報であり、当社はその個人情報を「お預かりし、利用させていただいている」以上、全てのスタッフがそれを大切に取扱うとともにそれを適切に保護することを『スタンプ付き♪まちがいさがし放題for auスマートパス（以下当サービス）』の当然の責務と認識し、実行します。</p>
+
+<p>株式会社ヒューベースi<br />
+個人情報管理責任者<br />
+吉原大二</p>
+</div>
+
+<div id="detail">
+<p>
+■当サービスが送信するお客様情報<br />
+●cookie(ランダムに生成した識別ID)<br />
+送信元：株式会社ヒューベースi<br />
+送信する目的：認証・識別<br />
+送信元種別：株式会社ヒューベースi<br />
+取得方法：アプリが端末から自動で取得
+</p>
+<p>
+●お客様による入力情報（メールアドレス）<br />
+送信元：株式会社ヒューベースi<br />
+送信する目的：アプリ、サービス本来の機能の提供<br />
+送信元種別：株式会社ヒューベースi<br />
+取得方法：お客様による入力後、アプリが端末から自動で取得
+</p>
+
+<p>
+■送信停止の方法<br />
+cookie:<br />
+ログアウト
+</p>
+<p>
+お客様による入力情報：<br />
+ログアウト
+</p>
+<p>
+■送信停止によるアプリへの影響<br />
+一部機能をご利用いただけなくなります。
+</p>
+<p>
+■送信済み情報の削除方法<br />
+cookie：<br />
+ログアウト
+</p>
+<p>
+お客様による入力情報：<br />
+「ヘルプ」内「ユーザー登録について」より<br />
+「ユーザー情報削除」へお進みください。
+</p>
+<p>
+■送信済み情報の削除による当サービスへの影響<br />
+cookie：<br />
+特に影響はありません。
+</p>
+<p>
+お客様による入力情報：<br />
+保存されたデータ、ポイントが削除されます。
+</p>
+</div>
+<div id="address">
+<p>
+株式会社ヒューベースi<br />
+東京都目黒区上目黒2-9-1 中目黒GS第1ビル7F<br />
+Email：support@kanahei.puzzle-m.net<br />
+TEL：03-5725-5024
+</p>
+<div style="text-align: center">
+<a href="{{ path('lp') }}" id="htohelptop">
+<img id="tohelptop" style="width: 30%;margin-top:15%" src="{{asset('/bundles/kanaheigame/images/parts/button_back.png')}}" /></a>
+</div>
+</div>
+</div>
+
+<div style="text-align:center">©マガジン・マガジン<br />
+©Hubase-i</div>
+
+{% endblock %}

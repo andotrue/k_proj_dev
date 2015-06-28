@@ -1,0 +1,70 @@
+{% extends "KanaheiAdminBundle::base.html.twig" %}
+
+{% block contents -%}
+    <h1>PUSH通知新規作成</h1>
+
+    <form id="the-form" action="/admin/push_alert/create" method="post">
+        <select name="mode">
+            <option value="1">全体</option>
+            <option value="2">会員</option>
+            <option value="3">非会員</option>
+        </select>
+        
+        <div>
+			メッセージ内容<br />
+            <textarea style="width: 300px; height: 200px" name="message" ></textarea>
+        </div>
+        <br />
+
+	    <input class="btn btn-primary" id="submit_button" type="submit" value="送信" onClick="return confirm('本当に送信しますか？')" />
+    </form>
+
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#the-form').submit(function(event) {
+                // HTMLでの送信をキャンセル
+                event.preventDefault();
+
+                // 操作対象のフォーム要素を取得
+                var $form = $(this);
+
+                // 送信ボタンを取得
+                // （後で使う: 二重送信を防止する。）
+                var $button = $form.find('#submit_button');
+
+                // 送信
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: $form.attr('method'),
+                    data: $form.serialize(),
+                    timeout: 1000,  // 単位はミリ秒
+
+                    // 送信前
+                    beforeSend: function(xhr, settings) {
+                        // ボタンを無効化し、二重送信を防止
+                        $button.attr('disabled', true);
+                        alert("送信を受け付けました。");
+                        location.reload();
+                    },
+                    // 応答後
+                    complete: function(xhr, textStatus) {
+                        // ボタンを有効化し、再送信を許可
+                        //$button.attr('disabled', false);
+                    },
+
+                    // 通信成功時の処理
+                    success: function(result, textStatus, xhr) {
+                        // 入力値を初期化
+                        //$form[0].reset();
+
+                        //$('#result').text('OK');
+                    },
+
+                    // 通信失敗時の処理
+                    //error: function(xhr, textStatus, error) {}
+                });
+            });
+        });        
+    </script>
+    
+{% endblock %}

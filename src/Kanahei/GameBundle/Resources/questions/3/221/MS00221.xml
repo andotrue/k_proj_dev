@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>221</id>
+ <name>元気いっぱいにラジオ体操！</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>55</x><!--point のx座標 -->
+  <y>90</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>22</x><!--point のx座標 -->
+  <y>227</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>148</x><!--point のx座標 -->
+  <y>161</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>377</x><!--point のx座標 -->
+  <y>107</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>193</x><!--point のx座標 -->
+  <y>277</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>15</x><!--point のx座標 -->
+  <y>425</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>356</x><!--point のx座標 -->
+  <y>267</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>285</x><!--point のx座標 -->
+  <y>417</y><!--point のy座標-->
+ </point>
+</different>

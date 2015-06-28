@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>344</id>
+ <name>ミニィちゃん みんなで歌おう♪</name>
+ <difficulty>3</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>203</x><!--point のx座標 -->
+  <y>132</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>373</x><!--point のx座標 -->
+  <y>133</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>86</x><!--point のx座標 -->
+  <y>258</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>198</x><!--point のx座標 -->
+  <y>302</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>386</x><!--point のx座標 -->
+  <y>283</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>56</x><!--point のx座標 -->
+  <y>422</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>195</x><!--point のx座標 -->
+  <y>346</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>358</x><!--point のx座標 -->
+  <y>374</y><!--point のy座標-->
+ </point>
+</different>

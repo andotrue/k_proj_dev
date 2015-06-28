@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>66</id>
+ <name>おつかいに行ってきま～す</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>332</x><!--point のx座標 -->
+  <y>43</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>314</x><!--point のx座標 -->
+  <y>170</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>240</x><!--point のx座標 -->
+  <y>199</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>60</x><!--point のx座標 -->
+  <y>132</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>50</x><!--point のx座標 -->
+  <y>306</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>81</x><!--point のx座標 -->
+  <y>351</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>234</x><!--point のx座標 -->
+  <y>344</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>289</x><!--point のx座標 -->
+  <y>346</y><!--point のy座標-->
+ </point>
+</different>

@@ -1,0 +1,32 @@
+{% extends "KanaheiGameBundle::base.html.twig" %}
+
+{% block title %}プライバシーポリシー{% endblock %}
+
+{% block body %}
+<style>
+p{margin-top:8%;}
+body {
+    background-image: url(/bundles/kanaheigame/images/parts/2-04-3-4_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+</style>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header.png')  }}" width="100%" />
+
+<div id="content" style="position:relative;margin-top:5%; padding:5%;text-align:left;">
+<div id="privacy">
+
+    <p style="text-align: center">＜会社概要＞<p>
+    <p>■会社名：株式会社ヒューベースi</p>
+    <p>■代表取締役：吉原大二</p>
+    <p>■所在地：〒153-0051 <br />　東京都目黒区上目黒2-9-1中目黒GS第1ビル7F</p>
+    <p>■連絡先：03-5725-5022</p>
+
+<div style="text-align: center">
+<a href="{{ path('lp') }}" id="htohelptop">
+<img id="tohelptop" style="width: 30%;margin-top:15%" src="{{asset('/bundles/kanaheigame/images/parts/button_back.png')}}" /></a>
+</div>
+</div>
+</div>
+
+{% endblock %}

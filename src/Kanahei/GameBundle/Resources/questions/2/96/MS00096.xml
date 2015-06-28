@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>96</id>
+ <name>クリスマスカードを贈ろう♪</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>72</x><!--point のx座標 -->
+  <y>151</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>154</x><!--point のx座標 -->
+  <y>365</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>303</x><!--point のx座標 -->
+  <y>377</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>322</x><!--point のx座標 -->
+  <y>226</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>400</x><!--point のx座標 -->
+  <y>102</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>634</x><!--point のx座標 -->
+  <y>353</y><!--point のy座標-->
+ </point>
+</different>

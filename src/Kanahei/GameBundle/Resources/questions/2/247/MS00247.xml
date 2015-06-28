@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>247</id>
+ <name>体が資本！体力測定</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>48</x><!--point のx座標 -->
+  <y>177</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>304</x><!--point のx座標 -->
+  <y>78</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>380</x><!--point のx座標 -->
+  <y>179</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>409</x><!--point のx座標 -->
+  <y>365</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>675</x><!--point のx座標 -->
+  <y>122</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>597</x><!--point のx座標 -->
+  <y>357</y><!--point のy座標-->
+ </point>
+</different>

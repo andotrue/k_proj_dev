@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<different>
+ <id>406</id>
+ <name>誰もが芸術家になる季節！？</name>
+ <difficulty>2</difficulty>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>371</x><!--point のx座標 -->
+  <y>77</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>649</x><!--point のx座標 -->
+  <y>123</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>241</x><!--point のx座標 -->
+  <y>144</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>523</x><!--point のx座標 -->
+  <y>288</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>100</x><!--point のx座標 -->
+  <y>348</y><!--point のy座標-->
+ </point>
+ <point><!--図画にある違う部分の座標。 -->
+  <x>315</x><!--point のx座標 -->
+  <y>268</y><!--point のy座標-->
+ </point>
+</different>

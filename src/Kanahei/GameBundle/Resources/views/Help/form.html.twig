@@ -1,0 +1,69 @@
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery-1.10.2.min.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery.timer.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/timeCalculater.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/changeImage.js') }}"></script>
+	<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/android.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/jquery.center.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/jquery.center.min.js') }}"></script>
+	<link rel="stylesheet" src="{{ asset('bundles/kanaheigame/css/html5reset-1.6.1.css')  }}" />
+	<link rel="stylesheet" src="{{ asset('bundles/kanaheigame/css/no-theme/jquery-ui-1.10.3.custom.min.css')  }}" />
+
+	<link rel="stylesheet" src="{{ asset('bundles/kanaheigame/css/html5reset-1.6.1.css>Error')  }}" />
+
+{% block title %}遊び方{% endblock %}
+
+{% block contents %}
+<style>
+#form_title{position:relative;margin-top:55%;width:87%;height:4%;font-size:1.5em; background-image: url({{asset('/bundles/kanaheigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+#form_email{position:relative;margin-top:17%;width:87%;height:4%;font-size:1.5em; background-image: url({{asset('/bundles/kanaheigame/images/parts/otoiawase_txtarea1.png')}});background-repeat:no-repeat;background-size:100% 100%;}
+#form_content{position:relative;margin-top:16%;width:87%;height:18%;font-size:1.5em; background-image: url({{asset('/bundles/kanaheigame/images/parts/otoiawase_txtarea2.png')}});background-repeat:no-repeat;background-size:100% 100%;height:5em;}
+body,*{padding:0;border:none;margin:0;}
+
+	 body{ text-align: center;}
+</style>
+<script>
+var image_path = null;
+var image_id = null;
+function changeImage(imageId){
+	var pre_src = $('#'+imageId).attr('src');
+	var src = pre_src.replace(/_off/g,'');
+	image_path = src;
+	image_id = imageId;
+	$('#'+imageId).attr("src",src);
+	setTimeout("originalImage();", 200);
+}
+function originalImage(){
+	var pre_src = $('#'+image_id).attr('src');
+	var src = image_path.replace(/.png/g,'_off.png');
+	$('#'+image_id).attr("src",src);
+}
+function submitForm(){
+	var title = $('#form_title').val();
+	var email = $('#form_email').val();
+	var content = $('#form_content').val();
+	if(!title.match(/\S/)){
+		alert("件名を入力してください。");
+	}else if(!email.match(/[\S]+[\w-]+@[\w\.-]+\.\w{2,}$/)){
+		alert("メールアドレスを入力してください。");
+	}else if(!content.match(/\S/)){
+		alert("本文を入力してください。");
+	}else{
+		$('#form_confirm').trigger('click');
+	}
+}
+</script>
+<img src="{{asset('/bundles/kanaheigame/images/parts/2-04-4-1_bg.png')}}" style="position:absolute;left:0%;top:0%;opacity:1.4;width:100%;height:auto"/>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/kanaheigame/images/parts/header_otoiawase_top.png')}}" width="100%" style="position:absolute;left:0%;top:10%"/>
+{{ form(form) }}
+<div style="position:relative;margin-top:8%">
+<img id="otoiawasecheck" src="{{asset('/bundles/kanaheigame/images/parts/button_otoiawasecheck_off.png')}}" width="64%" onclick="changeImage(this.id);submitForm()"/></div>
+<div style="position:relative;margin-top:4%">
+ <a href="{{path('HelpInquiry')}}""><img id="button_tohelp" src="{{ asset('/bundles/kanaheigame/images/parts/buttom_return_off.png')}}" width="64%" onclick="changeImage(this.id)">
+ </a>
+</div>
+
+<img class="preload" src="{{asset('/bundles/kanaheigame/images/parts/button_otoiawasecheck.png')}}" />
+<img class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/buttom_return.png')}}" >
+{% endblock %}

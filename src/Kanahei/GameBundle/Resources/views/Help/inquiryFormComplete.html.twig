@@ -1,0 +1,14 @@
+{% extends "KanaheiGameBundle:Help:base.html.twig" %}
+
+{% block title %}ヘルプ{% endblock %}
+
+{% block contents %}
+<img src="{{asset('/bundles/kanaheigame/images/parts/2-04-4-3_bg.png')}}" style="position:absolute;top:0%;left:0%;width:100%;height:auto"/>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{asset('/bundles/kanaheigame/images/parts/header_otoiawase_sendend.png')}}" width="100%" style="position:absolute;top:10%;left:0%"/>
+
+<div style="position:relative;margin-top:55%">
+<a href="{{path('Top')}}"><img id="toTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" width="35%" onclick="changeImage(this.id);"></a>
+<img id="preToTopImage" class="preload" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop.png')}}" >
+</div>
+{% endblock %}

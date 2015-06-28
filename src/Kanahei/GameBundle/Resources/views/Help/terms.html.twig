@@ -1,0 +1,53 @@
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery-1.10.2.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/jquery.timer.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/timeCalculater.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/kanaheigame/js/changeImage.js') }}"></script>
+<script type='text/javascript' src="{{ asset('bundles/kanaheigame/js/android.js') }}"></script>
+<style>
+body{text-align:center;}
+body{background-image: url({{ asset('/bundles/kanaheigame/images/parts/2-04-3-4_bg.png') }}); background-size:cover; background-repeat:no-repeat;"}
+</style>
+{% block title %}利用規約{% endblock %}
+
+{% block contents %}
+
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help.png')  }}" width="100%" style="position:absolute;left:0%;top:0%"/>
+<img src="{{ asset('/bundles/kanaheigame/images/parts/header_help_kiyaku.png') }}" width="100%" style="position:absolute;top:10%;left:0%;"/>
+<div style="position:absolute;left:0%;top:16%;padding:5%">
+<section id="terms" padding="5%" style="font-size:0.8em;text-align:left">
+<div id="content">
+<p>
+﻿お客さまが、株式会社ヒューベースi｛連絡先：support@kanahei.puzzle-m.net｝（以下「当社」といいます)が提供する『スタンプ付き♪まちがいさがし放題for auスマートパス』（以下「本サービス」といいます）を利用するに当たっては、本利用契約の内容を承諾していただきます。本サービスアプリは、KDDI株式会社又は沖縄セルラー電話株式会社（以下「KDDI等」といいます）が提供するauスマートパス（以下「au スマートパス」といいます）内の「アプリ取り放題」または「Webサービス使い放題」の一環として提供されます。お客様は、KDDI等に対しau スマートパスのサービス利用料を支払うことにより、当社に対し利用料金の支払いを行うことなく、本サービスを利用することができます。
+</p>
+</div>
+<div id="detail">
+<p>(1)本サービスに関する著作権等を含む一切の権利は、当社又は第三者に帰属します。</p>
+
+<p>(2)お客さまは、本サービスの内容を当社に無断で転載・複製・修正・蓄積又は転送してはいけません。</p>
+
+<p>(3)お客さまは本サービスに関する当社及び第三者の権利を侵害したり又はそのおそれがあるような行為を一切行ってはならないものとします。</p>
+
+<p>(4)本サービスのご利用には、au スマートパスに係る料金の他に別途通信料がかかります。</p>
+
+<p>(5)お客様は、au スマートパスに係る料金について、KDDI等が別途定める条件に基づき請求されることを承諾します。</p>
+
+<p>(6)当社は、本利用契約に違反した場合、お客さまに対する本サービスの提供を停止し又は本利用契約を解除することができるものとします。</p>
+
+<p>(7)当社は、本サービス及び本利用契約を予告なく改訂、追加、変更又は廃止することができるものとします。</p>
+
+<p>(8)お客さまは、本利用契約に係るいかなる権利又は義務も第三者に移転又は譲渡することはできません。</p>
+
+<p>(9)本サービスのご利用にあたり当社の責に帰する事由によりお客さまが損害を被った場合は、当社は、お客様利用金額を上限として、当該損害を賠償するものとします。但し、当社の故意又は重大な過失に基づく損害については、この限りではありません。</p>
+
+<p>(10)本サービス又は本利用契約に関してお客さまとの間で疑義又は争いが生じた場合には、誠意をもって協議することとしますが、それでもなお解決しない場合には「東京地方裁判所」又は「東京簡易裁判所」を専属の管轄裁判所とします。</p>
+</div>
+<a href="{{ path('Help') }}" id="htohelptop">
+<div style="position:relative;margin-left:24%">
+<img id="tohelptop" src="{{asset('/bundles/kanaheigame/images/parts/buttom_return_helptop_off.png')}}" width="60%" onclick="changeImage(this.id)"/></a>
+
+<img src="{{asset('/bundles/kanaheigame/images/parts/buttom_return_helptop.png')}}" class="preload"/>
+</div>
+</section>
+</div>
+{% endblock %}
