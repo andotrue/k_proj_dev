@@ -11,8 +11,48 @@
 {% block title %}KanaheiGameBundle:Gallery:index{% endblock %}
 
 {% block body %}
+
+<script type="text/javascript">
+var item_id = null;
+var title = null;
+$(function() {
+    $('#popup').hide();
+})
+function popup() {
+    msg = 'ギャラリーから削除しますか？<br /><br />※端末に保存したものは削除されません。';
+
+    $('.title').empty();
+    $('<p>' + msg + '</p>').appendTo('.title');
+    $('#popup').center();
+    $('#popup').show();
+    return false;
+}
+function go() {
+	$('#popup').hide();
+	$('#form').submit();
+}
+function cancel() {
+	$('#popup').hide();
+}
+</script>
+
+<form action="{{ path('GalleryDelete') }}" method="POST" name="form" id="form">
+
 <!-- ヘッダータイトル -->
-<div class="pagetitle">ギャラリー</div>
+<div class="pagetitle">
+	ギャラリー
+</div>
+<div>
+	<button type="submit" name="delete" value="削除" 
+			onmouseover="this.style.filter='alpha(opacity=50)';this.style.opacity='0.5';" 
+			onmouseout="this.style.filter='';this.style.opacity='1.0';" 
+			onmouseup="this.style.filter='';this.style.opacity='1.0';" 
+			onclick="return popup();" 
+			style="opacity: 1; position: relative; top: -100px; right: -400px;">
+			<img src="{{ asset('/bundles/kanaheigame/images/parts/gomibako.jpg') }}" alt="削除" style="width:100px;">
+			<input type="hidden" name="delete">
+	</button>
+</div>
 
 <table style="font-size: 20px; width:100%;">
 	{% for entity in purchasedItems %}
@@ -45,10 +85,13 @@
     			</a>
         	</span>
     	</div>
+    	
+    	<input type="checkbox" name="check[]" value="{{ entity.getId }}" style="width: 50px; height: 50px;">
 	</td>
 	</tr>
 	{% endfor %}
 </table>
+</form>
 
 	<!-- ページング -->
 	{% if maxPage > 1 %}
@@ -87,5 +130,24 @@
 	<img id="toTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" width="30%" onclick="changeImage(this.id);javascript: goTop();">
 	<img id="preToTopImage" src="{{ asset('/bundles/kanaheigame/images/parts/button_back_totop_off.png')}}" class="preload">
 </footer>
+
+<!-- 削除確認ポップアップ -->
+<div id="popup" style="display: none;position: absolute;width: 280px;height: 180px;
+				     background-image:url();
+				     background-size: cover;
+				     background-color: white; border: medium solid; border-radius: 25px;
+				     ">
+
+    <div class="title"
+	       style="padding-left: 5px;font-size: 15px;margin-top: 25px;width: auto;height: auto;overflow: hidden;">
+	</div>
+
+    <input type="submit" id="yes" alt="削除" value="はい" style="margin: auto; margin-top: 50px;width:30%"
+    		src="{{ asset('')  }}"
+			onclick="go();"/>
+    <input type="submit" id="no" alt="やめる" value="いいえ" style="margin: auto; margin-top: 50px;width:30%"
+    		src="{{ asset('')  }}"
+			onclick="cancel();"/>
+</div>
 
 {% endblock %}

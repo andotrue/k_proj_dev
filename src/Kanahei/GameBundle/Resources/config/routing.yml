@@ -477,10 +477,14 @@ apply_complete:
 GameJanken:
     pattern: /game/janken
     defaults: { _controller: KanaheiGameBundle:Game:janken }
+
     
 Gallery:
     pattern: /gallery/
     defaults: { _controller: KanaheiGameBundle:Gallery:index }
+GalleryDelete:
+    pattern: /gallery/delete
+    defaults: { _controller: KanaheiGameBundle:Gallery:delete }
 
 
 

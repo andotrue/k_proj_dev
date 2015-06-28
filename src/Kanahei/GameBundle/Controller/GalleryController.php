@@ -23,18 +23,6 @@ class GalleryController extends BaseController
 
         $offset_base = $page -1;
         $offset = $offset_base * $pageCount;
-/*
-        $purchasedItems = $this->getDoctrine()
-			        		->getRepository('KanaheiGameBundle:PurchaseHistory')
-			        		->findBy(
-        						array("user"=>$user->getId()),
-        						//array("createdAt", ">", "now()"),
-        						array("createdAt"=>"DESC"),
-        						$pageCount,
-        						$offset
-        					);
-       						//->andWhere('created_at > ?', 'now()');
-		       						 */
 		$repository = $this->getDoctrine()  
 							->getRepository('KanaheiGameBundle:PurchaseHistory');  
 		$query = $repository->createQueryBuilder('ph')  
@@ -60,5 +48,26 @@ class GalleryController extends BaseController
 						'page' => $page,
 						'maxPage' => $maxPage,
 				));
+    }
+    
+    public function deleteAction()
+    {
+    	$request = $this->get('request');
+    	$checks = $request->request->get('check', "");
+    	 
+    	var_dump($checks);
+    	foreach($checks as $key => $val)
+    	{
+$logger = $this->get('logger');
+$logger->info($val);
+    		$em = $this->getDoctrine()->getManager();
+    		$entity = $em->getRepository('KanaheiGameBundle:PurchaseHistory')->find($val);
+    		
+    		$em->remove($entity);
+    		$em->flush();
+    	}
+    	
+    	return $this->redirect($this->generateUrl('Gallery'));
+    	
     }
 }
